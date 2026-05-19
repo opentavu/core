@@ -1,0 +1,38 @@
+# ===== Build outputs =====
+/build/
+**/bin/
+**/obj/
+
+# ===== Solution artifacts (built, not source) =====
+# .zip exports are build artifacts; they go to GitHub Releases, not the repo
+*.zip
+!docs/**/*.zip
+
+# ===== Visual Studio =====
+.vs/
+*.user
+*.suo
+*.userprefs
+*.userosscache
+*.sln.docstates
+
+# ===== NuGet =====
+packages/
+*.nupkg
+*.snupkg
+
+# ===== Power Platform CLI =====
+.pac/
+
+# ===== OS =====
+Thumbs.db
+.DS_Store
+
+# ===== Local environment / secrets =====
+*.env
+*.local
+appsettings.Local.json
+appsettings.Development.json
+
+# ===== Logs =====
+*.log

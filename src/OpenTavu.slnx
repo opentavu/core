@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Plugins/" />
+  <Folder Name="/Solution/" />
+  <Folder Name="/WebResources/" />
+  <Folder Name="/WebResources/js/">
+    <File Path="WebResources/js/tavu_contact_main_form.js" />
+  </Folder>
+  <Folder Name="/Workflows/" />
+</Solution>
