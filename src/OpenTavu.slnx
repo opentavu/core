@@ -1,5 +1,7 @@
 <Solution>
-  <Folder Name="/Plugins/" />
+  <Folder Name="/Plugins/">
+    <Project Path="Plugins/Pl.Opportunity.LifecycleTracker/Pl.Opportunity.LifecycleTracker.csproj" Id="988e38d4-30a1-4a89-b4ba-90d6c41b2ca8" />
+  </Folder>
   <Folder Name="/Solution/" />
   <Folder Name="/WebResources/" />
   <Folder Name="/WebResources/js/">
