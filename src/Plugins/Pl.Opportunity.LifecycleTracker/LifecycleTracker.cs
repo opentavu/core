@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.Xrm.Sdk;
-using OpenTavu.Plugins.Common;
+using OpenTavu.Dataverse.Common;
 
 namespace Pl.Opportunity.LifecycleTracker
 {

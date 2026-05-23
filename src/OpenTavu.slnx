@@ -8,4 +8,8 @@
     <File Path="WebResources/js/tavu_contact_main_form.js" />
   </Folder>
   <Folder Name="/Workflows/" />
+  <Folder Name="/_shared/">
+    <File Path="_Shared/Common/LocalPluginContext.cs" />
+    <File Path="_Shared/Common/PluginBase.cs" />
+  </Folder>
 </Solution>

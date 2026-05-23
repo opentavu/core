@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "OpenTavu",
+  "classifications": [ "Dataverse", "Plugin", "OpenTavu" ],
+  "name": "OpenTavu Plugin (Pre-Op pattern)",
+  "identity": "OpenTavu.Plugin",
+  "shortName": "opentavu-plugin",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "Pl.Entity.Action",
+  "preferNameDirectory": true,
+  "symbols": {
+    "entityName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Logical name of the Dataverse table (e.g., tavu_case, tavu_opportunity, account)",
+      "isRequired": true,
+      "replaces": "TAVU_ENTITY_LOGICAL_NAME",
+      "fileRename": "tavu_entity"
+    },
+    "actionName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Action category for the plugin (e.g., LifecycleTracker, ValidationGuard). Used as the class name.",
+      "isRequired": true,
+      "replaces": "ACTION_NAME_PLACEHOLDER",
+      "fileRename": "Action"
+    },
+    "entityShortName": {
+      "type": "parameter",
+      "datatype": "string",
+      "description": "Capitalized short entity name without the publisher prefix (e.g., Case, Opportunity, Account).",
+      "isRequired": true,
+      "replaces": "Entity",
+      "fileRename": "Entity"
+    }
+  },
+  "primaryOutputs": [
+    { "path": "Pl.Entity.Action.csproj" }
+  ]
+}
