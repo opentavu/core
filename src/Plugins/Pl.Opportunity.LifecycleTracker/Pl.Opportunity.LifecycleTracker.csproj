@@ -98,10 +98,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\_Shared\LocalPluginContext.cs">
+    <Compile Include="..\..\_Shared\LocalPluginContext.cs">
       <Link>Common\LocalPluginContext.cs</Link>
     </Compile>
-    <Compile Include="..\_Shared\PluginBase.cs">
+    <Compile Include="..\..\_Shared\PluginBase.cs">
       <Link>Common\PluginBase.cs</Link>
     </Compile>
     <Compile Include="LifecycleTracker.cs" />
@@ -112,5 +112,6 @@
     <None Include="OpenTavu.snk" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
