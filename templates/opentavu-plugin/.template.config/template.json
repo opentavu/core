@@ -31,10 +31,8 @@
     "entityShortName": {
       "type": "parameter",
       "datatype": "string",
-      "description": "Capitalized short entity name without the publisher prefix (e.g., Case, Opportunity, Account).",
-      "isRequired": true,
-      "replaces": "Entity",
-      "fileRename": "Entity"
+      "description": "Capitalized short entity name without the publisher prefix (e.g., Case, Opportunity, Account). Used only as part of the project name -n parameter.",
+      "isRequired": true
     }
   },
   "primaryOutputs": [

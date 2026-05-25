@@ -97,9 +97,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         var formContext = executionContext.getFormContext();
         var customerValue = formContext.getAttribute("tavu_customerid").getValue();
 
-        // Customer cleared → clear typed mirrors, clear any prior warning.
         if (!customerValue || customerValue.length === 0) {
-            clearCustomerMirrors(formContext);
             formContext.ui.clearFormNotification(NOTIF.INVALID_CUSTOMER);
             return;
         }
@@ -107,15 +105,18 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         getCustomerMode().then(
             function (mode) {
                 if (!isCustomerTypeAllowed(customerValue[0].entityType, mode)) {
+                    // Feedback inmediato. El plugin también va a rechazar, pero
+                    // mostramos el mensaje antes para que el user corrija sin esperar al save.
                     rejectCustomerSelection(formContext, customerValue[0].entityType, mode);
                     return;
                 }
                 formContext.ui.clearFormNotification(NOTIF.INVALID_CUSTOMER);
-                mirrorCustomerToTypedLookups(formContext, customerValue[0]);
+                // NOTA: el mirror Account/Contact lo hace el plugin Pl.Opportunity.CustomerSync
+                // server-side, para que aplique a todos los caminos de entrada (UI, import,
+                // Power Automate, API). Aquí solo hacemos validación visual.
             },
             function () {
-                // Mode unavailable → permissive fallback: mirror without validation.
-                mirrorCustomerToTypedLookups(formContext, customerValue[0]);
+                // Mode unavailable → fallback permisivo. El plugin server-side haría lo mismo.
             }
         );
     };
@@ -361,7 +362,6 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
 
     function rejectCustomerSelection(formContext, attemptedEntityType, mode) {
         formContext.getAttribute("tavu_customerid").setValue(null);
-        clearCustomerMirrors(formContext);
 
         var typeLabel = attemptedEntityType === "account" ? "an Account" : "a Contact";
         var modeLabel = mode === CUSTOMER_MODE.B2B_ONLY ? "B2B Only" : "B2C Only";
@@ -370,37 +370,6 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
             allowedLabel + " as Customers. The " + typeLabel + " you selected was not saved.";
 
         formContext.ui.setFormNotification(message, "WARNING", NOTIF.INVALID_CUSTOMER);
-    }
-
-    /**
-     * Sets the typed lookup (tavu_accountid or tavu_contactid) matching the
-     * customer's entity type and clears the opposite.
-     */
-    function mirrorCustomerToTypedLookups(formContext, customerValue) {
-        if (!customerValue) return;
-        var mirrored = [{
-            id: customerValue.id,
-            name: customerValue.name,
-            entityType: customerValue.entityType
-        }];
-
-        if (customerValue.entityType === "account") {
-            setLookupValue(formContext, "tavu_accountid", mirrored);
-            setLookupValue(formContext, "tavu_contactid", null);
-        } else if (customerValue.entityType === "contact") {
-            setLookupValue(formContext, "tavu_contactid", mirrored);
-            setLookupValue(formContext, "tavu_accountid", null);
-        }
-    }
-
-    function clearCustomerMirrors(formContext) {
-        setLookupValue(formContext, "tavu_accountid", null);
-        setLookupValue(formContext, "tavu_contactid", null);
-    }
-
-    function setLookupValue(formContext, attributeName, value) {
-        var attr = formContext.getAttribute(attributeName);
-        if (attr) attr.setValue(value);
     }
 
 })(OpenTavu.Opportunity.MainForm);
