@@ -6,6 +6,7 @@
   <Folder Name="/WebResources/" />
   <Folder Name="/WebResources/js/">
     <File Path="WebResources/js/tavu_contact_main_form.js" />
+    <File Path="WebResources/js/tavu_opportunity_main_form.js" />
   </Folder>
   <Folder Name="/Workflows/" />
   <Folder Name="/_shared/">
