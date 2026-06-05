@@ -27,9 +27,9 @@ namespace Pl.Opportunity.CustomerSync
 		// ----- Schema constants -----
 		private const string TargetEntityName = "tavu_opportunity";
 
-		private const string AttrCustomer = "tavu_customerid";
-		private const string AttrAccount = "tavu_accountid";
-		private const string AttrContact = "tavu_contactid";
+		private const string AttrCustomer = "tavu_customer";
+		private const string AttrAccount = "tavu_account";
+		private const string AttrContact = "tavu_contact";
 
 		private const string EntityAccount = "account";
 		private const string EntityContact = "contact";

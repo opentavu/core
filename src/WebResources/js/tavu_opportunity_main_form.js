@@ -1,26 +1,21 @@
 "use strict";
 
 /**
- * OpenTavu — Opportunity Main Form
+ * OpenTavu — Opportunity Main Form (tavu_opportunity)
  *
- * Form behavior for tavu_opportunity. Two concerns:
- *   1. Customer field: filter by tenant Customer Mode, mirror Customer to
- *      typed Account/Contact lookups.
- *   2. Close lifecycle: show/hide Close Information section, lock form when
- *      closed, surface header notification.
+ * Customer field: filter by tenant Customer Mode + mirror to typed Account/Contact.
+ * Lifecycle (Option A): Sales Stage drives while Open; Won/Lost takes over when
+ * Closed. Rationale & schema: sales-model.md §6, §6.3bis, §7.3–§7.4.
  *
- * Events to register (form designer):
- *   OnLoad of form        → OpenTavu.Opportunity.MainForm.onLoad
- *   OnSave of form        → OpenTavu.Opportunity.MainForm.onSave
- *   OnChange statecode    → OpenTavu.Opportunity.MainForm.onStateCodeChange
+ * Form event registration (designer → handler; pass execution context):
+ *   OnLoad                   → OpenTavu.Opportunity.MainForm.onLoad
+ *   OnSave                   → OpenTavu.Opportunity.MainForm.onSave
+ *   OnChange statecode       → OpenTavu.Opportunity.MainForm.onStateCodeChange
+ *   OnChange statuscode      → OpenTavu.Opportunity.MainForm.onStatusReasonChange
  *   OnChange tavu_customerid → OpenTavu.Opportunity.MainForm.onCustomerChange
- *   (All handlers must pass execution context as first parameter.)
  *
- * Design references: sales-model.md §6, §7.3, §7.4
- *
- * @author  OpenTavu — Gustavo González Villani
- * @license MIT
- * @version 0.3.0
+ * @author OpenTavu — Gustavo González Villani
+ * SPDX-License-Identifier: MIT
  */
 
 var OpenTavu = OpenTavu || {};
@@ -33,12 +28,22 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
     // Constants
     // ============================================================
 
-    var STATE_OPEN = 0;
-    var STATE_WON = 1;
-    var STATE_LOST = 2;
+    // statecode — on a CUSTOM table this is ALWAYS Active/Inactive only.
+    // Won/Lost is NOT here; it lives in statuscode (see below).
+    var STATE_ACTIVE = 0;
+    var STATE_INACTIVE = 1;
+
+    // statuscode (Status Reason).
+    // "Open" lives under the Active state; "Won" and "Lost" live under Inactive.
+    var STATUS_OPEN = 576600001;
+    var STATUS_WON  = 576600005;   
+    var STATUS_LOST = 576600006;
 
     var TAB_GENERAL = "tab_general";
     var SECTION_CLOSE_INFORMATION = "SectionCloseInformation";
+
+    var FIELD_STATUS_REASON = "statuscode";
+    var FIELD_SALES_STAGE   = "tavu_salesstage";
 
     // Fields populated by close automation (Plugin/Flow from tavu_opportunityclose).
     // Read-only at all times — users never edit these directly.
@@ -75,10 +80,8 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
 
     /** @param {Xrm.ExecutionContext} executionContext */
     MainForm.onLoad = function (executionContext) {
-        MainForm.applyCloseSectionVisibility(executionContext);
+        refreshLifecycleUi(executionContext);
         MainForm.enforceReadOnlyFields(executionContext);
-        MainForm.applyClosedLockdown(executionContext);
-        MainForm.applyClosedStateNotification(executionContext);
         MainForm.applyCustomerModeFilter(executionContext);
     };
 
@@ -87,9 +90,12 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
 
     /** @param {Xrm.ExecutionContext} executionContext */
     MainForm.onStateCodeChange = function (executionContext) {
-        MainForm.applyCloseSectionVisibility(executionContext);
-        MainForm.applyClosedLockdown(executionContext);
-        MainForm.applyClosedStateNotification(executionContext);
+        refreshLifecycleUi(executionContext);
+    };
+
+    /** @param {Xrm.ExecutionContext} executionContext */
+    MainForm.onStatusReasonChange = function (executionContext) {
+        refreshLifecycleUi(executionContext);
     };
 
     /** @param {Xrm.ExecutionContext} executionContext */
@@ -105,19 +111,19 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         getCustomerMode().then(
             function (mode) {
                 if (!isCustomerTypeAllowed(customerValue[0].entityType, mode)) {
-                    // Feedback inmediato. El plugin también va a rechazar, pero
-                    // mostramos el mensaje antes para que el user corrija sin esperar al save.
-                    rejectCustomerSelection(formContext, customerValue[0].entityType, mode);
+                    // Immediate feedback. The plugin will also reject it, but we
+                    // surface the message up front so the user can fix it without waiting for save.
+                     rejectCustomerSelection(formContext, customerValue[0].entityType, mode);
                     return;
                 }
                 formContext.ui.clearFormNotification(NOTIF.INVALID_CUSTOMER);
-                // NOTA: el mirror Account/Contact lo hace el plugin Pl.Opportunity.CustomerSync
-                // server-side, para que aplique a todos los caminos de entrada (UI, import,
-                // Power Automate, API). Aquí solo hacemos validación visual.
+                // NOTE: the Account/Contact mirror is handled server-side by the
+                // Pl.Opportunity.CustomerSync plugin, so it applies across every entry
+                // path (UI, import, Power Automate, API). Here we only do visual validation.
             },
             function () {
-                // Mode unavailable → fallback permisivo. El plugin server-side haría lo mismo.
-            }
+                // Mode unavailable → permissive fallback. The server-side plugin would do the same.            
+                }
         );
     };
 
@@ -126,24 +132,47 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
     // ============================================================
 
     /**
+     * Option A lifecycle emphasis — the core of the no-friction reading.
+     *
+     *  Open    → Sales Stage is the protagonist (visible + business required).
+     *            Status Reason hidden: while Open it only reads "Open", so it
+     *            adds no information and competes with Sales Stage for attention.
+     *  Closed  → Sales Stage stays visible as historical reference but becomes
+     *            read-only (handled by applyClosedLockdown) and its requirement
+     *            is relaxed so legacy/migrated records can be re-saved.
+     *            Status Reason shown read-only — now meaningful (Won/Lost).
+     */
+    MainForm.applyOpenClosedEmphasis = function (executionContext) {
+        var formContext = executionContext.getFormContext();
+        var closed = isClosed(formContext);
+
+        // Status Reason: only meaningful once the opportunity is closed.
+        setControlVisible(formContext, FIELD_STATUS_REASON, closed);
+
+        // Sales Stage: always visible; required only while Open.
+        setControlVisible(formContext, FIELD_SALES_STAGE, true);
+        setFieldRequired(formContext, FIELD_SALES_STAGE, !closed);
+    };
+
+    /**
      * Open  → section hidden.
      * Won   → section visible, Lost Reason hidden inside.
      * Lost  → section visible, Actual Revenue hidden inside.
      */
     MainForm.applyCloseSectionVisibility = function (executionContext) {
         var formContext = executionContext.getFormContext();
-        var stateCode = getStateCode(formContext);
 
-        if (stateCode === STATE_OPEN || stateCode === null) {
+        if (!isClosed(formContext)) {
             setSectionVisible(formContext, TAB_GENERAL, SECTION_CLOSE_INFORMATION, false);
             return;
         }
 
+        var status = getStatusReason(formContext);
         setSectionVisible(formContext, TAB_GENERAL, SECTION_CLOSE_INFORMATION, true);
-        setControlVisible(formContext, "tavu_actualrevenue", stateCode === STATE_WON);
-        setControlVisible(formContext, "tavu_lostreason",    stateCode === STATE_LOST);
+        setControlVisible(formContext, "tavu_actualrevenue",   status === STATUS_WON);
+        setControlVisible(formContext, "tavu_lostreason",      status === STATUS_LOST);
         setControlVisible(formContext, "tavu_actualclosedate", true);
-        setControlVisible(formContext, "tavu_closenotes", true);
+        setControlVisible(formContext, "tavu_closenotes",      true);
     };
 
     MainForm.enforceReadOnlyFields = function (executionContext) {
@@ -159,8 +188,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
      */
     MainForm.applyClosedLockdown = function (executionContext) {
         var formContext = executionContext.getFormContext();
-        var stateCode = getStateCode(formContext);
-        var shouldLock = (stateCode === STATE_WON || stateCode === STATE_LOST);
+        var shouldLock = isClosed(formContext);
 
         formContext.ui.controls.forEach(function (ctrl) {
             if (!ctrl || !ctrl.setDisabled) return;
@@ -180,12 +208,14 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
 
     MainForm.applyClosedStateNotification = function (executionContext) {
         var formContext = executionContext.getFormContext();
-        var stateCode = getStateCode(formContext);
 
         formContext.ui.clearFormNotification(NOTIF.CLOSED_STATE);
-        if (stateCode !== STATE_WON && stateCode !== STATE_LOST) return;
+        if (!isClosed(formContext)) return;
 
-        var label = (stateCode === STATE_WON) ? "Won" : "Lost";
+        var status = getStatusReason(formContext);
+        var label = (status === STATUS_WON) ? "Won"
+                  : (status === STATUS_LOST) ? "Lost"
+                  : "Closed";
         var closeDate = getFormattedAttributeValue(formContext, "tavu_actualclosedate");
         var dateClause = closeDate ? (" on " + closeDate) : "";
         var message = "This opportunity is closed (" + label + dateClause +
@@ -226,11 +256,36 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
     // Internal helpers
     // ============================================================
 
+    /**
+     * Bundles every lifecycle-driven UI rule into one ordered pass.
+     * Order matters: emphasis sets visibility/requirement first, then section
+     * visibility, then the lockdown disables controls when closed, then the
+     * header notification is refreshed.
+     */
+    function refreshLifecycleUi(executionContext) {
+        MainForm.applyOpenClosedEmphasis(executionContext);
+        MainForm.applyCloseSectionVisibility(executionContext);
+        MainForm.applyClosedLockdown(executionContext);
+        MainForm.applyClosedStateNotification(executionContext);
+    }
+
     function getStateCode(formContext) {
         var attr = formContext.getAttribute("statecode");
         if (!attr) return null;
         var value = attr.getValue();
         return (value === null || value === undefined) ? null : value;
+    }
+
+    function getStatusReason(formContext) {
+        var attr = formContext.getAttribute("statuscode");
+        if (!attr) return null;
+        var value = attr.getValue();
+        return (value === null || value === undefined) ? null : value;
+    }
+
+    /** Open vs Closed is decided by statecode (Active/Inactive) on a custom table. */
+    function isClosed(formContext) {
+        return getStateCode(formContext) === STATE_INACTIVE;
     }
 
     function getFormattedAttributeValue(formContext, schemaName) {
@@ -272,6 +327,13 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         (attr.controls.get() || []).forEach(function (ctrl) {
             if (ctrl && ctrl.setDisabled) ctrl.setDisabled(disabled);
         });
+    }
+
+    function setFieldRequired(formContext, schemaName, required) {
+        var attr = formContext.getAttribute(schemaName);
+        if (attr && attr.setRequiredLevel) {
+            attr.setRequiredLevel(required ? "required" : "none");
+        }
     }
 
     // ----- Customer Mode resolution (sessionStorage + WebApi fallback) -----
