@@ -14,6 +14,9 @@
  *   OnChange statuscode      → OpenTavu.Opportunity.MainForm.onStatusReasonChange
  *   OnChange tavu_customerid → OpenTavu.Opportunity.MainForm.onCustomerChange
  *
+ * Command bar registration (Main form → Run JavaScript, param PrimaryControl):
+ *   "Reset Probability"      → OpenTavu.Opportunity.MainForm.resetProbability
+ *
  * @author OpenTavu — Gustavo González Villani
  * SPDX-License-Identifier: MIT
  */
@@ -45,6 +48,14 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
     var FIELD_STATUS_REASON = "statuscode";
     var FIELD_SALES_STAGE   = "tavu_salesstage";
 
+    // Probability defaulting (mirrors LifecycleTracker plugin contract).
+    var FIELD_PROBABILITY           = "tavu_probability";
+    var FIELD_PROBABILITY_IS_MANUAL = "tavu_probabilityismanual";
+
+    // Sales Stage config row — the single source of the default probability.
+    var STAGE_ENTITY                   = "tavu_salesstage";
+    var STAGE_ATTR_DEFAULT_PROBABILITY = "tavu_defaultprobability";
+
     // Fields populated by close automation (Plugin/Flow from tavu_opportunityclose).
     // Read-only at all times — users never edit these directly.
     var CLOSE_MANAGED_FIELDS = [
@@ -71,8 +82,11 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
     var NOTIF = {
         CLOSED_STATE: "opportunity_closed_state_banner",
         INVALID_CUSTOMER: "opentavu_invalid_customer_type",
-        MODE_FETCH_FAILED: "opentavu_mode_fetch_failed"
+        MODE_FETCH_FAILED: "opentavu_mode_fetch_failed",
+        PROBABILITY_RESET: "opentavu_probability_reset"
     };
+
+    var NOTIF_TRANSIENT_MS = 4000;
 
     // ============================================================
     // Event handlers
@@ -245,6 +259,119 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         );
     };
 
+    /**
+     * Ribbon command — "Reset Probability".
+     *
+     * Returns the opportunity to AUTO probability mode: clears the manual
+     * override flag and re-applies the current Sales Stage's configured
+     * default (tavu_salesstage.tavu_defaultprobability).
+     *
+     * Why client-side: per the LifecycleTracker contract (sales-model.md
+     * §6.3bis), the form path sends probability AND the manual flag explicitly;
+     * the server plugin is only the safety net for non-form paths. We read the
+     * default from the SAME config row the plugin reads, so the stage row stays
+     * the single source of truth — no duplicated stage→probability mapping here.
+     *
+     * AI-first path: today "reset" = stage default. Under AI-Assisted
+     * Forecasting this same command recalculates from the per-firm conversion
+     * model — the button and its contract (clear manual flag, recompute) survive.
+     *
+     * Registered on the Main form command bar via Run JavaScript, passing
+     * PrimaryControl. Auto-saves on success so the reset applies immediately;
+     * the save commits the WHOLE form (any other pending edits go with it).
+     *
+     * REQUIRES tavu_probabilityismanual to be present on the form (hidden is
+     * fine). Without it the flag cannot be cleared, and the plugin's
+     * "explicit probability + no flag = manual" rule would freeze the value.
+     *
+     * @param {Xrm.FormContext|Xrm.ExecutionContext} primaryControl
+     */
+    MainForm.resetProbability = function (primaryControl) {
+        var formContext = resolveFormContext(primaryControl);
+        if (!formContext) return;
+
+        // A closed opportunity is historical/read-only — never touch it.
+        if (isClosed(formContext)) {
+            notifyTransient(formContext,
+                "This opportunity is closed. Probability cannot be reset.",
+                "INFO");
+            return;
+        }
+
+        // The manual-override flag MUST be writable from the form. If it is not on
+        // the form, getAttribute returns null and we cannot clear it — and saving a
+        // probability WITHOUT the flag makes the plugin (LifecycleTracker, the
+        // "explicit probability + no flag = manual" rule) stamp manual = true,
+        // freezing the value. Abort loudly here BEFORE touching probability rather
+        // than silently poisoning the flag.
+        var manualAttr = formContext.getAttribute(FIELD_PROBABILITY_IS_MANUAL);
+        if (!manualAttr) {
+            console.error(
+                "[OpenTavu.Opportunity.MainForm] resetProbability: '" +
+                FIELD_PROBABILITY_IS_MANUAL + "' is not on the form. Add it (hidden is fine) and publish.");
+            notifyTransient(formContext,
+                "Reset is unavailable: the override flag field is missing from this form. " +
+                "Add it (it can be hidden) and publish, then try again.",
+                "ERROR");
+            return;
+        }
+
+        var stageAttr = formContext.getAttribute(FIELD_SALES_STAGE);
+        var stageRef = stageAttr ? stageAttr.getValue() : null;
+        if (!stageRef || stageRef.length === 0) {
+            notifyTransient(formContext,
+                "Select a Sales Stage first — the default probability comes from the stage.",
+                "WARNING");
+            return;
+        }
+
+        var stageId = stageRef[0].id.replace(/[{}]/g, "");
+
+        Xrm.WebApi.retrieveRecord(
+            STAGE_ENTITY, stageId, "?$select=" + STAGE_ATTR_DEFAULT_PROBABILITY
+        ).then(
+            function (stage) {
+                var def = stage[STAGE_ATTR_DEFAULT_PROBABILITY];
+                if (def === null || def === undefined) {
+                    notifyTransient(formContext,
+                        "This Sales Stage has no default probability configured.",
+                        "WARNING");
+                    return;
+                }
+
+                // Order matters: setValue does NOT fire OnChange, so writing the
+                // probability will not re-flip the manual flag. We then clear the
+                // flag explicitly to land in auto mode.
+                setAttributeValue(formContext, FIELD_PROBABILITY, def);
+                setAttributeValue(formContext, FIELD_PROBABILITY_IS_MANUAL, false);
+
+                // Auto-save so the reset takes effect immediately. This commits
+                // the whole form, including any other pending edits on it.
+                formContext.data.save().then(
+                    function () {
+                        notifyTransient(formContext,
+                            "Probability reset to the stage default (" + def + "%).",
+                            "INFO");
+                    },
+                    function (saveError) {
+                        console.error(
+                            "[OpenTavu.Opportunity.MainForm] resetProbability save failed:", saveError);
+                        notifyTransient(formContext,
+                            "Probability was reset on the form but the save failed. Save manually to apply.",
+                            "ERROR");
+                    }
+                );
+            },
+            function (error) {
+                console.error(
+                    "[OpenTavu.Opportunity.MainForm] resetProbability failed:", error);
+                notifyTransient(formContext,
+                    "Could not read the stage default probability. Try again.",
+                    "ERROR");
+            }
+        );
+    };
+
     // ============================================================
     // Reserved hooks for future modules
     // ============================================================
@@ -267,6 +394,29 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         MainForm.applyCloseSectionVisibility(executionContext);
         MainForm.applyClosedLockdown(executionContext);
         MainForm.applyClosedStateNotification(executionContext);
+    }
+
+    /**
+     * Command-bar handlers receive PrimaryControl (a FormContext); form-event
+     * handlers receive an ExecutionContext. Normalize to a FormContext so the
+     * same helpers work from either entry point.
+     */
+    function resolveFormContext(arg) {
+        if (!arg) return null;
+        return (typeof arg.getFormContext === "function") ? arg.getFormContext() : arg;
+    }
+
+    function setAttributeValue(formContext, schemaName, value) {
+        var attr = formContext.getAttribute(schemaName);
+        if (attr && attr.setValue) attr.setValue(value);
+    }
+
+    /** Form notification that auto-clears, so it does not linger on the form. */
+    function notifyTransient(formContext, message, level) {
+        formContext.ui.setFormNotification(message, level, NOTIF.PROBABILITY_RESET);
+        setTimeout(function () {
+            formContext.ui.clearFormNotification(NOTIF.PROBABILITY_RESET);
+        }, NOTIF_TRANSIENT_MS);
     }
 
     function getStateCode(formContext) {
