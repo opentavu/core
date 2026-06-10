@@ -32,6 +32,27 @@ dotnet new opentavu-plugin `
   --entityShortName Case
 ```
 
+> **`-n` is mandatory.** It is what names the project and creates its own
+> subfolder. If you omit it, `dotnet new` falls back to the **current directory
+> name** as the project name and writes the files **into the current folder**
+> instead of a new subfolder. Running it from `src\` without `-n` produces a
+> broken `src.csproj` with `namespace src` and wrong relative paths to
+> `_Shared\Common\`. Always pass `-n Pl.<EntityShortName>.<ActionName>` and run
+> it from `src\Plugins\` so the generated project lands at
+> `src\Plugins\Pl.<EntityShortName>.<ActionName>\`.
+>
+> `--entityShortName` does **not** drive the folder name on its own — it has no
+> `replaces`/`fileRename` in the manifest; you type it into the `-n` value.
+
+> **SDK reference version is coupled.** The generated `.csproj` resolves
+> `Microsoft.Xrm.Sdk` and `Microsoft.Crm.Sdk.Proxy` via a `HintPath` into
+> `..\..\packages\Microsoft.CrmSdk.CoreAssemblies.<version>\lib\net462\`. That
+> `<version>` is hardcoded to match the template's `packages.config`
+> (currently `9.0.2.51`). If you bump `CoreAssemblies` in `packages.config`,
+> update the two `HintPath` lines in `Pl.Entity.Action.csproj` to the same
+> version, or generated projects will fail with `CS0246` on every SDK type
+> (`Entity`, `IPlugin`, `IPluginExecutionContext`, etc.).
+
 ### `opentavu-cwa` (planned)
 
 Will scaffold a new Custom Workflow Activity project
