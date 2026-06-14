@@ -30,8 +30,8 @@
  *   OnSave → OpenTavu.Contact.Form.onSave                  (pass execution context: yes)
  *
  *   parentcustomerid OnChange         → OpenTavu.Contact.Form.onParentCustomerChange
- *   tavu_addresscountry OnChange      → OpenTavu.Contact.Form.onCountryChange
- *   tavu_addressstateprovince OnChange → OpenTavu.Contact.Form.onStateProvinceChange
+ *   tavu_country OnChange      → OpenTavu.Contact.Form.onCountryChange
+ *   tavu_stateprovince OnChange → OpenTavu.Contact.Form.onStateProvinceChange
  *
  * Header fields (configured in form designer, not by this script):
  *   tavu_engagementstatus, tavu_opencasescount, tavu_lastemaildate, tavu_lastmeetingdate
@@ -91,6 +91,16 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
         "tavu_lastengagementdate"
     ];
 
+    // Location cascade — custom lookups on Contact/Account, and the parent-link
+    // attribute on each child table used to filter the dependent lookup.
+    var FIELD_COUNTRY = "tavu_country";              // lookup -> tavu_country
+    var FIELD_STATEPROVINCE = "tavu_stateprovince";  // lookup -> tavu_stateprovince
+    var FIELD_CITY = "tavu_city";                    // lookup -> tavu_city
+    var STATEPROVINCE_TABLE = "tavu_stateprovince";
+    var CITY_TABLE = "tavu_city";
+    var STATEPROVINCE_PARENT_ATTR = "tavu_country";       // tavu_stateprovince.tavu_country
+    var CITY_PARENT_ATTR = "tavu_stateprovince";          // tavu_city.tavu_stateprovince
+
     // ============================================================
     // Event handlers
     // ============================================================
@@ -103,6 +113,7 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
     Form.onLoad = function (executionContext) {
         Form.applyAdaptiveLayout(executionContext);
         Form.setLocationFieldRequirements(executionContext);
+        Form.applyLocationFilters(executionContext);
         Form.enforceReadOnlyFields(executionContext);
     };
 
@@ -126,22 +137,22 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
     };
 
     /**
-     * OnChange for tavu_addresscountry. Clears State and City to enforce cascading.
+     * OnChange for tavu_country. Clears State and City to enforce cascading.
      * @param {Xrm.ExecutionContext} executionContext
      */
     Form.onCountryChange = function (executionContext) {
         var formContext = executionContext.getFormContext();
-        setAttribute(formContext, "tavu_addressstateprovince", null);
-        setAttribute(formContext, "tavu_addresscity", null);
+        setAttribute(formContext, FIELD_STATEPROVINCE, null);
+        setAttribute(formContext, FIELD_CITY, null);
     };
 
     /**
-     * OnChange for tavu_addressstateprovince. Clears City to enforce cascading.
+     * OnChange for tavu_stateprovince. Clears City to enforce cascading.
      * @param {Xrm.ExecutionContext} executionContext
      */
     Form.onStateProvinceChange = function (executionContext) {
         var formContext = executionContext.getFormContext();
-        setAttribute(formContext, "tavu_addresscity", null);
+        setAttribute(formContext, FIELD_CITY, null);
     };
 
     // ============================================================
@@ -233,7 +244,7 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
         var parentValue = parentAttr.getValue()[0];
         if (parentValue.entityType !== "account") return;
 
-        var countryAttr = formContext.getAttribute("tavu_addresscountry");
+        var countryAttr = formContext.getAttribute("tavu_country");
         if (!countryAttr) return;
 
         if (countryAttr.getValue() !== null) return; // Do not overwrite manual entry
@@ -249,17 +260,17 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
         Xrm.WebApi.retrieveRecord(
             "account",
             accountId,
-            "?$select=_tavu_addresscountry_value,_tavu_addressstateprovince_value,_tavu_addresscity_value"
+            "?$select=_tavu_country_value,_tavu_stateprovince_value,_tavu_city_value"
         ).then(
             function success(result) {
                 formContext.ui.clearFormNotification(NOTIF_LOCATION_INHERIT);
 
-                applyLookupFromODataResult(formContext, "tavu_addresscountry",
-                    result, "_tavu_addresscountry_value", "tavu_country");
-                applyLookupFromODataResult(formContext, "tavu_addressstateprovince",
-                    result, "_tavu_addressstateprovince_value", "tavu_stateprovince");
-                applyLookupFromODataResult(formContext, "tavu_addresscity",
-                    result, "_tavu_addresscity_value", "tavu_city");
+                applyLookupFromODataResult(formContext, "tavu_country",
+                    result, "_tavu_country_value", "tavu_country");
+                applyLookupFromODataResult(formContext, "tavu_stateprovince",
+                    result, "_tavu_stateprovince_value", "tavu_stateprovince");
+                applyLookupFromODataResult(formContext, "tavu_city",
+                    result, "_tavu_city_value", "tavu_city");
             },
             function error(err) {
                 formContext.ui.clearFormNotification(NOTIF_LOCATION_INHERIT);
@@ -274,9 +285,25 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
      */
     Form.setLocationFieldRequirements = function (executionContext) {
         var formContext = executionContext.getFormContext();
-        setRequired(formContext, "tavu_addresscountry", "required");
-        setRequired(formContext, "tavu_addressstateprovince", "none");
-        setRequired(formContext, "tavu_addresscity", "none");
+        setRequired(formContext, FIELD_COUNTRY, "required");
+        setRequired(formContext, FIELD_STATEPROVINCE, "none");
+        setRequired(formContext, FIELD_CITY, "none");
+    };
+
+    /**
+     * Cascading lookup filter: State/Province is restricted to the chosen Country,
+     * and City to the chosen State/Province. PreSearch handlers are added ONCE; each
+     * runs at search time and reads the current parent value, so changing the Country
+     * and reopening the State lookup automatically reflects the new scope. When no
+     * parent is selected, no filter is applied (the lookup shows everything).
+     * @param {Xrm.ExecutionContext} executionContext
+     */
+    Form.applyLocationFilters = function (executionContext) {
+        var formContext = executionContext.getFormContext();
+        wirePreSearch(formContext, FIELD_STATEPROVINCE, STATEPROVINCE_TABLE,
+            FIELD_COUNTRY, STATEPROVINCE_PARENT_ATTR);
+        wirePreSearch(formContext, FIELD_CITY, CITY_TABLE,
+            FIELD_STATEPROVINCE, CITY_PARENT_ATTR);
     };
 
     // ============================================================
@@ -430,6 +457,35 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
 
         var name = result[idKey + "@OData.Community.Display.V1.FormattedValue"];
         attr.setValue([{ id: id, name: name, entityType: entityType }]);
+    }
+
+    /**
+     * Adds a PreSearch filter to a dependent lookup so it only offers child records
+     * whose parent link equals the currently selected parent. Added once; the closure
+     * reads the live parent value on every search. No-op (shows all) when no parent.
+     *
+     * @param {object} formContext
+     * @param {string} childLookupField  the dependent lookup field on this form
+     * @param {string} childTable        logical name of the dependent table (for addCustomFilter)
+     * @param {string} parentField       the parent lookup field on this form
+     * @param {string} parentLinkAttr    attribute on the child table that points to the parent
+     */
+    function wirePreSearch(formContext, childLookupField, childTable, parentField, parentLinkAttr) {
+        var control = formContext.getControl(childLookupField);
+        if (!control || !control.addPreSearch) return;
+
+        control.addPreSearch(function () {
+            var parentAttr = formContext.getAttribute(parentField);
+            var parentValue = parentAttr ? parentAttr.getValue() : null;
+            if (!parentValue || parentValue.length === 0) return; // no parent → no filter
+
+            var parentId = parentValue[0].id.replace(/[{}]/g, "");
+            var filterXml =
+                "<filter type='and'>" +
+                "<condition attribute='" + parentLinkAttr + "' operator='eq' value='" + parentId + "' />" +
+                "</filter>";
+            control.addCustomFilter(filterXml, childTable);
+        });
     }
 
 })(OpenTavu.Contact.Form);

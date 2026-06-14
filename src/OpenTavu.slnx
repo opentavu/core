@@ -7,6 +7,7 @@
   <Folder Name="/Solution/" />
   <Folder Name="/WebResources/" />
   <Folder Name="/WebResources/js/">
+    <File Path="WebResources/js/tavu_account_form.js" />
     <File Path="WebResources/js/tavu_contact_form.js" />
     <File Path="WebResources/js/tavu_opportunity_form.js" />
     <File Path="WebResources/js/tavu_proposalline_form.js" />
