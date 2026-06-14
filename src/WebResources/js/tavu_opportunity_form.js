@@ -1,21 +1,21 @@
 "use strict";
 
 /**
- * OpenTavu — Opportunity Main Form (tavu_opportunity)
+ * OpenTavu — Opportunity Form (tavu_opportunity)
  *
  * Customer field: filter by tenant Customer Mode + mirror to typed Account/Contact.
  * Lifecycle (Option A): Sales Stage drives while Open; Won/Lost takes over when
  * Closed. Rationale & schema: sales-model.md §6, §6.3bis, §7.3–§7.4.
  *
  * Form event registration (designer → handler; pass execution context):
- *   OnLoad                   → OpenTavu.Opportunity.MainForm.onLoad
- *   OnSave                   → OpenTavu.Opportunity.MainForm.onSave
- *   OnChange statecode       → OpenTavu.Opportunity.MainForm.onStateCodeChange
- *   OnChange statuscode      → OpenTavu.Opportunity.MainForm.onStatusReasonChange
- *   OnChange tavu_customerid → OpenTavu.Opportunity.MainForm.onCustomerChange
+ *   OnLoad                   → OpenTavu.Opportunity.Form.onLoad
+ *   OnSave                   → OpenTavu.Opportunity.Form.onSave
+ *   OnChange statecode       → OpenTavu.Opportunity.Form.onStateCodeChange
+ *   OnChange statuscode      → OpenTavu.Opportunity.Form.onStatusReasonChange
+ *   OnChange tavu_customerid → OpenTavu.Opportunity.Form.onCustomerChange
  *
  * Command bar registration (Main form → Run JavaScript, param PrimaryControl):
- *   "Reset Probability"      → OpenTavu.Opportunity.MainForm.resetProbability
+ *   "Reset Probability"      → OpenTavu.Opportunity.Form.resetProbability
  *
  * @author OpenTavu — Gustavo González Villani
  * SPDX-License-Identifier: MIT
@@ -23,9 +23,9 @@
 
 var OpenTavu = OpenTavu || {};
 OpenTavu.Opportunity = OpenTavu.Opportunity || {};
-OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
+OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
 
-(function (MainForm) {
+(function (Form) {
 
     // ============================================================
     // Constants
@@ -93,27 +93,27 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
     // ============================================================
 
     /** @param {Xrm.ExecutionContext} executionContext */
-    MainForm.onLoad = function (executionContext) {
+    Form.onLoad = function (executionContext) {
         refreshLifecycleUi(executionContext);
-        MainForm.enforceReadOnlyFields(executionContext);
-        MainForm.applyCustomerModeFilter(executionContext);
+        Form.enforceReadOnlyFields(executionContext);
+        Form.applyCustomerModeFilter(executionContext);
     };
 
     /** Reserved for future save-time validations. */
-    MainForm.onSave = function (executionContext) { };
+    Form.onSave = function (executionContext) { };
 
     /** @param {Xrm.ExecutionContext} executionContext */
-    MainForm.onStateCodeChange = function (executionContext) {
+    Form.onStateCodeChange = function (executionContext) {
         refreshLifecycleUi(executionContext);
     };
 
     /** @param {Xrm.ExecutionContext} executionContext */
-    MainForm.onStatusReasonChange = function (executionContext) {
+    Form.onStatusReasonChange = function (executionContext) {
         refreshLifecycleUi(executionContext);
     };
 
     /** @param {Xrm.ExecutionContext} executionContext */
-    MainForm.onCustomerChange = function (executionContext) {
+    Form.onCustomerChange = function (executionContext) {
         var formContext = executionContext.getFormContext();
         var customerValue = formContext.getAttribute("tavu_customerid").getValue();
 
@@ -156,7 +156,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
      *            is relaxed so legacy/migrated records can be re-saved.
      *            Status Reason shown read-only — now meaningful (Won/Lost).
      */
-    MainForm.applyOpenClosedEmphasis = function (executionContext) {
+    Form.applyOpenClosedEmphasis = function (executionContext) {
         var formContext = executionContext.getFormContext();
         var closed = isClosed(formContext);
 
@@ -173,7 +173,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
      * Won   → section visible, Lost Reason hidden inside.
      * Lost  → section visible, Actual Revenue hidden inside.
      */
-    MainForm.applyCloseSectionVisibility = function (executionContext) {
+    Form.applyCloseSectionVisibility = function (executionContext) {
         var formContext = executionContext.getFormContext();
 
         if (!isClosed(formContext)) {
@@ -189,7 +189,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         setControlVisible(formContext, "tavu_closenotes",      true);
     };
 
-    MainForm.enforceReadOnlyFields = function (executionContext) {
+    Form.enforceReadOnlyFields = function (executionContext) {
         var formContext = executionContext.getFormContext();
         CLOSE_MANAGED_FIELDS.forEach(function (fieldName) {
             setControlDisabled(formContext, fieldName, true);
@@ -200,7 +200,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
      * Locks all controls when closed, except subgrid/timeline (audit trail)
      * and CLOSE_MANAGED_FIELDS (which stay locked even when reopened).
      */
-    MainForm.applyClosedLockdown = function (executionContext) {
+    Form.applyClosedLockdown = function (executionContext) {
         var formContext = executionContext.getFormContext();
         var shouldLock = isClosed(formContext);
 
@@ -220,7 +220,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         });
     };
 
-    MainForm.applyClosedStateNotification = function (executionContext) {
+    Form.applyClosedStateNotification = function (executionContext) {
         var formContext = executionContext.getFormContext();
 
         formContext.ui.clearFormNotification(NOTIF.CLOSED_STATE);
@@ -243,7 +243,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
      * Resolves customer mode and applies PreSearch filter to the Customer
      * lookup. Non-blocking: form remains usable while mode resolves.
      */
-    MainForm.applyCustomerModeFilter = function (executionContext) {
+    Form.applyCustomerModeFilter = function (executionContext) {
         var formContext = executionContext.getFormContext();
 
         getCustomerMode().then(
@@ -254,7 +254,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
                     "WARNING",
                     NOTIF.MODE_FETCH_FAILED
                 );
-                console.warn("[OpenTavu.Opportunity.MainForm] Customer Mode fetch failed:", error);
+                console.warn("[OpenTavu.Opportunity.Form] Customer Mode fetch failed:", error);
             }
         );
     };
@@ -286,7 +286,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
      *
      * @param {Xrm.FormContext|Xrm.ExecutionContext} primaryControl
      */
-    MainForm.resetProbability = function (primaryControl) {
+    Form.resetProbability = function (primaryControl) {
         var formContext = resolveFormContext(primaryControl);
         if (!formContext) return;
 
@@ -307,7 +307,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         var manualAttr = formContext.getAttribute(FIELD_PROBABILITY_IS_MANUAL);
         if (!manualAttr) {
             console.error(
-                "[OpenTavu.Opportunity.MainForm] resetProbability: '" +
+                "[OpenTavu.Opportunity.Form] resetProbability: '" +
                 FIELD_PROBABILITY_IS_MANUAL + "' is not on the form. Add it (hidden is fine) and publish.");
             notifyTransient(formContext,
                 "Reset is unavailable: the override flag field is missing from this form. " +
@@ -355,7 +355,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
                     },
                     function (saveError) {
                         console.error(
-                            "[OpenTavu.Opportunity.MainForm] resetProbability save failed:", saveError);
+                            "[OpenTavu.Opportunity.Form] resetProbability save failed:", saveError);
                         notifyTransient(formContext,
                             "Probability was reset on the form but the save failed. Save manually to apply.",
                             "ERROR");
@@ -364,7 +364,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
             },
             function (error) {
                 console.error(
-                    "[OpenTavu.Opportunity.MainForm] resetProbability failed:", error);
+                    "[OpenTavu.Opportunity.Form] resetProbability failed:", error);
                 notifyTransient(formContext,
                     "Could not read the stage default probability. Try again.",
                     "ERROR");
@@ -377,7 +377,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
     // ============================================================
 
     /** Reserved for Module 4 — AI Proposal Generator. */
-    MainForm.refreshProposalSignals = function (executionContext) { };
+    Form.refreshProposalSignals = function (executionContext) { };
 
     // ============================================================
     // Internal helpers
@@ -390,10 +390,10 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
      * header notification is refreshed.
      */
     function refreshLifecycleUi(executionContext) {
-        MainForm.applyOpenClosedEmphasis(executionContext);
-        MainForm.applyCloseSectionVisibility(executionContext);
-        MainForm.applyClosedLockdown(executionContext);
-        MainForm.applyClosedStateNotification(executionContext);
+        Form.applyOpenClosedEmphasis(executionContext);
+        Form.applyCloseSectionVisibility(executionContext);
+        Form.applyClosedLockdown(executionContext);
+        Form.applyClosedStateNotification(executionContext);
     }
 
     /**
@@ -530,7 +530,7 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
             "?$select=tavu_customermode&$top=1"
         ).then(function (result) {
             if (!result.entities || result.entities.length === 0) {
-                console.warn("[OpenTavu.Opportunity.MainForm] No tavu_systemsettings row. Defaulting to Mixed.");
+                console.warn("[OpenTavu.Opportunity.Form] No tavu_systemsettings row. Defaulting to Mixed.");
                 return CUSTOMER_MODE.MIXED;
             }
             var mode = result.entities[0].tavu_customermode;
@@ -584,4 +584,4 @@ OpenTavu.Opportunity.MainForm = OpenTavu.Opportunity.MainForm || {};
         formContext.ui.setFormNotification(message, "WARNING", NOTIF.INVALID_CUSTOMER);
     }
 
-})(OpenTavu.Opportunity.MainForm);
+})(OpenTavu.Opportunity.Form);

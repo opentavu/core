@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * OpenTavu — Contact Main Form Script
+ * OpenTavu — Contact Form Script
  *
  * Form: Contact > Main
  * Purpose: Adaptive form logic that switches between three modes:
@@ -26,12 +26,12 @@
  *   - UNSET: editable
  *
  * Form registration:
- *   OnLoad → OpenTavu.Contact.MainForm.onLoad                  (pass execution context: yes)
- *   OnSave → OpenTavu.Contact.MainForm.onSave                  (pass execution context: yes)
+ *   OnLoad → OpenTavu.Contact.Form.onLoad                  (pass execution context: yes)
+ *   OnSave → OpenTavu.Contact.Form.onSave                  (pass execution context: yes)
  *
- *   parentcustomerid OnChange         → OpenTavu.Contact.MainForm.onParentCustomerChange
- *   tavu_addresscountry OnChange      → OpenTavu.Contact.MainForm.onCountryChange
- *   tavu_addressstateprovince OnChange → OpenTavu.Contact.MainForm.onStateProvinceChange
+ *   parentcustomerid OnChange         → OpenTavu.Contact.Form.onParentCustomerChange
+ *   tavu_addresscountry OnChange      → OpenTavu.Contact.Form.onCountryChange
+ *   tavu_addressstateprovince OnChange → OpenTavu.Contact.Form.onStateProvinceChange
  *
  * Header fields (configured in form designer, not by this script):
  *   tavu_engagementstatus, tavu_opencasescount, tavu_lastemaildate, tavu_lastmeetingdate
@@ -47,9 +47,9 @@
 
 var OpenTavu = OpenTavu || {};
 OpenTavu.Contact = OpenTavu.Contact || {};
-OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
+OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
 
-(function (MainForm) {
+(function (Form) {
 
     // ============================================================
     // Constants
@@ -100,17 +100,17 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
      * field requirements, and read-only enforcement.
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.onLoad = function (executionContext) {
-        MainForm.applyAdaptiveLayout(executionContext);
-        MainForm.setLocationFieldRequirements(executionContext);
-        MainForm.enforceReadOnlyFields(executionContext);
+    Form.onLoad = function (executionContext) {
+        Form.applyAdaptiveLayout(executionContext);
+        Form.setLocationFieldRequirements(executionContext);
+        Form.enforceReadOnlyFields(executionContext);
     };
 
     /**
      * Form OnSave handler. Reserved for future validations.
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.onSave = function (executionContext) {
+    Form.onSave = function (executionContext) {
         // Reserved for future save-time validations.
     };
 
@@ -119,17 +119,17 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
      * inherits location, and re-enforces read-only policy for Customer Tier.
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.onParentCustomerChange = function (executionContext) {
-        MainForm.applyAdaptiveLayout(executionContext);
-        MainForm.inheritLocationFromAccount(executionContext);
-        MainForm.enforceReadOnlyFields(executionContext);
+    Form.onParentCustomerChange = function (executionContext) {
+        Form.applyAdaptiveLayout(executionContext);
+        Form.inheritLocationFromAccount(executionContext);
+        Form.enforceReadOnlyFields(executionContext);
     };
 
     /**
      * OnChange for tavu_addresscountry. Clears State and City to enforce cascading.
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.onCountryChange = function (executionContext) {
+    Form.onCountryChange = function (executionContext) {
         var formContext = executionContext.getFormContext();
         setAttribute(formContext, "tavu_addressstateprovince", null);
         setAttribute(formContext, "tavu_addresscity", null);
@@ -139,13 +139,13 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
      * OnChange for tavu_addressstateprovince. Clears City to enforce cascading.
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.onStateProvinceChange = function (executionContext) {
+    Form.onStateProvinceChange = function (executionContext) {
         var formContext = executionContext.getFormContext();
         setAttribute(formContext, "tavu_addresscity", null);
     };
 
     // ============================================================
-    // Core logic — exposed via MainForm namespace
+    // Core logic — exposed via Form namespace
     // ============================================================
 
     /**
@@ -154,7 +154,7 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
      *
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.applyAdaptiveLayout = function (executionContext) {
+    Form.applyAdaptiveLayout = function (executionContext) {
         var formContext = executionContext.getFormContext();
         var mode = detectMode(formContext);
 
@@ -204,7 +204,7 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
      *
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.enforceReadOnlyFields = function (executionContext) {
+    Form.enforceReadOnlyFields = function (executionContext) {
         var formContext = executionContext.getFormContext();
 
         SYSTEM_MANAGED_FIELDS.forEach(function (fieldName) {
@@ -222,7 +222,7 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
      * they can always override.
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.inheritLocationFromAccount = function (executionContext) {
+    Form.inheritLocationFromAccount = function (executionContext) {
         var formContext = executionContext.getFormContext();
         var mode = detectMode(formContext);
         if (mode !== MODE_B2B) return;
@@ -263,7 +263,7 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
             },
             function error(err) {
                 formContext.ui.clearFormNotification(NOTIF_LOCATION_INHERIT);
-                console.error("[OpenTavu.Contact.MainForm.inheritLocationFromAccount] " + err.message);
+                console.error("[OpenTavu.Contact.Form.inheritLocationFromAccount] " + err.message);
             }
         );
     };
@@ -272,7 +272,7 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
      * Sets requirement levels for location fields per sales-model.md §5.1.
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.setLocationFieldRequirements = function (executionContext) {
+    Form.setLocationFieldRequirements = function (executionContext) {
         var formContext = executionContext.getFormContext();
         setRequired(formContext, "tavu_addresscountry", "required");
         setRequired(formContext, "tavu_addressstateprovince", "none");
@@ -288,7 +288,7 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
      * timestamps when Module 3 pushes new email/meeting signals.
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.refreshEngagementMetrics = function (executionContext) {
+    Form.refreshEngagementMetrics = function (executionContext) {
         // TODO: implement when Module 3 is live.
     };
 
@@ -297,12 +297,12 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
      * once Module 1 provides sentiment signals.
      * @param {Xrm.ExecutionContext} executionContext
      */
-    MainForm.evaluateEngagementStatus = function (executionContext) {
+    Form.evaluateEngagementStatus = function (executionContext) {
         // TODO: extend when Module 1 sentiment signals are available.
     };
 
     // ============================================================
-    // Internal helpers — NOT exposed on the MainForm namespace
+    // Internal helpers — NOT exposed on the Form namespace
     // ============================================================
 
     /**
@@ -413,7 +413,7 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
             if (grid.setFilterXml) grid.setFilterXml(filterXml);
             if (grid.refresh) grid.refresh();
         } catch (e) {
-            console.warn("[OpenTavu.Contact.MainForm] Could not filter " + contextLabel + " subgrid: " + e.message);
+            console.warn("[OpenTavu.Contact.Form] Could not filter " + contextLabel + " subgrid: " + e.message);
         }
     }
 
@@ -432,4 +432,4 @@ OpenTavu.Contact.MainForm = OpenTavu.Contact.MainForm || {};
         attr.setValue([{ id: id, name: name, entityType: entityType }]);
     }
 
-})(OpenTavu.Contact.MainForm);
+})(OpenTavu.Contact.Form);
