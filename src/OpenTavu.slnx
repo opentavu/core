@@ -17,12 +17,15 @@
     <File Path="WebResources/js/tavu_proposalline_form.js" />
   </Folder>
   <Folder Name="/Workflows/" />
-  <Folder Name="/_shared/">
+  <Folder Name="/_shared/" />
+  <Folder Name="/_shared/AI/">
     <File Path="_Shared/AI/AIConfigResolver.cs" />
     <File Path="_Shared/AI/AIProviderFactory.cs" />
     <File Path="_Shared/AI/AzureOpenAIProvider.cs" />
     <File Path="_Shared/AI/IAIProvider.cs" />
     <File Path="_Shared/AI/OpenAIProvider.cs" />
+  </Folder>
+  <Folder Name="/_shared/Common/">
     <File Path="_Shared/Common/LocalPluginContext.cs" />
     <File Path="_Shared/Common/PluginBase.cs" />
   </Folder>
