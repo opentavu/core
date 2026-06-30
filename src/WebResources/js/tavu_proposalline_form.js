@@ -12,11 +12,12 @@
  * manual flag for the price, mirroring tavu_probabilityismanual on Opportunity
  * (sales-model.md §6.3bis, §8bis.2.1, §8bis.3.4).
  *
- * Live amount preview: Subtotal / Tax Amount / Total are recomputed client-side as the
- * seller types, so the grid feels instant. The Pl.ProposalLine.Calculator plugin remains
- * the source of truth on save and on every non-form path (import, API, Flow). Cost and
- * Line Cost are NOT touched here — they are Field-Security-protected and the seller's
- * context cannot write them; the plugin snapshots/derives them server-side.
+ * Live amount preview: Subtotal / Tax Amount / Total — and Unit Cost / Line Cost — are
+ * filled client-side as the seller picks a product and types, so nothing shows empty while
+ * creating. The Pl.ProposalLine.Calculator plugin remains the source of truth on save and
+ * on every non-form path (import, API, Flow); it re-stamps the unit cost from the product
+ * server-side. If cost/margin later become Field-Security-protected, the server stays
+ * correct (plugin via SystemService); this preview just won't persist for unauthorized users.
  *
  * Form event registration (designer → handler; pass execution context):
  *   OnLoad                    → OpenTavu.ProposalLine.Form.onLoad
@@ -48,17 +49,19 @@ OpenTavu.ProposalLine.Form = OpenTavu.ProposalLine.Form || {};
     // ============================================================
 
     // --- tavu_proposalline (the line) ---
-    var F_PRODUCT   = "tavu_productid";     // Lookup -> tavu_product   (VERIFY)
-    var F_UOM       = "tavu_uomid";         // Lookup -> tavu_uom        (VERIFY)
+    var F_PRODUCT   = "tavu_product";       // Lookup -> tavu_product   (confirmed)
+    var F_UOM       = "tavu_unitofmeasure"; // Lookup -> tavu_uom        (confirmed)
     var F_QUANTITY  = "tavu_quantity";      // Decimal
     var F_PRICE     = "tavu_priceperunit";  // Currency
     var F_TAXRATE   = "tavu_taxrate";       // Decimal (percent)
     var F_DISCOUNT  = "tavu_discount";      // Currency (amount)
     var F_OVERRIDE  = "tavu_overrideprice"; // Yes/No
+    var F_UNITCOST  = "tavu_unitcost";      // Currency (live preview; plugin is source of truth)
+    var F_LINECOST  = "tavu_linecost";      // Currency (live preview; plugin is source of truth)
     var F_SUBTOTAL  = "tavu_subtotal";      // Currency (plain, plugin-authoritative)
     var F_TAXAMOUNT = "tavu_taxamount";     // Currency (plain, plugin-authoritative)
     var F_TOTAL     = "tavu_total";         // Currency (plain, plugin-authoritative)
-    var F_PROPOSAL  = "tavu_proposalid";    // Lookup -> tavu_proposal   (VERIFY)
+    var F_PROPOSAL  = "tavu_proposal";      // Lookup -> tavu_proposal   (confirmed)
 
     // --- tavu_proposal (the header) ---
     var PROPOSAL_ENTITY    = "tavu_proposal";
@@ -67,11 +70,12 @@ OpenTavu.ProposalLine.Form = OpenTavu.ProposalLine.Form || {};
     // --- tavu_product ---
     var PRODUCT_ENTITY      = "tavu_product";
     var PRODUCT_DEFAULTUNIT = "tavu_defaultunit"; // Lookup -> tavu_uom (doc §8bis.3.2)
+    var PRODUCT_COST        = "tavu_cost";        // Currency (internal unit cost)
 
     // --- tavu_pricelistitem ---
     var PLI_ENTITY    = "tavu_pricelistitem";
-    var PLI_PRICELIST = "tavu_pricelistid"; // Lookup -> tavu_pricelist
-    var PLI_PRODUCT   = "tavu_productid";   // Lookup -> tavu_product
+    var PLI_PRICELIST = "tavu_pricelist";   // Lookup -> tavu_pricelist  (confirmed)
+    var PLI_PRODUCT   = "tavu_product";     // Lookup -> tavu_product    (confirmed)
     var PLI_PRICE     = "tavu_priceperunit";// Currency
     var PLI_TAXRATE   = "tavu_taxrate";     // Decimal (percent)
 
@@ -118,7 +122,7 @@ OpenTavu.ProposalLine.Form = OpenTavu.ProposalLine.Form || {};
 
         Xrm.WebApi.retrieveRecord(
             PRODUCT_ENTITY, productId,
-            "?$select=_" + PRODUCT_DEFAULTUNIT + "_value"
+            "?$select=_" + PRODUCT_DEFAULTUNIT + "_value," + PRODUCT_COST
         ).then(
             function (product) {
                 // Default Unit of Measure from the product (only if empty, so we never
@@ -131,6 +135,14 @@ OpenTavu.ProposalLine.Form = OpenTavu.ProposalLine.Form || {};
                 if (getNumber(formContext, F_QUANTITY) === null) {
                     setValue(formContext, F_QUANTITY, 1);
                 }
+                // Snapshot the unit cost from the product for instant on-form preview.
+                // The Pl.ProposalLine.Calculator plugin re-stamps it server-side on save
+                // and stays the source of truth for import/API/Flow. No-op on Quick Create
+                // (the field is not on that form).
+                var cost = product[PRODUCT_COST];
+                setValueIfPresent(formContext, F_UNITCOST,
+                    (cost === undefined || cost === null) ? null : cost);
+
                 // Pull price (unless overridden) and tax rate from the price list.
                 refreshPriceFromList(formContext, productId);
             },
@@ -266,14 +278,17 @@ OpenTavu.ProposalLine.Form = OpenTavu.ProposalLine.Form || {};
         var price    = getNumber(formContext, F_PRICE) || 0;
         var taxRate  = getNumber(formContext, F_TAXRATE) || 0;
         var discount = getNumber(formContext, F_DISCOUNT) || 0;
+        var unitCost = getNumber(formContext, F_UNITCOST) || 0;
 
         var subtotal  = round2(quantity * price);
         var taxAmount = round2(subtotal * (taxRate / 100));
         var total     = round2(subtotal + taxAmount - discount);
+        var lineCost  = round2(quantity * unitCost);
 
         setValueIfPresent(formContext, F_SUBTOTAL, subtotal);
         setValueIfPresent(formContext, F_TAXAMOUNT, taxAmount);
         setValueIfPresent(formContext, F_TOTAL, total);
+        setValueIfPresent(formContext, F_LINECOST, lineCost);
     }
 
     // ============================================================

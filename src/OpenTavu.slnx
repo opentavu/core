@@ -1,8 +1,11 @@
 <Solution>
+  <Folder Name="/Controls/" />
   <Folder Name="/Plugins/">
+    <Project Path="Plugins/Pl.Case.Categorize/Pl.Case.Categorize.csproj" />
     <Project Path="Plugins/Pl.Opportunity.CustomerSync/Pl.Opportunity.CustomerSync.csproj" />
     <Project Path="Plugins/Pl.Opportunity.LifecycleTracker/Pl.Opportunity.LifecycleTracker.csproj" Id="988e38d4-30a1-4a89-b4ba-90d6c41b2ca8" />
     <Project Path="Plugins/Pl.ProposalLine.Calculator/Pl.ProposalLine.Calculator.csproj" />
+    <Project Path="Plugins/Pl.SystemSettings.SingleRecordGuard/Pl.SystemSettings.SingleRecordGuard.csproj" />
   </Folder>
   <Folder Name="/Solution/" />
   <Folder Name="/WebResources/" />
@@ -10,10 +13,16 @@
     <File Path="WebResources/js/tavu_account_form.js" />
     <File Path="WebResources/js/tavu_contact_form.js" />
     <File Path="WebResources/js/tavu_opportunity_form.js" />
+    <File Path="WebResources/js/tavu_product_form.js" />
     <File Path="WebResources/js/tavu_proposalline_form.js" />
   </Folder>
   <Folder Name="/Workflows/" />
   <Folder Name="/_shared/">
+    <File Path="_Shared/AI/AIConfigResolver.cs" />
+    <File Path="_Shared/AI/AIProviderFactory.cs" />
+    <File Path="_Shared/AI/AzureOpenAIProvider.cs" />
+    <File Path="_Shared/AI/IAIProvider.cs" />
+    <File Path="_Shared/AI/OpenAIProvider.cs" />
     <File Path="_Shared/Common/LocalPluginContext.cs" />
     <File Path="_Shared/Common/PluginBase.cs" />
   </Folder>

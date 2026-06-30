@@ -34,8 +34,10 @@ namespace Pl.ProposalLine.Calculator
 	/// prefer the literal §8.3 formula, change AggregateHeader accordingly — but the doc
 	/// formula and the line.total formula disagree whenever any line has a discount.
 	///
-	/// Cost & margin are Field-Security-protected; the rollup runs under SystemService so
-	/// it can read line cost and write header cost/margin regardless of the seller's rights.
+	/// Cost & margin (unit cost, line cost, total cost, gross margin) are open to all by
+	/// default for now; a Field Security Profile can be added later. The rollup already
+	/// runs under SystemService, so it keeps working if/when those fields become FSP-protected.
+	/// Unit cost is snapshotted from tavu_product.tavu_cost on the line when the product is set.
 	/// </summary>
 	/// <remarks>
 	/// Plugin Registration (Plugin Registration Tool) — FIVE steps share this assembly,
@@ -43,14 +45,16 @@ namespace Pl.ProposalLine.Calculator
 	///
 	///   1. Create  — Stage 20 (Pre-Operation)  — no image.
 	///   2. Create  — Stage 40 (Post-Operation) — no image (parent id is on Target).
-	///   3. Update  — Stage 20 (Pre-Operation)  — Pre-Image "PreImage":
+	///   3. Update  — Stage 20 (Pre-Operation)  — Pre-Image "PreImg":
 	///        tavu_quantity, tavu_priceperunit, tavu_unitcost, tavu_taxrate, tavu_discount
-	///      Filtering attributes: same five.
-	///   4. Update  — Stage 40 (Post-Operation) — Pre-Image "PreImage":
-	///        tavu_proposalid (+ the five calc fields are harmless to include)
 	///      Filtering attributes: tavu_quantity, tavu_priceperunit, tavu_unitcost,
-	///        tavu_taxrate, tavu_discount, tavu_proposalid.
-	///   5. Delete  — Stage 40 (Post-Operation) — Pre-Image "PreImage": tavu_proposalid.
+	///        tavu_taxrate, tavu_discount, tavu_product
+	///        (tavu_product triggers a unit-cost re-snapshot).
+	///   4. Update  — Stage 40 (Post-Operation) — Pre-Image "PreImg":
+	///        tavu_proposal (+ the calc fields are harmless to include)
+	///      Filtering attributes: tavu_quantity, tavu_priceperunit, tavu_unitcost,
+	///        tavu_taxrate, tavu_discount, tavu_product, tavu_proposal.
+	///   5. Delete  — Stage 40 (Post-Operation) — Pre-Image "PreImg": tavu_proposal.
 	///
 	/// The header Update issued by the rollup runs in its own pipeline (depth 2) and does
 	/// NOT re-enter this plugin, which is registered on tavu_proposalline only. MaxDepth=1.
@@ -66,7 +70,8 @@ namespace Pl.ProposalLine.Calculator
 
 		// --- tavu_proposalline (the line) ---
 		private const string LineEntity = "tavu_proposalline";
-		private const string AttrLineProposal = "tavu_proposalid";   // lookup -> tavu_proposal  (VERIFY)
+		private const string AttrLineProposal = "tavu_proposal";     // lookup -> tavu_proposal  (confirmed)
+		private const string AttrProduct = "tavu_product";           // lookup -> tavu_product
 		private const string AttrQuantity = "tavu_quantity";         // Decimal
 		private const string AttrPricePerUnit = "tavu_priceperunit"; // Currency
 		private const string AttrUnitCost = "tavu_unitcost";         // Currency  (CREATE if missing)
@@ -83,7 +88,11 @@ namespace Pl.ProposalLine.Calculator
 		private const string AttrHeaderTotalTax = "tavu_totaltax";   // Currency (plain)
 		private const string AttrHeaderTotal = "tavu_total";         // Currency (plain)
 		private const string AttrHeaderTotalCost = "tavu_totalcost"; // Currency (plain, FSP)  (CREATE if missing)
-		private const string AttrHeaderGrossMargin = "tavu_grossmargin"; // Decimal (FSP)
+		private const string AttrHeaderGrossMargin = "tavu_grossmargin"; // Decimal
+
+		// --- tavu_product (catalog, read for the unit-cost snapshot) ---
+		private const string ProductEntity = "tavu_product";
+		private const string ProductCostAttr = "tavu_cost";          // Currency
 
 		private const string AttrStateCode = "statecode";
 		private const int StateActive = 0;
@@ -159,6 +168,29 @@ namespace Pl.ProposalLine.Calculator
 			decimal taxRate = GetDecimal(target, preImage, AttrTaxRate);
 			decimal discount = GetMoney(target, preImage, AttrDiscount);
 
+			// Snapshot the unit cost from the product whenever the product is set or
+			// changed (Create, or Update where tavu_product is in Target). The cost is
+			// frozen on the line at quote time, so a later catalog change does not
+			// retroactively alter an existing proposal's margin (sales-model.md §8bis).
+			// A quantity/price-only edit leaves tavu_product out of Target, so the frozen
+			// unit cost (read above from Target/Pre-Image) is kept untouched.
+			// SystemService: tavu_product is catalog data — read it under SYSTEM so the
+			// snapshot resolves on every path (form, import, API), like LifecycleTracker
+			// reads tavu_salesstage.
+			if (target.Contains(AttrProduct))
+			{
+				var productRef = target.GetAttributeValue<EntityReference>(AttrProduct);
+				if (productRef != null)
+				{
+					var product = localContext.SystemService.Retrieve(
+						ProductEntity, productRef.Id, new ColumnSet(ProductCostAttr));
+					unitCost = product.GetAttributeValue<Money>(ProductCostAttr)?.Value ?? 0m;
+					target[AttrUnitCost] = new Money(unitCost);
+					localContext.Trace(
+						"Unit cost snapshot from product {0}: {1}", productRef.Id, unitCost);
+				}
+			}
+
 			decimal subtotal = Round(quantity * price);
 			decimal taxAmount = Round(subtotal * (taxRate / 100m));
 			decimal total = Round(subtotal + taxAmount - discount);
@@ -178,8 +210,8 @@ namespace Pl.ProposalLine.Calculator
 		/// <summary>
 		/// Post-Operation: re-aggregate all active sibling lines of the parent proposal
 		/// and write the header totals + gross margin. Runs under SystemService because
-		/// line cost / header cost / margin are Field-Security-protected and derived
-		/// fields the seller must not hand-edit.
+		/// these are derived fields the seller must not hand-edit, and to stay working
+		/// if cost/margin later become Field-Security-protected.
 		/// </summary>
 		private void RollUpHeader(LocalPluginContext localContext)
 		{

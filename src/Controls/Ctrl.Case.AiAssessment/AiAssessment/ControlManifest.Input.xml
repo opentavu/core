@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="OpenTavu.Controls" constructor="AiAssessment" version="0.0.1"
+           display-name-key="AI Assessment"
+           description-key="OpenTavu AI assessment panel for cases (Module 1 - Smart Case Categorization)."
+           control-type="virtual">
+
+    <!-- This control only renders AI fields the categorization plugin already wrote.
+         It does NOT call any AI service itself, so it stays non-premium. -->
+    <external-service-usage enabled="false" />
+
+    <!-- PRIMARY bound column. Place the control on AI Summary (tavu_aisummary);
+         this property auto-binds to that column. -->
+    <property name="aiSummary" display-name-key="AI Summary"
+              description-key="Executive one-line summary written by the AI."
+              of-type="Multiple" usage="bound" required="true" />
+
+    <property name="aiProblem" display-name-key="AI Problem"
+              description-key="Distilled core problem."
+              of-type="Multiple" usage="bound" required="false" />
+
+    <property name="aiBusinessImpact" display-name-key="AI Business Impact"
+              description-key="Translated business risk / impact."
+              of-type="Multiple" usage="bound" required="false" />
+
+    <property name="aiMissingInfo" display-name-key="AI Missing Info"
+              description-key="Information still needed to respond."
+              of-type="Multiple" usage="bound" required="false" />
+
+    <property name="aiReasoning" display-name-key="AI Reasoning"
+              description-key="Chain-of-thought audit trail (shown collapsed)."
+              of-type="Multiple" usage="bound" required="false" />
+
+    <property name="aiSentiment" display-name-key="AI Sentiment"
+              description-key="Detected customer sentiment."
+              of-type="OptionSet" usage="bound" required="false" />
+
+    <property name="aiConfidenceScore" display-name-key="AI Confidence Score"
+              description-key="AI confidence (0-1). Bind to a Decimal column."
+              of-type="Decimal" usage="bound" required="false" />
+
+    <property name="multiIntentDetected" display-name-key="Multi-Intent Detected"
+              description-key="AI flagged multiple intents in the case."
+              of-type="TwoOptions" usage="bound" required="false" />
+
+    <!-- Configurable per tenant without recompiling (configuration over code). -->
+    <property name="confidenceThreshold" display-name-key="Confidence Threshold"
+              description-key="Below this value the case is flagged for manual review. Default 0.85."
+              of-type="Decimal" usage="input" required="false" />
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <platform-library name="React" version="16.14.0" />
+      <platform-library name="Fluent" version="9.46.2" />
+    </resources>
+
+  </control>
+</manifest>
