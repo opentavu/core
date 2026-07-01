@@ -6,7 +6,7 @@
 
 **Purpose:** explain what each service model table does, what each field does, and when each field is populated. The guide is organized by tables with complete specifications, complemented by operational flow narrative and real examples.
 
-**Last updated:** May 8, 2026
+**Last updated:** June 17, 2026
 
 ---
 
@@ -46,7 +46,7 @@ The core idea: **AI categorizes the new case, the system looks up the applicable
      ↓
 [During work, consultant logs time entries → Actual Hours accumulates]
      ↓
-[Consultant closes → Status: Resolved/Cancelled]
+[Consultant closes → statecode: Inactive (Resolved or Cancelled reason)]
 ```
 
 ---
@@ -157,6 +157,110 @@ When the firm identifies a recurring inquiry type not currently covered. For exa
 
 ---
 
+## 3.1 Tables `tavu_businessline`, `tavu_category`, `tavu_subcategory` — Case classification cascade
+
+**Purpose:** the per-firm, AI-populated topical taxonomy that describes *what a case is about* (its subject domain). It is a different axis from `tavu_casetype`: Case Type is the **operational** axis (drives SLA matching + routing); this cascade is the **topical** axis (Business Line → Category → Subcategory). Module 1 (Smart Case Categorization) classifies each case into this cascade.
+
+### Depth is optional; integrity is not
+
+The cascade is a strict hierarchy: a Category belongs to a Business Line; a Subcategory belongs to a Category. A firm chooses depth by **how many levels it populates**, not by relaxing integrity:
+
+- A firm using only Business Line + Category simply creates **no** Subcategory records; cases leave Subcategory empty.
+- The parent lookups are **Required on the child** (`Category.Business Line`, `Subcategory.Category`) to prevent orphans, which would break the cascade, reporting, and Module 1's validation. Requiredness on a child never forces a deeper level to exist.
+
+### Common base configuration (all three tables)
+
+| Property | Value |
+|---|---|
+| Ownership | Organization |
+| Audit | ✅ |
+| Primary column | `Name` (`tavu_name`) |
+| Quick create | ✅ (for adding children from the parent subgrid) |
+
+### State + Status Reason (all three)
+
+| State (statecode) | Status Reasons (statuscode) |
+|---|---|
+| **Active** (default) | Available |
+| **Inactive** | Deprecated, Replaced |
+
+### Columns
+
+| Display Name | Schema Name | Type | Required | Notes |
+|---|---|---|---|---|
+| Name | tavu_name | Single Line of Text (Primary) | Required | |
+| Code | tavu_code | Autonumber | System (read-only) | Reference code |
+| Sort Order | tavu_sortorder | Whole Number | Optional | Orders siblings within a parent |
+| Description | tavu_description | Multiple Lines of Text | Optional | |
+| AI Categorization Hint | tavu_aihint | Multiple Lines of Text (**Plain text**) | Optional | Injected into the Module 1 prompt |
+| Business Line | tavu_businessline | Lookup → tavu_businessline | **Required** | **`tavu_category` only** (parent) |
+| Category | tavu_category | Lookup → tavu_category | **Required** | **`tavu_subcategory` only** (parent) |
+
+### AI Categorization Hint
+
+Plain-text instructions injected into the Module 1 prompt to disambiguate nodes whose names alone are insufficient (e.g., "System Outage" vs "Performance"). Written by the implementer at setup; not shown to end users (kept off the default form — edit via Data grid or Excel import). Optional per node — fill only where the name is ambiguous.
+
+### Relationship to the case
+
+`tavu_case` carries `tavu_businessline`, `tavu_category`, `tavu_subcategory` as independent optional lookups (the form cascade-filters child by selected parent). Module 1 validates that the proposed chain exists and is active before persisting.
+
+---
+
+## 3.2 AI configuration layer (`tavu_aimodel`, `tavu_aitaskconfig`, `tavu_systemsettings`)
+
+**Purpose:** the provider-agnostic, configuration-over-code layer that lets each tenant choose **which AI model runs each task** without code changes. Module 1 (and future AI modules) resolve their model + parameters + prompt from these tables at runtime through the `IAIProvider` abstraction. *(Schema names below are indicative — match what exists in the environment.)*
+
+### `tavu_aimodel` — model catalog (one row per usable model)
+
+| Display Name | Schema Name | Type | Notes |
+|---|---|---|---|
+| Name | tavu_name | Single Line of Text (Primary) | e.g. "GPT-4o mini (Azure)" |
+| Provider | tavu_provider | Choice | Azure OpenAI / OpenAI / Anthropic / Google Gemini — selects the `IAIProvider` implementation |
+| Deployment / Model ID | tavu_deploymentname | Single Line of Text | Azure deployment name or model id, e.g. `gpt-4o-mini` |
+| Endpoint | tavu_endpoint | Single Line of Text | Provider base URL |
+| API Version | tavu_apiversion | Single Line of Text | e.g. `2024-10-21` (Azure) |
+| Secret Name | tavu_secretname | Single Line of Text | **Name** of the env-variable / Key Vault secret holding the API key — never the key itself |
+| Cost Tier | tavu_costtier | Choice | Economy / Standard / Premium |
+| Is Default | tavu_isdefault | Yes/No | Default model when a task doesn't specify |
+
+*Deferred (add when metering cost for billing): Input/Output cost per 1K tokens, Max context tokens.*
+
+### `tavu_aitaskconfig` — task → model mapping
+
+| Display Name | Schema Name | Type | Notes |
+|---|---|---|---|
+| Name | tavu_name | Single Line of Text (Primary) | e.g. "Case Categorization" |
+| Task Key | tavu_taskkey | Choice | Stable key the code looks up (Case Categorization / Response Drafting / Activity Extraction…) |
+| Model | tavu_model | Lookup → tavu_aimodel | Which model this task uses |
+| Temperature | tavu_temperature | Decimal | 0.0–0.2 for categorization (determinism) |
+| Max Output Tokens | tavu_maxoutputtokens | Whole Number | Output cap |
+| Confidence Threshold | tavu_confidencethreshold | Decimal (0–1) | Per-task override (blank → inherits the global) |
+| Token Budget | tavu_tokenbudget | Whole Number | Optional, per window |
+| System Prompt | tavu_systemprompt | Multiple Lines (**Plain text**) | Prompt template — tunable without redeploy |
+
+### `tavu_systemsettings` — AI globals (fields added to the singleton)
+
+| Display Name | Schema Name | Type | Notes |
+|---|---|---|---|
+| AI Enabled | tavu_aienabled | Yes/No | **Master kill switch.** If No → cases skip AI and go to Manual Review (graceful degradation) |
+| Default AI Model | tavu_defaultaimodel | Lookup → tavu_aimodel | Fallback when a task has no model |
+| Default Confidence Threshold | tavu_aiconfidencethreshold | Decimal | Global default (0.85) |
+
+### How a module resolves its AI config at runtime
+
+1. Read `tavu_aitaskconfig` for the task key (e.g., Case Categorization).
+2. If active → use its Model + Temperature + Max Output Tokens + System Prompt + Confidence Threshold; if Confidence Threshold is blank, inherit `tavu_systemsettings.Default Confidence Threshold`.
+3. If no task config → fall back to `Default AI Model`.
+4. If `AI Enabled = No` → skip AI entirely and route the case to Manual Review.
+5. Resolve the provider connection from `tavu_aimodel` (Provider, Endpoint, Deployment, API Version, Secret Name). The **secret value** is read from the environment variable / Key Vault named in Secret Name — never stored in Dataverse.
+
+### Security & forward-compatibility
+
+- Secrets never live in a Dataverse column; only the secret's **name** does.
+- Under the commercial managed-service model, `Endpoint` / `Secret Name` later point to the **OpenTavu AI gateway** (a service holding per-tenant keys, doing model routing, budget, and usage metering) instead of Azure directly. The `IAIProvider` abstraction absorbs that change without touching the modules.
+
+---
+
 ## 4. Table `tavu_sla` — The SLA matrix
 
 **Purpose:** define the specific SLA for each combination of Customer Tier and Case Type. This is the most important table operationally because it defines the firm's implicit service contract.
@@ -186,11 +290,14 @@ When the firm identifies a recurring inquiry type not currently covered. For exa
 | Name | tavu_name | Single Line of Text (Primary) | Required |
 | Customer Tier | tavu_customertier | Lookup → tavu_customertierdefinition | Required |
 | Case Type | tavu_casetype | Lookup → tavu_casetype | Optional (null = applies to all types for this tier) |
-| Response Target Hours | tavu_responsetargethours | Whole Number | Required |
-| Resolution Target Hours | tavu_resolutiontargethours | Whole Number | Required |
-| Coverage Hours | tavu_coveragehours | Choice (24x7, Business Hours 8x5, Extended Hours 12x5) | Optional |
+| Response Target Hours | tavu_responsetargethours | Decimal (2 dp) | Required |
+| Resolution Target Hours | tavu_resolutiontargethours | Decimal (2 dp) | Required |
+| Calendar | tavu_calendar | Lookup → tavu_businesscalendar | Optional (null → use the Default Calendar) |
+| Coverage Hours | tavu_coveragehours | Choice (24x7, Business Hours 8x5, Extended Hours 12x5) | **Deprecated** — superseded by the Calendar lookup |
 | Evaluation Priority | tavu_evaluationpriority | Whole Number | Required |
 | Description | tavu_description | Multiple Lines of Text | Optional |
+
+**On `Calendar` vs `Coverage Hours`:** the working schedule now comes from a **Business Calendar** (Section 4.1), referenced per SLA — the same pattern Dynamics 365 Customer Service uses (`SLA.BusinessHours`). `Coverage Hours` (the old Choice) is kept only for backward compatibility and is no longer read by the SLA engine.
 
 ### Initial seed data
 
@@ -231,6 +338,60 @@ When a new case is created, the system finds the applicable SLA as follows:
 Leaving `Case Type` empty converts the record into the tier's "default." This allows each firm to only create the specific records it needs. If a firm does not differentiate SLAs by type, it only configures 3 records (Standard-Default, Premium-Default, Strategic-Default).
 
 The **Evaluation Priority** column defines the evaluation order when there are multiple potential matches. Lower = evaluated first. By convention: specific records (Tier+Type) use 50; defaults (Tier only) use 100.
+
+---
+
+## 4.1 Business calendars (`tavu_businesscalendar`, `tavu_calendarworkinghours`, `tavu_businessclosure`)
+
+**Purpose:** define working schedules so SLA target dates respect business hours and holidays. Each SLA references a calendar (Section 4). This mirrors Dynamics 365 Customer Service's *Customer Service Schedule* + *Holiday Schedule* (`SLA.BusinessHours`), but implemented custom so it runs on Power Apps Premium without a Customer Service license. Multiple reusable calendars are supported; per-business-line/team assignment is deferred (the SLA→calendar lookup already gives differentiation, e.g. Strategic → 24x7, Standard → 8x5).
+
+**Common base (all three tables):** Ownership = Organization, Audit ✅, `Code` = Autonumber (read-only), primary column = `Name`, states Active/Inactive.
+
+### `tavu_businesscalendar` — schedule header
+
+| Display Name | Schema Name | Type | Notes |
+|---|---|---|---|
+| Name | tavu_name | Single Line of Text (Primary) | e.g. "Standard 8x5 (Colombia)" |
+| Code | tavu_code | Autonumber `CAL-{SEQNUM:000}` | read-only |
+| Time Zone | tavu_timezone | **Whole Number, Format = Time Zone** | standard TZ picker; stores the TimeZoneCode |
+| Is 24x7 | tavu_is247 | Yes/No | if Yes, clock runs continuously (no working-hours rows needed) |
+| Is Default | tavu_isdefault | Yes/No | fallback when an SLA has no Calendar |
+| Description | tavu_description | Multiple Lines of Text | |
+
+### `tavu_calendarworkinghours` — working intervals (child of calendar)
+
+| Display Name | Schema Name | Type | Notes |
+|---|---|---|---|
+| Name | tavu_name | Single Line of Text (Primary) | label, e.g. "Monday Morning" |
+| Code | tavu_code | Autonumber `CWH-{SEQNUM:000}` | |
+| Calendar | tavu_calendar | Lookup → tavu_businesscalendar | **Required** (parent) |
+| Day of Week | tavu_dayofweek | Choice (Monday=1 … Sunday=7) | |
+| Start Time | tavu_startminutes | Choice "Time of Day" | option **value = minutes from midnight** (540 = 09:00) |
+| End Time | tavu_endminutes | Choice "Time of Day" | option value = minutes (1080 = 18:00) |
+
+**Multiple rows per day are allowed** → split shifts / lunch break (e.g. Monday 08:00–12:00 and Monday 13:00–17:00; the 12:00–13:00 gap is excluded from SLA time). A day with no row = closed.
+
+### `tavu_businessclosure` — holidays / closures
+
+| Display Name | Schema Name | Type | Notes |
+|---|---|---|---|
+| Name | tavu_name | Single Line of Text (Primary) | e.g. "Año Nuevo" |
+| Code | tavu_code | Autonumber `CLO-{SEQNUM:000}` | |
+| Date | tavu_date | Date Only | |
+| Calendar | tavu_calendar | Lookup → tavu_businesscalendar | optional; null = applies to all calendars |
+
+### "Time of Day" global choice
+
+A reusable global Choice where **labels are HH:MM** and **values are minutes from midnight** (00:00=0, 09:00=540, 18:00=1080 … 24:00=1440). Gives an intuitive dropdown while the plugin reads the option value directly as minutes.
+
+### How the SLA engine consumes the calendar
+
+1. Resolve the SLA (Tier + Type) → its `Calendar` (or the Default Calendar).
+2. Convert `createdon` (UTC) to the calendar's local time via `LocalTimeFromUtcTimeRequest` (using the TimeZoneCode).
+3. Walk forward from that moment, consuming the SLA's target hours **only inside working intervals**, skipping nights/weekends/gaps and `tavu_businessclosure` dates. `Is 24x7 = Yes` → continuous clock (only closures pause it).
+4. Convert the resulting local target datetime back to UTC (`UtcTimeFromLocalTimeRequest`) and store it as Response/Resolution Target Date. Anchoring to `createdon` means re-categorization recomputes fairly from the customer's arrival time (already-elapsed time counts). DST is handled by those SDK messages.
+
+**Seed:** specific calendars and holidays are per-vertical/per-client configuration, not shipped as canonical seed (same rationale as the classification cascade).
 
 ---
 
@@ -297,11 +458,12 @@ IF opp_customer points to Contact:
 
 ### State + Status Reason
 
+> **Important:** `tavu_case` is a custom table, so `statecode` has only **Active / Inactive** (Dataverse does not allow custom states on a table). The "resolved" vs "cancelled" outcomes are distinguished by **status-reason groups within the Inactive state**, not by separate states. Throughout this guide, "Resolved" and "Cancelled" refer to those status-reason groups, not to statecodes.
+
 | State (statecode) | Status Reasons (statuscode) |
 |---|---|
 | **Active** (default) | New, AI Processing, Categorized — Awaiting Assignment, In Progress, Manual Review Required, Waiting on Customer |
-| **Resolved** | Solved, Information Provided, Duplicate, Out of Scope |
-| **Cancelled** | Cancelled by Customer, Cannot Reproduce, Closed without Resolution |
+| **Inactive** | **Resolved group:** Solved, Information Provided, Duplicate, Out of Scope · **Cancelled group:** Cancelled by Customer, Cannot Reproduce, Closed without Resolution |
 
 ### Custom columns — Client identification (hybrid architecture)
 
@@ -487,8 +649,8 @@ The consultant takes the case (manually or assigned by AI/queue) and starts work
 The consultant finishes the work and closes the case.
 
 **State at this point:**
-- `statecode` changes to `Resolved` (with statuscode "Solved" / "Information Provided" / "Duplicate" / "Out of Scope")
-- Or changes to `Cancelled` (with statuscode "Cancelled by Customer" / "Cannot Reproduce" / "Closed without Resolution")
+- `statecode` changes to `Inactive` with a **Resolved-group** statuscode ("Solved" / "Information Provided" / "Duplicate" / "Out of Scope")
+- Or `statecode = Inactive` with a **Cancelled-group** statuscode ("Cancelled by Customer" / "Cannot Reproduce" / "Closed without Resolution")
 
 **Fields populated:**
 
@@ -657,7 +819,7 @@ Time Entry 3: 0.5h - "Customer communication" - Submitted
 **Step 6 — Closure (Sunday 1:45 AM):**
 
 ```
-statecode: Resolved
+statecode: Inactive
 statuscode: Solved
 Resolution Date: May 7, 2026, 1:45 AM
 Resolution Notes: "Root cause: Application server OOM. Restarted server. Confirmed processing recovered."
@@ -911,5 +1073,10 @@ Because the firm needs to report REAL utilization. If a consultant spends 8 hour
 | 1.0 | May 6, 2026 | Gustavo González Villani | Initial operational guide. Covers tavu_customertierdefinition, tavu_casetype, tavu_sla, tavu_case, tavu_timeentry. |
 | 1.1 | May 6, 2026 | Gustavo González Villani | Added complete `tavu_timeentry` documentation: base configuration as Activity Type, custom columns with types and purpose, state/statuscode pattern for approval flow, accumulation logic in `tavu_case.tavu_actualhours`, granular example, operational restrictions, and 3 additional FAQs. |
 | 1.2 | May 8, 2026 | Gustavo González Villani | Full restructuring to unify format with Sales Guide. Adopted hybrid Customer field architecture in tavu_case; added tavu_primarycontact; added tavu_iscustomer, tavu_customersince, tavu_lastengagementdate to account; adjusted SLA matching algorithm to support Customer Tier from Account OR Contact (B2C case); expanded FAQ; added B2B+B2C hybrid law firm vertical as example; complete spec for tavu_casetype, tavu_customertierdefinition, tavu_sla with seed data. |
+| 1.3 | June 17, 2026 | Gustavo González Villani (revision with Claude) | **Statecode correction.** Verified against the live schema that `tavu_case`, being a custom table, has only Active / Inactive statecodes — there are no Resolved or Cancelled states. Section 6 State/Status-Reason table consolidated into Active + Inactive, with "Resolved" and "Cancelled" reclassified as status-reason groups inside Inactive; added an explanatory note; updated Section 7.5 and Example 1 closure to set `statecode = Inactive`; fixed the Section 1 flow diagram. Aligns with view-definitions v1.3 (Resolved/Cancelled views filter by `statecode = Inactive` + a `statuscode` group). |
+| 1.4 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Added Section 3.1 specifying the case classification cascade (`tavu_businessline`, `tavu_category`, `tavu_subcategory`): common base config (Name primary, Code as read-only autonumber, Active/Inactive states, Quick create), columns, **required parent lookups** (Category→Business Line, Subcategory→Category) for referential integrity, Sort Order, and the **AI Categorization Hint** (plain text, injected into the Module 1 prompt, kept off the default form). Documented that cascade depth is optional by how many levels a firm populates — not by relaxing requiredness — and the two-axis model (this cascade = topical "what it's about" vs `tavu_casetype` = operational "how it's handled"). |
+| 1.5 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Corrected `tavu_responsetargethours` and `tavu_resolutiontargethours` from Whole Number to **Decimal (2 dp)** so sub-hour SLA targets work (e.g., 0.5h = 30 min, 0.25h = 15 min) as used in the Strategic-Complaint seed. |
+| 1.6 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Added Section 3.2 documenting the AI configuration layer: `tavu_aimodel` (model catalog with provider, endpoint, deployment, API version, secret name, cost tier, is-default), `tavu_aitaskconfig` (task→model mapping with temperature, max output tokens, confidence threshold, token budget, plain-text system prompt), and the AI fields added to the `tavu_systemsettings` singleton (AI Enabled kill switch, Default AI Model, Default Confidence Threshold). Documented the runtime resolution order, the secret-by-name rule (keys live in env var / Key Vault, never Dataverse), and forward-compatibility with the managed-service AI gateway via the `IAIProvider` abstraction. |
+| 1.7 | July 1, 2026 | Gustavo González Villani (revision with Claude) | Added **Section 4.1 — Business calendars** (`tavu_businesscalendar`, `tavu_calendarworkinghours`, `tavu_businessclosure`): schedule header (Time Zone as Whole Number/Time Zone format, Is 24x7, Is Default), working intervals (multiple per weekday for split shifts/lunch; Start/End as a "Time of Day" choice whose value = minutes from midnight), holidays; all with autonumber Code. Added a `tavu_calendar` lookup to `tavu_sla` and **deprecated `tavu_coveragehours`** (superseded by the calendar, mirroring Dynamics' `SLA.BusinessHours`). Documented the SLA engine's calendar-aware, DST-aware target-date calculation anchored to `createdon`, and that specific calendars/holidays are per-client config (not canonical seed). |
 
 *This document is the operational reference for OpenTavu's service model.*
