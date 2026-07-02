@@ -941,24 +941,27 @@ After AI Processing and SLA Assignment:
 
 ## 11. SLA Status — How compliance is monitored
 
-The `tavu_slastatus` field is dynamically updated based on case progress.
+The `tavu_slastatus` choice tracks each case's SLA state. Option values (fixed across tenants):
 
-### Calculation logic
+| Label | Value | Meaning |
+|---|---|---|
+| On Track | 576600000 | Default at SLA assignment; within target |
+| Warning | 576600001 | Early-warning threshold before the resolution target reached |
+| Breached | 576600002 | Target time expired, case not yet resolved |
+| Met | 576600003 | Case resolved before the target (successful final state) |
 
-```
-On Track:  More than 50% of target time remaining
-At Risk:   Between 20% and 50% of time remaining
-Breached:  Time expired, case not yet resolved
-Met:       Case resolved before target date (successful final state)
-```
+*(The 576600001 option was originally labeled "At Risk"; the label is firm-configurable, the value is not.)*
 
-### Recurring Power Automate flow
+### How it is updated — push, not polling
 
-Every hour (configurable), a scheduled flow:
-1. Queries Active cases with unexpired Resolution Target Date
-2. Calculates remaining time percentage
-3. Updates SLA Status according to the rules
-4. Sends notifications when status changes to At Risk or Breached
+Status transitions are driven by the **OpenTavu SLA Scheduler**, a central Azure Durable Functions service (see `architecture.md` §2b), **not** by a recurring query.
+
+1. On categorization, the `Pl.Case.SlaAssignment` plugin resolves the SLA (Tier + Type), computes the **calendar-aware** Response/Resolution Target Dates from `createdon` (business hours + closures, DST-aware), and sets SLA Status = **On Track**.
+2. The plugin calls the gateway `POST /api/sla/schedule` with the case id and the timed transitions — e.g. `{ warningTimeUtc → Warning }` and `{ resolutionTargetUtc → Breached }` — where each status is the numeric option value above.
+3. The gateway holds **durable timers** that fire exactly at those times (push; survives host restarts). On fire, the write-back activity confirms the case is still open (`statecode = Active`) and sets `tavu_slastatus`. A case resolved before a timer fires is left untouched — no false Warning/Breached.
+4. When a case is resolved within target, SLA Status is set to **Met**. If the SLA changes (re-categorization), the plugin calls `POST /api/sla/cancel` with the stored orchestration instance id and reschedules — so targets stay anchored to the original `createdon`, not the change date.
+
+> **Why push over a recurring flow:** a polling flow is only as precise as its interval and burns runs continuously; durable timers fire to the second, cost nothing while idle, and cannot drift. The earlier hourly-flow design is superseded.
 
 ### Suggested Power BI reports
 
@@ -1077,6 +1080,7 @@ Because the firm needs to report REAL utilization. If a consultant spends 8 hour
 | 1.4 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Added Section 3.1 specifying the case classification cascade (`tavu_businessline`, `tavu_category`, `tavu_subcategory`): common base config (Name primary, Code as read-only autonumber, Active/Inactive states, Quick create), columns, **required parent lookups** (Category→Business Line, Subcategory→Category) for referential integrity, Sort Order, and the **AI Categorization Hint** (plain text, injected into the Module 1 prompt, kept off the default form). Documented that cascade depth is optional by how many levels a firm populates — not by relaxing requiredness — and the two-axis model (this cascade = topical "what it's about" vs `tavu_casetype` = operational "how it's handled"). |
 | 1.5 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Corrected `tavu_responsetargethours` and `tavu_resolutiontargethours` from Whole Number to **Decimal (2 dp)** so sub-hour SLA targets work (e.g., 0.5h = 30 min, 0.25h = 15 min) as used in the Strategic-Complaint seed. |
 | 1.6 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Added Section 3.2 documenting the AI configuration layer: `tavu_aimodel` (model catalog with provider, endpoint, deployment, API version, secret name, cost tier, is-default), `tavu_aitaskconfig` (task→model mapping with temperature, max output tokens, confidence threshold, token budget, plain-text system prompt), and the AI fields added to the `tavu_systemsettings` singleton (AI Enabled kill switch, Default AI Model, Default Confidence Threshold). Documented the runtime resolution order, the secret-by-name rule (keys live in env var / Key Vault, never Dataverse), and forward-compatibility with the managed-service AI gateway via the `IAIProvider` abstraction. |
+| 1.8 | July 2, 2026 | Gustavo González Villani (revision with Claude) | Rewrote **Section 11 — SLA Status** to reflect the implemented push architecture: documented the `tavu_slastatus` option values (On Track 576600000 / Warning 576600001 / Breached 576600002 / Met 576600003), replaced the superseded hourly Power Automate polling flow with the **OpenTavu SLA Scheduler** (Azure Durable Functions, `architecture.md` §2b) — `Pl.Case.SlaAssignment` computes calendar-aware targets and calls `/api/sla/schedule` with timed transitions; durable timers fire push-based, the write-back only acts if the case is still open, and re-categorization cancels/reschedules via `/api/sla/cancel`. |
 | 1.7 | July 1, 2026 | Gustavo González Villani (revision with Claude) | Added **Section 4.1 — Business calendars** (`tavu_businesscalendar`, `tavu_calendarworkinghours`, `tavu_businessclosure`): schedule header (Time Zone as Whole Number/Time Zone format, Is 24x7, Is Default), working intervals (multiple per weekday for split shifts/lunch; Start/End as a "Time of Day" choice whose value = minutes from midnight), holidays; all with autonumber Code. Added a `tavu_calendar` lookup to `tavu_sla` and **deprecated `tavu_coveragehours`** (superseded by the calendar, mirroring Dynamics' `SLA.BusinessHours`). Documented the SLA engine's calendar-aware, DST-aware target-date calculation anchored to `createdon`, and that specific calendars/holidays are per-client config (not canonical seed). |
 
 *This document is the operational reference for OpenTavu's service model.*
