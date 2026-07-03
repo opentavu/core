@@ -27,24 +27,25 @@ Deployed into the client's Dataverse (Power Apps Premium, no Dynamics 365 licens
 
 - **Tables:** `account`/`contact` (standard, extended) + custom `tavu_lead`, `tavu_opportunity`, `tavu_proposal`, `tavu_case`, and configuration tables (`tavu_casetype`, `tavu_customertierdefinition`, `tavu_sla`, `tavu_businessline`/`tavu_category`/`tavu_subcategory`, `tavu_businesscalendar`/`tavu_calendarworkinghours`/`tavu_businessclosure`, `tavu_systemsettings`, product/pricing tables). See `service-model.md` and `sales-model.md`.
 - **Plugins** (C#, sandbox, signed with `_Shared/Common/OpenTavu.snk`):
-  - `Pl.Case.Categorize` — Module 1 Smart Case Categorization (async, Create of `tavu_case`).
-  - `Pl.Case.SlaAssignment` — computes SLA target dates (calendar-aware, from `createdon`) and asks the gateway to schedule breach timers.
+  - `Pl.Case.Categorize` — Module 1 Smart Case Categorization (async, Create of `tavu_case`); routes AI through the gateway via `GatewayProvider`.
+  - `Pl.Case.SlaAssignment` — Pre-Op computes SLA target dates (calendar-aware, from `createdon`); async Post-Op calls the gateway to schedule the Warning/Breach durable timers and stores `tavu_slaorchestrationid`.
+  - `Pl.Case.CustomerSync` — mirrors the polymorphic `tavu_customer` to typed `tavu_account`/`tavu_contact` (so Quick View forms load) + sets `tavu_primarycontact` for B2C; validates Customer Mode. Case-side twin of `Pl.Opportunity.CustomerSync`.
   - `Pl.SystemSettings.SingleRecordGuard` — enforces the settings singleton.
   - Existing: `Pl.Opportunity.LifecycleTracker`, `Pl.Opportunity.CustomerSync`, `Pl.ProposalLine.Calculator`.
-- **PCF controls (React + Fluent v9):** `AiAssessment` (case AI panel), `SlaCountdown` (live SLA indicator).
+- **PCF controls (React + Fluent v9):** `AiAssessment` (case AI panel), `SlaCountdown` (live SLA countdown bar; placed on Response and Resolution target dates).
 - **Web resources:** `tavu_systemsettings_open.html` (opens the settings singleton directly).
-- **Shared code** (linked, not a DLL): `_Shared/Common` (PluginBase, LocalPluginContext) and `_Shared/AI` (`IAIProvider`, `AzureOpenAIProvider`, `OpenAIProvider`, `AIProviderFactory`, `AIConfigResolver`).
+- **Shared code** (linked, not a DLL): `_Shared/Common` (PluginBase, LocalPluginContext) and `_Shared/AI` (`IAIProvider`, `AzureOpenAIProvider`, `OpenAIProvider`, `GatewayProvider`, `AIProviderFactory`, `AIConfigResolver`).
 
 ---
 
 ## 2. Central layer — OpenTavu Azure Function App
 
-One **C# / .NET isolated** Function App in the `opentavu.com` tenant, pay-as-you-go subscription. Two capabilities:
+One **C# / .NET isolated** Function App in the `opentavu.com` tenant, pay-as-you-go subscription. **Deployed** as `opentavu-gateway` (Central US, Consumption plan) with a KeepWarm timer to cut cold starts. Two capabilities:
 
-### 2a. AI Gateway (`/ai/complete`)
-- Holds the **provider subscriptions and keys** (Azure OpenAI, OpenAI, Claude, Gemini) — OpenTavu contracts these centrally and bills clients per user (volume pricing).
-- Does **model-per-task routing** and holds the **prompts/parameters** (moved out of client tenants).
-- Receives from the in-tenant plugin: `taskKey` + case content + the client's **taxonomy** (sent in the payload) + a **per-tenant key**. Returns the completion; **meters usage** for billing.
+### 2a. AI Gateway (`/api/ai/complete`)
+- Holds the **provider subscriptions and keys** (Azure OpenAI, OpenAI, Claude, Gemini) — OpenTavu contracts these centrally and bills clients per user (volume pricing). **The AI key lives only here, never in the client tenant.**
+- Receives from the in-tenant plugin: `systemPrompt` + `userContent` (case text + the client's **taxonomy**) + a **per-tenant key**. Returns the completion + token counts.
+- *Today (MVP):* uses a single default model from app settings and the prompt is built in the client and sent in the payload. *Target:* per-task/per-tenant **model routing** and gateway-held prompts (config migrates from the client).
 
 ### 2b. SLA Scheduler (Durable Functions)
 - Receives `(caseId, tenant, warningTime, failureTime)` from `Pl.Case.SlaAssignment`.
@@ -57,7 +58,7 @@ One **C# / .NET isolated** Function App in the `opentavu.com` tenant, pay-as-you
 ## 3. Authentication
 
 - **Multi-tenant Entra app registration** (in `opentavu.com`). Each client **admin consents once** → an **application user** is created in their Dataverse. This lets the gateway write back to the client's Dataverse (S2S, client-credentials — no MFA, no interactive prompt).
-- **Plugin → gateway:** the in-tenant plugin calls the gateway over HTTPS with a **per-tenant key** stored as a secret **environment variable** in the client's environment. The client tenant never holds the real AI keys — only the gateway URL + a scoped key.
+- **Plugin → gateway:** the in-tenant plugin calls the gateway over HTTPS with a **per-tenant key** sent in the `X-OpenTavu-Tenant-Key` header. The client tenant holds only the gateway base URL + that scoped key, in two environment variables (`tavu_GatewayUrl`, `tavu_GatewayKey`) — never the real AI keys. Endpoints are **Anonymous** at the Functions layer; the tenant key is the credential (validated server-side, unknown → 401). Can be hardened later with IP allow-list / APIM.
 - **MFA** applies to **human** sign-ins only (admin accounts); it does **not** affect the service-to-service flows above.
 
 ---
@@ -73,7 +74,7 @@ One **C# / .NET isolated** Function App in the `opentavu.com` tenant, pay-as-you
 | Business calendars / SLAs / tiers | **Client** (business config) |
 | AI output fields on the case | **Client** (the data) |
 
-> MVP note: today the AI config lives in the client (`tavu_aimodel`, `tavu_aitaskconfig`) for the direct-call model. When the gateway lands, that config migrates to the gateway and the plugin's `IAIProvider` becomes a `GatewayProvider` (call the gateway instead of the provider directly) — the module code does not change.
+> Status: the gateway is **live** and the plugin's `IAIProvider` resolves to `GatewayProvider` whenever `tavu_GatewayUrl` + `tavu_GatewayKey` are set (else it falls back to the direct providers). The AI key has been **removed from the client tenant**. Still pending migration: the task **prompts** (`tavu_aitaskconfig`) and model routing currently stay in the client and are sent in the payload; these move to the gateway later without changing the module code.
 
 ---
 
@@ -87,7 +88,7 @@ One **C# / .NET isolated** Function App in the `opentavu.com` tenant, pay-as-you
 
 ## 6. Regions, billing, data
 
-- **Billing:** OpenTavu's Azure subscription (pay-as-you-go). Deploy the Function App in a **US region** (e.g., East US 2) to sit close to US clients.
+- **Billing:** OpenTavu's Azure subscription (pay-as-you-go). Function App deployed in **Central US** (East US / East US 2 had 0 vCPU quota on the new subscription; Central US had capacity — no functional difference for US clients).
 - **Data residency:** each client's case data lives in **their** Dataverse tenant/region. The gateway processes it **transiently** (does not store case data); AI providers (Azure OpenAI / OpenAI) do not train on API data.
 - **Sub-processor:** because case content transits the gateway, OpenTavu is a data sub-processor → covered in the client DPA. *(Legal review required.)*
 
@@ -112,8 +113,13 @@ Azure Functions **Consumption** plan: 1M executions + 400,000 GB-s free/month �
 
 ## 9. Current status & roadmap
 
-- **Built (MVP, direct-call):** Module 1 categorization plugin + AI provider abstraction + AiAssessment PCF + settings singleton, all in the client tenant; AI keys via env variable in the dev tenant.
-- **Next:** SLA plugin + SlaCountdown PCF; then the **central Azure layer** (AI Gateway + SLA Scheduler + multi-tenant auth), after which the AI config migrates from client tenants to the gateway.
+- **Built & live (end-to-end):**
+  - Central gateway **deployed** (`opentavu-gateway`, Central US) with AI Gateway (`/api/ai/complete`), SLA Scheduler (`/api/sla/schedule`, `/api/sla/cancel`, Durable timers) and KeepWarm.
+  - **Module 1 categorization** runs through the gateway (`GatewayProvider`); AI key removed from the client tenant.
+  - **SLA engine**: `Pl.Case.SlaAssignment` computes calendar-aware target dates and schedules the Warning/Breach timers via the gateway; the scheduler writes `tavu_slastatus` back (S2S) only while the case is open.
+  - **PCF**: `AiAssessment` + `SlaCountdown` (dual Response/Resolution bars). `Pl.Case.CustomerSync` fixes the polymorphic-customer Quick View.
+- **Next (case flow):** close the case lifecycle — set `First Response Date`, `Resolution Date`, and `SLA Status = Met/Breached` on resolve; Response-SLA tracking; SLA pause on "Waiting on Customer"; reopen. *(Under industry-best-practice research before implementation.)*
+- **Next (platform):** migrate prompts + model routing from the client to the gateway; per-tenant registry (replace single-tenant app settings); auth hardening (IP allow-list / APIM).
 
 ---
 
@@ -121,6 +127,7 @@ Azure Functions **Consumption** plan: 1M executions + 400,000 GB-s free/month �
 
 | Version | Date | Author | Notes |
 |---|---|---|---|
+| 1.1 | July 3, 2026 | Gustavo González Villani (with Claude) | Synced to the **live** deployment: gateway deployed (`opentavu-gateway`, Central US) + KeepWarm; AI now routed through the gateway via `GatewayProvider` (AI key removed from the client tenant); endpoints Anonymous + `X-OpenTavu-Tenant-Key`; wiring via `tavu_GatewayUrl`/`tavu_GatewayKey` env vars. Added `Pl.Case.CustomerSync` and the async SLA-scheduling step of `Pl.Case.SlaAssignment` (`tavu_slaorchestrationid`); `SlaCountdown` dual bars. Updated status/roadmap (case-lifecycle closure pending research; prompt/model-routing migration and auth hardening pending). Region note: Central US (East US had 0 vCPU quota). |
 | 1.0 | July 1, 2026 | Gustavo González Villani (with Claude) | Initial platform architecture: two-layer multi-tenant model (client managed solution + central OpenTavu Azure Function App = AI Gateway + SLA Scheduler); multi-tenant Entra auth + S2S; client/gateway config split; Module 1 and SLA flows; regions/billing/data residency; per-client onboarding; cost; runtime (C#/.NET isolated, Durable Functions). |
 
 *This document is the platform-architecture reference for OpenTavu. Detailed table specs live in `service-model.md` and `sales-model.md`; the product vision in `VISION.md`.*
