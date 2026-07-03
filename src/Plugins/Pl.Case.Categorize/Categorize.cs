@@ -141,8 +141,10 @@ namespace Pl.Case.Categorize
             var tax = LoadTaxonomy(localContext, svc);
             string userContent = BuildUserContent(title, description, tax);
 
-            // --- Call the AI provider ---
-            IAIProvider provider = AIProviderFactory.Create(cfg.ProviderValue);
+            // --- Call the AI provider (gateway if configured, else direct) ---
+            IAIProvider provider = cfg.UseGateway
+                ? new GatewayProvider(cfg.GatewayUrl, cfg.GatewayKey)
+                : AIProviderFactory.Create(cfg.ProviderValue);
             AICompletionResult ai = provider.Complete(
                 AIConfigResolver.ToRequest(cfg, userContent, jsonResponse: true));
 

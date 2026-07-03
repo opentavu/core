@@ -354,7 +354,7 @@ The **Evaluation Priority** column defines the evaluation order when there are m
 | Name | tavu_name | Single Line of Text (Primary) | e.g. "Standard 8x5 (Colombia)" |
 | Code | tavu_code | Autonumber `CAL-{SEQNUM:000}` | read-only |
 | Time Zone | tavu_timezone | **Whole Number, Format = Time Zone** | standard TZ picker; stores the TimeZoneCode |
-| Is 24x7 | tavu_is247 | Yes/No | if Yes, clock runs continuously (no working-hours rows needed) |
+| Is 24x7 | tavu_is24x7 | Yes/No | if Yes, clock runs continuously (no working-hours rows needed) |
 | Is Default | tavu_isdefault | Yes/No | fallback when an SLA has no Calendar |
 | Description | tavu_description | Multiple Lines of Text | |
 
@@ -366,8 +366,8 @@ The **Evaluation Priority** column defines the evaluation order when there are m
 | Code | tavu_code | Autonumber `CWH-{SEQNUM:000}` | |
 | Calendar | tavu_calendar | Lookup → tavu_businesscalendar | **Required** (parent) |
 | Day of Week | tavu_dayofweek | Choice (Monday=1 … Sunday=7) | |
-| Start Time | tavu_startminutes | Choice "Time of Day" | option **value = minutes from midnight** (540 = 09:00) |
-| End Time | tavu_endminutes | Choice "Time of Day" | option value = minutes (1080 = 18:00) |
+| Start Time | tavu_starttime | Choice "Time of Day" | option **value = minutes from midnight** (540 = 09:00) |
+| End Time | tavu_endtime | Choice "Time of Day" | option value = minutes (1080 = 18:00) |
 
 **Multiple rows per day are allowed** → split shifts / lunch break (e.g. Monday 08:00–12:00 and Monday 13:00–17:00; the 12:00–13:00 gap is excluded from SLA time). A day with no row = closed.
 
@@ -521,7 +521,7 @@ IF tavu_customer points to Contact (B2C case):
 
 | Display Name | Schema Name | Type | Required | Notes |
 |---|---|---|---|---|
-| Applied SLA | tavu_appliedsla | Lookup → tavu_sla | Optional | Auto-filled by system |
+| Applied SLA | tavu_sla | Lookup → tavu_sla | Optional | Auto-filled by system (the `Pl.Case.SlaAssignment` plugin) |
 | Response Target Date | tavu_responsetargetdate | DateTime | Optional | Calculated by system |
 | Resolution Target Date | tavu_resolutiontargetdate | DateTime | Optional | Calculated by system |
 | First Response Date | tavu_firstresponsedate | DateTime | Optional | Auto on first email replied |
@@ -1080,6 +1080,8 @@ Because the firm needs to report REAL utilization. If a consultant spends 8 hour
 | 1.4 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Added Section 3.1 specifying the case classification cascade (`tavu_businessline`, `tavu_category`, `tavu_subcategory`): common base config (Name primary, Code as read-only autonumber, Active/Inactive states, Quick create), columns, **required parent lookups** (Category→Business Line, Subcategory→Category) for referential integrity, Sort Order, and the **AI Categorization Hint** (plain text, injected into the Module 1 prompt, kept off the default form). Documented that cascade depth is optional by how many levels a firm populates — not by relaxing requiredness — and the two-axis model (this cascade = topical "what it's about" vs `tavu_casetype` = operational "how it's handled"). |
 | 1.5 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Corrected `tavu_responsetargethours` and `tavu_resolutiontargethours` from Whole Number to **Decimal (2 dp)** so sub-hour SLA targets work (e.g., 0.5h = 30 min, 0.25h = 15 min) as used in the Strategic-Complaint seed. |
 | 1.6 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Added Section 3.2 documenting the AI configuration layer: `tavu_aimodel` (model catalog with provider, endpoint, deployment, API version, secret name, cost tier, is-default), `tavu_aitaskconfig` (task→model mapping with temperature, max output tokens, confidence threshold, token budget, plain-text system prompt), and the AI fields added to the `tavu_systemsettings` singleton (AI Enabled kill switch, Default AI Model, Default Confidence Threshold). Documented the runtime resolution order, the secret-by-name rule (keys live in env var / Key Vault, never Dataverse), and forward-compatibility with the managed-service AI gateway via the `IAIProvider` abstraction. |
+| 1.10 | July 2, 2026 | Gustavo González Villani (revision with Claude) | Corrected calendar field logical names against the live schema: **Is 24x7** = `tavu_is24x7` (was `tavu_is247`), working-hours **Start Time** = `tavu_starttime` and **End Time** = `tavu_endtime` (were `tavu_startminutes`/`tavu_endminutes`). Values are still minutes-from-midnight. Consumed by `Pl.Case.SlaAssignment`. |
+| 1.9 | July 2, 2026 | Gustavo González Villani (revision with Claude) | Corrected the case's **Applied SLA** lookup logical name from `tavu_appliedsla` to **`tavu_sla`** (verified against the live schema) and noted it is auto-filled by the `Pl.Case.SlaAssignment` plugin. Customer tier for SLA matching is read from the polymorphic `tavu_customer` (account or contact), each carrying `tavu_customertier`. |
 | 1.8 | July 2, 2026 | Gustavo González Villani (revision with Claude) | Rewrote **Section 11 — SLA Status** to reflect the implemented push architecture: documented the `tavu_slastatus` option values (On Track 576600000 / Warning 576600001 / Breached 576600002 / Met 576600003), replaced the superseded hourly Power Automate polling flow with the **OpenTavu SLA Scheduler** (Azure Durable Functions, `architecture.md` §2b) — `Pl.Case.SlaAssignment` computes calendar-aware targets and calls `/api/sla/schedule` with timed transitions; durable timers fire push-based, the write-back only acts if the case is still open, and re-categorization cancels/reschedules via `/api/sla/cancel`. |
 | 1.7 | July 1, 2026 | Gustavo González Villani (revision with Claude) | Added **Section 4.1 — Business calendars** (`tavu_businesscalendar`, `tavu_calendarworkinghours`, `tavu_businessclosure`): schedule header (Time Zone as Whole Number/Time Zone format, Is 24x7, Is Default), working intervals (multiple per weekday for split shifts/lunch; Start/End as a "Time of Day" choice whose value = minutes from midnight), holidays; all with autonumber Code. Added a `tavu_calendar` lookup to `tavu_sla` and **deprecated `tavu_coveragehours`** (superseded by the calendar, mirroring Dynamics' `SLA.BusinessHours`). Documented the SLA engine's calendar-aware, DST-aware target-date calculation anchored to `createdon`, and that specific calendars/holidays are per-client config (not canonical seed). |
 

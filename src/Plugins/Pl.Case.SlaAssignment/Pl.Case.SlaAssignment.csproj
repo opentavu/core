@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{518F0D4E-E1AB-2614-E88A-81B30203A7DD}</ProjectGuid>
+    <ProjectGuid>{3A5B4A8D-8DB3-CE7D-6C21-A1E3EEA4E5E5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Pl.Case.Categorize</RootNamespace>
-    <AssemblyName>Pl.Case.Categorize</AssemblyName>
+    <RootNamespace>Pl.Case.SlaAssignment</RootNamespace>
+    <AssemblyName>Pl.Case.SlaAssignment</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -53,25 +53,7 @@
     <Compile Include="..\..\_Shared\Common\LocalPluginContext.cs">
       <Link>Common\LocalPluginContext.cs</Link>
     </Compile>
-    <Compile Include="..\..\_Shared\AI\IAIProvider.cs">
-      <Link>AI\IAIProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\..\_Shared\AI\AzureOpenAIProvider.cs">
-      <Link>AI\AzureOpenAIProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\..\_Shared\AI\AIConfigResolver.cs">
-      <Link>AI\AIConfigResolver.cs</Link>
-    </Compile>
-    <Compile Include="..\..\_Shared\AI\OpenAIProvider.cs">
-      <Link>AI\OpenAIProvider.cs</Link>
-    </Compile>
-    <Compile Include="..\..\_Shared\AI\AIProviderFactory.cs">
-      <Link>AI\AIProviderFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\..\_Shared\AI\GatewayProvider.cs">
-      <Link>AI\GatewayProvider.cs</Link>
-    </Compile>
-    <Compile Include="*.cs" Exclude="..\..\_Shared\**\*.cs" />
+    <Compile Include="*.cs" Exclude="..\..\_Shared\Common\*.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

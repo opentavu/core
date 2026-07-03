@@ -25,6 +25,11 @@ namespace OpenTavu.Dataverse.AI
         private const string SettingsDefaultModel      = "tavu_defaultaimodel";
         private const string SettingsDefaultThreshold  = "tavu_defaultconfidencethreshold";
 
+        // Gateway mode: environment variables holding the gateway base URL + per-tenant key.
+        // When both are present, AI inference is routed through the gateway (no AI key in the tenant).
+        private const string GatewayUrlVar = "tavu_GatewayUrl";
+        private const string GatewayKeyVar = "tavu_GatewayKey";
+
         // tavu_aitaskconfig
         private const string TaskEntity        = "tavu_aitaskconfiguration";
         private const string TaskKey           = "tavu_taskkey";            // OptionSet
@@ -107,7 +112,22 @@ namespace OpenTavu.Dataverse.AI
                 ? task.GetAttributeValue<decimal>(TaskThreshold)
                 : defaultThreshold;
 
-            // --- Resolve model: task's model, else the system default ---
+            // --- Gateway mode ---
+            // If a gateway URL + key are configured (env variables), route AI inference through
+            // the gateway. The tenant then needs NO model endpoint/key/deployment: the gateway
+            // holds the AI provider keys and does the model call. This is the target architecture.
+            string gatewayUrl = ReadEnvironmentVariable(service, GatewayUrlVar);
+            string gatewayKey = ReadEnvironmentVariable(service, GatewayKeyVar);
+            if (!string.IsNullOrEmpty(gatewayUrl) && !string.IsNullOrEmpty(gatewayKey))
+            {
+                cfg.UseGateway = true;
+                cfg.GatewayUrl = gatewayUrl;
+                cfg.GatewayKey = gatewayKey;
+                cfg.Found = true;
+                return cfg;
+            }
+
+            // --- Direct mode: resolve model: task's model, else the system default ---
             EntityReference modelRef = task.GetAttributeValue<EntityReference>(TaskModel) ?? defaultModelRef;
             if (modelRef == null)
             {
@@ -207,6 +227,11 @@ namespace OpenTavu.Dataverse.AI
         public bool Found { get; set; }
         public string Reason { get; set; }
 
+        // Gateway mode (AI inference routed through the OpenTavu gateway; no key in the tenant).
+        public bool UseGateway { get; set; }
+        public string GatewayUrl { get; set; }
+        public string GatewayKey { get; set; }
+
         public string Endpoint { get; set; }
         public string DeploymentOrModel { get; set; }
         public string ApiVersion { get; set; }
@@ -227,8 +252,10 @@ namespace OpenTavu.Dataverse.AI
         {
             get
             {
-                return AiEnabled && Found
-                    && !string.IsNullOrEmpty(Endpoint)
+                if (!AiEnabled || !Found) return false;
+                if (UseGateway)
+                    return !string.IsNullOrEmpty(GatewayUrl) && !string.IsNullOrEmpty(GatewayKey);
+                return !string.IsNullOrEmpty(Endpoint)
                     && !string.IsNullOrEmpty(DeploymentOrModel)
                     && !string.IsNullOrEmpty(ApiKey);
             }
