@@ -47,6 +47,10 @@ namespace Pl.Case.SlaAssignment
         // ---------- customer (account / contact) ----------
         private const string CustomerTierField   = "tavu_customertier";         // lookup -> tavu_customertierdefinition (same name on both)
 
+        // ---------- tavu_systemsettings (singleton) ----------
+        private const string SettingsEntity      = "tavu_systemsettings";
+        private const string SettingsDefaultTier = "tavu_defaultcustomertier";  // lookup -> tavu_customertierdefinition (SLA fallback)
+
         // ---------- tavu_sla ----------
         private const string SlaEntity           = "tavu_sla";
         private const string SlaTier             = "tavu_customertier";         // lookup -> tavu_customertierdefinition
@@ -149,12 +153,24 @@ namespace Pl.Case.SlaAssignment
             localContext.Trace("Inputs: type={0} customer={1} createdon={2:o}",
                 typeRef?.Id, customerRef == null ? "(none)" : customerRef.LogicalName, createdOnUtc);
 
-            // --- Resolve the customer tier (from account or contact) ---
+            // --- Resolve the customer tier (from account or contact); fall back to the system default ---
             Guid? tierId = ResolveTier(localContext, svc, customerRef);
             if (!tierId.HasValue)
             {
-                localContext.Trace("No customer tier resolved. Skipping SLA assignment.");
-                return;
+                // Customer has no tier (e.g. an unknown inbound sender, or a manual case where the tier
+                // was left blank). Use the configured system-default tier instead of skipping the SLA.
+                // The intake never stamps a tier on the contact — a blank tier is honest; this is where
+                // it's handled. Documented in service-model §4 matching step (c).
+                tierId = ResolveDefaultTier(localContext, svc);
+                if (!tierId.HasValue)
+                {
+                    localContext.Trace(
+                        "SLA NOT APPLIED: the case customer has no tier and no fallback is configured. " +
+                        "ACTION: set 'tavu_defaultcustomertier' (Default Customer Tier) on the System Settings " +
+                        "record (point it to e.g. Standard). Case creation continues without an SLA.");
+                    return;
+                }
+                localContext.Trace("Customer has no tier; using system-default tier {0}.", tierId);
             }
 
             // --- Resolve the SLA (Tier + Type, eval priority, tier-default fallback) ---
@@ -203,6 +219,29 @@ namespace Pl.Case.SlaAssignment
                 return null;
             }
             var tier = rec.GetAttributeValue<EntityReference>(CustomerTierField);
+            return tier?.Id;
+        }
+
+        /// <summary>
+        /// Fallback tier when the customer has none: reads the singleton tavu_systemsettings.tavu_defaultcustomertier.
+        /// Uses SystemService (config read). Returns null if there is no settings row or the field is unset.
+        /// </summary>
+        private Guid? ResolveDefaultTier(LocalPluginContext localContext, IOrganizationService svc)
+        {
+            var q = new QueryExpression(SettingsEntity)
+            {
+                ColumnSet = new ColumnSet(SettingsDefaultTier),
+                NoLock = true,
+                TopCount = 1
+            };
+            var res = svc.RetrieveMultiple(q);
+            if (res.Entities.Count == 0)
+            {
+                localContext.Trace("No tavu_systemsettings row found; cannot resolve a default tier.");
+                return null;
+            }
+            var tier = res.Entities[0].GetAttributeValue<EntityReference>(SettingsDefaultTier);
+            if (tier == null) localContext.Trace("tavu_defaultcustomertier is not set in system settings.");
             return tier?.Id;
         }
 

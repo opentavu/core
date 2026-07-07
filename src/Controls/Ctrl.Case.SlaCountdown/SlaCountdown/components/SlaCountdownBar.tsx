@@ -99,11 +99,24 @@ export const SlaCountdownBar: React.FC<ISlaCountdownProps> = (props) => {
         color = tokens.colorPaletteGreenForeground1;
     }
 
-    const badgeColor: "success" | "warning" | "danger" = overdue
-        ? "danger"
-        : fraction >= 0.8
-            ? "warning"
-            : "success";
+    // Derive the pill from the LIVE countdown so it never lags behind the bar (fixes the
+    // "still Warning while overdue until refresh" issue). Terminal state (Met) comes from
+    // the stored status; the gateway remains the authoritative writer of tavu_slastatus.
+    const isMet = (props.statusLabel ?? "").trim().toLowerCase() === "met";
+    const badgeColor: "success" | "warning" | "danger" = isMet
+        ? "success"
+        : overdue
+            ? "danger"
+            : fraction >= 0.8
+                ? "warning"
+                : "success";
+    const badgeLabel = isMet
+        ? props.statusLabel!
+        : overdue
+            ? "Breached"
+            : fraction >= 0.8
+                ? "Warning"
+                : "On Track";
 
     const remainingText = overdue
         ? "Overdue " + formatDuration(remainingMs)
@@ -123,7 +136,7 @@ export const SlaCountdownBar: React.FC<ISlaCountdownProps> = (props) => {
             </div>
             {props.statusLabel ? (
                 <Badge className={styles.badge} appearance="tint" color={badgeColor}>
-                    {props.statusLabel}
+                    {badgeLabel}
                 </Badge>
             ) : null}
         </div>

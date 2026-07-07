@@ -6,7 +6,7 @@
 
 **Purpose:** explain what each service model table does, what each field does, and when each field is populated. The guide is organized by tables with complete specifications, complemented by operational flow narrative and real examples.
 
-**Last updated:** June 17, 2026
+**Last updated:** July 4, 2026
 
 ---
 
@@ -78,9 +78,12 @@ The core idea: **AI categorizes the new case, the system looks up the applicable
 | Display Name | Schema Name | Type | Required |
 |---|---|---|---|
 | Name | tavu_name | Single Line of Text (Primary) | Required |
+| Code | tavu_code | Autonumber (`CTD-{SEQNUM:4}`) | System (read-only) |
 | Description | tavu_description | Multiple Lines of Text | Optional |
 | Sort Order | tavu_sortorder | Whole Number | Optional |
 | Display Color | tavu_displaycolor | Single Line of Text (hex) | Optional |
+
+> **`Code` as a stable config key.** `tavu_code` (e.g. `CTD-1000` = Standard) is the tenant-stable identifier for a tier — useful for referencing a specific tier from configuration without a hardcoded GUID.
 
 ### Initial seed data
 
@@ -245,6 +248,7 @@ Plain-text instructions injected into the Module 1 prompt to disambiguate nodes 
 | AI Enabled | tavu_aienabled | Yes/No | **Master kill switch.** If No → cases skip AI and go to Manual Review (graceful degradation) |
 | Default AI Model | tavu_defaultaimodel | Lookup → tavu_aimodel | Fallback when a task has no model |
 | Default Confidence Threshold | tavu_aiconfidencethreshold | Decimal | Global default (0.85) |
+| Default Customer Tier | tavu_defaultcustomertier | Lookup → tavu_customertierdefinition | **SLA fallback.** When a case's customer has no tier, `Pl.Case.SlaAssignment` uses this tier so an SLA is still applied (§4 matching step c). Set it to Standard. |
 
 ### How a module resolves its AI config at runtime
 
@@ -499,6 +503,7 @@ IF tavu_customer points to Contact (B2C case):
 | Display Name | Schema Name | Type | Required | Notes |
 |---|---|---|---|---|
 | Title | tavu_title | Single Line of Text (Primary) | Required | |
+| Case Number | tavu_casenumber | Autonumber | System (read-only) | Short human-readable id, format `OTC-{SEQNUM:5}-{RANDSTRING:4}` → `OTC-01000-A3F9` (SEQNUM:n = digit count, not a zero mask). Used as the email **threading token** (§6.1). The RANDSTRING suffix makes it non-guessable. |
 | Description | tavu_description | Multiple Lines of Text | Optional | Case content |
 | Origin | tavu_origin | Choice | Optional | Email, Web Form, Phone, Manual, Internal |
 | Type | tavu_type | Lookup → tavu_casetype | Required | Default: General Inquiry |
@@ -547,6 +552,112 @@ IF tavu_customer points to Contact (B2C case):
 | Display Name | Schema Name | Type | Required | Notes |
 |---|---|---|---|---|
 | Resolution Notes | tavu_resolutionnotes | Multiple Lines of Text | Optional | Closure documentation |
+
+---
+
+## 6.1 Case conversation model (`tavu_caseinteraction` + native `annotation` + native `appointment`)
+
+**Purpose:** give a case a single, self-contained conversation thread — customer emails, agent replies, internal notes, and system events (status changes, scheduled sessions) — rendered in one pane, with per-interaction state traceability. This replaces the native Dynamics timeline as the primary case-work surface.
+
+### Why not the native timeline
+
+The native timeline mixes activity types in a generic feed and scatters attachments into Notes; it answers "what activities exist" but not "what is the conversation and how did the case state move with it." OpenTavu's thread is purpose-built for the Professional Services support loop: bubbles (in/out/note), interleaved system events, and a **status delta on the very interaction that caused it** (Aranda-style traceability). The timeline stays available on a secondary tab as a power-user/fallback view, but is not where agents work.
+
+> **Design-mindset note.** This passes the Quick Test: it targets the CRM-hygiene / context-aware-communication pain points, it is *simpler* than the OOTB timeline (one axis: the conversation), and it is the render surface for **Module 2 (Context-Aware Customer Communication)** — the AI drafts the reply and proposes the status delta; the human is the second-line reviewer, not the composer. It is deliberately **not** a manual field with an "Ask AI" button.
+
+### Table `tavu_caseinteraction`
+
+| Property | Value |
+|---|---|
+| Display name | `Case Interaction` |
+| Plural | `Case Interactions` |
+| Schema name | `tavu_caseinteraction` |
+| Primary column | `Name` (`tavu_name`) — auto-filled from the first 80 chars of the body |
+| Ownership | **User or team** (mirrors case ownership; never Organization — an interaction is authored by a person) |
+| Notes (attachments) | ✅ **required** (this is where email/agent attachments live — see below) |
+| Audit | ✅ |
+| Quick create | ❌ (created by the compose control or by flows, not by a form) |
+
+**State + Status Reason:** Active (default) / Inactive. An interaction is an immutable historical record — it is not "resolved."
+
+#### Columns
+
+| Display Name | Schema Name | Type | Required | Notes |
+|---|---|---|---|---|
+| Name | tavu_name | Single Line of Text (Primary) | Required | First ~80 chars of the body; for display/search only |
+| Case | tavu_case | Lookup → tavu_case | **Required** | Parent case (the thread) |
+| Body | tavu_body | Multiple Lines of Text (**Plain text**) | Optional | Message content. Plain by design — attachments live as annotations, not inline HTML (Module 2 vision reads the files, not a rich-text blob) |
+| Direction | tavu_direction | Choice | Required | Inbound / Outbound / Internal Note (values below) |
+| Channel | tavu_channel | Choice | Required | Email / Phone / Portal / Chat / System (values below) |
+| From Contact | tavu_fromcontact | Lookup → Contact | Optional | Sender on **Inbound**; the customer interlocutor |
+| Status Before | tavu_statusbefore | (as live schema) | Optional | Case status label immediately before this interaction, when it changed the case |
+| Status After | tavu_statusafter | (as live schema) | Optional | Case status label immediately after |
+| Changed Fields | tavu_changedfields | Multiple Lines of Text | Optional | Human-readable summary of other field changes, e.g. `Priority: Standard → Critical` |
+
+#### Choice values (fixed across tenants)
+
+**`tavu_direction`** — Message Interaction Direction:
+
+| Label | Value |
+|---|---|
+| Inbound | 576600000 |
+| Outbound | 576600001 |
+| Internal Note | 576600002 |
+
+**`tavu_channel`** — Channel Message:
+
+| Label | Value |
+|---|---|
+| Email | 576600000 |
+| System | 576600004 |
+
+*(Additional channels — Phone, Portal, Chat — are firm-configurable additions; labels vary, the two values above are canonical for the email + system-event paths the flows use today.)*
+
+### Presentation — the `CaseConversation` PCF control
+
+A virtual React/Fluent (v9) control (`OpenTavu.Controls.CaseConversation`) bound to a subgrid of `tavu_caseinteraction` filtered by `tavu_case`. Behavior:
+
+- **Compose at the top**, thread **newest-first (descending)**. The subgrid **view must be sorted Created On descending** — paging follows the view, so page 1 = the newest interactions; the control also sorts descending as a safety net.
+- **Pagination:** primes a page of **10** and grows in increments of 10 via a subtle "Cargar más antiguos" button (avoids loading the full history blindly).
+- **Bubbles:** Outbound (right, brand tint), Inbound (left, neutral), Internal Note (left, amber, "internal note" tag). System-only interactions (no body) render as a centered pill line.
+- **State delta:** when `Status Before → Status After` or `Changed Fields` are stamped, they render as a caption under the bubble that caused the change.
+- **Compose:** a `Textarea` + a public/internal `Switch` + Enviar. On send it `createRecord`s a `tavu_caseinteraction` (Outbound/Email for a public reply, Internal Note/System for a note) linked to the parent case, then refreshes. **The compose only records the interaction — it does not send email; a flow does (below).**
+
+### Attachments — native `annotation`, rendered inline (no trip to Notes)
+
+Attachments are stored as **native `annotation` (Note) records on the `tavu_caseinteraction`** (Notes enabled on the table). The storage location does not force the timeline UI: the PCF reads the annotations by `objectid` via WebAPI and renders them as chips/links **inside the interaction bubble**, and the compose's clip button uploads new files as annotations on the interaction being created. The agent never leaves the control.
+
+**Storage cost (verified):** annotation `documentbody` in modern Dataverse environments lands in the **File** capacity tier (~$2/GB/mo), **not** the expensive **Database** tier (~$40/GB/mo). Reusing annotations therefore has the same cost as a custom File column, so the decision is UX, not cost — and reusing annotations is the simpler MVP (zero new tables).
+
+**When a custom `tavu_interactionattachment` table earns its place (deferred):** only when an AI module must persist **per-attachment metadata** (extracted text, vision summary, confidence). `annotation` is a system table — adding custom columns affects every note tenant-wide, which is not acceptable. Until then, keep annotations as the pure file store and hold AI output elsewhere. This is a roadmap item, not MVP.
+
+### Scheduled sessions — native `appointment`, mirrored into the thread
+
+Booking a working session with the customer is a calendar problem, not a CRM-record problem: it needs Exchange/Outlook sync, attendees, reminders, invitations. OpenTavu **does not rebuild that** — it uses the native `appointment` activity (`regardingobjectid` = the case).
+
+- **Create** from a compose action ("Agendar sesión") that `createRecord`s an `appointment` regarding the case; Exchange sync sends the invite.
+- **Show** in the thread: a flow stamps a system-line `tavu_caseinteraction` ("📅 Sesión agendada con {contact} — {when}") so the appointment appears in the single pane without duplicating the calendar.
+- **AI-first path:** Module 2 detects scheduling intent in the thread and proposes the slot.
+
+### Email intake and outbound — provider-agnostic by design
+
+Intake must **not** assume the client uses Microsoft email. A firm runs the CRM on Power Platform, but its mailbox may be Google Workspace, Zoho, Hostinger, etc. So the canonical paths use no Microsoft mailbox at all; an Office 365 flow is only a convenience when the client already lives in Microsoft.
+
+**Inbound (email → case/interaction). Three mechanisms, one per client — all end at `/api/intake`:**
+
+1. **Gateway IMAP-pull (canonical, provider-agnostic).** A timer function in the gateway connects by **IMAP** to the client's support mailbox (any provider), fetches unseen messages + attachments, and creates the `tavu_case` / `tavu_caseinteraction` directly via **S2S** (an Entra Application User in the client environment). **No Power Automate flow is involved.** Latency = the poll interval (1–2 min), which is fine for SMB support.
+2. **Inbound-parse webhook (optional, push / near-real-time).** The support address's MX points to an inbound-parse service (SendGrid / Mailgun / Cloudflare Email Workers) that POSTs the parsed mail + attachments to the gateway. No flow either; adds an MX/SaaS dependency, so reserved for clients wanting real-time.
+3. **Office 365 flow (Microsoft-only convenience).** `When a new email arrives (V3)` on an Exchange Online shared mailbox → calls `/api/intake`. Only applicable when the client is already on Microsoft 365.
+
+In all three, the **gateway is the brain**: given no threading token, it decides new-case-vs-append and returns proposed Type / Business Line / Category / Priority (confidence-gated); given a token `[<case number>]` in the subject, it resolves the case by `tavu_casenumber` and appends an Inbound/Email interaction to it. Incoming attachments become annotations on the interaction. An auto-acknowledgement carrying the token is sent so the customer's replies thread.
+
+> The dedicated support address must be a **separate mailbox**, never an alias onto a person's working inbox — otherwise IMAP-pull would ingest personal mail and create spurious cases.
+
+**Outbound (agent reply → email). A flow, but not necessarily Office 365.** Triggered **on create of `tavu_caseinteraction` where `Direction = Outbound` AND `Channel = Email`**, it composes the mail (token in subject, body = `tavu_body`, attaching the interaction's annotations) and sends it through the **client's own SMTP** via Power Automate's generic **SMTP connector** (Hostinger, Zoho, Gmail SMTP…). The Office 365 Outlook connector is used only if the client is on Microsoft.
+
+> **Why send lives in the client-tenant flow, not the gateway (no-lock-in).** Sending from the gateway would couple outbound comms to OpenTavu's private infra (and, on Microsoft, need `Mail.Send` over the client's mailbox). Keeping send in the client-tenant flow (SMTP or O365) means the mail path survives off-boarding untouched. The gateway is invoked for **receiving + decisioning** (it is the brain and lives outside the tenant), never for sending.
+
+**Threading:** a subject token `[<case number>]` (the `tavu_casenumber` autonumber, e.g. `[OT-00042-A3F9]`) is used rather than parsing `In-Reply-To`/`References` headers — more robust across providers, short enough for a subject line, and non-guessable thanks to the random suffix.
 
 ---
 
@@ -1083,6 +1194,11 @@ Because the firm needs to report REAL utilization. If a consultant spends 8 hour
 | 1.10 | July 2, 2026 | Gustavo González Villani (revision with Claude) | Corrected calendar field logical names against the live schema: **Is 24x7** = `tavu_is24x7` (was `tavu_is247`), working-hours **Start Time** = `tavu_starttime` and **End Time** = `tavu_endtime` (were `tavu_startminutes`/`tavu_endminutes`). Values are still minutes-from-midnight. Consumed by `Pl.Case.SlaAssignment`. |
 | 1.9 | July 2, 2026 | Gustavo González Villani (revision with Claude) | Corrected the case's **Applied SLA** lookup logical name from `tavu_appliedsla` to **`tavu_sla`** (verified against the live schema) and noted it is auto-filled by the `Pl.Case.SlaAssignment` plugin. Customer tier for SLA matching is read from the polymorphic `tavu_customer` (account or contact), each carrying `tavu_customertier`. |
 | 1.8 | July 2, 2026 | Gustavo González Villani (revision with Claude) | Rewrote **Section 11 — SLA Status** to reflect the implemented push architecture: documented the `tavu_slastatus` option values (On Track 576600000 / Warning 576600001 / Breached 576600002 / Met 576600003), replaced the superseded hourly Power Automate polling flow with the **OpenTavu SLA Scheduler** (Azure Durable Functions, `architecture.md` §2b) — `Pl.Case.SlaAssignment` computes calendar-aware targets and calls `/api/sla/schedule` with timed transitions; durable timers fire push-based, the write-back only acts if the case is still open, and re-categorization cancels/reschedules via `/api/sla/cancel`. |
+| 1.11 | July 4, 2026 | Gustavo González Villani (revision with Claude) | Added **Section 6.1 — Case conversation model** (`tavu_caseinteraction` + native `annotation` + native `appointment`). Documented: the interaction table (User/Team owned, Notes required, plain-text body, `tavu_direction` Inbound/Outbound/Internal-Note and `tavu_channel` Email/System choice values, `tavu_fromcontact`, `tavu_statusbefore`/`After`, `tavu_changedfields`); the `CaseConversation` PCF (compose at top, newest-first descending, 10-item pagination + "load older", bubbles, per-interaction status delta); **attachments reusing native annotations rendered inline by the PCF** (verified File-tier storage ~$2/GB vs Database ~$40/GB, so cost-neutral vs a custom table; custom `tavu_interactionattachment` deferred until AI per-attachment metadata is needed); **scheduled sessions via native `appointment`** mirrored into the thread as a system-line interaction (no calendar rebuild); and the **email intake/outbound flows** with the transport-vs-brain split (flow = SMTP transport, gateway `/api/intake` = Module 1 decisioning) and the no-lock-in rule that outbound send stays in the client-tenant flow, never the gateway. Rationale tied to Module 2 and the design mindset. |
+| 1.12 | July 4, 2026 | Gustavo González Villani (revision with Claude) | **Made email intake provider-agnostic in Section 6.1.** Replaced the Office-365-flow-centric intake with three mechanisms — (1) **gateway IMAP-pull** as the canonical, provider-agnostic path (timer function fetches by IMAP from any mailbox and writes via S2S / Entra Application User, **no Power Automate flow**), (2) optional inbound-parse webhook (SendGrid/Mailgun/Cloudflare) for push/near-real-time, (3) Office 365 flow only as a Microsoft-only convenience — all converging on `/api/intake` as the brain. Added the rule that the support address must be a **dedicated mailbox, not an alias** (else IMAP-pull ingests personal mail). Reworked **outbound** to send via Power Automate's generic **SMTP connector** (client's own SMTP: Hostinger/Zoho/Gmail), with O365 Outlook only if the client is on Microsoft; reaffirmed the no-lock-in rule (send stays in the client tenant; gateway does receive + decisioning, never send). Rationale: a client's mailbox may not be Microsoft even though the CRM runs on Power Platform. |
+| 1.13 | July 6, 2026 | Gustavo González Villani (revision with Claude) | Added **`tavu_casenumber`** (Autonumber, e.g. `OT-{SEQNUM:00000}-{RANDSTRING:4}`) to `tavu_case` (Section 6) and switched the §6.1 email **threading token** from the case GUID to this short, human-readable, non-guessable case number (`[OT-00042-A3F9]`). The gateway resolves appends by `tavu_casenumber`. Aligns with the intake code (ThreadToken + DataverseClient.FindCaseIdByNumberAsync). |
+| 1.14 | July 6, 2026 | Gustavo González Villani (revision with Claude) | Documented **`tavu_code`** on `tavu_customertierdefinition` (Section 2; autonumber, e.g. `CTD-1000` = Standard) — it existed in the live schema but wasn't in the guide. Noted its use as the tenant-stable config key for the email-intake default tier (`Intake:DefaultCustomerTierCode`), resolved to the id at runtime (no hardcoded GUID) so auto-created inbound contacts get a tier and the SLA plugin can resolve an SLA. |
+| 1.15 | July 6, 2026 | Gustavo González Villani (revision with Claude) | **Implemented the SLA system-default fallback (reverses the intake tier-stamping from v1.14).** `Pl.Case.SlaAssignment` now, when the customer has no tier, reads `tavu_systemsettings.tavu_defaultcustomertier` and applies that tier instead of skipping — covering unknown inbound senders, tier-less existing contacts, and manual cases. Correspondingly, the email-intake gateway **no longer stamps a tier** on auto-created contacts (a blank tier is honest; the machine must not rewrite customer master data), and the `Intake:DefaultCustomerTierCode` setting was removed. Added `tavu_defaultcustomertier` to the `tavu_systemsettings` spec (§3.2). This realizes §4 matching step (c), previously documented but not implemented. |
 | 1.7 | July 1, 2026 | Gustavo González Villani (revision with Claude) | Added **Section 4.1 — Business calendars** (`tavu_businesscalendar`, `tavu_calendarworkinghours`, `tavu_businessclosure`): schedule header (Time Zone as Whole Number/Time Zone format, Is 24x7, Is Default), working intervals (multiple per weekday for split shifts/lunch; Start/End as a "Time of Day" choice whose value = minutes from midnight), holidays; all with autonumber Code. Added a `tavu_calendar` lookup to `tavu_sla` and **deprecated `tavu_coveragehours`** (superseded by the calendar, mirroring Dynamics' `SLA.BusinessHours`). Documented the SLA engine's calendar-aware, DST-aware target-date calculation anchored to `createdon`, and that specific calendars/holidays are per-client config (not canonical seed). |
 
 *This document is the operational reference for OpenTavu's service model.*

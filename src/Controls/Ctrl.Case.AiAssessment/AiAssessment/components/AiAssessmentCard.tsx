@@ -45,6 +45,8 @@ const useStyles = makeStyles({
     borderRadius: tokens.borderRadiusLarge,
     boxShadow: `0 0 0 1px ${tokens.colorNeutralStroke2}`,
     backgroundColor: tokens.colorNeutralBackground1,
+    width: "100%",
+    boxSizing: "border-box",
   },
   header: {
     display: "flex",

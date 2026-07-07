@@ -41,7 +41,7 @@ export class AiAssessment implements ComponentFramework.ReactControl<IInputs, IO
 
         return React.createElement(
             FluentProvider,
-            { theme },
+            { theme, style: { width: "100%" } },
             React.createElement(AiAssessmentCard, props)
         );
     }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="OpenTavu.Controls" constructor="CaseConversation" version="0.0.1"
+           display-name-key="Case Conversation"
+           description-key="Threaded customer/agent conversation for a case, with per-interaction state traceability. Client-side render over tavu_caseinteraction."
+           control-type="virtual">
+
+    <external-service-usage enabled="false" />
+
+    <!-- Bind to a subgrid of Case Interactions (related to the case by tavu_case).
+         The subgrid VIEW must include these columns so the control can read them:
+         tavu_direction, tavu_channel, tavu_body, tavu_statusbefore, tavu_statusafter,
+         tavu_changedfields, tavu_fromcontact, createdby, createdon.
+         Sort the view by Created On ascending (oldest first). -->
+    <data-set name="interactions" display-name-key="Interactions" />
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <platform-library name="React" version="16.14.0" />
+      <platform-library name="Fluent" version="9.46.2" />
+    </resources>
+
+    <feature-usage>
+      <uses-feature name="WebAPI" required="true" />
+    </feature-usage>
+
+  </control>
+</manifest>
