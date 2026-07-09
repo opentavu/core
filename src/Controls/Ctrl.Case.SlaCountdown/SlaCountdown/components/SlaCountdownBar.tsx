@@ -89,9 +89,18 @@ export const SlaCountdownBar: React.FC<ISlaCountdownProps> = (props) => {
     }
     fraction = Math.max(0, Math.min(1, fraction));
 
-    // Color by remaining: overdue -> red; >=80% elapsed -> amber; else green.
+    // Terminal/paused states take precedence over the live countdown. Met = the case was resolved within
+    // (or the SLA closed as) target, so the clock is done — never show "Overdue" red. Paused = frozen.
+    const isMet = (props.statusLabel ?? "").trim().toLowerCase() === "met";
+    const isPaused = (props.statusLabel ?? "").trim().toLowerCase() === "paused";
+
+    // Color: met -> green; paused -> neutral; overdue -> red; >=80% elapsed -> amber; else green.
     let color: string;
-    if (overdue) {
+    if (isMet) {
+        color = tokens.colorPaletteGreenForeground1;
+    } else if (isPaused) {
+        color = tokens.colorNeutralForeground3;
+    } else if (overdue) {
         color = tokens.colorPaletteRedForeground1;
     } else if (fraction >= 0.8) {
         color = tokens.colorPaletteDarkOrangeForeground1;
@@ -102,25 +111,32 @@ export const SlaCountdownBar: React.FC<ISlaCountdownProps> = (props) => {
     // Derive the pill from the LIVE countdown so it never lags behind the bar (fixes the
     // "still Warning while overdue until refresh" issue). Terminal state (Met) comes from
     // the stored status; the gateway remains the authoritative writer of tavu_slastatus.
-    const isMet = (props.statusLabel ?? "").trim().toLowerCase() === "met";
-    const badgeColor: "success" | "warning" | "danger" = isMet
-        ? "success"
-        : overdue
-            ? "danger"
-            : fraction >= 0.8
-                ? "warning"
-                : "success";
-    const badgeLabel = isMet
-        ? props.statusLabel!
-        : overdue
-            ? "Breached"
-            : fraction >= 0.8
-                ? "Warning"
-                : "On Track";
+    const badgeColor: "success" | "warning" | "danger" | "informative" = isPaused
+        ? "informative"
+        : isMet
+            ? "success"
+            : overdue
+                ? "danger"
+                : fraction >= 0.8
+                    ? "warning"
+                    : "success";
+    const badgeLabel = isPaused
+        ? "Paused"
+        : isMet
+            ? props.statusLabel!
+            : overdue
+                ? "Breached"
+                : fraction >= 0.8
+                    ? "Warning"
+                    : "On Track";
 
-    const remainingText = overdue
-        ? "Overdue " + formatDuration(remainingMs)
-        : formatDuration(remainingMs) + " left";
+    const remainingText = isMet
+        ? "Cumplido"
+        : isPaused
+            ? "En pausa"
+            : overdue
+                ? "Overdue " + formatDuration(remainingMs)
+                : formatDuration(remainingMs) + " left";
 
     return (
         <div className={styles.root}>

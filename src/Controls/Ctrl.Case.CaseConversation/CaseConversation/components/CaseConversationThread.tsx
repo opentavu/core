@@ -1,10 +1,15 @@
 import * as React from "react";
-import { makeStyles, tokens, Textarea, Button, Switch } from "@fluentui/react-components";
+import { makeStyles, tokens, Textarea, Button, Switch, Select } from "@fluentui/react-components";
 
 export interface IAttachment {
     id: string;        // annotationid
     fileName: string;
     mimeType: string;
+}
+
+export interface IStatusOption {
+    id: string;        // tavu_casestatusid
+    name: string;
 }
 
 export interface IInteraction {
@@ -25,11 +30,12 @@ export interface IInteraction {
 export interface ICaseConversationProps {
     items: IInteraction[];        // pre-sorted newest-first by the control
     loading: boolean;
-    onSend?: (body: string, isInternal: boolean, files: File[]) => void;
+    onSend?: (body: string, isInternal: boolean, files: File[], statusId: string, statusName: string) => void;
     onLoadOlder?: () => void;
     hasMore?: boolean;
     attachmentsByInteraction?: Record<string, IAttachment[]>;
     onOpenAttachment?: (attachmentId: string) => void;
+    statusOptions?: IStatusOption[];
 }
 
 // tavu_direction option values
@@ -184,14 +190,18 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
     const [text, setText] = React.useState<string>("");
     const [internal, setInternal] = React.useState<boolean>(false);
     const [files, setFiles] = React.useState<File[]>([]);
+    const [statusId, setStatusId] = React.useState<string>("");
     const fileInputRef = React.useRef<HTMLInputElement>(null);
 
+    const statusOptions = props.statusOptions ?? [];
     const canSend = text.trim().length > 0 && !!props.onSend;
     const send = () => {
         if (!canSend || !props.onSend) return;
-        props.onSend(text.trim(), internal, files);
+        const statusName = statusOptions.find((s) => s.id === statusId)?.name ?? "";
+        props.onSend(text.trim(), internal, files, statusId, statusName);
         setText("");
         setFiles([]);
+        setStatusId("");
     };
 
     const onPickFiles = (ev: React.ChangeEvent<HTMLInputElement>) => {
@@ -255,6 +265,23 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                                 aria-label="Adjuntar"
                                 title="Adjuntar"
                             />
+                            {statusOptions.length > 0 ? (
+                                <Select
+                                    size="small"
+                                    value={statusId}
+                                    onChange={(_ev, data) => setStatusId(data.value)}
+                                    disabled={text.trim().length === 0}
+                                    title={text.trim().length === 0
+                                        ? "Escribe una respuesta para cambiar el estado al enviar"
+                                        : "Cambiar estado al enviar"}
+                                    aria-label="Cambiar estado"
+                                >
+                                    <option value="">— sin cambio de estado —</option>
+                                    {statusOptions.map((s) => (
+                                        <option key={s.id} value={s.id}>{s.name}</option>
+                                    ))}
+                                </Select>
+                            ) : null}
                         </div>
                         <Button appearance="primary" disabled={!canSend} onClick={send}>
                             Enviar

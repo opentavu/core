@@ -1,5 +1,5 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { CaseConversationThread, IInteraction, IAttachment } from "./components/CaseConversationThread";
+import { CaseConversationThread, IInteraction, IAttachment, IStatusOption } from "./components/CaseConversationThread";
 import { FluentProvider, webLightTheme, Theme } from "@fluentui/react-components";
 import * as React from "react";
 
@@ -31,6 +31,9 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
     // Attachments (native annotations) per interaction, fetched by WebAPI and cached by id-signature.
     private attachments: Record<string, IAttachment[]> = {};
     private attachmentSig = "";
+    // Active case statuses (for the compose status dropdown), fetched once.
+    private statuses: IStatusOption[] = [];
+    private statusesLoaded = false;
 
     constructor() {
         // Empty
@@ -52,6 +55,12 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
         // newest interactions; the control also sorts descending below as a safety net.
         if (ds?.paging && !this.pagePrimed) {
             this.pagePrimed = true;
+            // Force newest-first at the dataset level so page 1 always holds the latest interactions,
+            // regardless of the subgrid view's configured sort (externally-added inbound must appear).
+            if (ds.sorting) {
+                ds.sorting.length = 0;
+                ds.sorting.push({ name: "createdon", sortDirection: 1 }); // 1 = descending
+            }
             ds.paging.setPageSize(this.pageSize);
             ds.refresh();
         }
@@ -95,6 +104,8 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
 
         // Fetch the annotations (attachments) for the visible interactions if the set changed.
         this.syncAttachments(context, items.map((i) => i.id));
+        // Fetch the active case statuses once (for the compose status dropdown).
+        this.loadStatuses(context);
 
         const host = context as unknown as { fluentDesignLanguage?: { tokenTheme?: Theme } };
         const theme: Theme = host.fluentDesignLanguage?.tokenTheme ?? webLightTheme;
@@ -110,8 +121,31 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
                 hasMore: ds?.paging ? ds.paging.hasNextPage : false,
                 attachmentsByInteraction: this.attachments,
                 onOpenAttachment: this.openAttachment,
+                statusOptions: this.statuses,
             })
         );
+    }
+
+    /** Loads active case statuses once, ordered by sort order, for the compose status dropdown. */
+    private loadStatuses(ctx: ComponentFramework.Context<IInputs>): void {
+        if (this.statusesLoaded) return;
+        this.statusesLoaded = true;
+        void this.fetchStatuses(ctx);
+    }
+
+    private async fetchStatuses(ctx: ComponentFramework.Context<IInputs>): Promise<void> {
+        try {
+            const res = await ctx.webAPI.retrieveMultipleRecords(
+                "tavu_casestatus",
+                "?$select=tavu_casestatusid,tavu_name&$filter=statecode eq 0&$orderby=tavu_sortorder");
+            this.statuses = res.entities.map((e) => ({
+                id: e.tavu_casestatusid as string,
+                name: (e.tavu_name as string) || "(status)",
+            }));
+            this.notifyOutputChanged();
+        } catch (err) {
+            console.error("[CaseConversation] fetch statuses failed:", err);
+        }
     }
 
     /** Re-fetch annotations only when the visible interaction-id set changes. */
@@ -179,7 +213,7 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
      * and refresh the thread. Fire-and-forget; errors surface in the console.
      * The actual customer email send is handled downstream by a flow (B.3).
      */
-    private handleSend = (body: string, isInternal: boolean, files: File[]): void => {
+    private handleSend = (body: string, isInternal: boolean, files: File[], statusId: string, statusName: string): void => {
         const ctx = this.context;
         if (!ctx || !body || body.trim().length === 0) return;
 
@@ -197,14 +231,19 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
             tavu_channel: isInternal ? CH_SYSTEM : CH_EMAIL,
             "tavu_Case@odata.bind": "/tavu_cases(" + caseId + ")",
         };
+        // If the agent chose a status change, record it as the interaction delta. The actual case
+        // status change drives SLA pause/resume via the plugin (status-driven).
+        if (statusId) data.tavu_changedfields = "Estado → " + statusName;
 
-        void this.createAndRefresh(ctx, data, files);
+        void this.createAndRefresh(ctx, data, files, caseId, statusId);
     };
 
     private async createAndRefresh(
         ctx: ComponentFramework.Context<IInputs>,
         data: ComponentFramework.WebApi.Entity,
-        files: File[]
+        files: File[],
+        caseId: string,
+        statusId: string
     ): Promise<void> {
         try {
             const created = await ctx.webAPI.createRecord("tavu_caseinteraction", data);
@@ -225,10 +264,34 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
                 }
             }
 
+            // Change the case status AFTER the outbound exists (so the pause guardrail passes when the
+            // chosen status is a pausing one). VERIFY nav property: tavu_status -> "tavu_Status".
+            if (statusId) {
+                await ctx.webAPI.updateRecord("tavu_case", caseId, {
+                    "tavu_Status@odata.bind": "/tavu_casestatuses(" + statusId + ")",
+                });
+            }
+
             this.attachmentSig = ""; // force re-fetch of attachments after the refresh
             ctx.parameters.interactions.refresh();
+
+            // A case status change updates header/SLA fields server-side (via plugins). Refresh the host
+            // form so the agent sees it immediately, without a manual refresh.
+            if (statusId) this.refreshHostForm();
         } catch (err) {
             console.error("[CaseConversation] createRecord failed:", err);
+        }
+    }
+
+    /** Refreshes the host model-driven form's data (no save) so field/header/SLA controls repaint. */
+    private refreshHostForm(): void {
+        try {
+            const xrm = (window as unknown as {
+                Xrm?: { Page?: { data?: { refresh?: (save: boolean) => Promise<unknown> } } };
+            }).Xrm;
+            void xrm?.Page?.data?.refresh?.(false);
+        } catch (err) {
+            console.error("[CaseConversation] host form refresh failed:", err);
         }
     }
 

@@ -460,14 +460,46 @@ IF opp_customer points to Contact:
 | Quick create | ✅ |
 | Enable for queues | ✅ |
 
-### State + Status Reason
+### State model — `statecode` + `tavu_status` (config table)
 
-> **Important:** `tavu_case` is a custom table, so `statecode` has only **Active / Inactive** (Dataverse does not allow custom states on a table). The "resolved" vs "cancelled" outcomes are distinguished by **status-reason groups within the Inactive state**, not by separate states. Throughout this guide, "Resolved" and "Cancelled" refer to those status-reason groups, not to statecodes.
+The operational stage of a case lives in **`tavu_status`** (a lookup to the **`tavu_casestatus`** config table), **not** in the native `statuscode`. This keeps the status vocabulary a single source of truth, lets per-status behaviors (pauses SLA, resolved/cancelled, resume target, AI outcomes) be columns, and makes SLA pause **status-driven** without hardcoded option values or a mirrored optionset.
 
-| State (statecode) | Status Reasons (statuscode) |
-|---|---|
-| **Active** (default) | New, AI Processing, Categorized — Awaiting Assignment, In Progress, Manual Review Required, Waiting on Customer |
-| **Inactive** | **Resolved group:** Solved, Information Provided, Duplicate, Out of Scope · **Cancelled group:** Cancelled by Customer, Cannot Reproduce, Closed without Resolution |
+- **`statecode`** (native, Active / Inactive) stays for record activation/deactivation, derived from the chosen status's **State Category** (Active → Active; Resolved/Cancelled → Inactive). On a move to a Resolved/Cancelled status, `Pl.Case.SlaAssignment` sets `statecode = Inactive`, stops the SLA timers, and (for Resolved) stamps the resolution date + Met/Breached — see §7.5 / §11.1.
+- **`statuscode`** (native) is reduced to vestigial (one reason per state) — no longer used for the granular stage.
+- **`tavu_status`** (lookup → `tavu_casestatus`) is the stage the agent and automations read/write.
+
+#### Config table `tavu_casestatus` (Case Status)
+
+Common base: Ownership = Organization, Audit ✅, primary column `Name`, states Active/Inactive.
+
+| Display Name | Schema | Type | Notes |
+|---|---|---|---|
+| Name | tavu_name | Single Line (primary) | e.g. "Waiting on Customer" |
+| Code | tavu_code | Autonumber `CST-{SEQNUM:0000}` | stable config key |
+| State Category | tavu_statecategory | Choice: Active / Resolved / Cancelled | drives the case `statecode` + the Resolved/Cancelled grouping |
+| Pauses SLA | tavu_pausessla | Yes/No | **SLA pause driver** — a status with Yes stops the clock (§11.1) |
+| Is Default (new) | tavu_isdefaultnew | Yes/No | status a new case gets (one Yes) |
+| Is Resume Target | tavu_isresumetarget | Yes/No | status set when work resumes / on auto-resume — "In Progress" (one Yes) |
+| Is AI Categorized | tavu_isaicategorized | Yes/No | Module 1 high-confidence outcome (one Yes) |
+| Is Manual Review | tavu_ismanualreview | Yes/No | Module 1 low-confidence / degraded outcome (one Yes) |
+| Sort Order | tavu_sortorder | Whole Number | order in dropdowns |
+| Display Color | tavu_displaycolor | Single Line (hex) | optional |
+| Description | tavu_description | Multiple Lines | optional |
+
+**Seed (13 statuses, one axis):**
+
+| Name | State Category | Pauses SLA | Behavior flag |
+|---|---|---|---|
+| New | Active | No | IsDefaultNew |
+| AI Processing | Active | No | |
+| Categorized — Awaiting Assignment | Active | No | IsAICategorized |
+| In Progress | Active | No | IsResumeTarget |
+| Manual Review Required | Active | No | IsManualReview |
+| Waiting on Customer | Active | **Yes** | |
+| Solved · Information Provided · Duplicate · Out of Scope | **Resolved** | No | |
+| Cancelled by Customer · Cannot Reproduce · Closed without Resolution | **Cancelled** | No | |
+
+> **Why a table, not `statuscode`.** Code that needs a specific status resolves it by **flag** (IsDefaultNew / IsResumeTarget / IsAICategorized / IsManualReview) or by **behavior column** (PausesSLA) — never by a hardcoded option value. The pause is decoupled from any specific status: `Pl.Case.SlaAssignment` reads `tavu_pausessla` of the case's current status. Adding or renaming a status is a config change with zero code impact. Rationale and the migration record: `case-status-model-migration-plan.md`.
 
 ### Custom columns — Client identification (hybrid architecture)
 
@@ -507,6 +539,7 @@ IF tavu_customer points to Contact (B2C case):
 | Description | tavu_description | Multiple Lines of Text | Optional | Case content |
 | Origin | tavu_origin | Choice | Optional | Email, Web Form, Phone, Manual, Internal |
 | Type | tavu_type | Lookup → tavu_casetype | Required | Default: General Inquiry |
+| Status | tavu_status | Lookup → tavu_casestatus | Business Recommended | Operational stage (see state model above). Default New via plugin on create; drives statecode + SLA pause. |
 | Priority | tavu_priority | Choice | Optional | Standard, Expedited, Critical |
 | Priority Reason | tavu_priorityreason | Multiple Lines of Text | Optional | Justification when Expedited/Critical |
 | Business Line | tavu_businessline | Lookup → tavu_businessline | Optional | Cascading |
@@ -531,7 +564,8 @@ IF tavu_customer points to Contact (B2C case):
 | Resolution Target Date | tavu_resolutiontargetdate | DateTime | Optional | Calculated by system |
 | First Response Date | tavu_firstresponsedate | DateTime | Optional | Auto on first email replied |
 | Resolution Date | tavu_resolutiondate | DateTime | Optional | Auto on state change to Resolved |
-| SLA Status | tavu_slastatus | Choice | Optional | On Track, At Risk, Breached, Met |
+| SLA Status | tavu_slastatus | Choice | Optional | On Track, Warning, Breached, Met, **Paused** (§11.1) |
+| SLA Paused On | tavu_slapausedon | DateTime | Optional | Set when the SLA is paused; used to compute remaining business time on resume; cleared on resume (§11.1) |
 
 ### Custom columns — AI processing
 
@@ -617,11 +651,11 @@ The native timeline mixes activity types in a generic feed and scatters attachme
 
 A virtual React/Fluent (v9) control (`OpenTavu.Controls.CaseConversation`) bound to a subgrid of `tavu_caseinteraction` filtered by `tavu_case`. Behavior:
 
-- **Compose at the top**, thread **newest-first (descending)**. The subgrid **view must be sorted Created On descending** — paging follows the view, so page 1 = the newest interactions; the control also sorts descending as a safety net.
+- **Compose at the top**, thread **newest-first**. The control **forces `createdon` descending at the dataset level** (`ds.sorting`), so page 1 always holds the newest interactions regardless of the subgrid view's configured sort — important so externally-added inbound emails surface at the top.
 - **Pagination:** primes a page of **10** and grows in increments of 10 via a subtle "Cargar más antiguos" button (avoids loading the full history blindly).
 - **Bubbles:** Outbound (right, brand tint), Inbound (left, neutral), Internal Note (left, amber, "internal note" tag). System-only interactions (no body) render as a centered pill line.
 - **State delta:** when `Status Before → Status After` or `Changed Fields` are stamped, they render as a caption under the bubble that caused the change.
-- **Compose:** a `Textarea` + a public/internal `Switch` + Enviar. On send it `createRecord`s a `tavu_caseinteraction` (Outbound/Email for a public reply, Internal Note/System for a note) linked to the parent case, then refreshes. **The compose only records the interaction — it does not send email; a flow does (below).**
+- **Compose:** a `Textarea`, a public/internal `Switch`, an attach (📎) button, and a **status dropdown** (populated from `tavu_casestatus`; enabled only once you start typing, since it applies on send). On send it `createRecord`s the `tavu_caseinteraction` (Outbound/Email for a public reply, Internal Note/System for a note), uploads any attached files as annotations, and — if a status was chosen — updates the case `tavu_status` (driving SLA pause/resume via the plugin) then refreshes the host form so header/SLA repaint. **The compose records the interaction and can change status; it does not send the email — the outbound flow does (below).** Standalone status changes (e.g. resuming without replying) are made on the case form's `tavu_status` field.
 
 ### Attachments — native `annotation`, rendered inline (no trip to Notes)
 
@@ -681,18 +715,18 @@ When a client email arrives or a case is manually created:
 
 **State at this point:**
 - `statecode = Active`
-- `statuscode = New`
+- `tavu_status = New` (the status flagged `IsDefaultNew`, set by a create plugin)
 - All other fields are empty.
 
 ### 7.2 Moment "AI Processing" — Automatic categorization
 
 The plugin/Power Automate detects the case in `New` state and processes it with Azure OpenAI. The AI receives the case content + available context (list of types, categories, tiers, customer tier from Account or Contact). Returns structured JSON.
 
-**State at this point:**
-- `statuscode` changes from `New` to `AI Processing` momentarily
+**State at this point** (`tavu_status`, resolved by flag — see §6 state model):
 - After processing:
-  - If confidence ≥ 0.85 → `Categorized — Awaiting Assignment`
-  - If confidence < 0.85 → `Manual Review Required`
+  - If confidence ≥ threshold → **Categorized — Awaiting Assignment** (the status flagged `IsAICategorized`)
+  - If confidence < threshold, multi-intent, or any failure → **Manual Review Required** (the status flagged `IsManualReview`)
+- `Pl.Case.Categorize` sets `tavu_status` directly (it does not touch `statuscode`).
 
 **Fields filled by AI:**
 
@@ -742,7 +776,7 @@ After AI categorization, the system finds the applicable SLA using the matching 
 
 The consultant takes the case (manually or assigned by AI/queue) and starts working it.
 
-**State at this point:** `statuscode = In Progress`
+**State at this point:** `tavu_status = In Progress` (the status flagged `IsResumeTarget`)
 
 **Fields populated operationally:**
 
@@ -760,8 +794,8 @@ The consultant takes the case (manually or assigned by AI/queue) and starts work
 The consultant finishes the work and closes the case.
 
 **State at this point:**
-- `statecode` changes to `Inactive` with a **Resolved-group** statuscode ("Solved" / "Information Provided" / "Duplicate" / "Out of Scope")
-- Or `statecode = Inactive` with a **Cancelled-group** statuscode ("Cancelled by Customer" / "Cannot Reproduce" / "Closed without Resolution")
+- `tavu_status` → a **Resolved-category** status (Solved / Information Provided / Duplicate / Out of Scope) or a **Cancelled-category** status (Cancelled by Customer / Cannot Reproduce / Closed without Resolution).
+- `Pl.Case.SlaAssignment` (on the status change) then: stops the gateway SLA timers; for **Resolved**, stamps `tavu_resolutiondate = now` and sets `tavu_slastatus = Met` if resolved within the resolution target, else **Breached**; for **Cancelled**, closes without a Met/Breached judgment; and sets `statecode = Inactive`.
 
 **Fields populated:**
 
@@ -1060,6 +1094,7 @@ The `tavu_slastatus` choice tracks each case's SLA state. Option values (fixed a
 | Warning | 576600001 | Early-warning threshold before the resolution target reached |
 | Breached | 576600002 | Target time expired, case not yet resolved |
 | Met | 576600003 | Case resolved before the target (successful final state) |
+| Paused | 576600004 | SLA clock stopped while the case is in a pausing status (`tavu_status` whose `tavu_pausessla = Yes`) — see §11.1 |
 
 *(The 576600001 option was originally labeled "At Risk"; the label is firm-configurable, the value is not.)*
 
@@ -1073,6 +1108,23 @@ Status transitions are driven by the **OpenTavu SLA Scheduler**, a central Azure
 4. When a case is resolved within target, SLA Status is set to **Met**. If the SLA changes (re-categorization), the plugin calls `POST /api/sla/cancel` with the stored orchestration instance id and reschedules — so targets stay anchored to the original `createdon`, not the change date.
 
 > **Why push over a recurring flow:** a polling flow is only as precise as its interval and burns runs continuously; durable timers fire to the second, cost nothing while idle, and cannot drift. The earlier hourly-flow design is superseded.
+
+### SLA pause / resume
+
+The SLA clock can be paused while the case waits on the customer, honoring the business calendar. Pausing is **status-driven**: when the case's `tavu_status` is one whose `tavu_pausessla = Yes` (e.g. "Waiting on Customer"), the SLA stops — the industry norm (Zendesk/ServiceNow/Dynamics). There is **no boolean and no mirrored optionset** — the pause behavior is a column on `tavu_casestatus`, so it is decoupled from any hardcoded status value and adding a pausing status is pure config.
+
+**Mechanism** (`Pl.Case.SlaAssignment` reacts to `tavu_status` changes):
+
+1. **Pause** — when the case moves to a status with `tavu_pausessla = Yes`, the plugin cancels the gateway's durable timers, stamps `tavu_slapausedon` (pause start), and sets `tavu_slastatus = Paused`.
+2. **Guardrail (anti-gaming)** — a Pre-operation step blocks moving into a pausing status if there is **no Outbound interaction** yet (you can't "wait on the customer" if you never replied). Surfaces a clear message; the compose flow satisfies it naturally because the reply is created first.
+3. **Resume** — when the case moves to a non-pausing status while `tavu_slapausedon` is set, the plugin recomputes the **remaining business time** frozen at pause (`BusinessMinutesBetween(pausedOn, target)` over the calendar), re-anchors Response/Resolution targets to "now" via the calendar walk, clears `tavu_slapausedon`, reschedules the gateway timers, and returns `tavu_slastatus` to On Track. Industry-standard "remaining-time" model; Dynamics 365 uses the same cancel-and-recreate pattern the gateway does.
+4. **Auto-resume (AI-first differentiator)** — when a customer reply (Inbound interaction) lands on a case whose current status pauses, `Pl.CaseInteraction.CaseSync` moves the case to the **`IsResumeTarget`** status (In Progress) automatically **if `tavu_systemsettings.tavu_slaautoresume = Yes`** → triggers resume. The clock restarts the instant the ball returns, no manual flipping. If the setting is No, the reply lands in the thread and the agent resumes by changing the status (trade-off: No re-opens the "pause and forget" vector, mitigated later by pause-duration metrics / auto-expire).
+
+**How the status changes:** on the case form (`tavu_status` field) for a standalone pause/resume, or from the conversation compose's status dropdown when changing status as part of a reply.
+
+**Fields:** `tavu_casestatus.tavu_pausessla` (the driver), `tavu_slapausedon` (DateTime, case), `tavu_slaautoresume` (Yes/No, systemsettings).
+
+**Roadmap (Module 2):** the pause is proposed by AI reading the outbound reply (detecting a genuine customer-wait), rather than a manual status change the agent could abuse.
 
 ### Suggested Power BI reports
 
@@ -1199,6 +1251,9 @@ Because the firm needs to report REAL utilization. If a consultant spends 8 hour
 | 1.13 | July 6, 2026 | Gustavo González Villani (revision with Claude) | Added **`tavu_casenumber`** (Autonumber, e.g. `OT-{SEQNUM:00000}-{RANDSTRING:4}`) to `tavu_case` (Section 6) and switched the §6.1 email **threading token** from the case GUID to this short, human-readable, non-guessable case number (`[OT-00042-A3F9]`). The gateway resolves appends by `tavu_casenumber`. Aligns with the intake code (ThreadToken + DataverseClient.FindCaseIdByNumberAsync). |
 | 1.14 | July 6, 2026 | Gustavo González Villani (revision with Claude) | Documented **`tavu_code`** on `tavu_customertierdefinition` (Section 2; autonumber, e.g. `CTD-1000` = Standard) — it existed in the live schema but wasn't in the guide. Noted its use as the tenant-stable config key for the email-intake default tier (`Intake:DefaultCustomerTierCode`), resolved to the id at runtime (no hardcoded GUID) so auto-created inbound contacts get a tier and the SLA plugin can resolve an SLA. |
 | 1.15 | July 6, 2026 | Gustavo González Villani (revision with Claude) | **Implemented the SLA system-default fallback (reverses the intake tier-stamping from v1.14).** `Pl.Case.SlaAssignment` now, when the customer has no tier, reads `tavu_systemsettings.tavu_defaultcustomertier` and applies that tier instead of skipping — covering unknown inbound senders, tier-less existing contacts, and manual cases. Correspondingly, the email-intake gateway **no longer stamps a tier** on auto-created contacts (a blank tier is honest; the machine must not rewrite customer master data), and the `Intake:DefaultCustomerTierCode` setting was removed. Added `tavu_defaultcustomertier` to the `tavu_systemsettings` spec (§3.2). This realizes §4 matching step (c), previously documented but not implemented. |
+| 1.16 | July 6, 2026 | Gustavo González Villani (revision with Claude) | Added **SLA pause/resume** (§11.1) driven by `tavu_slaonhold` (Yes/No), decoupled from statuscode: pause cancels gateway timers + stamps `tavu_slapausedon` + `tavu_slastatus = Paused` (new option 576600004); resume recomputes remaining **business** time and re-anchors targets (industry "remaining-time" model); Pre-op **guardrail** blocks pausing without a prior Outbound (anti-gaming); **auto-resume** on inbound gated by `tavu_slaautoresume` (systemsettings). Implemented across `Pl.Case.SlaAssignment` (pause/resume + BusinessMinutesBetween) and `Pl.CaseInteraction.CaseSync` (auto-resume). Design grounded in the comparative SLA research (`Conclusiones_Analisis_SLA_Comparativo_Helpdesk.md`). |
+| 1.17 | July 8, 2026 | Gustavo González Villani (revision with Claude) | **Migrated the case status model to the `tavu_casestatus` config table.** Rewrote §6 state model: operational stage now lives in `tavu_status` (lookup → `tavu_casestatus`), with per-status behavior columns (State Category, PausesSLA, IsDefaultNew, IsResumeTarget, IsAICategorized, IsManualReview); native `statuscode` deprecated to vestigial, `statecode` derived from State Category. Added the table spec + 13-status seed. Updated §7 lifecycle moments (statuscode → `tavu_status`, resolved by flag). Rewrote §11.1 SLA pause as **status-driven** (`tavu_pausessla`) — no boolean, no mirror; guardrail + remaining-business-time resume + auto-resume to the IsResumeTarget status. Added `tavu_status` and `tavu_slapausedon` to the case columns; noted the `CaseConversation` PCF status dropdown + forced descending sort + host-form refresh. Full rationale in `case-status-model-migration-plan.md`. |
+| 1.18 | July 8, 2026 | Gustavo González Villani (revision with Claude) | **Resolution finalization (#6).** `Pl.Case.SlaAssignment` now, when `tavu_status` moves to a Resolved/Cancelled-category status: cancels the gateway SLA timers, sets `statecode = Inactive` (statecode sync, formerly deferred), and — for Resolved — stamps `tavu_resolutiondate` and judges `tavu_slastatus` Met (resolved ≤ resolution target) vs Breached. Cancelled closes without a Met/Breached judgment. Updated §6 state note and §7.5. |
 | 1.7 | July 1, 2026 | Gustavo González Villani (revision with Claude) | Added **Section 4.1 — Business calendars** (`tavu_businesscalendar`, `tavu_calendarworkinghours`, `tavu_businessclosure`): schedule header (Time Zone as Whole Number/Time Zone format, Is 24x7, Is Default), working intervals (multiple per weekday for split shifts/lunch; Start/End as a "Time of Day" choice whose value = minutes from midnight), holidays; all with autonumber Code. Added a `tavu_calendar` lookup to `tavu_sla` and **deprecated `tavu_coveragehours`** (superseded by the calendar, mirroring Dynamics' `SLA.BusinessHours`). Documented the SLA engine's calendar-aware, DST-aware target-date calculation anchored to `createdon`, and that specific calendars/holidays are per-client config (not canonical seed). |
 
 *This document is the operational reference for OpenTavu's service model.*

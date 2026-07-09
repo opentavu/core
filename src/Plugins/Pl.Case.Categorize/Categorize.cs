@@ -69,9 +69,12 @@ namespace Pl.Case.Categorize
         // Task Key option value for "Case Categorization"
         private const int TaskKeyCaseCategorization = 576600000;
 
-        // statuscode option values in tavu_case
-        private const int StatusCategorizedAwaitingAssignment = 576600003;
-        private const int StatusManualReviewRequired          = 576600005;
+        // Operational status is now a lookup to tavu_casestatus. The two AI outcomes are resolved by
+        // flags on that table (config-over-code), not by hardcoded statuscode values.
+        private const string CaseStatus            = "tavu_status";            // lookup -> tavu_casestatus
+        private const string StatusEntity          = "tavu_casestatus";
+        private const string StatusIsCategorized   = "tavu_isaicategorized";   // Yes on "Categorized — Awaiting Assignment"
+        private const string StatusIsManualReview  = "tavu_ismanualreview";    // Yes on "Manual Review Required"
 
 		// tavu_priority option values in tavu_case
 		private const int PriorityStandard  = 576600000;
@@ -194,8 +197,12 @@ namespace Pl.Case.Categorize
             bool mappingClean = blOk && catOk; // subcategory optional depending on firm depth
             bool autoAssign = confident && !o.MultiIntent && mappingClean;
 
-            update["statuscode"] = new OptionSetValue(
-                autoAssign ? StatusCategorizedAwaitingAssignment : StatusManualReviewRequired);
+            Guid statusId = ResolveStatusIdByFlag(svc, autoAssign ? StatusIsCategorized : StatusIsManualReview);
+            if (statusId != Guid.Empty)
+                update[CaseStatus] = new EntityReference(StatusEntity, statusId);
+            else
+                localContext.Trace("Could not resolve target status by flag ({0}); leaving status unchanged.",
+                    autoAssign ? StatusIsCategorized : StatusIsManualReview);
 
             localContext.Trace(
                 "Categorization done. confidence={0} threshold={1} multiIntent={2} blOk={3} catOk={4} subOk={5} -> {6}",
@@ -210,10 +217,21 @@ namespace Pl.Case.Categorize
         private void RouteToManualReview(IOrganizationService svc, Guid caseId, string note)
         {
             var update = new Entity(CaseEntity, caseId);
-            update["statuscode"] = new OptionSetValue(StatusManualReviewRequired);
+            Guid mr = ResolveStatusIdByFlag(svc, StatusIsManualReview);
+            if (mr != Guid.Empty) update[CaseStatus] = new EntityReference(StatusEntity, mr);
             update[CaseIsAutomated] = true;
             update[CaseAiReasoning] = note;
             svc.Update(update);
+        }
+
+        /// <summary>Resolves the id of the single active tavu_casestatus row whose given flag is set.</summary>
+        private static Guid ResolveStatusIdByFlag(IOrganizationService svc, string flagField)
+        {
+            var q = new QueryExpression(StatusEntity) { ColumnSet = new ColumnSet(false), NoLock = true, TopCount = 1 };
+            q.Criteria.AddCondition("statecode", ConditionOperator.Equal, StateActive);
+            q.Criteria.AddCondition(flagField, ConditionOperator.Equal, true);
+            var r = svc.RetrieveMultiple(q);
+            return r.Entities.Count > 0 ? r.Entities[0].Id : Guid.Empty;
         }
 
         // ---------- Taxonomy ----------

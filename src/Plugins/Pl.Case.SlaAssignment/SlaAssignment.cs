@@ -24,13 +24,12 @@ namespace Pl.Case.SlaAssignment
     /// Increment 2 (later) adds the call to the OpenTavu gateway to schedule the durable SLA timers.
     /// </summary>
     /// <remarks>
-    /// Plugin Registration Tool configuration:
-    ///   Message:              Update  (also valid on Create if Type is set at creation)
-    ///   Primary Entity:       tavu_case
-    ///   Filtering Attributes: tavu_type
-    ///   Stage:                20 (Pre-operation)
-    ///   Execution Mode:       Synchronous
-    ///   Deployment:           Server
+    /// Plugin Registration Tool — register these steps (all Primary Entity = tavu_case, Sync, Server):
+    ///   1. SLA assign:   Message Update (+ Create), Filtering Attr: tavu_type,       Stage 20 (Pre-op)
+    ///   2. SLA schedule: Message Update (+ Create), Filtering Attr: tavu_type,       Stage 40 (Post-op)
+    ///   3. Pause guard:  Message Update,             Filtering Attr: tavu_status,    Stage 20 (Pre-op)
+    ///   4. Pause/resume: Message Update,             Filtering Attr: tavu_status,    Stage 40 (Post-op)
+    /// The router in ExecuteInternal dispatches by message/stage/changed-attribute.
     /// </remarks>
     public class SlaAssignment : PluginBase
     {
@@ -42,7 +41,27 @@ namespace Pl.Case.SlaAssignment
         private const string CaseResponseTarget  = "tavu_responsetargetdate";   // DateTime (UTC)
         private const string CaseResolutionTarget = "tavu_resolutiontargetdate"; // DateTime (UTC)
         private const string CaseSlaStatus       = "tavu_slastatus";            // Choice
+        private const string CaseFirstResponse   = "tavu_firstresponsedate";    // DateTime
+        private const string CaseStatus          = "tavu_status";               // lookup -> tavu_casestatus (operational status)
+        private const string CasePausedOn        = "tavu_slapausedon";          // DateTime — when the current pause started
         private const string CreatedOn           = "createdon";
+
+        // ---------- tavu_casestatus (status vocabulary + behaviors) ----------
+        private const string StatusEntity        = "tavu_casestatus";
+        private const string StatusPausesSla     = "tavu_pausessla";            // Yes/No — this status stops the SLA clock
+        private const string StatusStateCategory = "tavu_statecategory";        // Choice: Active/Resolved/Cancelled
+        private const int    StateCategoryActive    = 576600000;
+        private const int    StateCategoryResolved  = 576600001;
+        private const int    StateCategoryCancelled = 576600002;
+
+        private const string CaseResolutionDate  = "tavu_resolutiondate";       // DateTime (set on resolve)
+        private const int    SlaStatusMet        = 576600003;
+
+        // ---------- tavu_caseinteraction (guardrail) ----------
+        private const string InteractionEntity   = "tavu_caseinteraction";
+        private const string IxCase              = "tavu_case";                 // lookup -> tavu_case
+        private const string IxDirection         = "tavu_direction";            // Choice
+        private const int    DirOutbound         = 576600001;                   // agent -> customer
 
         // ---------- customer (account / contact) ----------
         private const string CustomerTierField   = "tavu_customertier";         // lookup -> tavu_customertierdefinition (same name on both)
@@ -82,6 +101,7 @@ namespace Pl.Case.SlaAssignment
         private const int SlaStatusOnTrack  = 576600000;
         private const int SlaStatusWarning  = 576600001;
         private const int SlaStatusBreached = 576600002;
+        private const int SlaStatusPaused   = 576600004;
         private const int StateActive      = 0;
         private const int MinutesPerDay    = 1440;
 
@@ -117,6 +137,16 @@ namespace Pl.Case.SlaAssignment
             if (!string.Equals(target.LogicalName, CaseEntity, StringComparison.Ordinal))
             {
                 localContext.Trace("Unexpected entity '{0}'. Exiting.", target.LogicalName);
+                return;
+            }
+
+            // Pause/resume path: an Update that changes tavu_status routes here. Pause is status-driven —
+            // the new status's tavu_pausessla flag decides. Pre-op (20) = guardrail; Post-op (40) = mechanics.
+            if (string.Equals(ctx.MessageName, "Update", StringComparison.OrdinalIgnoreCase) && target.Contains(CaseStatus))
+            {
+                if (ctx.Stage == 20) GuardStatusChange(localContext, target);
+                else HandleStatusChange(localContext, target);
+                localContext.Trace("SlaAssignment: ExecuteInternal exiting (status path).");
                 return;
             }
 
@@ -243,6 +273,250 @@ namespace Pl.Case.SlaAssignment
             var tier = res.Entities[0].GetAttributeValue<EntityReference>(SettingsDefaultTier);
             if (tier == null) localContext.Trace("tavu_defaultcustomertier is not set in system settings.");
             return tier?.Id;
+        }
+
+        // ---------- pause / resume (tavu_slaonhold) ----------
+
+        /// <summary>
+        /// Pre-op guardrail: block moving the case into a pausing status if the agent hasn't responded to
+        /// the customer yet (no Outbound interaction). Pausing without a reply is illegitimate.
+        /// </summary>
+        private void GuardStatusChange(LocalPluginContext localContext, Entity target)
+        {
+            var statusRef = target.GetAttributeValue<EntityReference>(CaseStatus);
+            if (statusRef == null) return;
+
+            IOrganizationService svc = localContext.SystemService;
+            if (StatusPauses(svc, statusRef) && !HasOutbound(svc, target.Id))
+            {
+                localContext.Trace("Pause blocked: pausing status but no Outbound interaction on the case.");
+                throw new InvalidPluginExecutionException(
+                    "No puedes poner el caso en espera del cliente sin haberle respondido primero.");
+            }
+        }
+
+        private bool HasOutbound(IOrganizationService svc, Guid caseId)
+        {
+            var q = new QueryExpression(InteractionEntity)
+            {
+                ColumnSet = new ColumnSet(false),
+                NoLock = true,
+                TopCount = 1
+            };
+            q.Criteria.AddCondition(IxCase, ConditionOperator.Equal, caseId);
+            q.Criteria.AddCondition(IxDirection, ConditionOperator.Equal, DirOutbound);
+            return svc.RetrieveMultiple(q).Entities.Count > 0;
+        }
+
+        /// <summary>True if the given status's tavu_pausessla flag is set.</summary>
+        private bool StatusPauses(IOrganizationService svc, EntityReference statusRef)
+        {
+            var s = svc.Retrieve(StatusEntity, statusRef.Id, new ColumnSet(StatusPausesSla));
+            return s.GetAttributeValue<bool>(StatusPausesSla);
+        }
+
+        /// <summary>
+        /// Post-op: react to a status change.
+        ///  - Resolved/Cancelled category  -> finalize the SLA (Met/Breached), stop timers, deactivate.
+        ///  - Active category               -> pause or resume based on tavu_pausessla vs current pause state.
+        /// </summary>
+        private void HandleStatusChange(LocalPluginContext localContext, Entity target)
+        {
+            var statusRef = target.GetAttributeValue<EntityReference>(CaseStatus);
+            if (statusRef == null) return;
+
+            IOrganizationService svc = localContext.SystemService;
+            var status = svc.Retrieve(StatusEntity, statusRef.Id, new ColumnSet(StatusPausesSla, StatusStateCategory));
+            var category = status.GetAttributeValue<OptionSetValue>(StatusStateCategory);
+            int categoryValue = category?.Value ?? StateCategoryActive;
+
+            if (categoryValue == StateCategoryResolved || categoryValue == StateCategoryCancelled)
+            {
+                Resolve(localContext, target, categoryValue == StateCategoryResolved);
+                return;
+            }
+
+            bool pauses = status.GetAttributeValue<bool>(StatusPausesSla);
+            var c = svc.Retrieve(CaseEntity, target.Id, new ColumnSet(CasePausedOn));
+            bool isPaused = c.Contains(CasePausedOn) && c[CasePausedOn] != null;
+
+            if (pauses && !isPaused) Pause(localContext, target);
+            else if (!pauses && isPaused) Resume(localContext, target);
+            else localContext.Trace("No SLA pause transition needed (pauses={0}, isPaused={1}).", pauses, isPaused);
+        }
+
+        /// <summary>
+        /// Finalize the SLA when a case moves to a Resolved/Cancelled status: stop the gateway timers,
+        /// deactivate the record (statecode = Inactive), and — for Resolved — stamp the resolution date and
+        /// judge Met vs Breached against the resolution target.
+        /// </summary>
+        private void Resolve(LocalPluginContext localContext, Entity target, bool isResolved)
+        {
+            IOrganizationService svc = localContext.SystemService;
+            Guid caseId = target.Id;
+
+            Entity c = svc.Retrieve(CaseEntity, caseId,
+                new ColumnSet(CaseOrchestrationId, CaseResolutionTarget, CasePausedOn));
+
+            // Stop any scheduled SLA timers (best-effort).
+            string instance = c.GetAttributeValue<string>(CaseOrchestrationId);
+            string baseUrl = ReadEnvironmentVariable(svc, GatewayUrlVar);
+            string tenantKey = ReadEnvironmentVariable(svc, GatewayKeyVar);
+            if (!string.IsNullOrEmpty(baseUrl) && !string.IsNullOrEmpty(tenantKey) && !string.IsNullOrEmpty(instance))
+                TryCancel(localContext, baseUrl.TrimEnd('/'), tenantKey, instance);
+
+            var upd = new Entity(CaseEntity, caseId);
+
+            if (isResolved)
+            {
+                DateTime nowUtc = DateTime.UtcNow;
+                upd[CaseResolutionDate] = nowUtc;
+
+                int slaStatus = SlaStatusMet;
+                if (c.Contains(CaseResolutionTarget))
+                {
+                    DateTime tr = DateTime.SpecifyKind(c.GetAttributeValue<DateTime>(CaseResolutionTarget), DateTimeKind.Utc);
+                    slaStatus = nowUtc <= tr ? SlaStatusMet : SlaStatusBreached;
+                }
+                upd[CaseSlaStatus] = new OptionSetValue(slaStatus);
+                localContext.Trace("Case {0} resolved. SLA {1}.", caseId, slaStatus == SlaStatusMet ? "Met" : "Breached");
+            }
+            else
+            {
+                localContext.Trace("Case {0} cancelled; SLA closed without Met/Breached judgment.", caseId);
+            }
+
+            // Clear any pause marker and deactivate the case. Set only statecode = Inactive (1); Dataverse
+            // assigns the state's default statuscode. (If the org requires an explicit statuscode, add the
+            // Inactive reason value here.)
+            if (c.Contains(CasePausedOn) && c[CasePausedOn] != null) upd[CasePausedOn] = null;
+            upd["statecode"] = new OptionSetValue(1);
+            svc.Update(upd);
+        }
+
+        /// <summary>Pause: cancel the gateway timers, stamp the pause start, set SLA Status = Paused.</summary>
+        private void Pause(LocalPluginContext localContext, Entity target)
+        {
+            IOrganizationService svc = localContext.SystemService;
+            Guid caseId = target.Id;
+
+            Entity c = svc.Retrieve(CaseEntity, caseId, new ColumnSet(CaseOrchestrationId));
+            string instance = c.GetAttributeValue<string>(CaseOrchestrationId);
+
+            string baseUrl = ReadEnvironmentVariable(svc, GatewayUrlVar);
+            string tenantKey = ReadEnvironmentVariable(svc, GatewayKeyVar);
+            if (!string.IsNullOrEmpty(baseUrl) && !string.IsNullOrEmpty(tenantKey) && !string.IsNullOrEmpty(instance))
+                TryCancel(localContext, baseUrl.TrimEnd('/'), tenantKey, instance);
+
+            var upd = new Entity(CaseEntity, caseId);
+            upd[CasePausedOn] = DateTime.UtcNow;
+            upd[CaseSlaStatus] = new OptionSetValue(SlaStatusPaused);
+            svc.Update(upd);
+            localContext.Trace("SLA paused for case {0}.", caseId);
+        }
+
+        /// <summary>
+        /// Resume: recompute the remaining BUSINESS time (frozen at pause) and re-anchor the targets to
+        /// "now", then reschedule the gateway timers. Uses the calendar of the applied SLA.
+        /// </summary>
+        private void Resume(LocalPluginContext localContext, Entity target)
+        {
+            IOrganizationService svc = localContext.SystemService;
+            Guid caseId = target.Id;
+
+            Entity c = svc.Retrieve(CaseEntity, caseId, new ColumnSet(
+                CasePausedOn, CaseResponseTarget, CaseResolutionTarget, CaseAppliedSla, CaseFirstResponse));
+
+            if (!c.Contains(CasePausedOn) || c[CasePausedOn] == null)
+            {
+                localContext.Trace("Resume with no prior pause (tavu_slapausedon empty); nothing to do.");
+                return;
+            }
+
+            DateTime pausedOnUtc = DateTime.SpecifyKind(c.GetAttributeValue<DateTime>(CasePausedOn), DateTimeKind.Utc);
+            DateTime nowUtc = DateTime.UtcNow;
+            CalendarModel cal = GetCaseCalendar(localContext, svc, c);
+
+            var upd = new Entity(CaseEntity, caseId);
+
+            // Resolution target (always re-anchored while the case is active).
+            if (c.Contains(CaseResolutionTarget))
+            {
+                DateTime tr = DateTime.SpecifyKind(c.GetAttributeValue<DateTime>(CaseResolutionTarget), DateTimeKind.Utc);
+                if (tr > pausedOnUtc)
+                {
+                    double remainingMin = BusinessMinutesBetween(svc, pausedOnUtc, tr, cal);
+                    upd[CaseResolutionTarget] = ComputeTarget(localContext, svc, nowUtc, (decimal)(remainingMin / 60.0), cal);
+                }
+            }
+
+            // Response target only if first response hasn't happened yet.
+            bool responded = c.Contains(CaseFirstResponse) && c[CaseFirstResponse] != null;
+            if (!responded && c.Contains(CaseResponseTarget))
+            {
+                DateTime tr = DateTime.SpecifyKind(c.GetAttributeValue<DateTime>(CaseResponseTarget), DateTimeKind.Utc);
+                if (tr > pausedOnUtc)
+                {
+                    double remainingMin = BusinessMinutesBetween(svc, pausedOnUtc, tr, cal);
+                    upd[CaseResponseTarget] = ComputeTarget(localContext, svc, nowUtc, (decimal)(remainingMin / 60.0), cal);
+                }
+            }
+
+            upd[CasePausedOn] = null; // clear the pause
+            upd[CaseSlaStatus] = new OptionSetValue(SlaStatusOnTrack);
+            svc.Update(upd);
+
+            // Reprogram the durable timers against the new targets.
+            ScheduleSla(localContext, new Entity(CaseEntity, caseId));
+            localContext.Trace("SLA resumed for case {0}.", caseId);
+        }
+
+        /// <summary>Loads the calendar of the case's applied SLA (or the default calendar).</summary>
+        private CalendarModel GetCaseCalendar(LocalPluginContext localContext, IOrganizationService svc, Entity caseEntity)
+        {
+            EntityReference calRef = null;
+            var slaRef = caseEntity.GetAttributeValue<EntityReference>(CaseAppliedSla);
+            if (slaRef != null)
+            {
+                var sla = svc.Retrieve(SlaEntity, slaRef.Id, new ColumnSet(SlaCalendar));
+                calRef = sla.GetAttributeValue<EntityReference>(SlaCalendar);
+            }
+            return LoadCalendar(localContext, svc, calRef);
+        }
+
+        /// <summary>Business minutes between two UTC instants, honoring the calendar (or wall-clock if none).</summary>
+        private double BusinessMinutesBetween(IOrganizationService svc, DateTime fromUtc, DateTime toUtc, CalendarModel cal)
+        {
+            if (toUtc <= fromUtc) return 0;
+            if (cal == null) return (toUtc - fromUtc).TotalMinutes;
+
+            DateTime fromLocal = cal.HasTimeZone ? ToLocal(svc, cal.TimeZoneCode, fromUtc) : fromUtc;
+            DateTime toLocal = cal.HasTimeZone ? ToLocal(svc, cal.TimeZoneCode, toUtc) : toUtc;
+            return CountWorkingMinutes(fromLocal, toLocal, cal);
+        }
+
+        /// <summary>Counts working minutes in [start, end] local time across the calendar's intervals/closures.</summary>
+        private double CountWorkingMinutes(DateTime start, DateTime end, CalendarModel cal)
+        {
+            double total = 0;
+            DateTime cursor = start;
+            for (int guard = 0; guard < 366 && cursor < end; guard++)
+            {
+                DateTime day = cursor.Date;
+                if (!cal.Closures.Contains(day))
+                {
+                    foreach (var iv in cal.IntervalsFor(day))
+                    {
+                        DateTime ivStart = day.AddMinutes(iv.Start);
+                        DateTime ivEnd = day.AddMinutes(iv.End);
+                        DateTime s = cursor > ivStart ? cursor : ivStart;
+                        DateTime e = end < ivEnd ? end : ivEnd;
+                        if (e > s) total += (e - s).TotalMinutes;
+                    }
+                }
+                cursor = day.AddDays(1);
+            }
+            return total;
         }
 
         // ---------- SLA matching ----------
