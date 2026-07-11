@@ -16,6 +16,9 @@
  *
  * Command bar registration (Main form → Run JavaScript, param PrimaryControl):
  *   "Reset Probability"      → OpenTavu.Opportunity.Form.resetProbability
+ *   "Close as Won"           → OpenTavu.Opportunity.Form.closeAsWon
+ *   "Close as Lost"          → OpenTavu.Opportunity.Form.closeAsLost
+ *   "Reopen"                 → OpenTavu.Opportunity.Form.reopen
  *
  * @author OpenTavu — Gustavo González Villani
  * SPDX-License-Identifier: MIT
@@ -78,6 +81,12 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
     };
 
     var SESSION_CACHE_KEY = "opentavu.customerMode";
+
+    // Custom page (canvas) used as the guided close dialog. MUST match the unique
+    // name of the custom page added to the OpenTavu solution.
+    var CLOSE_DIALOG_PAGE = "tavu_opportunityclosedialog_31702";
+
+    var CLOSE_OUTCOME = { WON: "won", LOST: "lost" };
 
     var NOTIF = {
         CLOSED_STATE: "opportunity_closed_state_banner",
@@ -372,6 +381,156 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
         );
     };
 
+    /**
+     * Ribbon command — "Close as Won".
+     * Show only when the opportunity is Open (enable rule: statecode = Active).
+     * @param {Xrm.FormContext|Xrm.ExecutionContext} primaryControl
+     */
+    Form.closeAsWon = function (primaryControl) {
+        openCloseDialog(resolveFormContext(primaryControl), CLOSE_OUTCOME.WON);
+    };
+
+    /**
+     * Ribbon command — "Close as Lost".
+     * Show only when the opportunity is Open (enable rule: statecode = Active).
+     * @param {Xrm.FormContext|Xrm.ExecutionContext} primaryControl
+     */
+    Form.closeAsLost = function (primaryControl) {
+        openCloseDialog(resolveFormContext(primaryControl), CLOSE_OUTCOME.LOST);
+    };
+
+    /**
+     * Opens the guided close custom page as a centered dialog, passing the
+     * opportunity id and the outcome (won/lost). The custom page captures the
+     * required inputs (Actual Revenue for Won, Lost Reason for Lost, plus close
+     * date and notes), writes them to the opportunity together with the terminal
+     * statecode/statuscode, and saves — which fires the server engine:
+     *   - Pl.Opportunity.LifecycleTracker (Pre-Op): validates inputs, forces
+     *     probability to 100/0, defaults the close date.
+     *   - Pl.Opportunity.CloseOrchestrator (Post-Op): logs the
+     *     tavu_opportunityclose activity and, on Won, marks the customer.
+     *
+     * The dialog owns the write so the optionset (Lost Reason) and numeric input
+     * render natively. On dialog close we refresh the form to reflect the new
+     * closed state and the plugin-derived effects.
+     *
+     * We require a clean (saved) form first: the dialog writes server-side
+     * directly, so any unsaved edits on the open form would be missed or conflict.
+     */
+    function openCloseDialog(formContext, outcome) {
+        if (!formContext) return;
+
+        if (isClosed(formContext)) {
+            notifyTransient(formContext, "This opportunity is already closed.", "INFO");
+            return;
+        }
+        if (formContext.data.getIsDirty()) {
+            notifyTransient(formContext,
+                "Save your pending changes before closing the opportunity.", "WARNING");
+            return;
+        }
+
+        var oppId = formContext.data.entity.getId().replace(/[{}]/g, "");
+        if (!oppId) {
+            notifyTransient(formContext,
+                "Save the opportunity before closing it.", "WARNING");
+            return;
+        }
+
+        var isWon = outcome === CLOSE_OUTCOME.WON;
+
+        // Custom pages opened via navigateTo only forward two parameters:
+        // recordId and entityName. Arbitrary keys (e.g. "outcome") are dropped by
+        // the platform (confirmed limitation). We keep recordId as the real GUID and
+        // repurpose ("hijack") entityName to carry the close outcome, since this page
+        // is NOT record-bound and never needs the real table name. The page reads it
+        // via Param("entityName").
+        var pageInput = {
+            pageType: "custom",
+            name: CLOSE_DIALOG_PAGE,
+            recordId: oppId,
+            entityName: outcome // carries "won" | "lost"; read via Param("entityName")
+        };
+        var navOptions = {
+            target: 2,      // dialog
+            position: 1,    // center
+            width: { value: 480, unit: "px" },
+            height: { value: 420, unit: "px" },
+            title: isWon ? "Close as Won" : "Close as Lost"
+        };
+
+        Xrm.Navigation.navigateTo(pageInput, navOptions).then(
+            function () {
+                // Dialog closed (confirmed or cancelled). Refresh either way; the
+                // custom page performed any write server-side.
+                formContext.data.refresh(false).then(
+                    function () { refreshLifecycleUi(wrapFormContext(formContext)); },
+                    function () { refreshLifecycleUi(wrapFormContext(formContext)); }
+                );
+            },
+            function (error) {
+                console.error("[OpenTavu.Opportunity.Form] close dialog failed:", error);
+                notifyTransient(formContext,
+                    "The close dialog could not be opened. Try again.", "ERROR");
+            }
+        );
+    }
+
+    /**
+     * Ribbon command — "Reopen".
+     *
+     * Returns a closed (Won/Lost) opportunity to Open so it can re-enter the
+     * pipeline. Needs no user input, so it is fully self-contained: confirm,
+     * flip statecode/statuscode, save.
+     *
+     * The close details (tavu_actualrevenue / tavu_lostreason /
+     * tavu_actualclosedate / tavu_closenotes) are deliberately preserved as
+     * history — the form keeps them locked even when reopened. On save the
+     * Pl.Opportunity.LifecycleTracker plugin detects the reopen (previous
+     * statecode = Inactive) and re-applies the current Sales Stage default
+     * probability, clearing the manual flag.
+     *
+     * Registered on the Main form command bar via Run JavaScript, passing
+     * PrimaryControl. Show the button only when the record is closed
+     * (enable rule: statecode = Inactive).
+     *
+     * @param {Xrm.FormContext|Xrm.ExecutionContext} primaryControl
+     */
+    Form.reopen = function (primaryControl) {
+        var formContext = resolveFormContext(primaryControl);
+        if (!formContext) return;
+
+        if (!isClosed(formContext)) {
+            notifyTransient(formContext, "This opportunity is already open.", "INFO");
+            return;
+        }
+
+        Xrm.Navigation.openConfirmDialog({
+            title: "Reopen Opportunity",
+            text: "This opportunity will return to Open and re-enter the pipeline. " +
+                  "The close details (revenue / lost reason / close date) are kept as " +
+                  "history. Probability will reset to the current stage default. Continue?"
+        }).then(function (result) {
+            if (!result.confirmed) return;
+
+            setAttributeValue(formContext, "statecode", STATE_ACTIVE);
+            setAttributeValue(formContext, FIELD_STATUS_REASON, STATUS_OPEN);
+
+            formContext.data.save().then(
+                function () {
+                    notifyTransient(formContext,
+                        "Opportunity reopened. Probability reset to the stage default.", "INFO");
+                    refreshLifecycleUi(wrapFormContext(formContext));
+                },
+                function (saveError) {
+                    console.error("[OpenTavu.Opportunity.Form] reopen save failed:", saveError);
+                    notifyTransient(formContext,
+                        "The opportunity could not be reopened. Try again.", "ERROR");
+                }
+            );
+        });
+    };
+
     // ============================================================
     // Reserved hooks for future modules
     // ============================================================
@@ -404,6 +563,11 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
     function resolveFormContext(arg) {
         if (!arg) return null;
         return (typeof arg.getFormContext === "function") ? arg.getFormContext() : arg;
+    }
+
+    /** Adapts a FormContext into the { getFormContext() } shape the UI passes expect. */
+    function wrapFormContext(formContext) {
+        return { getFormContext: function () { return formContext; } };
     }
 
     function setAttributeValue(formContext, schemaName, value) {
