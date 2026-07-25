@@ -8,6 +8,8 @@
     <Project Path="Plugins/Pl.Opportunity.CloseOrchestrator/Pl.Opportunity.CloseOrchestrator.csproj" />
     <Project Path="Plugins/Pl.Opportunity.CustomerSync/Pl.Opportunity.CustomerSync.csproj" />
     <Project Path="Plugins/Pl.Opportunity.LifecycleTracker/Pl.Opportunity.LifecycleTracker.csproj" Id="988e38d4-30a1-4a89-b4ba-90d6c41b2ca8" />
+    <Project Path="Plugins/Pl.Proposal.CloneVersion/Pl.Proposal.CloneVersion.csproj" />
+    <Project Path="Plugins/Pl.Proposal.LifecycleTracker/Pl.Proposal.LifecycleTracker.csproj" />
     <Project Path="Plugins/Pl.ProposalLine.Calculator/Pl.ProposalLine.Calculator.csproj" />
     <Project Path="Plugins/Pl.SystemSettings.SingleRecordGuard/Pl.SystemSettings.SingleRecordGuard.csproj" />
   </Folder>
@@ -19,6 +21,7 @@
     <File Path="WebResources/js/tavu_opportunity_form.js" />
     <File Path="WebResources/js/tavu_product_form.js" />
     <File Path="WebResources/js/tavu_proposalline_form.js" />
+    <File Path="WebResources/js/tavu_proposal_form.js" />
   </Folder>
   <Folder Name="/Workflows/" />
   <Folder Name="/_shared/" />

@@ -12,7 +12,7 @@
  *   OnSave                   → OpenTavu.Opportunity.Form.onSave
  *   OnChange statecode       → OpenTavu.Opportunity.Form.onStateCodeChange
  *   OnChange statuscode      → OpenTavu.Opportunity.Form.onStatusReasonChange
- *   OnChange tavu_customerid → OpenTavu.Opportunity.Form.onCustomerChange
+ *   OnChange tavu_customer → OpenTavu.Opportunity.Form.onCustomerChange
  *
  * Command bar registration (Main form → Run JavaScript, param PrimaryControl):
  *   "Reset Probability"      → OpenTavu.Opportunity.Form.resetProbability
@@ -124,7 +124,9 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
     /** @param {Xrm.ExecutionContext} executionContext */
     Form.onCustomerChange = function (executionContext) {
         var formContext = executionContext.getFormContext();
-        var customerValue = formContext.getAttribute("tavu_customerid").getValue();
+        var customerAttr = formContext.getAttribute("tavu_customer");
+        if (!customerAttr) return; // field not on the form — nothing to validate
+        var customerValue = customerAttr.getValue();
 
         if (!customerValue || customerValue.length === 0) {
             formContext.ui.clearFormNotification(NOTIF.INVALID_CUSTOMER);
@@ -711,7 +713,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
      * community workaround for the lack of an OOTB API to remove a lookup tab.
      */
     function applyPreSearchFilter(formContext, mode) {
-        var control = formContext.getControl("tavu_customerid");
+        var control = formContext.getControl("tavu_customer");
         if (!control || mode === CUSTOMER_MODE.MIXED) return;
 
         control.addPreSearch(function () {
@@ -737,7 +739,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
     }
 
     function rejectCustomerSelection(formContext, attemptedEntityType, mode) {
-        formContext.getAttribute("tavu_customerid").setValue(null);
+        formContext.getAttribute("tavu_customer").setValue(null);
 
         var typeLabel = attemptedEntityType === "account" ? "an Account" : "a Contact";
         var modeLabel = mode === CUSTOMER_MODE.B2B_ONLY ? "B2B Only" : "B2C Only";

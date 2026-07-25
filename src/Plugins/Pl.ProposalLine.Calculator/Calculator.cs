@@ -97,6 +97,14 @@ namespace Pl.ProposalLine.Calculator
 		private const string AttrStateCode = "statecode";
 		private const int StateActive = 0;
 
+		// Parent proposal lock — a line cannot be added/edited/removed once the
+		// proposal has been sent to the client or closed. "Create New Version" is the
+		// only way to change a locked proposal (proposal statuscodes; sales-model.md §8.2).
+		private const string AttrProposalStatusCode = "statuscode";
+		private const int PropStatusSentToClient = 576600004;
+		private const int PropStatusAwaitingDecision = 576600005;
+		private const int HeaderStateInactive = 1; // Approved/Rejected/Superseded/Withdrawn
+
 		private const string PreImageName = "PreImg";
 
 		// Pipeline stages
@@ -118,10 +126,17 @@ namespace Pl.ProposalLine.Calculator
 			// Route by stage. Each handler self-filters and traces what it does.
 			if (ctx.Stage == StagePreOperation)
 			{
+				// Block line create/update on a locked (sent/closed) proposal.
+				GuardParentLock(localContext);
 				ComputeLine(localContext);
 			}
 			else if (ctx.Stage == StagePostOperation)
 			{
+				// Block line delete on a locked proposal (throwing here rolls back the delete).
+				if (string.Equals(ctx.MessageName, "Delete", StringComparison.OrdinalIgnoreCase))
+				{
+					GuardParentLock(localContext);
+				}
 				RollUpHeader(localContext);
 			}
 			else
@@ -289,6 +304,47 @@ namespace Pl.ProposalLine.Calculator
 			}
 
 			return Guid.Empty;
+		}
+
+		/// <summary>
+		/// Throws if the line's parent proposal is locked. A proposal is locked once it
+		/// reaches "Sent to Client" / "Awaiting Decision" or any closed (Inactive) status —
+		/// its lines are then immutable to preserve the sent version. To change a locked
+		/// proposal, use Create New Version (tavu_CloneProposalVersion). Runs under
+		/// SystemService so the check is consistent on every entry path.
+		/// </summary>
+		private void GuardParentLock(LocalPluginContext localContext)
+		{
+			Guid proposalId = ResolveProposalId(localContext);
+			if (proposalId == Guid.Empty)
+			{
+				localContext.Trace("GuardParentLock: no parent proposal resolved. Skipping.");
+				return;
+			}
+
+			var p = localContext.SystemService.Retrieve(
+				HeaderEntity, proposalId,
+				new ColumnSet(AttrStateCode, AttrProposalStatusCode));
+
+			var state = p.GetAttributeValue<OptionSetValue>(AttrStateCode);
+			var status = p.GetAttributeValue<OptionSetValue>(AttrProposalStatusCode);
+
+			bool locked =
+				(state != null && state.Value == HeaderStateInactive) ||
+				(status != null &&
+				 (status.Value == PropStatusSentToClient ||
+				  status.Value == PropStatusAwaitingDecision));
+
+			if (locked)
+			{
+				localContext.Trace(
+					"GuardParentLock: proposal {0} is locked. Blocking line change.", proposalId);
+				throw new InvalidPluginExecutionException(
+					"This proposal is locked because it has been sent to the client (or closed). " +
+					"Its lines can't be changed — use Create New Version to make edits.");
+			}
+
+			localContext.Trace("GuardParentLock: proposal {0} is editable.", proposalId);
 		}
 
 		// ===== Helpers =====

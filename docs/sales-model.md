@@ -6,7 +6,7 @@
 
 **Purpose:** explain what each sales model table does, what each field does, and when each field is populated. The guide is organized around real operational flows, not tables in isolation — because no field exists in a vacuum; every field is part of a business process.
 
-**Last updated:** June 14, 2026
+**Last updated:** July 10, 2026
 
 ---
 
@@ -742,55 +742,63 @@ Instead of simply changing a Status field on the opportunity, OpenTavu creates a
 | Subject | subject (OOTB) | Single Line (Primary) | Required |
 | Activity Date | actualstart (OOTB) | Date Only | Required |
 | Description (Close Notes) | description (OOTB) | Multiple Lines | Required |
-| Close Type | tavu\_closetype | Choice (Won, Lost) | Required |
-| **Lost Reason** | **tavu\_lostreason** | **Lookup → Global Choice tavu\_global\_lostreason** | Required when Close Type \= Lost |
-| **Actual Revenue** | **tavu\_actualrevenue** | **Currency** | Required when Close Type \= Won |
-| **Actual Close Date** | **tavu\_actualclosedate** | **Date Only** | Required |
+| **Lost Reason** | **tavu\_lostreason** | **Choice → Global Choice `tavu_lostreason`** | Required on Lost |
+| **Actual Revenue** | **tavu\_actualrevenue** | **Currency** | Required on Won |
+| **Actual Close Date** | **tavu\_actualclosedate** | **DateTime** | Required |
 | Regarding | regardingobjectid (OOTB) | Lookup polymorphic → tavu\_opportunity | Required |
 | Resource | tavu\_resource | Lookup → SystemUser | Required |
 
-### 7.4 Close mechanics — Ribbon buttons
+> **Won vs Lost is the activity's own `statuscode`, not a separate field.** Won \= `576600001`, Lost \= `576600002` (both under the Completed state). There is **no `tavu_closetype` field** — an earlier draft of this guide proposed one; it was dropped as redundant with `statuscode`, and the implementation reads the outcome from `statuscode`.
 
-OpenTavu adds two custom buttons to the `tavu_opportunity` Ribbon:
+### 7.4 Close mechanics — ribbon buttons + guided dialog
 
-**"Close Won" button:**
+OpenTavu adds three commands to the `tavu_opportunity` main-form ribbon: **Closed as
+Won** and **Closed as Lost** (shown while the opportunity is Open) and **Reopen
+Opportunity** (shown while it is closed). Full build and registration detail lives
+in `docs/opportunity-close-dialog.md`.
 
-1. Opens Main Form Dialog (guided pop-up)  
-2. Pre-fills Close Type \= Won  
-3. Hides Lost Reason field (not applicable)  
-4. Shows: Actual Revenue (required), Actual Close Date (default \= today), Close Notes  
-5. On Confirm:  
-   - Creates `tavu_opportunityclose` record  
-   - Changes opportunity statecode to Won, statuscode to Won  
-   - `tavu_salesstage` is preserved as historical reference (the last stage before close)  
-   - `tavu_probability` is set to 100 by the Plugin  
-   - Plugin/Flow syncs mirrors: actualrevenue, actualclosedate, closenotes  
-   - Auto-changes Primary Contact's Engagement Status to Engaged (or flags for manual review)  
-   - Auto-marks Account or Contact `tavu_iscustomer = Yes`
+**Design: the opportunity is the source of truth.** The Won/Lost buttons open a
+guided **custom-page dialog** (`tavu_opportunityclosedialog_31702`) that captures
+the close inputs and writes them onto the opportunity in a single save; the server
+plugins then perform the derived work. The buttons do **not** create the close
+activity from the client — the plugin does.
 
-**"Close Lost" button:**
+**Closed as Won / Closed as Lost:**
 
-1. Opens Main Form Dialog  
-2. Pre-fills Close Type \= Lost  
-3. Hides Actual Revenue (not applicable)  
-4. Shows: Lost Reason (required, Global Choice dropdown), Actual Close Date, Close Notes  
-5. On Confirm:  
-   - Creates `tavu_opportunityclose` record  
-   - Changes opportunity statecode to Lost, statuscode to Lost  
-   - `tavu_salesstage` is preserved as historical reference (the last stage before close)  
-   - `tavu_probability` is set to 0 by the Plugin  
-   - Plugin/Flow syncs mirrors: lostreason, actualclosedate, closenotes  
-   - If NO other open opportunities for Primary Contact → suggests updating engagement status
+1. Opens the custom-page dialog. The outcome (won/lost) is passed via the
+   navigateTo `entityName` parameter, because dialogs drop other custom params.  
+2. Won shows Actual Revenue (prefilled from Estimated Revenue); Lost shows Lost
+   Reason. Both show Actual Close Date (default today) and Close Notes.  
+3. On confirm, the dialog `Patch`es the opportunity: `statecode = Inactive` **and**
+   `statuscode = Won/Lost` (both must be set together, or Dataverse rejects the
+   transition), plus the close fields (`tavu_actualrevenue` or `tavu_lostreason`,
+   `tavu_actualclosedate`, `tavu_closenotes`). `tavu_salesstage` is preserved as the
+   last stage before close.  
+4. `Pl.Opportunity.LifecycleTracker` (Pre-Op) validates the inputs (Won requires
+   Actual Revenue > 0; Lost requires a Lost Reason), forces `tavu_probability` to
+   100 (Won) / 0 (Lost), and defaults the close date if empty.  
+5. `Pl.Opportunity.CloseOrchestrator` (Post-Op) creates the `tavu_opportunityclose`
+   history log (created Open, then transitioned to Completed + Won/Lost, since
+   activities cannot be created in a completed state), and on Won marks the
+   commercial subject as a customer (`tavu_iscustomer = Yes`, `tavu_customersince`
+   stamped if empty) on the Account (B2B) or Contact (B2C).
+
+**Engagement status (`tavu_engagementstatus`) is deliberately NOT changed on
+close.** That communication state is owned by Module 3 (AI Activity Capture), which
+derives it from real activity rather than as a hardcoded close side effect.
 
 ### 7.5 Reopening opportunities
 
-**Option 1 — Reopen same opportunity:**
+**Option 1 — Reopen the same opportunity (Reopen Opportunity button):**
 
-- Change statecode from Lost to Open manually  
-- Create new `tavu_opportunityclose` with description "Reopened: client returned with new requirements"  
-- Opportunity timeline shows both events (close \+ reopen)
+- The button flips `statecode` back to Active and `statuscode` to Open.  
+- `Pl.Opportunity.LifecycleTracker` detects the reopen and re-applies the current
+  Sales Stage's default probability (clearing the manual flag). The close fields
+  (revenue / lost reason / close date) are preserved as history and stay read-only
+  on the form.  
+- v1 does not log a separate reopen activity.
 
-**Option 2 — Create new opportunity (recommended):**
+**Option 2 — Create new opportunity (recommended when scope changed):**
 
 - Keep Lost opportunity closed (historical data preserved)  
 - Create new opportunity linked to same Account/Contact  
@@ -1615,5 +1623,6 @@ Yes, with one restriction: a proposal uses the currency of the assigned price li
 | 1.5 | June 14, 2026 | Gustavo González Villani | Corrected `tavu_uom` schema (Section 8bis.3.1) to match the implemented environment: (1) **Replaced the `tavu_schedule` Choice with the `tavu_unitgroup` lookup** (Display name "Unit Group") → `tavu_unitofmeasureschedule`, Business required — the schedule/group is a configuration table, not an optionset, consistent with `tavu_product.tavu_defaultunitgroup`. (2) **Conversion Factor** changed Optional → Required. (3) **Added the `tavu_isbaseunit` (Yes/No) column** that explicitly flags the root UOM of each group, replacing the implicit "factor = 1" convention. (4) Updated seed data table accordingly. (5) **Added Section 8bis.3.0** documenting the `tavu_unitofmeasureschedule` (Unit groups) table, parent of `tavu_uom`. (6) **Resynced the repo copy** (`C:\Code\OpenTavu\core\docs\sales-model.md`) to this version (previously stale at v1.2). |
 | 1.6 | June 14, 2026 | Gustavo González Villani | Currency model correction for the price list (Section 8bis.3.4): (1) **Removed the custom `tavu_currency` field** from `tavu_pricelist` — replaced by the native Dataverse `transactioncurrencyid` (lookup → `transactioncurrency`), selected once at the header. (2) Documented that `transactioncurrencyid` persists on `tavu_pricelist` as a pure currency selector even with no money column on the table. (3) Specified **currency inheritance**: `tavu_pricelistitem` does not auto-inherit currency; a Pre-Operation Create/Update plugin stamps `transactioncurrencyid` from the parent list, and the currency field is not exposed on the line form. Enforces one-currency-per-list. |
 | 1.7 | July 3, 2026 | Gustavo González Villani (revision with Claude) | §8.5: framed the **AI Proposal Generator as the top roadmap priority for the proposals area** (proposal/SOW authoring is the costliest, most time-consuming step for senior consultants), with cross-reference to VISION §8, and clarified the AI-first intent (AI drafts, human reviews — not an "ask AI" button). Direction note only; no schema change. Derived from the HubSpot GTM 2026 analysis (evidence in the private triangulation §3.7). |
+| 1.8 | July 10, 2026 | Gustavo González Villani (revision with Claude) | Aligned the opportunity close mechanics with the implemented Win/Loss engine. (1) **Removed the ghost `tavu_closetype` field** from `tavu_opportunityclose` (§7.3) — Won/Lost is the activity's own `statuscode` (Won `576600001` / Lost `576600002`); corrected `tavu_lostreason` to a Choice (not lookup) and `tavu_actualclosedate` to DateTime. (2) **Rewrote §7.4** to the "opportunity is source of truth" (Arch B) flow: ribbon commands (Closed as Won / Lost / Reopen) open a custom-page dialog (`tavu_opportunityclosedialog_31702`) that Patches the opportunity's statecode+statuscode; `Pl.Opportunity.LifecycleTracker` (Pre-Op) validates and forces probability; `Pl.Opportunity.CloseOrchestrator` (Post-Op) writes the history log (created Open, then completed) and marks `tavu_iscustomer` on Won. (3) **Deferred engagement-status changes to Module 3** (removed the close-time engagement mutation). (4) **Rewrote §7.5 reopen** to the Reopen button + plugin (re-applies stage default probability; close fields preserved). Full build detail in `docs/opportunity-close-dialog.md`. |
 
 *This document is the operational reference for OpenTavu's sales model.*
