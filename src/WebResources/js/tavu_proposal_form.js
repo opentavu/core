@@ -5,6 +5,7 @@
  *
  * Ribbon commands:
  *   "Create New Version" → OpenTavu.Proposal.Form.createNewVersion
+ *   "Send to Client"     → OpenTavu.Proposal.Form.sendToClient   (show when Draft/AIGen/UnderReview)
  *   "Mark as Approved"   → OpenTavu.Proposal.Form.markApproved   (show when Sent/Awaiting)
  *   "Mark as Lost"       → OpenTavu.Proposal.Form.markRejected   (show when Sent/Awaiting)
  *      Recommended visibility (app-scoped Power Fx): show when the proposal is
@@ -15,6 +16,7 @@
  * Form event registration (designer → handler; pass execution context):
  *   OnLoad              → OpenTavu.Proposal.Form.onLoad             (visual lock when Sent/closed)
  *   OnChange statuscode → OpenTavu.Proposal.Form.onStatusReasonChange
+ *   Grid (lines) OnSave → OpenTavu.Proposal.Form.onLineGridSave     (editable grid; covers add/edit)
  *
  * Reserved for the next iteration: Approved→Won (copy total to opportunity + offer Close as Won).
  *
@@ -31,6 +33,9 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
     var CLONE_API = "tavu_CloneProposalVersion";
 
     // Proposal statuscode values that mean "locked" (sent to client / awaiting).
+    var STATUS_DRAFT = 576600001;
+    var STATUS_AI_GENERATED = 576600002;
+    var STATUS_UNDER_REVIEW = 576600003;
     var STATUS_SENT_TO_CLIENT = 576600004;
     var STATUS_AWAITING_DECISION = 576600005;
     var STATUS_APPROVED = 576600006;
@@ -38,6 +43,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
     var STATE_INACTIVE = 1; // Approved / Rejected / Superseded / Withdrawn
 
     var FIELD_STATUS_REASON = "statuscode";
+    var FIELD_SENT_DATE = "tavu_sentdate";
     var FIELD_PROPOSAL_TOTAL = "tavu_total";
     var FIELD_OPPORTUNITY = "tavu_opportunity";
     var OPP_ESTIMATED_REVENUE = "tavu_estimatedrevenue";
@@ -45,6 +51,11 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
     // Opportunity close dialog (custom page) — must match CLOSE_DIALOG_PAGE in
     // tavu_opportunity_form.js.
     var CLOSE_DIALOG_PAGE = "tavu_opportunityclosedialog_31702";
+
+    // Parent (proposal) form context, captured on load. Grid events (OnSave) expose a
+    // row/grid context whose getId() is the LINE, not the proposal — so header refreshes
+    // must use this stored parent context, not executionContext.getFormContext().
+    var _parentForm = null;
 
     var NOTIF = { CLONE: "opentavu_proposal_clone", LOCKED: "opentavu_proposal_locked" };
     var NOTIF_TRANSIENT_MS = 4000;
@@ -128,6 +139,59 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
                     notifyTransient(formContext,
                         "Couldn't create a new version: " + (error && error.message ? error.message : "unknown error"),
                         "ERROR");
+                }
+            );
+        });
+    };
+
+    /**
+     * Ribbon command — "Send to Client".
+     *
+     * Advances the proposal from an editable pre-send state (Draft / AI Generated /
+     * Under Internal Review) to Sent to Client, stamps the Sent Date, and refreshes the
+     * form so the read-only lock applies immediately. This is the deliberate "activate/
+     * lock" step, mirroring how the deal advances via buttons rather than editing the
+     * Status Reason picklist.
+     *
+     * Show only while the proposal is in a pre-send state.
+     * @param {Xrm.FormContext|Xrm.ExecutionContext} primaryControl
+     */
+    Form.sendToClient = function (primaryControl) {
+        var formContext = resolveFormContext(primaryControl);
+        if (!formContext) return;
+        if (!ensureSaved(formContext)) return;
+
+        var status = getOptionValue(formContext, FIELD_STATUS_REASON);
+        if (status !== STATUS_DRAFT && status !== STATUS_AI_GENERATED && status !== STATUS_UNDER_REVIEW) {
+            notifyTransient(formContext, "This proposal has already been sent (or closed).", "WARNING");
+            return;
+        }
+
+        var proposalId = formContext.data.entity.getId().replace(/[{}]/g, "");
+
+        Xrm.Navigation.openConfirmDialog({
+            title: "Send to Client",
+            text: "Mark this proposal as Sent to Client? Once sent, its content is locked — " +
+                  "use Create New Version to make changes."
+        }).then(function (confirm) {
+            if (!confirm.confirmed) return;
+
+            var today = new Date();
+            var sentDate = today.getFullYear() + "-" +
+                ("0" + (today.getMonth() + 1)).slice(-2) + "-" +
+                ("0" + today.getDate()).slice(-2);
+
+            var patch = {};
+            patch[FIELD_STATUS_REASON] = STATUS_SENT_TO_CLIENT;
+            patch[FIELD_SENT_DATE] = sentDate;
+
+            Xrm.WebApi.updateRecord("tavu_proposal", proposalId, patch).then(
+                function () {
+                    formContext.data.refresh(false); // reflect Sent + apply the lock
+                },
+                function (error) {
+                    console.error("[OpenTavu.Proposal.Form] sendToClient failed:", error);
+                    notifyTransient(formContext, "Couldn't send this proposal: " + msg(error), "ERROR");
                 }
             );
         });
@@ -280,6 +344,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
      */
     Form.onLoad = function (executionContext) {
         var formContext = executionContext.getFormContext();
+        _parentForm = formContext; // used by grid-event handlers (see _parentForm note)
         applyLockdown(formContext);
         wireLineSubgridRefresh(formContext);
     };
@@ -389,52 +454,87 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
     }
 
     // ============================================================
-    // Header totals auto-refresh (subgrid → header rollup)
+    // Header totals auto-refresh (subgrid row change → re-read header rollup)
     // ============================================================
+    //
+    // There is no designer event for subgrids and no first-party "row CRUD" event on
+    // the modern Power Apps grid. The supported, community-standard pattern is: wire
+    // the subgrid's addOnLoad (fires when the grid reloads), and when the row COUNT
+    // changes (add or delete), refresh the form so the plugin-computed header totals
+    // are re-read. This covers add + delete; inline value edits that don't change the
+    // count are the residual gap (a platform limitation — even D365 Sales has it).
 
     var HEADER_TOTAL_FIELDS = [
         "tavu_subtotal", "tavu_totaltax", "tavu_total", "tavu_totalcost", "tavu_grossmargin"
     ];
+    var _gridRowCount = {}; // per subgrid control name
 
-    /**
-     * Registers a refresh on every subgrid on the form (there is no designer event for
-     * subgrids — it must be wired via addOnLoad in code). A subgrid fires addOnLoad
-     * whenever it (re)loads, including after a line is added/edited/deleted, so this is
-     * the reliable "lines changed" hook. Fetches only the server-computed header totals
-     * and paints them — no full-form refresh (avoids loops and dirtying the form).
-     */
+    // Coverage combines two hooks: addOnLoad + row-count change catches add/delete (the
+    // grid reloads and the count changes), and the grid OnSave handler (onLineGridSave)
+    // catches inline add/edit. Both require the parent form context captured on load
+    // (_parentForm) — the form OnLoad handler must be registered.
     function wireLineSubgridRefresh(formContext) {
         formContext.ui.controls.forEach(function (ctrl) {
-            if (ctrl && ctrl.getControlType && ctrl.getControlType() === "subgrid" && ctrl.addOnLoad) {
-                ctrl.addOnLoad(function () { refreshHeaderTotals(formContext); });
+            if (!ctrl || !ctrl.addOnLoad || !ctrl.getControlType) return;
+            var type = ctrl.getControlType();
+            if (typeof type === "string" && type.indexOf("subgrid") >= 0) {
+                ctrl.addOnLoad(onSubgridLoad);
             }
         });
     }
 
+    function onSubgridLoad(executionContext) {
+        var grid = executionContext.getEventSource ? executionContext.getEventSource() : null;
+        if (!grid || !grid.getGrid) return;
+        var name = grid.getName ? grid.getName() : "subgrid";
+        var count = grid.getGrid().getTotalRecordCount();
+        if (_gridRowCount[name] === undefined) { _gridRowCount[name] = count; return; }
+        if (_gridRowCount[name] !== count) {
+            _gridRowCount[name] = count;
+            refreshHeaderTotals(_parentForm); // use the stored parent form, not the grid context
+        }
+    }
+
+    /**
+     * Grid OnSave handler — WIRE THIS on the EDITABLE grid's OnSave event.
+     * Reliably covers inline add and inline edit. OnSave fires BEFORE the row commits
+     * server-side, so the read is deferred to let the line save and the synchronous
+     * Calculator plugin recompute the header totals first.
+     * @param {Xrm.ExecutionContext} executionContext
+     */
+    Form.onLineGridSave = function (executionContext) {
+        // Use the stored parent form — the grid OnSave context's getId() is the line.
+        if (!_parentForm) return;
+        // OnSave fires BEFORE the row commits, so a single delayed read can catch the
+        // pre-commit (stale) total. Re-read twice; the later pass reflects the commit +
+        // the synchronous Calculator rollup.
+        setTimeout(function () { refreshHeaderTotals(_parentForm); }, 1500);
+        setTimeout(function () { refreshHeaderTotals(_parentForm); }, 3500);
+    };
+
+    /**
+     * Lightweight re-read of the 5 plugin-computed totals and paint them on the form.
+     * No full-form refresh (so no "Save & Continue" dialog and no lost form state);
+     * setSubmitMode "never" because these are server-computed.
+     */
     function refreshHeaderTotals(formContext) {
         var rawId = formContext.data.entity.getId();
-        if (!rawId) return; // unsaved record has no server totals yet
+        if (!rawId) return;
         var id = rawId.replace(/[{}]/g, "");
-
         Xrm.WebApi.retrieveRecord("tavu_proposal", id,
             "?$select=" + HEADER_TOTAL_FIELDS.join(",")).then(
             function (record) {
                 HEADER_TOTAL_FIELDS.forEach(function (name) {
-                    setComputed(formContext, name, record[name]);
+                    var attr = formContext.getAttribute(name);
+                    if (!attr) return;
+                    attr.setValue(record[name] === undefined ? null : record[name]);
+                    attr.setSubmitMode("never");
                 });
             },
             function (error) {
                 console.warn("[OpenTavu.Proposal.Form] header totals refresh failed:", error);
             }
         );
-    }
-
-    /** Paints a server-computed value onto a form field without marking it for save. */
-    function setComputed(formContext, name, value) {
-        var attr = formContext.getAttribute(name);
-        if (!attr) return;
-        attr.setValue((value === undefined) ? null : value);
-        attr.setSubmitMode("never"); // display only — these are plugin-computed on the server
     }
 
 })(OpenTavu.Proposal.Form);
