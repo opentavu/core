@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Opening Company Profile…</title>
+  <style>
+    body { font-family: "Segoe UI", sans-serif; color: #444; padding: 24px; }
+    a { color: #5b2d8e; }
+  </style>
+</head>
+<body>
+  <div id="msg">Opening Company Profile…</div>
+  <script>
+    (function () {
+      // Confirm EntitySetName at:
+      //   <orgUrl>/api/data/v9.2/EntityDefinitions(LogicalName='tavu_companyprofile')?$select=EntitySetName
+      var ENTITY_SET = "tavu_companyprofiles";
+      var ENTITY_LOGICAL = "tavu_companyprofile";
+      var ID_FIELD = "tavu_companyprofileid";
+
+      var orgUrl = window.location.origin;
+
+      // Reach the client API without using location navigation (sandbox-safe).
+      function getXrm() {
+        try { if (typeof Xrm !== "undefined" && Xrm.Navigation) return Xrm; } catch (e) {}
+        try { if (window.parent && window.parent.Xrm && window.parent.Xrm.Navigation) return window.parent.Xrm; } catch (e) {}
+        try { if (window.top && window.top.Xrm && window.top.Xrm.Navigation) return window.top.Xrm; } catch (e) {}
+        return null;
+      }
+
+      function getAppId() {
+        var s = "";
+        try { s = window.top.location.search; } catch (e) {}
+        if (!s) { try { s = window.parent.location.search; } catch (e) {} }
+        if (!s) { s = window.location.search; }
+        return new URLSearchParams(s).get("appid") || "";
+      }
+
+      function fallbackLink(id) {
+        // Last resort: a user-clickable link (top navigation by user gesture is allowed).
+        var appId = getAppId();
+        var url = orgUrl + "/main.aspx?" + (appId ? "appid=" + appId + "&" : "")
+                + "pagetype=entityrecord&etn=" + ENTITY_LOGICAL + (id ? "&id=" + id : "");
+        document.getElementById("msg").innerHTML =
+          '<a href="' + url + '" target="_top">Open Company Profile</a>';
+      }
+
+      var api = orgUrl + "/api/data/v9.2/" + ENTITY_SET + "?$select=" + ID_FIELD + "&$top=1";
+
+      fetch(api, {
+        headers: { "Accept": "application/json", "OData-Version": "4.0", "OData-MaxVersion": "4.0" },
+        credentials: "include"
+      })
+      .then(function (r) { return r.json(); })
+      .then(function (data) {
+        var id = (data && data.value && data.value.length > 0) ? data.value[0][ID_FIELD] : null;
+        var x = getXrm();
+        if (x) {
+          var pageInput = { pageType: "entityrecord", entityName: ENTITY_LOGICAL };
+          if (id) { pageInput.entityId = id; }   // exists -> edit; no id -> new form
+          x.Navigation.navigateTo(pageInput, { target: 1 })
+            .then(null, function () { fallbackLink(id); });
+        } else {
+          fallbackLink(id);
+        }
+      })
+      .catch(function (e) {
+        document.getElementById("msg").innerText = "Error opening Company Profile: " + e;
+      });
+    })();
+  </script>
+</body>
+</html>

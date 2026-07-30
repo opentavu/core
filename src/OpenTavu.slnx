@@ -5,9 +5,11 @@
     <Project Path="Plugins/Pl.Case.CustomerSync/Pl.Case.CustomerSync.csproj" />
     <Project Path="Plugins/Pl.Case.SlaAssignment/Pl.Case.SlaAssignment.csproj" />
     <Project Path="Plugins/Pl.CaseInteraction.CaseSync/Pl.CaseInteraction.CaseSync.csproj" />
+    <Project Path="Plugins/Pl.CompanyProfile.SingleRecordGuard/Pl.CompanyProfile.SingleRecordGuard.csproj" />
     <Project Path="Plugins/Pl.Opportunity.CloseOrchestrator/Pl.Opportunity.CloseOrchestrator.csproj" />
     <Project Path="Plugins/Pl.Opportunity.CustomerSync/Pl.Opportunity.CustomerSync.csproj" />
     <Project Path="Plugins/Pl.Opportunity.LifecycleTracker/Pl.Opportunity.LifecycleTracker.csproj" Id="988e38d4-30a1-4a89-b4ba-90d6c41b2ca8" />
+    <Project Path="Plugins/Pl.Proposal.BuildEmailDraft/Pl.Proposal.BuildEmailDraft.csproj" />
     <Project Path="Plugins/Pl.Proposal.CloneVersion/Pl.Proposal.CloneVersion.csproj" />
     <Project Path="Plugins/Pl.Proposal.LifecycleTracker/Pl.Proposal.LifecycleTracker.csproj" />
     <Project Path="Plugins/Pl.ProposalLine.Calculator/Pl.ProposalLine.Calculator.csproj" />

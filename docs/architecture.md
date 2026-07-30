@@ -25,15 +25,22 @@ Only `C:\Code\OpenTavu\core` ships to GitHub / clients. The Azure layer is a sep
 
 Deployed into the client's Dataverse (Power Apps Premium, no Dynamics 365 license). Current components:
 
-- **Tables:** `account`/`contact` (standard, extended) + custom `tavu_lead`, `tavu_opportunity`, `tavu_proposal`, `tavu_case`, and configuration tables (`tavu_casetype`, `tavu_customertierdefinition`, `tavu_sla`, `tavu_businessline`/`tavu_category`/`tavu_subcategory`, `tavu_businesscalendar`/`tavu_calendarworkinghours`/`tavu_businessclosure`, `tavu_systemsettings`, product/pricing tables). See `service-model.md` and `sales-model.md`.
+- **Tables:** `account`/`contact` (standard, extended) + custom `tavu_lead`, `tavu_opportunity`, `tavu_proposal`, `tavu_case`, and configuration tables (`tavu_casetype`, `tavu_customertierdefinition`, `tavu_sla`, `tavu_businessline`/`tavu_category`/`tavu_subcategory`, `tavu_businesscalendar`/`tavu_calendarworkinghours`/`tavu_businessclosure`, `tavu_systemsettings`, product/pricing tables). See `service-model.md` and `sales-model.md`. Human-readable record IDs use the autonumber standard `OTC/OTO/OTP-{DATETIMEUTC:yyyy}-{SEQNUM:5}` on Case / Opportunity / Proposal.
 - **Plugins** (C#, sandbox, signed with `_Shared/Common/OpenTavu.snk`):
   - `Pl.Case.Categorize` — Module 1 Smart Case Categorization (async, Create of `tavu_case`); routes AI through the gateway via `GatewayProvider`.
   - `Pl.Case.SlaAssignment` — Pre-Op computes SLA target dates (calendar-aware, from `createdon`); async Post-Op calls the gateway to schedule the Warning/Breach durable timers and stores `tavu_slaorchestrationid`.
   - `Pl.Case.CustomerSync` — mirrors the polymorphic `tavu_customer` to typed `tavu_account`/`tavu_contact` (so Quick View forms load) + sets `tavu_primarycontact` for B2C; validates Customer Mode. Case-side twin of `Pl.Opportunity.CustomerSync`.
   - `Pl.SystemSettings.SingleRecordGuard` — enforces the settings singleton.
-  - Existing: `Pl.Opportunity.LifecycleTracker`, `Pl.Opportunity.CustomerSync`, `Pl.ProposalLine.Calculator`.
+  - `Pl.Opportunity.LifecycleTracker` — lifecycle fields (stage-change date, stage probability default) + close/reopen probability and close-input validation.
+  - `Pl.Opportunity.CustomerSync` — polymorphic `tavu_customer` → typed lookups + Customer Mode validation.
+  - `Pl.Opportunity.CloseOrchestrator` — Post-Op on close: writes the `tavu_opportunityclose` history log and marks `tavu_iscustomer` on Won. See `opportunity-close-dialog.md`.
+  - `Pl.ProposalLine.Calculator` — line money fields + header rollup totals + parent-lock guard.
+  - `Pl.Proposal.LifecycleTracker` — version default, transition guard, lock, one Approved per opportunity. See `proposal-lifecycle.md`.
+  - `Pl.Proposal.CloneVersion` — implements the `tavu_CloneProposalVersion` Custom API (Create New Version).
+- **Custom APIs:** `tavu_CloneProposalVersion` (Global action; clones a proposal into a new draft version, supersedes the source; implemented by `Pl.Proposal.CloneVersion`).
 - **PCF controls (React + Fluent v9):** `AiAssessment` (case AI panel), `SlaCountdown` (live SLA countdown bar; placed on Response and Resolution target dates).
-- **Web resources:** `tavu_systemsettings_open.html` (opens the settings singleton directly).
+- **Custom pages:** `tavu_opportunityclosedialog` — guided Close as Won/Lost dialog for the opportunity.
+- **Web resources:** `tavu_systemsettings_open.html` (settings singleton); form scripts `tavu_opportunity_form.js` (Customer Mode filter/mirror, lifecycle UI, close/reopen), `tavu_proposal_form.js` (lifecycle buttons, visual lock, header totals auto-refresh), plus `tavu_account_form.js`, `tavu_contact_form.js`, `tavu_product_form.js`, `tavu_proposalline_form.js`.
 - **Shared code** (linked, not a DLL): `_Shared/Common` (PluginBase, LocalPluginContext) and `_Shared/AI` (`IAIProvider`, `AzureOpenAIProvider`, `OpenAIProvider`, `GatewayProvider`, `AIProviderFactory`, `AIConfigResolver`).
 
 ---
@@ -127,6 +134,7 @@ Azure Functions **Consumption** plan: 1M executions + 400,000 GB-s free/month �
 
 | Version | Date | Author | Notes |
 |---|---|---|---|
+| 1.2 | July 10, 2026 | Gustavo González Villani (with Claude) | Synced the client-layer inventory to the implemented sales cycle. Added plugins `Pl.Opportunity.CloseOrchestrator`, `Pl.Proposal.LifecycleTracker`, `Pl.Proposal.CloneVersion` (and expanded the LifecycleTracker/Calculator descriptions). Added the `tavu_CloneProposalVersion` Custom API, the `tavu_opportunityclosedialog` custom page, and the opportunity/proposal form web resources. Documented the `OTC/OTO/OTP-{yyyy}-{seqnum:5}` autonumber standard. Detail in `opportunity-close-dialog.md` and `proposal-lifecycle.md`. |
 | 1.1 | July 3, 2026 | Gustavo González Villani (with Claude) | Synced to the **live** deployment: gateway deployed (`opentavu-gateway`, Central US) + KeepWarm; AI now routed through the gateway via `GatewayProvider` (AI key removed from the client tenant); endpoints Anonymous + `X-OpenTavu-Tenant-Key`; wiring via `tavu_GatewayUrl`/`tavu_GatewayKey` env vars. Added `Pl.Case.CustomerSync` and the async SLA-scheduling step of `Pl.Case.SlaAssignment` (`tavu_slaorchestrationid`); `SlaCountdown` dual bars. Updated status/roadmap (case-lifecycle closure pending research; prompt/model-routing migration and auth hardening pending). Region note: Central US (East US had 0 vCPU quota). |
 | 1.0 | July 1, 2026 | Gustavo González Villani (with Claude) | Initial platform architecture: two-layer multi-tenant model (client managed solution + central OpenTavu Azure Function App = AI Gateway + SLA Scheduler); multi-tenant Entra auth + S2S; client/gateway config split; Module 1 and SLA flows; regions/billing/data residency; per-client onboarding; cost; runtime (C#/.NET isolated, Durable Functions). |
 

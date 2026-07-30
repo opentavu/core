@@ -31,6 +31,9 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 (function (Form) {
 
     var CLONE_API = "tavu_CloneProposalVersion";
+    var BUILD_EMAIL_API = "tavu_BuildProposalEmailDraft";
+    var SETTINGS_ENTITY = "tavu_systemsettings";
+    var SETTINGS_TOGGLE = "tavu_proposalemaildraftenabled";
 
     // Proposal statuscode values that mean "locked" (sent to client / awaiting).
     var STATUS_DRAFT = 576600001;
@@ -162,7 +165,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
         if (!ensureSaved(formContext)) return;
 
         var status = getOptionValue(formContext, FIELD_STATUS_REASON);
-        if (status !== STATUS_DRAFT && status !== STATUS_AI_GENERATED && status !== STATUS_UNDER_REVIEW) {
+        if (status !== STATUS_DRAFT && status !== STATUS_AI_GENERATED) {
             notifyTransient(formContext, "This proposal has already been sent (or closed).", "WARNING");
             return;
         }
@@ -187,7 +190,13 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 
             Xrm.WebApi.updateRecord("tavu_proposal", proposalId, patch).then(
                 function () {
-                    formContext.data.refresh(false); // reflect Sent + apply the lock
+                    // Reflect Sent from the server, then RE-APPLY the visual lock explicitly:
+                    // data.refresh() does not re-run the OnLoad lock handler on its own.
+                    formContext.data.refresh(false).then(
+                        function () { applyLockdown(formContext); },
+                        function () { applyLockdown(formContext); }
+                    );
+                    maybeBuildEmailDraft(formContext, proposalId); // toggle-gated: prepare the client email draft
                 },
                 function (error) {
                     console.error("[OpenTavu.Proposal.Form] sendToClient failed:", error);
@@ -215,7 +224,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
         if (!ensureSaved(formContext)) return;
 
         var status = getOptionValue(formContext, FIELD_STATUS_REASON);
-        if (status !== STATUS_SENT_TO_CLIENT && status !== STATUS_AWAITING_DECISION) {
+        if (status !== STATUS_SENT_TO_CLIENT) {
             notifyTransient(formContext,
                 "Only a proposal that has been sent to the client can be approved.", "WARNING");
             return;
@@ -261,7 +270,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
         if (!ensureSaved(formContext)) return;
 
         var status = getOptionValue(formContext, FIELD_STATUS_REASON);
-        if (status !== STATUS_SENT_TO_CLIENT && status !== STATUS_AWAITING_DECISION) {
+        if (status !== STATUS_SENT_TO_CLIENT) {
             notifyTransient(formContext,
                 "Only a proposal that has been sent to the client can be rejected.", "WARNING");
             return;
@@ -336,18 +345,76 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 
     /**
      * OnLoad — applies the visual lock: when the proposal is Sent to the client or
-     * closed, the whole form is made read-only EXCEPT the Status Reason (so the deal
-     * can still advance Sent -> Awaiting -> Approved/Rejected). Mirrors the server-side
-     * lock (Pl.Proposal.LifecycleTracker), so the user never edits a commercial field
-     * only to hit a save error.
+     * closed, the whole form is made read-only (including Status Reason — the lifecycle
+     * advances via the ribbon buttons, not by editing the picklist). Mirrors the
+     * server-side lock (Pl.Proposal.LifecycleTracker), so the user never edits a
+     * commercial field only to hit a save error.
      * @param {Xrm.ExecutionContext} executionContext
      */
     Form.onLoad = function (executionContext) {
         var formContext = executionContext.getFormContext();
         _parentForm = formContext; // used by grid-event handlers (see _parentForm note)
+        prefillFromOpportunity(formContext);
         applyLockdown(formContext);
         wireLineSubgridRefresh(formContext);
     };
+
+    /**
+     * On a NEW proposal opened from an opportunity (main form, create mode with the
+     * Opportunity lookup already set), pre-fills the suggested Name and the inherited
+     * customer context (customer / account / contact / discovery notes) so the consultant
+     * sees them immediately instead of blank fields. Fill-if-empty only: anything the user
+     * already changed is left untouched. The server-side handler
+     * (Pl.Proposal.LifecycleTracker Create) is the backstop for paths that skip the form.
+     */
+    function prefillFromOpportunity(formContext) {
+        if (formContext.ui.getFormType() !== 1) return; // 1 = Create
+        var oppRef = getLookup(formContext, FIELD_OPPORTUNITY);
+        if (!oppRef) return; // standalone proposal — nothing to inherit
+        var oppId = oppRef.id.replace(/[{}]/g, "");
+
+        Xrm.WebApi.retrieveRecord("tavu_opportunity", oppId,
+            "?$select=tavu_topic,tavu_discoverynotes,_tavu_customer_value,_tavu_account_value,_tavu_contact_value").then(
+            function (opp) {
+                setIfEmptyText(formContext, "tavu_name",
+                    opp.tavu_topic ? (opp.tavu_topic + " — Proposal v1") : null);
+                setIfEmptyText(formContext, "tavu_discoverynotes", opp.tavu_discoverynotes);
+                setIfEmptyLookup(formContext, "tavu_customer",
+                    opp["_tavu_customer_value"],
+                    opp["_tavu_customer_value@Microsoft.Dynamics.CRM.lookuplogicalname"],
+                    opp["_tavu_customer_value@OData.Community.Display.V1.FormattedValue"]);
+                setIfEmptyLookup(formContext, "tavu_account",
+                    opp["_tavu_account_value"], "account",
+                    opp["_tavu_account_value@OData.Community.Display.V1.FormattedValue"]);
+                setIfEmptyLookup(formContext, "tavu_contact",
+                    opp["_tavu_contact_value"], "contact",
+                    opp["_tavu_contact_value@OData.Community.Display.V1.FormattedValue"]);
+            },
+            function (error) {
+                console.warn("[OpenTavu.Proposal.Form] prefillFromOpportunity failed:", msg(error));
+            }
+        );
+    }
+
+    /** Sets a text attribute only when it is currently empty (respects a user-entered value). */
+    function setIfEmptyText(formContext, name, value) {
+        if (!value) return;
+        var attr = formContext.getAttribute(name);
+        if (!attr) return;
+        var cur = attr.getValue();
+        if (cur !== null && cur !== undefined && String(cur).trim() !== "") return;
+        attr.setValue(value);
+    }
+
+    /** Sets a lookup attribute only when it is currently empty (respects a user-chosen value). */
+    function setIfEmptyLookup(formContext, name, id, entityType, display) {
+        if (!id || !entityType) return;
+        var attr = formContext.getAttribute(name);
+        if (!attr) return;
+        var cur = attr.getValue();
+        if (cur && cur.length) return;
+        attr.setValue([{ id: id.replace(/[{}]/g, ""), entityType: entityType, name: display || "" }]);
+    }
 
     /**
      * OnChange of Status Reason — re-applies the lock so the UI locks immediately when
@@ -415,7 +482,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 
     /**
      * When the proposal is locked (Sent / Awaiting Decision / closed), disables every
-     * control except Status Reason and shows an explanatory banner. Disable-only: when
+     * control (including Status Reason) and shows an explanatory banner. Disable-only: when
      * the proposal is still editable it leaves the form's designer settings untouched,
      * so always-read-only fields (Proposal Number, totals, inherited Customer) stay as
      * configured.
@@ -427,9 +494,8 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 
         formContext.ui.controls.forEach(function (ctrl) {
             if (!ctrl || !ctrl.setDisabled) return;
-            var name = ctrl.getName ? ctrl.getName() : null;
-            // Status Reason stays editable so the deal can still advance.
-            if (name === FIELD_STATUS_REASON) { ctrl.setDisabled(false); return; }
+            // Lock everything, including Status Reason: the lifecycle advances only via the
+            // ribbon buttons (Send / Approve / Lost / New Version), never by editing the picklist.
             ctrl.setDisabled(true);
         });
 
@@ -443,7 +509,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
     function isLocked(formContext) {
         if (getOptionValue(formContext, "statecode") === STATE_INACTIVE) return true;
         var status = getOptionValue(formContext, FIELD_STATUS_REASON);
-        return status === STATUS_SENT_TO_CLIENT || status === STATUS_AWAITING_DECISION;
+        return status === STATUS_SENT_TO_CLIENT;
     }
 
     function getOptionValue(formContext, name) {
@@ -451,6 +517,91 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
         if (!attr) return null;
         var v = attr.getValue();
         return (v === null || v === undefined) ? null : v;
+    }
+
+    // ============================================================
+    // Send-to-Client email draft (via the tavu_BuildProposalEmailDraft Custom API)
+    // ============================================================
+
+    /**
+     * After the proposal is marked Sent, if the System Settings toggle
+     * tavu_proposalemaildraftenabled is on (default on), build the client email draft
+     * (AI body + branded PDF) via the Custom API and open it in the OOB email form for the
+     * seller to review and send. Best-effort: never blocks the send.
+     */
+    function maybeBuildEmailDraft(formContext, proposalId) {
+        Xrm.WebApi.retrieveMultipleRecords(SETTINGS_ENTITY, "?$select=" + SETTINGS_TOGGLE + "&$top=1").then(
+            function (result) {
+                var on = true; // default ON when there is no settings row or the field is unset
+                if (result.entities && result.entities.length > 0) {
+                    on = result.entities[0][SETTINGS_TOGGLE] !== false;
+                }
+                if (on) buildEmailDraft(formContext, proposalId);
+            },
+            function () { buildEmailDraft(formContext, proposalId); } // settings unreadable -> default ON
+        );
+    }
+
+    /**
+     * Calls tavu_BuildProposalEmailDraft and opens the returned draft email in a modal
+     * DIALOG (target 2) so the seller reviews/sends without leaving the proposal. When the
+     * dialog closes, the proposal is refreshed so the new email shows in its timeline.
+     */
+    function buildEmailDraft(formContext, proposalId) {
+        Xrm.Utility.showProgressIndicator("Preparing email draft…");
+
+        var request = {
+            ProposalId: proposalId,
+            getMetadata: function () {
+                return {
+                    boundParameter: null,
+                    parameterTypes: { ProposalId: { typeName: "Edm.String", structuralProperty: 1 } },
+                    operationType: 0, // 0 = Action
+                    operationName: BUILD_EMAIL_API
+                };
+            }
+        };
+
+        Xrm.WebApi.online.execute(request).then(
+            function (response) {
+                if (!response.ok) throw new Error("Custom API returned status " + response.status);
+                return response.json();
+            }
+        ).then(
+            function (result) {
+                Xrm.Utility.closeProgressIndicator();
+                var emailId = result && result.EmailId;
+                if (!emailId) return;
+
+                // Whether the seller sends or just closes the dialog, refresh the proposal and
+                // re-apply the lock (so the Sent state + read-only fields always show on return).
+                var relock = function () {
+                    if (!formContext) return;
+                    formContext.data.refresh(false).then(
+                        function () { applyLockdown(formContext); },
+                        function () { applyLockdown(formContext); }
+                    );
+                };
+
+                Xrm.Navigation.navigateTo(
+                    { pageType: "entityrecord", entityName: "email", entityId: emailId.replace(/[{}]/g, "") },
+                    {
+                        target: 2, position: 1,
+                        width: { value: 70, unit: "%" },
+                        height: { value: 80, unit: "%" },
+                        title: "Review & Send"
+                    }
+                ).then(relock, relock);
+            },
+            function (error) {
+                Xrm.Utility.closeProgressIndicator();
+                console.error("[OpenTavu.Proposal.Form] buildEmailDraft failed:", error);
+                Xrm.Navigation.openErrorDialog({
+                    message: "The proposal was sent, but the email draft couldn't be prepared: " +
+                        (error && error.message ? error.message : "unknown error")
+                });
+            }
+        );
     }
 
     // ============================================================

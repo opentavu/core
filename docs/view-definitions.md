@@ -144,41 +144,41 @@ Same columns as Active Leads. This is the daily triage queue — the sales rep's
 
 #### Active Opportunities view (Open)
 
-*Filter: `statecode = Open`* *Sort: `tavu_customertier` ascending (Strategic first), then `tavu_estimatedclosedate` ascending*
+*Filter: `statecode = Active`* *Sort: `tavu_customertier` ascending (Strategic first), then `tavu_estimatedclosedate` ascending*
 
 | \# | Column | Field | Why |
 | :---- | :---- | :---- | :---- |
 | 1 | **Topic** | `tavu_topic` | Deal name — what is this opportunity |
 | 2 | **Customer** | `tavu_customer` | Account or Contact — who is the client (polymorphic) |
 | 3 | **Customer Tier** | `tavu_customertier` | Denormalized from Account/Contact — Strategic deals surface first |
-| 4 | **Status Reason** | `statuscode` | Discovery / Proposal Drafted / Proposal Sent / Negotiation |
-| 5 | **Est. Revenue** | `tavu_estimatedvalue` | Deal size — drives prioritization |
+| 4 | **Sales Stage** | `tavu_salesstage` | Per-firm pipeline stage (Discovery / Proposal Drafted / Proposal Sent / Negotiation …), from the `tavu_salesstage` config table |
+| 5 | **Est. Revenue** | `tavu_estimatedrevenue` | Deal size — drives prioritization |
 | 6 | **Est. Close Date** | `tavu_estimatedclosedate` | Urgency signal |
 | 7 | **Owner** | `ownerid` | Who is working this deal |
 
-**Notes:** This view answers the Sales Manager's question "what is our pipeline today?" in one glance. The dual sort (tier first, then close date) ensures Strategic deals near-closing surface above Standard deals also near-closing. Probability is intentionally omitted from the default view because in early-stage SMBs it tends to be unreliable; it lives on the form for those who use it.
+**Notes:** This view answers the Sales Manager's "what is our pipeline today?" in one glance. `statecode = Active` means Open (statuscode is only Open/Won/Lost; the granular pipeline stage lives in `tavu_salesstage`). The dual sort (tier first, then close date) surfaces Strategic near-closing deals first. Probability is omitted from the default view (unreliable in early-stage SMBs); it lives on the form.
 
-**Recommended secondary view — My Open Opportunities:** *Filter: `statecode = Open` AND `ownerid = current user`* *Sort: `tavu_estimatedclosedate` ascending*
+**Recommended secondary view — My Open Opportunities:** *Filter: `statecode = Active` AND `ownerid = current user`* *Sort: `tavu_estimatedclosedate` ascending*
 
 Same columns minus `ownerid`. The seller's personal pipeline.
 
-**Recommended secondary view — Pipeline by Engagement Type:** *Filter: `statecode = Open`* *Sort: `tavu_engagementtype` ascending, then `tavu_estimatedvalue` descending*
+**Recommended secondary view — Pipeline by Sales Stage:** *Filter: `statecode = Active`* *Sort: `tavu_salesstage` ascending (by display order), then `tavu_estimatedrevenue` descending*
 
 | \# | Column | Field | Why |
 | :---- | :---- | :---- | :---- |
 | 1 | **Topic** | `tavu_topic` |  |
 | 2 | **Customer** | `tavu_customer` |  |
-| 3 | **Engagement Type** | `tavu_engagementtype` | One-time Project / Retainer / Ongoing / T\&M |
-| 4 | **Est. Revenue** | `tavu_estimatedvalue` |  |
-| 5 | **Probability** | `tavu_probability` | For weighted forecasting |
-| 6 | **Status Reason** | `statuscode` |  |
+| 3 | **Sales Stage** | `tavu_salesstage` | Group/sort by stage for a funnel-style read |
+| 4 | **Est. Revenue** | `tavu_estimatedrevenue` |  |
+| 5 | **Probability** | `tavu_probability` | For weighted forecasting (defaulted per stage) |
+| 6 | **Est. Close Date** | `tavu_estimatedclosedate` |  |
 | 7 | **Owner** | `ownerid` |  |
 
-This view supports forecast reporting: Retainer revenue is recurring; Project revenue is one-time. Differentiating these matters for cash flow planning at SMB scale.
+Supports forecast reporting by stage and its Forecast Category (Pipeline / Best Case / Committed) configured on `tavu_salesstage`.
 
 #### Won Opportunities view
 
-*Filter: `statecode = Won`* *Sort: `tavu_actualclosedate` descending*
+*Filter: `statecode = Inactive` AND `statuscode = Won`* *Sort: `tavu_actualclosedate` descending*
 
 | \# | Column | Field | Why |
 | :---- | :---- | :---- | :---- |
@@ -186,21 +186,21 @@ This view supports forecast reporting: Retainer revenue is recurring; Project re
 | 2 | **Customer** | `tavu_customer` |  |
 | 3 | **Actual Revenue** | `tavu_actualrevenue` | What we actually closed — not estimate (mirror field) |
 | 4 | **Customer Tier** | `tavu_customertier` | Which tier are wins coming from |
-| 5 | **Engagement Type** | `tavu_engagementtype` | Project / Retainer / Ongoing / T\&M — what types win |
+| 5 | **Sales Stage** | `tavu_salesstage` | Last stage before close (historical reference) |
 | 6 | **Actual Close Date** | `tavu_actualclosedate` | When it closed |
 | 7 | **Owner** | `ownerid` |  |
 
 #### Lost Opportunities view
 
-*Filter: `statecode = Lost`* *Sort: `tavu_actualclosedate` descending*
+*Filter: `statecode = Inactive` AND `statuscode = Lost`* *Sort: `tavu_actualclosedate` descending*
 
 | \# | Column | Field | Why |
 | :---- | :---- | :---- | :---- |
 | 1 | **Topic** | `tavu_topic` |  |
 | 2 | **Customer** | `tavu_customer` |  |
 | 3 | **Lost Reason** | `tavu_lostreason` | Price / Competitor / Timing / No Decision — why we lost (mirror field) |
-| 4 | **Est. Revenue** | `tavu_estimatedvalue` | How much value was lost |
-| 5 | **Engagement Type** | `tavu_engagementtype` | Which types lose more |
+| 4 | **Est. Revenue** | `tavu_estimatedrevenue` | How much value was lost |
+| 5 | **Sales Stage** | `tavu_salesstage` | Stage reached before losing |
 | 6 | **Actual Close Date** | `tavu_actualclosedate` |  |
 | 7 | **Owner** | `ownerid` |  |
 
@@ -239,10 +239,10 @@ This view supports forecast reporting: Retainer revenue is recurring; Project re
 | \# | Column | Field | Why |
 | :---- | :---- | :---- | :---- |
 | 1 | **Name** | `tavu_name` | Proposal name \+ version |
-| 2 | **Opportunity** | `tavu_opportunityid` | Which deal this belongs to |
-| 3 | **Customer** | `tavu_customerid` | Account or Contact (inherited from opportunity) |
+| 2 | **Opportunity** | `tavu_opportunity` | Which deal this belongs to |
+| 3 | **Customer** | `tavu_customer` | Account or Contact (inherited from opportunity) |
 | 4 | **Status Reason** | `statuscode` | Draft / AI Generated — Awaiting Review / Under Internal Review / Sent to Client / Awaiting Decision |
-| 5 | **Document Type** | `tavu_documenttype` | SOW / Proposal / Contract / Estimate / Change Order |
+| 5 | **Version** | `tavu_version` | Current iteration (v1, v2 …) |
 | 6 | **Total** | `tavu_total` | Full value including tax (rollup from lines) |
 | 7 | **Expected Decision** | `tavu_expecteddecisiondate` | When client should decide — drives follow-up |
 
@@ -255,10 +255,10 @@ This view supports forecast reporting: Retainer revenue is recurring; Project re
 | \# | Column | Field | Why |
 | :---- | :---- | :---- | :---- |
 | 1 | **Name** | `tavu_name` |  |
-| 2 | **Opportunity** | `tavu_opportunityid` |  |
-| 3 | **Customer** | `tavu_customerid` |  |
+| 2 | **Opportunity** | `tavu_opportunity` |  |
+| 3 | **Customer** | `tavu_customer` |  |
 | 4 | **Status Reason** | `statuscode` | Approved by Client / Rejected by Client / Superseded / Withdrawn — outcome |
-| 5 | **Document Type** | `tavu_documenttype` |  |
+| 5 | **Version** | `tavu_version` |  |
 | 6 | **Total** | `tavu_total` | How much was this worth |
 | 7 | **Sent Date** | `tavu_sentdate` | When it was sent — historical context |
 
@@ -830,6 +830,7 @@ Native model-driven app conditional formatting is limited; the following are sug
 | 1.0 | May 14, 2026 | Gustavo González Villani | Initial view definitions for 15 tables. Covers Active \+ Inactive views per table, supplementary views for Opportunity and Case, field-by-field rationale, sort order, filters, Field Security reminders, and implementation priority order. |
 | 1.1 | May 14, 2026 | Gustavo González Villani (revision with Claude Opus 4.7) | Reconciliation pass against sales-model.md and service-model.md. **Added missing tables**: Opportunity Close (activity), Time Entry (activity), Knowledge Article, System Settings, Business Line / Category / Subcategory. **Added fields per actual schema**: Engagement Type and Customer Tier (denormalized) in Active Opportunities; Email in Active Contacts (highest-frequency action from contact list); AI Summary alternative view for Active Cases; My Open Opportunities personal pipeline view; Pipeline by Engagement Type for forecast support; Status Reason renamed consistently (vs "Status"). **Refined sort logic**: Active Opportunities sorts by Customer Tier first, then close date (surfaces Strategic+near-closing first); Active Leads sorts by statuscode first (Manual Review at top), then `tavu_daysinbuffer`; Active Proposals sorts by statuscode first to surface "Awaiting Decision" before "Draft". **Corrected statecode references**: Opportunity uses Open/Won/Lost (not Active/Inactive — per Dataverse pattern); Case uses Active/Resolved/Cancelled [later corrected to Active/Inactive in v1.3]. **Added conditional formatting recommendations table**. **Added priority items 13–15** to the build order for completeness. Reorganized table numbering (now 21 tables) to reflect full schema. Field Security note expanded to clarify view-definition implications. |
 | 1.2 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Case views refined during Module 1 / AI Assessment PCF implementation. **Active Cases**: added `ownerid` (manager visibility) and `tavu_resolutiontargetdate` (second SLA deadline) → 9 columns, a deliberate exception to the 7-column guideline justified by this being the team's operational hub. **My Open Cases**: same as Active Cases minus Owner. **Needs Review — Cases**: reworked toward its real purpose (validating the AI's categorization) — added `tavu_subcategory`, removed Owner / SLA Status / target-date columns because cases at `Manual Review Required` are pre-assignment and have no SLA yet; final set = Title, Customer, Subcategory, AI Confidence, AI Summary, AI Sentiment, Multi-Intent, Created On. **Clarification recorded**: `tavu_type` drives SLA matching (Tier + Type) and queue routing, while the Business Line / Category / Subcategory cascade is the per-firm topical taxonomy produced by Module 1 — two different axes; the cascade belongs in review and reporting views, not the urgency-focused triage list. |
+| 1.4 | July 10, 2026 | Gustavo González Villani (revision with Claude) | **Sales views synced to the implemented schema/lifecycle.** Proposals (§6): replaced the non-existent `tavu_documenttype` with **`tavu_version`** (v1, v2 …) in Active/Inactive Proposals; fixed lookup names `tavu_opportunityid` → `tavu_opportunity`, `tavu_customerid` → `tavu_customer`. Opportunities (§4): caught up to the v1.4 sales-model refactor — replaced the `statuscode`-as-stages column and the removed `tavu_engagementtype` with the **`tavu_salesstage`** lookup (Active view + Won/Lost + a new "Pipeline by Sales Stage" secondary view); corrected the estimated-revenue field to **`tavu_estimatedrevenue`**; fixed the state filters (Active = Open; Won/Lost = `statecode = Inactive` + `statuscode`). |
 | 1.3 | June 17, 2026 | Gustavo González Villani (revision with Claude) | **Statecode correction.** Verified against the live `tavu_case` schema that a custom table's `statecode` has only Active / Inactive — Resolved/Cancelled cannot exist as states. Corrected the Resolved Cases and Cancelled Cases views to filter by `statecode = Inactive` + a `statuscode` group instead of the non-existent `statecode = Resolved` / `= Cancelled`. Resolved group = Solved, Information Provided, Duplicate, Out of Scope; Cancelled group = Cancelled by Customer, Cannot Reproduce, Closed without Resolution. `service-model.md` Section 6 was corrected in tandem (service-model v1.3). Also added an "Inactive Cases (all closed)" combined view alongside the split Resolved / Cancelled views — all three retained per the user's setup. |
 
 *This document is the operational reference for OpenTavu's view definitions in the model-driven app.*  

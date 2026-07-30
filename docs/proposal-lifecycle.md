@@ -10,20 +10,22 @@ approved/lost, revise-as-new-version, one winning proposal).
 
 `tavu_proposal.statuscode` values:
 
-| Status | Value | State | Editable? |
+| Status | Value | State | Notes |
 |---|---|---|---|
-| Draft | 576600001 | Active | Yes |
-| AI Generated – Awaiting Review | 576600002 | Active | Yes (roadmap: AI writes it) |
-| Under Internal Review | 576600003 | Active | Yes |
+| Draft | 576600001 | Active | Editable |
+| AI Generated – Awaiting Review | 576600002 | Active | Editable (roadmap: AI writes it) |
+| Under Internal Review | 576600003 | Active | **Hidden** (reversible; no button/no clear pain — un-hide + add a button if a firm needs an internal-review gate) |
 | Sent to Client | 576600004 | Active | **Locked** |
-| Awaiting Decision | 576600005 | Active | **Locked** (optional step) |
+| Awaiting Decision | 576600005 | Active | **Hidden** (reversible; reserved for a future follow-up feature) |
 | Approved by Client | 576600006 | Inactive | Terminal (winner) |
 | Rejected by Client | 576600007 | Inactive | Terminal |
 | Superseded | 576600008 | Inactive | Terminal (replaced by a new version) |
 | Withdrawn | 576600009 | Inactive | Terminal |
 
-Advancement is button-driven (see Ribbon commands); the Status Reason picklist is not
-the intended path to advance.
+**Lifecycle is button-driven and Status Reason is read-only** (set read-only on the form;
+the ribbon buttons + plugins change it via `updateRecord`/`setValue`, which bypass form
+read-only). Active flow: Draft / AI Generated → **Send to Client** → Sent → **Approve /
+Lost**. To edit a Sent proposal, create a new version (a fresh Draft record).
 
 ## Components
 
@@ -56,18 +58,65 @@ LifecycleTracker auto-abort at depth 2 (MaxDepth = 1).
 
 | Button | Function | Visibility (statuscode) |
 |---|---|---|
-| Send to Client | `OpenTavu.Proposal.Form.sendToClient` | Draft / AI Generated / Under Internal Review |
-| Mark as Approved | `OpenTavu.Proposal.Form.markApproved` | Sent to Client / Awaiting Decision |
-| Mark as Lost | `OpenTavu.Proposal.Form.markRejected` | Sent to Client / Awaiting Decision |
-| Create New Version | `OpenTavu.Proposal.Form.createNewVersion` | Sent / Awaiting / Rejected |
+| Send to Client | `OpenTavu.Proposal.Form.sendToClient` | Draft / AI Generated |
+| Mark as Approved | `OpenTavu.Proposal.Form.markApproved` | Sent to Client |
+| Mark as Lost | `OpenTavu.Proposal.Form.markRejected` | Sent to Client |
+| Create New Version | `OpenTavu.Proposal.Form.createNewVersion` | Sent / Rejected |
 
-- **Send to Client**: sets Sent to Client + stamps Sent Date, then refreshes → the
-  lock applies immediately.
+- **Send to Client**: sets Sent to Client + stamps Sent Date, re-applies the lock, and
+  then (if the System Settings toggle `tavu_proposalemaildraftenabled` is on, default on)
+  builds the client email draft and opens it in a modal OOB email dialog — see
+  "Send to Client — client email draft" below.
 - **Mark as Approved**: sets Approved, rolls the proposal total into the opportunity's
   `tavu_estimatedrevenue`, and offers **Close as Won** (reuses the opportunity close
   dialog `tavu_opportunityclosedialog_31702`). Single-Approved enforced server-side.
 - **Mark as Lost**: sets Rejected (candidate for Create New Version).
 - **Create New Version**: calls the Custom API and opens the new Draft.
+
+## Send to Client — client email draft (AI body + branded PDF)
+
+When a proposal is sent, OpenTavu prepares a ready-to-review client email so the seller
+doesn't start from a blank page. Config-gated by
+**`tavu_systemsettings.tavu_proposalemaildraftenabled`** (Yes/No, default on).
+
+Flow (`sendToClient` → `maybeBuildEmailDraft` → `buildEmailDraft`):
+1. After Sent + lock, read the toggle. If on, `showProgressIndicator("Preparing email draft…")`.
+2. Call the **`tavu_BuildProposalEmailDraft`** Custom API (`ProposalId` → `EmailId`).
+3. Open the returned email in a **modal dialog** (`Xrm.Navigation.navigateTo`, target 2)
+   so the seller reviews/sends without leaving the proposal. On close (send or dismiss),
+   the proposal is refreshed and the lock re-applied.
+
+**`Pl.Proposal.BuildEmailDraft`** (Custom API plugin, net462):
+- Reads the proposal + lines + **`tavu_companyprofile`** (branding) + logo bytes (File
+  column via `InitializeFileBlocksDownload`/`DownloadBlock`).
+- Resolves the recipient: `tavu_contact` → the account's primary contact → the
+  opportunity's primary contact. From = current user; Regarding = the proposal.
+- POSTs to `{tavu_GatewayUrl}/api/proposal/email-draft` (header
+  `X-OpenTavu-Tenant-Key = tavu_GatewayKey`); gets `{subject, body, pdfBase64}`.
+- Creates the `email` (Draft) + an `activitymimeattachment` with the PDF; returns `EmailId`.
+
+**Gateway `POST /api/proposal/email-draft`** (private gateway + public `gateway-reference`, .NET 8):
+- Reuses the AI path for `{subject, body}` (short email; greets the contact, signs with
+  the sender; no bracketed placeholders; plain fallback if the model is off).
+- Renders the PDF with **PdfSharpCore + MigraDocCore (MIT)** — logo + brand accent color,
+  line-item table, subtotal/tax/total, terms. **Data-driven**: no physical template; all
+  branding comes from `tavu_companyprofile`, passed in the request.
+
+**Why the PDF renders in the gateway, not the plugin:** plugins run on **.NET Framework
+4.6.2**; PdfSharpCore/ImageSharp don't load reliably in the plugin sandbox. The gateway
+(.NET 8) renders cleanly. Data residency holds for firms that self-host the reference
+gateway (Decision 42), and the email body already transits the gateway.
+
+**`tavu_companyprofile`** (Organization-owned, single record) — seller branding:
+`tavu_name`, `tavu_logo` (File — store a PNG, not SVG), `tavu_brandaccentcolor` (hex),
+`tavu_address`/`tavu_email`/`tavu_phone`/`tavu_taxid`/`tavu_website`,
+`tavu_defaultproposalterms`. Single-record via `Pl.CompanyProfile.SingleRecordGuard`;
+opened by the `tavu_companyprofile_open` web resource.
+
+**Sending** the email requires the tenant's **Server-Side Synchronization** (email server
+profile + the user's mailbox approved/enabled) — M365, Google Workspace (OAuth 2.0), or a
+generic SMTP host like Hostinger. Creating the draft does not; sending does. Tenant
+onboarding config, not shipped by the solution.
 
 ## Form events (designer → handler; pass execution context)
 
@@ -113,6 +162,16 @@ proposal).
 - Ribbon buttons with the visibility rules above.
 - Proposals subgrid on the opportunity: view shows all states (not Active-only) so
   approved/superseded proposals stay visible.
+- Custom API `tavu_BuildProposalEmailDraft` bound to `Pl.Proposal.BuildEmailDraft`
+  (Global; request `ProposalId` String, response `EmailId` String).
+- `tavu_companyprofile` (Organization-owned, single record) + register
+  `Pl.CompanyProfile.SingleRecordGuard` (Create Pre-Op) + `tavu_companyprofile_open` web
+  resource + sitemap link; create the single record with the firm's branding.
+- `tavu_systemsettings.tavu_proposalemaildraftenabled` (Yes/No, default Yes).
+- **Status Reason set to Read-only** on the proposal main form; hide the
+  `Under Internal Review` and `Awaiting Decision` statuscode options.
+- Gateway: deploy the `/api/proposal/email-draft` endpoint (private + reference gateways);
+  each tenant configures Server-Side Sync to actually send.
 
 ## Gotchas learned
 
@@ -128,3 +187,12 @@ proposal).
    statuscode alone is rejected). The buttons set both via `Xrm.WebApi.updateRecord`.
 5. **`tavu_proposalcontent`** (not `tavu_content`); **no `tavu_documenttype`** — the
    sales-model §8.3 mentioned both; only `tavu_proposalcontent` is real.
+6. **PDF libs need .NET 8** — PdfSharpCore/MigraDocCore + ImageSharp don't load reliably
+   in the net462 plugin sandbox; render the PDF in the gateway, not a plugin.
+7. **`data.refresh()` does not re-run OnLoad** — re-apply the lock explicitly
+   (`applyLockdown`) after refresh, or a Sent proposal shows unlocked until a manual reload.
+8. **Open the email as a dialog** (`navigateTo` target 2), not `openForm`, or it navigates
+   away from the proposal instead of showing a review popup.
+9. **MigraDocCore logo** needs the ImageSharp image-source registered once
+   (`ImageSource.ImageSourceImpl = new ImageSharpImageSource<Rgba32>()`) + a PNG (not SVG);
+   store the logo as a **File** column (exact bytes; Image columns downscale/thumbnail).
