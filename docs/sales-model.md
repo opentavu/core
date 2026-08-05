@@ -183,21 +183,29 @@ Auto-populated by the same daily scheduled Power Automate flow that calculates `
 
 **Step 1 — Auto-creation on inbound signal:** Power Automate detects new email to `info@` or web form submission → creates `tavu_lead` with status `New`.
 
-**Step 2 — Module 3 AI processes (target \< 2 minutes):**
+**Step 2 — Module 3 processing (target \< 2 minutes):**
 
-- Does it match an existing Contact? (email lookup) → if YES, link and notify  
-- Does it match an existing Account? (company name lookup) → if YES, link  
-- Is it spam/noise? → if YES, status \= `Inactive / Discarded as Noise`  
-- Is it a duplicate? → if YES, status \= `Inactive / Duplicate`  
-- Fill AI Confidence Score, AI Recommendation  
-- If confidence ≥ 0.85 → auto-promote to Contact \+ Account, status \= `Inactive / Promoted to Contact`  
-- If 0.50 ≤ confidence \< 0.85 → status \= `Awaiting Human Review`, notify sales  
-- If confidence \< 0.50 → status \= `Inactive / Discarded as Noise`
+*Deterministic first (no AI tokens):*
 
-**Step 3 — Human review (if needed):** Sales rep reads AI Recommendation and decides:
+- Exact **email** match to an existing Contact? → **match found**.  
+- Exact **domain** match to an existing Account? → **match found**.  
+- Obvious junk (spam patterns, `no-reply@`, empty body)? → status \= `Inactive / Discarded as Noise`.  
+- Duplicate of an open lead (same email)? → status \= `Inactive / Duplicate`.
 
-- Promote → creates Contact \+ Account, lead \= `Inactive / Promoted to Contact`  
-- Discard → lead \= `Inactive / Discarded as Noise`
+*AI only when the deterministic pass is inconclusive:* fuzzy match (name/company variants), real-lead-vs-noise judgement, field extraction → fills `tavu_aiconfidencescore` \+ `tavu_airecommendation`.
+
+*Promotion boundary (Option A — protects the clean master DB):*
+
+- **Match to an EXISTING Contact/Account** (deterministic, or AI fuzzy ≥ threshold) → **auto-link** (`tavu_matchedcontact` / `tavu_matchedaccount`), notify the owner, status \= `Inactive / Promoted to Contact`. Safe and reversible — **no new master record is created**.  
+- **No existing match but looks like a real prospect** → status \= `Awaiting Human Review`, `tavu_airecommendation = "Promote — create new"`. Creating a brand-new Account/Contact from anonymous inbound is the one write to the clean master DB, so it **always needs a human's one-click Approve** (Step 3), regardless of confidence.  
+- **Low confidence / ambiguous** → status \= `Awaiting Human Review`, notify.  
+- **Below the noise floor** → status \= `Inactive / Discarded as Noise`.
+
+**Step 3 — Human decision (only when Awaiting Human Review):** the rep reads the AI recommendation + extracted fields, then one click:
+
+- **Approve & Promote** → creates the Contact (+ Account) from the lead's data; lead \= `Inactive / Promoted to Contact`. The AI pre-filled everything; the human only confirms the master-DB write.  
+- **Link to existing** → if the AI matched imperfectly, point it to the right record; lead \= `Inactive / Promoted to Contact`.  
+- **Discard** → lead \= `Inactive / Discarded as Noise` (or `Not Qualified`).
 
 **Step 4 — Auto-cleanup of stale leads:** Scheduled Power Automate flow (runs daily):
 
@@ -217,7 +225,7 @@ This prevents abandoned leads from polluting views indefinitely.
 
 - **Respects how consultants work:** Path A is the common case, Path B is the exception  
 - **Preserves the buffer's function:** low-quality anonymous inbound does NOT pollute the master Contact database  
-- **Gives Module 3 a clear role:** orchestrates automatic promotion with confidence threshold  
+- **Gives Module 3 a clear role:** deterministic dedup + AI match/extract; **auto-links** to existing records, and pre-fills a **one-click human Approve** for creating new master records (AI-first; human is the 2nd-line reviewer only on the irreversible write)  
 - **Captures audit trail:** each processed lead leaves a record of what AI decided and why
 
 ---
@@ -1629,5 +1637,6 @@ Yes, with one restriction: a proposal uses the currency of the assigned price li
 | 1.8 | July 10, 2026 | Gustavo González Villani (revision with Claude) | Aligned the opportunity close mechanics with the implemented Win/Loss engine. (1) **Removed the ghost `tavu_closetype` field** from `tavu_opportunityclose` (§7.3) — Won/Lost is the activity's own `statuscode` (Won `576600001` / Lost `576600002`); corrected `tavu_lostreason` to a Choice (not lookup) and `tavu_actualclosedate` to DateTime. (2) **Rewrote §7.4** to the "opportunity is source of truth" (Arch B) flow: ribbon commands (Closed as Won / Lost / Reopen) open a custom-page dialog (`tavu_opportunityclosedialog_31702`) that Patches the opportunity's statecode+statuscode; `Pl.Opportunity.LifecycleTracker` (Pre-Op) validates and forces probability; `Pl.Opportunity.CloseOrchestrator` (Post-Op) writes the history log (created Open, then completed) and marks `tavu_iscustomer` on Won. (3) **Deferred engagement-status changes to Module 3** (removed the close-time engagement mutation). (4) **Rewrote §7.5 reopen** to the Reopen button + plugin (re-applies stage default probability; close fields preserved). Full build detail in `docs/opportunity-close-dialog.md`. |
 | 1.9 | July 10, 2026 | Gustavo González Villani (revision with Claude) | Implemented the deterministic **proposal lifecycle** (§8). (1) **Corrected §8.3**: `tavu_version` is real (defaulted to `v1`, incremented by Create New Version); removed the ghost `tavu_documenttype`; fixed `tavu_content` → `tavu_proposalcontent`. (2) New **`Pl.Proposal.LifecycleTracker`** (Pre-Op): version default, transition guard, lock (business `tavu_*` fields once Sent/closed), one Approved per opportunity. (3) **`Pl.ProposalLine.Calculator`**: added line-lock when the parent is locked. (4) New **`tavu_CloneProposalVersion` Custom API** (`Pl.Proposal.CloneVersion`): clones header+lines into a new Draft, increments version, supersedes source. (5) New **`tavu_proposal_form.js`**: Send to Client / Mark as Approved (rolls total to the opportunity + offers Close as Won) / Mark as Lost / Create New Version buttons; visual lock; header totals auto-refresh on add/edit (grid OnSave) and add/delete (subgrid addOnLoad row-count) using the modern Power Apps grid (editable). (6) **Standardized autonumber IDs** `OTC/OTO/OTP-{DATETIMEUTC:yyyy}-{SEQNUM:5}` across Case/Opportunity/Proposal. (7) Fixed the opportunity form JS `tavu_customerid` → `tavu_customer`. Full build detail in `docs/proposal-lifecycle.md`. |
 | 2.0 | July 29, 2026 | Gustavo González Villani (revision with Claude) | Proposal → client email draft + status-model cleanup. (1) **§8.2 statuses reduced**: `Under Internal Review` and `Awaiting Decision` hidden (reversible); active flow Draft / AI Generated → Sent, button-driven, **Status Reason read-only**. (2) New **`tavu_companyprofile`** (Organization-owned single record) for seller branding (logo/color/profile/terms), with `Pl.CompanyProfile.SingleRecordGuard` + `tavu_companyprofile_open` web resource. (3) New **`tavu_BuildProposalEmailDraft` Custom API** (`Pl.Proposal.BuildEmailDraft`): on Send to Client, builds a client email draft (AI body + branded PDF) and opens it in a modal OOB email dialog; toggle `tavu_systemsettings.tavu_proposalemaildraftenabled` (default on). (4) **Gateway** endpoint `/api/proposal/email-draft` (PdfSharpCore/MigraDocCore, MIT) renders the PDF data-driven from Company Profile — in the gateway, not the net462 plugin sandbox. Full detail in `proposal-lifecycle.md`; strategic record in the product master Decisión 43. |
+| 2.1 | July 30, 2026 | Gustavo González Villani (revision with Claude) | **§3.3 lead-processing refinement (design; Module 3 not built yet).** Deterministic dedup first (exact email/domain match — no AI tokens), AI only for fuzzy/uncertain cases. **Promotion boundary (Option A):** AI **auto-links** anonymous inbound that matches an existing Contact/Account (safe/reversible, no new master record); creating a **new** Account/Contact always requires a human **one-click Approve & Promote** (AI pre-fills everything) — protecting the clean master DB, per the triangulated fit-to-segment research. §3.4 updated accordingly. |
 
 *This document is the operational reference for OpenTavu's sales model.*

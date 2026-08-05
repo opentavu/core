@@ -88,8 +88,13 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
     var SYSTEM_MANAGED_FIELDS = [
         "tavu_iscustomer",
         "tavu_customersince",
-        "tavu_lastengagementdate"
+        "tavu_lastengagementdate",
+        "tavu_originatinglead"
     ];
+
+    // Provenance lookup to tavu_lead, set by Pl.Lead.PromoteLead only when the record was
+    // created from a lead. Shown only when it has a value (hidden for directly-created records).
+    var FIELD_ORIGINATING_LEAD = "tavu_originatinglead";
 
     // Location cascade — custom lookups on Contact/Account, and the parent-link
     // attribute on each child table used to filter the dependent lookup.
@@ -115,6 +120,7 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
         Form.setLocationFieldRequirements(executionContext);
         Form.applyLocationFilters(executionContext);
         Form.enforceReadOnlyFields(executionContext);
+        Form.applyOriginatingLeadVisibility(executionContext);
     };
 
     /**
@@ -225,6 +231,20 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
         var mode = detectMode(formContext);
         var tierDisabled = (mode === MODE_B2B);
         setControlDisabled(formContext, "tavu_customertier", tierDisabled);
+    };
+
+    /**
+     * Shows the Originating Lead lookup only when it has a value (a record promoted from a
+     * lead); hides it for directly-created records so the form is not cluttered with an empty
+     * provenance field. The field itself is always read-only (see SYSTEM_MANAGED_FIELDS).
+     * @param {Xrm.ExecutionContext} executionContext
+     */
+    Form.applyOriginatingLeadVisibility = function (executionContext) {
+        var formContext = executionContext.getFormContext();
+        var attr = formContext.getAttribute(FIELD_ORIGINATING_LEAD);
+        var value = attr ? attr.getValue() : null;
+        var hasValue = !!(value && value.length > 0);
+        setControlVisible(formContext, FIELD_ORIGINATING_LEAD, hasValue);
     };
 
     /**
@@ -391,6 +411,20 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
         if (!controls) return;
         controls.forEach(function (ctrl) {
             if (ctrl && ctrl.setDisabled) ctrl.setDisabled(disabled);
+        });
+    }
+
+    /**
+     * Safe control visibility setter. Iterates over all controls of a field and shows/hides
+     * them. Silent no-op if the attribute is missing (field not on this form).
+     */
+    function setControlVisible(formContext, schemaName, visible) {
+        var attr = formContext.getAttribute(schemaName);
+        if (!attr) return;
+        var controls = attr.controls.get();
+        if (!controls) return;
+        controls.forEach(function (ctrl) {
+            if (ctrl && ctrl.setVisible) ctrl.setVisible(visible);
         });
     }
 

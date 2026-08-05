@@ -31,7 +31,7 @@ namespace Pl.Case.Categorize
     public class Categorize : PluginBase
     {
         // ============================================================
-        // SCHEMA CONSTANTS — VERIFY against actual logical/option values
+        // SCHEMA CONSTANTS: VERIFY against actual logical/option values
         // ============================================================
 
         private const string CaseEntity = "tavu_case";
@@ -73,7 +73,7 @@ namespace Pl.Case.Categorize
         // flags on that table (config-over-code), not by hardcoded statuscode values.
         private const string CaseStatus            = "tavu_status";            // lookup -> tavu_casestatus
         private const string StatusEntity          = "tavu_casestatus";
-        private const string StatusIsCategorized   = "tavu_isaicategorized";   // Yes on "Categorized — Awaiting Assignment"
+        private const string StatusIsCategorized   = "tavu_isaicategorized";   // Yes on "Awaiting Assignment" (resolved by flag, not by name)
         private const string StatusIsManualReview  = "tavu_ismanualreview";    // Yes on "Manual Review Required"
 
 		// tavu_priority option values in tavu_case
@@ -181,7 +181,9 @@ namespace Pl.Case.Categorize
             update[CaseAiMissing]  = Trunc(o.MissingInfo, 1000);
             update[CaseAiReasoning] = o.Reasoning;
             update[CasePriorityRsn] = o.PriorityReason;
-            update[CaseAiConfidence] = (decimal)o.Confidence;
+            // Stored as a whole percentage (0-100) so the field/header reads "90", not "0.90"
+            // (parity with the lead module). The routing threshold below stays on the raw 0-1.
+            update[CaseAiConfidence] = decimal.Round((decimal)o.Confidence * 100m, 0);
             update[CaseIsBillable]   = o.IsBillable;
             update[CaseIsAutomated]  = true;
             update[CaseMultiIntent]  = o.MultiIntent;
@@ -410,7 +412,7 @@ namespace Pl.Case.Categorize
         private static string HintSuffix(Entity e)
         {
             string h = e.GetAttributeValue<string>(FieldAiHint);
-            return string.IsNullOrEmpty(h) ? string.Empty : " — " + h;
+            return string.IsNullOrEmpty(h) ? string.Empty : ": " + h;
         }
 
         private static string Trunc(string s, int max)

@@ -35,6 +35,10 @@ OpenTavu.Account.Form = OpenTavu.Account.Form || {};
     var FIELD_STATEPROVINCE = "tavu_stateprovince";  // lookup -> tavu_stateprovince
     var FIELD_CITY = "tavu_city";                    // lookup -> tavu_city
 
+    // Provenance lookup to tavu_lead, set by Pl.Lead.PromoteLead only when the account was
+    // created from a lead. Shown only when it has a value; always read-only.
+    var FIELD_ORIGINATING_LEAD = "tavu_originatinglead";
+
     // Dependent (child) tables and the attribute on each that points to its parent.
     var STATEPROVINCE_TABLE = "tavu_stateprovince";
     var CITY_TABLE = "tavu_city";
@@ -49,6 +53,7 @@ OpenTavu.Account.Form = OpenTavu.Account.Form || {};
     Form.onLoad = function (executionContext) {
         Form.setLocationFieldRequirements(executionContext);
         Form.applyLocationFilters(executionContext);
+        Form.applyOriginatingLeadVisibility(executionContext);
     };
 
     /** OnChange for tavu_country — clears State and City to enforce cascading. */
@@ -90,6 +95,20 @@ OpenTavu.Account.Form = OpenTavu.Account.Form || {};
             FIELD_STATEPROVINCE, CITY_PARENT_ATTR);
     };
 
+    /**
+     * Shows the Originating Lead lookup only when it has a value (an account promoted from a
+     * lead); hides it for directly-created accounts. Always read-only (system-set provenance).
+     * @param {Xrm.ExecutionContext} executionContext
+     */
+    Form.applyOriginatingLeadVisibility = function (executionContext) {
+        var formContext = executionContext.getFormContext();
+        var attr = formContext.getAttribute(FIELD_ORIGINATING_LEAD);
+        var value = attr ? attr.getValue() : null;
+        var hasValue = !!(value && value.length > 0);
+        setControlVisible(formContext, FIELD_ORIGINATING_LEAD, hasValue);
+        setControlDisabled(formContext, FIELD_ORIGINATING_LEAD, true);
+    };
+
     // ============================================================
     // Internal helpers
     // ============================================================
@@ -102,6 +121,28 @@ OpenTavu.Account.Form = OpenTavu.Account.Form || {};
     function setRequired(formContext, schemaName, level) {
         var attr = formContext.getAttribute(schemaName);
         if (attr) attr.setRequiredLevel(level);
+    }
+
+    /** Safe control visibility setter. Silent no-op if the field is not on this form. */
+    function setControlVisible(formContext, schemaName, visible) {
+        var attr = formContext.getAttribute(schemaName);
+        if (!attr) return;
+        var controls = attr.controls.get();
+        if (!controls) return;
+        controls.forEach(function (ctrl) {
+            if (ctrl && ctrl.setVisible) ctrl.setVisible(visible);
+        });
+    }
+
+    /** Safe control disable setter. Silent no-op if the field is not on this form. */
+    function setControlDisabled(formContext, schemaName, disabled) {
+        var attr = formContext.getAttribute(schemaName);
+        if (!attr) return;
+        var controls = attr.controls.get();
+        if (!controls) return;
+        controls.forEach(function (ctrl) {
+            if (ctrl && ctrl.setDisabled) ctrl.setDisabled(disabled);
+        });
     }
 
     /**
