@@ -59,6 +59,13 @@ namespace Pl.Meeting.Associate
         private const string MOpportunity  = "tavu_opportunity";  // typed lookup (reporting)
         private const string MRegarding    = "regardingobjectid"; // polymorphic (timeline)
 
+        // Prospect fields (AI-extracted; used to auto-provision a contact + account on create).
+        private const string MProspectCompany = "tavu_prospectcompanyname";
+        private const string MProspectFirst   = "tavu_prospectfirstname";
+        private const string MProspectLast    = "tavu_prospectlastname";
+        private const string MProspectEmail   = "tavu_prospectemail";
+        private const string MProspectPhone   = "tavu_prospectphone";
+
         // tavu_meeting statuscode + activity statecode (from Pl.Meeting.Capture)
         private const int StatusReviewed  = 576600005; // Completed
         private const int StateCompleted  = 1;
@@ -73,9 +80,18 @@ namespace Pl.Meeting.Associate
         private const string AccountEntity = "account";
         private const string ContactEntity = "contact";
 
-        // ===== System Settings flag (gate consolidation) =====
+        // contact / account fields (for provisioning)
+        private const string ContactFirst  = "firstname";
+        private const string ContactLast   = "lastname";
+        private const string ContactEmail  = "emailaddress1";
+        private const string ContactPhone  = "telephone1";
+        private const string ContactParent = "parentcustomerid";
+        private const string AccountName   = "name";
+
+        // ===== System Settings flags =====
         private const string SettingsEntity     = "tavu_systemsettings";
         private const string SettingConsolidate = "tavu_meetingconsolidateddiscovery"; // Yes/No (VERIFY)
+        private const string SettingAutoProvision = "tavu_meetingautoprovision";       // Yes/No (VERIFY; default ON)
 
         // Reuse the Meeting Capture AI task config + JSON contract for consolidation.
         private const int TaskKeyMeetingCapture = 576600004; // VERIFY (matches Pl.Meeting.Capture)
@@ -100,7 +116,8 @@ namespace Pl.Meeting.Associate
             IOrganizationService userSvc = localContext.UserService;
 
             Entity meeting = userSvc.Retrieve(MeetingEntity, meetingId, new ColumnSet(
-                MSubject, MAccount, MContact, MSuggestedOpp, MDiscovery));
+                MSubject, MAccount, MContact, MSuggestedOpp, MDiscovery,
+                MProspectCompany, MProspectFirst, MProspectLast, MProspectEmail, MProspectPhone));
 
             // ----- 1. resolve the target opportunity -----
             Guid oppId = ResolveOpportunity(localContext, userSvc, meeting, oppIdInput, createNew, oppTopicInput);
@@ -170,6 +187,12 @@ namespace Pl.Meeting.Associate
             EntityReference account = meeting.GetAttributeValue<EntityReference>(MAccount);
             EntityReference contact = meeting.GetAttributeValue<EntityReference>(MContact);
 
+            // Nothing matched: auto-provision the contact (and account) from the call, if enabled
+            // and the AI captured enough prospect data. The human already clicked Create, so this is
+            // the deliberate 2nd-line write into the clean master DB (mirrors Lead promotion).
+            if (account == null && contact == null && AutoProvisionEnabled(localContext.SystemService))
+                ProvisionFromProspect(localContext, svc, meeting, ref account, ref contact);
+
             // The opportunity needs a customer. Prefer the account (B2B); fall back to the contact.
             EntityReference customer =
                 account != null ? new EntityReference(AccountEntity, account.Id) :
@@ -177,8 +200,9 @@ namespace Pl.Meeting.Associate
 
             if (customer == null)
                 throw new InvalidPluginExecutionException(
-                    "Cannot create an opportunity: the meeting has no matched account or contact. "
-                    + "Match the meeting to a customer first, or associate to an existing opportunity.");
+                    "Cannot create an opportunity: the meeting has no matched account or contact, and the "
+                    + "call did not include enough data to create them. Match the meeting to a customer "
+                    + "first, or associate to an existing opportunity.");
 
             string topic = (oppTopicInput ?? string.Empty).Trim();
             if (topic.Length == 0)
@@ -193,6 +217,118 @@ namespace Pl.Meeting.Associate
             Guid id = svc.Create(opp);
             localContext.Trace("Created opportunity '{0}' = {1} (customer {2}).", topic, id, customer.LogicalName);
             return id;
+        }
+
+        // ============================================================
+        // Auto-provision contact + account from the AI-extracted prospect data
+        // ============================================================
+
+        /// <summary>
+        /// Match-or-create an account and contact from the meeting's prospect fields, and reflect
+        /// them back on the meeting. Match-first (account by name, contact by email) avoids
+        /// duplicates. Writes as the acting user (UserService), consistent with the human gate.
+        /// </summary>
+        private void ProvisionFromProspect(LocalPluginContext localContext, IOrganizationService svc,
+            Entity meeting, ref EntityReference account, ref EntityReference contact)
+        {
+            string company = Val(meeting, MProspectCompany);
+            string first   = Val(meeting, MProspectFirst);
+            string last    = Val(meeting, MProspectLast);
+            string email   = Val(meeting, MProspectEmail);
+            string phone   = Val(meeting, MProspectPhone);
+
+            if (company.Length == 0 && last.Length == 0 && first.Length == 0 && email.Length == 0)
+            {
+                localContext.Trace("No prospect data to provision from. Skipping.");
+                return;
+            }
+
+            // Account: match by name, else create (only when a company is known).
+            if (company.Length > 0)
+            {
+                Guid accId = FindAccountByName(svc, company);
+                if (accId == Guid.Empty)
+                {
+                    accId = svc.Create(new Entity(AccountEntity) { [AccountName] = Trunc(company, 200) });
+                    localContext.Trace("Provisioned account '{0}' = {1}.", company, accId);
+                }
+                account = new EntityReference(AccountEntity, accId);
+            }
+
+            // Contact: match by email, else create from the prospect fields under the account.
+            Guid contactId = email.Length > 0 ? FindContactByEmail(svc, email) : Guid.Empty;
+            if (contactId == Guid.Empty && (last.Length > 0 || first.Length > 0 || email.Length > 0))
+            {
+                if (last.Length == 0)
+                {
+                    if (first.Length > 0) { last = first; first = string.Empty; }
+                    else last = email.Length > 0 ? email : "New Contact";
+                }
+                var c = new Entity(ContactEntity);
+                if (first.Length > 0) c[ContactFirst] = first;
+                c[ContactLast] = last;
+                if (email.Length > 0) c[ContactEmail] = email;
+                if (phone.Length > 0) c[ContactPhone] = phone;
+                if (account != null)  c[ContactParent] = new EntityReference(AccountEntity, account.Id);
+                contactId = svc.Create(c);
+                localContext.Trace("Provisioned contact '{0} {1}' = {2}.", first, last, contactId);
+            }
+            if (contactId != Guid.Empty) contact = new EntityReference(ContactEntity, contactId);
+
+            // Reflect the resolved customer back on the meeting so the form shows it.
+            if (account != null || contact != null)
+            {
+                var upd = new Entity(MeetingEntity, meeting.Id);
+                if (account != null) upd[MAccount] = account;
+                if (contact != null) upd[MContact] = contact;
+                svc.Update(upd);
+            }
+        }
+
+        private static bool AutoProvisionEnabled(IOrganizationService svc)
+        {
+            // Explicit opt-in: enabled only when the flag is Yes. Null / No / no settings record = off.
+            var q = new QueryExpression(SettingsEntity)
+            {
+                ColumnSet = new ColumnSet(SettingAutoProvision),
+                TopCount = 1,
+                NoLock = true
+            };
+            EntityCollection r = svc.RetrieveMultiple(q);
+            return r.Entities.Count > 0 && r.Entities[0].GetAttributeValue<bool>(SettingAutoProvision);
+        }
+
+        private static Guid FindAccountByName(IOrganizationService svc, string name)
+        {
+            var q = new QueryExpression(AccountEntity)
+            {
+                ColumnSet = new ColumnSet(false),
+                NoLock = true,
+                TopCount = 1
+            };
+            q.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+            q.Criteria.AddCondition(AccountName, ConditionOperator.Equal, name);
+            EntityCollection r = svc.RetrieveMultiple(q);
+            return r.Entities.Count > 0 ? r.Entities[0].Id : Guid.Empty;
+        }
+
+        private static Guid FindContactByEmail(IOrganizationService svc, string email)
+        {
+            var q = new QueryExpression(ContactEntity)
+            {
+                ColumnSet = new ColumnSet(false),
+                NoLock = true,
+                TopCount = 1
+            };
+            q.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+            q.Criteria.AddCondition(ContactEmail, ConditionOperator.Equal, email);
+            EntityCollection r = svc.RetrieveMultiple(q);
+            return r.Entities.Count > 0 ? r.Entities[0].Id : Guid.Empty;
+        }
+
+        private static string Val(Entity e, string attr)
+        {
+            return (e.GetAttributeValue<string>(attr) ?? string.Empty).Trim();
         }
 
         // ============================================================
@@ -256,6 +392,8 @@ namespace Pl.Meeting.Associate
 
         private static bool ConsolidationEnabled(IOrganizationService svc)
         {
+            // Explicit opt-in: enabled only when the flag is Yes. Null / No / no settings record = off
+            // (consistent with the AI Enabled flag; no hidden default-on).
             var q = new QueryExpression(SettingsEntity)
             {
                 ColumnSet = new ColumnSet(SettingConsolidate),
@@ -263,10 +401,7 @@ namespace Pl.Meeting.Associate
                 NoLock = true
             };
             EntityCollection r = svc.RetrieveMultiple(q);
-            if (r.Entities.Count == 0) return true; // no settings record -> default on
-            Entity s = r.Entities[0];
-            // Absent attribute -> default on; explicit false -> off.
-            return !s.Contains(SettingConsolidate) || s.GetAttributeValue<bool>(SettingConsolidate);
+            return r.Entities.Count > 0 && r.Entities[0].GetAttributeValue<bool>(SettingConsolidate);
         }
 
         private static List<string> GatherDiscoveryExtracts(IOrganizationService svc, Guid oppId)

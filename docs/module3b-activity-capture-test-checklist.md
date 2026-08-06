@@ -26,10 +26,10 @@
 > fields + trace. The trace shows the decision path, confidence, and threshold.
 
 - [x] **C1, Happy path (real prospect).** New meeting: Subject set, Attendees = the test contact's email, a real transcript pasted. → AI runs → **Processed**; `tavu_summary`, `tavu_discoveryextract`, `tavu_aiconfidence` (0–100) and `tavu_lastaiprocessingdate` stamped; `tavu_contact` / `tavu_account` filled from the attendee; `tavu_suggestedopportunity` set to the open opp (if the transcript points to it).
-- [ ] **C2, No transcript.** New meeting with an empty `tavu_transcript`. → **Manual Review Required**; `tavu_summary` carries the reason; no AI tokens spent (trace shows the early exit).
+- [x] **C2, No transcript.** New meeting with an empty `tavu_transcript`. → **Manual Review Required**; `tavu_summary` carries the reason; no AI tokens spent (trace shows the early exit).
 - [ ] **C3, Attendee match.** Meeting where `tavu_contact` is left blank but Attendees contains the contact's email. → the plugin fills `tavu_contact` and its parent `tavu_account`.
 - [ ] **C4, Suggested-opportunity guard.** Transcript that mentions a deal name that is NOT an open opp on the account. → `tavu_suggestedopportunity` stays empty (the AI cannot invent an opp; it only picks from the candidate list).
-- [ ] **C5, AI unavailable.** Set System Settings `AI Enabled = No` (or deactivate the Meeting Capture config). Create a meeting with a transcript. → **Manual Review Required**; the meeting survives with a reason; `tavu_aiconfidence = 0`. Re-enable AI afterward.
+- [x] **C5, AI unavailable.** Set System Settings `AI Enabled = No` (or deactivate the Meeting Capture config). Create a meeting with a transcript. → **Manual Review Required**; the meeting survives with a reason; `tavu_aiconfidence = 0`. Re-enable AI afterward.
 - [ ] **C6, Confidence as %.** On a Processed meeting, the AI Meeting Summary control header shows `Confidence NN%` (whole number), amber below 70, and the low-confidence MessageBar appears when < 70.
 
 ## 2. Form + ribbon buttons (the human gate)
@@ -40,9 +40,9 @@
 - [x] **F2, Associate (accept AI suggestion).** Processed meeting with a `tavu_suggestedopportunity` → click **Associate to opportunity** → confirm the suggested opp. → meeting → **Reviewed** (Completed); `regardingobjectid` and `tavu_opportunity` = that opp; the meeting appears in the **opportunity timeline**; buttons hide; form locks.
 - [ ] **F3, Associate (no suggestion → picker).** Processed meeting with `tavu_suggestedopportunity` empty → **Associate to opportunity** → opportunity picker → choose one. → same result as F2 with the chosen opp.
 - [x] **F4, Create opportunity (modal, in-flow).** Meeting with a matched account/contact and no fitting opp → **Create opportunity** → confirm. → a new opportunity is created (topic from subject, customer = matched account/contact) and **opens in a centered modal**; save/close the modal → you return to the **same meeting**, refreshed; meeting → Reviewed; `tavu_opportunity` set.
-- [ ] **F5, Create opportunity guard.** Meeting with **no** matched account or contact → **Create opportunity**. → clear error ("no matched account or contact"); no opportunity created; meeting stays Processed.
-- [ ] **F6, Discard.** Processed meeting → **Discard** → confirm. → meeting → **Discarded** (Canceled); nothing associated; form locks. No opportunity touched.
-- [ ] **F7, Guards.** On a non-reviewable meeting, a button warns "not awaiting review". With unsaved edits, warns "save your pending changes first". Unsaved new record warns "save the meeting first".
+- [x] **F5, Create opportunity guard.** Meeting with **no** matched account or contact → **Create opportunity**. → clear error ("no matched account or contact"); no opportunity created; meeting stays Processed.
+- [x] **F6, Discard.** Processed meeting → **Discard** → confirm. → meeting → **Discarded** (Canceled); nothing associated; form locks. No opportunity touched.
+- [x] **F7, Guards.** On a non-reviewable meeting, a button warns "not awaiting review". With unsaved edits, warns "save your pending changes first". Unsaved new record warns "save the meeting first".
 
 ## 3. Follow-up draft email (tavu_BuildMeetingEmailDraft)
 
@@ -56,9 +56,15 @@
 
 ## 4. Discovery consolidation (opportunity discovery notes)
 
-- [ ] **D1, Consolidate across sessions.** Associate a **first** meeting to an opportunity (F2/F3), then capture and associate a **second** meeting to the **same** opportunity. → after the second associate, `opportunity.tavu_discoverynotes` reflects a consolidated view of BOTH sessions' discovery extracts (`DiscoveryConsolidated = true` in the trace / API output).
+- [x] **D1, Consolidate across sessions.** Associate a **first** meeting to an opportunity (F2/F3), then capture and associate a **second** meeting to the **same** opportunity. → after the second associate, `opportunity.tavu_discoverynotes` reflects a consolidated view of BOTH sessions' discovery extracts (`DiscoveryConsolidated = true` in the trace / API output).
 - [ ] **D2, Consolidation off.** Set System Settings `tavu_meetingconsolidateddiscovery = No` → associate a meeting. → the association still succeeds; `tavu_discoverynotes` is not changed by the AI; `DiscoveryConsolidated = false`. Restore to Yes afterward.
 - [x] **D3, Proposal prefill loop.** On an opportunity whose `tavu_discoverynotes` was consolidated, create a new **Proposal**. → the proposal form prefills its `tavu_discoverynotes` from the opportunity (captured meetings feed the proposal draft, no manual re-entry).
+
+## 4b. Auto-provision (contact + account from the call)
+
+- [x] **P1, Provision from a first call.** New meeting with prospect data and attendees that match no existing contact. → Processed with the **Prospect (new customer)** section visible and filled; the AI picks the PRIMARY client contact (decision maker), not a secondary attendee. **Create Opportunity** → creates the account + contact + opportunity, sets them on the meeting, opens the opp in a modal. Confirm dialog spells out what will be created.
+- [x] **P2, Dedup on a repeat call.** A second meeting with the same prospect email/company. → no duplicate account/contact is created (the capture step matches the existing contact, or the provision step matches by email/name); only a new opportunity is created under the existing customer.
+- [ ] **P3, Auto-provision off.** System Settings `tavu_meetingautoprovision = No` → Create Opportunity on an unmatched meeting → the clear "not enough data / match first" error stands, nothing is provisioned. Restore to Yes after.
 
 ## 5. Views (config)
 

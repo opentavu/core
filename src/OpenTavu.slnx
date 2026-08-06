@@ -26,6 +26,7 @@
     <File Path="WebResources/js/tavu_account_form.js" />
     <File Path="WebResources/js/tavu_contact_form.js" />
     <File Path="WebResources/js/tavu_lead_form.js" />
+    <File Path="WebResources/js/tavu_meeting_form.js" />
     <File Path="WebResources/js/tavu_opportunity_form.js" />
     <File Path="WebResources/js/tavu_product_form.js" />
     <File Path="WebResources/js/tavu_proposalline_form.js" />

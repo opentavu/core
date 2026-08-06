@@ -212,7 +212,7 @@ discovery write on `SystemService`).
 - **Association:** sets `regardingobjectid` (native timeline) **and** the typed `tavu_opportunity`
   lookup (reporting), then completes the activity as **Reviewed** (statecode 1 / statuscode 576600005).
 - **Discovery consolidation (best-effort):** gated by the System Settings flag
-  `tavu_meetingconsolidateddiscovery` (absent flag or record defaults to ON). Gathers the
+  `tavu_meetingconsolidateddiscovery` (explicit opt-in: enabled only when Yes; null/No/no record = off). Gathers the
   `tavu_discoveryextract` of every meeting on that opportunity, one AI call (reuses the **Meeting
   Capture** task config + JSON contract, reading back the `discoveryExtract` field), writes the
   result to the opportunity's **`tavu_discoverynotes`**. Never blocks the association: any AI gap is
@@ -258,6 +258,29 @@ promise resolves on close, so the meeting is refreshed then and the rep never le
 "Review draft email" lazily generates the draft (calls `tavu_BuildMeetingEmailDraft`) when none
 exists yet, then opens it. `reviewDraft` opening an existing draft does not require the reviewable
 guard; the other three require Processed / Manual Review Required.
+
+### 5.4 AI auto-provision of contact + account on Create (built)
+
+When the meeting has **no matched account/contact** and the rep clicks **Create Opportunity**, the
+system now **provisions the customer from the call** instead of sending the rep away to create records
+by hand. This extends the Lead promotion pattern to meetings (Pain #1: manual CRM entry).
+
+- **Capture** (`Pl.Meeting.Capture`): when no contact matched, the AI extracts prospect fields from
+  the transcript/attendees and stamps them on the meeting: `tavu_prospectcompanyname`,
+  `tavu_prospectfirstname`, `tavu_prospectlastname`, `tavu_prospectemail`, `tavu_prospectphone`. It
+  never guesses an email/phone; empty when not stated.
+- **Create Opportunity** (`tavu_AssociateMeeting`): if nothing matched and auto-provision is enabled,
+  it **match-first, then create**: account by exact name (else create), contact by email (else create
+  under the account), reflects both back on the meeting, then creates the opportunity. Writes as the
+  acting user (the human clicked Create = the 2nd-line gate into the clean master DB).
+- **Guardrails:** deduplicate by matching before creating; require minimum data (a company name or a
+  contact name/email), else the clear "not enough data" error stands; gated by the System Settings
+  flag **`tavu_meetingautoprovision`** (Yes/No, explicit opt-in: enabled only when Yes; null/No = off).
+- **Form:** the prospect fields show only when no customer is linked (so the rep can review/correct
+  before creating); the Create Opportunity confirm dialog spells out what will be created.
+
+New Dataverse fields required (on `tavu_meeting`): the five `tavu_prospect*` text fields above; and
+on `tavu_systemsettings` the `tavu_meetingautoprovision` Yes/No flag.
 
 > **Recommended order:** while the meeting is **Processed**, draft the follow-up (review/send), then
 > **Associate** (which completes the meeting as Reviewed and hides the buttons). If a rep needs the

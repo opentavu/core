@@ -47,6 +47,24 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
     var FIELD_SUMMARY = "tavu_summary";
     var FIELD_CONFIDENCE = "tavu_aiconfidence";     // stored 0-100
     var FIELD_DRAFT_EMAIL = "tavu_draftemail";      // lookup -> email (BuildMeetingEmailDraft, later)
+    var FIELD_ACCOUNT = "tavu_account";
+    var FIELD_CONTACT = "tavu_contact";
+
+    // Prospect fields (AI-extracted; shown only when nothing matched, so the rep can review/edit
+    // before Create Opportunity auto-provisions the contact + account from the call).
+    var FIELD_PROSPECT_COMPANY = "tavu_prospectcompanyname";
+    var FIELD_PROSPECT_FIRST = "tavu_prospectfirstname";
+    var FIELD_PROSPECT_LAST = "tavu_prospectlastname";
+    var FIELD_PROSPECT_EMAIL = "tavu_prospectemail";
+    var FIELD_PROSPECT_PHONE = "tavu_prospectphone";
+    var PROSPECT_FIELDS = [
+        FIELD_PROSPECT_COMPANY, FIELD_PROSPECT_FIRST, FIELD_PROSPECT_LAST,
+        FIELD_PROSPECT_EMAIL, FIELD_PROSPECT_PHONE
+    ];
+
+    // Form section holding the prospect fields. Shown only when prospect data was captured AND no
+    // customer is linked; hidden otherwise so the form stays clean.
+    var SECTION_PROSPECT = "section_prospectnewcustomer";
 
     var NOTIF = { ACTION: "opentavu_meeting_action", AI: "opentavu_meeting_ai", LOCKED: "opentavu_meeting_locked" };
     var NOTIF_TRANSIENT_MS = 4000;
@@ -108,12 +126,39 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
 
         Xrm.Navigation.openConfirmDialog({
             title: "Create opportunity",
-            text: "Create a new opportunity from this meeting's customer and associate the meeting to it?"
+            text: buildCreateConfirmText(formContext)
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
             runAssociate(formContext, meetingId, { OpportunityId: null, CreateNewOpportunity: true }, true);
         });
     };
+
+    /**
+     * Builds the Create Opportunity confirm text. When an account/contact is already matched, it is
+     * a plain "create opportunity". When nothing matched but the AI captured prospect data, it warns
+     * that the contact and account will be created from the call (the 2nd-line human write).
+     */
+    function buildCreateConfirmText(formContext) {
+        var account = getLookup(formContext, FIELD_ACCOUNT);
+        var contact = getLookup(formContext, FIELD_CONTACT);
+        if (account || contact) {
+            var who = account ? account.name : contact.name;
+            return "Create a new opportunity for " + who + " and associate the meeting to it?";
+        }
+        var company = getText(formContext, FIELD_PROSPECT_COMPANY);
+        var first = getText(formContext, FIELD_PROSPECT_FIRST) || "";
+        var last = getText(formContext, FIELD_PROSPECT_LAST) || "";
+        var person = (first + " " + last).trim();
+        if (company || person) {
+            var parts = [];
+            if (person) parts.push("the contact " + person);
+            if (company) parts.push("the account " + company);
+            return "No existing customer is linked. This will create " + parts.join(" and ") +
+                " from the call (matching existing records first), then a new opportunity. Continue?";
+        }
+        return "Create a new opportunity from this meeting and associate it? " +
+            "Note: no customer is linked and the call has no prospect data, so this may not succeed.";
+    }
 
     /**
      * "Review draft email": open the follow-up draft for the rep to corroborate and send, in a
@@ -209,8 +254,33 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
     Form.onLoad = function (executionContext) {
         var formContext = executionContext.getFormContext();
         showAiSummary(formContext);
+        applyProspectVisibility(formContext);
         applyLockdown(formContext);
     };
+
+    /**
+     * Shows the AI-extracted prospect fields ONLY when no account/contact matched, so the rep can
+     * review or correct them before Create Opportunity provisions the customer from the call. When
+     * a customer is already linked, these fields are hidden to keep the form clean. No-ops silently
+     * if the fields are not on the form.
+     */
+    function applyProspectVisibility(formContext) {
+        var hasCustomer = !!(getLookup(formContext, FIELD_ACCOUNT) || getLookup(formContext, FIELD_CONTACT));
+        var hasProspect = PROSPECT_FIELDS.some(function (name) {
+            return !!getText(formContext, name);
+        });
+        // Visible only when the AI captured prospect data and no customer is linked yet.
+        setSectionVisible(formContext, SECTION_PROSPECT, !hasCustomer && hasProspect);
+    }
+
+    /** Shows/hides a form section by name, searching every tab. No-op if not found. */
+    function setSectionVisible(formContext, sectionName, visible) {
+        var tabs = formContext.ui.tabs.get();
+        for (var i = 0; i < tabs.length; i++) {
+            var section = tabs[i].sections.get(sectionName);
+            if (section) { section.setVisible(visible); return; }
+        }
+    }
 
     /** Shows the AI summary + confidence as a banner while the meeting awaits the human. */
     function showAiSummary(formContext) {

@@ -50,6 +50,15 @@ namespace Pl.Meeting.Capture
         private const string MConfidence   = "tavu_aiconfidence";         // Decimal 0-100 (note: NOT tavu_aiconfidencescore)
         private const string MLastAiDate   = "tavu_lastaiprocessingdate"; // DateTime
 
+        // Prospect fields: the account/contact details the AI extracts from the transcript, used to
+        // auto-provision a new contact + account when nothing matched (the human still clicks
+        // Create Opportunity, which reviews and creates them). Only stamped when no contact matched.
+        private const string MProspectCompany = "tavu_prospectcompanyname"; // Text
+        private const string MProspectFirst   = "tavu_prospectfirstname";   // Text
+        private const string MProspectLast    = "tavu_prospectlastname";    // Text
+        private const string MProspectEmail   = "tavu_prospectemail";       // Text
+        private const string MProspectPhone   = "tavu_prospectphone";       // Text
+
         // Standard tables used for matching
         private const string ContactEntity = "contact";
         private const string AccountEntity = "account";
@@ -203,6 +212,12 @@ namespace Pl.Meeting.Capture
 
             update[MSummary]   = Trunc(o.Summary, 4000);
             update[MDiscovery] = Trunc(o.DiscoveryExtract, 4000);
+
+            // No existing contact matched: stamp the prospect details the AI extracted, so the
+            // human can auto-provision a contact (and account) from the call on Create Opportunity.
+            if (contactRef == null)
+                StampProspect(update, o);
+
             StampAi(update, (decimal)o.Confidence);
             SetStatus(update, StateOpen, StatusProcessed);
 
@@ -294,6 +309,10 @@ namespace Pl.Meeting.Capture
             sb.AppendLine("Return ONLY the JSON object described in the system prompt. Suggest an "
                 + "opportunity only by EXACT Name from the candidate list; leave it empty if none fits. "
                 + "Never invent an opportunity.");
+            sb.AppendLine("Also fill the prospect fields (prospectCompanyName, prospectFirstName, "
+                + "prospectLastName, prospectEmail, prospectPhone) from the transcript and attendees so a "
+                + "missing account/contact can be created later. Leave any prospect field empty if the "
+                + "transcript does not state it; never guess an email or phone.");
             return sb.ToString();
         }
 
@@ -343,6 +362,11 @@ namespace Pl.Meeting.Capture
                         case "discoveryExtract": o.DiscoveryExtract = FlattenJsonNode(child); break;
                         case "suggestedOpportunityName": o.SuggestedOpportunityName = child.InnerText; break;
                         case "reasoning": o.Reasoning = child.InnerText; break;
+                        case "prospectCompanyName": o.ProspectCompanyName = child.InnerText; break;
+                        case "prospectFirstName": o.ProspectFirstName = child.InnerText; break;
+                        case "prospectLastName": o.ProspectLastName = child.InnerText; break;
+                        case "prospectEmail": o.ProspectEmail = child.InnerText; break;
+                        case "prospectPhone": o.ProspectPhone = child.InnerText; break;
                         case "confidence":
                             double c;
                             o.Confidence = double.TryParse(child.InnerText, System.Globalization.NumberStyles.Any,
@@ -422,6 +446,23 @@ namespace Pl.Meeting.Capture
             update[MLastAiDate] = DateTime.UtcNow;
         }
 
+        // Writes the AI-extracted prospect details (only the non-empty ones) so the human can
+        // auto-provision a contact + account from the call when nothing matched.
+        private static void StampProspect(Entity update, MeetingCaptureOutput o)
+        {
+            SetIfPresent(update, MProspectCompany, o.ProspectCompanyName, 200);
+            SetIfPresent(update, MProspectFirst,   o.ProspectFirstName,   100);
+            SetIfPresent(update, MProspectLast,    o.ProspectLastName,    100);
+            SetIfPresent(update, MProspectEmail,   o.ProspectEmail,       100);
+            SetIfPresent(update, MProspectPhone,   o.ProspectPhone,       50);
+        }
+
+        private static void SetIfPresent(Entity e, string attr, string value, int max)
+        {
+            string v = (value ?? string.Empty).Trim();
+            if (v.Length > 0) e[attr] = Trunc(v, max);
+        }
+
         private static Guid ResolveOpp(Dictionary<string, Guid> map, string proposedName)
         {
             if (string.IsNullOrEmpty(proposedName)) return Guid.Empty;
@@ -447,6 +488,11 @@ namespace Pl.Meeting.Capture
             [DataMember(Name = "suggestedOpportunityName")] public string SuggestedOpportunityName { get; set; }
             [DataMember(Name = "confidence")]              public double Confidence { get; set; }
             [DataMember(Name = "reasoning")]               public string Reasoning { get; set; }
+            [DataMember(Name = "prospectCompanyName")]     public string ProspectCompanyName { get; set; }
+            [DataMember(Name = "prospectFirstName")]       public string ProspectFirstName { get; set; }
+            [DataMember(Name = "prospectLastName")]        public string ProspectLastName { get; set; }
+            [DataMember(Name = "prospectEmail")]           public string ProspectEmail { get; set; }
+            [DataMember(Name = "prospectPhone")]           public string ProspectPhone { get; set; }
         }
     }
 }
