@@ -746,6 +746,59 @@ Same columns. This is the approver's queue.
 
 ---
 
+### 22\. Meeting (`tavu_meeting`) — Activity
+
+**User context:** User-facing **activity** table (placed here to avoid renumbering §1–21). Module 3, Part B (Activity Capture). A connector or a manual paste creates a meeting with the transcript; `Pl.Meeting.Capture` extracts the AI summary, discovery, contact/account match, and a suggested opportunity, leaving it **Processed** (or **Manual Review Required**). The rep then associates it to an opportunity, drafts the follow-up, or discards it. Reps mostly see meetings in the **opportunity timeline** (via `regardingobjectid`); these list views are the review queue and audit. Lives in the **Workspace** area of the app (meeting *sources* live in **Settings**).
+
+> **Status reasons:** Captured 576600001 · AI Processing 576600002 · Processed 576600003 · Manual Review Required 576600004 · Reviewed 576600005 · Discarded 576600006. Activity `statecode`: Open 0 · Completed 1 · Canceled 2. The capture-source column on this table is **`tavu_source`** (Choice → the global `tavu_meetingsource`; the same global choice is exposed as `tavu_provider` on the Meeting Source config table).
+
+#### Meetings to Review view (the primary AI queue)
+
+*Filter: `statecode = Open` AND `statuscode IN (Processed, Manual Review Required)`* *Sort: `statuscode` ascending (Manual Review Required first), then `createdon` ascending (oldest first)*
+
+| \# | Column | Field | Why |
+| :---- | :---- | :---- | :---- |
+| 1 | **Subject** | `subject` | What the meeting was about |
+| 2 | **Status Reason** | `statuscode` | Processed vs Manual Review Required — what the human must do |
+| 3 | **Contact** | `tavu_contact` | Who we met — matched by the AI |
+| 4 | **Account** | `tavu_account` | Which client |
+| 5 | **Suggested Opportunity** | `tavu_suggestedopportunity` | The AI's proposed deal — one-click accept on associate |
+| 6 | **AI Confidence** | `tavu_aiconfidence` | 0–100 — drives urgency of review |
+| 7 | **Created On** | `createdon` | How long it has been waiting |
+
+**Notes:** This is the rep's meeting inbox. Manual Review Required (AI could not run / empty transcript) surfaces first; oldest-first secondary sort so nothing is forgotten. `tavu_summary` is omitted here (too long for a list); it shows in the AI Meeting Summary control on the form. Conditional formatting on `tavu_aiconfidence` (<70 = amber) flags low-confidence captures.
+
+#### Active Meetings view (all open)
+
+*Filter: `statecode = Open`* *Sort: `createdon` descending*
+
+| \# | Column | Field | Why |
+| :---- | :---- | :---- | :---- |
+| 1 | **Subject** | `subject` |  |
+| 2 | **Status Reason** | `statuscode` | Captured / AI Processing / Processed / Manual Review Required |
+| 3 | **Contact** | `tavu_contact` |  |
+| 4 | **Account** | `tavu_account` |  |
+| 5 | **Source** | `tavu_source` | Teams / Zoom / Meet / Note-taker / Manual — capture source |
+| 6 | **Suggested Opportunity** | `tavu_suggestedopportunity` |  |
+| 7 | **Created On** | `createdon` |  |
+
+#### Reviewed Meetings view (closed)
+
+*Filter: `statecode = Completed` OR `statecode = Canceled`* *Sort: `modifiedon` descending*
+
+| \# | Column | Field | Why |
+| :---- | :---- | :---- | :---- |
+| 1 | **Subject** | `subject` |  |
+| 2 | **Status Reason** | `statuscode` | Reviewed (associated) vs Discarded — the outcome |
+| 3 | **Contact** | `tavu_contact` |  |
+| 4 | **Opportunity** | `tavu_opportunity` | The deal it was associated to — traceability |
+| 5 | **Source** | `tavu_source` |  |
+| 6 | **Modified On** | `modifiedon` | When it was resolved |
+
+**Notes:** Reviewed = the meeting was associated (Completed); Discarded = Canceled. One combined closed view is enough at this scale; split by `statuscode` later if audit needs it.
+
+---
+
 ## VIEW IMPLEMENTATION NOTES
 
 ### How to create views in the App Designer
@@ -774,6 +827,7 @@ For each table above:
 | `Cancelled Cases` | historical view |
 | `Recent Closures` | activity audit view |
 | `Active Cases (AI Summary)` | alternative default view |
+| `Meetings to Review` | Activity Capture AI review queue |
 
 ### Field Security reminder
 
@@ -820,6 +874,7 @@ Native model-driven app conditional formatting is limited; the following are sug
 | Active Opportunities | `tavu_estimatedclosedate` | Past \= red, ≤7 days \= amber, ≤30 days \= neutral |
 | Active Proposals | `tavu_expecteddecisiondate` | Past \= red, ≤3 days \= amber |
 | Active Cases (AI Summary) | `tavu_aisentiment` | Critical \= red, Frustrated \= amber, Concerned \= blue, Calm \= grey |
+| Meetings to Review | `tavu_aiconfidence` | \<70 \= amber (verify before associating) |
 
 ---
 
@@ -832,5 +887,7 @@ Native model-driven app conditional formatting is limited; the following are sug
 | 1.2 | June 17, 2026 | Gustavo González Villani (revision with Claude) | Case views refined during Module 1 / AI Assessment PCF implementation. **Active Cases**: added `ownerid` (manager visibility) and `tavu_resolutiontargetdate` (second SLA deadline) → 9 columns, a deliberate exception to the 7-column guideline justified by this being the team's operational hub. **My Open Cases**: same as Active Cases minus Owner. **Needs Review — Cases**: reworked toward its real purpose (validating the AI's categorization) — added `tavu_subcategory`, removed Owner / SLA Status / target-date columns because cases at `Manual Review Required` are pre-assignment and have no SLA yet; final set = Title, Customer, Subcategory, AI Confidence, AI Summary, AI Sentiment, Multi-Intent, Created On. **Clarification recorded**: `tavu_type` drives SLA matching (Tier + Type) and queue routing, while the Business Line / Category / Subcategory cascade is the per-firm topical taxonomy produced by Module 1 — two different axes; the cascade belongs in review and reporting views, not the urgency-focused triage list. |
 | 1.4 | July 10, 2026 | Gustavo González Villani (revision with Claude) | **Sales views synced to the implemented schema/lifecycle.** Proposals (§6): replaced the non-existent `tavu_documenttype` with **`tavu_version`** (v1, v2 …) in Active/Inactive Proposals; fixed lookup names `tavu_opportunityid` → `tavu_opportunity`, `tavu_customerid` → `tavu_customer`. Opportunities (§4): caught up to the v1.4 sales-model refactor — replaced the `statuscode`-as-stages column and the removed `tavu_engagementtype` with the **`tavu_salesstage`** lookup (Active view + Won/Lost + a new "Pipeline by Sales Stage" secondary view); corrected the estimated-revenue field to **`tavu_estimatedrevenue`**; fixed the state filters (Active = Open; Won/Lost = `statecode = Inactive` + `statuscode`). |
 | 1.3 | June 17, 2026 | Gustavo González Villani (revision with Claude) | **Statecode correction.** Verified against the live `tavu_case` schema that a custom table's `statecode` has only Active / Inactive — Resolved/Cancelled cannot exist as states. Corrected the Resolved Cases and Cancelled Cases views to filter by `statecode = Inactive` + a `statuscode` group instead of the non-existent `statecode = Resolved` / `= Cancelled`. Resolved group = Solved, Information Provided, Duplicate, Out of Scope; Cancelled group = Cancelled by Customer, Cannot Reproduce, Closed without Resolution. `service-model.md` Section 6 was corrected in tandem (service-model v1.3). Also added an "Inactive Cases (all closed)" combined view alongside the split Resolved / Cancelled views — all three retained per the user's setup. |
+
+| 1.5 | August 6, 2026 | Gustavo González Villani (with Cowork) | **Added the Meeting (`tavu_meeting`) activity table (§22)** for Module 3 Part B (Activity Capture): the primary **Meetings to Review** AI queue (Open + Processed / Manual Review Required), an **Active Meetings** view, and a combined **Reviewed Meetings** closed view. Documented meeting status reasons and activity statecode, the opportunity-timeline behavior (via `regardingobjectid`), and app placement (meetings in Workspace, meeting sources in Settings). Added the naming-convention and conditional-formatting rows. Capture-source column on Meeting is `tavu_source` (the same global choice `tavu_meetingsource` is `tavu_provider` on the Meeting Source config table). |
 
 *This document is the operational reference for OpenTavu's view definitions in the model-driven app.*  

@@ -42,7 +42,11 @@
  *
  * @author  OpenTavu — Gustavo González Villani
  * @license MIT
- * @version 0.2.0
+ * @version 0.3.0
+ *
+ * v0.3.0: the editable Company Name (parentcustomerid) lookup is now kept visible in every mode
+ *         (B2C/UNSET included), so a direct client can be attached to an account and promoted to
+ *         B2B. Previously it was only reachable in B2B, which trapped B2C contacts.
  */
 
 var OpenTavu = OpenTavu || {};
@@ -95,6 +99,13 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
     // Provenance lookup to tavu_lead, set by Pl.Lead.PromoteLead only when the record was
     // created from a lead. Shown only when it has a value (hidden for directly-created records).
     var FIELD_ORIGINATING_LEAD = "tavu_originatinglead";
+
+    // Editable parent-account link (Company Name). This is the lookup the user sets to attach the
+    // contact to an Account (B2B). It must be placed in an ALWAYS-VISIBLE section of the form (e.g.
+    // the main Contact Information section), NOT inside SectionParentAccountCard (that section is the
+    // read-only B2B-only Quick View card). This script keeps its control visible in every mode so a
+    // B2C or brand-new contact can be linked to an account and promoted to B2B (no chicken-and-egg).
+    var FIELD_PARENT_ACCOUNT = "parentcustomerid";
 
     // Location cascade — custom lookups on Contact/Account, and the parent-link
     // attribute on each child table used to filter the dependent lookup.
@@ -176,6 +187,11 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
         var mode = detectMode(formContext);
 
         formContext.ui.clearFormNotification(NOTIF_UNSET_MODE);
+
+        // The editable Company Name (parentcustomerid) lookup is ALWAYS reachable, in every mode,
+        // so a B2C or new contact can be attached to an account (and thereby promoted to B2B).
+        // Only the read-only Parent Account *card* (Quick View) is mode-gated below.
+        setControlVisible(formContext, FIELD_PARENT_ACCOUNT, true);
 
         if (mode === MODE_UNSET) {
             // New record — hide all mode-specific sections.

@@ -8,6 +8,9 @@
     <Project Path="Plugins/Pl.CompanyProfile.SingleRecordGuard/Pl.CompanyProfile.SingleRecordGuard.csproj" />
     <Project Path="Plugins/Pl.Lead.PromoteLead/Pl.Lead.PromoteLead.csproj" Id="7c4b1e2a-9d3f-4a6b-b1c8-2e5f0a9d7c11" />
     <Project Path="Plugins/Pl.Lead.Triage/Pl.Lead.Triage.csproj" />
+    <Project Path="Plugins/Pl.Meeting.Associate/Pl.Meeting.Associate.csproj" Id="7c3f1a92-4b6d-4e21-9f0a-2d5c8e1b4a77" />
+    <Project Path="Plugins/Pl.Meeting.BuildEmailDraft/Pl.Meeting.BuildEmailDraft.csproj" Id="3e9b6c05-7a41-4d8f-b2e6-9c1470f5a2d3" />
+    <Project Path="Plugins/Pl.Meeting.Capture/Pl.Meeting.Capture.csproj" Id="3e9a7c41-52b8-4d6e-9f1a-7c2d8b0e5a33" />
     <Project Path="Plugins/Pl.Opportunity.CloseOrchestrator/Pl.Opportunity.CloseOrchestrator.csproj" />
     <Project Path="Plugins/Pl.Opportunity.CustomerSync/Pl.Opportunity.CustomerSync.csproj" />
     <Project Path="Plugins/Pl.Opportunity.LifecycleTracker/Pl.Opportunity.LifecycleTracker.csproj" Id="988e38d4-30a1-4a89-b4ba-90d6c41b2ca8" />

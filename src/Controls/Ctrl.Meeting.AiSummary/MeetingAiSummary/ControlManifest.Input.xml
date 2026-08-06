@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="OpenTavu.Controls" constructor="MeetingAiSummary" version="0.0.1"
+           display-name-key="AI Meeting Summary"
+           description-key="OpenTavu AI capture panel for meetings (Module 3, Part B, Activity Capture)."
+           control-type="virtual">
+
+    <!-- This control only renders AI fields the capture plugin already wrote.
+         It does NOT call any AI service itself, so it stays non-premium. -->
+    <external-service-usage enabled="false" />
+
+    <!-- PRIMARY bound column. Place the control on Summary (tavu_summary);
+         this property auto-binds to that column. -->
+    <property name="aiSummary" display-name-key="Summary"
+              description-key="Concise meeting summary written by the AI."
+              of-type="Multiple" usage="bound" required="true" />
+
+    <property name="discoveryExtract" display-name-key="Discovery Extract"
+              description-key="Discovery insights extracted from this session."
+              of-type="Multiple" usage="bound" required="false" />
+
+    <property name="aiConfidence" display-name-key="AI Confidence (%)"
+              description-key="AI confidence as a whole percentage (0-100). Bind to the Decimal column."
+              of-type="Decimal" usage="bound" required="false" />
+
+    <!-- Configurable per tenant without recompiling (configuration over code).
+         Same 0-100 scale as the stored confidence. -->
+    <property name="confidenceThreshold" display-name-key="Confidence Threshold (%)"
+              description-key="Below this value the meeting is flagged for review. Default 70."
+              of-type="Decimal" usage="input" required="false" />
+
+    <resources>
+      <code path="index.ts" order="1"/>
+      <platform-library name="React" version="16.14.0" />
+      <platform-library name="Fluent" version="9.46.2" />
+    </resources>
+
+  </control>
+</manifest>
