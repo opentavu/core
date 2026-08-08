@@ -67,6 +67,11 @@ namespace Pl.Meeting.Capture
         private const string ContactFull   = "fullname";
         private const string AccountName   = "name";
 
+        // Internal users (sellers/staff). They are excluded from prospect-contact matching so the
+        // meeting's Contact resolves to the CLIENT, never to the internal person who ran the call.
+        private const string SystemUserEntity = "systemuser";
+        private const string SUInternalEmail  = "internalemailaddress";
+
         // Opportunity (candidate source). Primary display is tavu_topic (see tavu_proposal_form.js).
         private const string OppEntity  = "tavu_opportunity";
         private const string OppTopic   = "tavu_topic";      // opportunity title
@@ -154,13 +159,23 @@ namespace Pl.Meeting.Capture
             }
 
             // --- Attendee match (fill contact/account if not already set by the connector) ---
-            Entity matchedContact = ResolveContactFromAttendees(svc, attendees);
+            // Internal (seller/staff) domains, so the meeting's Contact resolves to the CLIENT, not the host.
+            HashSet<string> internalDomains = GetInternalDomains(svc);
+            localContext.Trace("Internal domains loaded: {0}.", internalDomains.Count);
+            Entity matchedContact = ResolveContactFromAttendees(svc, attendees, internalDomains);
             EntityReference accountRef = meeting.GetAttributeValue<EntityReference>(MAccount);
             EntityReference contactRef = meeting.GetAttributeValue<EntityReference>(MContact);
             if (contactRef == null && matchedContact != null)
                 contactRef = new EntityReference(ContactEntity, matchedContact.Id);
             if (accountRef == null && matchedContact != null)
                 accountRef = GetParentAccount(matchedContact);
+
+            // Authoritative CLIENT facts derived from the external attendee's email domain. Speech-to-text
+            // mangles company names (e.g. "Seti" -> "Ceti"); the email domain is the source of truth. We
+            // hand these to the AI as ground truth AND stamp them, so the company/email never depend on
+            // what the transcript sounded like.
+            string clientEmail   = FirstExternalAttendeeEmail(attendees, internalDomains);
+            string clientCompany = CompanyFromDomain(clientEmail);
 
             // --- Resolve AI config; degrade to Manual Review if unusable ---
             AIResolvedConfig cfg = AIConfigResolver.Resolve(svc, TaskKeyMeetingCapture);
@@ -177,7 +192,7 @@ namespace Pl.Meeting.Capture
                 contactRef != null ? contactRef.Id : Guid.Empty);
             localContext.Trace("Candidate opps loaded: {0}.", candOpps.Count);
 
-            string userContent = BuildUserContent(subject, attendees, transcript, candOpps);
+            string userContent = BuildUserContent(subject, attendees, transcript, candOpps, clientEmail, clientCompany);
 
             IAIProvider provider = cfg.UseGateway
                 ? new GatewayProvider(cfg.GatewayUrl, cfg.GatewayKey)
@@ -200,6 +215,19 @@ namespace Pl.Meeting.Capture
                 return;
             }
 
+            // No external attendee matched a contact: try the AI-identified prospect email — the
+            // client may already exist as a contact. Only if that also misses do we stamp the prospect
+            // details for later provisioning (below). This keeps the Contact on the CLIENT, not the seller.
+            if (contactRef == null && !string.IsNullOrEmpty(o.ProspectEmail))
+            {
+                Entity byProspect = FindContactByEmail(svc, o.ProspectEmail.Trim());
+                if (byProspect != null)
+                {
+                    contactRef = new EntityReference(ContactEntity, byProspect.Id);
+                    if (accountRef == null) accountRef = GetParentAccount(byProspect);
+                }
+            }
+
             // --- Build the update ---
             var update = NewUpdate(meetingId);
             if (contactRef != null) update[MContact] = contactRef;
@@ -213,10 +241,11 @@ namespace Pl.Meeting.Capture
             update[MSummary]   = Trunc(o.Summary, 4000);
             update[MDiscovery] = Trunc(o.DiscoveryExtract, 4000);
 
-            // No existing contact matched: stamp the prospect details the AI extracted, so the
-            // human can auto-provision a contact (and account) from the call on Create Opportunity.
+            // No existing contact matched: stamp the prospect details so the human can auto-provision a
+            // contact (and account) from the call on Create Opportunity. Company/email come from the
+            // attendee email domain (authoritative) when available, falling back to the AI's values.
             if (contactRef == null)
-                StampProspect(update, o);
+                StampProspect(update, o, clientEmail, clientCompany);
 
             StampAi(update, (decimal)o.Confidence);
             SetStatus(update, StateOpen, StatusProcessed);
@@ -226,21 +255,149 @@ namespace Pl.Meeting.Capture
                 o.Confidence, suggestedId != Guid.Empty, contactRef != null, accountRef != null);
 
             svc.Update(update);
+
+            // Set the meeting owner to the organizer (the internal host on the call), not the gateway
+            // app user that created the record. Best-effort: never fail capture over ownership.
+            TryAssignOwnerToOrganizer(localContext, svc, meetingId, attendees, internalDomains);
         }
 
         // ============================================================
         // Matching helpers
         // ============================================================
 
-        private static Entity ResolveContactFromAttendees(IOrganizationService svc, string attendees)
+        /// <summary>First internal (staff/host) attendee email — used to set the meeting owner to the organizer.</summary>
+        private static string FirstInternalAttendeeEmail(string attendees, HashSet<string> internalDomains)
         {
             if (string.IsNullOrEmpty(attendees)) return null;
             foreach (Match m in EmailRegex.Matches(attendees))
             {
-                Entity c = FindContactByEmail(svc, m.Value.Trim());
-                if (c != null) return c; // first resolvable attendee is the primary
+                string email = m.Value.Trim();
+                if (IsInternalEmail(email, internalDomains)) return email;
             }
             return null;
+        }
+
+        private static Guid FindSystemUserIdByEmail(IOrganizationService svc, string email)
+        {
+            if (string.IsNullOrEmpty(email)) return Guid.Empty;
+            var q = new QueryExpression(SystemUserEntity)
+            {
+                ColumnSet = new ColumnSet(false),
+                NoLock = true,
+                TopCount = 1
+            };
+            q.Criteria.AddCondition("isdisabled", ConditionOperator.Equal, false);
+            var byEmail = new FilterExpression(LogicalOperator.Or);
+            byEmail.AddCondition(SUInternalEmail, ConditionOperator.Equal, email);
+            byEmail.AddCondition("domainname", ConditionOperator.Equal, email);
+            q.Criteria.AddFilter(byEmail);
+            var r = svc.RetrieveMultiple(q);
+            return r.Entities.Count > 0 ? r.Entities[0].Id : Guid.Empty;
+        }
+
+        private static void TryAssignOwnerToOrganizer(LocalPluginContext lc, IOrganizationService svc,
+            Guid meetingId, string attendees, HashSet<string> internalDomains)
+        {
+            try
+            {
+                string hostEmail = FirstInternalAttendeeEmail(attendees, internalDomains);
+                if (string.IsNullOrEmpty(hostEmail)) return;
+                Guid suId = FindSystemUserIdByEmail(svc, hostEmail);
+                if (suId == Guid.Empty) return;
+                var assign = new Entity(MeetingEntity, meetingId);
+                assign["ownerid"] = new EntityReference("systemuser", suId);
+                svc.Update(assign);
+                lc.Trace("Owner set to organizer {0}.", hostEmail);
+            }
+            catch (Exception ex)
+            {
+                lc.Trace("Owner assign skipped (non-fatal): {0}", ex.Message);
+            }
+        }
+
+        private static Entity ResolveContactFromAttendees(IOrganizationService svc, string attendees,
+            HashSet<string> internalDomains)
+        {
+            if (string.IsNullOrEmpty(attendees)) return null;
+            foreach (Match m in EmailRegex.Matches(attendees))
+            {
+                string email = m.Value.Trim();
+                // Skip internal staff (the seller who ran the call): the prospect is the external
+                // attendee, who usually is NOT yet a contact. Matching the seller (who IS in the CRM)
+                // would wrongly bind them and suppress the AI's prospect extraction.
+                if (IsInternalEmail(email, internalDomains)) continue;
+                Entity c = FindContactByEmail(svc, email);
+                if (c != null) return c; // first resolvable EXTERNAL attendee is the primary
+            }
+            return null;
+        }
+
+        /// <summary>First external (non-staff) attendee email, used to derive the client company + prospect email.</summary>
+        private static string FirstExternalAttendeeEmail(string attendees, HashSet<string> internalDomains)
+        {
+            if (string.IsNullOrEmpty(attendees)) return null;
+            foreach (Match m in EmailRegex.Matches(attendees))
+            {
+                string email = m.Value.Trim();
+                if (!IsInternalEmail(email, internalDomains)) return email;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Domains of all enabled internal users (sellers/staff), used to tell the client apart from the
+        /// host. Robust by DOMAIN (not exact email) so aliases and a blank internalemailaddress still work.
+        /// If systemuser can't be read, returns empty (no exclusion) rather than throwing.
+        /// </summary>
+        private static HashSet<string> GetInternalDomains(IOrganizationService svc)
+        {
+            var domains = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            try
+            {
+                var q = new QueryExpression(SystemUserEntity)
+                {
+                    ColumnSet = new ColumnSet(SUInternalEmail, "domainname"),
+                    NoLock = true
+                };
+                q.Criteria.AddCondition("isdisabled", ConditionOperator.Equal, false);
+                foreach (var u in svc.RetrieveMultiple(q).Entities)
+                {
+                    AddDomain(domains, u.GetAttributeValue<string>(SUInternalEmail));
+                    AddDomain(domains, u.GetAttributeValue<string>("domainname"));
+                }
+            }
+            catch { /* systemuser not readable: fall back to no domain exclusion */ }
+            return domains;
+        }
+
+        private static void AddDomain(HashSet<string> set, string email)
+        {
+            string d = DomainOf(email);
+            if (!string.IsNullOrEmpty(d)) set.Add(d);
+        }
+
+        private static string DomainOf(string email)
+        {
+            if (string.IsNullOrEmpty(email)) return null;
+            int at = email.IndexOf('@');
+            return (at >= 0 && at < email.Length - 1) ? email.Substring(at + 1).Trim() : null;
+        }
+
+        private static bool IsInternalEmail(string email, HashSet<string> internalDomains)
+        {
+            if (internalDomains == null || internalDomains.Count == 0) return false;
+            string d = DomainOf(email);
+            return d != null && internalDomains.Contains(d);
+        }
+
+        /// <summary>Client company from an email domain's second-level label: "x@seti.com.co" -> "Seti".</summary>
+        private static string CompanyFromDomain(string email)
+        {
+            string domain = DomainOf(email);
+            if (string.IsNullOrEmpty(domain)) return null;
+            string label = domain.Split('.')[0];
+            if (string.IsNullOrEmpty(label)) return null;
+            return char.ToUpperInvariant(label[0]) + (label.Length > 1 ? label.Substring(1) : string.Empty);
         }
 
         private static Entity FindContactByEmail(IOrganizationService svc, string email)
@@ -292,13 +449,23 @@ namespace Pl.Meeting.Capture
         }
 
         private string BuildUserContent(string subject, string attendees, string transcript,
-            Dictionary<string, Guid> candOpps)
+            Dictionary<string, Guid> candOpps, string clientEmail, string clientCompany)
         {
             var sb = new StringBuilder();
             sb.AppendLine("MEETING");
             sb.AppendLine("Subject: " + subject);
             sb.AppendLine("Attendees: " + attendees);
             sb.AppendLine();
+            if (!string.IsNullOrEmpty(clientCompany) || !string.IsNullOrEmpty(clientEmail))
+            {
+                sb.AppendLine("CLIENT FACTS (authoritative, derived from the external attendee's email "
+                    + "domain). Use these EXACT spellings for the client company and email EVERYWHERE in "
+                    + "your output (summary, discoveryExtract, prospect fields). They OVERRIDE any company "
+                    + "name misheard/mis-transcribed in the transcript:");
+                if (!string.IsNullOrEmpty(clientCompany)) sb.AppendLine("- Client company: " + clientCompany);
+                if (!string.IsNullOrEmpty(clientEmail)) sb.AppendLine("- Client contact email: " + clientEmail);
+                sb.AppendLine();
+            }
             sb.AppendLine("CANDIDATE OPEN OPPORTUNITIES (pick an EXACT Name to suggest, or none):");
             if (candOpps.Count == 0) sb.AppendLine("- (none)");
             else foreach (var n in candOpps.Keys) sb.AppendLine("- " + n);
@@ -448,13 +615,18 @@ namespace Pl.Meeting.Capture
 
         // Writes the AI-extracted prospect details (only the non-empty ones) so the human can
         // auto-provision a contact + account from the call when nothing matched.
-        private static void StampProspect(Entity update, MeetingCaptureOutput o)
+        private static void StampProspect(Entity update, MeetingCaptureOutput o,
+            string clientEmail, string clientCompany)
         {
-            SetIfPresent(update, MProspectCompany, o.ProspectCompanyName, 200);
-            SetIfPresent(update, MProspectFirst,   o.ProspectFirstName,   100);
-            SetIfPresent(update, MProspectLast,    o.ProspectLastName,    100);
-            SetIfPresent(update, MProspectEmail,   o.ProspectEmail,       100);
-            SetIfPresent(update, MProspectPhone,   o.ProspectPhone,       50);
+            // Company + email prefer the authoritative attendee-domain values over the AI's (which can
+            // mishear the company name); name/phone come from the AI/transcript.
+            string company = !string.IsNullOrEmpty(clientCompany) ? clientCompany : o.ProspectCompanyName;
+            string email   = !string.IsNullOrEmpty(clientEmail)   ? clientEmail   : o.ProspectEmail;
+            SetIfPresent(update, MProspectCompany, company,              200);
+            SetIfPresent(update, MProspectFirst,   o.ProspectFirstName,  100);
+            SetIfPresent(update, MProspectLast,    o.ProspectLastName,   100);
+            SetIfPresent(update, MProspectEmail,   email,                100);
+            SetIfPresent(update, MProspectPhone,   o.ProspectPhone,      50);
         }
 
         private static void SetIfPresent(Entity e, string attr, string value, int max)

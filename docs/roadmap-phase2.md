@@ -2,7 +2,7 @@
 
 Backlog of enhancements after the core case + email + SLA module (Phase 1, complete). Each item follows the OpenTavu method: **research the state of the art → implement best practices → apply the AI-first lens (AI replaces the human step where it genuinely adds value, human as second-line reviewer) → document.**
 
-**Last updated:** July 8, 2026.
+**Last updated:** August 7, 2026.
 
 ---
 
@@ -35,6 +35,26 @@ Layer on the status-driven pause (§11.1): **pause-duration metrics** (time paus
 ## 3. Module 2 — Context-Aware Customer Communication (AI-drafted responses)
 
 The compose's AI-first endgame: Module 2 **drafts the reply** and **proposes** the status change / SLA pause by reading the thread (detecting a genuine customer-wait), with the agent as reviewer. Also: vision over inbound attachments (extract error from a screenshot/log). The conversation model, status-driven pause, and interaction deltas were built to be its render + action surface.
+
+---
+
+## 4. Outlook Add-in — capture contacts / leads from email (AI-assisted)
+
+**Problem.** Reps live in Outlook. Turning an inbound email into a CRM contact or lead is manual today (copy the name, email, company, phone from the signature). This is Pain #1 (manual CRM entry) on the email surface. Microsoft's **Dynamics 365 App for Outlook** does this, but it is heavyweight and requires Dynamics licensing; OpenTavu wants a **focused, AI-assisted** version that reinforces the "tightly Microsoft-connected" positioning and shows well in demos.
+
+**Constraints / context.**
+- An **Office Add-in** (Office.js) that runs in **Outlook on the web and desktop** (New + classic). Works on the Power Apps Premium stack, with **no dependency on the Dynamics 365 App for Outlook**. Note: the add-in runs in **Outlook on the web with Business Basic**; the **desktop** Outlook app needs Business Standard.
+- **Auth:** Entra SSO (nested-app auth) so calls to the Dataverse Web API run as the acting user (respect privileges; same human-gate philosophy as lead promotion). The taskpane can be hosted on the OpenTavu gateway static site.
+- **Match-first (dedup):** match contact by email, account by domain/name **before** creating, reusing the meeting auto-provision / `tavu_PromoteLead` helpers. Never create duplicates.
+
+**Approach.**
+1. **Research** Office Add-in patterns and the Dynamics App for Outlook UX; identify the minimal "capture the sender" flow and the New-Outlook add-in constraints.
+2. **Design** the taskpane: show the sender, the **AI-extracted fields** (name, company, title, phone, editable), and buttons **Create contact** / **Create lead**; if an existing match is found, offer **Link** instead of create (same 2nd-line human gate as leads/meetings).
+3. **AI-first lens.** The gateway AI reads the email **signature/body** and **proposes** the contact + account fields and a suggested action (contact vs lead); the human confirms. Deterministic dedup plumbing (email/domain match). Do not AI-wash the matching.
+4. **Implement** as: add-in manifest + taskpane (hosted on the gateway) + Dataverse Web API calls via SSO, reusing the existing account/contact match-or-create logic (shared with Module 3B provisioning).
+5. **Document** as its own module doc; connect to Pain #1 and the Microsoft-native narrative (NIW).
+
+**Status:** roadmap / high-level design only. Depends on the M365 demo tenant (Business Basic is enough for Outlook-web demos; Standard for desktop). Sequenced **after** the meeting-capture connectors (Teams / note-taker), which share the AI-extraction + match-or-create plumbing.
 
 ---
 
