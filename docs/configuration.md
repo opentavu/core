@@ -177,14 +177,14 @@ Configuration:
 
 ---
 
-## 6. Module 1, Smart Case Categorization
+## 6. AI task configurations (Module 1 and the other live AI tasks)
 
 Module 1 categorizes each incoming case, writes a confidence score and reasoning, and either auto-applies the result or flags the case for human review. It runs as the `Pl.Case.Categorize` plugin (asynchronous, on create of `tavu_case`).
 
 ### 6.1 Confirm AI wiring and the task prompt
 
 1. Confirm AI is wired (§2) and AI Enabled is Yes (§3).
-2. Review the Module 1 **task configuration** (`tavu_aitaskconfig`): the system prompt and model parameters used for categorization. In gateway mode these move to the gateway over time; today the prompt is built in the client and sent in the request payload. Adjust the prompt only if the client needs different categorization behavior, and keep it in the same language as the case content.
+2. Review the Module 1 **task configuration** (`tavu_aitaskconfiguration`): the system prompt and model parameters used for categorization. In gateway mode these move to the gateway over time; today the prompt is built in the client and sent in the request payload. Adjust the prompt only if the client needs different categorization behavior, and keep it in the same language as the case content.
 
 ### 6.2 Confidence threshold behavior
 
@@ -216,6 +216,38 @@ A good hint describes what genuinely distinguishes the type and gives an example
 > ✅ **Checkpoint:** Every active case type has a written `tavu_aihint`. On a test case, the `AiAssessment` panel renders. You confirm live categorization end-to-end in §8.
 
 ---
+
+### 6.4 The shared AI task configuration table
+
+All of OpenTavu's AI features are configured the same way: one row per task in `tavu_aitaskconfiguration`, holding the model (lookup to `tavu_aimodel`), temperature, confidence threshold, max output tokens, and the prompt. Module 1 above is one such row; the tasks below are the others that ship live. Verify each row exists and points at a model your AI wiring (section 2) can reach.
+
+| Task | Covered in |
+|---|---|
+| Case Categorization | Module 1 (6.1 to 6.3) |
+| Lead Triage | 6.5 |
+| Meeting Capture | 6.6 |
+| Meeting Follow-up Email | 6.6 |
+| Proposal email | 6.7 |
+
+### 6.5 Lead Triage
+
+`Pl.Lead.Triage` runs on each new `tavu_lead` (anonymous inbound). The model reads the lead, matches it against existing contacts and accounts, and recommends promote, link, or discard, writing the recommendation for the salesperson. Creating a brand new contact or account from anonymous inbound always requires a one-click human approval through the `tavu_PromoteLead` action. Configure its `tavu_aitaskconfiguration` row (model, temperature, confidence threshold) the same way as Module 1.
+
+> ✅ **Checkpoint:** create a test `tavu_lead`; the AI recommendation appears and the Approve / Link / Discard ribbon works.
+
+### 6.6 Meeting Capture and follow-up email
+
+`Pl.Meeting.Capture` runs when a meeting transcript is captured. It extracts the discovery notes with AI, flags potential clients and their company, and lets the rep create an opportunity (need, contact, account) from the meeting with one button (`tavu_AssociateMeeting`). It also drafts a follow-up email for the rep to review and send. Two `tavu_aitaskconfiguration` rows drive this: Meeting Capture (extraction) and Meeting Follow-up Email (the draft).
+
+Transcript source: the MVP supports Teams native transcripts plus manual paste as a first-class fallback. To use Teams, configure the source on the `tavu_meetingsource` Teams row (the setup wizard probes the connection through the `tavu_ProbeMeetingSource` API). Native Teams transcripts require a paid M365 tier; manual paste works on any tier and doubles as the test harness.
+
+> ✅ **Checkpoint:** capture or paste a test transcript; the AI extraction populates, the create-opportunity button works, and a follow-up draft is produced.
+
+### 6.7 Proposal Send-to-Client email
+
+On **Send to Client**, OpenTavu drafts the client email (AI body grounded in the proposal) and attaches a branded PDF, then opens it for the seller to review and send. Gated by `tavu_systemsettings.tavu_proposalemaildraftenabled` (Yes/No, default on). Confirm the toggle is on and that the company profile used for the branded PDF is populated.
+
+> ✅ **Checkpoint:** on a Sent proposal, the email draft opens with the branded PDF attached.
 
 ## 7. SLA matrix and business calendars
 

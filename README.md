@@ -150,25 +150,35 @@ The `tavu_customermode` flag controls the behavior of the `tavu_customer` polymo
 
 ## Initial AI Modules
 
-### Module 1 — Smart Case Categorization *(in active development)*
+OpenTavu's AI is organized as three modules for design and evidence purposes: Module 1 (Smart Case Categorization), Module 2 (Context-Aware Communication), and Module 3 (Activity Capture and CRM Hygiene). The capabilities below are presented across the client lifecycle, sales first. All are configured through one `tavu_aitaskconfiguration` table (model, temperature, confidence threshold, max output tokens, prompt) and invoked through the provider-agnostic `IAIProvider` layer.
 
-Automatically categorizes incoming cases into the firm's own business lines, categories, and subcategories. Routes to the correct queue or owner. A custom C# Workflow Activity invokes Azure OpenAI with a structured JSON prompt that includes the case content and the firm's active typification hierarchy. The model returns categorization with a confidence score; the activity validates against active typifications and either auto-applies or flags for human review.
+### Lead Triage *(live, Module 3 Part A)*
 
-**Pain addressed:** manual triage on every incoming request — the most documented CRM abandonment driver in professional services.
+Reads each anonymous inbound lead in the `tavu_lead` buffer, matches it against existing contacts and accounts, and recommends promote, link, or discard. Creating a new master record always needs a one-click human approval (`Pl.Lead.Triage` plus the `tavu_PromoteLead` action).
 
-**Status:** production-tested in a prior enterprise deployment (Azure OpenAI + Dynamics 365 Customer Service). The OpenTavu version is an abstracted, generalized re-implementation.
+**Pain addressed:** manual CRM entry and low-quality inbound (Pain #1).
 
-### Module 2 — Context-Aware Customer Communication Assistant *(target: Month 3)*
+### Meeting Capture *(live, MVP, Module 3 Part B)*
 
-Generates first-draft responses grounded in the full CRM context: customer history, open opportunities, active cases, prior communications. Critically different from general-purpose AI assistants (including Microsoft 365 Copilot) in that it operates at the CRM-record level — the draft knows what the client bought, what they complained about last quarter, and what is currently at risk.
+Captures a client meeting transcript (Teams native, with manual paste as a first-class fallback), extracts the discovery notes with AI, flags potential clients and their company, lets the rep create an opportunity (need, contact, account) from the meeting with one button (`Pl.Meeting.Capture` plus `tavu_AssociateMeeting`), and drafts a follow-up email to review and send. Capture-only MVP; OpenTavu does not schedule meetings.
 
-**Pain addressed:** follow-up discipline and context loss.
+**Pain addressed:** context lost after meetings (Pain #6), manual CRM entry (Pain #1), and follow-up discipline (Pain #4).
 
-### Module 3 — AI Activity Capture & CRM Hygiene Assistant *(target: Month 4)*
+### Proposal email draft *(live, Module 2 at a gate)*
 
-Captures activity signals from email and meeting metadata, proposes structured updates to opportunity and account records, and surfaces relationships that have gone quiet. Uses the Azure OpenAI Batch API for retroactive and background processing.
+When a proposal is sent (Send to Client), OpenTavu writes the client email (AI body grounded in the proposal) and attaches a branded PDF for the seller to review and send. Config-gated by `tavu_proposalemaildraftenabled` (default on). This is the Context-Aware Communication pattern applied at a concrete gate; broader case and opportunity drafting stays on the roadmap.
 
-**Pain addressed:** CRM abandonment — the root cause of most CRM implementation failures in SMBs.
+**Pain addressed:** follow-up discipline, context loss, and slow proposal turnaround.
+
+### Smart Case Categorization *(live, Module 1)*
+
+Once a prospect becomes a client, every incoming case is read, categorized into the firm's own business lines, categories, and subcategories, and routed to the correct queue or owner. `Pl.Case.Categorize` builds a structured JSON prompt from the case content and the firm's active typification hierarchy, validates the result against active typifications, and either auto-applies it or flags the case for human review by confidence.
+
+**Pain addressed:** manual triage on every incoming request, a top CRM abandonment driver in professional services.
+
+**Status:** originally production-tested in a prior enterprise deployment (Azure OpenAI + Dynamics 365 Customer Service); the OpenTavu version is an abstracted, generalized re-implementation.
+
+Relationship-health monitoring (Module 3) stays on the roadmap.
 
 ---
 
@@ -213,9 +223,9 @@ The pain points driving the AI module design were validated through independent 
 
 ## Project status
 
-OpenTavu is in **early active development**. The data model and commercial flow design are complete and documented. Module 1 is in active construction. The first managed solution release is targeted for Month 3.
+OpenTavu is in **active development**. The data model and commercial flow are complete and documented, and several AI features are live: Smart Case Categorization, Lead Triage, Meeting Capture, and the AI proposal email draft. Deployment and configuration are documented in [`docs/installation.md`](docs/installation.md) and [`docs/configuration.md`](docs/configuration.md).
 
-This repository currently contains foundational documentation. The managed solution (.zip) and implementation guide will be published as Releases when the first module reaches a deployable state.
+Work continues on the roadmap modules below and on hardening the live features across more tenants and clients.
 
 ---
 

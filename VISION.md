@@ -245,45 +245,48 @@ Implementation details (specific Choice columns, status reasons, security roles,
 
 ## 8. Initial AI Modules
 
-OpenTavu launches with three AI modules in priority order. Each module ships as an independently consumable component within the framework, with its own documentation, configuration, and validation logic. Each module addresses one or more of the pain points identified in Section 3.
+OpenTavu ships three AI modules. They keep their module numbers as identity labels (Module 1 was the first built and production-tested), but they are presented here across the client lifecycle, from first lead to ongoing service, which is also the order in which they build on one another. Each ships as an independently consumable component with its own documentation, configuration, and validation logic, and addresses one or more of the pain points in Section 3. The foundation comes first.
 
-### Module 1 — Smart Case Categorization
+### Module 3 — AI Activity Capture & CRM Hygiene Assistant *(the foundation)*
 
-**Pain addressed:** Pain #1 (manual data entry) and partially Pain #6 (lost context).
+**Foundational, not merely additive.** OpenTavu leads with this module on purpose. Every other module, and every roadmap module, depends on a clean, context-complete record layer. AI operating on stale or partial data scales effort, not results (the "context gap"). The hygiene and capture layer is a prerequisite for the rest of the AI-first thesis, and the sequencing reflects that: capture clean, context-rich data from the first lead and the first meeting, and everything downstream inherits it.
 
-**What it does.** Automatically categorizes incoming cases (from email, web forms, or manual creation) into business lines, categories, and subcategories defined by the SMB's own typification configuration. Routes to the correct queue or owner based on the categorization.
+**Pain addressed:** Pain #1 (manual data entry / CRM abandonment), the most cited pain point in the evidence reviewed. Also Pain #6 (lost context), and it supports the commercial flow in Section 7.
 
-**How it works.** A custom C# Workflow Activity invokes Azure OpenAI with a structured JSON prompt that includes the case content and the active hierarchical typification of the customer. The model returns a categorization with a confidence score. The activity validates the output against active typifications, applies a configurable confidence threshold, and either persists or flags for human review.
+**What it does.** Captures consultant activity (inbound leads, meetings, emails) from connected sources, extracts the relevant context with AI, and updates the CRM without manual entry. Two capabilities are live today:
 
-**Why it matters for SMBs.** Small support teams cannot afford to spend the first 30 seconds of every case manually deciding where it belongs. Automating categorization frees scarce attention for the parts of customer service that require human judgment. In professional services contexts, this applies equally to RFP intake, billing inquiries, scope-change requests, and routine support — the categorization vocabulary changes per client, but the pattern is universal. A natural extension toward RFP-specific intake analysis is recorded on the roadmap below.
+- **Lead Triage:** reads each anonymous inbound lead in the `tavu_lead` buffer, matches it against existing `contact` and `account` records, and recommends promote, link, or discard. Promotion to a master record always requires one-tap human approval.
+- **Meeting Capture:** captures a client meeting transcript (Teams native, with manual paste as a first-class fallback), extracts the discovery, flags potential clients and their company, lets the rep create an opportunity (need, contact, account) from the meeting with one button, and drafts a follow-up email for review.
 
-**Status.** Production-tested in a prior deployment. The OpenTavu version is an abstracted, sanitized, and generalized re-implementation, released as the first module of the framework.
+**How it works.** Custom C# plugins plus a meeting-source abstraction that normalizes any transcript into one table. Inbound signals are processed by an AI extraction step that identifies which records the activity refers to, what new information it implies, and which state transitions to suggest. Suggestions are presented for one-tap approval; nothing writes to master records without confirmation. Heavy retroactive operations run via Azure OpenAI Batch API to control cost.
 
-### Module 2 — Context-Aware Customer Communication Assistant
+**Status.** MVP live: Lead Triage and Meeting Capture. Relationship-health monitoring (communication cadence and cooling detection) stays on the roadmap.
+
+### Module 2 — Context-Aware Customer Communication Assistant *(first gate live)*
 
 **Pain addressed:** Pain #4 (follow-up discipline) and Pain #6 (lost context).
 
-**What it does.** Generates draft responses to customer emails and suggests proactive follow-up communications based on the customer's full CRM history — not just the email currently open. Pulls from related cases, prior interactions, active opportunities, and engagement patterns. Drafts are presented to the human user for review and editing rather than auto-sent.
+**What it does.** Generates draft communications grounded in the customer's full CRM history, not just the message currently open. Drafts are presented to the human for review rather than auto-sent.
 
-**How it works.** A Power Automate flow gathers structured context from across Dataverse (customer record, related cases, prior interactions, active opportunity if relevant, recent meeting summaries), invokes the configured AI provider (Azure OpenAI by default) with a prompt template configurable by the implementing consultant, and writes the generated draft to a draft column on the case or opportunity record for human review. The CRM-record-grounded context distinguishes this module from general-purpose AI email assistants that operate only on the email thread itself.
+**Live today.** The first gate is the proposal **Send to Client** email: when a proposal is sent, OpenTavu writes the client email (AI body grounded in the proposal) and attaches a branded PDF, opened for the seller to review and send. Config-gated by `tavu_proposalemaildraftenabled` (default on).
 
-**Why it matters for SMBs and how this differs from Microsoft 365 Copilot.** General-purpose assistants like Microsoft 365 Copilot draft email responses based on the email thread and the user's recent activity. They do not have first-class access to CRM record structure or organization-wide history beyond what Microsoft Graph exposes. OpenTavu's Module 2 is grounded in the full Dataverse context: it knows about prior cases for that account, opportunity stage history, the lifecycle stage of the contact, and patterns across the consultant's portfolio. For professional services firms, where consistency of tone and context across a portfolio of client engagements is a documented gap, the differentiator is depth of CRM integration, not generic drafting capability.
+**How it works.** The module gathers structured context from across Dataverse, invokes the configured AI provider (Azure OpenAI by default) with a consultant-configurable prompt, and writes the generated draft for human review. The CRM-record-grounded context distinguishes this from general-purpose email assistants that operate only on the thread itself.
 
-**Status.** Initial development. Target release: Month 3.
+**Why it matters, and how this differs from Microsoft 365 Copilot.** General-purpose assistants like Microsoft 365 Copilot draft from the email thread and recent activity. They do not have first-class access to CRM record structure or organization-wide history beyond what Microsoft Graph exposes. Module 2 is grounded in the full Dataverse context: prior cases for that account, opportunity stage history, the contact's lifecycle stage, and patterns across the portfolio. The differentiator is depth of CRM integration, not generic drafting.
 
-### Module 3 — AI Activity Capture & CRM Hygiene Assistant
+**Status.** First gate live (proposal email). Broader case and opportunity drafting in development.
 
-**Pain addressed:** Pain #1 (manual data entry / CRM abandonment) — the most cited pain point in the evidence reviewed. Also addresses Pain #6 (lost context) and supports the commercial flow described in Section 7.
+### Module 1 — Smart Case Categorization *(live)*
 
-**What it does.** Automatically captures consultant activity (emails sent and received, meetings held, calls logged) from connected sources, extracts the relevant context using AI, and updates the CRM without manual intervention. Suggests fields to update on existing records, links communications to the correct opportunity or account, detects clients or prospects with no recent activity that warrant follow-up, and orchestrates the promotion of `tavu_lead` records (ingestion buffer) into `contact` records (master) with confidence thresholds.
+**Pain addressed:** Pain #1 (manual data entry) and partially Pain #6 (lost context).
 
-**How it works.** A combination of Power Automate flows and custom C# Workflow Activities. Inbound signals from Microsoft Graph (Outlook email, Teams meetings, calendar events) are processed by an AI extraction step that identifies which existing records the activity refers to, what new information it implies, and whether any state transitions should be suggested. All suggestions are presented to the consultant for one-tap approval; nothing writes to the master records without confirmation, except for low-risk activity logging (e.g., "an email was sent to this contact at this time"). Heavy retroactive operations (historical email analysis, periodic relationship-health computation) run via Azure OpenAI Batch API to control cost.
+**What it does.** Once a prospect becomes a client, automatically categorizes incoming cases (email, web forms, or manual creation) into business lines, categories, and subcategories defined by the firm's own typification configuration, and routes to the correct queue or owner.
 
-**Why it matters for SMBs.** This module addresses the single most consistently cited reason CRM implementations fail in professional services firms: consultants do not update the CRM because manual entry is friction they cannot afford. By capturing activity automatically and proposing record updates, OpenTavu reduces CRM abandonment and produces the "clean pipeline" that downstream analytics and forecasting depend on. The downstream effect is also measurable: higher percentage of activity captured, fewer dropped follow-ups, better forecast quality.
+**How it works.** A custom C# plugin invokes Azure OpenAI with a structured JSON prompt that includes the case content and the customer's active hierarchical typification. The model returns a categorization with a confidence score. The plugin validates the output against active typifications, applies a configurable confidence threshold, and either persists or flags for human review.
 
-In this sense Module 3 is **foundational, not merely additive**: Modules 1 and 2 — and every roadmap module — depend on a clean, context-complete record layer. AI operating on stale or partial data scales effort, not results (the "context gap"). The hygiene layer is therefore a prerequisite for the rest of the AI-first thesis rather than a third add-on, and its sequencing reflects that.
+**Why it matters for SMBs.** Small support teams cannot afford to spend the first 30 seconds of every case deciding where it belongs. Automating categorization frees scarce attention for the parts of service that need human judgment. In professional services this applies to RFP intake, billing inquiries, scope-change requests, and routine support; the categorization vocabulary changes per client, the pattern is universal. A natural extension toward RFP-specific intake analysis is recorded on the roadmap below.
 
-**Status.** Initial development. Target release: Month 4.
+**Status.** Live. Originally production-tested in a prior deployment; the OpenTavu version is an abstracted, sanitized, and generalized re-implementation.
 
 ### Roadmap modules (documented but not yet built)
 
