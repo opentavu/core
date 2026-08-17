@@ -11,6 +11,7 @@
     <Project Path="Plugins/Pl.Meeting.Associate/Pl.Meeting.Associate.csproj" Id="7c3f1a92-4b6d-4e21-9f0a-2d5c8e1b4a77" />
     <Project Path="Plugins/Pl.Meeting.BuildEmailDraft/Pl.Meeting.BuildEmailDraft.csproj" Id="3e9b6c05-7a41-4d8f-b2e6-9c1470f5a2d3" />
     <Project Path="Plugins/Pl.Meeting.Capture/Pl.Meeting.Capture.csproj" Id="3e9a7c41-52b8-4d6e-9f1a-7c2d8b0e5a33" />
+    <Project Path="Plugins/Pl.MeetingSource.Probe/Pl.MeetingSource.Probe.csproj" />
     <Project Path="Plugins/Pl.Opportunity.CloseOrchestrator/Pl.Opportunity.CloseOrchestrator.csproj" />
     <Project Path="Plugins/Pl.Opportunity.CustomerSync/Pl.Opportunity.CustomerSync.csproj" />
     <Project Path="Plugins/Pl.Opportunity.LifecycleTracker/Pl.Opportunity.LifecycleTracker.csproj" Id="988e38d4-30a1-4a89-b4ba-90d6c41b2ca8" />
@@ -26,6 +27,7 @@
     <File Path="WebResources/js/tavu_account_form.js" />
     <File Path="WebResources/js/tavu_contact_form.js" />
     <File Path="WebResources/js/tavu_lead_form.js" />
+    <File Path="WebResources/js/tavu_meetingsource_form.js" />
     <File Path="WebResources/js/tavu_meeting_form.js" />
     <File Path="WebResources/js/tavu_opportunity_form.js" />
     <File Path="WebResources/js/tavu_product_form.js" />

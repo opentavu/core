@@ -754,7 +754,7 @@ Same columns. This is the approver's queue.
 
 #### Meetings to Review view (the primary AI queue)
 
-*Filter: `statecode = Open` AND `statuscode IN (Processed, Manual Review Required)`* *Sort: `statuscode` ascending (Manual Review Required first), then `createdon` ascending (oldest first)*
+*Filter: `statecode = Open` AND `statuscode IN (Processed, Manual Review Required)`* *Sort: `statuscode` (Status Reason) **ascending**, then `createdon` ascending (oldest first). Note: the modern view designer orders a Choice column by its **label**, not its numeric value, so ascending puts "**M**anual Review Required" above "**P**rocessed" (M before P). This is the intended queue order; it happens to align with the labels today and would need re-checking if the status labels are ever renamed.*
 
 | \# | Column | Field | Why |
 | :---- | :---- | :---- | :---- |
@@ -766,7 +766,7 @@ Same columns. This is the approver's queue.
 | 6 | **AI Confidence** | `tavu_aiconfidence` | 0–100 — drives urgency of review |
 | 7 | **Created On** | `createdon` | How long it has been waiting |
 
-**Notes:** This is the rep's meeting inbox. Manual Review Required (AI could not run / empty transcript) surfaces first; oldest-first secondary sort so nothing is forgotten. `tavu_summary` is omitted here (too long for a list); it shows in the AI Meeting Summary control on the form. Conditional formatting on `tavu_aiconfidence` (<70 = amber) flags low-confidence captures.
+**Notes:** This is the rep's meeting inbox, a **work queue, not a newest-first feed**: most-urgent (Manual Review Required) on top, then oldest-first so nothing is forgotten at the bottom. To eyeball freshly synced meetings (newest first), use the **Active Meetings** view (`createdon` descending). Manual Review Required (AI could not run / empty transcript) surfaces first via the label-ascending sort noted above; oldest-first secondary sort so nothing is forgotten. `tavu_summary` is omitted here (too long for a list); it shows in the AI Meeting Summary control on the form. Conditional formatting on `tavu_aiconfidence` (<70 = amber) flags low-confidence captures.
 
 #### Active Meetings view (all open)
 
@@ -889,5 +889,6 @@ Native model-driven app conditional formatting is limited; the following are sug
 | 1.3 | June 17, 2026 | Gustavo González Villani (revision with Claude) | **Statecode correction.** Verified against the live `tavu_case` schema that a custom table's `statecode` has only Active / Inactive — Resolved/Cancelled cannot exist as states. Corrected the Resolved Cases and Cancelled Cases views to filter by `statecode = Inactive` + a `statuscode` group instead of the non-existent `statecode = Resolved` / `= Cancelled`. Resolved group = Solved, Information Provided, Duplicate, Out of Scope; Cancelled group = Cancelled by Customer, Cannot Reproduce, Closed without Resolution. `service-model.md` Section 6 was corrected in tandem (service-model v1.3). Also added an "Inactive Cases (all closed)" combined view alongside the split Resolved / Cancelled views — all three retained per the user's setup. |
 
 | 1.5 | August 6, 2026 | Gustavo González Villani (with Cowork) | **Added the Meeting (`tavu_meeting`) activity table (§22)** for Module 3 Part B (Activity Capture): the primary **Meetings to Review** AI queue (Open + Processed / Manual Review Required), an **Active Meetings** view, and a combined **Reviewed Meetings** closed view. Documented meeting status reasons and activity statecode, the opportunity-timeline behavior (via `regardingobjectid`), and app placement (meetings in Workspace, meeting sources in Settings). Added the naming-convention and conditional-formatting rows. Capture-source column on Meeting is `tavu_source` (the same global choice `tavu_meetingsource` is `tavu_provider` on the Meeting Source config table). |
+| 1.6 | August 12, 2026 | Gustavo González Villani (with Cowork) | **Clarified the Meetings to Review sort (§22).** Confirmed against the live view designer that a Choice column sorts by its **label**, not its numeric value: `statuscode` **ascending** correctly puts "Manual Review Required" above "Processed" (M before P). Documented the queue-vs-feed intent (most-urgent + oldest-first, deliberately not newest-first; use Active Meetings for newest-first) and flagged the label-ordering fragility if status labels are renamed. No column changes. |
 
 *This document is the operational reference for OpenTavu's view definitions in the model-driven app.*  
