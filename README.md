@@ -12,7 +12,7 @@
 
 ## What is OpenTavu?
 
-OpenTavu is a production-grade, AI-first CRM foundation for **professional services SMBs** — IT consultancies, B2B agencies, software/QA boutiques, and similar firms — that need more than a spreadsheet but cannot justify the cost and complexity of enterprise CRM platforms.
+OpenTavu is a production-grade, AI-first CRM foundation for **professional services SMBs** (engineering and architecture practices, B2B agencies, legal and accounting firms, QA boutiques, and IT and management consultancies) that need more than a spreadsheet but cannot justify the cost and complexity of enterprise CRM platforms.
 
 It is delivered as a **Microsoft Power Platform managed solution** that a consultant or integrator deploys into a client's Dataverse tenant in hours, not months. It includes a purpose-built data model, AI modules that automate high-friction workflows, automation flows, and complete documentation.
 
