@@ -223,7 +223,7 @@ This repository currently contains foundational documentation. The managed solut
 
 **If you are a business leader:** OpenTavu is deployed by a consultant who configures it for your tenant. You will need Power Apps Premium licenses and an Azure subscription with Azure OpenAI access. Contact the author via LinkedIn or open a Discussion in this repository.
 
-**If you are a Power Platform consultant or integrator:** Fork the repository, evaluate the framework, adapt it for a client engagement, and contribute improvements back. The [vision document](VISION.md) and operational guides (`docs/sales-model.md`, `docs/service-model.md`) describe the full design rationale and specifications.
+**If you are a Power Platform consultant or integrator:** Fork the repository, evaluate the framework, adapt it for a client engagement, and contribute improvements back. The [vision document](VISION.md) and operational guides (`docs/sales-model.md`, `docs/service-model.md`) describe the full design rationale and specifications. To deploy OpenTavu into a client tenant, follow the [installation guide](docs/installation.md) and the [configuration guide](docs/configuration.md).
 
 **Prerequisites:**
 - Microsoft 365 tenant
