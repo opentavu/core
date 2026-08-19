@@ -236,7 +236,7 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                     <Textarea
                         value={text}
                         onChange={(_ev, data) => setText(data.value)}
-                        placeholder={internal ? "Nota interna (privada)…" : "Responder al cliente…"}
+                        placeholder={internal ? "Internal note (private)…" : "Reply to the customer…"}
                         resize="vertical"
                         style={{ width: "100%" }}
                     />
@@ -256,14 +256,14 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                             <Switch
                                 checked={internal}
                                 onChange={(_ev, data) => setInternal(data.checked ?? false)}
-                                label={internal ? "Nota interna" : "Respuesta pública"}
+                                label={internal ? "Internal note" : "Public reply"}
                             />
                             <Button
                                 appearance="transparent"
                                 icon={<PaperclipIcon />}
                                 onClick={() => fileInputRef.current?.click()}
-                                aria-label="Adjuntar"
-                                title="Adjuntar"
+                                aria-label="Attach"
+                                title="Attach"
                             />
                             {statusOptions.length > 0 ? (
                                 <Select
@@ -272,11 +272,11 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                                     onChange={(_ev, data) => setStatusId(data.value)}
                                     disabled={text.trim().length === 0}
                                     title={text.trim().length === 0
-                                        ? "Escribe una respuesta para cambiar el estado al enviar"
-                                        : "Cambiar estado al enviar"}
-                                    aria-label="Cambiar estado"
+                                        ? "Write a reply to change the status on send"
+                                        : "Change status on send"}
+                                    aria-label="Change status"
                                 >
-                                    <option value="">— sin cambio de estado —</option>
+                                    <option value="">— no status change —</option>
                                     {statusOptions.map((s) => (
                                         <option key={s.id} value={s.id}>{s.name}</option>
                                     ))}
@@ -284,7 +284,7 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                             ) : null}
                         </div>
                         <Button appearance="primary" disabled={!canSend} onClick={send}>
-                            Enviar
+                            Send
                         </Button>
                     </div>
 
@@ -335,7 +335,7 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
 
             {!props.loading && props.hasMore && props.onLoadOlder ? (
                 <Button className={styles.loadOlder} appearance="subtle" size="small" onClick={props.onLoadOlder}>
-                    Cargar más antiguos
+                    Load older
                 </Button>
             ) : null}
         </div>
