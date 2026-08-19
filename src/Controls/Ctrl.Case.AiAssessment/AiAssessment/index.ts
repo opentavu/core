@@ -27,7 +27,15 @@ export class AiAssessment implements ComponentFramework.ReactControl<IInputs, IO
             missingInfo: p.aiMissingInfo.raw ?? undefined,
             reasoning: p.aiReasoning.raw ?? undefined,
             sentimentLabel: this.getOptionLabel(p.aiSentiment),
-            confidence: p.aiConfidenceScore.raw,
+            // tavu_AIConfidenceScore is stored 0-100 (whole percentage, consistent
+            // with the lead/meeting plugins). The card works on a 0-1 scale (it
+            // multiplies by 100 for display and compares against a 0-1 threshold),
+            // so normalize here at the boundary — otherwise 90 renders as "9000%"
+            // and the low-confidence review gate never fires.
+            confidence:
+                p.aiConfidenceScore.raw === null || p.aiConfidenceScore.raw === undefined
+                    ? null
+                    : p.aiConfidenceScore.raw / 100,
             multiIntent: p.multiIntentDetected.raw === true,
             confidenceThreshold: p.confidenceThreshold.raw ?? 0.85,
         };

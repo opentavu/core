@@ -452,6 +452,10 @@ namespace Pl.Meeting.Capture
             Dictionary<string, Guid> candOpps, string clientEmail, string clientCompany)
         {
             var sb = new StringBuilder();
+            string outLang = DetectLanguage(transcript);
+            sb.AppendLine("OUTPUT LANGUAGE: " + outLang
+                + " (write summary, discoveryExtract and reasoning ONLY in " + outLang + ").");
+            sb.AppendLine();
             sb.AppendLine("MEETING");
             sb.AppendLine("Subject: " + subject);
             sb.AppendLine("Attendees: " + attendees);
@@ -480,7 +484,27 @@ namespace Pl.Meeting.Capture
                 + "prospectLastName, prospectEmail, prospectPhone) from the transcript and attendees so a "
                 + "missing account/contact can be created later. Leave any prospect field empty if the "
                 + "transcript does not state it; never guess an email or phone.");
+            sb.AppendLine();
+            sb.AppendLine("OUTPUT LANGUAGE (final reminder): write summary, discoveryExtract and "
+                + "reasoning ONLY in " + outLang + ". The JSON keys stay in English; only the "
+                + "values follow " + outLang + ".");
             return sb.ToString();
+        }
+
+        // Deterministic ES/EN detection so the model never has to guess the output
+        // language. Small models mishandle "match the transcript's language" when the
+        // instructions are in a different language; we detect here and tell the model.
+        private static string DetectLanguage(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return "English";
+            string t = " " + text.ToLowerInvariant() + " ";
+            int es = 0, en = 0;
+            foreach (char c in t) if ("áéíóúñ¿¡ü".IndexOf(c) >= 0) es += 2;
+            string[] esW = { " el ", " la ", " los ", " las ", " de ", " que ", " para ", " con ", " una ", " está ", " son ", " pero ", " propuesta ", " reunión ", " cliente ", " hojas " };
+            string[] enW = { " the ", " and ", " of ", " to ", " for ", " with ", " is ", " are ", " that ", " we ", " you ", " proposal ", " meeting ", " client ", " budget ", " spreadsheet " };
+            foreach (var w in esW) if (t.Contains(w)) es++;
+            foreach (var w in enW) if (t.Contains(w)) en++;
+            return es > en ? "Spanish" : "English";
         }
 
         // ============================================================

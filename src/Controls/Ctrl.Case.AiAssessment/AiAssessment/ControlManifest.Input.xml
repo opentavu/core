@@ -36,7 +36,7 @@
               of-type="OptionSet" usage="bound" required="false" />
 
     <property name="aiConfidenceScore" display-name-key="AI Confidence Score"
-              description-key="AI confidence (0-1). Bind to a Decimal column."
+              description-key="AI confidence (0-100, whole percentage). Bind to a Decimal column; normalized to 0-1 internally."
               of-type="Decimal" usage="bound" required="false" />
 
     <property name="multiIntentDetected" display-name-key="Multi-Intent Detected"
