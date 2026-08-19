@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{f26d5fdb-7258-f111-a825-0022480a59ac}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_topic" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_opportunityid">
+          <cell name="tavu_topic" width="200" />
+          <cell name="tavu_customer" width="127" />
+          <cell name="statuscode" width="119" />
+          <cell name="tavu_estimatedrevenue" width="149" />
+          <cell name="tavu_probability" width="103" />
+          <cell name="tavu_estimatedclosedate" width="162" />
+          <cell name="tavu_customertier" width="121" />
+          <cell name="ownerid" width="100" />
+          <cell name="modifiedon" width="113" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="true">
+        <entity name="tavu_opportunity">
+          <attribute name="tavu_topic" />
+          <attribute name="tavu_opportunityid" />
+          <attribute name="tavu_customer" />
+          <attribute name="statuscode" />
+          <attribute name="tavu_estimatedrevenue" />
+          <attribute name="tavu_probability" />
+          <attribute name="tavu_estimatedclosedate" />
+          <attribute name="tavu_customertier" />
+          <attribute name="ownerid" />
+          <attribute name="modifiedon" />
+          <filter type="and">
+            <condition attribute="ownerid" operator="eq-userid" />
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="My Open Opportunities" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

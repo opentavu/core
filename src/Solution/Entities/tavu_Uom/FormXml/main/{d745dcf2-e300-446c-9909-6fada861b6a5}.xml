@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{d745dcf2-e300-446c-9909-6fada861b6a5}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{702a6f68-e1a8-413c-8631-649b553939eb}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{ce4d6eb8-50fb-4150-9551-5620cd11bd17}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{2e406445-d1d2-4cd6-a028-435cb7595a0f}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bfccf61a-3107-4659-90bd-238637425917}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Unit Group" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_unitgroup" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_unitgroup" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3ceef0d8-a6ec-4081-ab31-d37d4ba9fb81}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Conversion Factor" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_conversionfactor" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_conversionfactor" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{079aee11-5416-4dcb-9e19-c69486bc69f1}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Is Base Unit" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_isbaseunit" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_isbaseunit" disabled="false" uniqueid="{ed8148d1-9152-4acf-9411-91e553b2136f}" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{7a8b4556-d868-4fd8-8103-57b4340c5810}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{12e01dd4-d78a-4219-8c01-80595e392a10}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{acf0c26d-697e-4841-bbbb-930da180e746}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{be279d55-09b1-4726-8f27-a3c7b53faf93}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{1d79369b-6d67-4c74-808b-71124f6c09f2}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{ac8aaddc-f532-4a82-b325-4ac8bd151945}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{4565b51a-575c-4f45-9f10-6d1c8624f8c9}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{dbeca3a8-71e1-4f2e-acd6-2f2db8675816}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{ed8148d1-9152-4acf-9411-91e553b2136f}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_isbaseunit</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isbaseunit</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isbaseunit</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isbaseunit</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

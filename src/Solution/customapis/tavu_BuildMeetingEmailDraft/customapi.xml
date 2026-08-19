@@ -1,0 +1,18 @@
+<customapi uniquename="tavu_BuildMeetingEmailDraft">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="Drafts an AI follow-up email from a captured meeting (summary and discovery) and creates it as a draft email activity, regarding the associated opportunity, for the rep to review and send">
+    <label description="Drafts an AI follow-up email from a captured meeting (summary and discovery) and creates it as a draft email activity, regarding the associated opportunity, for the rep to review and send" languagecode="1033" />
+  </description>
+  <displayname default="BuildMeetingEmailDraft">
+    <label description="BuildMeetingEmailDraft" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>BuildMeetingEmailDraft</name>
+  <plugintypeid>
+    <plugintypeexportkey>c748ea18-e731-474c-9659-d4ba5f862f99</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

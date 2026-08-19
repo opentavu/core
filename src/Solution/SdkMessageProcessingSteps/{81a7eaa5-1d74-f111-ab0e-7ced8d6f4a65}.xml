@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="Pl.SystemSettings.SingleRecordGuard.SingleRecordGuard: Create of tavu_systemsettings" SdkMessageProcessingStepId="{81a7eaa5-1d74-f111-ab0e-7ced8d6f4a65}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>9ebdbb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeName>Pl.SystemSettings.SingleRecordGuard.SingleRecordGuard, Pl.SystemSettings.SingleRecordGuard, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5</PluginTypeName>
+  <PluginTypeId>c543c718-a4c8-4b90-91ca-56a80ebb0ac0</PluginTypeId>
+  <PrimaryEntity>tavu_systemsettings</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <FilteringAttributes></FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>20</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="MeetingId">
+  <description default="The tavu_meeting to draft the follow-up email for. Required. GUID as string.">
+    <label description="The tavu_meeting to draft the follow-up email for. Required. GUID as string." languagecode="1033" />
+  </description>
+  <displayname default="BuildMeetingEmailDraft-In-MeetingId">
+    <label description="BuildMeetingEmailDraft-In-MeetingId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>BuildMeetingEmailDraft-In-MeetingId</name>
+  <type>10</type>
+</customapirequestparameter>

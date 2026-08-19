@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{a0694520-4393-4cff-a9ba-3913242c2275}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_systemsettingsid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_defaultcountry" width="136" />
+          <cell name="tavu_activitythresholddays" width="179" />
+          <cell name="tavu_aienabled" width="105" />
+          <cell name="tavu_defaultaimodel" width="141" />
+          <cell name="tavu_defaultconfidencethreshold" width="211" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_systemsettings">
+          <attribute name="tavu_systemsettingsid" />
+          <attribute name="tavu_name" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="tavu_activitythresholddays" />
+          <attribute name="tavu_defaultcountry" />
+          <attribute name="tavu_aienabled" />
+          <attribute name="tavu_defaultconfidencethreshold" />
+          <attribute name="tavu_defaultaimodel" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive System Settings" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

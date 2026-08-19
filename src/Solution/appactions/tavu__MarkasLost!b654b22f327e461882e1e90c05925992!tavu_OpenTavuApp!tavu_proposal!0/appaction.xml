@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__MarkasLost!b654b22f327e461882e1e90c05925992!tavu_OpenTavuApp!tavu_proposal!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Mark as Lost">
+    <label description="Mark as Lost" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Mark this proposal as rejected by the client.">
+    <label description="Mark this proposal as rejected by the client." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Mark this proposal as rejected by the client.">
+    <label description="Mark this proposal as rejected by the client." languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_proposal</logicalname>
+  </contextentity>
+  <contextvalue>tavu_proposal</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>fafad864-c07c-f111-ab0e-000d3a33441f</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>MarkasLost!b654b22f327e461882e1e90c05925992</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Proposal.Form.markRejected</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>5602e8e5-b686-f111-8075-7ced8d6f945c</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100046.7500000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>3e68e0435bf1453f8e49b3afb2ca3a83</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{237a73c1-e49e-4498-93ef-32b3316f5c57}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_salesstageid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_defaultprobability" width="148" />
+          <cell name="tavu_forecastcategory" width="143" />
+          <cell name="tavu_displayorder" width="120" />
+          <cell name="tavu_color" width="100" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_salesstage">
+          <attribute name="tavu_salesstageid" />
+          <attribute name="tavu_name" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_defaultprobability" />
+          <attribute name="tavu_displayorder" />
+          <attribute name="tavu_forecastcategory" />
+          <order attribute="tavu_displayorder" descending="false" />
+          <order attribute="tavu_name" descending="false" />
+          <attribute name="tavu_color" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Sales Stages" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

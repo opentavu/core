@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__CreateNewVersion!eb84687bb391419f935cb433b7ff54b1!tavu_OpenTavuApp!tavu_proposal!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Create New Version">
+    <label description="Create New Version" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Create a new draft copy of this proposal with a new version number, and mark the current one as Superseded.">
+    <label description="Create a new draft copy of this proposal with a new version number, and mark the current one as Superseded." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Create New Version">
+    <label description="Create New Version" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_proposal</logicalname>
+  </contextentity>
+  <contextvalue>tavu_proposal</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>86d8959b-aa86-f111-8075-7ced8d6f945c</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>CreateNewVersion!eb84687bb391419f935cb433b7ff54b1</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Proposal.Form.createNewVersion</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>5602e8e5-b686-f111-8075-7ced8d6f945c</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100046.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>7ef72ac2c44a4fc191611732304482c9</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

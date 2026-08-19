@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__ClosedasLost!f0d1146501234dbd87f663025117cbd1!tavu_OpenTavuApp!tavu_opportunity!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Closed as Lost">
+    <label description="Closed as Lost" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Close this opportunity as lost and record the reason">
+    <label description="Close this opportunity as lost and record the reason" languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Close this opportunity as lost and record the reason">
+    <label description="Close this opportunity as lost and record the reason" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_opportunity</logicalname>
+  </contextentity>
+  <contextvalue>tavu_opportunity</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>fafad864-c07c-f111-ab0e-000d3a33441f</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>ClosedasLost!f0d1146501234dbd87f663025117cbd1</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Opportunity.Form.closeAsLost</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>fdbe8263-1d68-f111-ab0c-0022480a59ac</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100017.5000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>386771a6d7b548ba82a82ad6cd2084f9</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__Discard!087d4a5745014452b9fdaf4aa67ae9f9!tavu_OpenTavuApp!tavu_lead!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Discard">
+    <label description="Discard" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Close this lead as Not Qualified when you've reviewed it and it isn't worth pursuing. No Contact or Account is created.">
+    <label description="Close this lead as Not Qualified when you've reviewed it and it isn't worth pursuing. No Contact or Account is created." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Discard as Not Qualified">
+    <label description="Discard as Not Qualified" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_lead</logicalname>
+  </contextentity>
+  <contextvalue>tavu_lead</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>520f7ca0-678c-f111-8076-7ced8d715683</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>Discard!087d4a5745014452b9fdaf4aa67ae9f9</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Lead.Form.discard</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>3f78f410-638c-f111-8076-7ced8d715683</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100046.7500000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>6eecb9e5fb9c426e915468795752bea3</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

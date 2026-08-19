@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__ClosedasWon!fd9e0962b085434e8d4376e1118ca6e2!tavu_OpenTavuApp!tavu_opportunity!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Closed as Won">
+    <label description="Closed as Won" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Close this opportunity as won and record the actual revenue">
+    <label description="Close this opportunity as won and record the actual revenue" languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Close this opportunity as won and record the actual revenue">
+    <label description="Close this opportunity as won and record the actual revenue" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_opportunity</logicalname>
+  </contextentity>
+  <contextvalue>tavu_opportunity</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>9493d8c0-a07c-f111-ab0e-000d3a33441f</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>ClosedasWon!fd9e0962b085434e8d4376e1118ca6e2</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Opportunity.Form.closeAsWon</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>fdbe8263-1d68-f111-ab0c-0022480a59ac</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100015.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>7782a797a93a4e75b8e5b8206b8a57d0</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

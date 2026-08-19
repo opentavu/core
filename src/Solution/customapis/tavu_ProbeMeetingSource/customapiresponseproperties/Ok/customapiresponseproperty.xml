@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="Ok">
+  <description default="True if the gateway call completed. Gate failures still return true; see HealthJson">
+    <label description="True if the gateway call completed. Gate failures still return true; see HealthJson" languagecode="1033" />
+  </description>
+  <displayname default="ProbeMeetingSource-Out-Ok">
+    <label description="ProbeMeetingSource-Out-Ok" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>ProbeMeetingSource-Out-Ok</name>
+  <type>0</type>
+</customapiresponseproperty>

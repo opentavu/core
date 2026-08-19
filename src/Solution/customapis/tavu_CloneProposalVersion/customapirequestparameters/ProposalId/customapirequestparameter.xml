@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="ProposalId">
+  <description default="The source tavu_proposal to version. Required. GUID as string.">
+    <label description="The source tavu_proposal to version. Required. GUID as string." languagecode="1033" />
+  </description>
+  <displayname default="CloneProposalVersion-In-ProposalId">
+    <label description="CloneProposalVersion-In-ProposalId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>CloneProposalVersion-In-ProposalId</name>
+  <type>10</type>
+</customapirequestparameter>

@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{e2b0c0b5-0a34-403b-ac4e-ff9a834242b6}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{3aa2f0ba-2d14-4b14-9aa8-31db598b6358}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{7831e394-9c2d-4876-9485-4ad3e487a1af}" name="Section_CaseStatusDetails" columns="11">
+                  <labels>
+                    <label description="Case Status Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{d7a34f6c-79bf-471e-b45d-2f7967be74a9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_code" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_code" disabled="true" />
+                      </cell>
+                      <cell id="{3ebd91e5-5ef0-4649-9b50-b53f893277f7}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_isaicategorized" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_isaicategorized" disabled="false" uniqueid="{ec9f8917-3fa0-423f-93a2-318fd674a960}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b449871f-7e50-439b-a7fe-2ec2e08f58af}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                      <cell id="{5b504632-4cf1-4297-a812-956e098e8af8}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_ismanualreview" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_ismanualreview" disabled="false" uniqueid="{35932066-a0bc-4c9a-b602-65f8cdd1bda3}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2ab108d5-74e9-4dd9-85dd-8cf5572e57f1}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_statecategory" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_statecategory" disabled="false" />
+                      </cell>
+                      <cell id="{de891df0-daec-4de4-8b25-358d69925826}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_sortorder" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_sortorder" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{61d2fb56-a325-4de8-af2d-5ec02492cb36}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{88921349-61d6-4fcd-9435-5c280c832421}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_displaycolor" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_displaycolor" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{ccccb9da-071f-4a46-b7d4-e20bc3c7c03a}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{69423601-8f4a-4c16-b4cf-e3dc93c5015e}" locklevel="0" colspan="1" rowspan="4">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_description" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_description" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{622fa306-ce52-4980-9ad1-2b66d9a2fc34}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{5181746e-2bd0-4387-a595-3d8f9a3f829c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_pausessla" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_pausessla" disabled="false" uniqueid="{953b3476-2f55-4def-b338-5d1a15006b43}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{15b8a17c-9c4b-4b56-b95e-3915eaa24c95}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_isdefaultnew" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_isdefaultnew" disabled="false" uniqueid="{ac036059-9fc1-45b4-a65e-c08994c2bd40}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{09b77437-47d3-40a7-ad23-669c10a46225}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_isresumetarget" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_isresumetarget" disabled="false" uniqueid="{38aa4398-ab40-4cd9-8c7d-2af141f1daa2}" />
+                      </cell>
+                      <cell locklevel="0" id="{5e20f4c7-3130-45bc-9370-906d9d07d894}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{c4bfcf14-a42e-4660-a985-4d9312c8c7fb}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{24391fc7-4682-48e2-ac90-b1611d03862a}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e31a4baf-57a9-4bd4-8c85-bf2c58417db6}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e539e589-346c-4587-baf3-ea350fb9966d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{a3fe7359-76fd-414e-8898-2e11e9c5fc9f}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{93ed0be6-295b-44f0-82b3-c7c542415723}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e436db56-3db9-4c4b-b958-cc79368310fd}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{28f2dde8-ea67-4a37-82e9-462f53654491}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{953b3476-2f55-4def-b338-5d1a15006b43}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_pausessla</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_pausessla</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_pausessla</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_pausessla</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{38aa4398-ab40-4cd9-8c7d-2af141f1daa2}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_isresumetarget</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isresumetarget</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isresumetarget</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isresumetarget</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{ac036059-9fc1-45b4-a65e-c08994c2bd40}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_isdefaultnew</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isdefaultnew</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isdefaultnew</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isdefaultnew</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{ec9f8917-3fa0-423f-93a2-318fd674a960}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_isaicategorized</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isaicategorized</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isaicategorized</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_isaicategorized</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{35932066-a0bc-4c9a-b602-65f8cdd1bda3}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_ismanualreview</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_ismanualreview</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_ismanualreview</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_ismanualreview</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

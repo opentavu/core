@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="LinkToAccountId">
+  <description default="Optional. When creating a new contact, parents it under this account instead of the lead's matched account or a newly created one.">
+    <label description="Optional. When creating a new contact, parents it under this account instead of the lead's matched account or a newly created one." languagecode="1033" />
+  </description>
+  <displayname default="PromoteLead-In-LinkToAccountId">
+    <label description="PromoteLead-In-LinkToAccountId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>PromoteLead-In-LinkToAccountId</name>
+  <type>10</type>
+</customapirequestparameter>

@@ -1,0 +1,522 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{6ecaf5ab-0dd2-4816-90a5-b3b9fc17958e}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{b295c866-2e7b-4ead-a443-f912d2e8f83b}" IsUserDefined="1" name="tab_General">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="21%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{8e3eb3f4-4a3a-466e-b4bf-029e216fac44}" name="Section_Proposal_Information">
+                  <labels>
+                    <label description="Proposal Information" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{51557e0a-1dc9-4cbe-a4dd-52f5a3c02d1b}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{88add560-0cf4-4f27-9cc8-623e3c4e2eb0}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_proposalnumber" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_proposalnumber" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9eea1b2a-d7e5-4f1f-a39b-fb2cf49497d9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_opportunity" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_opportunity" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{54c6ddd5-e10f-4888-b1dc-c15072507c27}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_pricelist" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_pricelist" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1381a9ee-130b-4456-a775-6434f80e9763}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_sentdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_sentdate" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0ab45ca9-b611-42b5-9472-0e606a8f101e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="statuscode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statuscode" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{650d6f2b-3aec-43ca-afa6-749149c19757}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="tab_General_section_5" id="e5ece519-bbb9-44b1-847f-7b9783f95712" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Totals" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{f2d4b726-b6e2-4c32-9aef-272a0be872a3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_subtotal" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_subtotal" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9232ea46-bfb6-4373-87b9-1c8b3d4eda63}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_totaltax" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_totaltax" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{523908c3-0ab1-49c3-94c5-7434702ba432}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_total" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_total" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{fa198819-1f90-48bc-876d-5c6c7a01371e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_totalcost" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_totalcost" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{17d7b156-cfe3-4231-85d3-81e130f9fafa}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_grossmargin" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_grossmargin" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="53%">
+              <sections>
+                <section name="Section_Proposal_Lines" id="624c9dff-3433-449f-b365-065b71ec07cb" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Top" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Proposal Lines" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{40243462-56f3-4131-b692-3faae0aed00e}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_discoverynotes" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_discoverynotes" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row>
+                      <cell id="{6e3e352f-dfa9-4fe6-b149-6bc7f8454b16}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_proposalcontent" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_proposalcontent" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row>
+                      <cell locklevel="0" id="{d2c6379f-e95d-4bf9-bbd5-2e65b798087e}" rowspan="4" colspan="1" auto="false" showlabel="true">
+                        <labels>
+                          <label description="Proposal Lines" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_ProposalLines" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" uniqueid="{20ab5cb0-b7c8-408d-bd31-ea21b03205bc}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>tavu_proposalline_Proposal_tavu_proposal</RelationshipName>
+                            <TargetEntityType>tavu_proposalline</TargetEntityType>
+                            <ViewId>{CEE0D733-5567-F111-AB0C-0022480A59AC}</ViewId>
+                            <ViewIds>{674B045F-9F4B-4C7C-A63B-F4DD704D881F},{CEE0D733-5567-F111-AB0C-0022480A59AC}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="26%">
+              <sections>
+                <section name="Section_Customer" id="cb9b561d-2ee9-4153-90df-c7eff560bf3d" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Customer" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{ed26dff7-ae7c-439b-b2f5-70839c7ab464}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_customer" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_customer" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{640c9481-a9b1-4d48-9a53-143f60e221fa}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="New QV control 1781061016807" languagecode="1033" />
+                        </labels>
+                        <control id="QVCustomerAccountInfo" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="tavu_customer">
+                          <parameters>
+                            <DisplayAsCustomer360Tile>false</DisplayAsCustomer360Tile>
+                            <QuickForms>&lt;QuickFormIds&gt;&lt;QuickFormId entityname="account"&gt;46157f8c-cf53-f111-a824-0022480a59ac&lt;/QuickFormId&gt;&lt;/QuickFormIds&gt;</QuickForms>
+                            <HideQuickFormBorder>true</HideQuickFormBorder>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{cccfe6b2-c7cb-4da7-a6ec-5763e40acb8b}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="New QV control 1781061134813" languagecode="1033" />
+                        </labels>
+                        <control id="QVContactInfo" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="tavu_customer">
+                          <parameters>
+                            <DisplayAsCustomer360Tile>false</DisplayAsCustomer360Tile>
+                            <QuickForms>&lt;QuickFormIds&gt;&lt;QuickFormId entityname="contact"&gt;0e67508c-4558-f111-a825-0022480a59ac&lt;/QuickFormId&gt;&lt;/QuickFormIds&gt;</QuickForms>
+                            <HideQuickFormBorder>true</HideQuickFormBorder>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="Section_Timeline" id="d0ec4d58-9413-48ca-a9a5-cc2c83a10c24" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Timeline" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell locklevel="0" id="{52623eb0-bd07-4bd4-8d4d-e9227aa21628}" rowspan="15" colspan="1">
+                        <labels>
+                          <label description="Note Text" languagecode="1033" />
+                        </labels>
+                        <control id="notescontrol" classid="{06375649-C143-495E-A496-C962E5B4488E}" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_systemfields" id="d1ce0b89-3c32-41a8-a9be-eb8da70386b7" IsUserDefined="0" locklevel="0" showlabel="true" visible="false">
+          <labels>
+            <label description="System Fields" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="section_system_fields" id="c1760143-a400-45ba-ace3-aa85762fef66" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="System Fields" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{7d6e6adb-a742-459c-9c4f-ef070b31780c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_version" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_version" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{8c6c36b4-6aab-499e-a68a-c9b71f7dc043}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{27eb014e-2f55-4d2a-bd62-7aaee35de718}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6de5951c-73f7-425e-b1d1-57f4989e1c5d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6275a665-eb08-4ac1-969e-ab729998d13d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e470b339-a55b-47c5-bc6c-248267d163e0}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+              <control id="header_tavu_version" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_version" disabled="false" />
+            </cell>
+            <cell id="{3fd2cd7f-447d-4fc9-93d9-d6ff86a0e219}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+              <control id="header_tavu_sentdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_sentdate" disabled="false" />
+            </cell>
+            <cell id="{7e7e6317-8fb0-471a-b92b-e4f5f9ae2f80}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+              <control id="header_tavu_expecteddecisiondate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_expecteddecisiondate" disabled="false" />
+            </cell>
+            <cell id="{096789c4-b5e4-4303-9807-72f0132f0279}" locklevel="0" colspan="1" rowspan="1">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+              <control id="header_statecode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{2a298791-947f-4d00-82ca-62f0fcf802ee}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{ac785acf-d790-4f63-80aa-2b09b2a2f1bb}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{3ee2662f-4ce1-4aa6-9b1e-9c7c4dd6c1a7}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e2de084d-ca67-4237-b4a9-4fde18d854fd}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{20ab5cb0-b7c8-408d-bd31-ea21b03205bc}">
+          <customControl id="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+            <parameters />
+          </customControl>
+          <customControl formFactor="0" name="Microsoft.PowerApps.PowerAppsOneGrid">
+            <parameters>
+              <data-set name="Items">
+                <ViewId>{cee0d733-5567-f111-ab0c-0022480a59ac}</ViewId>
+                <TargetEntityType>tavu_proposalline</TargetEntityType>
+                <IsUserView>false</IsUserView>
+                <EnableViewPicker>false</EnableViewPicker>
+                <RelationshipName>tavu_proposalline_Proposal_tavu_proposal</RelationshipName>
+                <FilteredViewIds>{674B045F-9F4B-4C7C-A63B-F4DD704D881F},{CEE0D733-5567-F111-AB0C-0022480A59AC}</FilteredViewIds>
+              </data-set>
+              <EnableEditing type="Enum" static="true">yes</EnableEditing>
+              <DisableChildItemsEditing type="Enum" static="true">no</DisableChildItemsEditing>
+              <HeadlessRendering type="Enum" static="true">no</HeadlessRendering>
+              <EnableFiltering type="Enum" static="true">yes</EnableFiltering>
+              <EnableSorting type="Enum" static="true">yes</EnableSorting>
+              <EnableGrouping type="Enum" static="true">no</EnableGrouping>
+              <EnableAggregation type="Enum" static="true">no</EnableAggregation>
+              <EnableColumnMoving type="Enum" static="true">no</EnableColumnMoving>
+              <EnableMultipleSelection type="Enum" static="true">yes</EnableMultipleSelection>
+              <EnableRangeSelection type="Enum" static="true">yes</EnableRangeSelection>
+              <EnableJumpBar type="Enum" static="true">no</EnableJumpBar>
+              <EnablePagination type="Enum" static="true">no</EnablePagination>
+              <EnableDropdownColor type="Enum" static="true">no</EnableDropdownColor>
+              <EnableStatusIcons type="Enum" static="true">yes</EnableStatusIcons>
+              <EnableTypeIcons type="Enum" static="true">no</EnableTypeIcons>
+              <NavigationTypesAllowed type="Enum" static="true">all</NavigationTypesAllowed>
+              <ReflowBehavior type="Enum" static="true">Reflow</ReflowBehavior>
+              <ShowAvatar type="Enum" static="true">yes</ShowAvatar>
+              <ShowColumnNamesForListView type="Enum" static="true">no</ShowColumnNamesForListView>
+              <EnableBandedRowsForListView type="Enum" static="true">no</EnableBandedRowsForListView>
+              <NumberOfListColumns type="Whole.None" static="true">3</NumberOfListColumns>
+              <ShowFooter type="Enum" static="true">yes</ShowFooter>
+              <ShowColumnHeaders type="Enum" static="true">yes</ShowColumnHeaders>
+              <ContextualLookupColumnFilters type="Enum" static="true">yes</ContextualLookupColumnFilters>
+              <LookupFilterBeginsWith type="Enum" static="true">no</LookupFilterBeginsWith>
+              <UseFirstColumnForLookupEdits type="Enum" static="true">no</UseFirstColumnForLookupEdits>
+              <DateTimeFormat type="Enum" static="true">none</DateTimeFormat>
+              <DateOnlyFormat type="Enum" static="true">none</DateOnlyFormat>
+              <EnableStatusColumn type="Enum" static="true">yes</EnableStatusColumn>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="Microsoft.PowerApps.PowerAppsOneGrid">
+            <parameters>
+              <data-set name="Items">
+                <ViewId>{cee0d733-5567-f111-ab0c-0022480a59ac}</ViewId>
+                <TargetEntityType>tavu_proposalline</TargetEntityType>
+                <IsUserView>false</IsUserView>
+                <EnableViewPicker>false</EnableViewPicker>
+                <RelationshipName>tavu_proposalline_Proposal_tavu_proposal</RelationshipName>
+                <FilteredViewIds>{674B045F-9F4B-4C7C-A63B-F4DD704D881F},{CEE0D733-5567-F111-AB0C-0022480A59AC}</FilteredViewIds>
+              </data-set>
+              <EnableEditing type="Enum" static="true">yes</EnableEditing>
+              <DisableChildItemsEditing type="Enum" static="true">no</DisableChildItemsEditing>
+              <HeadlessRendering type="Enum" static="true">no</HeadlessRendering>
+              <EnableFiltering type="Enum" static="true">yes</EnableFiltering>
+              <EnableSorting type="Enum" static="true">yes</EnableSorting>
+              <EnableGrouping type="Enum" static="true">no</EnableGrouping>
+              <EnableAggregation type="Enum" static="true">no</EnableAggregation>
+              <EnableColumnMoving type="Enum" static="true">no</EnableColumnMoving>
+              <EnableMultipleSelection type="Enum" static="true">yes</EnableMultipleSelection>
+              <EnableRangeSelection type="Enum" static="true">yes</EnableRangeSelection>
+              <EnableJumpBar type="Enum" static="true">no</EnableJumpBar>
+              <EnablePagination type="Enum" static="true">no</EnablePagination>
+              <EnableDropdownColor type="Enum" static="true">no</EnableDropdownColor>
+              <EnableStatusIcons type="Enum" static="true">yes</EnableStatusIcons>
+              <EnableTypeIcons type="Enum" static="true">no</EnableTypeIcons>
+              <NavigationTypesAllowed type="Enum" static="true">all</NavigationTypesAllowed>
+              <ReflowBehavior type="Enum" static="true">Reflow</ReflowBehavior>
+              <ShowAvatar type="Enum" static="true">yes</ShowAvatar>
+              <ShowColumnNamesForListView type="Enum" static="true">no</ShowColumnNamesForListView>
+              <EnableBandedRowsForListView type="Enum" static="true">no</EnableBandedRowsForListView>
+              <NumberOfListColumns type="Whole.None" static="true">3</NumberOfListColumns>
+              <ShowFooter type="Enum" static="true">yes</ShowFooter>
+              <ShowColumnHeaders type="Enum" static="true">yes</ShowColumnHeaders>
+              <ContextualLookupColumnFilters type="Enum" static="true">yes</ContextualLookupColumnFilters>
+              <LookupFilterBeginsWith type="Enum" static="true">no</LookupFilterBeginsWith>
+              <UseFirstColumnForLookupEdits type="Enum" static="true">no</UseFirstColumnForLookupEdits>
+              <DateTimeFormat type="Enum" static="true">none</DateTimeFormat>
+              <DateOnlyFormat type="Enum" static="true">none</DateOnlyFormat>
+              <EnableStatusColumn type="Enum" static="true">yes</EnableStatusColumn>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="Microsoft.PowerApps.PowerAppsOneGrid">
+            <parameters>
+              <data-set name="Items">
+                <ViewId>{cee0d733-5567-f111-ab0c-0022480a59ac}</ViewId>
+                <TargetEntityType>tavu_proposalline</TargetEntityType>
+                <IsUserView>false</IsUserView>
+                <EnableViewPicker>false</EnableViewPicker>
+                <RelationshipName>tavu_proposalline_Proposal_tavu_proposal</RelationshipName>
+                <FilteredViewIds>{674B045F-9F4B-4C7C-A63B-F4DD704D881F},{CEE0D733-5567-F111-AB0C-0022480A59AC}</FilteredViewIds>
+              </data-set>
+              <EnableEditing type="Enum" static="true">yes</EnableEditing>
+              <DisableChildItemsEditing type="Enum" static="true">no</DisableChildItemsEditing>
+              <HeadlessRendering type="Enum" static="true">no</HeadlessRendering>
+              <EnableFiltering type="Enum" static="true">yes</EnableFiltering>
+              <EnableSorting type="Enum" static="true">yes</EnableSorting>
+              <EnableGrouping type="Enum" static="true">no</EnableGrouping>
+              <EnableAggregation type="Enum" static="true">no</EnableAggregation>
+              <EnableColumnMoving type="Enum" static="true">no</EnableColumnMoving>
+              <EnableMultipleSelection type="Enum" static="true">yes</EnableMultipleSelection>
+              <EnableRangeSelection type="Enum" static="true">yes</EnableRangeSelection>
+              <EnableJumpBar type="Enum" static="true">no</EnableJumpBar>
+              <EnablePagination type="Enum" static="true">no</EnablePagination>
+              <EnableDropdownColor type="Enum" static="true">no</EnableDropdownColor>
+              <EnableStatusIcons type="Enum" static="true">yes</EnableStatusIcons>
+              <EnableTypeIcons type="Enum" static="true">no</EnableTypeIcons>
+              <NavigationTypesAllowed type="Enum" static="true">all</NavigationTypesAllowed>
+              <ReflowBehavior type="Enum" static="true">Reflow</ReflowBehavior>
+              <ShowAvatar type="Enum" static="true">yes</ShowAvatar>
+              <ShowColumnNamesForListView type="Enum" static="true">no</ShowColumnNamesForListView>
+              <EnableBandedRowsForListView type="Enum" static="true">no</EnableBandedRowsForListView>
+              <NumberOfListColumns type="Whole.None" static="true">3</NumberOfListColumns>
+              <ShowFooter type="Enum" static="true">yes</ShowFooter>
+              <ShowColumnHeaders type="Enum" static="true">yes</ShowColumnHeaders>
+              <ContextualLookupColumnFilters type="Enum" static="true">yes</ContextualLookupColumnFilters>
+              <LookupFilterBeginsWith type="Enum" static="true">no</LookupFilterBeginsWith>
+              <UseFirstColumnForLookupEdits type="Enum" static="true">no</UseFirstColumnForLookupEdits>
+              <DateTimeFormat type="Enum" static="true">none</DateTimeFormat>
+              <DateOnlyFormat type="Enum" static="true">none</DateOnlyFormat>
+              <EnableStatusColumn type="Enum" static="true">yes</EnableStatusColumn>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+      <formLibraries>
+        <Library name="tavu_proposal_form" libraryUniqueId="{601766f4-5cca-4235-81c2-9b91ba5e77db}" />
+      </formLibraries>
+      <events>
+        <event name="onsave" application="false" active="false" relationship="" control="Subgrid_ProposalLines">
+          <Handlers>
+            <Handler functionName="OpenTavu.Proposal.Form.onLineGridSave" libraryName="tavu_proposal_form" handlerUniqueId="{fbc74f5e-82de-4630-b900-ffb09ef9897d}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="OpenTavu.Proposal.Form.onLoad" libraryName="tavu_proposal_form" handlerUniqueId="{e88b72db-0ccc-4881-898d-09d66aa325ae}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Proposal Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

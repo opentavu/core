@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__ReviewDraftEmail!969f50e314084216b083ca820e1849ff!tavu_OpenTavuApp!tavu_meeting!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Review Draft Email">
+    <label description="Review Draft Email" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Open the AI follow-up draft to review and send it to the customer.">
+    <label description="Open the AI follow-up draft to review and send it to the customer." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Review draft email">
+    <label description="Review draft email" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_meeting</logicalname>
+  </contextentity>
+  <contextvalue>tavu_meeting</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>c6c68918-9291-f111-b8da-6045bd002def</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>ReviewDraftEmail!969f50e314084216b083ca820e1849ff</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Meeting.Form.reviewDraft</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>d70ca1e9-1991-f111-b8da-6045bd002def</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100046.7500000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>97cf9bfde14a4a578e5df1d33161813d</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

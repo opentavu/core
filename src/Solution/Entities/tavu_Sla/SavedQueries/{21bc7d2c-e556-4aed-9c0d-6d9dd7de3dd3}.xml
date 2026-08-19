@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{21bc7d2c-e556-4aed-9c0d-6d9dd7de3dd3}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_slaid">
+          <cell name="tavu_name" width="226" />
+          <cell name="tavu_customertier" width="128" />
+          <cell name="tavu_casetype" width="145" />
+          <cell name="tavu_responsetargethours" width="171" />
+          <cell name="tavu_resolutiontargethours" width="178" />
+          <cell name="tavu_calendar" width="143" />
+          <cell name="tavu_evaluationpriority" width="147" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_sla">
+          <attribute name="tavu_slaid" />
+          <attribute name="tavu_name" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_customertier" />
+          <attribute name="tavu_casetype" />
+          <attribute name="tavu_evaluationpriority" />
+          <attribute name="tavu_resolutiontargethours" />
+          <attribute name="tavu_responsetargethours" />
+          <attribute name="tavu_calendar" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Slas" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

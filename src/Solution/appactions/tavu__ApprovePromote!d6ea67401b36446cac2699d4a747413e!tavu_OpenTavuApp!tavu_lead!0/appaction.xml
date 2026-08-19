@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__ApprovePromote!d6ea67401b36446cac2699d4a747413e!tavu_OpenTavuApp!tavu_lead!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Approve &amp; Promote">
+    <label description="Approve &amp; Promote" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Create a new Contact (and Account, if needed) from this lead, then close the lead as Promoted to Contact. Use when the lead is a real, new prospect with no existing record.">
+    <label description="Create a new Contact (and Account, if needed) from this lead, then close the lead as Promoted to Contact. Use when the lead is a real, new prospect with no existing record." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Approve &amp; promote to Contact">
+    <label description="Approve &amp; promote to Contact" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_lead</logicalname>
+  </contextentity>
+  <contextvalue>tavu_lead</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>a095216f-658c-f111-8076-7ced8d715683</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>ApprovePromote!d6ea67401b36446cac2699d4a747413e</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Lead.Form.approveAndPromote</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>3f78f410-638c-f111-8076-7ced8d715683</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100046.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>db728858c53741059644e9400a17ad11</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

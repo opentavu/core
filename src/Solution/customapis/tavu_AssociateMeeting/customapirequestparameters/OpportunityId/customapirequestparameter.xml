@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="OpportunityId">
+  <description default="Optional. The existing opportunity to associate the meeting to. When provided, it takes priority over CreateNewOpportunity and the AI suggestion.">
+    <label description="Optional. The existing opportunity to associate the meeting to. When provided, it takes priority over CreateNewOpportunity and the AI suggestion." languagecode="1033" />
+  </description>
+  <displayname default="AssociateMeeting-In-OpportunityId">
+    <label description="AssociateMeeting-In-OpportunityId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>AssociateMeeting-In-OpportunityId</name>
+  <type>10</type>
+</customapirequestparameter>

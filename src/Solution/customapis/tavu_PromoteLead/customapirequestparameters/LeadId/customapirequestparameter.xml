@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="LeadId">
+  <description default="The tavu_lead to promote. Required. GUID as string.">
+    <label description="The tavu_lead to promote. Required. GUID as string." languagecode="1033" />
+  </description>
+  <displayname default="PromoteLead-In-LeadId">
+    <label description="PromoteLead-In-LeadId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>0</isoptional>
+  <name>PromoteLead-In-LeadId</name>
+  <type>10</type>
+</customapirequestparameter>

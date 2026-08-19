@@ -1,0 +1,10 @@
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
+<svg fill="#605E5C" width="800px" height="800px" viewBox="0 0 24 24" id="calendar-event" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
+<g id="SVGRepo_bgCarrier" stroke-width="0"/>
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+<g id="SVGRepo_iconCarrier">
+<path id="secondary" d="M21,9V19H19v2H4a1,1,0,0,1-1-1V9Z" style="fill: #2ca9bc; stroke-width: 2;"/>
+<path id="primary" d="M21,19l-2,2V19ZM20,4H4A1,1,0,0,0,3,5V20a1,1,0,0,0,1,1H19l2-2V5A1,1,0,0,0,20,4Zm0,0H4A1,1,0,0,0,3,5V9H21V5A1,1,0,0,0,20,4ZM17,3V5M12,3V5M7,3V5" style="fill: none; stroke: #605E5C; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/>
+</g>
+</svg>

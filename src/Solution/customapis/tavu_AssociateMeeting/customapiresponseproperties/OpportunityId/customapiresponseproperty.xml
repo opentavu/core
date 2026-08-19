@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="OpportunityId">
+  <description default="The opportunity the meeting was associated to (resolved, created, or suggested). GUID as string.">
+    <label description="The opportunity the meeting was associated to (resolved, created, or suggested). GUID as string." languagecode="1033" />
+  </description>
+  <displayname default="AssociateMeeting-Out-OpportunityId">
+    <label description="AssociateMeeting-Out-OpportunityId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>AssociateMeeting-Out-OpportunityId</name>
+  <type>10</type>
+</customapiresponseproperty>

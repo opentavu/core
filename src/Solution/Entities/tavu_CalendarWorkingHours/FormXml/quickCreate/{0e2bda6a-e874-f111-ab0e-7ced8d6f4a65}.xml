@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{0e2bda6a-e874-f111-ab0e-7ced8d6f4a65}</formid>
+    <IntroducedVersion>1.0.0.16</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="F931FFE2-B873-473F-8F95-9502F0AA3F5E" name="tab_1" showlabel="false" labelid="{3c96c657-4e2e-44ea-b173-9e1f5145e965}">
+          <labels>
+            <label description="New Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="34%">
+              <sections>
+                <section id="0C655D4E-C6E3-424E-9AF5-71E72D30D12E" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{facbbb05-bc48-424a-917f-e50cb8becfd2}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="542FBFBE-0E4C-496C-8012-555DE6581923" labelid="{bc624b60-c4eb-417c-bd06-cf56a914267d}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6d70125d-c6ae-4da9-9a81-ef044dfa8c60}" locklevel="0" colspan="1" rowspan="1" labelid="{7b724748-b885-4721-b188-8605bd39a5b8}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_name" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b58410e7-3997-4c72-9c4c-6bbbfbcf472d}" locklevel="0" colspan="1" rowspan="1" labelid="{29a952d1-c664-420d-b19a-04b7b1553d1c}">
+                        <labels>
+                          <label description="Calendar" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_calendar" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_calendar" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2288e5a4-51f6-469e-8607-a0672df1c51d}" locklevel="0" colspan="1" rowspan="1" labelid="{e7a082bf-7242-45e9-ab02-9f4139cde5ce}">
+                        <labels>
+                          <label description="Day of Week" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_dayofweek" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_dayofweek" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c906a828-5de8-48d6-aff0-1eec2d33ec69}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Start Time" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_starttime" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_starttime" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{cb8cd77e-194a-4cbc-958a-c74161a81baa}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="End Time" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_endtime" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_endtime" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="02DECBA0-3AE2-484D-A19F-C5353AF4F4F2" name="tab_1_column_2_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{306c595f-a04b-456c-913f-1fe77c2171ea}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="266FE48D-4D04-4E9A-8C5A-7DEF9A2F059B" labelid="{f313b965-2a81-4db8-aecf-8246afd2f0ad}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="46FD66EA-B686-41D9-AAE0-C565BD78EC1F" name="tab_1_column_3_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{28ac0af0-4119-4e64-a5dc-56a917acd9e3}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="07C04A4E-A482-45CC-BAB7-7FCA3CD02938" labelid="{6765d814-d403-4a4e-9365-c6c0ee6ab493}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="QC - Calendar Working Hours" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

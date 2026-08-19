@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{3d0eff31-4c0c-4bd4-b370-204b5583ae62}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_uomid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_unitgroup" width="105" />
+          <cell name="tavu_isbaseunit" width="110" />
+          <cell name="tavu_conversionfactor" width="144" />
+          <cell name="statecode" width="100" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_uom">
+          <attribute name="tavu_uomid" />
+          <attribute name="tavu_name" />
+          <attribute name="createdon" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_conversionfactor" />
+          <attribute name="tavu_isbaseunit" />
+          <attribute name="tavu_unitgroup" />
+          <attribute name="statecode" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Unit of Measures" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

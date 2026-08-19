@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{4fbe54ac-56c7-4e80-8438-ebb947c8b440}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_proposalid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_opportunity" width="180" />
+          <cell name="statuscode" width="119" />
+          <cell name="tavu_sentdate" width="100" />
+          <cell name="tavu_subtotal" width="100" />
+          <cell name="tavu_totalcost" width="100" />
+          <cell name="tavu_totaltax" width="100" />
+          <cell name="tavu_total" width="100" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_proposal">
+          <attribute name="tavu_proposalid" />
+          <attribute name="tavu_name" />
+          <attribute name="createdon" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="tavu_opportunity" />
+          <attribute name="statuscode" />
+          <attribute name="tavu_subtotal" />
+          <attribute name="tavu_total" />
+          <attribute name="tavu_totalcost" />
+          <attribute name="tavu_totaltax" />
+          <attribute name="tavu_sentdate" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Proposals" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

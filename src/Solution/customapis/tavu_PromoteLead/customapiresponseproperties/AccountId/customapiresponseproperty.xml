@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="AccountId">
+  <description default="Account of the promoted contact, if any. Empty if none. GUID as string.">
+    <label description="Account of the promoted contact, if any. Empty if none. GUID as string." languagecode="1033" />
+  </description>
+  <displayname default="PromoteLead-Out-AccountId">
+    <label description="PromoteLead-Out-AccountId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>PromoteLead-Out-AccountId</name>
+  <type>10</type>
+</customapiresponseproperty>

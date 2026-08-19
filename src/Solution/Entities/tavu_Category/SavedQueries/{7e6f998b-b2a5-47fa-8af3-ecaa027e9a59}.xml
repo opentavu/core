@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{7e6f998b-b2a5-47fa-8af3-ecaa027e9a59}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_categoryid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_code" width="100" />
+          <cell name="tavu_businessline" width="186" />
+          <cell name="tavu_sortorder" width="123" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_category">
+          <attribute name="tavu_categoryid" />
+          <attribute name="tavu_name" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="tavu_code" />
+          <attribute name="tavu_businessline" />
+          <attribute name="tavu_sortorder" />
+          <order attribute="tavu_sortorder" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Categories" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

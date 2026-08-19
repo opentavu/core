@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{c888e80b-686a-f111-ab0d-0022480a59ac}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_title" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_caseid">
+          <cell name="tavu_title" width="300" />
+          <cell name="tavu_customer" width="100" />
+          <cell name="tavu_type" width="100" />
+          <cell name="tavu_status" width="165" />
+          <cell name="statuscode" width="140" />
+          <cell name="tavu_slastatus" width="105" />
+          <cell name="tavu_actualhours" width="116" />
+          <cell name="tavu_resolutiondate" width="154" />
+          <cell name="ownerid" width="179" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical" distinct="true">
+        <entity name="tavu_case">
+          <attribute name="tavu_caseid" />
+          <attribute name="tavu_title" />
+          <attribute name="tavu_customer" />
+          <attribute name="statuscode" />
+          <attribute name="tavu_type" />
+          <attribute name="tavu_slastatus" />
+          <attribute name="tavu_resolutiondate" />
+          <attribute name="ownerid" />
+          <attribute name="tavu_actualhours" />
+          <order attribute="tavu_resolutiondate" descending="true" />
+          <attribute name="tavu_status" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+            <condition attribute="tavu_status" operator="in">
+              <value uiname="Solved" uitype="tavu_casestatus">{6fe39927-707a-f111-ab0e-70a8a59d4d26}</value>
+              <value uiname="Information Provided" uitype="tavu_casestatus">{44ada936-707a-f111-ab0e-70a8a59d4d26}</value>
+              <value uiname="Duplicate" uitype="tavu_casestatus">{71ec9c4b-707a-f111-ab0e-70a8a59d4d26}</value>
+              <value uiname="Out of Scope" uitype="tavu_casestatus">{fcd0eb59-707a-f111-ab0e-70a8a59d4d26}</value>
+            </condition>
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.6</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Resolved Cases" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

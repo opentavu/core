@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{a0b7d04b-9aa6-4fc5-ba4d-6f36af045217}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{556c687b-a9af-4437-b275-017885dc162a}" IsUserDefined="1" name="tab_General">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="30%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{95055af2-1f99-43da-ad27-2763895cf68a}" name="Section_Category">
+                  <labels>
+                    <label description="Category Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{4a70bdc6-2eea-471a-8135-eea1c6a3391d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_code" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_code" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{06cb7ca3-e231-4ddc-87e8-935cc6477ae6}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{369553f9-ec89-48dd-b2a8-412baf7f98df}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_businessline" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_businessline" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b3d643f6-b225-4b45-a7cd-4388c82d904e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_sortorder" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_sortorder" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{47e0a60b-3070-47ee-ba97-2472e386e92b}" locklevel="0" colspan="1" rowspan="3">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_description" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_description" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="70%">
+              <sections>
+                <section name="Section Subcategories" id="d9bf397f-65de-4cb7-b43b-3f1d3282b61c" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Subcategories" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell locklevel="0" id="{2228d0c8-5444-4923-ac38-1870d8964dfd}" rowspan="4" colspan="1" auto="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="Subgrid_Subcategories" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>4</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>true</EnableChartPicker>
+                            <ChartGridMode>All</ChartGridMode>
+                            <RelationshipName>tavu_subcategory_Category_tavu_category</RelationshipName>
+                            <TargetEntityType>tavu_subcategory</TargetEntityType>
+                            <ViewId>{DC8BB03F-9A6D-F111-AB0E-0022480A59AC}</ViewId>
+                            <ViewIds>{A2084FA8-62ED-48CB-8A2C-1DD407A900DE},{DC8BB03F-9A6D-F111-AB0E-0022480A59AC}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_SystemFields" id="7c173913-1403-465a-bdd5-0728b1fb0478" IsUserDefined="0" locklevel="0" showlabel="true" visible="false" expanded="false">
+          <labels>
+            <label description="System Fields" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="Section_SystemFields" id="9eac3abd-7570-45aa-85f9-4cb9195d8ccc" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Top" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="System Fields" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{5dca842b-de48-4b2f-bd77-17e86a10ae08}" locklevel="0" colspan="1" rowspan="4">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_aicategorizationhint" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_aicategorizationhint" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{af8c4bb6-68ca-441f-8035-6aa8489ff426}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{ef9c387e-fdb5-4bec-8995-9ad9ead52287}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{0383e315-368c-4c52-9a9e-d428ecd88cef}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{cd48cc86-6568-4760-bc96-94c2bc515b30}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{f06919c0-4f55-4e5d-b894-7f684c5eb9af}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{232c9d7c-4699-4f35-a8cb-e3ebf0896288}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{64ced918-5584-4837-b724-afac0a4ac6d9}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{1e663f5f-c0a8-47b2-a308-6c50ea11fc96}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

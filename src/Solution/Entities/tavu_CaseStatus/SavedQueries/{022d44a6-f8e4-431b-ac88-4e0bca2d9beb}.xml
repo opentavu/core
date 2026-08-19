@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{022d44a6-f8e4-431b-ac88-4e0bca2d9beb}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_casestatusid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_code" width="100" />
+          <cell name="tavu_statecategory" width="123" />
+          <cell name="tavu_pausessla" width="109" />
+          <cell name="tavu_isdefaultnew" width="132" />
+          <cell name="tavu_isresumetarget" width="138" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_casestatus">
+          <attribute name="tavu_casestatusid" />
+          <attribute name="tavu_name" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="tavu_code" />
+          <attribute name="tavu_statecategory" />
+          <attribute name="tavu_isdefaultnew" />
+          <attribute name="tavu_isresumetarget" />
+          <attribute name="tavu_pausessla" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Case Statuses" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

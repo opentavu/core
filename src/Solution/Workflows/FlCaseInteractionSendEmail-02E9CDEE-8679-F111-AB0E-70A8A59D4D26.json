@@ -1,0 +1,177 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "tavu_sharedcommondataserviceforapps_18f0f"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_smtp": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "tavu_sharedsmtp_f8d97"
+        },
+        "api": {
+          "name": "shared_smtp"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_Outbound_Email_is_created": {
+          "metadata": {
+            "operationMetadataId": "4cc325e8-6efd-44f6-9e25-92e8ca4904e1"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "SubscribeWebhookTrigger",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "subscriptionRequest/message": 1,
+              "subscriptionRequest/entityname": "tavu_caseinteraction",
+              "subscriptionRequest/scope": 4,
+              "subscriptionRequest/filterexpression": "tavu_direction eq 576600001 and tavu_channel eq 576600000"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Get_Case": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "804bae41-b0f0-4ca7-838f-e96482b20a7e"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "tavu_cases",
+              "recordId": "@triggerOutputs()?['body/_tavu_case_value']",
+              "$select": "tavu_casenumber,tavu_title,_tavu_primarycontact_value"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Get_Primary_Contact": {
+          "runAfter": {
+            "Get_Case": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "185711a9-7978-4702-bdf7-9927b60d1328"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "GetItem",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "contacts",
+              "recordId": "@outputs('Get_Case')?['body/_tavu_primarycontact_value']",
+              "$select": "emailaddress1,fullname"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Get_Attachments": {
+          "runAfter": {
+            "Get_Primary_Contact": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "096fd340-6867-4e3f-ace0-64eef43b1774"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "annotations",
+              "$select": "filename,mimetype,documentbody",
+              "$filter": "_objectid_value eq @{triggerOutputs()?['body/tavu_caseinteractionid']} and isdocument eq true"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Map_Attachments": {
+          "runAfter": {
+            "Get_Attachments": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a1f2c3d4-0001-4a0b-9c1d-0aa8b7c6d5e4"
+          },
+          "type": "Select",
+          "inputs": {
+            "from": "@outputs('Get_Attachments')?['body/value']",
+            "select": {
+              "ContentData": "@base64ToBinary(item()?['documentbody'])",
+              "ContentType": "@item()?['mimetype']",
+              "FileName": "@item()?['filename']"
+            }
+          }
+        },
+        "Send_Customer_Email": {
+          "runAfter": {
+            "Map_Attachments": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "d2f419df-be43-4a7a-98f4-c780b71c794c"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_smtp",
+              "operationId": "SendEmailV3",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_smtp"
+            },
+            "parameters": {
+              "emailMessage/From": "support@opentavu.com",
+              "emailMessage/To": "@outputs('Get_Primary_Contact')?['body/emailaddress1']",
+              "emailMessage/Subject": "@concat('[', outputs('Get_Case')?['body/tavu_casenumber'], '] ', outputs('Get_Case')?['body/tavu_title'])",
+              "emailMessage/Body": "<p>@{triggerOutputs()?['body/tavu_body']}</p>",
+              "emailMessage/Attachments": "@body('Map_Attachments')"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

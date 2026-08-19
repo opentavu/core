@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="NewProposalId">
+  <description default="New draft proposal version cloned from the source, with incremented version. GUID as string.">
+    <label description="New draft proposal version cloned from the source, with incremented version. GUID as string." languagecode="1033" />
+  </description>
+  <displayname default="CloneProposalVersion-Out-NewProposalId">
+    <label description="CloneProposalVersion-Out-NewProposalId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>CloneProposalVersion-Out-NewProposalId</name>
+  <type>10</type>
+</customapiresponseproperty>

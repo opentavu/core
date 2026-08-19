@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{f5791555-1a35-4061-b61e-382916ba8627}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{6f76838f-c000-455e-a605-b0c461457300}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{98c0923b-fd02-4f42-a09f-0fdad05d448e}" columns="11" name="Section_General">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{3a4e367e-0e1b-49ac-91a1-cd8bb2789b22}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Code" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_code" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_code" disabled="true" />
+                      </cell>
+                      <cell id="{1e98541b-bdc9-4d7f-a010-0f32439d9378}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Calendar" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_calendar" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_calendar" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{ea20f886-e3d4-4ffd-91b1-7c79394c710f}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{29e6e984-0f62-4213-9284-1c66eda75c4c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Start Time" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_starttime" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_starttime" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{411670af-937a-4f43-bf08-1cebd3a96ffd}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                      <cell id="{d19a2ee3-0149-46e1-a38b-3707a2448aee}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="End Time" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_endtime" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_endtime" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{14717445-d78f-4567-b478-c8838a4dd1f9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Day of Week" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_dayofweek" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_dayofweek" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{4a5664a4-c436-4657-be23-02ff600a6af0}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{924ece39-2e50-476b-b8fe-e7470e7a4a62}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{5833e6d8-c870-4260-a2e4-d2751a373f59}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{09efa316-0531-4a33-ad8c-42bb0e59166e}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f8fdaeee-d301-49c1-bc3d-66031f574e1c}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{0ba5a29d-8b1d-4055-b661-877c4dafd8a3}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{7edd2a9d-0d12-47f7-93e9-dd64b01a6718}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f44e1ea7-e025-4e09-9ba1-dd1189d9ba50}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{c5cfdc97-07fe-4433-8f15-75b6bb19abae}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

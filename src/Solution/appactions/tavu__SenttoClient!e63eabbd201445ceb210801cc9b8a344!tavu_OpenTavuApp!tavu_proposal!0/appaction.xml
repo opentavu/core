@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__SenttoClient!e63eabbd201445ceb210801cc9b8a344!tavu_OpenTavuApp!tavu_proposal!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Sent to Client">
+    <label description="Sent to Client" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Mark this proposal as sent to the client and lock it for editing">
+    <label description="Mark this proposal as sent to the client and lock it for editing" languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Mark this proposal as sent to the client and lock it for editing">
+    <label description="Mark this proposal as sent to the client and lock it for editing" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_proposal</logicalname>
+  </contextentity>
+  <contextvalue>tavu_proposal</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>00779c30-df89-f111-8076-70a8a59cf0c9</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>SenttoClient!e63eabbd201445ceb210801cc9b8a344</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Proposal.Form.sendToClient</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>5602e8e5-b686-f111-8075-7ced8d6f945c</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100045.5000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>c894677de2354e3396e38b8b05746ea2</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

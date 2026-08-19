@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{4bc63ae5-4038-440b-b406-6574aaa205ca}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{be540c90-d392-40bf-acc3-d228665deeee}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{30e6a5b9-4cdc-4d64-b62e-c4640cdc3747}" columns="11" name="tab_ItemDetails">
+                  <labels>
+                    <label description="Item Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{f932282b-97bd-4fd3-ba47-ec08d826ba1a}" visible="false">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{794fbc2e-1a15-4515-81ef-577a90c5c415}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Price List" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_pricelist" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_pricelist" disabled="false" />
+                      </cell>
+                      <cell id="{e9591dd0-4353-47f3-8dc2-39575724bd69}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Price Per Unit" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_priceperunit" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_priceperunit" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7040fdfc-0ab5-477b-b59b-418a5bdd15c6}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Product" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_product" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_product" disabled="false" />
+                      </cell>
+                      <cell id="{3201d441-d863-4df4-8b93-17a22488e5ff}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Tax Rate (%)" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_taxrate" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_taxrate" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{f7cd7037-9df7-455e-8b96-9f7d2fd4d00d}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{c0e7f9bd-ab46-4df6-9cdd-a60596c42f1a}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d44a48d2-743a-4092-aa90-04bddee648a7}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{4bdf90f5-1318-4e7d-ac8b-228fca972101}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{37080962-26c2-4995-954c-11cb9726ac61}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{ac7d0b71-a3e8-4054-ba3b-c63700b851e0}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{09745652-5d4e-4fc6-aace-cf7333e6700c}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{04b0bf41-f9c2-4091-a3f2-c4fff9a6242b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

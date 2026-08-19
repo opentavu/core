@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__LinktoExisting!397f939f12de4c15828eec41036db217!tavu_OpenTavuApp!tavu_lead!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Link to Existing">
+    <label description="Link to Existing" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="This lead is someone already in the CRM. Pick the matching Contact to link it, no new record is created, and close the lead as Promoted to Contact.">
+    <label description="This lead is someone already in the CRM. Pick the matching Contact to link it, no new record is created, and close the lead as Promoted to Contact." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Link to an existing Contact">
+    <label description="Link to an existing Contact" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_lead</logicalname>
+  </contextentity>
+  <contextvalue>tavu_lead</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>923de3d8-658c-f111-8076-7ced8d715683</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>LinktoExisting!397f939f12de4c15828eec41036db217</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Lead.Form.linkToExisting</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>3f78f410-638c-f111-8076-7ced8d715683</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100046.5000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>33d98dccc4ef489c88380d56a4166c52</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

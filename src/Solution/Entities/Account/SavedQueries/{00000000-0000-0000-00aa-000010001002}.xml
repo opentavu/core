@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{00000000-0000-0000-00aa-000010001002}</savedqueryid>
+    <queryapi></queryapi>
+    <layoutxml>
+      <grid name="resultset" jump="name" select="1" icon="1" preview="1">
+        <row name="result" id="accountid">
+          <cell name="name" width="300" />
+          <cell name="tavu_customertier" width="129" />
+          <cell name="primarycontactid" width="154" />
+          <cell name="telephone1" width="145" />
+          <cell name="a_2206902a530941f694373168ce586b42.emailaddress1" width="179" />
+          <cell name="tavu_city" width="102" />
+          <cell name="tavu_iscustomer" width="109" />
+          <cell name="industrycode" width="100" />
+          <cell name="tavu_customersince" width="124" />
+          <cell name="tavu_lastengagementdate" width="168" />
+          <cell name="ownerid" width="197" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical">
+        <entity name="account">
+          <attribute name="name" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="accountid" />
+          <attribute name="tavu_customertier" />
+          <attribute name="tavu_iscustomer" />
+          <attribute name="industrycode" />
+          <attribute name="tavu_customersince" />
+          <attribute name="tavu_lastengagementdate" />
+          <attribute name="ownerid" />
+          <order attribute="tavu_customertier" descending="true" />
+          <attribute name="primarycontactid" />
+          <attribute name="telephone1" />
+          <link-entity alias="a_2206902a530941f694373168ce586b42" name="contact" to="primarycontactid" from="contactid" link-type="outer" visible="false">
+            <attribute name="emailaddress1" />
+          </link-entity>
+          <attribute name="tavu_city" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Accounts" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

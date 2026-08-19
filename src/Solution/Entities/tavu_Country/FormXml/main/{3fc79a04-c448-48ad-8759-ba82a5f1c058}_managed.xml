@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{3fc79a04-c448-48ad-8759-ba82a5f1c058}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{b1c538c8-ab9a-4313-ab58-90e14ef20e9e}" IsUserDefined="1" name="TabGeneral">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{e46925e7-d381-4f57-a170-d56fbd22428c}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{6b05ecc5-34fd-4607-a1e0-49d294b12ad5}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="IsoCodeSection" id="1923b580-f911-4a20-9e99-b4f016b1d566" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Iso Codes" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{dd66e9e5-88c7-415d-a189-b19cb8b832e7}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_isocode2" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_isocode2" disabled="false" />
+                      </cell>
+                      <cell id="{237362e9-06ce-4d31-86c0-ac5342b19177}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_isocode3" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_isocode3" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6ba8ac23-fe87-4720-9ff6-c3d4d26ac993}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_numericcode" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_numericcode" disabled="false" />
+                      </cell>
+                      <cell id="{3864a950-003a-443d-b8ab-37b69135f4b5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_phoneprefix" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_phoneprefix" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{503380f9-4af9-4896-b0d3-6f1604102e1e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_currency" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_currency" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{8c4b3b4f-f5e9-4ded-a551-9cf7ce9e361f}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{b90f00e4-a9f1-49e3-917d-42c0838129f9}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{58721fad-8380-4952-aee8-37bef9560a7f}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{d0687faf-1d13-4d91-9ea6-a296e8e615b1}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{8b3ffe1e-5e1f-418a-b1ba-e1552b7b7fcd}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{37f9ba5e-e34d-4957-bbee-fa8c3991a72f}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{9f43d091-b2a3-4629-9180-795a01e72526}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{9e5fa08d-5f97-4b3d-870e-b9a967f8a2b5}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6843664d-77bd-4c1f-a97f-785f637585c6}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

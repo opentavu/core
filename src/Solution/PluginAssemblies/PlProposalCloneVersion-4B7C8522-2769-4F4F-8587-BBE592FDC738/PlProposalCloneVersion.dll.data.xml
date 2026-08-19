@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Pl.Proposal.CloneVersion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginAssemblyId="4b7c8522-2769-4f4f-8587-bbe592fdc738" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/PlProposalCloneVersion-4B7C8522-2769-4F4F-8587-BBE592FDC738/PlProposalCloneVersion.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Pl.Proposal.CloneVersion.CloneVersion, Pl.Proposal.CloneVersion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginTypeId="c30cf6d1-4dc5-44e0-8855-3fadf92a02cf" Name="Pl.Proposal.CloneVersion.CloneVersion">
+      <FriendlyName>84263fe2-2e96-4592-b64e-e15ccbcd8465</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

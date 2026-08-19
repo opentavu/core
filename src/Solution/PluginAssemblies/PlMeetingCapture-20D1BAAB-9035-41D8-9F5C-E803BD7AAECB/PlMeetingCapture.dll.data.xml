@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Pl.Meeting.Capture, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginAssemblyId="20d1baab-9035-41d8-9f5c-e803bd7aaecb" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/PlMeetingCapture-20D1BAAB-9035-41D8-9F5C-E803BD7AAECB/PlMeetingCapture.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Pl.Meeting.Capture.MeetingCapture, Pl.Meeting.Capture, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginTypeId="d1a79d6e-7ce0-4831-a8a8-d92d1d904393" Name="Pl.Meeting.Capture.MeetingCapture">
+      <FriendlyName>a6690939-a6ba-4b08-9902-1f565073836b</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

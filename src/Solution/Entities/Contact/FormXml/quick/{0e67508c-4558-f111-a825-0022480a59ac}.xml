@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{0e67508c-4558-f111-a825-0022480a59ac}</formid>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="ACBA75B7-97B6-4116-AA55-51312992B721" name="tab_1" showlabel="false" labelid="{4df1d17d-3535-45c6-9695-439bd0b8e1d0}">
+          <labels>
+            <label description="New Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section id="AD49B5BF-256F-46A8-9C75-947146172EB9" name="tab_1_column_1_section_1" columns="1" showlabel="false" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{a015dc9d-8a05-4130-9dfb-824a6a31d0e9}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{faea5b28-5c54-4abf-8c52-69b7f72ab7ae}" locklevel="0" colspan="1" rowspan="1" labelid="{4e070f11-930c-40d9-9fab-2b1f6745c939}">
+                        <labels>
+                          <label description="Full Name" languagecode="1033" />
+                        </labels>
+                        <control id="fullname" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="fullname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{41e2b577-45b2-4ee6-874a-2447a9f33662}" locklevel="0" colspan="1" rowspan="1" labelid="{e7c32cbe-9ae7-4494-9570-7aba31f2317b}">
+                        <labels>
+                          <label description="Customer Tier" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_customertier" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_customertier" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{250fcb93-b80c-4c22-9422-7ad6b35cfcb7}" locklevel="0" colspan="1" rowspan="1" labelid="{922cf896-6370-44ba-8222-2e3579875380}">
+                        <labels>
+                          <label description="Is Customer" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_iscustomer" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_iscustomer" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bed90548-9d4a-4232-b7cf-99367711625b}" locklevel="0" colspan="1" rowspan="1" labelid="{7ae6baa7-3003-48af-870a-096c4779dd57}">
+                        <labels>
+                          <label description="Customer Since" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_customersince" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_customersince" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="2" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Customer Overview" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

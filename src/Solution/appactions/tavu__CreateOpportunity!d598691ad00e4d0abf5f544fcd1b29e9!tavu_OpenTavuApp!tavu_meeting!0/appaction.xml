@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__CreateOpportunity!d598691ad00e4d0abf5f544fcd1b29e9!tavu_OpenTavuApp!tavu_meeting!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Create Opportunity">
+    <label description="Create Opportunity" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Create a new opportunity from this meeting's customer and associate the meeting to it.">
+    <label description="Create a new opportunity from this meeting's customer and associate the meeting to it." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Create opportunity">
+    <label description="Create opportunity" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_meeting</logicalname>
+  </contextentity>
+  <contextvalue>tavu_meeting</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>23aff7c8-1991-f111-b8da-6045bd002def</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>CreateOpportunity!d598691ad00e4d0abf5f544fcd1b29e9</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Meeting.Form.createOpportunity</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>d70ca1e9-1991-f111-b8da-6045bd002def</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100046.5000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>b6c84233935e4404b44546d57876deb2</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

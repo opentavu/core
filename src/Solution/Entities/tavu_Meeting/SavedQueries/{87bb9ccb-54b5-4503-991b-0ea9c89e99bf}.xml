@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>1</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{87bb9ccb-54b5-4503-991b-0ea9c89e99bf}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="subject" select="1" icon="1" preview="1">
+        <row name="result" id="activityid">
+          <cell name="subject" width="300" />
+          <cell name="tavu_source" width="147" />
+          <cell name="scheduledstart" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>4</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_meeting">
+          <attribute name="activityid" />
+          <attribute name="subject" />
+          <order attribute="subject" descending="false" />
+          <filter type="or" isquickfindfields="1">
+            <condition attribute="subject" operator="like" value="{0}" />
+          </filter>
+          <attribute name="tavu_source" />
+          <attribute name="scheduledstart" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.27</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Quick Find Active Meetings" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

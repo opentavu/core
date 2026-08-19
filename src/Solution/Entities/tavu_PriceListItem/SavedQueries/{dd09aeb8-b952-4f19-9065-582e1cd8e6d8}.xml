@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{dd09aeb8-b952-4f19-9065-582e1cd8e6d8}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_pricelistitemid">
+          <cell name="tavu_pricelist" width="166" />
+          <cell name="tavu_product" width="176" />
+          <cell name="tavu_priceperunit" width="120" />
+          <cell name="tavu_taxrate" width="115" />
+          <cell name="statecode" width="100" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_pricelistitem">
+          <attribute name="tavu_pricelistitemid" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_pricelist" />
+          <attribute name="tavu_product" />
+          <attribute name="tavu_priceperunit" />
+          <attribute name="tavu_taxrate" />
+          <attribute name="statecode" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Price List Items" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

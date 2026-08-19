@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{f2189196-1e56-4085-9736-88432c36907e}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{48b50475-75df-4186-81d8-b0f79ade1aad}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{f130cc32-a229-46b1-8f49-87fb092e75c2}" name="Section_AITaskConfigurationDetails" columns="11">
+                  <labels>
+                    <label description="AI Task Configuration Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{4c2b9a5f-95ad-47be-a581-db1397460ae6}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                      <cell id="{31b11196-2178-4928-984c-6d40bc4f10de}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Max Output Tokens" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_maxoutputtokens" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_maxoutputtokens" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f4dd075c-a59e-4520-b423-08b1c0e44845}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Task Key" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_taskkey" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_taskkey" disabled="false" />
+                      </cell>
+                      <cell id="{b760e94d-d731-4215-8d96-0cb98d1a74f9}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Confidence Threshold" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_confidencethreshold" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_confidencethreshold" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bbcf1b3b-01c1-4375-a512-196b3b09c461}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Model" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_model" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_model" disabled="false" />
+                      </cell>
+                      <cell id="{231cb4c5-53db-4d3d-a6da-a501f7d9ec08}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Token Budget" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_tokenbudget" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_tokenbudget" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{32629448-d4ff-49e6-bd62-c5b918a48164}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Temperature" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_temperature" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_temperature" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="Section_SystemPrompt" id="4a5dc033-3cbe-429b-b423-c2aa8ed3a968" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="System Prompt" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{a3af6c4d-2db9-4144-91e5-25e75231d956}" locklevel="0" colspan="1" rowspan="6">
+                        <labels>
+                          <label description="System Prompt" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_systemprompt" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_systemprompt" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{4f41e454-202f-41c4-88df-4288e97405f1}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{4e27eba6-e60e-4048-b4e1-ee9269e303f2}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{ac0d0ed9-f087-490a-9901-8af94fb87730}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{3d4569b5-2af6-4b99-a8c5-1e728196a875}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{545ac1f3-50a4-4489-af68-6c8de8b3fcc2}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{60b6a5af-7a2f-43f6-930f-13bb89f07956}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e98bb92b-4fe5-42cf-bbb2-9e4680fab215}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{32f3a4c9-2853-4541-b5f9-94f2898fb5cf}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

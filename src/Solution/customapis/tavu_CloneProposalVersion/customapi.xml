@@ -1,0 +1,18 @@
+<customapi uniquename="tavu_CloneProposalVersion">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="Creates a new draft version of a proposal by cloning its header and active lines, increments the version, and supersedes the source proposal.">
+    <label description="Creates a new draft version of a proposal by cloning its header and active lines, increments the version, and supersedes the source proposal." languagecode="1033" />
+  </description>
+  <displayname default="Clone Proposal Version">
+    <label description="Clone Proposal Version" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>CloneProposalVersion</name>
+  <plugintypeid>
+    <plugintypeexportkey>c30cf6d1-4dc5-44e0-8855-3fadf92a02cf</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

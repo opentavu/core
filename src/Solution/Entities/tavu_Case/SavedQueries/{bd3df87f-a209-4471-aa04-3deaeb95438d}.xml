@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{bd3df87f-a209-4471-aa04-3deaeb95438d}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_title" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_caseid">
+          <cell name="tavu_title" width="300" />
+          <cell name="tavu_customer" width="100" />
+          <cell name="tavu_priority" width="100" />
+          <cell name="tavu_status" width="100" />
+          <cell name="tavu_type" width="100" />
+          <cell name="tavu_slastatus" width="105" />
+          <cell name="tavu_responsetargetdate" width="163" />
+          <cell name="tavu_resolutiontargetdate" width="170" />
+          <cell name="ownerid" width="100" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_case">
+          <attribute name="tavu_caseid" />
+          <attribute name="tavu_title" />
+          <attribute name="createdon" />
+          <order attribute="tavu_title" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_customer" />
+          <attribute name="tavu_priority" />
+          <attribute name="tavu_type" />
+          <attribute name="tavu_slastatus" />
+          <attribute name="tavu_resolutiontargetdate" />
+          <attribute name="tavu_responsetargetdate" />
+          <attribute name="ownerid" />
+          <attribute name="tavu_status" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Cases" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

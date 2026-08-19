@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Pl.Proposal.LifecycleTracker, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginAssemblyId="144a3eab-993c-4da8-92a9-c865b42ea6ce" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/PlProposalLifecycleTracker-144A3EAB-993C-4DA8-92A9-C865B42EA6CE/PlProposalLifecycleTracker.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Pl.Proposal.LifecycleTracker.LifecycleTracker, Pl.Proposal.LifecycleTracker, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginTypeId="366b53e3-cca1-4c97-80b0-e04ab37dd4e8" Name="Pl.Proposal.LifecycleTracker.LifecycleTracker">
+      <FriendlyName>6c1e62d3-84d0-4424-9eb7-df1215f71e48</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

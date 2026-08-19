@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="Pl.CompanyProfile.SingleRecordGuard.SingleRecordGuard: Create of tavu_companyprofile" SdkMessageProcessingStepId="{2bb31b19-d38a-f111-8076-7ced8d715683}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>9ebdbb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeName>Pl.CompanyProfile.SingleRecordGuard.SingleRecordGuard, Pl.CompanyProfile.SingleRecordGuard, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5</PluginTypeName>
+  <PluginTypeId>8a6ee61d-0466-4da9-a523-4438ce2cae71</PluginTypeId>
+  <PrimaryEntity>tavu_companyprofile</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <FilteringAttributes></FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>20</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

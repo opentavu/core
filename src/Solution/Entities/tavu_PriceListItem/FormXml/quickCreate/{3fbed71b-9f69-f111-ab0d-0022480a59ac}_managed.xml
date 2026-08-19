@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{3fbed71b-9f69-f111-ab0d-0022480a59ac}</formid>
+    <IntroducedVersion>1.0.0.4</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form>
+      <tabs>
+        <tab id="F931FFE2-B873-473F-8F95-9502F0AA3F5E" name="tab_1" showlabel="false" labelid="{7114e2aa-ee35-4b2f-8399-f34b5936ab2b}">
+          <labels>
+            <label description="New Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="34%">
+              <sections>
+                <section id="0C655D4E-C6E3-424E-9AF5-71E72D30D12E" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{d8854a53-962c-425a-9bc2-2e87db900728}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{3426af0e-fa55-4ad8-ae8b-b6f23a23b015}" locklevel="0" colspan="1" rowspan="1" labelid="{82e0be61-258c-44c9-96c6-b6801b470086}">
+                        <labels>
+                          <label description="Price List" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_pricelist" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_pricelist" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{710f125e-b0a5-42d9-845b-797c68be93f4}" locklevel="0" colspan="1" rowspan="1" labelid="{f825d317-1ae2-4878-b2ef-63beaa45989b}">
+                        <labels>
+                          <label description="Product" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_product" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_product" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a0be1057-ed4b-4c98-b3fb-85e999890bd0}" locklevel="0" colspan="1" rowspan="1" labelid="{ac2bc142-5dad-44d5-aa6b-fa8414098950}">
+                        <labels>
+                          <label description="Price Per Unit" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_priceperunit" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_priceperunit" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6be9c53a-a918-43bb-bb33-58b639046372}" locklevel="0" colspan="1" rowspan="1" labelid="{f60388d9-8213-4666-afd2-4385c1c3a9d8}">
+                        <labels>
+                          <label description="Tax Rate (%)" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_taxrate" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_taxrate" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="02DECBA0-3AE2-484D-A19F-C5353AF4F4F2" name="tab_1_column_2_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{ac359fe1-cec5-4c29-b9ce-1b154d864947}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="266FE48D-4D04-4E9A-8C5A-7DEF9A2F059B" labelid="{b49ddbb9-582a-4915-9a81-b39d11db4c28}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="46FD66EA-B686-41D9-AAE0-C565BD78EC1F" name="tab_1_column_3_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{a25bb80c-2b53-430e-b32e-818aa1c9bdab}">
+                  <labels>
+                    <label description="New Section" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="07C04A4E-A482-45CC-BAB7-7FCA3CD02938" labelid="{4f57c3a5-a948-4b4a-a145-c8f596b4f3a4}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="QC - Price List Item" languagecode="1033" />
+    </LocalizedNames>
+  </systemform>
+</forms>

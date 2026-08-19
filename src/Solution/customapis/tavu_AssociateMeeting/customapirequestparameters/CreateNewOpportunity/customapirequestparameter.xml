@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="CreateNewOpportunity">
+  <description default="Optional. When true and no OpportunityId is given, creates a new opportunity from the meeting's matched account or contact and associates the meeting to it.">
+    <label description="Optional. When true and no OpportunityId is given, creates a new opportunity from the meeting's matched account or contact and associates the meeting to it." languagecode="1033" />
+  </description>
+  <displayname default="AssociateMeeting-In-CreateNewOpportunity">
+    <label description="AssociateMeeting-In-CreateNewOpportunity" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>AssociateMeeting-In-CreateNewOpportunity</name>
+  <type>0</type>
+</customapirequestparameter>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{252c6faf-2eb0-4081-b42f-a4d611f02645}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_casetypeid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_code" width="100" />
+          <cell name="tavu_defaultpriority" width="129" />
+          <cell name="tavu_isdefault" width="100" />
+          <cell name="tavu_defaultownerteam" width="158" />
+          <cell name="tavu_sortorder" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_casetype">
+          <attribute name="tavu_casetypeid" />
+          <attribute name="tavu_name" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_code" />
+          <attribute name="tavu_defaultpriority" />
+          <attribute name="tavu_isdefault" />
+          <attribute name="tavu_defaultownerteam" />
+          <attribute name="tavu_sortorder" />
+          <order attribute="tavu_sortorder" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Case Types" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,18 @@
+<customapi uniquename="tavu_PromoteLead">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="Human gate of Lead Triage (Module 3A): promotes a reviewed lead into the clean master database, either by linking it to an existing contact or by creating a new contact (and account) from the lead, then closes the lead as Promoted to Contact.">
+    <label description="Human gate of Lead Triage (Module 3A): promotes a reviewed lead into the clean master database, either by linking it to an existing contact or by creating a new contact (and account) from the lead, then closes the lead as Promoted to Contact." languagecode="1033" />
+  </description>
+  <displayname default="PromoteLead">
+    <label description="PromoteLead" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>PromoteLead</name>
+  <plugintypeid>
+    <plugintypeexportkey>54e345b6-7bc6-41b7-9720-210b442c1a6d</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{00000000-0000-0000-00aa-000010001031}</savedqueryid>
+    <queryapi></queryapi>
+    <layoutxml>
+      <grid name="resultset" jump="name" select="1" icon="1" preview="1">
+        <row name="result" id="accountid">
+          <cell name="name" width="300" />
+          <cell name="tavu_customertier" width="121" />
+          <cell name="primarycontactid" width="150" />
+          <cell name="telephone1" width="108" />
+          <cell name="tavu_city" width="128" />
+          <cell name="primaryContactEmailAddress.emailaddress1" width="213" disableSorting="1" />
+          <cell name="tavu_iscustomer" width="109" />
+          <cell name="industrycode" width="141" />
+          <cell name="customersizecode" width="123" />
+          <cell name="tavu_lastengagementdate" width="168" />
+          <cell name="ownerid" width="181" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical">
+        <entity name="account">
+          <attribute name="name" />
+          <order attribute="name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="primarycontactid" />
+          <attribute name="telephone1" />
+          <link-entity alias="primaryContactEmailAddress" name="contact" from="contactid" to="primarycontactid" link-type="outer" visible="false">
+            <attribute name="emailaddress1" />
+          </link-entity>
+          <attribute name="accountid" />
+          <attribute name="tavu_customertier" />
+          <attribute name="tavu_iscustomer" />
+          <attribute name="industrycode" />
+          <attribute name="customersizecode" />
+          <attribute name="tavu_lastengagementdate" />
+          <attribute name="ownerid" />
+          <attribute name="tavu_city" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>5.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Accounts" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

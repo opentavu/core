@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{a9205ace-d21c-4cc1-a105-4f98a654d734}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_subject" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_leadid">
+          <cell name="tavu_subject" width="300" />
+          <cell name="statuscode" width="119" />
+          <cell name="tavu_fullname" width="210" />
+          <cell name="tavu_companyname" width="132" />
+          <cell name="tavu_source" width="150" />
+          <cell name="tavu_promotedcontact" width="205" />
+          <cell name="modifiedon" width="121" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_lead">
+          <attribute name="tavu_leadid" />
+          <attribute name="tavu_subject" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="statuscode" />
+          <attribute name="tavu_fullname" />
+          <attribute name="tavu_companyname" />
+          <attribute name="tavu_source" />
+          <attribute name="tavu_promotedcontact" />
+          <attribute name="modifiedon" />
+          <order attribute="modifiedon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Leads" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

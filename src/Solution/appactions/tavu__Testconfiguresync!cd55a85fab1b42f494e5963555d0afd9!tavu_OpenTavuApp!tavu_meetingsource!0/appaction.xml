@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__Testconfiguresync!cd55a85fab1b42f494e5963555d0afd9!tavu_OpenTavuApp!tavu_meetingsource!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Test &amp; configure sync">
+    <label description="Test &amp; configure sync" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Check the Teams transcript setup gates and get step-by-step fixes">
+    <label description="Check the Teams transcript setup gates and get step-by-step fixes" languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Test &amp; configure sync">
+    <label description="Test &amp; configure sync" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_meetingsource</logicalname>
+  </contextentity>
+  <contextvalue>tavu_meetingsource</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>3bce638f-6a96-f111-b8db-7ced8d715261</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>Testconfiguresync!cd55a85fab1b42f494e5963555d0afd9</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.MeetingSource.Form.openTeamsWizard</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>a154e7b1-6896-f111-b8db-7ced8d715261</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100015.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>70e323631e2c4c6da9e8882c2a96c35e</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

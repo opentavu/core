@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{7a1f5113-da74-f111-ab0e-7ced8d6f4a65}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_calendarworkinghoursid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_code" width="100" />
+          <cell name="tavu_calendar" width="193" />
+          <cell name="tavu_dayofweek" width="114" />
+          <cell name="tavu_starttime" width="100" />
+          <cell name="tavu_endtime" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_calendarworkinghours">
+          <attribute name="tavu_calendarworkinghoursid" />
+          <attribute name="tavu_name" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_code" />
+          <attribute name="tavu_dayofweek" />
+          <attribute name="tavu_calendar" />
+          <attribute name="tavu_starttime" />
+          <attribute name="tavu_endtime" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.15</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Calendar Working Hours Grid" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

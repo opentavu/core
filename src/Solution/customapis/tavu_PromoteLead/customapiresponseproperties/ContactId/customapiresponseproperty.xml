@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="ContactId">
+  <description default="The contact the lead was promoted to (existing or newly created). GUID as string.">
+    <label description="The contact the lead was promoted to (existing or newly created). GUID as string." languagecode="1033" />
+  </description>
+  <displayname default="PromoteLead-Out-ContactId">
+    <label description="PromoteLead-Out-ContactId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>PromoteLead-Out-ContactId</name>
+  <type>10</type>
+</customapiresponseproperty>

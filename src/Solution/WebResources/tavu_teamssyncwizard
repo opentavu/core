@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Enable Teams sync</title>
+  <style>
+    :root { --brand:#5b2d8e; --ok:#107c10; --fail:#c50f1f; --wait:#8a8886; --line:#edebe9; --ink:#323130; }
+    * { box-sizing:border-box; }
+    body { font-family:"Segoe UI",Tahoma,sans-serif; color:var(--ink); margin:0; padding:20px; background:#faf9f8; }
+    h1 { font-size:18px; margin:0 0 2px; color:var(--brand); }
+    .sub { font-size:12px; color:#605e5c; margin:0 0 16px; }
+    .bar { display:flex; gap:8px; align-items:center; margin-bottom:14px; }
+    button { font-family:inherit; font-size:13px; border-radius:4px; border:1px solid var(--brand);
+      background:var(--brand); color:#fff; padding:7px 14px; cursor:pointer; }
+    button.ghost { background:#fff; color:var(--brand); }
+    button:disabled { opacity:.5; cursor:default; }
+    .status { font-size:12px; color:#605e5c; }
+    .banner { border-radius:6px; padding:10px 12px; font-size:13px; margin-bottom:14px; border:1px solid var(--line); background:#fff; }
+    .banner.good { border-color:#9fd89f; background:#f1faf1; }
+    .banner.warn { border-color:#f6c9a8; background:#fff4ec; }
+    .banner.bad  { border-color:#f1a9ae; background:#fdf3f4; }
+    .gate { border:1px solid var(--line); border-radius:6px; background:#fff; padding:12px 14px; margin-bottom:10px; }
+    .gate .row { display:flex; align-items:flex-start; gap:10px; }
+    .dot { width:16px; height:16px; border-radius:50%; flex:0 0 auto; margin-top:2px; background:var(--wait); }
+    .dot.pass { background:var(--ok); } .dot.fail { background:var(--fail); } .dot.unknown { background:var(--wait); }
+    .gate .title { font-weight:600; font-size:13px; }
+    .gate .desc { font-size:12px; color:#605e5c; margin-top:2px; }
+    .remedy { margin-top:8px; font-size:12px; }
+    .cmd { position:relative; margin-top:6px; }
+    pre { background:#1e1e1e; color:#d4d4d4; font-family:Consolas,monospace; font-size:11.5px;
+      padding:9px 10px; border-radius:5px; overflow:auto; margin:0; white-space:pre-wrap; word-break:break-word; }
+    .copy { position:absolute; top:6px; right:6px; padding:2px 8px; font-size:11px; }
+    a { color:var(--brand); }
+    .step { border:1px dashed #c8c6c4; border-radius:6px; padding:12px 14px; margin-top:6px; font-size:12.5px; background:#fff; }
+    .step b { color:var(--brand); }
+    .muted { color:#605e5c; font-size:11.5px; }
+    code.inl { background:#f3f2f1; padding:1px 5px; border-radius:3px; font-family:Consolas,monospace; }
+  </style>
+</head>
+<body>
+  <h1>Enable Teams sync</h1>
+  <p class="sub">Checks the three tenant setup gates for meeting-transcript sync and shows exactly what is missing.</p>
+
+  <div class="bar">
+    <button id="recheck" onclick="run()">Re-check</button>
+    <span class="status" id="status">Checking…</span>
+  </div>
+
+  <div id="banner" class="banner" style="display:none"></div>
+  <div id="gates"></div>
+
+  <div id="enablestep" class="step" style="display:none">
+    <b>Last step, enable the users to sync.</b> The gates above turn on Teams sync for the tenant.
+    Transcripts are only pulled for users you opt in. In the app go to
+    <b>Settings → Users</b>, open each user, and set <code class="inl">Meeting Sync Enabled</code> to
+    <b>Yes</b>. The next poll (every 2 minutes) starts ingesting their finalized transcripts.
+  </div>
+
+  <script>
+    // ---- canonical remediation commands (shown for failing gates; the gateway also returns a hint) ----
+    var CMD = {
+      consentUrl: function (clientId, tenantId) {
+        var t = tenantId || "common";
+        return "https://login.microsoftonline.com/" + t + "/adminconsent?client_id=" + (clientId || "<OpenTavu-app-client-id>");
+      },
+      policy:
+        "# Teams PowerShell (Connect-MicrosoftTeams first)\n" +
+        "New-CsApplicationAccessPolicy -Identity OpenTavu-Transcripts -AppIds \"<OpenTavu-app-client-id>\" -Description \"OpenTavu transcript read\"\n" +
+        "Grant-CsApplicationAccessPolicy -PolicyName OpenTavu-Transcripts -Identity \"<user-object-id-or-UPN>\"",
+      transcript:
+        "# Teams PowerShell (Connect-MicrosoftTeams first)\n" +
+        "Set-CsTeamsMeetingConfiguration -Identity Global -EnableGraphTranscriptAccess $true"
+    };
+
+    var GATE_META = {
+      consentAndPermissions:   { title: "1. Admin consent & Graph permissions",
+        desc: "The OpenTavu app has admin consent for OnlineMeetingTranscript.Read.All + OnlineMeetings.Read.All." },
+      applicationAccessPolicy: { title: "2. Teams application access policy",
+        desc: "A Cs application access policy lets the app read the probed user's online meetings." },
+      transcriptApiAccess:     { title: "3. Graph transcript access enabled",
+        desc: "The tenant allows Graph to read Teams transcripts (EnableGraphTranscriptAccess)." }
+    };
+
+    function getXrm() {
+      try { if (typeof Xrm !== "undefined" && Xrm.WebApi) return Xrm; } catch (e) {}
+      try { if (window.parent && window.parent.Xrm && window.parent.Xrm.WebApi) return window.parent.Xrm; } catch (e) {}
+      try { if (window.top && window.top.Xrm && window.top.Xrm.WebApi) return window.top.Xrm; } catch (e) {}
+      return null;
+    }
+
+    // navigateTo(webresource) passes the caller's payload as ?data=<encoded>. Accept a JSON blob or
+    // plain userId/source params. All optional: with no userId the gateway probes the first flagged user.
+    function getParams() {
+      var q = new URLSearchParams(window.location.search);
+      var out = { source: "Teams", userId: "" };
+      var data = q.get("data");
+      if (data) {
+        try { var o = JSON.parse(data); if (o.source) out.source = o.source; if (o.userId) out.userId = o.userId; }
+        catch (e) { /* data may be a bare userId */ if (data.indexOf("{") < 0) out.userId = data; }
+      }
+      if (q.get("userId")) out.userId = q.get("userId");
+      if (q.get("source")) out.source = q.get("source");
+      return out;
+    }
+
+    function esc(s) { return (s == null ? "" : String(s)).replace(/[&<>]/g, function (c) {
+      return c === "&" ? "&amp;" : c === "<" ? "&lt;" : "&gt;"; }); }
+
+    function dotClass(g) { return g === "Pass" ? "pass" : g === "Fail" ? "fail" : "unknown"; }
+
+    function cmdBlock(id, text) {
+      return '<div class="cmd"><button class="ghost copy" onclick="copyCmd(\'' + id + '\')">Copy</button>' +
+             '<pre id="' + id + '">' + esc(text) + '</pre></div>';
+    }
+    function copyCmd(id) {
+      var el = document.getElementById(id); if (!el) return;
+      var r = document.createRange(); r.selectNodeContents(el);
+      var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+      try { document.execCommand("copy"); } catch (e) {}
+      sel.removeAllRanges();
+    }
+
+    function renderGate(key, statusVal, gatewayHint) {
+      var meta = GATE_META[key];
+      var html = '<div class="gate"><div class="row"><span class="dot ' + dotClass(statusVal) + '"></span>' +
+        '<div><div class="title">' + esc(meta.title) + ' <span class="muted">(' + esc(statusVal) + ')</span></div>' +
+        '<div class="desc">' + esc(meta.desc) + '</div>';
+      if (statusVal === "Fail") {
+        html += '<div class="remedy">' + (gatewayHint ? esc(gatewayHint) : "") ;
+        if (key === "consentAndPermissions")
+          html += '<div class="muted" style="margin-top:6px">Open the admin-consent URL as a Global Admin (replace the client id):</div>' +
+                  cmdBlock("cmd_consent", CMD.consentUrl("", ""));
+        if (key === "applicationAccessPolicy")
+          html += cmdBlock("cmd_policy", CMD.policy);
+        if (key === "transcriptApiAccess")
+          html += cmdBlock("cmd_transcript", CMD.transcript);
+        html += '</div>';
+      }
+      html += '</div></div></div>';
+      return html;
+    }
+
+    function setStatus(t) { document.getElementById("status").innerText = t; }
+    function showBanner(cls, html) {
+      var b = document.getElementById("banner"); b.className = "banner " + cls; b.innerHTML = html; b.style.display = "block";
+    }
+    function hideBanner() { document.getElementById("banner").style.display = "none"; }
+
+    function render(health) {
+      var gatesDiv = document.getElementById("gates"); gatesDiv.innerHTML = "";
+      document.getElementById("enablestep").style.display = "block";
+
+      // Proxy / precondition outcomes (no gates object).
+      if (!health || !health.gates) {
+        var reason = health && health.reason;
+        var msg = (health && health.message) || "No response.";
+        if (reason === "NoUserToProbe") {
+          showBanner("warn", "<b>No user to probe yet.</b> Flag at least one user for meeting sync first: " +
+            "<b>Settings → Users</b>, open a user and set <code class=\"inl\">Meeting Sync Enabled</code> to Yes, then Re-check.");
+        } else if (reason === "GatewayNotConfigured") {
+          showBanner("bad", "<b>Gateway not configured.</b> " + esc(msg) +
+            " Set the environment variables <code class=\"inl\">tavu_GatewayUrl</code> and <code class=\"inl\">tavu_GatewayKey</code>.");
+        } else if (reason === "SourceNotSupported") {
+          showBanner("warn", esc(msg));
+        } else {
+          showBanner("bad", "<b>Could not reach the gateway.</b> " + esc(msg));
+        }
+        return;
+      }
+
+      var g = health.gates, rem = health.remediation || {};
+      var allPass = g.consentAndPermissions === "Pass" && g.applicationAccessPolicy === "Pass" && g.transcriptApiAccess === "Pass";
+
+      if (health.healthy) {
+        showBanner("good", "<b>All three gates pass.</b> Teams transcript sync is ready. Enable the users below and you are done.");
+      } else if (allPass) {
+        // 404 / "no transcript yet": setup looks satisfied, just no data to confirm against.
+        var d = health.detail || {};
+        showBanner("warn", "<b>Setup looks satisfied.</b> " + esc((d.message) || "No auth, policy or tenant block detected.") +
+          " Validate with a real transcribed meeting.");
+      } else {
+        showBanner("bad", "<b>One or more gates need attention.</b> Fix the red items below, then Re-check.");
+      }
+
+      gatesDiv.innerHTML =
+        renderGate("consentAndPermissions", g.consentAndPermissions, rem.consentAndPermissions) +
+        renderGate("applicationAccessPolicy", g.applicationAccessPolicy, rem.applicationAccessPolicy) +
+        renderGate("transcriptApiAccess", g.transcriptApiAccess, rem.transcriptApiAccess);
+    }
+
+    // Build and run the unbound Custom API tavu_ProbeMeetingSource.
+    function run() {
+      var x = getXrm();
+      var btn = document.getElementById("recheck");
+      if (!x) { setStatus("Client API unavailable."); showBanner("bad", "Open this from the Meeting Source form."); return; }
+      btn.disabled = true; setStatus("Checking…"); hideBanner();
+
+      var p = getParams();
+
+      var req = {
+        SourceName: p.source || "Teams",
+        getMetadata: function () {
+          var pt = { "SourceName": { typeName: "Edm.String", structuralProperty: 1 } };
+          var params = { boundParameter: null, operationType: 0, operationName: "tavu_ProbeMeetingSource", parameterTypes: pt };
+          if (p.userId) { pt["UserId"] = { typeName: "Edm.String", structuralProperty: 1 }; }
+          return params;
+        }
+      };
+      if (p.userId) req.UserId = p.userId;
+
+      x.WebApi.online.execute(req).then(function (r) { return r.json(); }).then(function (res) {
+        btn.disabled = false; setStatus("Last checked just now.");
+        var health = {};
+        try { health = res.HealthJson ? JSON.parse(res.HealthJson) : {}; } catch (e) { health = { reason: "BadJson", message: res.HealthJson }; }
+        render(health);
+      }, function (err) {
+        btn.disabled = false; setStatus("Check failed.");
+        showBanner("bad", "<b>Probe call failed.</b> " + esc(err && err.message ? err.message : err) +
+          " Confirm the Custom API <code class=\"inl\">tavu_ProbeMeetingSource</code> is registered.");
+      });
+    }
+
+    run();
+  </script>
+</body>
+</html>

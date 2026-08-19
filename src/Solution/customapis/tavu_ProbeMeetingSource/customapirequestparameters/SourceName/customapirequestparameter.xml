@@ -1,0 +1,12 @@
+<customapirequestparameter uniquename="SourceName">
+  <description default="Meeting source connector name. Defaults to 'Teams'. Only Teams is supported today">
+    <label description="Meeting source connector name. Defaults to 'Teams'. Only Teams is supported today" languagecode="1033" />
+  </description>
+  <displayname default="ProbeMeetingSource-In-SourceName">
+    <label description="ProbeMeetingSource-In-SourceName" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>ProbeMeetingSource-In-SourceName</name>
+  <type>10</type>
+</customapirequestparameter>

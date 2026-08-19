@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="EmailId">
+  <description default="The created draft follow-up email activity. GUID as string.">
+    <label description="The created draft follow-up email activity. GUID as string." languagecode="1033" />
+  </description>
+  <displayname default="BuildMeetingEmailDraft-Out-EmailId">
+    <label description="BuildMeetingEmailDraft-Out-EmailId" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>BuildMeetingEmailDraft-Out-EmailId</name>
+  <type>10</type>
+</customapiresponseproperty>

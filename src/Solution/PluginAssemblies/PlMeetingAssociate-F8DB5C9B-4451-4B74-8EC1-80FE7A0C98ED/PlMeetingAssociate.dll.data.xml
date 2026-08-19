@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Pl.Meeting.Associate, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginAssemblyId="f8db5c9b-4451-4b74-8ec1-80fe7a0c98ed" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/PlMeetingAssociate-F8DB5C9B-4451-4B74-8EC1-80FE7A0C98ED/PlMeetingAssociate.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Pl.Meeting.Associate.AssociateMeeting, Pl.Meeting.Associate, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginTypeId="7b10c387-2044-4024-aa80-bb74ac08dfd5" Name="Pl.Meeting.Associate.AssociateMeeting">
+      <FriendlyName>9ae4618b-4164-49c3-b7fa-bce09e2e361a</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

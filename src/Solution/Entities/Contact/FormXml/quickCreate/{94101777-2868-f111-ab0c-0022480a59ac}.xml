@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{94101777-2868-f111-ab0c-0022480a59ac}</formid>
+    <IntroducedVersion>1.0.0.3</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form maxWidth="1900">
+      <tabs>
+        <tab id="{ee019344-2ac2-4ade-b2b8-630ff38801b1}" name="tab_1" showlabel="false" IsUserDefined="0" labelid="{e98b1f2a-9b09-433f-b9a0-7c426039106a}">
+          <labels>
+            <label description="Tab" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="33%">
+              <sections>
+                <section id="{be7e5181-f67d-4fac-9420-ed9e2ac588fd}" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" labelid="{71235257-8b67-4660-b51c-cf4068b22980}">
+                  <labels>
+                    <label description="Details" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{a2528d42-720c-9931-81ca-784c1881b8c2}" showlabel="true" locklevel="0" labelid="{82e12112-66eb-4d62-a230-18b85fd8689b}">
+                        <labels>
+                          <label description="First Name" languagecode="1033" />
+                        </labels>
+                        <control id="firstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="firstname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7a7e1043-ea62-1a5d-44c8-68757777c3d0}" showlabel="true" locklevel="0" labelid="{05b89762-2303-4e48-a93b-e24ab8c0296a}">
+                        <labels>
+                          <label description="Last Name" languagecode="1033" />
+                        </labels>
+                        <control id="lastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="lastname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c7039214-3590-a99c-cce7-e18a7895d74e}" showlabel="true" locklevel="0" labelid="{6405c80a-6f74-4350-9927-d810d78c664c}">
+                        <labels>
+                          <label description="Job Title" languagecode="1033" />
+                        </labels>
+                        <control id="jobtitle" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="jobtitle" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{64cb3028-1866-28da-8268-c5487ce86317}" showlabel="true" locklevel="0" labelid="{1b6ad767-0ae7-4481-8e6d-fc8d9d50964b}">
+                        <labels>
+                          <label description="Account Name" languagecode="1033" />
+                        </labels>
+                        <control id="parentcustomerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="parentcustomerid" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="{b5f2a6a1-d1e1-439d-ab76-fbb48f1381d4}" name="tab_1_column_2_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" labelid="{71595de8-54e7-4251-8e2a-4877c2605dea}">
+                  <labels>
+                    <label description="Contact Information" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{a6b833e8-225b-4986-c283-067453a7daa2}" showlabel="true" locklevel="0" labelid="{b05e81cd-e529-426e-9291-07717a167416}">
+                        <labels>
+                          <label description="Email" languagecode="1033" />
+                        </labels>
+                        <control id="emailaddress1" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="emailaddress1" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{192e5ab2-2129-ee55-cd56-2846649cbe47}" showlabel="true" locklevel="0" labelid="{294bf1a8-f371-47b2-801a-7bf4a38e805f}">
+                        <labels>
+                          <label description="Mobile Phone" languagecode="1033" />
+                        </labels>
+                        <control id="mobilephone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="mobilephone" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section id="{4e35e9f6-ac81-44cf-b8d6-91149b679634}" name="tab_1_column_3_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" labelid="{9f697aea-6cea-4029-82ab-d996eba00e1c}">
+                  <labels>
+                    <label description="Address" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{96579477-ae15-4c6e-99ce-5f6879befb4b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Country" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_country" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1bff9f9c-adce-4f53-8811-42247a1d278b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="State/Province" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_stateprovince" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_stateprovince" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9d4ceebd-4d71-46f3-a98c-6777805a8ecd}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="City" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_city" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_city" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2AC67B8F-6335-4448-9E85-1601793BF072}" showlabel="true" locklevel="0" labelid="{b2a9b88b-8cc3-48b4-a794-d406ef4ef529}">
+                        <labels>
+                          <label description="ZIP/Postal Code" languagecode="1033" />
+                        </labels>
+                        <control id="address1_postalcode" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="address1_postalcode" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions FallbackForm="true" Order="1">
+        <Role Id="{627090ff-40a3-4053-8790-584edc5be201}" />
+        <Role Id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="QC - Contact Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Default quick create form for Contact" languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="HealthJson">
+  <description default="Raw JSON from /api/teams/health, or a proxy error JSON. The wizard parses this">
+    <label description="Raw JSON from /api/teams/health, or a proxy error JSON. The wizard parses this" languagecode="1033" />
+  </description>
+  <displayname default="ProbeMeetingSource-Out-HealthJson">
+    <label description="ProbeMeetingSource-Out-HealthJson" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>ProbeMeetingSource-Out-HealthJson</name>
+  <type>10</type>
+</customapiresponseproperty>

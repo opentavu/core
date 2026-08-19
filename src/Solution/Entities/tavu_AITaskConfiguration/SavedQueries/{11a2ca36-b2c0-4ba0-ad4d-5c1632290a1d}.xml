@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{11a2ca36-b2c0-4ba0-ad4d-5c1632290a1d}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_aitaskconfigurationid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_taskkey" width="100" />
+          <cell name="tavu_tokenbudget" width="119" />
+          <cell name="tavu_maxoutputtokens" width="152" />
+          <cell name="tavu_confidencethreshold" width="165" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_aitaskconfiguration">
+          <attribute name="tavu_aitaskconfigurationid" />
+          <attribute name="tavu_name" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="tavu_taskkey" />
+          <attribute name="tavu_tokenbudget" />
+          <attribute name="tavu_maxoutputtokens" />
+          <attribute name="tavu_confidencethreshold" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive AI Task Configurations" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

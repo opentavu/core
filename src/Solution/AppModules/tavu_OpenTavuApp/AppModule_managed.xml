@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>tavu_OpenTavuApp</UniqueName>
+  <IntroducedVersion>1.0.0.12</IntroducedVersion>
+  <WebResourceId>23a9ec32-ab4d-f111-bec6-000d3a5aefd8</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="account" />
+    <AppModuleComponent type="1" schemaName="applicationuser" />
+    <AppModuleComponent type="1" schemaName="contact" />
+    <AppModuleComponent type="1" schemaName="systemuser" />
+    <AppModuleComponent type="1" schemaName="tavu_aimodel" />
+    <AppModuleComponent type="1" schemaName="tavu_aitaskconfiguration" />
+    <AppModuleComponent type="1" schemaName="tavu_businesscalendar" />
+    <AppModuleComponent type="1" schemaName="tavu_businessclosure" />
+    <AppModuleComponent type="1" schemaName="tavu_businessline" />
+    <AppModuleComponent type="1" schemaName="tavu_calendarworkinghours" />
+    <AppModuleComponent type="1" schemaName="tavu_case" />
+    <AppModuleComponent type="1" schemaName="tavu_casestatus" />
+    <AppModuleComponent type="1" schemaName="tavu_casetype" />
+    <AppModuleComponent type="1" schemaName="tavu_category" />
+    <AppModuleComponent type="1" schemaName="tavu_city" />
+    <AppModuleComponent type="1" schemaName="tavu_companyprofile" />
+    <AppModuleComponent type="1" schemaName="tavu_country" />
+    <AppModuleComponent type="1" schemaName="tavu_customertierdefinition" />
+    <AppModuleComponent type="1" schemaName="tavu_knowledgearticle" />
+    <AppModuleComponent type="1" schemaName="tavu_lead" />
+    <AppModuleComponent type="1" schemaName="tavu_meeting" />
+    <AppModuleComponent type="1" schemaName="tavu_meetingsource" />
+    <AppModuleComponent type="1" schemaName="tavu_opportunity" />
+    <AppModuleComponent type="1" schemaName="tavu_pricelist" />
+    <AppModuleComponent type="1" schemaName="tavu_product" />
+    <AppModuleComponent type="1" schemaName="tavu_proposal" />
+    <AppModuleComponent type="1" schemaName="tavu_proposalline" />
+    <AppModuleComponent type="1" schemaName="tavu_salesstage" />
+    <AppModuleComponent type="1" schemaName="tavu_sla" />
+    <AppModuleComponent type="1" schemaName="tavu_stateprovince" />
+    <AppModuleComponent type="1" schemaName="tavu_subcategory" />
+    <AppModuleComponent type="1" schemaName="tavu_unitofmeasureschedule" />
+    <AppModuleComponent type="1" schemaName="tavu_uom" />
+    <AppModuleComponent type="60" id="{1718b862-0f68-f111-ab0c-0022480a59ac}" />
+    <AppModuleComponent type="60" id="{90bb23fc-68d5-4ddd-afcc-10ac001d0682}" />
+    <AppModuleComponent type="60" id="{0e2bda6a-e874-f111-ab0e-7ced8d6f4a65}" />
+    <AppModuleComponent type="60" id="{e19109c4-bff2-4c6c-953e-f0bb48c9df4b}" />
+    <AppModuleComponent type="62" schemaName="tavu_OpenTavuApp" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    <Role id="{627090ff-40a3-4053-8790-584edc5be201}" />
+    <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="OpenTavu App" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="AI-CRM for Professional Services - Pipeline, Cases, and Proposals in one place." languagecode="1033" />
+  </Descriptions>
+  <appelements>
+    <appelement uniquename="tavu_tavu_OpenTavuApp_canvasappid_tavu_opentavuappdefaultcommandlibrary_9129c">
+      <canvasappid>
+        <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>tavu_tavu_OpenTavuApp_canvasappid_tavu_opentavuappdefaultcommandlibrary_9129c</name>
+    </appelement>
+    <appelement uniquename="tavu_tavu_OpenTavuApp_canvasappid_tavu_opportunityclosedialog_31702">
+      <canvasappid>
+        <name>tavu_opportunityclosedialog_31702</name>
+      </canvasappid>
+      <iscustomizable>1</iscustomizable>
+      <name>tavu_tavu_OpenTavuApp_canvasappid_tavu_opportunityclosedialog_31702</name>
+    </appelement>
+  </appelements>
+  <appsettings>
+    <appsetting settingdefinitionid.uniquename="AppChannel">
+      <iscustomizable>1</iscustomizable>
+      <value>1</value>
+    </appsetting>
+    <appsetting settingdefinitionid.uniquename="IsSmartEmailAddressValidationControlEnabled">
+      <iscustomizable>1</iscustomizable>
+      <value>true</value>
+    </appsetting>
+  </appsettings>
+</AppModule>

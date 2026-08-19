@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{ba3806af-d126-4287-a25e-74e2f1db4006}</savedqueryid>
+    <layoutxml>
+      <grid name="tavu_meetings" jump="subject" select="1" icon="1" preview="1">
+        <row name="tavu_meeting" id="activityid">
+          <cell name="subject" width="300" />
+          <cell name="tavu_source" width="152" />
+          <cell name="scheduledstart" width="100" />
+          <cell name="statuscode" width="119" />
+          <cell name="tavu_aiconfidence" width="138" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>2</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_meeting">
+          <attribute name="activityid" />
+          <attribute name="subject" />
+          <order attribute="subject" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="in">
+              <value>0</value>
+              <value>3</value>
+            </condition>
+          </filter>
+          <attribute name="tavu_source" />
+          <attribute name="scheduledstart" />
+          <attribute name="statuscode" />
+          <attribute name="tavu_aiconfidence" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.27</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Meeting Associated View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

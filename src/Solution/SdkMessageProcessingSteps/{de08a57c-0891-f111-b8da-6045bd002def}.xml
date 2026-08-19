@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="Pl.Meeting.Capture.MeetingCapture: Create of tavu_meeting" SdkMessageProcessingStepId="{de08a57c-0891-f111-b8da-6045bd002def}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>9ebdbb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeName>Pl.Meeting.Capture.MeetingCapture, Pl.Meeting.Capture, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5</PluginTypeName>
+  <PluginTypeId>d1a79d6e-7ce0-4831-a8a8-d92d1d904393</PluginTypeId>
+  <PrimaryEntity>tavu_meeting</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <FilteringAttributes></FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>1</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>40</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

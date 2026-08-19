@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="Pl.Opportunity.CustomerSync.CustomerSync: Create of tavu_opportunity" SdkMessageProcessingStepId="{2ebf87da-6c58-f111-a825-0022480a59ac}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>9ebdbb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeName>Pl.Opportunity.CustomerSync.CustomerSync, Pl.Opportunity.CustomerSync, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5</PluginTypeName>
+  <PluginTypeId>5a055af5-f024-4586-81de-db6983fe1c54</PluginTypeId>
+  <PrimaryEntity>tavu_opportunity</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <Description>CustomerSync — mirror customerid and validate type on Create</Description>
+  <FilteringAttributes></FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>0</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>20</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

@@ -1,0 +1,10 @@
+<environmentvariabledefinition schemaname="tavu_GatewayKey">
+  <displayname default="Gateway Key">
+    <label description="Gateway Key" languagecode="1033" />
+  </displayname>
+  <introducedversion>1.0.0.17</introducedversion>
+  <iscustomizable>1</iscustomizable>
+  <isrequired>0</isrequired>
+  <secretstore>0</secretstore>
+  <type>100000000</type>
+</environmentvariabledefinition>

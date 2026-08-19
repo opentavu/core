@@ -1,0 +1,11 @@
+<customapiresponseproperty uniquename="HttpStatus">
+  <description default="HTTP status from the health endpoint. 0 if the call could not be made">
+    <label description="HTTP status from the health endpoint. 0 if the call could not be made" languagecode="1033" />
+  </description>
+  <displayname default="ProbeMeetingSource-Out-HttpStatus">
+    <label description="ProbeMeetingSource-Out-HttpStatus" languagecode="1033" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>ProbeMeetingSource-Out-HttpStatus</name>
+  <type>7</type>
+</customapiresponseproperty>

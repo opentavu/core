@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SdkMessageProcessingStep Name="Pl.Case.Categorize.Categorize: Create of tavu_case" SdkMessageProcessingStepId="{ce85106f-2674-f111-ab0e-7ced8d6f4a65}" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SdkMessageId>9ebdbb1b-ea3e-db11-86a7-000a3a5473e8</SdkMessageId>
+  <PluginTypeName>Pl.Case.Categorize.Categorize, Pl.Case.Categorize, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5</PluginTypeName>
+  <PluginTypeId>4acae0e4-81bd-4d79-8b9e-cf5a7e218dc5</PluginTypeId>
+  <PrimaryEntity>tavu_case</PrimaryEntity>
+  <AsyncAutoDelete>0</AsyncAutoDelete>
+  <FilteringAttributes></FilteringAttributes>
+  <InvocationSource>1</InvocationSource>
+  <Mode>1</Mode>
+  <Rank>1</Rank>
+  <EventHandlerTypeCode>4602</EventHandlerTypeCode>
+  <Stage>40</Stage>
+  <IsCustomizable>1</IsCustomizable>
+  <IsHidden>0</IsHidden>
+  <SupportedDeployment>0</SupportedDeployment>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <SdkMessageProcessingStepImages />
+</SdkMessageProcessingStep>

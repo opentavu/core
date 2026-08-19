@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{9e7ae295-526d-492c-881c-cad37027308d}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{c16ad2ff-6707-4a6e-b14b-cac3aa8b77a7}" IsUserDefined="1" name="tab_General">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{c0fd7cdc-e685-4f99-83fc-4c85f4654388}" name="Section_Line_Item">
+                  <labels>
+                    <label description="Line Item" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{aa243bcd-0908-4972-8624-cbcf3b0843fd}" visible="false">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ec4d1819-119e-40b6-9e5b-b3840d77e53e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_product" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_product" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{f520b53d-20f6-4944-87eb-af1730e912b3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_unitofmeasure" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_unitofmeasure" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a0b9c03a-88f9-4af9-b5a7-e17b166145ce}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_quantity" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_quantity" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ce346a4d-e627-4357-aa8e-d5c0f56222af}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_priceperunit" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_priceperunit" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a01603c8-ac65-4c8d-a1f9-bce0ada72929}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_overrideprice" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_overrideprice" disabled="false" uniqueid="{729ea490-a490-4bd3-b17e-e7615eac5dde}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7c29ad8f-4123-4d39-b8cd-2daf62edb843}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_discount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_discount" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{bba0dcde-72d6-4bae-8715-89b9f3a397ad}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_taxrate" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_taxrate" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="Section_Amounts" id="f506b97d-69e3-45d4-b1b9-5861960b32a6" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Amounts" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{62473a4a-d9ab-45ef-9b60-f9baf46aa581}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_subtotal" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_subtotal" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{060f4b4c-9a80-4a7b-9ea8-233998a3c6e0}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_taxamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_taxamount" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3a1ea00b-ec72-4dc7-a3b4-30a084d2cd1b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_total" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_total" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section name="Section_Link_Admon" id="7d45bf14-3185-43b2-b893-7a72cc15566b" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Link &amp; Administration" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{08d5231e-8027-4f1c-b290-bb61b39ee868}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_proposal" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_proposal" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{522cf00b-fc8d-4624-a5d1-ad9782265d1e}" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{9963cc80-ea67-4685-91f6-b5ef072ccae3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="Section_Cost_Margin" id="d4c6adeb-35d3-45d4-ad45-f32e38516562" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Cost &amp; Margin" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{133d4884-b79d-43a3-8b95-0704a76de60c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_unitcost" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_unitcost" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1e5b8835-9614-4143-b70b-052e1715a866}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_linecost" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_linecost" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{d648b90c-79a7-4c40-aa85-538ae27d3f0a}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{1cd85b0d-b975-4483-9654-ff87d00d58b2}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{29beb85d-b1c9-466f-9de9-5632cc133c2f}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{f22e346b-7f39-4884-9511-553f488451e2}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{d821a250-5330-46a6-9dee-b0474f19d457}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{a2bd0ab0-a2ab-4ca2-95d9-b8447efc041c}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e2b8b7b2-c4ac-43c1-95f3-09431523e019}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{aa1a5198-f63d-4419-a632-97bf174026da}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{729ea490-a490-4bd3-b17e-e7615eac5dde}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_overrideprice</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_overrideprice</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_overrideprice</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_overrideprice</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+      <formLibraries>
+        <Library name="tavu_proposalline_form" libraryUniqueId="{1003a5fd-0096-47b8-a815-f3e0823cbc13}" />
+      </formLibraries>
+      <events>
+        <event name="onchange" application="false" active="false" attribute="tavu_product">
+          <Handlers>
+            <Handler functionName="OpenTavu.ProposalLine.Form.onProductChange" libraryName="tavu_proposalline_form" handlerUniqueId="{b1e2012c-9897-4dea-83a3-1b4e306da314}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="OpenTavu.ProposalLine.Form.onLoad" libraryName="tavu_proposalline_form" handlerUniqueId="{0883cfdd-213b-45ad-b16a-964d47cfc399}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="tavu_overrideprice">
+          <Handlers>
+            <Handler functionName="OpenTavu.ProposalLine.Form.onOverrideChange" libraryName="tavu_proposalline_form" handlerUniqueId="{273f23d1-c6a8-4c52-b8ab-8c0ef6979b92}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="tavu_priceperunit">
+          <Handlers>
+            <Handler functionName="OpenTavu.ProposalLine.Form.onPriceChange" libraryName="tavu_proposalline_form" handlerUniqueId="{62f7fd27-19a3-4744-b4cc-97c338ad5ca8}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="tavu_quantity">
+          <Handlers>
+            <Handler functionName="OpenTavu.ProposalLine.Form.onQuantityChange" libraryName="tavu_proposalline_form" handlerUniqueId="{28ed3fb3-8dc3-4cee-bacb-9175a092a6ce}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="tavu_discount">
+          <Handlers>
+            <Handler functionName="OpenTavu.ProposalLine.Form.onDiscountChange" libraryName="tavu_proposalline_form" handlerUniqueId="{960aeb72-d1b9-4150-911e-0ed11c4e6f49}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="tavu_taxrate">
+          <Handlers>
+            <Handler functionName="OpenTavu.ProposalLine.Form.onTaxRateChange" libraryName="tavu_proposalline_form" handlerUniqueId="{b1c87f47-4a0b-4bfe-b50e-e6afc52889e5}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Proposal Line Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

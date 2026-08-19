@@ -1,0 +1,398 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{0c39289a-374a-40ed-a185-2bc66eeb99e9}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{dfdacafb-46be-499f-a8a5-da22dbe25e1f}" IsUserDefined="1" name="tab_General">
+          <labels>
+            <label description="General" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{6d00eda5-18c6-47f2-8506-5cc95d0db2ce}">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{8ab865de-3478-43de-ae3d-d4ca246c6437}">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="GeneralSection" id="7ffb4a5b-30c3-4a0a-b9c1-25c135d0d910" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell locklevel="0" id="{9e7f4ade-ebb5-4fe1-bcaa-05cdf53f43d9}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{861046a1-0c94-4966-96a4-a17e2f2b4dc8}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Activity Threshold Days" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_activitythresholddays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_activitythresholddays" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6f6b5d7c-3bed-4fa9-b6b0-7c0fd7d75641}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Default Country" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_defaultcountry" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_defaultcountry" disabled="false" />
+                      </cell>
+                      <cell id="{fbb0aa44-88ab-4c9e-91af-b77cb01ebcd5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Default Customer Tier" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_defaultcustomertier" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_defaultcustomertier" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2ae745a1-d71f-4260-8e09-bc74a825d5ee}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Customer Mode" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_customermode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_customermode" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{98278fd1-8827-4909-bb3a-815a920e283e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Sla Auto Resume" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_slaautoresume" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_slaautoresume" disabled="false" uniqueid="{c709bb30-6a32-4520-90a2-cdf6b68d10a0}" />
+                      </cell>
+                      <cell locklevel="0" id="{799bcc25-cd29-457f-bdc0-73ca3105eeea}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_leads" id="30f9126b-8c94-4628-b22b-e2994bf462ee" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Leads" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{cd81d165-9c27-4190-870b-7090efb0330b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Lead Buffer Aging Days" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_leadbufferagingdays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_leadbufferagingdays" disabled="false" />
+                      </cell>
+                      <cell id="{e70e724c-ae4b-4d7f-84c4-a9d2e6527ab4}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Lead Buffer Stale Days" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_leadbufferstaledays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_leadbufferstaledays" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="Section_AISettings" id="144b1203-ff87-4735-b00f-c704deead145" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="AI Settings" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{edf97e5b-8af5-4b2c-91d3-00dc16ca216f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="AI Enabled" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_aienabled" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_aienabled" disabled="false" uniqueid="{819a14da-2230-4e0b-aac5-a1aa6ca868ff}" />
+                      </cell>
+                      <cell id="{79036631-4679-40b9-9225-221bd90b79ff}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Default AI Model" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_defaultaimodel" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_defaultaimodel" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e503682f-f4de-4610-8dcf-a42dcebb6fba}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Proposal Email Draft Enabled" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_proposalemaildraftenabled" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_proposalemaildraftenabled" disabled="false" uniqueid="{4031932a-c509-426a-bc46-e7119521c44e}" />
+                      </cell>
+                      <cell id="{15391095-8822-471a-9294-436c77bd6291}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Default Confidence Threshold" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_defaultconfidencethreshold" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_defaultconfidencethreshold" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_activitycapturemeeting" id="16708909-e499-4036-8e2d-e60ee6dd418d" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Activity Capture (Meetings)" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{d7715dcc-a04c-4597-be4e-0c554dbf0b11}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Meeting Auto Provision" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_meetingautoprovision" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_meetingautoprovision" disabled="false" uniqueid="{a27ef35b-9c54-40d1-b3ed-bbfd06e309c3}" />
+                      </cell>
+                      <cell id="{57b00841-e3b0-420b-8ee5-c1df6f92446c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Meeting Follow Up Draft Enabled" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_meetingfollowupdraftenabled" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_meetingfollowupdraftenabled" disabled="false" uniqueid="{ff5b360f-7f42-4fc6-af50-27b1aefd4f51}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6a149fd9-8b80-452b-b4f1-0bd78054595a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Meeting Consolidated Discovery" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_meetingconsolidateddiscovery" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_meetingconsolidateddiscovery" disabled="false" uniqueid="{96bce795-0c4d-45be-8567-906dc4d9b53a}" />
+                      </cell>
+                      <cell id="{6aa07a13-e8cc-40f0-be9b-6aa89cc733d8}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Meeting Stamp Engagement" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_meetingstampengagement" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_meetingstampengagement" disabled="false" uniqueid="{6a23a690-c31f-4bb6-bc36-d1b2bea7e8ef}" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{c65d2ea4-6a83-40b4-84b8-757826d6013c}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{403de0d5-7d33-44d5-ac2d-c09706389fa9}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{58b913b8-eaef-47cc-9251-e488ec40e1e6}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{3a54fd32-661d-49d0-9af4-51d39bba0233}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{147913c4-4941-448b-8893-b28d40bef08e}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{7d2b725c-7225-45e4-acee-f20cff6a42a1}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{baee4d90-6bdb-489d-b8d2-33fbdc99f9ad}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{58de43e0-6cc5-4986-99d0-202705cc0781}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <controlDescriptions>
+        <controlDescription forControl="{819a14da-2230-4e0b-aac5-a1aa6ca868ff}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_aienabled</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_aienabled</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_aienabled</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_aienabled</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{c709bb30-6a32-4520-90a2-cdf6b68d10a0}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_slaautoresume</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_slaautoresume</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_slaautoresume</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_slaautoresume</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{4031932a-c509-426a-bc46-e7119521c44e}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_proposalemaildraftenabled</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_proposalemaildraftenabled</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_proposalemaildraftenabled</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_proposalemaildraftenabled</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{a27ef35b-9c54-40d1-b3ed-bbfd06e309c3}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_meetingautoprovision</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingautoprovision</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingautoprovision</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingautoprovision</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{96bce795-0c4d-45be-8567-906dc4d9b53a}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_meetingconsolidateddiscovery</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingconsolidateddiscovery</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingconsolidateddiscovery</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingconsolidateddiscovery</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{ff5b360f-7f42-4fc6-af50-27b1aefd4f51}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_meetingfollowupdraftenabled</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingfollowupdraftenabled</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingfollowupdraftenabled</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingfollowupdraftenabled</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{6a23a690-c31f-4bb6-bc36-d1b2bea7e8ef}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_meetingstampengagement</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingstampengagement</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingstampengagement</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_meetingstampengagement</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__Discard!e783cbd74a01488c8474ae58d2f8d92a!tavu_OpenTavuApp!tavu_meeting!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Discard">
+    <label description="Discard" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Close this meeting as discarded when it has no discovery value. No opportunity is affected.">
+    <label description="Close this meeting as discarded when it has no discovery value. No opportunity is affected." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Discard meeting">
+    <label description="Discard meeting" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_meeting</logicalname>
+  </contextentity>
+  <contextvalue>tavu_meeting</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>21e9c31b-9d91-f111-b8da-6045bd002def</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>Discard!e783cbd74a01488c8474ae58d2f8d92a</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Meeting.Form.discard</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>d70ca1e9-1991-f111-b8da-6045bd002def</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100046.8750000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>d0a986e3f583459292e2b62f4434059f</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

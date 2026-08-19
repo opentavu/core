@@ -1,0 +1,2 @@
+tavu_daysinpipeline: =DateDiff(createdon,Now(),TimeUnit.Days)
+tavu_daysinstage: =DateDiff(tavu_stagechangedate,Now(),TimeUnit.Days)

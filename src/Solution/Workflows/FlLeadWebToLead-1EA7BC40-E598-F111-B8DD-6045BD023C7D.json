@@ -1,0 +1,263 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_microsoftforms": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "tavu_sharedmicrosoftforms_40371"
+        },
+        "api": {
+          "name": "shared_microsoftforms"
+        }
+      },
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "tavu_sharedcommondataserviceforapps_18f0f"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      },
+      "shared_onedriveforbusiness": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "tavu_sharedonedriveforbusiness_84191"
+        },
+        "api": {
+          "name": "shared_onedriveforbusiness"
+        }
+      },
+      "shared_office365": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "tavu_sharedoffice365_e014b"
+        },
+        "api": {
+          "name": "shared_office365"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "When_a_new_response_is_submitted_in_opentavu_guide_form": {
+          "splitOn": "@triggerOutputs()?['body/value']",
+          "metadata": {
+            "operationMetadataId": "b6a70c55-ad33-4b9f-82c1-4f6429498991"
+          },
+          "type": "OpenApiConnectionWebhook",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_microsoftforms",
+              "operationId": "CreateFormWebhook",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftforms"
+            },
+            "parameters": {
+              "form_id": "fLMgjuR70UGoSX7nxJeYkiSkpg0R2qlKpb_ttS5npI5UN0w4VDI0VUZRRTE2MzJaVjNLOUJIUDNOSC4u"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        }
+      },
+      "actions": {
+        "Get_response_details": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "eda0b885-c2d0-42c4-8176-c452e60fd002"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_microsoftforms",
+              "operationId": "GetFormResponseById",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_microsoftforms"
+            },
+            "parameters": {
+              "form_id": "fLMgjuR70UGoSX7nxJeYkiSkpg0R2qlKpb_ttS5npI5UN0w4VDI0VUZRRTE2MzJaVjNLOUJIUDNOSC4u",
+              "response_id": "@triggerOutputs()?['body/resourceData/responseId']"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Add_a_new_lead": {
+          "runAfter": {
+            "Get_Language": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "a113ad46-019c-408a-9df4-b3717b18e7e5"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "CreateRecord",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "tavu_leads",
+              "item/tavu_subject": "Lead magnet ot-guide: @{outputs('Get_response_details')?['body/r23277fff940142c290bf458a7cb6e0ac']}",
+              "item/tavu_companyname": "@outputs('Get_response_details')?['body/rfd017c73fd8d438aa51e562e9d092e6a']",
+              "item/tavu_email": "@outputs('Get_response_details')?['body/ra61fd8a8a660400aac65c3e24d96b8bf']",
+              "item/tavu_firstname": "@outputs('Get_response_details')?['body/r23277fff940142c290bf458a7cb6e0ac']",
+              "item/tavu_leadlanguage": "@if(equals(outputs('Get_Language'), 'Español'), 576600000, 576600001)",
+              "item/tavu_source": 576600000,
+              "item/tavu_sourcedetails": "[origen: website / lead magnet: OpenTavu SMB CRM Guide]\n@{outputs('Get_response_details')?['body/rd3d610e4dabc44eb810aa83f55ba18a4']}"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Get_Language": {
+          "runAfter": {
+            "Get_response_details": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "4aa5e118-543d-4c4d-b428-1a04f3c2d86a"
+          },
+          "type": "Compose",
+          "inputs": "@outputs('Get_response_details')?['body/r3f82cea517fb4165bc4e6cf1ab72ff37']"
+        },
+        "Need_to_send_guide_in_spanish_or_english": {
+          "actions": {
+            "Get_file_PDF_Opentavu_Guide_ES": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "04623934-b2b2-4a62-ae3e-e1c16c79b471"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_onedriveforbusiness",
+                  "operationId": "GetFileContentByPath",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+                },
+                "parameters": {
+                  "path": "/Opentavu/Magnet Lead Opentavu Guide/Guia_OpenTavu_CRM_IA_PowerPlatform_ES.pdf",
+                  "inferContentType": true
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Send_an_email_with_the_guide_in_spanish": {
+              "runAfter": {
+                "Get_file_PDF_Opentavu_Guide_ES": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a31c64fd-277f-44e5-8dc9-00d309f8dc45"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_office365",
+                  "operationId": "SendEmailV2",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                },
+                "parameters": {
+                  "emailMessage/To": "@outputs('Get_response_details')?['body/ra61fd8a8a660400aac65c3e24d96b8bf']",
+                  "emailMessage/Subject": "Tu guía de OpenTavu ya está aquí",
+                  "emailMessage/Body": "<p>Hola @{outputs('Get_response_details')?['body/r23277fff940142c290bf458a7cb6e0ac']},<br>\n<br>\nGracias por tu interés en OpenTavu. Aquí tienes la guía que pediste, va adjunta en este correo.<br>\n<br>\nOpenTavu es un CRM AI-first para firmas de servicios profesionales, pensado para que la IA haga el trabajo pesado del CRM en lugar de que tú llenes campos.<br>\n<br>\nSi quieres verlo con tu propio pipeline, responde a este correo o agenda una llamada corta.<br>\n<br>\nUn saludo,<br>\nEquipo OpenTavu<br>\nsupport@opentavu.com</p>",
+                  "emailMessage/Attachments": [
+                    {
+                      "Name": "Guia-OpenTavu-ES.pdf",
+                      "ContentBytes": "@body('Get_file_PDF_Opentavu_Guide_ES')"
+                    }
+                  ],
+                  "emailMessage/Importance": "Normal"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            }
+          },
+          "runAfter": {
+            "Add_a_new_lead": [
+              "Succeeded"
+            ]
+          },
+          "else": {
+            "actions": {
+              "Get_file_PDF_Opentavu_Guide_EN": {
+                "runAfter": {},
+                "metadata": {
+                  "operationMetadataId": "b65cc9ed-0cb4-4fdb-8482-723599381071"
+                },
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "connectionName": "shared_onedriveforbusiness",
+                    "operationId": "GetFileContentByPath",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness"
+                  },
+                  "parameters": {
+                    "path": "/Opentavu/Magnet Lead Opentavu Guide/OpenTavu_AI_CRM_PowerPlatform_Guide_EN.pdf",
+                    "inferContentType": true
+                  },
+                  "authentication": "@parameters('$authentication')"
+                }
+              },
+              "Send_an_email_with_the_guide_in_english": {
+                "runAfter": {
+                  "Get_file_PDF_Opentavu_Guide_EN": [
+                    "Succeeded"
+                  ]
+                },
+                "metadata": {
+                  "operationMetadataId": "b1adecc6-825b-4022-9e89-9483021608b2"
+                },
+                "type": "OpenApiConnection",
+                "inputs": {
+                  "host": {
+                    "connectionName": "shared_office365",
+                    "operationId": "SendEmailV2",
+                    "apiId": "/providers/Microsoft.PowerApps/apis/shared_office365"
+                  },
+                  "parameters": {
+                    "emailMessage/To": "@outputs('Get_response_details')?['body/ra61fd8a8a660400aac65c3e24d96b8bf']",
+                    "emailMessage/Subject": "Your OpenTavu guide is here",
+                    "emailMessage/Body": "<p>Hi @{outputs('Get_response_details')?['body/r23277fff940142c290bf458a7cb6e0ac']},<br>\n<br>\nThanks for your interest in OpenTavu. Here's the guide you requested, attached to this email.<br>\n<br>\nOpenTavu is an AI-first CRM for professional services firms, built so AI does the heavy CRM lifting instead of you filling in fields.<br>\n<br>\nIf you'd like to see it on your own pipeline, just reply to this email or book a short call.<br>\n<br>\nBest,<br>\nThe OpenTavu team<br>\nsupport@opentavu.com</p>",
+                    "emailMessage/Attachments": [
+                      {
+                        "Name": "OpenTavu-Guide-EN.pdf",
+                        "ContentBytes": "@body('Get_file_PDF_Opentavu_Guide_EN')"
+                      }
+                    ],
+                    "emailMessage/Importance": "Normal"
+                  },
+                  "authentication": "@parameters('$authentication')"
+                }
+              }
+            }
+          },
+          "expression": {
+            "equals": [
+              "@outputs('Get_Language')",
+              "Español"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "73c35828-4306-4228-8eac-4fb659465475"
+          },
+          "type": "If"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

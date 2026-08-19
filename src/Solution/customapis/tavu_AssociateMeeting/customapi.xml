@@ -1,0 +1,18 @@
+<customapi uniquename="tavu_AssociateMeeting">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="Human step of Activity Capture (Module 3B): associates a captured meeting to an opportunity (existing, newly created, or the AI-suggested one), completes the meeting as Reviewed, and consolidates the opportunity's discovery notes across sessions.">
+    <label description="Human step of Activity Capture (Module 3B): associates a captured meeting to an opportunity (existing, newly created, or the AI-suggested one), completes the meeting as Reviewed, and consolidates the opportunity's discovery notes across sessions." languagecode="1033" />
+  </description>
+  <displayname default="AssociateMeeting">
+    <label description="AssociateMeeting" languagecode="1033" />
+  </displayname>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>AssociateMeeting</name>
+  <plugintypeid>
+    <plugintypeexportkey>7b10c387-2044-4024-aa80-bb74ac08dfd5</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

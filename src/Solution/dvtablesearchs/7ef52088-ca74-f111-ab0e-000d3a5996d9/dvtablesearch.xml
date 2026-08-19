@@ -1,0 +1,11 @@
+<dvtablesearch dvtablesearchid="7ef52088-ca74-f111-ab0e-000d3a5996d9">
+  <appmoduleuniquename>tavu_OpenTavuApp</appmoduleuniquename>
+  <iscustomizable>1</iscustomizable>
+  <m365appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </m365appmoduleid>
+  <name>M365_Primary_model_tavu_OpenTavuApp</name>
+  <searchtype>0</searchtype>
+  <statecode>1</statecode>
+  <statuscode>2</statuscode>
+</dvtablesearch>

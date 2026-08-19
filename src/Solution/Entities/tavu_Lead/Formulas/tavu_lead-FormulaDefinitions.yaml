@@ -1,0 +1,1 @@
+tavu_fullname: =Trim(tavu_firstname & " " & tavu_lastname)

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{fbbea92e-281a-4a5d-b64b-6013a1a402de}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_cityid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_country" width="147" />
+          <cell name="tavu_stateprovince" width="153" />
+          <cell name="tavu_iscapital" width="100" />
+          <cell name="tavu_population" width="101" />
+          <cell name="tavu_localcode" width="105" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_city">
+          <attribute name="tavu_cityid" />
+          <attribute name="tavu_name" />
+          <attribute name="createdon" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_stateprovince" />
+          <attribute name="tavu_country" />
+          <attribute name="tavu_population" />
+          <attribute name="tavu_iscapital" />
+          <attribute name="tavu_localcode" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Cities" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

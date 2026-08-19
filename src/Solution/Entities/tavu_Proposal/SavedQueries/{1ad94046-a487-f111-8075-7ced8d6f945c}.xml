@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{1ad94046-a487-f111-8075-7ced8d6f945c}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_proposalid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_opportunity" width="174" />
+          <cell name="statuscode" width="119" />
+          <cell name="tavu_sentdate" width="100" />
+          <cell name="tavu_subtotal" width="100" />
+          <cell name="tavu_totaltax" width="100" />
+          <cell name="tavu_totalcost" width="100" />
+          <cell name="tavu_total" width="100" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical" distinct="true">
+        <entity name="tavu_proposal">
+          <attribute name="tavu_proposalid" />
+          <attribute name="tavu_name" />
+          <attribute name="createdon" />
+          <attribute name="tavu_opportunity" />
+          <attribute name="tavu_subtotal" />
+          <attribute name="tavu_total" />
+          <attribute name="tavu_totaltax" />
+          <attribute name="tavu_totalcost" />
+          <attribute name="statuscode" />
+          <attribute name="tavu_sentdate" />
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.22</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Opportunity Proposals Grid" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

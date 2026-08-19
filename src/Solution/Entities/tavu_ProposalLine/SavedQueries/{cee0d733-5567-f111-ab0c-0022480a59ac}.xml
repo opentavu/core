@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{cee0d733-5567-f111-ab0c-0022480a59ac}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_proposallineid">
+          <cell name="tavu_product" width="166" />
+          <cell name="tavu_quantity" width="74" />
+          <cell name="tavu_unitofmeasure" width="63" />
+          <cell name="tavu_priceperunit" width="67" />
+          <cell name="tavu_discount" width="90" />
+          <cell name="tavu_total" width="115" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_proposalline">
+          <attribute name="tavu_proposallineid" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_product" />
+          <attribute name="tavu_quantity" />
+          <attribute name="tavu_priceperunit" />
+          <attribute name="tavu_discount" />
+          <attribute name="tavu_total" />
+          <attribute name="tavu_unitofmeasure" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.3</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Proposal Lines Grid (Seller)" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

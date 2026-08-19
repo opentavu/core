@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{97aaf250-a474-475b-9073-6dbf7bd4e499}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_topic" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_opportunityid">
+          <cell name="tavu_topic" width="300" />
+          <cell name="tavu_customer" width="135" />
+          <cell name="statuscode" width="119" />
+          <cell name="tavu_estimatedrevenue" width="149" />
+          <cell name="tavu_probability" width="103" />
+          <cell name="tavu_estimatedclosedate" width="162" />
+          <cell name="tavu_customertier" width="121" />
+          <cell name="ownerid" width="100" />
+          <cell name="modifiedon" width="113" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_opportunity">
+          <attribute name="tavu_opportunityid" />
+          <attribute name="tavu_topic" />
+          <order attribute="tavu_topic" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_customer" />
+          <attribute name="statuscode" />
+          <attribute name="tavu_estimatedrevenue" />
+          <attribute name="tavu_probability" />
+          <attribute name="tavu_estimatedclosedate" />
+          <attribute name="tavu_customertier" />
+          <attribute name="ownerid" />
+          <attribute name="modifiedon" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Opportunities" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

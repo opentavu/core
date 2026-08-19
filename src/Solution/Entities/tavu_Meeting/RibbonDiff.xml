@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RibbonDiffXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <CustomActions>
+    <HideCustomAction HideActionId="tavu.Mscrm.HomepageGrid.tavu_meeting.AddAppointment.Hide" Location="Mscrm.HomepageGrid.tavu_meeting.AddAppointment" />
+    <HideCustomAction HideActionId="tavu.Mscrm.HomepageGrid.tavu_meeting.AddEmail.Hide" Location="Mscrm.HomepageGrid.tavu_meeting.AddEmail" />
+    <HideCustomAction HideActionId="tavu.Mscrm.HomepageGrid.tavu_meeting.AddFax.Hide" Location="Mscrm.HomepageGrid.tavu_meeting.AddFax" />
+    <HideCustomAction HideActionId="tavu.Mscrm.HomepageGrid.tavu_meeting.AddLetter.Hide" Location="Mscrm.HomepageGrid.tavu_meeting.AddLetter" />
+    <HideCustomAction HideActionId="tavu.Mscrm.HomepageGrid.tavu_meeting.AddOtherActivities.Hide" Location="Mscrm.HomepageGrid.tavu_meeting.AddOtherActivities" />
+    <HideCustomAction HideActionId="tavu.Mscrm.HomepageGrid.tavu_meeting.AddPhone.Hide" Location="Mscrm.HomepageGrid.tavu_meeting.AddPhone" />
+    <HideCustomAction HideActionId="tavu.Mscrm.HomepageGrid.tavu_meeting.AddTask.Hide" Location="Mscrm.HomepageGrid.tavu_meeting.AddTask" />
+    <CustomAction Id="tavu.Mscrm.HomepageGrid.tavu_meeting.Related.GroupMeeting.CustomAction" Location="Mscrm.HomepageGrid.AllEntities.VisualizationTab.Groups._children" Sequence="28">
+      <CommandUIDefinition>
+        <Group Command="Mscrm.Enabled" Description="$LocLabels:tavu.Mscrm.HomepageGrid.tavu_meeting.Related.GroupMeeting.Title" Id="tavu.Mscrm.HomepageGrid.tavu_meeting.Related.GroupMeeting" Sequence="28" Template="Mscrm.Templates.Flexible3" Title="$LocLabels:tavu.Mscrm.HomepageGrid.tavu_meeting.Related.GroupMeeting.Title">
+          <Controls Id="tavu.Mscrm.HomepageGrid.tavu_meeting.Related.GroupMeeting.Controls">
+            <Button Command="tavu.tavu_meeting.CommandNewMeeting" Id="tavu.tavu_meeting.ButtonNewMeeting" Image32by32="" Image16by16="" LabelText="$LocLabels:tavu.tavu_meeting.ButtonNewMeeting.LabelText" Sequence="5" TemplateAlias="o1" ToolTipTitle="$LocLabels:tavu.tavu_meeting.ButtonNewMeeting.ToolTipTitle" ToolTipDescription="$LocLabels:tavu.tavu_meeting.ButtonNewMeeting.ToolTipDescription" ModernImage="$webresource:tavu_meetingrecord" />
+          </Controls>
+        </Group>
+      </CommandUIDefinition>
+    </CustomAction>
+    <CustomAction Id="tavu.Mscrm.HomepageGrid.tavu_meeting.Related.MaxSize.0.CustomAction" Location="Mscrm.HomepageGrid.AllEntities.VisualizationTab.Scaling._children" Sequence="10">
+      <CommandUIDefinition>
+        <MaxSize GroupId="tavu.Mscrm.HomepageGrid.tavu_meeting.Related.GroupMeeting" Id="tavu.Mscrm.HomepageGrid.tavu_meeting.Related.MaxSize.0" Sequence="10" Size="LargeLargeMedium" />
+      </CommandUIDefinition>
+    </CustomAction>
+  </CustomActions>
+  <Templates>
+    <RibbonTemplates Id="Mscrm.Templates"></RibbonTemplates>
+  </Templates>
+  <CommandDefinitions>
+    <CommandDefinition Id="tavu.tavu_meeting.CommandNewMeeting">
+      <EnableRules />
+      <DisplayRules />
+      <Actions>
+        <JavaScriptFunction FunctionName="OpenTavu.Meeting.Form.newRecord" Library="$webresource:tavu_meeting_form" />
+      </Actions>
+    </CommandDefinition>
+  </CommandDefinitions>
+  <RuleDefinitions>
+    <TabDisplayRules />
+    <DisplayRules />
+    <EnableRules />
+  </RuleDefinitions>
+  <LocLabels>
+    <LocLabel Id="tavu.Mscrm.HomepageGrid.tavu_meeting.Related.GroupMeeting.Title">
+      <Titles>
+        <Title description="Meeting" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tavu.tavu_meeting.ButtonNewMeeting.LabelText">
+      <Titles>
+        <Title description="New Meeting" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tavu.tavu_meeting.ButtonNewMeeting.ToolTipDescription">
+      <Titles>
+        <Title description="Capture a new meeting" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+    <LocLabel Id="tavu.tavu_meeting.ButtonNewMeeting.ToolTipTitle">
+      <Titles>
+        <Title description="New Meeting" languagecode="1033" />
+      </Titles>
+    </LocLabel>
+  </LocLabels>
+</RibbonDiffXml>

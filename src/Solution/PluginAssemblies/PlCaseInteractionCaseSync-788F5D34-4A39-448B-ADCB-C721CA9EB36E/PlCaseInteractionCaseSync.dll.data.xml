@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Pl.CaseInteraction.CaseSync, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginAssemblyId="788f5d34-4a39-448b-adcb-c721ca9eb36e" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/PlCaseInteractionCaseSync-788F5D34-4A39-448B-ADCB-C721CA9EB36E/PlCaseInteractionCaseSync.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Pl.CaseInteraction.CaseSync.CaseSync, Pl.CaseInteraction.CaseSync, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginTypeId="386f3000-f2ab-4929-879e-de4e4422b379" Name="Pl.CaseInteraction.CaseSync.CaseSync">
+      <FriendlyName>71ed6cf4-4d20-4073-8013-97df2b4c2838</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

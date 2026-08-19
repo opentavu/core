@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="tavu_customermode" localizedName="Customer Mode" description="OpenTavu allows each firm to configure the Customer lookup behavior according to their business model. " xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <ExternalTypeName></ExternalTypeName>
+  <displaynames>
+    <displayname description="Customer Mode" languagecode="1033" />
+  </displaynames>
+  <Descriptions>
+    <Description description="OpenTavu allows each firm to configure the Customer lookup behavior according to their business model. " languagecode="1033" />
+  </Descriptions>
+  <options>
+    <option value="576600000" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="B2B Only" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="576600001" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="B2C Only" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+    <option value="576600002" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Mixed" languagecode="1033" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
+  </options>
+</optionset>

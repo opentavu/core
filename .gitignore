@@ -36,3 +36,5 @@ appsettings.Development.json
 
 # ===== Logs =====
 *.log
+# Transient solution exports
+/_export/

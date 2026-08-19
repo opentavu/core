@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Pl.Opportunity.LifecycleTracker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginAssemblyId="ea19be2a-9def-4e3c-9ebf-510db24075aa" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/PlOpportunityLifecycleTracker-EA19BE2A-9DEF-4E3C-9EBF-510DB24075AA/PlOpportunityLifecycleTracker.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Pl.Opportunity.LifecycleTracker.LifecycleTracker, Pl.Opportunity.LifecycleTracker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginTypeId="3e0c3e3e-8c34-4d0e-a14a-56b63e813ade" Name="Pl.Opportunity.LifecycleTracker.LifecycleTracker">
+      <FriendlyName>3089b599-1781-4375-8ab1-9d4dc74ff944</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

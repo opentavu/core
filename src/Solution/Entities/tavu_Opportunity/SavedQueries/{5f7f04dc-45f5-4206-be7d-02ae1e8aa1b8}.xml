@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{5f7f04dc-45f5-4206-be7d-02ae1e8aa1b8}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_topic" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_opportunityid">
+          <cell name="tavu_topic" width="300" />
+          <cell name="tavu_customer" width="159" />
+          <cell name="statuscode" width="119" />
+          <cell name="tavu_estimatedrevenue" width="149" />
+          <cell name="tavu_actualrevenue" width="130" />
+          <cell name="tavu_actualclosedate" width="143" />
+          <cell name="tavu_lostreason" width="139" />
+          <cell name="tavu_customertier" width="121" />
+          <cell name="ownerid" width="174" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_opportunity">
+          <attribute name="tavu_opportunityid" />
+          <attribute name="tavu_topic" />
+          <order attribute="tavu_topic" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+          <attribute name="tavu_customer" />
+          <attribute name="statuscode" />
+          <attribute name="tavu_estimatedrevenue" />
+          <attribute name="tavu_actualrevenue" />
+          <attribute name="tavu_actualclosedate" />
+          <attribute name="tavu_lostreason" />
+          <attribute name="tavu_customertier" />
+          <attribute name="ownerid" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Opportunities" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

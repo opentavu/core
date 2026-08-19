@@ -1,0 +1,239 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "tavu_sharedcommondataserviceforapps_18f0f"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Day",
+            "interval": 1,
+            "startTime": "2026-08-03T11:00:00Z"
+          },
+          "metadata": {
+            "operationMetadataId": "a1a1ea77-78ef-4756-b5be-0a43a6131db8"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Read_Settings": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "5b010d07-7bc7-4629-940b-b5055d395d10"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "tavu_systemsettingses",
+              "$select": "tavu_leadbufferagingdays,tavu_leadbufferstaledays",
+              "$top": 1
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Initialize_variable_aging_days": {
+          "runAfter": {
+            "Read_Settings": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b40741bb-5e85-4a7c-b337-fd8228ce9979"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "agingDays",
+                "type": "integer",
+                "value": "@coalesce(first(outputs('Read_Settings')?['body/value'])?['tavu_leadbufferagingdays'], 7)"
+              }
+            ]
+          }
+        },
+        "Initialize_variable_stale_days": {
+          "runAfter": {
+            "Initialize_variable_aging_days": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "1bbdf5d2-5ca6-4279-a688-782e9bd68fe2"
+          },
+          "type": "InitializeVariable",
+          "inputs": {
+            "variables": [
+              {
+                "name": "staleDays",
+                "type": "integer",
+                "value": "@coalesce(first(outputs('Read_Settings')?['body/value'])?['tavu_leadbufferstaledays'], 14)"
+              }
+            ]
+          }
+        },
+        "Read_Active_Leads": {
+          "runAfter": {
+            "Initialize_variable_stale_days": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "975bca94-9019-49c3-b923-13777e3194f5"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "tavu_leads",
+              "$select": "createdon,statuscode,tavu_leadid",
+              "$filter": "statecode eq 0"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "For_each_active_lead": {
+          "foreach": "@outputs('Read_Active_Leads')?['body/value']",
+          "actions": {
+            "Compute_days_in_buffer": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "81201935-3ff9-4eb5-b968-5b3b64d188fe"
+              },
+              "type": "Compose",
+              "inputs": "@div(sub(ticks(utcNow()), ticks(item()?['createdon'])), 864000000000)"
+            },
+            "Compute_buffer_alert_band": {
+              "runAfter": {
+                "Compute_days_in_buffer": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "06bb587d-8224-4418-9937-dca572ec1201"
+              },
+              "type": "Compose",
+              "inputs": "@if(greater(int(outputs('Compute_days_in_buffer')), variables('staleDays')), 576600002, if(greater(int(outputs('Compute_days_in_buffer')), variables('agingDays')), 576600001, 576600000))"
+            },
+            "Update_lead_buffer_fields": {
+              "runAfter": {
+                "Compute_buffer_alert_band": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "c4d0e362-d0f6-40b9-84e5-13c73bc45ab0"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "UpdateOnlyRecord",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "tavu_leads",
+                  "recordId": "@items('For_each_active_lead')?['tavu_leadid']",
+                  "item/tavu_bufferalert": "@outputs('Compute_buffer_alert_band')",
+                  "item/tavu_daysinbuffer": "@int(outputs('Compute_days_in_buffer'))"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "If_awaiting_review_and_stale": {
+              "actions": {
+                "Close_lead_as_stale": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "d5f3a2b1-1c2d-4e5f-9a8b-7c6d5e4f3a2b"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "UpdateOnlyRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "tavu_leads",
+                      "recordId": "@items('For_each_active_lead')?['tavu_leadid']",
+                      "item/statecode": 1,
+                      "item/statuscode": 576600009
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {
+                "Update_lead_buffer_fields": [
+                  "Succeeded"
+                ]
+              },
+              "expression": {
+                "and": [
+                  {
+                    "equals": [
+                      "@items('For_each_active_lead')?['statuscode']",
+                      576600003
+                    ]
+                  },
+                  {
+                    "greater": [
+                      "@int(outputs('Compute_days_in_buffer'))",
+                      "@variables('staleDays')"
+                    ]
+                  }
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "41893b54-2931-47f9-b755-9f599f806284"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "Read_Active_Leads": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "e0bd4cb0-9979-4250-81d2-7f72985054e3"
+          },
+          "type": "Foreach"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

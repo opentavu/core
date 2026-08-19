@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{f5b9b956-9ae9-4e06-80c8-adfd0f29f25e}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_subject" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_leadid">
+          <cell name="tavu_subject" width="300" />
+          <cell name="statuscode" width="119" />
+          <cell name="tavu_fullname" width="193" />
+          <cell name="tavu_companyname" width="132" />
+          <cell name="tavu_source" width="159" />
+          <cell name="tavu_aiconfidencescore" width="159" />
+          <cell name="tavu_bufferalert" width="109" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_lead">
+          <attribute name="tavu_leadid" />
+          <attribute name="tavu_subject" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_source" />
+          <attribute name="statuscode" />
+          <attribute name="tavu_fullname" />
+          <attribute name="tavu_companyname" />
+          <attribute name="tavu_aiconfidencescore" />
+          <order attribute="statuscode" descending="false" />
+          <order attribute="createdon" descending="false" />
+          <attribute name="tavu_bufferalert" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Leads" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

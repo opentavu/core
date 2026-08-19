@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.26082.126" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26082.126" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26082.00127">
+  <SolutionManifest>
+    <UniqueName>OpenTavu</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="OpenTavu" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0.0.30</Version>
+    <Managed>2</Managed>
+    <Publisher>
+      <UniqueName>OpenTavu</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="OpenTavu" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions />
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+      <CustomizationPrefix>tavu</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>57660</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="account" behavior="1" />
+      <RootComponent type="1" schemaName="contact" behavior="1" />
+      <RootComponent type="1" schemaName="email" behavior="1" />
+      <RootComponent type="1" schemaName="systemuser" behavior="1" />
+      <RootComponent type="1" schemaName="tavu_aimodel" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_aitaskconfiguration" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_businesscalendar" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_businessclosure" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_businessline" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_calendarworkinghours" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_case" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_caseinteraction" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_casestatus" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_casetype" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_category" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_city" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_companyprofile" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_country" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_customertierdefinition" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_kitcomponent" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_knowledgearticle" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_lead" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_meeting" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_meetingsource" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_opportunity" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_opportunityclose" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_pricelist" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_pricelistitem" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_product" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_proposal" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_proposalline" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_salesstage" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_sla" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_stateprovince" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_subcategory" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_systemsettings" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_timeentry" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_unitofmeasureschedule" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_uom" behavior="0" />
+      <RootComponent type="1" schemaName="team" behavior="1" />
+      <RootComponent type="1" schemaName="transactioncurrency" behavior="1" />
+      <RootComponent type="29" id="{02e9cdee-8679-f111-ab0e-70a8a59d4d26}" behavior="0" />
+      <RootComponent type="29" id="{1ea7bc40-e598-f111-b8dd-6045bd023c7d}" behavior="0" />
+      <RootComponent type="29" id="{7abc281a-998e-f111-b8da-6045bd002def}" behavior="0" />
+      <RootComponent type="300" schemaName="tavu_opentavuappdefaultcommandlibrary_9129c" behavior="0" />
+      <RootComponent type="300" schemaName="tavu_opentavudefaultcommandlibrary_7f0d4" behavior="0" />
+      <RootComponent type="300" schemaName="tavu_opportunityclosedialog_31702" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_account_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_aimodel" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_aitaskconfiguration" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_ApproveAndPromote" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_associateopp" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_businesscalendar" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_businessclosure" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_businessline" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_caseinteraction" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_cases" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_casestatus" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_casetype" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_category" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_city" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_company" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_companyprofile_open" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_contact_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_country" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_createopp" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_customertierdefinition" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_discardlead" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_discardmeeting" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_kit" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_knowledgearticle" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_lead" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_lead_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_linktoexisting" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_meeting" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_meeting_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_meetingrecord" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_meetingsource_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_meetingsources" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_newversionproposal" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_OpenTavuAppLogo" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_opplost" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_opportunity" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_opportunity_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_opportunityclose" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_oppwon" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_pricelist" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_pricelistitem" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_product" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_product_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_proposal" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_proposal_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_proposalline" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_proposalline_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_reopenopp" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_resetprobability" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_reviewdraftemail" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_salesstages" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_sendproposal" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_sla" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_stateprovince" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_subcategory" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_systemsettings" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_systemsettings_open" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_teamssyncwizard" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_timeentry" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_uom" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_uomschedule" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_videocallsync" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_workinghours" behavior="0" />
+      <RootComponent type="62" schemaName="tavu_OpenTavuApp" behavior="0" />
+      <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.AiAssessment" behavior="0" />
+      <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.CaseConversation" behavior="0" />
+      <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.MeetingAiSummary" behavior="0" />
+      <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.SlaCountdown" behavior="0" />
+      <RootComponent type="80" schemaName="tavu_OpenTavuApp" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_aiprovider" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_aisentiment" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_aitaskkeyconfig" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_bufferalert" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_casecategory" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_channelmessage" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_costtier" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_coveragehours" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_customermode" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_dayofweek" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_defaultpriority" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_engagementstatus" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_engagementtype" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_forecastcategory" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_language" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_leadsource" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_lostreason" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_meetingsource" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_meetingsourcetype" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_messageinteractiondirection" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_origin" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_slastatus" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_timeofday" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_worktype" behavior="0" />
+      <RootComponent type="91" id="{b2110180-3663-4f7e-a96e-4ed439a88a51}" schemaName="Pl.Case.Categorize, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{1c99621a-ee8f-405c-894f-a1ebb4d5743d}" schemaName="Pl.Case.CustomerSync, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{003da84f-8b59-46d5-95ae-d923124f1571}" schemaName="Pl.Case.SlaAssignment, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{788f5d34-4a39-448b-adcb-c721ca9eb36e}" schemaName="Pl.CaseInteraction.CaseSync, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{d1a4e646-6e2d-40b9-a51e-69af6d161bb4}" schemaName="Pl.CompanyProfile.SingleRecordGuard, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{bc52e390-09af-484a-90b5-6a90fc242cbe}" schemaName="Pl.Lead.PromoteLead, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{665ecf96-d8be-48dc-808b-dee917a1c3c8}" schemaName="Pl.Lead.Triage, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{f8db5c9b-4451-4b74-8ec1-80fe7a0c98ed}" schemaName="Pl.Meeting.Associate, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{f84ca5dd-3893-450b-a5fe-c782882157e1}" schemaName="Pl.Meeting.BuildEmailDraft, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{20d1baab-9035-41d8-9f5c-e803bd7aaecb}" schemaName="Pl.Meeting.Capture, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{4e9e1462-fa4d-4ffd-93cb-96948c21b538}" schemaName="Pl.MeetingSource.Probe, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{1bf249da-ab17-44db-97f5-049f0eb8af1c}" schemaName="Pl.Opportunity.CloseOrchestrator, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{672c16a1-ceec-49e2-ae57-3c9cdd21f213}" schemaName="Pl.Opportunity.CustomerSync, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{ea19be2a-9def-4e3c-9ebf-510db24075aa}" schemaName="Pl.Opportunity.LifecycleTracker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{77214691-5a91-4230-8b25-ef3c263230f3}" schemaName="Pl.Proposal.BuildEmailDraft, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{4b7c8522-2769-4f4f-8587-bbe592fdc738}" schemaName="Pl.Proposal.CloneVersion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{144a3eab-993c-4da8-92a9-c865b42ea6ce}" schemaName="Pl.Proposal.LifecycleTracker, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{48fb4dcf-6657-4441-abd1-a3b8e1f28a73}" schemaName="Pl.ProposalLine.Calculator, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{0ba6bf36-8e50-49bb-8e84-7803a4c24c0a}" schemaName="Pl.SystemSettings.SingleRecordGuard, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="92" id="{157a1aa5-c27c-f111-ab0e-000d3a33441f}" behavior="0" />
+      <RootComponent type="92" id="{2bb31b19-d38a-f111-8076-7ced8d715683}" behavior="0" />
+      <RootComponent type="92" id="{2ebf87da-6c58-f111-a825-0022480a59ac}" behavior="0" />
+      <RootComponent type="92" id="{3bbc900e-8e79-f111-ab0e-70a8a59d4d26}" behavior="0" />
+      <RootComponent type="92" id="{5950b30a-5a76-f111-ab0e-6045bd09b203}" behavior="0" />
+      <RootComponent type="92" id="{814e7e30-747a-f111-ab0e-70a8a59d4d26}" behavior="0" />
+      <RootComponent type="92" id="{81a7eaa5-1d74-f111-ab0e-7ced8d6f4a65}" behavior="0" />
+      <RootComponent type="92" id="{88a7fa97-9c86-f111-8075-7ced8d6f945c}" behavior="0" />
+      <RootComponent type="92" id="{8d2db88e-6a64-f111-ab0d-0022480a59ac}" behavior="0" />
+      <RootComponent type="92" id="{8fd0aefc-7264-f111-ab0d-0022480a59ac}" behavior="0" />
+      <RootComponent type="92" id="{8ff0eae5-5676-f111-ab0e-6045bd09b203}" behavior="0" />
+      <RootComponent type="92" id="{9439f7e5-6964-f111-ab0d-0022480a59ac}" behavior="0" />
+      <RootComponent type="92" id="{b97989c2-5f8c-f111-8076-7ced8d715683}" behavior="0" />
+      <RootComponent type="92" id="{c1d87c45-2856-f111-a825-0022480a59ac}" behavior="0" />
+      <RootComponent type="92" id="{ce85106f-2674-f111-ab0e-7ced8d6f4a65}" behavior="0" />
+      <RootComponent type="92" id="{d0aeb18d-ff76-f111-ab0e-000d3a313067}" behavior="0" />
+      <RootComponent type="92" id="{d33a73fa-6b76-f111-ab0e-6045bd09b203}" behavior="0" />
+      <RootComponent type="92" id="{d443e269-7264-f111-ab0d-0022480a59ac}" behavior="0" />
+      <RootComponent type="92" id="{de08a57c-0891-f111-b8da-6045bd002def}" behavior="0" />
+      <RootComponent type="92" id="{e8213046-747a-f111-ab0e-70a8a59d4d26}" behavior="0" />
+      <RootComponent type="92" id="{ee255b74-9d86-f111-8075-7ced8d6f945c}" behavior="0" />
+      <RootComponent type="92" id="{ee96e261-6964-f111-ab0d-0022480a59ac}" behavior="0" />
+      <RootComponent type="92" id="{ef24e276-ff76-f111-ab0e-000d3a313067}" behavior="0" />
+      <RootComponent type="92" id="{f116f7e0-6b76-f111-ab0e-6045bd09b203}" behavior="0" />
+      <RootComponent type="92" id="{f48f4af8-6c58-f111-a825-0022480a59ac}" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="1" schemaName="applicationuser" displayName="ApplicationUser" solution="ApplicationUserSolution (1.0.1.4)">
+          <package appName="Microsoft S2SCDSCoreApplication Package" version="1.0.1.29">MicrosoftS2SApplicationIdentitiesCoreTst (1.0.1.29)</package>
+        </Required>
+        <Dependent type="80" schemaName="tavu_OpenTavuApp" displayName="OpenTavu App" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="2" schemaName="systemmanagedusertype" displayName="System Managed User Type" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.137.0.0)">
+          <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
+        </Required>
+        <Dependent type="26" schemaName="Enabled Users" displayName="Enabled Users" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Contact Quick Create" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}">
+          <package appName="msdynce_AppCommon" version="9.0.26071.10001">msdynce_AppCommonAnchor (9.0.26071.10001)</package>
+        </Required>
+        <Dependent type="60" displayName="Contact Quick Create" parentDisplayName="Contact" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="Microsoft.PowerApps.PowerAppsOneGrid" displayName="Microsoft.PowerApps.PowerAppsOneGrid" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Proposal Information" parentDisplayName="Proposal" id="{6ecaf5ab-0dd2-4816-90a5-b3b9fc17958e}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="System Settings" id="{0c39289a-374a-40ed-a185-2bc66eeb99e9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="QC - Proposal Line" parentDisplayName="Proposal Line" id="{1718b862-0f68-f111-ab0c-0022480a59ac}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Opportunity Information" parentDisplayName="Opportunity" id="{2a5b0891-7395-4bd7-b908-2517ac5ec3bc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="Meeting Source" id="{5d91af56-2e11-4feb-9504-97c72ba4c3ff}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Product Information" parentDisplayName="Product" id="{73d96964-e4a2-4711-88a4-9db45ff6accc}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="Business Calendar" id="{931ae7bd-c6bc-4255-be44-b18086f8aef9}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="City" id="{95a69929-7186-403f-a2f8-69cba7d45a97}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="AI Model" id="{97cd6d85-94c8-4484-9801-73e68ea002be}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Proposal Line Information" parentDisplayName="Proposal Line" id="{9e7ae295-526d-492c-881c-cad37027308d}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="User" parentDisplayName="User" id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="Unit of Measure" id="{d745dcf2-e300-446c-9909-6fada861b6a5}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="Case Status" id="{e2b0c0b5-0a34-403b-ac4e-ff9a834242b6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="Price List" id="{f782db30-6f34-4829-bae7-4f8d284d58f7}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="60" displayName="Contact Information" parentDisplayName="Contact" id="{f98718fb-9d53-f111-a824-0022480a59ac}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
+          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        </Required>
+        <Dependent type="26" schemaName="Enabled Users" displayName="Enabled Users" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.19)" id.uniquename="AppChannel">
+          <package appName="PowerAppsAppFramework Package" version="1.0.0.25">PowerAppsAppFramework_Anchor (1.0.0.25)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=tavu_OpenTavuApp,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="tavu_OpenTavuApp" id.settingdefinitionid.uniquename="AppChannel" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="IsSmartEmailAddressValidationControlEnabled" solution="msdyn_EmailAddressValidation (1.0.0.4)" id.uniquename="IsSmartEmailAddressValidationControlEnabled">
+          <package appName="DataValidationApp Package" version="1.0.0.4">DataValidationApp_Anchor (1.0.0.4)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=tavu_OpenTavuApp,settingdefinitionid.uniquename=IsSmartEmailAddressValidationControlEnabled" id.parentappmoduleid.uniquename="tavu_OpenTavuApp" id.settingdefinitionid.uniquename="IsSmartEmailAddressValidationControlEnabled" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

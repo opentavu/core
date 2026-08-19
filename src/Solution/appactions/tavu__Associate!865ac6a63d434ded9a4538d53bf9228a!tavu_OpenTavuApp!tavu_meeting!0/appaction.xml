@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__Associate!865ac6a63d434ded9a4538d53bf9228a!tavu_OpenTavuApp!tavu_meeting!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Associate">
+    <label description="Associate" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Link this meeting to the AI-suggested opportunity, or pick one. Completes the meeting and updates the opportunity's discovery notes.">
+    <label description="Link this meeting to the AI-suggested opportunity, or pick one. Completes the meeting and updates the opportunity's discovery notes." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Associate to opportunity">
+    <label description="Associate to opportunity" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_meeting</logicalname>
+  </contextentity>
+  <contextvalue>tavu_meeting</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>6ffa1386-1891-f111-b8da-6045bd002def</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>Associate!865ac6a63d434ded9a4538d53bf9228a</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Meeting.Form.associate</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>d70ca1e9-1991-f111-b8da-6045bd002def</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100046.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilityformulacomponentlibraryid>
+    <name>tavu_opentavuappdefaultcommandlibrary_9129c</name>
+  </visibilityformulacomponentlibraryid>
+  <visibilityformulacomponentname>9c0460cd3a9a4ade858347991ac67f0d</visibilityformulacomponentname>
+  <visibilityformulafunctionname>Visible</visibilityformulafunctionname>
+  <visibilitytype>1</visibilitytype>
+</appaction>

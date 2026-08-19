@@ -1,0 +1,37 @@
+<appaction uniquename="tavu__ResetProbability!347faed5c142408db86ba94afdf7d6ac!tavu_opportunity!0">
+  <buttonlabeltext default="Reset Probability">
+    <label description="Reset Probability" languagecode="1033" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Discard the manual probability and restore the current Sales Stage's default. The deal returns to automatic mode, so future stage changes update the probability again.">
+    <label description="Discard the manual probability and restore the current Sales Stage's default. The deal returns to automatic mode, so future stage changes update the probability again." languagecode="1033" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Reset Probability">
+    <label description="Reset Probability" languagecode="1033" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_opportunity</logicalname>
+  </contextentity>
+  <contextvalue>tavu_opportunity</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>cd25af43-3861-f111-ab0c-0022480a59ac</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>ResetProbability!347faed5c142408db86ba94afdf7d6ac</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.Opportunity.Form.resetProbability</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>fdbe8263-1d68-f111-ab0c-0022480a59ac</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100400034.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilitytype>0</visibilitytype>
+</appaction>

@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{211b50c5-3877-f111-ab0e-000d3a313067}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_caseinteractionid">
+          <cell name="tavu_direction" width="100" />
+          <cell name="tavu_channel" width="100" />
+          <cell name="tavu_body" width="100" />
+          <cell name="tavu_statusbefore" width="116" />
+          <cell name="tavu_statusafter" width="108" />
+          <cell name="tavu_changedfields" width="128" />
+          <cell name="tavu_fromcontact" width="118" />
+          <cell name="createdby" width="104" />
+          <cell name="createdon" width="125" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_caseinteraction">
+          <attribute name="tavu_caseinteractionid" />
+          <attribute name="createdon" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_direction" />
+          <attribute name="tavu_channel" />
+          <attribute name="tavu_body" />
+          <attribute name="tavu_statusbefore" />
+          <attribute name="tavu_statusafter" />
+          <attribute name="tavu_changedfields" />
+          <attribute name="tavu_fromcontact" />
+          <attribute name="createdby" />
+          <order attribute="createdon" descending="true" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.18</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Case Interactions Grid" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Pl.MeetingSource.Probe, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginAssemblyId="4e9e1462-fa4d-4ffd-93cb-96948c21b538" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/PlMeetingSourceProbe-4E9E1462-FA4D-4FFD-93CB-96948C21B538/PlMeetingSourceProbe.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Pl.MeetingSource.Probe.Probe, Pl.MeetingSource.Probe, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginTypeId="b1fd3ed3-2a27-496d-817f-ea4bed914855" Name="Pl.MeetingSource.Probe.Probe">
+      <FriendlyName>12a96e40-2120-427d-afa9-f965b90fe914</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>
