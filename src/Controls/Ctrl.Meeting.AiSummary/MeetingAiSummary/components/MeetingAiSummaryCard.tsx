@@ -9,6 +9,16 @@ import {
   MessageBarTitle,
 } from "@fluentui/react-components";
 
+// Localized UI strings, resolved from resx by index.ts (context.resources.getString).
+export interface IMeetingAiSummaryStrings {
+  title: string;
+  confidence: string;                 // "Confidence {0}%"
+  reviewBeforeAssociating: string;
+  lowConfidence: string;              // "Low confidence ({0}%). …"
+  awaiting: string;
+  discoveryExtract: string;
+}
+
 export interface IMeetingAiSummaryProps {
   summary?: string;
   discoveryExtract?: string;
@@ -16,6 +26,7 @@ export interface IMeetingAiSummaryProps {
   confidence?: number | null;
   // Threshold on the same 0-100 scale.
   confidenceThreshold: number;
+  strings: IMeetingAiSummaryStrings;
 }
 
 const useStyles = makeStyles({
@@ -73,7 +84,7 @@ const useStyles = makeStyles({
 
 export const MeetingAiSummaryCard: React.FC<IMeetingAiSummaryProps> = (props) => {
   const styles = useStyles();
-  const { summary, discoveryExtract, confidence, confidenceThreshold } = props;
+  const { summary, discoveryExtract, confidence, confidenceThreshold, strings } = props;
 
   const hasContent = [summary, discoveryExtract].some(
     (v) => typeof v === "string" && v.length > 0
@@ -103,13 +114,13 @@ export const MeetingAiSummaryCard: React.FC<IMeetingAiSummaryProps> = (props) =>
         <div className={styles.titleGroup}>
           <span className={styles.brandDot} aria-hidden="true" />
           <Text size={400} weight="semibold">
-            AI meeting capture
+            {strings.title}
           </Text>
         </div>
         <div className={styles.badges}>
           {confidencePct !== undefined && (
             <Badge appearance="tint" color={lowConfidence ? "warning" : "success"}>
-              {`Confidence ${confidencePct}%`}
+              {strings.confidence.replace("{0}", String(confidencePct))}
             </Badge>
           )}
         </div>
@@ -118,15 +129,15 @@ export const MeetingAiSummaryCard: React.FC<IMeetingAiSummaryProps> = (props) =>
       {lowConfidence && (
         <MessageBar intent="warning">
           <MessageBarBody>
-            <MessageBarTitle>Review before associating</MessageBarTitle>
-            {` Low confidence (${confidencePct ?? 0}%). Verify the summary and the suggested opportunity before you associate this meeting.`}
+            <MessageBarTitle>{strings.reviewBeforeAssociating}</MessageBarTitle>
+            {" " + strings.lowConfidence.replace("{0}", String(confidencePct ?? 0))}
           </MessageBarBody>
         </MessageBar>
       )}
 
       {!hasContent && (
         <Text size={300} className={styles.placeholder}>
-          Awaiting AI processing…
+          {strings.awaiting}
         </Text>
       )}
 
@@ -136,7 +147,7 @@ export const MeetingAiSummaryCard: React.FC<IMeetingAiSummaryProps> = (props) =>
         </Text>
       )}
 
-      {renderField("Discovery extract", discoveryExtract)}
+      {renderField(strings.discoveryExtract, discoveryExtract)}
     </div>
   );
 };

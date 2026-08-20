@@ -30,6 +30,81 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 
 (function (Form) {
 
+    var TAVU_I18N = (function () {
+        var S = {
+            1033: {
+                "saveBeforeVersion": "Save the proposal before creating a new version.",
+                "savePendingVersion": "Save your pending changes before creating a new version.",
+                "newVersionTitle": "Create New Version",
+                "newVersionText": "This creates a new draft copy of the proposal (with a new version number) and marks the current one as Superseded. Continue?",
+                "newVersionNoId": "The new version was created but no id was returned.",
+                "newVersionError": "Couldn't create a new version: ",
+                "alreadySent": "This proposal has already been sent (or closed).",
+                "sendTitle": "Send to Client",
+                "sendText": "Mark this proposal as Sent to Client? Once sent, its content is locked — use Create New Version to make changes.",
+                "sendError": "Couldn't send this proposal: ",
+                "onlySentApprove": "Only a proposal that has been sent to the client can be approved.",
+                "approveTitle": "Mark as Approved",
+                "approveText": "Mark this proposal as Approved by Client? It becomes the winning proposal for the opportunity.",
+                "approveError": "Couldn't approve this proposal: ",
+                "onlySentReject": "Only a proposal that has been sent to the client can be rejected.",
+                "rejectTitle": "Mark as Lost",
+                "rejectText": "Mark this proposal as Rejected by Client? You can create a new version to re-propose.",
+                "rejectDone": "Proposal marked as Rejected. Use Create New Version to re-propose.",
+                "rejectError": "Couldn't reject this proposal: ",
+                "offerCloseWonTitle": "Close the opportunity as Won?",
+                "offerCloseWonText": "This proposal is approved. Close the opportunity as Won now?",
+                "closeWonNav": "Close as Won",
+                "saveFirst": "Save the proposal first.",
+                "savePending": "Save your pending changes first.",
+                "lockBanner": "This proposal is locked because it has been sent to the client (or closed). Its fields are read-only — use Create New Version to make changes.",
+                "preparingEmail": "Preparing email draft…",
+                "reviewSend": "Review & Send",
+                "emailPrepError": "The proposal was sent, but the email draft couldn't be prepared: ",
+                "unknownError": "unknown error"
+            },
+            3082: {
+                "saveBeforeVersion": "Guarde la propuesta antes de crear una nueva versión.",
+                "savePendingVersion": "Guarde los cambios pendientes antes de crear una nueva versión.",
+                "newVersionTitle": "Crear nueva versión",
+                "newVersionText": "Esto crea una nueva copia en borrador de la propuesta (con un nuevo número de versión) y marca la actual como Reemplazada. ¿Continuar?",
+                "newVersionNoId": "La nueva versión se creó pero no se devolvió ningún id.",
+                "newVersionError": "No se pudo crear una nueva versión: ",
+                "alreadySent": "Esta propuesta ya fue enviada (o cerrada).",
+                "sendTitle": "Enviar al cliente",
+                "sendText": "¿Marcar esta propuesta como Enviada al cliente? Una vez enviada, su contenido queda bloqueado — use Crear nueva versión para hacer cambios.",
+                "sendError": "No se pudo enviar esta propuesta: ",
+                "onlySentApprove": "Solo se puede aprobar una propuesta que haya sido enviada al cliente.",
+                "approveTitle": "Marcar como aprobada",
+                "approveText": "¿Marcar esta propuesta como Aprobada por el cliente? Se convierte en la propuesta ganadora de la oportunidad.",
+                "approveError": "No se pudo aprobar esta propuesta: ",
+                "onlySentReject": "Solo se puede rechazar una propuesta que haya sido enviada al cliente.",
+                "rejectTitle": "Marcar como perdida",
+                "rejectText": "¿Marcar esta propuesta como Rechazada por el cliente? Puede crear una nueva versión para volver a proponer.",
+                "rejectDone": "Propuesta marcada como Rechazada. Use Crear nueva versión para volver a proponer.",
+                "rejectError": "No se pudo rechazar esta propuesta: ",
+                "offerCloseWonTitle": "¿Cerrar la oportunidad como ganada?",
+                "offerCloseWonText": "Esta propuesta está aprobada. ¿Cerrar la oportunidad como ganada ahora?",
+                "closeWonNav": "Cerrar como ganada",
+                "saveFirst": "Guarde primero la propuesta.",
+                "savePending": "Guarde primero los cambios pendientes.",
+                "lockBanner": "Esta propuesta está bloqueada porque fue enviada al cliente (o cerrada). Sus campos son de solo lectura — use Crear nueva versión para hacer cambios.",
+                "preparingEmail": "Preparando el borrador del correo…",
+                "reviewSend": "Revisar y enviar",
+                "emailPrepError": "La propuesta se envió, pero no se pudo preparar el borrador del correo: ",
+                "unknownError": "error desconocido"
+            }
+        };
+        function lc() { try { return Xrm.Utility.getGlobalContext().userSettings.languageId; } catch (e) { return 1033; } }
+        return function (k, a0, a1) {
+            var tb = S[lc()] || S[1033];
+            var v = (tb && tb[k] != null) ? tb[k] : (S[1033][k] != null ? S[1033][k] : k);
+            if (a0 !== undefined) v = String(v).replace("{0}", a0);
+            if (a1 !== undefined) v = String(v).replace("{1}", a1);
+            return v;
+        };
+    })();
+
     var CLONE_API = "tavu_CloneProposalVersion";
     var BUILD_EMAIL_API = "tavu_BuildProposalEmailDraft";
     var SETTINGS_ENTITY = "tavu_systemsettings";
@@ -88,20 +163,19 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 
         var rawId = formContext.data.entity.getId();
         if (!rawId) {
-            notifyTransient(formContext, "Save the proposal before creating a new version.", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("saveBeforeVersion"), "WARNING");
             return;
         }
         if (formContext.data.getIsDirty()) {
-            notifyTransient(formContext, "Save your pending changes before creating a new version.", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("savePendingVersion"), "WARNING");
             return;
         }
 
         var proposalId = rawId.replace(/[{}]/g, "");
 
         Xrm.Navigation.openConfirmDialog({
-            title: "Create New Version",
-            text: "This creates a new draft copy of the proposal (with a new version number) " +
-                  "and marks the current one as Superseded. Continue?"
+            title: TAVU_I18N("newVersionTitle"),
+            text: TAVU_I18N("newVersionText")
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
 
@@ -131,7 +205,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
                     var newId = result && result.NewProposalId;
                     if (!newId) {
                         notifyTransient(formContext,
-                            "The new version was created but no id was returned.", "WARNING");
+                            TAVU_I18N("newVersionNoId"), "WARNING");
                         return;
                     }
                     // Open the new draft version so the consultant can edit and re-send it.
@@ -140,7 +214,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
                 function (error) {
                     console.error("[OpenTavu.Proposal.Form] createNewVersion failed:", error);
                     notifyTransient(formContext,
-                        "Couldn't create a new version: " + (error && error.message ? error.message : "unknown error"),
+                        TAVU_I18N("newVersionError") + (error && error.message ? error.message : TAVU_I18N("unknownError")),
                         "ERROR");
                 }
             );
@@ -166,16 +240,15 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 
         var status = getOptionValue(formContext, FIELD_STATUS_REASON);
         if (status !== STATUS_DRAFT && status !== STATUS_AI_GENERATED) {
-            notifyTransient(formContext, "This proposal has already been sent (or closed).", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("alreadySent"), "WARNING");
             return;
         }
 
         var proposalId = formContext.data.entity.getId().replace(/[{}]/g, "");
 
         Xrm.Navigation.openConfirmDialog({
-            title: "Send to Client",
-            text: "Mark this proposal as Sent to Client? Once sent, its content is locked — " +
-                  "use Create New Version to make changes."
+            title: TAVU_I18N("sendTitle"),
+            text: TAVU_I18N("sendText")
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
 
@@ -200,7 +273,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
                 },
                 function (error) {
                     console.error("[OpenTavu.Proposal.Form] sendToClient failed:", error);
-                    notifyTransient(formContext, "Couldn't send this proposal: " + msg(error), "ERROR");
+                    notifyTransient(formContext, TAVU_I18N("sendError") + msg(error), "ERROR");
                 }
             );
         });
@@ -226,7 +299,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
         var status = getOptionValue(formContext, FIELD_STATUS_REASON);
         if (status !== STATUS_SENT_TO_CLIENT) {
             notifyTransient(formContext,
-                "Only a proposal that has been sent to the client can be approved.", "WARNING");
+                TAVU_I18N("onlySentApprove"), "WARNING");
             return;
         }
 
@@ -235,9 +308,8 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
         var oppRef = getLookup(formContext, FIELD_OPPORTUNITY);
 
         Xrm.Navigation.openConfirmDialog({
-            title: "Mark as Approved",
-            text: "Mark this proposal as Approved by Client? It becomes the winning " +
-                  "proposal for the opportunity."
+            title: TAVU_I18N("approveTitle"),
+            text: TAVU_I18N("approveText")
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
 
@@ -249,7 +321,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
                 },
                 function (error) {
                     console.error("[OpenTavu.Proposal.Form] markApproved failed:", error);
-                    notifyTransient(formContext, "Couldn't approve this proposal: " + msg(error), "ERROR");
+                    notifyTransient(formContext, TAVU_I18N("approveError") + msg(error), "ERROR");
                 }
             );
         });
@@ -272,16 +344,15 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
         var status = getOptionValue(formContext, FIELD_STATUS_REASON);
         if (status !== STATUS_SENT_TO_CLIENT) {
             notifyTransient(formContext,
-                "Only a proposal that has been sent to the client can be rejected.", "WARNING");
+                TAVU_I18N("onlySentReject"), "WARNING");
             return;
         }
 
         var proposalId = formContext.data.entity.getId().replace(/[{}]/g, "");
 
         Xrm.Navigation.openConfirmDialog({
-            title: "Mark as Lost",
-            text: "Mark this proposal as Rejected by Client? You can create a new version " +
-                  "to re-propose."
+            title: TAVU_I18N("rejectTitle"),
+            text: TAVU_I18N("rejectText")
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
 
@@ -290,11 +361,11 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
                 function () {
                     formContext.data.refresh(false);
                     notifyTransient(formContext,
-                        "Proposal marked as Rejected. Use Create New Version to re-propose.", "INFO");
+                        TAVU_I18N("rejectDone"), "INFO");
                 },
                 function (error) {
                     console.error("[OpenTavu.Proposal.Form] markRejected failed:", error);
-                    notifyTransient(formContext, "Couldn't reject this proposal: " + msg(error), "ERROR");
+                    notifyTransient(formContext, TAVU_I18N("rejectError") + msg(error), "ERROR");
                 }
             );
         });
@@ -311,8 +382,8 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 
         var proceed = function () {
             Xrm.Navigation.openConfirmDialog({
-                title: "Close the opportunity as Won?",
-                text: "This proposal is approved. Close the opportunity as Won now?"
+                title: TAVU_I18N("offerCloseWonTitle"),
+                text: TAVU_I18N("offerCloseWonText")
             }).then(function (confirm) {
                 if (confirm.confirmed) openWonDialog(oppId);
             });
@@ -334,7 +405,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
             {
                 target: 2, position: 1,
                 width: { value: 480, unit: "px" }, height: { value: 420, unit: "px" },
-                title: "Close as Won"
+                title: TAVU_I18N("closeWonNav")
             }
         );
     }
@@ -449,11 +520,11 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
     /** True when the record is saved (has an id) and has no pending edits. */
     function ensureSaved(formContext) {
         if (!formContext.data.entity.getId()) {
-            notifyTransient(formContext, "Save the proposal first.", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("saveFirst"), "WARNING");
             return false;
         }
         if (formContext.data.getIsDirty()) {
-            notifyTransient(formContext, "Save your pending changes first.", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("savePending"), "WARNING");
             return false;
         }
         return true;
@@ -477,7 +548,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
 
     /** Best-effort error message. */
     function msg(error) {
-        return (error && error.message) ? error.message : "unknown error";
+        return (error && error.message) ? error.message : TAVU_I18N("unknownError");
     }
 
     /**
@@ -500,8 +571,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
         });
 
         formContext.ui.setFormNotification(
-            "This proposal is locked because it has been sent to the client (or closed). " +
-            "Its fields are read-only — use Create New Version to make changes.",
+            TAVU_I18N("lockBanner"),
             "INFO", NOTIF.LOCKED);
     }
 
@@ -548,7 +618,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
      * dialog closes, the proposal is refreshed so the new email shows in its timeline.
      */
     function buildEmailDraft(formContext, proposalId) {
-        Xrm.Utility.showProgressIndicator("Preparing email draft…");
+        Xrm.Utility.showProgressIndicator(TAVU_I18N("preparingEmail"));
 
         var request = {
             ProposalId: proposalId,
@@ -589,7 +659,7 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
                         target: 2, position: 1,
                         width: { value: 70, unit: "%" },
                         height: { value: 80, unit: "%" },
-                        title: "Review & Send"
+                        title: TAVU_I18N("reviewSend")
                     }
                 ).then(relock, relock);
             },
@@ -597,8 +667,8 @@ OpenTavu.Proposal.Form = OpenTavu.Proposal.Form || {};
                 Xrm.Utility.closeProgressIndicator();
                 console.error("[OpenTavu.Proposal.Form] buildEmailDraft failed:", error);
                 Xrm.Navigation.openErrorDialog({
-                    message: "The proposal was sent, but the email draft couldn't be prepared: " +
-                        (error && error.message ? error.message : "unknown error")
+                    message: TAVU_I18N("emailPrepError") +
+                        (error && error.message ? error.message : TAVU_I18N("unknownError"))
                 });
             }
         );

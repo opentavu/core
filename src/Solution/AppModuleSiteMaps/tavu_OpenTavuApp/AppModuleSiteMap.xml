@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <AppModuleSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SiteMapUniqueName>tavu_OpenTavuApp</SiteMapUniqueName>
   <EnableCollapsibleGroups>True</EnableCollapsibleGroups>
@@ -9,10 +9,12 @@
     <Area Id="area_workspace" ResourceId="SitemapDesigner.NewTitle" DescriptionResourceId="SitemapDesigner.NewTitle" ShowGroups="true" IntroducedVersion="7.0.0.0">
       <Titles>
         <Title LCID="1033" Title="Workspace" />
+        <Title LCID="3082" Title="Espacio de trabajo" />
       </Titles>
       <Group Id="group_pipeline" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
           <Title LCID="1033" Title="Pipeline" />
+          <Title LCID="3082" Title="Pipeline" />
         </Titles>
         <SubArea Id="subarea_6d2bcf2c" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="tavu_lead" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
         <SubArea Id="subarea_037ae949" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="tavu_meeting" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
@@ -22,6 +24,7 @@
       <Group Id="group_Clients" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
           <Title LCID="1033" Title="Clients" />
+          <Title LCID="3082" Title="Clientes" />
         </Titles>
         <SubArea Id="subarea_20ffa7b4" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="account" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
         <SubArea Id="subarea_4a6f1f8b" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="contact" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
@@ -29,6 +32,7 @@
       <Group Id="group_service" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
           <Title LCID="1033" Title="Service" />
+          <Title LCID="3082" Title="Servicio" />
         </Titles>
         <SubArea Id="subarea_8515b277" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="tavu_case" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
         <SubArea Id="subarea_7260c16a" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="tavu_knowledgearticle" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
@@ -37,10 +41,12 @@
     <Area Id="area_settings" ResourceId="SitemapDesigner.NewTitle" DescriptionResourceId="SitemapDesigner.NewTitle" ShowGroups="true" IntroducedVersion="7.0.0.0">
       <Titles>
         <Title LCID="1033" Title="Settings" />
+        <Title LCID="3082" Title="Configuración" />
       </Titles>
       <Group Id="group_servicesetup" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
           <Title LCID="1033" Title="Service Setup" />
+          <Title LCID="3082" Title="Configuración de servicio" />
         </Titles>
         <SubArea Id="subarea_57e365a1" Entity="tavu_businessline" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
         <SubArea Id="subarea_d7f8388e" Entity="tavu_casetype" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
@@ -55,6 +61,7 @@
       <Group Id="group_salessetup" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
           <Title LCID="1033" Title="Sales Setup" />
+          <Title LCID="3082" Title="Configuración de ventas" />
         </Titles>
         <SubArea Id="subarea_6e97b51c" Entity="tavu_pricelist" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
         <SubArea Id="subarea_b6296674" Entity="tavu_product" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
@@ -65,6 +72,7 @@
       <Group Id="group_geography" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
           <Title LCID="1033" Title="Geography" />
+          <Title LCID="3082" Title="Geografía" />
         </Titles>
         <SubArea Id="subarea_63622d7c" Entity="tavu_city" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
         <SubArea Id="subarea_5cd8814d" Entity="tavu_country" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
@@ -73,6 +81,7 @@
       <Group Id="group_aisetup" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
           <Title LCID="1033" Title="AI Setup" />
+          <Title LCID="3082" Title="Configuración de IA" />
         </Titles>
         <SubArea Id="subarea_16981768" Entity="tavu_aimodel" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
         <SubArea Id="subarea_58a120dd" Entity="tavu_aitaskconfiguration" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />
@@ -80,15 +89,18 @@
       <Group Id="group_settings" ResourceId="SitemapDesigner.NewGroup" DescriptionResourceId="SitemapDesigner.NewGroup" IntroducedVersion="7.0.0.0" IsProfile="false" ToolTipResourseId="SitemapDesigner.Unknown">
         <Titles>
           <Title LCID="1033" Title="Settings" />
+          <Title LCID="3082" Title="Configuración" />
         </Titles>
         <SubArea Id="subarea_c4e942fb" ResourceId="SitemapDesigner.NewSubArea" VectorIcon="/WebResources/tavu_systemsettings" Icon="/WebResources/tavu_systemsettings" Url="$webresource:tavu_systemsettings_open" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="System Settings" />
+            <Title LCID="3082" Title="Configuración del sistema" />
           </Titles>
         </SubArea>
         <SubArea Id="subarea_46127319" ResourceId="SitemapDesigner.NewSubArea" VectorIcon="/WebResources/tavu_company" Icon="/WebResources/tavu_company" Url="$webresource:tavu_companyprofile_open" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA">
           <Titles>
             <Title LCID="1033" Title="Company Profile" />
+            <Title LCID="3082" Title="Perfil de la empresa" />
           </Titles>
         </SubArea>
         <SubArea Id="subarea_42123420" Icon="/_imgs/imagestrips/transparent_spacer.gif" Entity="tavu_meetingsource" Client="All,Outlook,OutlookLaptopClient,OutlookWorkstationClient,Web" AvailableOffline="true" PassParams="false" Sku="All,OnPremise,Live,SPLA" />

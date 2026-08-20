@@ -30,6 +30,79 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
 
 (function (Form) {
 
+    var TAVU_I18N = (function () {
+        var S = {
+            1033: {
+                "assocOppTitle": "Associate to opportunity",
+                "createOppTitle": "Create opportunity",
+                "assocOppText_1": "Associate this meeting to the suggested opportunity \"",
+                "assocOppText_2": "\"? The meeting is completed and the opportunity's discovery notes are updated.",
+                "createOppFor": "Create a new opportunity for ",
+                "createOppAssoc": " and associate the meeting to it?",
+                "theContact": "the contact ",
+                "theAccount": "the account ",
+                "andJoin": " and ",
+                "noCustomer_1": "No existing customer is linked. This will create ",
+                "noCustomer_2": " from the call (matching existing records first), then a new opportunity. Continue?",
+                "createNoData": "Create a new opportunity from this meeting and associate it? Note: no customer is linked and the call has no prospect data, so this may not succeed.",
+                "saveFirst": "Save the meeting first.",
+                "savePending": "Save your pending changes first.",
+                "drafting": "Drafting follow-up email…",
+                "draftFailed": "The draft could not be created.",
+                "draftError": "Couldn't draft the follow-up email: ",
+                "discardTitle": "Discard Meeting",
+                "discardText": "Discard this meeting? It will be closed and left out of the opportunity.",
+                "discardError": "Couldn't discard this meeting: ",
+                "closedLock": "This meeting is closed. Its fields are read-only.",
+                "associating": "Associating meeting…",
+                "associateError": "Couldn't associate this meeting: ",
+                "notAwaiting": "This meeting is not awaiting review (it may already be resolved).",
+                "aiPrefix": "AI: ",
+                "confidenceOpen": " (confidence ",
+                "confidenceClose": "%)",
+                "unknownError": "unknown error"
+            },
+            3082: {
+                "assocOppTitle": "Asociar a oportunidad",
+                "createOppTitle": "Crear oportunidad",
+                "assocOppText_1": "¿Asociar esta reunión a la oportunidad sugerida \"",
+                "assocOppText_2": "\"? La reunión se marca como completada y se actualizan las notas de descubrimiento de la oportunidad.",
+                "createOppFor": "Crear una nueva oportunidad para ",
+                "createOppAssoc": " y asociar la reunión a ella?",
+                "theContact": "el contacto ",
+                "theAccount": "la cuenta ",
+                "andJoin": " y ",
+                "noCustomer_1": "No hay ningún cliente vinculado. Esto creará ",
+                "noCustomer_2": " a partir de la llamada (buscando primero registros existentes) y luego una nueva oportunidad. ¿Continuar?",
+                "createNoData": "¿Crear una nueva oportunidad a partir de esta reunión y asociarla? Nota: no hay cliente vinculado y la llamada no tiene datos del prospecto, por lo que podría no completarse.",
+                "saveFirst": "Guarde primero la reunión.",
+                "savePending": "Guarde primero los cambios pendientes.",
+                "drafting": "Redactando el correo de seguimiento…",
+                "draftFailed": "No se pudo crear el borrador.",
+                "draftError": "No se pudo redactar el correo de seguimiento: ",
+                "discardTitle": "Descartar reunión",
+                "discardText": "¿Descartar esta reunión? Se cerrará y quedará fuera de la oportunidad.",
+                "discardError": "No se pudo descartar esta reunión: ",
+                "closedLock": "Esta reunión está cerrada. Sus campos son de solo lectura.",
+                "associating": "Asociando la reunión…",
+                "associateError": "No se pudo asociar esta reunión: ",
+                "notAwaiting": "Esta reunión no está en espera de revisión (puede que ya esté resuelta).",
+                "aiPrefix": "IA: ",
+                "confidenceOpen": " (confianza ",
+                "confidenceClose": "%)",
+                "unknownError": "error desconocido"
+            }
+        };
+        function lc() { try { return Xrm.Utility.getGlobalContext().userSettings.languageId; } catch (e) { return 1033; } }
+        return function (k, a0, a1) {
+            var tb = S[lc()] || S[1033];
+            var v = (tb && tb[k] != null) ? tb[k] : (S[1033][k] != null ? S[1033][k] : k);
+            if (a0 !== undefined) v = String(v).replace("{0}", a0);
+            if (a1 !== undefined) v = String(v).replace("{1}", a1);
+            return v;
+        };
+    })();
+
     var ASSOCIATE_API = "tavu_AssociateMeeting";
     var EMAIL_DRAFT_API = "tavu_BuildMeetingEmailDraft";
     var MEETING_ENTITY = "tavu_meeting";
@@ -89,9 +162,9 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
 
         if (suggested) {
             Xrm.Navigation.openConfirmDialog({
-                title: "Associate to opportunity",
-                text: "Associate this meeting to the suggested opportunity \"" + suggested.name +
-                      "\"? The meeting is completed and the opportunity's discovery notes are updated."
+                title: TAVU_I18N("assocOppTitle"),
+                text: TAVU_I18N("assocOppText_1") + suggested.name +
+                      TAVU_I18N("assocOppText_2")
             }).then(function (confirm) {
                 if (!confirm.confirmed) return;
                 runAssociate(formContext, meetingId, { OpportunityId: null, CreateNewOpportunity: false });
@@ -125,7 +198,7 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
         var meetingId = formContext.data.entity.getId().replace(/[{}]/g, "");
 
         Xrm.Navigation.openConfirmDialog({
-            title: "Create opportunity",
+            title: TAVU_I18N("createOppTitle"),
             text: buildCreateConfirmText(formContext)
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
@@ -143,7 +216,7 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
         var contact = getLookup(formContext, FIELD_CONTACT);
         if (account || contact) {
             var who = account ? account.name : contact.name;
-            return "Create a new opportunity for " + who + " and associate the meeting to it?";
+            return TAVU_I18N("createOppFor") + who + TAVU_I18N("createOppAssoc");
         }
         var company = getText(formContext, FIELD_PROSPECT_COMPANY);
         var first = getText(formContext, FIELD_PROSPECT_FIRST) || "";
@@ -151,13 +224,12 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
         var person = (first + " " + last).trim();
         if (company || person) {
             var parts = [];
-            if (person) parts.push("the contact " + person);
-            if (company) parts.push("the account " + company);
-            return "No existing customer is linked. This will create " + parts.join(" and ") +
-                " from the call (matching existing records first), then a new opportunity. Continue?";
+            if (person) parts.push(TAVU_I18N("theContact") + person);
+            if (company) parts.push(TAVU_I18N("theAccount") + company);
+            return TAVU_I18N("noCustomer_1") + parts.join(TAVU_I18N("andJoin")) +
+                TAVU_I18N("noCustomer_2");
         }
-        return "Create a new opportunity from this meeting and associate it? " +
-            "Note: no customer is linked and the call has no prospect data, so this may not succeed.";
+        return TAVU_I18N("createNoData");
     }
 
     /**
@@ -176,18 +248,18 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
         }
 
         if (!formContext.data.entity.getId()) {
-            notifyTransient(formContext, "Save the meeting first.", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("saveFirst"), "WARNING");
             return;
         }
         var meetingId = formContext.data.entity.getId().replace(/[{}]/g, "");
 
-        Xrm.Utility.showProgressIndicator("Drafting follow-up email…");
+        Xrm.Utility.showProgressIndicator(TAVU_I18N("drafting"));
         callBuildMeetingEmailDraft(meetingId).then(
             function (result) {
                 Xrm.Utility.closeProgressIndicator();
                 var emailId = result && result.EmailId;
                 if (!emailId) {
-                    notifyTransient(formContext, "The draft could not be created.", "ERROR");
+                    notifyTransient(formContext, TAVU_I18N("draftFailed"), "ERROR");
                     return;
                 }
                 openRecordModal(formContext, EMAIL_ENTITY, emailId.replace(/[{}]/g, ""));
@@ -195,7 +267,7 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
             function (error) {
                 Xrm.Utility.closeProgressIndicator();
                 console.error("[OpenTavu.Meeting.Form] reviewDraft failed:", error);
-                Xrm.Navigation.openErrorDialog({ message: "Couldn't draft the follow-up email: " + msg(error) });
+                Xrm.Navigation.openErrorDialog({ message: TAVU_I18N("draftError") + msg(error) });
             }
         );
     };
@@ -213,8 +285,8 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
         var meetingId = formContext.data.entity.getId().replace(/[{}]/g, "");
 
         Xrm.Navigation.openConfirmDialog({
-            title: "Discard Meeting",
-            text: "Discard this meeting? It will be closed and left out of the opportunity."
+            title: TAVU_I18N("discardTitle"),
+            text: TAVU_I18N("discardText")
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
 
@@ -227,7 +299,7 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
                 },
                 function (error) {
                     console.error("[OpenTavu.Meeting.Form] discard failed:", error);
-                    notifyTransient(formContext, "Couldn't discard this meeting: " + msg(error), "ERROR");
+                    notifyTransient(formContext, TAVU_I18N("discardError") + msg(error), "ERROR");
                 }
             );
         });
@@ -297,11 +369,11 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
         var level = "INFO";
         if (status === STATUS_PROCESSED) {
             var conf = getNumber(formContext, FIELD_CONFIDENCE);
-            if (conf !== null && conf !== undefined) confText = " (confidence " + Math.round(conf) + "%)";
+            if (conf !== null && conf !== undefined) confText = TAVU_I18N("confidenceOpen") + Math.round(conf) + TAVU_I18N("confidenceClose");
         } else {
             level = "WARNING";
         }
-        formContext.ui.setFormNotification("AI: " + summary + confText, level, NOTIF.AI);
+        formContext.ui.setFormNotification(TAVU_I18N("aiPrefix") + summary + confText, level, NOTIF.AI);
     }
 
     /**
@@ -316,7 +388,7 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
             if (ctrl && ctrl.setDisabled) ctrl.setDisabled(true);
         });
         formContext.ui.setFormNotification(
-            "This meeting is closed. Its fields are read-only.", "INFO", NOTIF.LOCKED);
+            TAVU_I18N("closedLock"), "INFO", NOTIF.LOCKED);
     }
 
     // ============================================================
@@ -329,7 +401,7 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
      * way the meeting is refreshed at the end. Surfaces whether discovery was consolidated.
      */
     function runAssociate(formContext, meetingId, opts, openOpp) {
-        Xrm.Utility.showProgressIndicator("Associating meeting…");
+        Xrm.Utility.showProgressIndicator(TAVU_I18N("associating"));
         callAssociateMeeting(meetingId, opts).then(
             function (result) {
                 Xrm.Utility.closeProgressIndicator();
@@ -346,7 +418,7 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
             function (error) {
                 Xrm.Utility.closeProgressIndicator();
                 console.error("[OpenTavu.Meeting.Form] associate failed:", error);
-                Xrm.Navigation.openErrorDialog({ message: "Couldn't associate this meeting: " + msg(error) });
+                Xrm.Navigation.openErrorDialog({ message: TAVU_I18N("associateError") + msg(error) });
             }
         );
     }
@@ -442,17 +514,17 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
     /** True when the meeting is saved, clean, and still awaiting the human (Processed / Manual Review). */
     function ensureReviewable(formContext) {
         if (!formContext.data.entity.getId()) {
-            notifyTransient(formContext, "Save the meeting first.", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("saveFirst"), "WARNING");
             return false;
         }
         if (formContext.data.getIsDirty()) {
-            notifyTransient(formContext, "Save your pending changes first.", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("savePending"), "WARNING");
             return false;
         }
         var status = getOptionValue(formContext, FIELD_STATUS_REASON);
         if (status !== STATUS_PROCESSED && status !== STATUS_MANUAL_REVIEW) {
             notifyTransient(formContext,
-                "This meeting is not awaiting review (it may already be resolved).", "WARNING");
+                TAVU_I18N("notAwaiting"), "WARNING");
             return false;
         }
         return true;
@@ -492,7 +564,7 @@ OpenTavu.Meeting.Form = OpenTavu.Meeting.Form || {};
     }
 
     function msg(error) {
-        return (error && error.message) ? error.message : "unknown error";
+        return (error && error.message) ? error.message : TAVU_I18N("unknownError");
     }
 
 })(OpenTavu.Meeting.Form);

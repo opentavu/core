@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="OpenTavu.Controls" constructor="CaseConversation" version="0.0.1"
+  <control namespace="OpenTavu.Controls" constructor="CaseConversation" version="0.0.2"
            display-name-key="Case Conversation"
            description-key="Threaded customer/agent conversation for a case, with per-interaction state traceability. Client-side render over tavu_caseinteraction."
            control-type="virtual">
@@ -16,6 +16,8 @@
 
     <resources>
       <code path="index.ts" order="1"/>
+      <resx path="strings/CaseConversation.1033.resx" version="1.0.0" />
+      <resx path="strings/CaseConversation.3082.resx" version="1.0.0" />
       <platform-library name="React" version="16.14.0" />
       <platform-library name="Fluent" version="9.46.2" />
     </resources>

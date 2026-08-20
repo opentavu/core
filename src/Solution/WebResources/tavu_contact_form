@@ -56,6 +56,31 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
 (function (Form) {
 
     // ============================================================
+    // i18n helper
+    // ============================================================
+
+    var TAVU_I18N = (function () {
+        var S = {
+            1033: {
+                b2bHint: "Set a Parent Account to treat this contact as a B2B interlocutor, or leave empty and save to treat as a direct client (B2C).",
+                inheritLocation: "Inheriting location from parent Account..."
+            },
+            3082: {
+                b2bHint: "Asigne una Cuenta principal para tratar este contacto como interlocutor B2B, o deje vacío y guarde para tratarlo como cliente directo (B2C).",
+                inheritLocation: "Heredando la ubicación de la Cuenta principal..."
+            }
+        };
+        function lc() { try { return Xrm.Utility.getGlobalContext().userSettings.languageId; } catch (e) { return 1033; } }
+        return function (k, a0, a1) {
+            var tb = S[lc()] || S[1033];
+            var v = (tb && tb[k] != null) ? tb[k] : (S[1033][k] != null ? S[1033][k] : k);
+            if (a0 !== undefined) v = String(v).replace("{0}", a0);
+            if (a1 !== undefined) v = String(v).replace("{1}", a1);
+            return v;
+        };
+    })();
+
+    // ============================================================
     // Constants
     // ============================================================
 
@@ -204,7 +229,7 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
             setSectionVisible(formContext, TAB_SUMMARY, SECTION_KEY_METRICS_B2C, false);
 
             formContext.ui.setFormNotification(
-                "Set a Parent Account to treat this contact as a B2B interlocutor, or leave empty and save to treat as a direct client (B2C).",
+                TAVU_I18N("b2bHint"),
                 "INFO",
                 NOTIF_UNSET_MODE
             );
@@ -288,7 +313,7 @@ OpenTavu.Contact.Form = OpenTavu.Contact.Form || {};
         var accountId = parentValue.id.replace("{", "").replace("}", "");
 
         formContext.ui.setFormNotification(
-            "Inheriting location from parent Account...",
+            TAVU_I18N("inheritLocation"),
             "INFO",
             NOTIF_LOCATION_INHERIT
         );

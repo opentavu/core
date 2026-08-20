@@ -1,1 +1,19 @@
-<manifest><control namespace="OpenTavu.Controls" constructor="SlaCountdown" version="0.0.1" display-name-key="SLA Countdown" description-key="Live SLA countdown bar for cases. Client-side only; reads existing fields and calls nothing (non-premium)." control-type="virtual" api-version="1.3.18"><external-service-usage enabled="false" /><property name="targetDate" display-name-key="Target Date" description-key="The SLA target datetime the countdown runs to (Resolution or Response target)." of-type="DateAndTime.DateAndTime" usage="bound" required="true" /><property name="label" display-name-key="Label" description-key="Row label shown before the countdown, e.g. Resolution or Response." of-type="SingleLine.Text" usage="input" required="false" /><property name="createdOn" display-name-key="Created On" description-key="Case creation time; the progress-bar baseline. Bind to Created On." of-type="DateAndTime.DateAndTime" usage="bound" required="false" /><property name="slaStatus" display-name-key="SLA Status" description-key="Current SLA status, shown as a caption. Bind to tavu_slastatus." of-type="OptionSet" usage="bound" required="false" /><resources><code path="bundle.js" order="1" /><platform-library name="React" version="16.14.0" /><platform-library name="Fluent" version="9.46.2" /></resources><feature-usage /><built-by name="pac" version="1.51.1" /></control></manifest>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<manifest>
+  <control namespace="OpenTavu.Controls" constructor="SlaCountdown" version="0.0.2" display-name-key="SLA Countdown" description-key="Live SLA countdown bar for cases. Client-side only; reads existing fields and calls nothing (non-premium)." control-type="virtual" api-version="1.3.18">
+    <external-service-usage enabled="false"/>
+    <property name="targetDate" display-name-key="Target Date" description-key="The SLA target datetime the countdown runs to (Resolution or Response target)." of-type="DateAndTime.DateAndTime" usage="bound" required="true"/>
+    <property name="label" display-name-key="Label" description-key="Row label shown before the countdown, e.g. Resolution or Response." of-type="SingleLine.Text" usage="input" required="false"/>
+    <property name="createdOn" display-name-key="Created On" description-key="Case creation time; the progress-bar baseline. Bind to Created On." of-type="DateAndTime.DateAndTime" usage="bound" required="false"/>
+    <property name="slaStatus" display-name-key="SLA Status" description-key="Current SLA status, shown as a caption. Bind to tavu_slastatus." of-type="OptionSet" usage="bound" required="false"/>
+    <resources>
+      <code path="bundle.js" order="1"/>
+      <resx path="strings/SlaCountdown.1033.resx" version="1.0.0"/>
+      <resx path="strings/SlaCountdown.3082.resx" version="1.0.0"/>
+      <platform-library name="React" version="16.14.0"/>
+      <platform-library name="Fluent" version="9.46.2"/>
+    </resources>
+    <feature-usage/>
+    <built-by name="pac" version="1.51.1"/>
+  </control>
+</manifest>

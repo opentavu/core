@@ -43,6 +43,31 @@ OpenTavu.ProposalLine.Form = OpenTavu.ProposalLine.Form || {};
 (function (Form) {
 
     // ============================================================
+    // i18n helper — resolves user-facing strings by UI language
+    // (LCID 3082 = Spanish, falling back to 1033 = English).
+    // ============================================================
+    var TAVU_I18N = (function () {
+        var S = {
+            1033: {
+                noPriceList: "This proposal has no price list selected. Enter Price Per Unit manually.",
+                noPriceEntry: "No price list entry for this product. Enter Price Per Unit manually."
+            },
+            3082: {
+                noPriceList: "Esta propuesta no tiene lista de precios seleccionada. Ingrese el Precio por unidad manualmente.",
+                noPriceEntry: "No hay entrada de lista de precios para este producto. Ingrese el Precio por unidad manualmente."
+            }
+        };
+        function lc() { try { return Xrm.Utility.getGlobalContext().userSettings.languageId; } catch (e) { return 1033; } }
+        return function (k, a0, a1) {
+            var tb = S[lc()] || S[1033];
+            var v = (tb && tb[k] != null) ? tb[k] : (S[1033][k] != null ? S[1033][k] : k);
+            if (a0 !== undefined) v = String(v).replace("{0}", a0);
+            if (a1 !== undefined) v = String(v).replace("{1}", a1);
+            return v;
+        };
+    })();
+
+    // ============================================================
     // Schema constants — VERIFY against the live environment.
     // Doc/schema drift exists (e.g. Opportunity uses tavu_customer, not
     // tavu_customerid). Centralized so a rename is a one-line change.
@@ -220,7 +245,7 @@ OpenTavu.ProposalLine.Form = OpenTavu.ProposalLine.Form || {};
             var priceListId = proposal["_" + PROPOSAL_PRICELIST + "_value"];
             if (!priceListId) {
                 notifyTransient(formContext,
-                    "This proposal has no price list selected. Enter Price Per Unit manually.",
+                    TAVU_I18N("noPriceList"),
                     "INFO", NOTIF.NO_PRICELIST);
                 recalcAmounts(formContext);
                 return;
@@ -254,7 +279,7 @@ OpenTavu.ProposalLine.Form = OpenTavu.ProposalLine.Form || {};
                     // rate untouched (no source to copy from).
                     setValue(formContext, F_PRICE, null);
                     notifyTransient(formContext,
-                        "No price list entry for this product. Enter Price Per Unit manually.",
+                        TAVU_I18N("noPriceEntry"),
                         "INFO", NOTIF.NO_PRICE);
                 }
                 recalcAmounts(formContext);

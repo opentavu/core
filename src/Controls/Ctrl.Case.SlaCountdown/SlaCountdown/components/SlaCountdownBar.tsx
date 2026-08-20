@@ -1,6 +1,20 @@
 import * as React from "react";
 import { makeStyles, tokens, Badge } from "@fluentui/react-components";
 
+// Localized UI strings, resolved from resx by index.ts (context.resources.getString).
+export interface ISlaCountdownStrings {
+    noTarget: string;
+    resolution: string;
+    badgePaused: string;
+    badgeBreached: string;
+    badgeWarning: string;
+    badgeOnTrack: string;
+    remainingMet: string;
+    remainingPaused: string;
+    overdue: string;    // "Overdue {0}"
+    remaining: string;  // "{0} left"
+}
+
 export interface ISlaCountdownProps {
     /** The SLA target datetime the countdown runs to (Resolution or Response). */
     targetDate?: Date;
@@ -8,8 +22,9 @@ export interface ISlaCountdownProps {
     createdOn?: Date;
     /** Current SLA status label (from the bound choice), shown as an optional caption. */
     statusLabel?: string;
-    /** Row label, e.g. "Resolution" or "Response". Defaults to "Resolution". */
+    /** Row label, e.g. "Resolution" or "Response". Defaults to the localized "Resolution". */
     label?: string;
+    strings: ISlaCountdownStrings;
 }
 
 const useStyles = makeStyles({
@@ -65,6 +80,7 @@ function formatDuration(ms: number): string {
 
 export const SlaCountdownBar: React.FC<ISlaCountdownProps> = (props) => {
     const styles = useStyles();
+    const strings = props.strings;
     const [now, setNow] = React.useState<number>(Date.now());
 
     // Re-render every 30s so the countdown stays live without any server call.
@@ -74,7 +90,7 @@ export const SlaCountdownBar: React.FC<ISlaCountdownProps> = (props) => {
     }, []);
 
     if (!props.targetDate) {
-        return <span className={styles.caption}>No SLA target set.</span>;
+        return <span className={styles.caption}>{strings.noTarget}</span>;
     }
 
     const target = props.targetDate.getTime();
@@ -121,27 +137,27 @@ export const SlaCountdownBar: React.FC<ISlaCountdownProps> = (props) => {
                     ? "warning"
                     : "success";
     const badgeLabel = isPaused
-        ? "Paused"
+        ? strings.badgePaused
         : isMet
             ? props.statusLabel!
             : overdue
-                ? "Breached"
+                ? strings.badgeBreached
                 : fraction >= 0.8
-                    ? "Warning"
-                    : "On Track";
+                    ? strings.badgeWarning
+                    : strings.badgeOnTrack;
 
     const remainingText = isMet
-        ? "Cumplido"
+        ? strings.remainingMet
         : isPaused
-            ? "En pausa"
+            ? strings.remainingPaused
             : overdue
-                ? "Overdue " + formatDuration(remainingMs)
-                : formatDuration(remainingMs) + " left";
+                ? strings.overdue.replace("{0}", formatDuration(remainingMs))
+                : strings.remaining.replace("{0}", formatDuration(remainingMs));
 
     return (
         <div className={styles.root}>
             <div className={styles.row}>
-                <span className={styles.label}>{props.label ?? "Resolution"}</span>
+                <span className={styles.label}>{props.label ?? strings.resolution}</span>
                 <span className={styles.remaining} style={{ color }}>{remainingText}</span>
             </div>
             <div className={styles.track}>

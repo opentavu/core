@@ -32,6 +32,57 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
 
 (function (Form) {
 
+    var TAVU_I18N = (function () {
+        var S = {
+            1033: {
+                approvePromoteTitle: "Approve & Promote",
+                approvePromoteText: "This creates a new Contact (and Account if needed) from this lead and closes the lead as Promoted to Contact. Continue?",
+                promoting: "Promoting lead…",
+                promoteError: "Couldn't promote this lead: ",
+                linking: "Linking lead…",
+                linkError: "Couldn't link this lead: ",
+                discardTitle: "Discard Lead",
+                discardText: "Close this lead as Not Qualified? No contact or account will be created.",
+                discardError: "Couldn't discard this lead: ",
+                aiPrefix: "AI: ",
+                confidenceOpen: " (confidence ",
+                confidenceClose: "%)",
+                closedLock: "This lead is closed. Its fields are read-only.",
+                saveFirst: "Save the lead first.",
+                savePending: "Save your pending changes first.",
+                notAwaiting: "This lead is not awaiting review (it may already be resolved).",
+                unknownError: "unknown error"
+            },
+            3082: {
+                approvePromoteTitle: "Aprobar y promover",
+                approvePromoteText: "Esto crea un nuevo Contacto (y Cuenta si es necesario) a partir de este prospecto y cierra el prospecto como Promovido a Contacto. ¿Continuar?",
+                promoting: "Promoviendo el prospecto…",
+                promoteError: "No se pudo promover este prospecto: ",
+                linking: "Vinculando el prospecto…",
+                linkError: "No se pudo vincular este prospecto: ",
+                discardTitle: "Descartar prospecto",
+                discardText: "¿Cerrar este prospecto como No calificado? No se creará ningún contacto ni cuenta.",
+                discardError: "No se pudo descartar este prospecto: ",
+                aiPrefix: "IA: ",
+                confidenceOpen: " (confianza ",
+                confidenceClose: "%)",
+                closedLock: "Este prospecto está cerrado. Sus campos son de solo lectura.",
+                saveFirst: "Guarde primero el prospecto.",
+                savePending: "Guarde primero los cambios pendientes.",
+                notAwaiting: "Este prospecto no está en espera de revisión (puede que ya esté resuelto).",
+                unknownError: "error desconocido"
+            }
+        };
+        function lc() { try { return Xrm.Utility.getGlobalContext().userSettings.languageId; } catch (e) { return 1033; } }
+        return function (k, a0, a1) {
+            var tb = S[lc()] || S[1033];
+            var v = (tb && tb[k] != null) ? tb[k] : (S[1033][k] != null ? S[1033][k] : k);
+            if (a0 !== undefined) v = String(v).replace("{0}", a0);
+            if (a1 !== undefined) v = String(v).replace("{1}", a1);
+            return v;
+        };
+    })();
+
     var PROMOTE_API = "tavu_PromoteLead";
     var LEAD_ENTITY = "tavu_lead";
 
@@ -69,13 +120,12 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
         var leadId = formContext.data.entity.getId().replace(/[{}]/g, "");
 
         Xrm.Navigation.openConfirmDialog({
-            title: "Approve & Promote",
-            text: "This creates a new Contact (and Account if needed) from this lead and closes " +
-                  "the lead as Promoted to Contact. Continue?"
+            title: TAVU_I18N("approvePromoteTitle"),
+            text: TAVU_I18N("approvePromoteText")
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
 
-            Xrm.Utility.showProgressIndicator("Promoting lead…");
+            Xrm.Utility.showProgressIndicator(TAVU_I18N("promoting"));
             callPromoteLead(leadId, null, null).then(
                 function (result) {
                     Xrm.Utility.closeProgressIndicator();
@@ -92,7 +142,7 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
                     Xrm.Utility.closeProgressIndicator();
                     console.error("[OpenTavu.Lead.Form] approveAndPromote failed:", error);
                     Xrm.Navigation.openErrorDialog({
-                        message: "Couldn't promote this lead: " + msg(error)
+                        message: TAVU_I18N("promoteError") + msg(error)
                     });
                 }
             );
@@ -124,7 +174,7 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
                 if (!selected || !selected.length) return; // user cancelled
                 var contactId = selected[0].id.replace(/[{}]/g, "");
 
-                Xrm.Utility.showProgressIndicator("Linking lead…");
+                Xrm.Utility.showProgressIndicator(TAVU_I18N("linking"));
                 callPromoteLead(leadId, contactId, null).then(
                     function () {
                         Xrm.Utility.closeProgressIndicator();
@@ -135,7 +185,7 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
                     function (error) {
                         Xrm.Utility.closeProgressIndicator();
                         console.error("[OpenTavu.Lead.Form] linkToExisting failed:", error);
-                        Xrm.Navigation.openErrorDialog({ message: "Couldn't link this lead: " + msg(error) });
+                        Xrm.Navigation.openErrorDialog({ message: TAVU_I18N("linkError") + msg(error) });
                     }
                 );
             },
@@ -158,8 +208,8 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
         var leadId = formContext.data.entity.getId().replace(/[{}]/g, "");
 
         Xrm.Navigation.openConfirmDialog({
-            title: "Discard Lead",
-            text: "Close this lead as Not Qualified? No contact or account will be created."
+            title: TAVU_I18N("discardTitle"),
+            text: TAVU_I18N("discardText")
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
 
@@ -172,7 +222,7 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
                 },
                 function (error) {
                     console.error("[OpenTavu.Lead.Form] discard failed:", error);
-                    notifyTransient(formContext, "Couldn't discard this lead: " + msg(error), "ERROR");
+                    notifyTransient(formContext, TAVU_I18N("discardError") + msg(error), "ERROR");
                 }
             );
         });
@@ -209,11 +259,11 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
         var level = "INFO";
         if (status === STATUS_AWAITING_HUMAN_REVIEW) {
             var conf = getNumber(formContext, FIELD_AI_CONFIDENCE);
-            if (conf !== null && conf !== undefined) confText = " (confidence " + Math.round(conf) + "%)";
+            if (conf !== null && conf !== undefined) confText = TAVU_I18N("confidenceOpen") + Math.round(conf) + TAVU_I18N("confidenceClose");
         } else {
             level = "WARNING";
         }
-        formContext.ui.setFormNotification("AI: " + rec + confText, level, NOTIF.AI);
+        formContext.ui.setFormNotification(TAVU_I18N("aiPrefix") + rec + confText, level, NOTIF.AI);
     }
 
     /**
@@ -229,7 +279,7 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
             if (ctrl && ctrl.setDisabled) ctrl.setDisabled(true);
         });
         formContext.ui.setFormNotification(
-            "This lead is closed. Its fields are read-only.", "INFO", NOTIF.LOCKED);
+            TAVU_I18N("closedLock"), "INFO", NOTIF.LOCKED);
     }
 
     // ============================================================
@@ -281,17 +331,17 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
     /** True when the lead is saved, clean, and still Awaiting Human Review. */
     function ensureReviewable(formContext) {
         if (!formContext.data.entity.getId()) {
-            notifyTransient(formContext, "Save the lead first.", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("saveFirst"), "WARNING");
             return false;
         }
         if (formContext.data.getIsDirty()) {
-            notifyTransient(formContext, "Save your pending changes first.", "WARNING");
+            notifyTransient(formContext, TAVU_I18N("savePending"), "WARNING");
             return false;
         }
         var status = getOptionValue(formContext, FIELD_STATUS_REASON);
         if (status !== STATUS_AWAITING_HUMAN_REVIEW && status !== STATUS_MANUAL_REVIEW_REQUIRED) {
             notifyTransient(formContext,
-                "This lead is not awaiting review (it may already be resolved).", "WARNING");
+                TAVU_I18N("notAwaiting"), "WARNING");
             return false;
         }
         return true;
@@ -331,7 +381,7 @@ OpenTavu.Lead.Form = OpenTavu.Lead.Form || {};
     }
 
     function msg(error) {
-        return (error && error.message) ? error.message : "unknown error";
+        return (error && error.message) ? error.message : TAVU_I18N("unknownError");
     }
 
 })(OpenTavu.Lead.Form);

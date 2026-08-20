@@ -1,5 +1,5 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { AiAssessmentCard, IAiAssessmentProps } from "./components/AiAssessmentCard";
+import { AiAssessmentCard, IAiAssessmentProps, IAiAssessmentStrings } from "./components/AiAssessmentCard";
 import { FluentProvider, webLightTheme, Theme } from "@fluentui/react-components";
 import * as React from "react";
 
@@ -20,6 +20,20 @@ export class AiAssessment implements ComponentFramework.ReactControl<IInputs, IO
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
         const p = context.parameters;
 
+        // Localized UI strings — resolved from the resx bundle for the user's language.
+        const strings: IAiAssessmentStrings = {
+            title: context.resources.getString("title"),
+            confidence: context.resources.getString("confidence"),
+            reviewRequired: context.resources.getString("reviewRequired"),
+            multiIntent: context.resources.getString("multiIntent"),
+            lowConfidence: context.resources.getString("lowConfidence"),
+            awaiting: context.resources.getString("awaiting"),
+            problem: context.resources.getString("problem"),
+            businessImpact: context.resources.getString("businessImpact"),
+            missingInfo: context.resources.getString("missingInfo"),
+            reasoning: context.resources.getString("reasoning"),
+        };
+
         const props: IAiAssessmentProps = {
             summary: p.aiSummary.raw ?? undefined,
             problem: p.aiProblem.raw ?? undefined,
@@ -38,6 +52,7 @@ export class AiAssessment implements ComponentFramework.ReactControl<IInputs, IO
                     : p.aiConfidenceScore.raw / 100,
             multiIntent: p.multiIntentDetected.raw === true,
             confidenceThreshold: p.confidenceThreshold.raw ?? 0.85,
+            strings: strings,
         };
 
         // Use the host's Fluent theme when available (model-driven app provides it,

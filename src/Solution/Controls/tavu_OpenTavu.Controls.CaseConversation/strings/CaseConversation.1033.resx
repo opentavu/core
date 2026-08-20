@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="internalNotePlaceholder" xml:space="preserve"><value>Internal note (private)…</value></data>
+  <data name="replyPlaceholder" xml:space="preserve"><value>Reply to the customer…</value></data>
+  <data name="internalNote" xml:space="preserve"><value>Internal note</value></data>
+  <data name="publicReply" xml:space="preserve"><value>Public reply</value></data>
+  <data name="attach" xml:space="preserve"><value>Attach</value></data>
+  <data name="statusHintDisabled" xml:space="preserve"><value>Write a reply to change the status on send</value></data>
+  <data name="statusHint" xml:space="preserve"><value>Change status on send</value></data>
+  <data name="changeStatus" xml:space="preserve"><value>Change status</value></data>
+  <data name="noStatusChange" xml:space="preserve"><value>— no status change —</value></data>
+  <data name="send" xml:space="preserve"><value>Send</value></data>
+  <data name="loading" xml:space="preserve"><value>Loading…</value></data>
+  <data name="noInteractions" xml:space="preserve"><value>No interactions yet.</value></data>
+  <data name="customer" xml:space="preserve"><value>Customer</value></data>
+  <data name="internalNoteTag" xml:space="preserve"><value>internal note</value></data>
+  <data name="statusDelta" xml:space="preserve"><value>Status: {0} → {1}</value></data>
+  <data name="loadOlder" xml:space="preserve"><value>Load older</value></data>
+</root>

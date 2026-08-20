@@ -1,6 +1,26 @@
 import * as React from "react";
 import { makeStyles, tokens, Textarea, Button, Switch, Select } from "@fluentui/react-components";
 
+// Localized UI strings, resolved from resx by index.ts (context.resources.getString).
+export interface ICaseConversationStrings {
+    internalNotePlaceholder: string;
+    replyPlaceholder: string;
+    internalNote: string;
+    publicReply: string;
+    attach: string;
+    statusHintDisabled: string;
+    statusHint: string;
+    changeStatus: string;
+    noStatusChange: string;
+    send: string;
+    loading: string;
+    noInteractions: string;
+    customer: string;
+    internalNoteTag: string;
+    statusDelta: string;   // "Status: {0} → {1}"
+    loadOlder: string;
+}
+
 export interface IAttachment {
     id: string;        // annotationid
     fileName: string;
@@ -36,6 +56,7 @@ export interface ICaseConversationProps {
     attachmentsByInteraction?: Record<string, IAttachment[]>;
     onOpenAttachment?: (attachmentId: string) => void;
     statusOptions?: IStatusOption[];
+    strings: ICaseConversationStrings;
 }
 
 // tavu_direction option values
@@ -174,10 +195,10 @@ const useStyles = makeStyles({
     },
 });
 
-function deltaText(it: IInteraction): string {
+function deltaText(it: IInteraction, strings: ICaseConversationStrings): string {
     const parts: string[] = [];
     if (it.statusBefore && it.statusAfter && it.statusBefore !== it.statusAfter) {
-        parts.push("Status: " + it.statusBefore + " → " + it.statusAfter);
+        parts.push(strings.statusDelta.replace("{0}", it.statusBefore).replace("{1}", it.statusAfter));
     }
     if (it.changedFields) {
         parts.push(it.changedFields);
@@ -187,6 +208,7 @@ function deltaText(it: IInteraction): string {
 
 export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) => {
     const styles = useStyles();
+    const strings = props.strings;
     const [text, setText] = React.useState<string>("");
     const [internal, setInternal] = React.useState<boolean>(false);
     const [files, setFiles] = React.useState<File[]>([]);
@@ -236,7 +258,7 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                     <Textarea
                         value={text}
                         onChange={(_ev, data) => setText(data.value)}
-                        placeholder={internal ? "Internal note (private)…" : "Reply to the customer…"}
+                        placeholder={internal ? strings.internalNotePlaceholder : strings.replyPlaceholder}
                         resize="vertical"
                         style={{ width: "100%" }}
                     />
@@ -256,14 +278,14 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                             <Switch
                                 checked={internal}
                                 onChange={(_ev, data) => setInternal(data.checked ?? false)}
-                                label={internal ? "Internal note" : "Public reply"}
+                                label={internal ? strings.internalNote : strings.publicReply}
                             />
                             <Button
                                 appearance="transparent"
                                 icon={<PaperclipIcon />}
                                 onClick={() => fileInputRef.current?.click()}
-                                aria-label="Attach"
-                                title="Attach"
+                                aria-label={strings.attach}
+                                title={strings.attach}
                             />
                             {statusOptions.length > 0 ? (
                                 <Select
@@ -272,11 +294,11 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                                     onChange={(_ev, data) => setStatusId(data.value)}
                                     disabled={text.trim().length === 0}
                                     title={text.trim().length === 0
-                                        ? "Write a reply to change the status on send"
-                                        : "Change status on send"}
-                                    aria-label="Change status"
+                                        ? strings.statusHintDisabled
+                                        : strings.statusHint}
+                                    aria-label={strings.changeStatus}
                                 >
-                                    <option value="">— no status change —</option>
+                                    <option value="">{strings.noStatusChange}</option>
                                     {statusOptions.map((s) => (
                                         <option key={s.id} value={s.id}>{s.name}</option>
                                     ))}
@@ -284,7 +306,7 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                             ) : null}
                         </div>
                         <Button appearance="primary" disabled={!canSend} onClick={send}>
-                            Send
+                            {strings.send}
                         </Button>
                     </div>
 
@@ -292,11 +314,11 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                 </div>
             ) : null}
 
-            {props.loading ? <div className={styles.empty}>Loading…</div> : null}
-            {!props.loading && !hasItems ? <div className={styles.empty}>No interactions yet.</div> : null}
+            {props.loading ? <div className={styles.empty}>{strings.loading}</div> : null}
+            {!props.loading && !hasItems ? <div className={styles.empty}>{strings.noInteractions}</div> : null}
 
             {!props.loading && hasItems ? props.items.map((it) => {
-                const delta = deltaText(it);
+                const delta = deltaText(it, strings);
                 const hasBody = it.body ? it.body.trim().length > 0 : false;
                 const atts = props.attachmentsByInteraction?.[it.id] ?? [];
 
@@ -315,13 +337,13 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
                             : styles.bubbleIn;
 
                 const who = it.direction === DIR_INBOUND
-                    ? (it.fromContact ? it.fromContact : "Customer")
+                    ? (it.fromContact ? it.fromContact : strings.customer)
                     : it.author;
 
                 return (
                     <div key={it.id} className={bubbleClass}>
                         <div className={styles.meta}>
-                            {it.direction === DIR_NOTE ? <span className={styles.noteTag}>internal note</span> : null}
+                            {it.direction === DIR_NOTE ? <span className={styles.noteTag}>{strings.internalNoteTag}</span> : null}
                             <span>{who}</span>
                             {it.channelLabel ? <span>· {it.channelLabel}</span> : null}
                             {it.timestampLabel ? <span>· {it.timestampLabel}</span> : null}
@@ -335,7 +357,7 @@ export const CaseConversationThread: React.FC<ICaseConversationProps> = (props) 
 
             {!props.loading && props.hasMore && props.onLoadOlder ? (
                 <Button className={styles.loadOlder} appearance="subtle" size="small" onClick={props.onLoadOlder}>
-                    Load older
+                    {strings.loadOlder}
                 </Button>
             ) : null}
         </div>

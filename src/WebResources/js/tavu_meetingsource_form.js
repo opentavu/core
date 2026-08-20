@@ -24,6 +24,29 @@ OpenTavu.MeetingSource.Form = OpenTavu.MeetingSource.Form || {};
 
 (function (Form) {
 
+    var TAVU_I18N = (function () {
+        var S = {
+            1033: {
+                "enableTitle": "Enable Teams sync",
+                "clientApiUnavailable": "Client API unavailable; cannot open the wizard.",
+                "wizardOpenError": "Could not open the Teams sync wizard."
+            },
+            3082: {
+                "enableTitle": "Habilitar sincronización de Teams",
+                "clientApiUnavailable": "API de cliente no disponible; no se puede abrir el asistente.",
+                "wizardOpenError": "No se pudo abrir el asistente de sincronización de Teams."
+            }
+        };
+        function lc() { try { return Xrm.Utility.getGlobalContext().userSettings.languageId; } catch (e) { return 1033; } }
+        return function (k, a0, a1) {
+            var tb = S[lc()] || S[1033];
+            var v = (tb && tb[k] != null) ? tb[k] : (S[1033][k] != null ? S[1033][k] : k);
+            if (a0 !== undefined) v = String(v).replace("{0}", a0);
+            if (a1 !== undefined) v = String(v).replace("{1}", a1);
+            return v;
+        };
+    })();
+
     var WIZARD_WEBRESOURCE = "tavu_teamssyncwizard";
     var NAME_FIELD = "tavu_name"; // connector name, e.g. "Teams"
 
@@ -53,13 +76,13 @@ OpenTavu.MeetingSource.Form = OpenTavu.MeetingSource.Form || {};
             position: 1,        // center
             width: { value: 560, unit: "px" },
             height: { value: 640, unit: "px" },
-            title: "Enable Teams sync"
+            title: TAVU_I18N("enableTitle")
         };
 
         var x = getXrm();
         if (!x || !x.Navigation || !x.Navigation.navigateTo) {
             if (x && x.Navigation && x.Navigation.openErrorDialog) {
-                x.Navigation.openErrorDialog({ message: "Client API unavailable; cannot open the wizard." });
+                x.Navigation.openErrorDialog({ message: TAVU_I18N("clientApiUnavailable") });
             }
             return;
         }
@@ -68,7 +91,7 @@ OpenTavu.MeetingSource.Form = OpenTavu.MeetingSource.Form || {};
             function () { /* closed; nothing to refresh */ },
             function (err) {
                 x.Navigation.openErrorDialog({
-                    message: "Could not open the Teams sync wizard.",
+                    message: TAVU_I18N("wizardOpenError"),
                     details: err && err.message ? err.message : String(err)
                 });
             }

@@ -14,6 +14,20 @@ import {
   AccordionPanel,
 } from "@fluentui/react-components";
 
+// Localized UI strings, resolved from resx by index.ts (context.resources.getString).
+export interface IAiAssessmentStrings {
+  title: string;
+  confidence: string;        // "Confidence {0}%"
+  reviewRequired: string;
+  multiIntent: string;
+  lowConfidence: string;     // "Low confidence ({0}%) — …"
+  awaiting: string;
+  problem: string;
+  businessImpact: string;
+  missingInfo: string;
+  reasoning: string;
+}
+
 export interface IAiAssessmentProps {
   summary?: string;
   problem?: string;
@@ -24,6 +38,7 @@ export interface IAiAssessmentProps {
   confidence?: number | null;
   multiIntent?: boolean;
   confidenceThreshold: number;
+  strings: IAiAssessmentStrings;
 }
 
 type BadgeColor =
@@ -116,6 +131,7 @@ export const AiAssessmentCard: React.FC<IAiAssessmentProps> = (props) => {
     confidence,
     multiIntent,
     confidenceThreshold,
+    strings,
   } = props;
 
   const hasContent = [summary, problem, businessImpact, missingInfo].some(
@@ -147,13 +163,13 @@ export const AiAssessmentCard: React.FC<IAiAssessmentProps> = (props) => {
         <div className={styles.titleGroup}>
           <span className={styles.brandDot} aria-hidden="true" />
           <Text size={400} weight="semibold">
-            AI assessment
+            {strings.title}
           </Text>
         </div>
         <div className={styles.badges}>
           {confidencePct !== undefined && (
             <Badge appearance="tint" color={lowConfidence ? "warning" : "success"}>
-              {`Confidence ${confidencePct}%`}
+              {strings.confidence.replace("{0}", String(confidencePct))}
             </Badge>
           )}
           {sentimentLabel && (
@@ -167,17 +183,17 @@ export const AiAssessmentCard: React.FC<IAiAssessmentProps> = (props) => {
       {needsReview && (
         <MessageBar intent="warning">
           <MessageBarBody>
-            <MessageBarTitle>Manual review required</MessageBarTitle>
+            <MessageBarTitle>{strings.reviewRequired}</MessageBarTitle>
             {multiIntent
-              ? " Multiple intents detected — review and split this case."
-              : ` Low confidence (${confidencePct ?? 0}%) — verify the categorization before assigning.`}
+              ? " " + strings.multiIntent
+              : " " + strings.lowConfidence.replace("{0}", String(confidencePct ?? 0))}
           </MessageBarBody>
         </MessageBar>
       )}
 
       {!hasContent && (
         <Text size={300} className={styles.placeholder}>
-          Awaiting AI processing…
+          {strings.awaiting}
         </Text>
       )}
 
@@ -187,16 +203,16 @@ export const AiAssessmentCard: React.FC<IAiAssessmentProps> = (props) => {
         </Text>
       )}
 
-      {renderField("Problem", problem)}
-      {renderField("Business impact", businessImpact)}
-      {renderField("Missing info", missingInfo)}
+      {renderField(strings.problem, problem)}
+      {renderField(strings.businessImpact, businessImpact)}
+      {renderField(strings.missingInfo, missingInfo)}
 
       {reasoning && (
         <>
           <Divider />
           <Accordion collapsible>
             <AccordionItem value="reasoning">
-              <AccordionHeader>AI reasoning (audit trail)</AccordionHeader>
+              <AccordionHeader>{strings.reasoning}</AccordionHeader>
               <AccordionPanel>
                 <Text size={200}>{reasoning}</Text>
               </AccordionPanel>

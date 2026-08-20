@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="title" xml:space="preserve"><value>AI assessment</value></data>
+  <data name="confidence" xml:space="preserve"><value>Confidence {0}%</value></data>
+  <data name="reviewRequired" xml:space="preserve"><value>Manual review required</value></data>
+  <data name="multiIntent" xml:space="preserve"><value>Multiple intents detected — review and split this case.</value></data>
+  <data name="lowConfidence" xml:space="preserve"><value>Low confidence ({0}%) — verify the categorization before assigning.</value></data>
+  <data name="awaiting" xml:space="preserve"><value>Awaiting AI processing…</value></data>
+  <data name="problem" xml:space="preserve"><value>Problem</value></data>
+  <data name="businessImpact" xml:space="preserve"><value>Business impact</value></data>
+  <data name="missingInfo" xml:space="preserve"><value>Missing info</value></data>
+  <data name="reasoning" xml:space="preserve"><value>AI reasoning (audit trail)</value></data>
+</root>

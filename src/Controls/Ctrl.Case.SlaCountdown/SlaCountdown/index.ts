@@ -1,5 +1,5 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { SlaCountdownBar, ISlaCountdownProps } from "./components/SlaCountdownBar";
+import { SlaCountdownBar, ISlaCountdownProps, ISlaCountdownStrings } from "./components/SlaCountdownBar";
 import { FluentProvider, webLightTheme, Theme } from "@fluentui/react-components";
 import * as React from "react";
 
@@ -20,11 +20,26 @@ export class SlaCountdown implements ComponentFramework.ReactControl<IInputs, IO
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
         const p = context.parameters;
 
+        // Localized UI strings — resolved from the resx bundle for the user's language.
+        const strings: ISlaCountdownStrings = {
+            noTarget: context.resources.getString("noTarget"),
+            resolution: context.resources.getString("resolution"),
+            badgePaused: context.resources.getString("badgePaused"),
+            badgeBreached: context.resources.getString("badgeBreached"),
+            badgeWarning: context.resources.getString("badgeWarning"),
+            badgeOnTrack: context.resources.getString("badgeOnTrack"),
+            remainingMet: context.resources.getString("remainingMet"),
+            remainingPaused: context.resources.getString("remainingPaused"),
+            overdue: context.resources.getString("overdue"),
+            remaining: context.resources.getString("remaining"),
+        };
+
         const props: ISlaCountdownProps = {
             targetDate: p.targetDate.raw ?? undefined,
             createdOn: p.createdOn.raw ?? undefined,
             statusLabel: this.getOptionLabel(p.slaStatus),
             label: p.label.raw ?? undefined,
+            strings: strings,
         };
 
         // Use the host's Fluent theme (model-driven app provides it, incl. dark mode);

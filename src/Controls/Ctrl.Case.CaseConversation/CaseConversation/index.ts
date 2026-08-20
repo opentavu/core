@@ -1,5 +1,5 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { CaseConversationThread, IInteraction, IAttachment, IStatusOption } from "./components/CaseConversationThread";
+import { CaseConversationThread, IInteraction, IAttachment, IStatusOption, ICaseConversationStrings } from "./components/CaseConversationThread";
 import { FluentProvider, webLightTheme, Theme } from "@fluentui/react-components";
 import * as React from "react";
 
@@ -44,6 +44,28 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
         notifyOutputChanged: () => void
     ): void {
         this.notifyOutputChanged = notifyOutputChanged;
+    }
+
+    /** Localized UI strings — resolved from the resx bundle for the user's language. */
+    private getStrings(context: ComponentFramework.Context<IInputs>): ICaseConversationStrings {
+        return {
+            internalNotePlaceholder: context.resources.getString("internalNotePlaceholder"),
+            replyPlaceholder: context.resources.getString("replyPlaceholder"),
+            internalNote: context.resources.getString("internalNote"),
+            publicReply: context.resources.getString("publicReply"),
+            attach: context.resources.getString("attach"),
+            statusHintDisabled: context.resources.getString("statusHintDisabled"),
+            statusHint: context.resources.getString("statusHint"),
+            changeStatus: context.resources.getString("changeStatus"),
+            noStatusChange: context.resources.getString("noStatusChange"),
+            send: context.resources.getString("send"),
+            loading: context.resources.getString("loading"),
+            noInteractions: context.resources.getString("noInteractions"),
+            customer: context.resources.getString("customer"),
+            internalNoteTag: context.resources.getString("internalNoteTag"),
+            statusDelta: context.resources.getString("statusDelta"),
+            loadOlder: context.resources.getString("loadOlder"),
+        };
     }
 
     public updateView(context: ComponentFramework.Context<IInputs>): React.ReactElement {
@@ -122,6 +144,7 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
                 attachmentsByInteraction: this.attachments,
                 onOpenAttachment: this.openAttachment,
                 statusOptions: this.statuses,
+                strings: this.getStrings(context),
             })
         );
     }

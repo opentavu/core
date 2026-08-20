@@ -31,6 +31,98 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
 (function (Form) {
 
     // ============================================================
+    // i18n (English 1033 / Spanish 3082)
+    // ============================================================
+    var TAVU_I18N = (function () {
+        var S = {
+            1033: {
+                "closedBanner_1": "This opportunity is closed (",
+                "closedBanner_2": "). Fields are read-only to preserve the historical record. To capture new work, create a new opportunity for this customer.",
+                "won": "Won",
+                "lost": "Lost",
+                "closed": "Closed",
+                "onDate": " on ",
+                "customerModeWarn": "Customer Mode could not be loaded. Customer filtering is disabled. Refresh to retry.",
+                "closedNoReset": "This opportunity is closed. Probability cannot be reset.",
+                "resetMissingFlag": "Reset is unavailable: the override flag field is missing from this form. Add it (it can be hidden) and publish, then try again.",
+                "selectStageFirst": "Select a Sales Stage first — the default probability comes from the stage.",
+                "stageNoDefault": "This Sales Stage has no default probability configured.",
+                "resetDone_1": "Probability reset to the stage default (",
+                "resetDone_2": "%).",
+                "resetSaveFailed": "Probability was reset on the form but the save failed. Save manually to apply.",
+                "readStageFail": "Could not read the stage default probability. Try again.",
+                "alreadyClosed": "This opportunity is already closed.",
+                "savePendingClose": "Save your pending changes before closing the opportunity.",
+                "saveBeforeClose": "Save the opportunity before closing it.",
+                "closeAsWon": "Close as Won",
+                "closeAsLost": "Close as Lost",
+                "closeDialogError": "The close dialog could not be opened. Try again.",
+                "alreadyOpen": "This opportunity is already open.",
+                "reopenTitle": "Reopen Opportunity",
+                "reopenText": "This opportunity will return to Open and re-enter the pipeline. The close details (revenue / lost reason / close date) are kept as history. Probability will reset to the current stage default. Continue?",
+                "reopenDone": "Opportunity reopened. Probability reset to the stage default.",
+                "reopenFail": "The opportunity could not be reopened. Try again.",
+                "rejectMode_1": "This system is configured in ",
+                "rejectMode_2": " mode and only allows ",
+                "rejectMode_3": " as Customers. The ",
+                "rejectMode_4": " you selected was not saved.",
+                "anAccount": "an Account",
+                "aContact": "a Contact",
+                "b2bOnly": "B2B Only",
+                "b2cOnly": "B2C Only",
+                "accounts": "Accounts",
+                "contacts": "Contacts"
+            },
+            3082: {
+                "closedBanner_1": "Esta oportunidad está cerrada (",
+                "closedBanner_2": "). Los campos son de solo lectura para preservar el registro histórico. Para capturar nuevo trabajo, cree una nueva oportunidad para este cliente.",
+                "won": "Ganada",
+                "lost": "Perdida",
+                "closed": "Cerrada",
+                "onDate": " el ",
+                "customerModeWarn": "No se pudo cargar el Modo de cliente. El filtrado de clientes está deshabilitado. Actualice para reintentar.",
+                "closedNoReset": "Esta oportunidad está cerrada. No se puede restablecer la probabilidad.",
+                "resetMissingFlag": "El restablecimiento no está disponible: falta en este formulario el campo del indicador de override. Agréguelo (puede estar oculto) y publique; luego intente de nuevo.",
+                "selectStageFirst": "Seleccione primero una Etapa de venta — la probabilidad predeterminada proviene de la etapa.",
+                "stageNoDefault": "Esta Etapa de venta no tiene una probabilidad predeterminada configurada.",
+                "resetDone_1": "Probabilidad restablecida al valor predeterminado de la etapa (",
+                "resetDone_2": "%).",
+                "resetSaveFailed": "La probabilidad se restableció en el formulario pero falló el guardado. Guarde manualmente para aplicar.",
+                "readStageFail": "No se pudo leer la probabilidad predeterminada de la etapa. Intente de nuevo.",
+                "alreadyClosed": "Esta oportunidad ya está cerrada.",
+                "savePendingClose": "Guarde los cambios pendientes antes de cerrar la oportunidad.",
+                "saveBeforeClose": "Guarde la oportunidad antes de cerrarla.",
+                "closeAsWon": "Cerrar como ganada",
+                "closeAsLost": "Cerrar como perdida",
+                "closeDialogError": "No se pudo abrir el diálogo de cierre. Intente de nuevo.",
+                "alreadyOpen": "Esta oportunidad ya está abierta.",
+                "reopenTitle": "Reabrir oportunidad",
+                "reopenText": "Esta oportunidad volverá a Abierta y regresará al pipeline. Los detalles del cierre (ingresos / motivo de pérdida / fecha de cierre) se conservan como historial. La probabilidad se restablecerá al valor predeterminado de la etapa actual. ¿Continuar?",
+                "reopenDone": "Oportunidad reabierta. Probabilidad restablecida al valor predeterminado de la etapa.",
+                "reopenFail": "No se pudo reabrir la oportunidad. Intente de nuevo.",
+                "rejectMode_1": "Este sistema está configurado en ",
+                "rejectMode_2": " y solo permite ",
+                "rejectMode_3": " como clientes. La opción ",
+                "rejectMode_4": " que seleccionó no se guardó.",
+                "anAccount": "Cuenta",
+                "aContact": "Contacto",
+                "b2bOnly": "Solo B2B",
+                "b2cOnly": "Solo B2C",
+                "accounts": "Cuentas",
+                "contacts": "Contactos"
+            }
+        };
+        function lc() { try { return Xrm.Utility.getGlobalContext().userSettings.languageId; } catch (e) { return 1033; } }
+        return function (k, a0, a1) {
+            var tb = S[lc()] || S[1033];
+            var v = (tb && tb[k] != null) ? tb[k] : (S[1033][k] != null ? S[1033][k] : k);
+            if (a0 !== undefined) v = String(v).replace("{0}", a0);
+            if (a1 !== undefined) v = String(v).replace("{1}", a1);
+            return v;
+        };
+    })();
+
+    // ============================================================
     // Constants
     // ============================================================
 
@@ -238,14 +330,13 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
         if (!isClosed(formContext)) return;
 
         var status = getStatusReason(formContext);
-        var label = (status === STATUS_WON) ? "Won"
-                  : (status === STATUS_LOST) ? "Lost"
-                  : "Closed";
+        var label = (status === STATUS_WON) ? TAVU_I18N("won")
+                  : (status === STATUS_LOST) ? TAVU_I18N("lost")
+                  : TAVU_I18N("closed");
         var closeDate = getFormattedAttributeValue(formContext, "tavu_actualclosedate");
-        var dateClause = closeDate ? (" on " + closeDate) : "";
-        var message = "This opportunity is closed (" + label + dateClause +
-            "). Fields are read-only to preserve the historical record. " +
-            "To capture new work, create a new opportunity for this customer.";
+        var dateClause = closeDate ? (TAVU_I18N("onDate") + closeDate) : "";
+        var message = TAVU_I18N("closedBanner_1") + label + dateClause +
+            TAVU_I18N("closedBanner_2");
 
         formContext.ui.setFormNotification(message, "INFO", NOTIF.CLOSED_STATE);
     };
@@ -261,7 +352,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
             function (mode) { applyPreSearchFilter(formContext, mode); },
             function (error) {
                 formContext.ui.setFormNotification(
-                    "Customer Mode could not be loaded. Customer filtering is disabled. Refresh to retry.",
+                    TAVU_I18N("customerModeWarn"),
                     "WARNING",
                     NOTIF.MODE_FETCH_FAILED
                 );
@@ -304,7 +395,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
         // A closed opportunity is historical/read-only — never touch it.
         if (isClosed(formContext)) {
             notifyTransient(formContext,
-                "This opportunity is closed. Probability cannot be reset.",
+                TAVU_I18N("closedNoReset"),
                 "INFO");
             return;
         }
@@ -321,8 +412,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
                 "[OpenTavu.Opportunity.Form] resetProbability: '" +
                 FIELD_PROBABILITY_IS_MANUAL + "' is not on the form. Add it (hidden is fine) and publish.");
             notifyTransient(formContext,
-                "Reset is unavailable: the override flag field is missing from this form. " +
-                "Add it (it can be hidden) and publish, then try again.",
+                TAVU_I18N("resetMissingFlag"),
                 "ERROR");
             return;
         }
@@ -331,7 +421,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
         var stageRef = stageAttr ? stageAttr.getValue() : null;
         if (!stageRef || stageRef.length === 0) {
             notifyTransient(formContext,
-                "Select a Sales Stage first — the default probability comes from the stage.",
+                TAVU_I18N("selectStageFirst"),
                 "WARNING");
             return;
         }
@@ -345,7 +435,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
                 var def = stage[STAGE_ATTR_DEFAULT_PROBABILITY];
                 if (def === null || def === undefined) {
                     notifyTransient(formContext,
-                        "This Sales Stage has no default probability configured.",
+                        TAVU_I18N("stageNoDefault"),
                         "WARNING");
                     return;
                 }
@@ -361,14 +451,14 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
                 formContext.data.save().then(
                     function () {
                         notifyTransient(formContext,
-                            "Probability reset to the stage default (" + def + "%).",
+                            TAVU_I18N("resetDone_1") + def + TAVU_I18N("resetDone_2"),
                             "INFO");
                     },
                     function (saveError) {
                         console.error(
                             "[OpenTavu.Opportunity.Form] resetProbability save failed:", saveError);
                         notifyTransient(formContext,
-                            "Probability was reset on the form but the save failed. Save manually to apply.",
+                            TAVU_I18N("resetSaveFailed"),
                             "ERROR");
                     }
                 );
@@ -377,7 +467,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
                 console.error(
                     "[OpenTavu.Opportunity.Form] resetProbability failed:", error);
                 notifyTransient(formContext,
-                    "Could not read the stage default probability. Try again.",
+                    TAVU_I18N("readStageFail"),
                     "ERROR");
             }
         );
@@ -423,19 +513,19 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
         if (!formContext) return;
 
         if (isClosed(formContext)) {
-            notifyTransient(formContext, "This opportunity is already closed.", "INFO");
+            notifyTransient(formContext, TAVU_I18N("alreadyClosed"), "INFO");
             return;
         }
         if (formContext.data.getIsDirty()) {
             notifyTransient(formContext,
-                "Save your pending changes before closing the opportunity.", "WARNING");
+                TAVU_I18N("savePendingClose"), "WARNING");
             return;
         }
 
         var oppId = formContext.data.entity.getId().replace(/[{}]/g, "");
         if (!oppId) {
             notifyTransient(formContext,
-                "Save the opportunity before closing it.", "WARNING");
+                TAVU_I18N("saveBeforeClose"), "WARNING");
             return;
         }
 
@@ -458,7 +548,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
             position: 1,    // center
             width: { value: 480, unit: "px" },
             height: { value: 420, unit: "px" },
-            title: isWon ? "Close as Won" : "Close as Lost"
+            title: isWon ? TAVU_I18N("closeAsWon") : TAVU_I18N("closeAsLost")
         };
 
         Xrm.Navigation.navigateTo(pageInput, navOptions).then(
@@ -473,7 +563,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
             function (error) {
                 console.error("[OpenTavu.Opportunity.Form] close dialog failed:", error);
                 notifyTransient(formContext,
-                    "The close dialog could not be opened. Try again.", "ERROR");
+                    TAVU_I18N("closeDialogError"), "ERROR");
             }
         );
     }
@@ -503,15 +593,13 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
         if (!formContext) return;
 
         if (!isClosed(formContext)) {
-            notifyTransient(formContext, "This opportunity is already open.", "INFO");
+            notifyTransient(formContext, TAVU_I18N("alreadyOpen"), "INFO");
             return;
         }
 
         Xrm.Navigation.openConfirmDialog({
-            title: "Reopen Opportunity",
-            text: "This opportunity will return to Open and re-enter the pipeline. " +
-                  "The close details (revenue / lost reason / close date) are kept as " +
-                  "history. Probability will reset to the current stage default. Continue?"
+            title: TAVU_I18N("reopenTitle"),
+            text: TAVU_I18N("reopenText")
         }).then(function (result) {
             if (!result.confirmed) return;
 
@@ -521,13 +609,13 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
             formContext.data.save().then(
                 function () {
                     notifyTransient(formContext,
-                        "Opportunity reopened. Probability reset to the stage default.", "INFO");
+                        TAVU_I18N("reopenDone"), "INFO");
                     refreshLifecycleUi(wrapFormContext(formContext));
                 },
                 function (saveError) {
                     console.error("[OpenTavu.Opportunity.Form] reopen save failed:", saveError);
                     notifyTransient(formContext,
-                        "The opportunity could not be reopened. Try again.", "ERROR");
+                        TAVU_I18N("reopenFail"), "ERROR");
                 }
             );
         });
@@ -741,11 +829,11 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
     function rejectCustomerSelection(formContext, attemptedEntityType, mode) {
         formContext.getAttribute("tavu_customer").setValue(null);
 
-        var typeLabel = attemptedEntityType === "account" ? "an Account" : "a Contact";
-        var modeLabel = mode === CUSTOMER_MODE.B2B_ONLY ? "B2B Only" : "B2C Only";
-        var allowedLabel = mode === CUSTOMER_MODE.B2B_ONLY ? "Accounts" : "Contacts";
-        var message = "This system is configured in " + modeLabel + " mode and only allows " +
-            allowedLabel + " as Customers. The " + typeLabel + " you selected was not saved.";
+        var typeLabel = attemptedEntityType === "account" ? TAVU_I18N("anAccount") : TAVU_I18N("aContact");
+        var modeLabel = mode === CUSTOMER_MODE.B2B_ONLY ? TAVU_I18N("b2bOnly") : TAVU_I18N("b2cOnly");
+        var allowedLabel = mode === CUSTOMER_MODE.B2B_ONLY ? TAVU_I18N("accounts") : TAVU_I18N("contacts");
+        var message = TAVU_I18N("rejectMode_1") + modeLabel + TAVU_I18N("rejectMode_2") +
+            allowedLabel + TAVU_I18N("rejectMode_3") + typeLabel + TAVU_I18N("rejectMode_4");
 
         formContext.ui.setFormNotification(message, "WARNING", NOTIF.INVALID_CUSTOMER);
     }

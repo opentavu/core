@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="title" xml:space="preserve"><value>AI meeting capture</value></data>
+  <data name="confidence" xml:space="preserve"><value>Confidence {0}%</value></data>
+  <data name="reviewBeforeAssociating" xml:space="preserve"><value>Review before associating</value></data>
+  <data name="lowConfidence" xml:space="preserve"><value>Low confidence ({0}%). Verify the summary and the suggested opportunity before you associate this meeting.</value></data>
+  <data name="awaiting" xml:space="preserve"><value>Awaiting AI processing…</value></data>
+  <data name="discoveryExtract" xml:space="preserve"><value>Discovery extract</value></data>
+</root>

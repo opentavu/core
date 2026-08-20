@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="OpenTavu.Controls" constructor="AiAssessment" version="0.0.1"
+  <control namespace="OpenTavu.Controls" constructor="AiAssessment" version="0.0.2"
            display-name-key="AI Assessment"
            description-key="OpenTavu AI assessment panel for cases (Module 1 - Smart Case Categorization)."
            control-type="virtual">
@@ -50,6 +50,8 @@
 
     <resources>
       <code path="index.ts" order="1"/>
+      <resx path="strings/AiAssessment.1033.resx" version="1.0.0" />
+      <resx path="strings/AiAssessment.3082.resx" version="1.0.0" />
       <platform-library name="React" version="16.14.0" />
       <platform-library name="Fluent" version="9.46.2" />
     </resources>

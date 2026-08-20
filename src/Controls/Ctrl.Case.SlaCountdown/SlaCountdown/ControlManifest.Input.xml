@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="OpenTavu.Controls" constructor="SlaCountdown" version="0.0.1"
+  <control namespace="OpenTavu.Controls" constructor="SlaCountdown" version="0.0.2"
            display-name-key="SLA Countdown"
            description-key="Live SLA countdown bar for cases. Client-side only; reads existing fields and calls nothing (non-premium)."
            control-type="virtual">
@@ -26,6 +26,8 @@
 
     <resources>
       <code path="index.ts" order="1"/>
+      <resx path="strings/SlaCountdown.1033.resx" version="1.0.0" />
+      <resx path="strings/SlaCountdown.3082.resx" version="1.0.0" />
       <platform-library name="React" version="16.14.0" />
       <platform-library name="Fluent" version="9.46.2" />
     </resources>
