@@ -9,7 +9,7 @@
       <tabs>
         <tab name="general" verticallayout="true" id="{00048c56-56c8-44cb-b21e-8b7861c14223}" IsUserDefined="0">
           <labels>
-            <label description="" languagecode="1033" />
+            <label description="" languagecode="3082" />
           </labels>
           <columns>
             <column width="25%">
@@ -17,6 +17,7 @@
                 <section name="ColorStrip" showlabel="false" showbar="false" columns="1" IsUserDefined="0" id="{f21e16f4-a8a7-4f21-aee5-16f194f374f0}">
                   <labels>
                     <label description="ColorStrip" languagecode="1033" />
+                    <label description="ColorStrip" languagecode="3082" />
                   </labels>
                 </section>
               </sections>
@@ -26,23 +27,25 @@
                 <section name="CardHeader" showlabel="false" showbar="false" columns="111" id="{8c852bb2-60da-4969-a146-5efbd66bde8d}" IsUserDefined="0">
                   <labels>
                     <label description="Header" languagecode="1033" />
+                    <label description="Encabezado" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{3edec929-c770-4cbf-bea3-7275373907c8}" showlabel="true" locklevel="0">
                         <labels>
                           <label description="Status Reason" languagecode="1033" />
+                          <label description="Motivo del estado" languagecode="3082" />
                         </labels>
                         <control id="statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="false" />
                       </cell>
                       <cell id="{cf65dfb0-a94c-4775-8977-54390c1677ce}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                       <cell id="{bb6d9edf-18df-45ee-920d-18dde22fed0c}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -51,12 +54,14 @@
                 <section name="CardDetails" showlabel="false" showbar="false" columns="1" id="{a2e4a738-65cd-44b2-806e-172e4b0f3728}" IsUserDefined="0">
                   <labels>
                     <label description="Details" languagecode="1033" />
+                    <label description="Detalles" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{4f0b3174-868f-4dc9-8ba4-354f957985bd}" showlabel="true" locklevel="0">
                         <labels>
                           <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" disabled="false" />
                       </cell>
@@ -66,23 +71,25 @@
                 <section name="CardFooter" showlabel="false" columns="1111" showbar="false" id="{0bcfab4e-fc6b-4a9e-ad4e-67da0620806e}" IsUserDefined="0">
                   <labels>
                     <label description="Footer" languagecode="1033" />
+                    <label description="Pie de página" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{21b69152-c2c9-49f7-9310-19b3bb6ad581}" showlabel="true" locklevel="0">
                         <labels>
                           <label description="Created On" languagecode="1033" />
+                          <label description="Fecha de creación" languagecode="3082" />
                         </labels>
                         <control id="createdon" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdon" disabled="false" />
                       </cell>
                       <cell id="{94f46677-81e9-4ef0-bc60-b031148be674}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                       <cell id="{49a74f4b-6fbe-4b24-bb18-d9ffbbf969c0}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -98,9 +105,11 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="A card form for this entity." languagecode="1033" />
+      <Description description="Un formulario de tarjeta para esta entidad." languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

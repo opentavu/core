@@ -17,6 +17,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the activity." languagecode="1033" />
+        <Description description="Identificador único de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -37,6 +38,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the activity." languagecode="1033" />
+        <Description description="Identificador único de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -57,6 +59,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the activity." languagecode="1033" />
+        <Description description="Identificador único de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

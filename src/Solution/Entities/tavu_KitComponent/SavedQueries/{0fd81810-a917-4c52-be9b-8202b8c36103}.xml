@@ -32,6 +32,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Active Kit Components" languagecode="1033" />
+      <LocalizedName description="Componentes de kit activos" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

@@ -10,6 +10,7 @@
         <tab verticallayout="true" id="{6432825f-7d53-44bd-ba6f-722ed71ad524}" IsUserDefined="1">
           <labels>
             <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +18,13 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{625c7155-d1de-4a8f-bda0-c2f068f0e93d}">
                   <labels>
                     <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{bc06528d-d676-4bdf-a507-d05fe3578ed4}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
@@ -30,7 +32,7 @@
                     <row>
                       <cell id="{70b2aded-673a-4edf-ab6a-a037569ff7e7}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="tavu_baseunit" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_baseunit" disabled="false" />
                       </cell>
@@ -38,7 +40,7 @@
                     <row>
                       <cell id="{39ed50b7-6a1d-47c5-94c5-1f93c38e6f58}" locklevel="0" colspan="1" rowspan="2">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="tavu_description" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_description" disabled="false" />
                       </cell>
@@ -56,17 +58,17 @@
           <row>
             <cell id="{1322c6db-95d7-4ef6-b3f6-40d639295b36}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{4b4c7a3c-2124-46de-93ff-0e6963ea1830}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{1caadddd-9267-4823-945a-1ca4022d32ff}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -77,17 +79,17 @@
           <row>
             <cell id="{503d7a04-bbac-44ab-9e26-b916eab49d02}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{6d632d16-5875-413c-b141-1d59929e01c8}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{bcab46c9-4292-43d1-8f23-4fe78e52d0f1}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -101,9 +103,11 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Un formulario para esta entidad." languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

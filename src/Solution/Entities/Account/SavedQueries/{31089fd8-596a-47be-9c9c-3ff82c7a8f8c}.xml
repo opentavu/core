@@ -21,9 +21,11 @@
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="My Accounts" languagecode="1033" />
+      <LocalizedName description="Mis cuentas" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="Accounts owned by me" languagecode="1033" />
+      <Description description="Cuentas de mi propiedad" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

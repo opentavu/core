@@ -47,6 +47,7 @@
           <LookupTypes />
           <displaynames>
             <displayname description="City" languagecode="1033" />
+            <displayname description="Ciudad" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -86,6 +87,7 @@
           <LookupTypes />
           <displaynames>
             <displayname description="Country" languagecode="1033" />
+            <displayname description="País" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -126,6 +128,7 @@
           <Behavior>1</Behavior>
           <displaynames>
             <displayname description="Customer Since" languagecode="1033" />
+            <displayname description="Cliente desde" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -165,6 +168,7 @@
           <LookupTypes />
           <displaynames>
             <displayname description="Customer Tier" languagecode="1033" />
+            <displayname description="Nivel de cliente" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -204,6 +208,7 @@
           <OptionSetName>tavu_engagementstatus</OptionSetName>
           <displaynames>
             <displayname description="Engagement Status" languagecode="1033" />
+            <displayname description="Estado de interacción" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -247,6 +252,7 @@
             <ExternalTypeName></ExternalTypeName>
             <displaynames>
               <displayname description="Is Customer" languagecode="1033" />
+              <displayname description="Es cliente" languagecode="3082" />
             </displaynames>
             <Descriptions>
               <Description description="" languagecode="1033" />
@@ -255,17 +261,20 @@
               <option value="1" ExternalValue="" IsHidden="0">
                 <labels>
                   <label description="Yes" languagecode="1033" />
+                  <label description="Sí" languagecode="3082" />
                 </labels>
               </option>
               <option value="0" ExternalValue="" IsHidden="0">
                 <labels>
                   <label description="No" languagecode="1033" />
+                  <label description="No" languagecode="3082" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
             <displayname description="Is Customer" languagecode="1033" />
+            <displayname description="Es cliente" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -306,6 +315,7 @@
           <Behavior>3</Behavior>
           <displaynames>
             <displayname description="Last Engagement Date" languagecode="1033" />
+            <displayname description="Fecha de última interacción" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -347,6 +357,7 @@
           <AccuracySource>2</AccuracySource>
           <displaynames>
             <displayname description="Lifetime Revenue" languagecode="1033" />
+            <displayname description="Ingresos de por vida" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -390,9 +401,11 @@
           <CalculationOf>tavu_LifetimeRevenue</CalculationOf>
           <displaynames>
             <displayname description="Lifetime Revenue (Base)" languagecode="1033" />
+            <displayname description="Ingresos de por vida (base)" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="Value of the Lifetime Revenue in base currency." languagecode="1033" />
+            <Description description="Valor de los ingresos de por vida en moneda base." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_OpenCasesCount">
@@ -430,6 +443,7 @@
           <MaxValue>2147483647</MaxValue>
           <displaynames>
             <displayname description="Open Cases Count" languagecode="1033" />
+            <displayname description="Cantidad de casos abiertos" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -472,6 +486,7 @@
           <AccuracySource>2</AccuracySource>
           <displaynames>
             <displayname description="Open Pipeline Value" languagecode="1033" />
+            <displayname description="Valor del pipeline abierto" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -515,9 +530,11 @@
           <CalculationOf>tavu_OpenPipelineValue</CalculationOf>
           <displaynames>
             <displayname description="Open Pipeline Value (Base)" languagecode="1033" />
+            <displayname description="Valor del pipeline abierto (base)" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="Value of the Open Pipeline Value in base currency." languagecode="1033" />
+            <Description description="Valor del valor del pipeline abierto en moneda base." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_OriginatingLead">
@@ -553,6 +570,7 @@
           <LookupTypes />
           <displaynames>
             <displayname description="Originating Lead" languagecode="1033" />
+            <displayname description="Prospecto de origen" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
@@ -592,6 +610,7 @@
           <LookupTypes />
           <displaynames>
             <displayname description="State/Province" languagecode="1033" />
+            <displayname description="Estado/Provincia" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />

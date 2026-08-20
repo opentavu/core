@@ -7,14 +7,17 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Customer Mode" languagecode="1033" />
+    <displayname description="Modo de cliente" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="OpenTavu allows each firm to configure the Customer lookup behavior according to their business model. " languagecode="1033" />
+    <Description description="OpenTavu permite que cada firma configure el comportamiento de búsqueda de Cliente según su modelo de negocio. " languagecode="3082" />
   </Descriptions>
   <options>
     <option value="576600000" ExternalValue="" IsHidden="0">
       <labels>
         <label description="B2B Only" languagecode="1033" />
+        <label description="Solo B2B" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +26,7 @@
     <option value="576600001" ExternalValue="" IsHidden="0">
       <labels>
         <label description="B2C Only" languagecode="1033" />
+        <label description="Solo B2C" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +35,7 @@
     <option value="576600002" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Mixed" languagecode="1033" />
+        <label description="Mixto" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

@@ -9,7 +9,7 @@
       <tabs>
         <tab verticallayout="true" id="{c19db236-0c2b-4aed-8e15-ccb14b3a5468}" IsUserDefined="1">
           <labels>
-            <label description="" languagecode="1033" />
+            <label description="" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +17,14 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{2849475b-7adf-4b58-8900-ca219a2f7939}">
                   <labels>
                     <label description="GENERAL" languagecode="1033" />
+                    <label description="GENERAL" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{00e182d9-76b8-468a-80c7-07f008f3ff6b}">
                         <labels>
                           <label description="Topic" languagecode="1033" />
+                          <label description="Tema" languagecode="3082" />
                         </labels>
                         <control id="tavu_topic" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_topic" />
                       </cell>
@@ -31,6 +33,7 @@
                       <cell id="{420412d2-fe63-4ba0-adac-d9057b472f94}">
                         <labels>
                           <label description="Owner" languagecode="1033" />
+                          <label description="Propietario" languagecode="3082" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>
@@ -47,6 +50,7 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
   </systemform>
 </forms>

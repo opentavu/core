@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Buffer Alert" languagecode="1033" />
+    <displayname description="Alerta de buffer" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" Color="#107C10" IsHidden="0">
       <labels>
         <label description="Fresh (0-7 days)" languagecode="1033" />
+        <label description="Reciente (0-7 días)" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600001" ExternalValue="" Color="#CA5010" IsHidden="0">
       <labels>
         <label description="Aging (8-14 days)" languagecode="1033" />
+        <label description="Antigüedad (8-14 días)" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600002" ExternalValue="" Color="#D13438" IsHidden="0">
       <labels>
         <label description="Stale (15+ days)" languagecode="1033" />
+        <label description="Obsoleto (más de 15 días)" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

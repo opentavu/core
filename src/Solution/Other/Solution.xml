@@ -268,115 +268,115 @@
         <Required type="1" schemaName="applicationuser" displayName="ApplicationUser" solution="ApplicationUserSolution (1.0.1.4)">
           <package appName="Microsoft S2SCDSCoreApplication Package" version="1.0.1.29">MicrosoftS2SApplicationIdentitiesCoreTst (1.0.1.29)</package>
         </Required>
-        <Dependent type="80" schemaName="tavu_OpenTavuApp" displayName="OpenTavu App" />
+        <Dependent type="80" schemaName="tavu_OpenTavuApp" displayName="Opentavu" />
       </MissingDependency>
       <MissingDependency>
         <Required type="2" schemaName="systemmanagedusertype" displayName="System Managed User Type" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.137.0.0)">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
-        <Dependent type="26" schemaName="Enabled Users" displayName="Enabled Users" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
+        <Dependent type="26" schemaName="Usuarios habilitados" displayName="Usuarios habilitados" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="60" displayName="Contact Quick Create" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}">
+        <Required type="60" displayName="Creación rápida de contacto" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}">
           <package appName="msdynce_AppCommon" version="9.0.26071.10001">msdynce_AppCommonAnchor (9.0.26071.10001)</package>
         </Required>
-        <Dependent type="60" displayName="Contact Quick Create" parentDisplayName="Contact" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" />
+        <Dependent type="60" displayName="Creación rápida de contacto" parentDisplayName="Contact" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="Microsoft.PowerApps.PowerAppsOneGrid" displayName="Microsoft.PowerApps.PowerAppsOneGrid" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Proposal Information" parentDisplayName="Proposal" id="{6ecaf5ab-0dd2-4816-90a5-b3b9fc17958e}" />
+        <Dependent type="60" displayName="Información de la propuesta" parentDisplayName="Proposal" id="{6ecaf5ab-0dd2-4816-90a5-b3b9fc17958e}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Information" parentDisplayName="System Settings" id="{0c39289a-374a-40ed-a185-2bc66eeb99e9}" />
+        <Dependent type="60" displayName="Información" parentDisplayName="System Settings" id="{0c39289a-374a-40ed-a185-2bc66eeb99e9}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="QC - Proposal Line" parentDisplayName="Proposal Line" id="{1718b862-0f68-f111-ab0c-0022480a59ac}" />
+        <Dependent type="60" displayName="QC - Línea de propuesta" parentDisplayName="Proposal Line" id="{1718b862-0f68-f111-ab0c-0022480a59ac}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Opportunity Information" parentDisplayName="Opportunity" id="{2a5b0891-7395-4bd7-b908-2517ac5ec3bc}" />
+        <Dependent type="60" displayName="Información de la oportunidad" parentDisplayName="Opportunity" id="{2a5b0891-7395-4bd7-b908-2517ac5ec3bc}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Information" parentDisplayName="Meeting Source" id="{5d91af56-2e11-4feb-9504-97c72ba4c3ff}" />
+        <Dependent type="60" displayName="Información" parentDisplayName="Meeting Source" id="{5d91af56-2e11-4feb-9504-97c72ba4c3ff}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Product Information" parentDisplayName="Product" id="{73d96964-e4a2-4711-88a4-9db45ff6accc}" />
+        <Dependent type="60" displayName="Información del producto" parentDisplayName="Product" id="{73d96964-e4a2-4711-88a4-9db45ff6accc}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Information" parentDisplayName="Business Calendar" id="{931ae7bd-c6bc-4255-be44-b18086f8aef9}" />
+        <Dependent type="60" displayName="Información" parentDisplayName="Business Calendar" id="{931ae7bd-c6bc-4255-be44-b18086f8aef9}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Information" parentDisplayName="City" id="{95a69929-7186-403f-a2f8-69cba7d45a97}" />
+        <Dependent type="60" displayName="Información" parentDisplayName="City" id="{95a69929-7186-403f-a2f8-69cba7d45a97}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Information" parentDisplayName="AI Model" id="{97cd6d85-94c8-4484-9801-73e68ea002be}" />
+        <Dependent type="60" displayName="Información" parentDisplayName="AI Model" id="{97cd6d85-94c8-4484-9801-73e68ea002be}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Proposal Line Information" parentDisplayName="Proposal Line" id="{9e7ae295-526d-492c-881c-cad37027308d}" />
+        <Dependent type="60" displayName="Información de la línea de propuesta" parentDisplayName="Proposal Line" id="{9e7ae295-526d-492c-881c-cad37027308d}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="User" parentDisplayName="User" id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" />
+        <Dependent type="60" displayName="Usuario" parentDisplayName="User" id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Information" parentDisplayName="Unit of Measure" id="{d745dcf2-e300-446c-9909-6fada861b6a5}" />
+        <Dependent type="60" displayName="Información" parentDisplayName="Unit of Measure" id="{d745dcf2-e300-446c-9909-6fada861b6a5}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Information" parentDisplayName="Case Status" id="{e2b0c0b5-0a34-403b-ac4e-ff9a834242b6}" />
+        <Dependent type="60" displayName="Información" parentDisplayName="Case Status" id="{e2b0c0b5-0a34-403b-ac4e-ff9a834242b6}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Information" parentDisplayName="Price List" id="{f782db30-6f34-4829-bae7-4f8d284d58f7}" />
+        <Dependent type="60" displayName="Información" parentDisplayName="Price List" id="{f782db30-6f34-4829-bae7-4f8d284d58f7}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="60" displayName="Contact Information" parentDisplayName="Contact" id="{f98718fb-9d53-f111-a824-0022480a59ac}" />
+        <Dependent type="60" displayName="Información de contacto" parentDisplayName="Contact" id="{f98718fb-9d53-f111-a824-0022480a59ac}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
           <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
         </Required>
-        <Dependent type="26" schemaName="Enabled Users" displayName="Enabled Users" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
+        <Dependent type="26" schemaName="Usuarios habilitados" displayName="Usuarios habilitados" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.19)" id.uniquename="AppChannel">

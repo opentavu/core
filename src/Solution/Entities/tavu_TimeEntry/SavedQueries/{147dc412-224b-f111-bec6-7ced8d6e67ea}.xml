@@ -22,9 +22,11 @@
     <IntroducedVersion>1.0.0.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="My Time Entries" languagecode="1033" />
+      <LocalizedName description="Mis registros de tiempo" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="Active Time Entries owned by me" languagecode="1033" />
+      <Description description="Registros de tiempo activos de mi propiedad" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

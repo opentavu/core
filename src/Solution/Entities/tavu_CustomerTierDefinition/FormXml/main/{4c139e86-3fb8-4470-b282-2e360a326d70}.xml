@@ -10,6 +10,7 @@
         <tab verticallayout="true" id="{8c407815-0e90-4be4-926b-046cd98f54bb}" IsUserDefined="1" name="tab_General">
           <labels>
             <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
           </labels>
           <columns>
             <column width="30%">
@@ -17,12 +18,14 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{37795aab-a3c5-41d6-9f03-5380fcaba038}" columns="11">
                   <labels>
                     <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{be924257-e37a-4dab-9f70-45e60b469700}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Code" languagecode="1033" />
+                          <label description="Código" languagecode="3082" />
                         </labels>
                         <control id="tavu_code" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_code" disabled="true" />
                       </cell>
@@ -31,12 +34,13 @@
                       <cell id="{2c29328c-d709-4217-ad31-88e42e63aa36}">
                         <labels>
                           <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
                       <cell locklevel="0" id="{4cdd511a-e629-4685-acc5-1f1b4ae5b372}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -44,12 +48,13 @@
                       <cell id="{3b9605fa-752f-4906-a7f1-c473ccf7a6f3}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Sort Order" languagecode="1033" />
+                          <label description="Orden de clasificación" languagecode="3082" />
                         </labels>
                         <control id="tavu_sortorder" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_sortorder" disabled="false" />
                       </cell>
                       <cell locklevel="0" id="{4cda3f70-5243-4658-bb2f-2c280ef7c3b2}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -62,6 +67,7 @@
                 <section name="Section_Description" id="5d6d14a5-5522-46d3-81e5-93a39dfc8dac" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="Description" languagecode="1033" />
+                    <label description="Descripción" languagecode="3082" />
                   </labels>
                   <rows>
                     <row />
@@ -69,6 +75,7 @@
                       <cell id="{902815c5-917e-4d97-9946-681b6bec0cd9}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="Description" languagecode="1033" />
+                          <label description="Descripción" languagecode="3082" />
                         </labels>
                         <control id="tavu_description" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_description" disabled="false" />
                       </cell>
@@ -89,17 +96,17 @@
           <row>
             <cell id="{d9c30cf8-e989-4125-8c5e-4491d327351f}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{d9f28890-0859-4724-aee8-cd61d639165e}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{b46307af-2be7-493c-b478-1cfa5647f4e1}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -110,17 +117,17 @@
           <row>
             <cell id="{18e644dc-bb80-4879-a9b4-dcfbd14d92f2}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{ed985226-2656-446e-8075-aeab8ebea66a}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{095ae601-618f-478f-9735-30e16cf52675}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -134,9 +141,11 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Un formulario para esta entidad." languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

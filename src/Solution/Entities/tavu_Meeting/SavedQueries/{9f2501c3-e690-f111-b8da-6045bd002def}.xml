@@ -22,9 +22,11 @@
     <IntroducedVersion>1.0.0.27</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="My Meetings" languagecode="1033" />
+      <LocalizedName description="Mis reuniones" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="Active Meetings owned by me" languagecode="1033" />
+      <Description description="Reuniones activas de mi propiedad" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

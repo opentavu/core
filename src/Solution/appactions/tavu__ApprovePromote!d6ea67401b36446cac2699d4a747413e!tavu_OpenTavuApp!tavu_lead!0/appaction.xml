@@ -2,14 +2,17 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Approve &amp; Promote">
+  <buttonlabeltext default="Aprobar y promover">
     <label description="Approve &amp; Promote" languagecode="1033" />
+    <label description="Aprobar y promover" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Create a new Contact (and Account, if needed) from this lead, then close the lead as Promoted to Contact. Use when the lead is a real, new prospect with no existing record.">
+  <buttontooltipdescription default="Cree un nuevo Contacto (y Cuenta, si es necesario) a partir de este prospecto, luego cierre el prospecto como Promovido a Contacto. Use cuando el prospecto sea un prospecto real y nuevo sin registro existente.">
     <label description="Create a new Contact (and Account, if needed) from this lead, then close the lead as Promoted to Contact. Use when the lead is a real, new prospect with no existing record." languagecode="1033" />
+    <label description="Cree un nuevo Contacto (y Cuenta, si es necesario) a partir de este prospecto, luego cierre el prospecto como Promovido a Contacto. Use cuando el prospecto sea un prospecto real y nuevo sin registro existente." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Approve &amp; promote to Contact">
+  <buttontooltiptitle default="Aprobar y promover a contacto">
     <label description="Approve &amp; promote to Contact" languagecode="1033" />
+    <label description="Aprobar y promover a contacto" languagecode="3082" />
   </buttontooltiptitle>
   <context>1</context>
   <contextentity>

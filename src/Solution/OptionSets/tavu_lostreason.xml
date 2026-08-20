@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Lost Reason" languagecode="1033" />
+    <displayname description="Motivo de pérdida" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Price" languagecode="1033" />
+        <label description="Precio" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600001" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Competitor" languagecode="1033" />
+        <label description="Competidor" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600002" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Timing" languagecode="1033" />
+        <label description="Tiempos" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -39,6 +43,7 @@
     <option value="576600003" ExternalValue="" IsHidden="0">
       <labels>
         <label description="No Decision" languagecode="1033" />
+        <label description="Sin decisión" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -47,6 +52,7 @@
     <option value="576600004" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Scope Mismatch" languagecode="1033" />
+        <label description="Discrepancia de alcance" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -55,6 +61,7 @@
     <option value="576600005" ExternalValue="" IsHidden="0">
       <labels>
         <label description="No Response" languagecode="1033" />
+        <label description="Sin respuesta" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -63,6 +70,7 @@
     <option value="576600006" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Other" languagecode="1033" />
+        <label description="Otro" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

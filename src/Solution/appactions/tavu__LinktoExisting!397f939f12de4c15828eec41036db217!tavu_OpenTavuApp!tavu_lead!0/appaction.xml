@@ -2,14 +2,17 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Link to Existing">
+  <buttonlabeltext default="Vincular a existente">
     <label description="Link to Existing" languagecode="1033" />
+    <label description="Vincular a existente" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="This lead is someone already in the CRM. Pick the matching Contact to link it, no new record is created, and close the lead as Promoted to Contact.">
+  <buttontooltipdescription default="Este prospecto es alguien que ya está en el CRM. Elige el contacto coincidente para vincularlo, no se crea ningún registro nuevo y cierra el prospecto como Promovido a contacto.">
     <label description="This lead is someone already in the CRM. Pick the matching Contact to link it, no new record is created, and close the lead as Promoted to Contact." languagecode="1033" />
+    <label description="Este prospecto es alguien que ya está en el CRM. Elige el contacto coincidente para vincularlo, no se crea ningún registro nuevo y cierra el prospecto como Promovido a contacto." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Link to an existing Contact">
+  <buttontooltiptitle default="Vincular a un contacto existente">
     <label description="Link to an existing Contact" languagecode="1033" />
+    <label description="Vincular a un contacto existente" languagecode="3082" />
   </buttontooltiptitle>
   <context>1</context>
   <contextentity>

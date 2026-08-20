@@ -53,6 +53,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the team that owns the activity." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -74,6 +75,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the team that owns the activity." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -95,6 +97,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the team that owns the activity." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -115,6 +118,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -135,6 +139,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -155,6 +160,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -175,6 +181,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -195,6 +202,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -215,6 +223,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -235,6 +244,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the team that owns the record." languagecode="1033" />
+        <Description description="Identificador único del equipo propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

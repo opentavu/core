@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Meeting Source Type" languagecode="1033" />
+    <displayname description="Tipo de origen de la reunión" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Native platform" languagecode="1033" />
+        <label description="Plataforma nativa" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600001" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Note-taker" languagecode="1033" />
+        <label description="Tomador de notas" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600002" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Bot" languagecode="1033" />
+        <label description="Bot" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -39,6 +43,7 @@
     <option value="576600003" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Manual" languagecode="1033" />
+        <label description="Manual" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

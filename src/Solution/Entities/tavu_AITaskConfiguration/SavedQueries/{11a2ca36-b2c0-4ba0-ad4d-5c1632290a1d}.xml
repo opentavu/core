@@ -38,6 +38,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Inactive AI Task Configurations" languagecode="1033" />
+      <LocalizedName description="Configuraciones de tareas de IA inactivas" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

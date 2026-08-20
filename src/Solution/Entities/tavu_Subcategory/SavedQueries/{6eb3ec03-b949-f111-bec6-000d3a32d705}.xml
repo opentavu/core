@@ -21,9 +21,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Subcategories" languagecode="1033" />
+      <LocalizedName description="Subcategorías" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="All active Subcategories" languagecode="1033" />
+      <Description description="Todas las subcategorías activas" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

@@ -29,6 +29,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Price List Item Advanced Find View" languagecode="1033" />
+      <LocalizedName description="Vista de búsqueda avanzada de ítem de lista de precios" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

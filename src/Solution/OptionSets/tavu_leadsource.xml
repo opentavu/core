@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Lead Source" languagecode="1033" />
+    <displayname description="Origen del prospecto" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Website" languagecode="1033" />
+        <label description="Sitio web" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600007" IsHidden="0">
       <labels>
         <label description="Web Form" languagecode="1033" />
+        <label description="Formulario web" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600001" ExternalValue="" IsHidden="0">
       <labels>
         <label description="LinkedIn" languagecode="1033" />
+        <label description="LinkedIn" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -39,6 +43,7 @@
     <option value="576600002" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Referral" languagecode="1033" />
+        <label description="Referido" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -47,6 +52,7 @@
     <option value="576600003" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Cold Outreach" languagecode="1033" />
+        <label description="Contacto en frío" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -55,6 +61,7 @@
     <option value="576600004" ExternalValue="" IsHidden="0">
       <labels>
         <label description="AI Scraper" languagecode="1033" />
+        <label description="Scraper de IA" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -63,6 +70,7 @@
     <option value="576600005" ExternalValue="" IsHidden="0">
       <labels>
         <label description="AI Chatbot" languagecode="1033" />
+        <label description="Chatbot de IA" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -71,6 +79,7 @@
     <option value="576600006" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Other" languagecode="1033" />
+        <label description="Otro" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

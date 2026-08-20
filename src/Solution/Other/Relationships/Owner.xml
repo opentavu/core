@@ -17,6 +17,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="Id del propietario" languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -37,6 +38,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="Id del propietario" languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -57,6 +59,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="Id del propietario" languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -77,6 +80,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="Id del propietario" languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -97,6 +101,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="Id del propietario" languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -117,6 +122,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="Id del propietario" languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -137,6 +143,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Owner Id" languagecode="1033" />
+        <Description description="Id del propietario" languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -158,6 +165,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user or team who owns the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario o equipo propietario de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -179,6 +187,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user or team who owns the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario o equipo propietario de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -200,6 +209,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user or team who owns the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario o equipo propietario de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

@@ -40,6 +40,7 @@
     <IntroducedVersion>1.0.0.15</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Calendar Working Hours Grid" languagecode="1033" />
+      <LocalizedName description="Cuadrícula de horario laboral del calendario" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

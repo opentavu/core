@@ -40,6 +40,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Active Case Types" languagecode="1033" />
+      <LocalizedName description="Tipos de caso activos" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Forecast Category" languagecode="1033" />
+    <displayname description="Categoría de pronóstico" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Pipeline" languagecode="1033" />
+        <label description="Pipeline" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600001" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Best Case" languagecode="1033" />
+        <label description="Mejor caso" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600002" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Committed" languagecode="1033" />
+        <label description="Comprometido" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -39,6 +43,7 @@
     <option value="576600003" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Closed" languagecode="1033" />
+        <label description="Cerrado" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

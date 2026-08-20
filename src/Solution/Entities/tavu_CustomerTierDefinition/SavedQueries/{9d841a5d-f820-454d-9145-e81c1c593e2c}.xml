@@ -34,6 +34,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Active Customer Tier Definitions" languagecode="1033" />
+      <LocalizedName description="Definiciones de nivel de cliente activas" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

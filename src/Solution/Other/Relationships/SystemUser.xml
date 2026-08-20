@@ -17,6 +17,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -37,6 +38,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -57,6 +59,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -77,6 +80,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -97,6 +101,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -117,6 +122,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -137,6 +143,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -157,6 +164,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -177,6 +185,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -197,6 +206,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -217,6 +227,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -237,6 +248,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -257,6 +269,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -277,6 +290,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -297,6 +311,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -317,6 +332,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -337,6 +353,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -357,6 +374,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -377,6 +395,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -397,6 +416,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -417,6 +437,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -437,6 +458,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -457,6 +479,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -477,6 +500,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -497,6 +521,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -517,6 +542,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -537,6 +563,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -557,6 +584,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -577,6 +605,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -597,6 +626,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -617,6 +647,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -637,6 +668,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -657,6 +689,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -677,6 +710,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -697,6 +731,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -717,6 +752,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -737,6 +773,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -757,6 +794,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -777,6 +815,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -797,6 +836,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -817,6 +857,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -837,6 +878,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -857,6 +899,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -877,6 +920,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -897,6 +941,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -917,6 +962,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -937,6 +983,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -957,6 +1004,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -977,6 +1025,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -997,6 +1046,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1017,6 +1067,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1037,6 +1088,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1057,6 +1109,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1077,6 +1130,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1097,6 +1151,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1117,6 +1172,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1137,6 +1193,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1157,6 +1214,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1177,6 +1235,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1197,6 +1256,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1217,6 +1277,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1237,6 +1298,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1257,6 +1319,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1277,6 +1340,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who modified the record." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó el registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1298,6 +1362,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1319,6 +1384,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of user who last modified the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó por última vez la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1340,6 +1406,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user that owns the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1361,6 +1428,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1382,6 +1450,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of user who last modified the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó por última vez la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1403,6 +1472,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user that owns the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1459,6 +1529,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user who created the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario que creó la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1480,6 +1551,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of user who last modified the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario que modificó por última vez la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1501,6 +1573,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier of the user that owns the activity." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario de la actividad." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1521,6 +1594,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1541,6 +1615,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1561,6 +1636,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1581,6 +1657,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1601,6 +1678,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1621,6 +1699,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -1641,6 +1720,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Unique identifier for the user that owns the record." languagecode="1033" />
+        <Description description="Identificador único del usuario propietario del registro." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

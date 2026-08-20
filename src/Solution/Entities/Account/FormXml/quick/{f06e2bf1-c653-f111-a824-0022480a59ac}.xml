@@ -10,6 +10,7 @@
         <tab id="ACBA75B7-97B6-4116-AA55-51312992B721" name="tab_1" showlabel="false" labelid="{48985dec-dce7-4bb8-ac9c-850b071f545a}">
           <labels>
             <label description="New Tab" languagecode="1033" />
+            <label description="Nueva pestaña" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +18,14 @@
                 <section id="AD49B5BF-256F-46A8-9C75-947146172EB9" name="tab_1_column_1_section_1" columns="1" showlabel="false" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{d9bcb98a-a7a8-416e-bbe9-25f18e74de49}">
                   <labels>
                     <label description="New Section" languagecode="1033" />
+                    <label description="Nueva sección" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{67919ea3-4fd7-4ddb-a989-5056cbda5968}" locklevel="0" colspan="1" rowspan="1" labelid="{928bde99-9d09-4315-a27b-f8ffb122846a}">
                         <labels>
                           <label description="Open Pipeline Value" languagecode="1033" />
+                          <label description="Valor del pipeline abierto" languagecode="3082" />
                         </labels>
                         <control id="tavu_openpipelinevalue" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_openpipelinevalue" disabled="false" />
                       </cell>
@@ -31,6 +34,7 @@
                       <cell id="{8bbeb758-0303-408b-9f7e-6090338cc85a}" locklevel="0" colspan="1" rowspan="1" labelid="{81b084c0-6966-41f5-b118-de415a895a0d}">
                         <labels>
                           <label description="Lifetime Revenue" languagecode="1033" />
+                          <label description="Ingresos de por vida" languagecode="3082" />
                         </labels>
                         <control id="tavu_lifetimerevenue" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_lifetimerevenue" disabled="false" />
                       </cell>
@@ -51,6 +55,7 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Key Metrics" languagecode="1033" />
+      <LocalizedName description="Métricas clave" languagecode="3082" />
     </LocalizedNames>
   </systemform>
 </forms>

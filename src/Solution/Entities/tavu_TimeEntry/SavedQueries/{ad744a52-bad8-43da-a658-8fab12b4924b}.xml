@@ -34,6 +34,7 @@
     <IntroducedVersion>1.0.0.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Time Entry Lookup View" languagecode="1033" />
+      <LocalizedName description="Vista de búsqueda de registro de tiempo" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

@@ -32,6 +32,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Inactive Business Lines" languagecode="1033" />
+      <LocalizedName description="Líneas de negocio inactivas" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

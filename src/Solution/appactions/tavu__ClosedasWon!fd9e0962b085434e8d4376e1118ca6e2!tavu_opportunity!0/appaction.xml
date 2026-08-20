@@ -1,12 +1,15 @@
 <appaction uniquename="tavu__ClosedasWon!fd9e0962b085434e8d4376e1118ca6e2!tavu_opportunity!0">
-  <buttonlabeltext default="Closed as Won">
+  <buttonlabeltext default="Cerrado como ganado">
     <label description="Closed as Won" languagecode="1033" />
+    <label description="Cerrado como ganado" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Close this opportunity as won and record the actual revenue">
+  <buttontooltipdescription default="Cierre esta oportunidad como ganada y registre los ingresos reales">
     <label description="Close this opportunity as won and record the actual revenue" languagecode="1033" />
+    <label description="Cierre esta oportunidad como ganada y registre los ingresos reales" languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Close this opportunity as won and record the actual revenue">
+  <buttontooltiptitle default="Cierre esta oportunidad como ganada y registre los ingresos reales">
     <label description="Close this opportunity as won and record the actual revenue" languagecode="1033" />
+    <label description="Cierre esta oportunidad como ganada y registre los ingresos reales" languagecode="3082" />
   </buttontooltiptitle>
   <context>1</context>
   <contextentity>

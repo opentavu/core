@@ -44,21 +44,25 @@
     <LocLabel Id="tavu.Mscrm.HomepageGrid.tavu_meeting.Related.GroupMeeting.Title">
       <Titles>
         <Title description="Meeting" languagecode="1033" />
+        <Title description="Reunión" languagecode="3082" />
       </Titles>
     </LocLabel>
     <LocLabel Id="tavu.tavu_meeting.ButtonNewMeeting.LabelText">
       <Titles>
         <Title description="New Meeting" languagecode="1033" />
+        <Title description="Nueva reunión" languagecode="3082" />
       </Titles>
     </LocLabel>
     <LocLabel Id="tavu.tavu_meeting.ButtonNewMeeting.ToolTipDescription">
       <Titles>
         <Title description="Capture a new meeting" languagecode="1033" />
+        <Title description="Capturar una nueva reunión" languagecode="3082" />
       </Titles>
     </LocLabel>
     <LocLabel Id="tavu.tavu_meeting.ButtonNewMeeting.ToolTipTitle">
       <Titles>
         <Title description="New Meeting" languagecode="1033" />
+        <Title description="Nueva reunión" languagecode="3082" />
       </Titles>
     </LocLabel>
   </LocLabels>

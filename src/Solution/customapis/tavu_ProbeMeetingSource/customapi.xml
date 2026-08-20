@@ -1,8 +1,8 @@
 <customapi uniquename="tavu_ProbeMeetingSource">
   <allowedcustomprocessingsteptype>2</allowedcustomprocessingsteptype>
   <bindingtype>0</bindingtype>
-  <description default="Server proxy: reads the gateway environment variables and calls `GET /api/teams/health`, returning the raw health JSON to the Teams sync wizard.&#xD;&#xA;">
-    <label description="Server proxy: reads the gateway environment variables and calls `GET /api/teams/health`, returning the raw health JSON to the Teams sync wizard.&#xD;&#xA;" languagecode="1033" />
+  <description default="Server proxy: reads the gateway environment variables and calls `GET /api/teams/health`, returning the raw health JSON to the Teams sync wizard.&#xA;">
+    <label description="Server proxy: reads the gateway environment variables and calls `GET /api/teams/health`, returning the raw health JSON to the Teams sync wizard.&#xA;" languagecode="1033" />
   </description>
   <displayname default="ProbeMeetingSource">
     <label description="ProbeMeetingSource" languagecode="1033" />

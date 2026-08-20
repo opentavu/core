@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="AI Sentiment" languagecode="1033" />
+    <displayname description="Sentimiento de IA" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Calm" languagecode="1033" />
+        <label description="Tranquilo" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600001" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Concerned" languagecode="1033" />
+        <label description="Preocupado" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600002" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Frustrated" languagecode="1033" />
+        <label description="Frustrado" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -39,6 +43,7 @@
     <option value="576600003" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Critical" languagecode="1033" />
+        <label description="Crítico" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -47,6 +52,7 @@
     <option value="576600004" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Unknown" languagecode="1033" />
+        <label description="Desconocido" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

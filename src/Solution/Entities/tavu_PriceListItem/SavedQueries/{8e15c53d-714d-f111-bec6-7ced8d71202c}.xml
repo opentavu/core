@@ -21,9 +21,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Price List Items" languagecode="1033" />
+      <LocalizedName description="Ítems de lista de precios" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="All active Price List Items" languagecode="1033" />
+      <Description description="Todos los ítems de lista de precios activos" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

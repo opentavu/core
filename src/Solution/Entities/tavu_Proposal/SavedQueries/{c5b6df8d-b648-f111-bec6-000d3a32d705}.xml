@@ -22,9 +22,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="My Proposals" languagecode="1033" />
+      <LocalizedName description="Mis propuestas" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="Active Proposals owned by me" languagecode="1033" />
+      <Description description="Propuestas activas de mi propiedad" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

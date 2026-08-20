@@ -56,6 +56,7 @@
     <IntroducedVersion>1.0.0.27</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="My Open Meetings" languagecode="1033" />
+      <LocalizedName description="Mis reuniones abiertas" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

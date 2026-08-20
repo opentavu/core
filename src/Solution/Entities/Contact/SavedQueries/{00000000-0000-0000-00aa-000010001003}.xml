@@ -36,6 +36,7 @@
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="My Active Contacts" languagecode="1033" />
+      <LocalizedName description="Mis contactos activos" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

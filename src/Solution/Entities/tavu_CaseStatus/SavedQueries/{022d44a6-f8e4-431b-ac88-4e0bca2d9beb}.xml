@@ -40,6 +40,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Inactive Case Statuses" languagecode="1033" />
+      <LocalizedName description="Estados del caso inactivos" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

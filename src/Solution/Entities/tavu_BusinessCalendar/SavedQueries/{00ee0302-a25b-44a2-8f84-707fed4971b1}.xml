@@ -32,6 +32,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Business Calendar Associated View" languagecode="1033" />
+      <LocalizedName description="Vista asociada de calendario laboral" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

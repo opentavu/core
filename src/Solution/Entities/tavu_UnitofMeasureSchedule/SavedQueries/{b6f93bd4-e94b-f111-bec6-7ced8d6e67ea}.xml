@@ -21,9 +21,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Unit of Measure Schedules" languagecode="1033" />
+      <LocalizedName description="Programas de unidad de medida" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="All active Unit of Measure Schedules" languagecode="1033" />
+      <Description description="Todos los programas de unidad de medida activos" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

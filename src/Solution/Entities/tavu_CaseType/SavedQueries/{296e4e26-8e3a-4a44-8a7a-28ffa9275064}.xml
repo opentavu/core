@@ -32,6 +32,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Case Type Associated View" languagecode="1033" />
+      <LocalizedName description="Vista asociada de tipo de caso" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

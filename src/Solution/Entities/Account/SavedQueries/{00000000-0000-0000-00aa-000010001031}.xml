@@ -51,6 +51,7 @@
     <IntroducedVersion>5.0.0.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Inactive Accounts" languagecode="1033" />
+      <LocalizedName description="Cuentas inactivas" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

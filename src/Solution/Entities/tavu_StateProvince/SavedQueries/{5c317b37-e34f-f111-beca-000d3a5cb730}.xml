@@ -21,9 +21,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="State/Provinces" languagecode="1033" />
+      <LocalizedName description="Estados/Provincias" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="All active State/Provinces" languagecode="1033" />
+      <Description description="Todos los estados/provincias activos" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

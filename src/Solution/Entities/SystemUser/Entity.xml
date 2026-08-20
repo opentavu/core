@@ -42,6 +42,7 @@
             <ExternalTypeName></ExternalTypeName>
             <displaynames>
               <displayname description="Meeting Sync Enabled" languagecode="1033" />
+              <displayname description="Sincronización de reuniones habilitada" languagecode="3082" />
             </displaynames>
             <Descriptions>
               <Description description="" languagecode="1033" />
@@ -50,17 +51,20 @@
               <option value="1" ExternalValue="" IsHidden="0">
                 <labels>
                   <label description="Yes" languagecode="1033" />
+                  <label description="Sí" languagecode="3082" />
                 </labels>
               </option>
               <option value="0" ExternalValue="" IsHidden="0">
                 <labels>
                   <label description="No" languagecode="1033" />
+                  <label description="No" languagecode="3082" />
                 </labels>
               </option>
             </options>
           </optionset>
           <displaynames>
             <displayname description="Meeting Sync Enabled" languagecode="1033" />
+            <displayname description="Sincronización de reuniones habilitada" languagecode="3082" />
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />

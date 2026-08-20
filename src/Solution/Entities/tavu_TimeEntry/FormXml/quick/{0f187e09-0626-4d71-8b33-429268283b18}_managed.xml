@@ -9,7 +9,7 @@
       <tabs>
         <tab verticallayout="true" id="{80c12871-6285-495a-adc7-91ae4f3aca25}" IsUserDefined="1">
           <labels>
-            <label description="" languagecode="1033" />
+            <label description="" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +17,13 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{e3982b95-7c27-4738-a1b6-73bd88a252e7}">
                   <labels>
                     <label description="GENERAL" languagecode="1033" />
+                    <label description="GENERAL" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{bc5c65f9-9e97-44d5-96ec-f54560a73cef}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="subject" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="subject" />
                       </cell>
@@ -30,7 +31,7 @@
                     <row>
                       <cell id="{5c221012-5ce3-4ef1-a01b-bf0ba8f4be6f}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="regardingobjectid" classid="{F3015350-44A2-4aa0-97B5-00166532B5E9}" datafieldname="regardingobjectid" />
                       </cell>
@@ -38,7 +39,7 @@
                     <row>
                       <cell id="{7f12c050-37f5-4a4c-8f4e-a44faf1d09c2}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" />
                       </cell>
@@ -48,12 +49,13 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{103ddf0a-16dd-4599-8aee-8a6100e60b10}">
                   <labels>
                     <label description="OTHER DETAILS" languagecode="1033" />
+                    <label description="OTROS DETALLES" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{4d45b38c-bf2a-4678-925f-182651b02ebf}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="prioritycode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="prioritycode" />
                       </cell>
@@ -61,7 +63,7 @@
                     <row>
                       <cell id="{34943976-c1c6-45f9-8a5b-5abb513672cb}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="scheduledend" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="scheduledend" />
                       </cell>
@@ -69,7 +71,7 @@
                     <row>
                       <cell id="{e08a21eb-e2cd-4405-9f61-b84a56a1ba0f}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>
@@ -86,6 +88,7 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
   </systemform>
 </forms>

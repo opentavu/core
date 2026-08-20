@@ -10,6 +10,7 @@
         <tab verticallayout="true" id="{cd915f25-6cb2-4d1b-b418-567c05bc9fb9}" IsUserDefined="1" name="TabGeneral">
           <labels>
             <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +18,14 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{8ea42c31-1fc3-4a3a-97ed-05e6471e073c}">
                   <labels>
                     <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{61e7d8ec-9463-4e7d-ab21-6756d4aef421}">
                         <labels>
                           <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
@@ -32,6 +35,7 @@
                 <section name="IsoCodeSection" id="0e585746-955f-44b8-b870-ff192969188d" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
                   <labels>
                     <label description="Iso Codes" languagecode="1033" />
+                    <label description="Códigos ISO" languagecode="3082" />
                   </labels>
                   <rows>
                     <row />
@@ -39,12 +43,14 @@
                       <cell id="{e8482423-4a53-4287-bf05-404524c98340}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Country" languagecode="1033" />
+                          <label description="País" languagecode="3082" />
                         </labels>
                         <control id="tavu_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_country" disabled="false" />
                       </cell>
                       <cell id="{4dbb25e3-f9d9-4632-aeab-2432c509ce98}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Iso Code" languagecode="1033" />
+                          <label description="Código ISO" languagecode="3082" />
                         </labels>
                         <control id="tavu_isocode" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_isocode" disabled="false" />
                       </cell>
@@ -53,12 +59,14 @@
                       <cell id="{a76977e5-8271-4ca7-ac5d-9f0d1b9a485d}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Short Code" languagecode="1033" />
+                          <label description="Código corto" languagecode="3082" />
                         </labels>
                         <control id="tavu_shortcode" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_shortcode" disabled="false" />
                       </cell>
                       <cell id="{f5a053a4-aed0-46f4-b9b6-c946b836576b}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Local Code" languagecode="1033" />
+                          <label description="Código local" languagecode="3082" />
                         </labels>
                         <control id="tavu_localcode" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_localcode" disabled="false" />
                       </cell>
@@ -75,17 +83,17 @@
           <row>
             <cell id="{ae946ce2-bc8f-4a4e-a1bd-5cde1fe62a4d}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{3c81133a-5310-4943-a689-423e5d41708e}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{0b49f265-9cbd-451f-8c0c-0dfd58915ddc}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -96,17 +104,17 @@
           <row>
             <cell id="{228bcfdc-b0ff-42aa-8718-bcedbed99935}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{55ed0ec2-8190-4638-8cdd-a6e5c17d575a}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{56f3fcf2-2c8f-4eff-82a5-736ff87fdb6d}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -120,9 +128,11 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Un formulario para esta entidad." languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

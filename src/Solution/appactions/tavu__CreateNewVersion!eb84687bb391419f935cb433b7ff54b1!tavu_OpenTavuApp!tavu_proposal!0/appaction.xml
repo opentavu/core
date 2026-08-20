@@ -2,14 +2,17 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Create New Version">
+  <buttonlabeltext default="Crear nueva versión">
     <label description="Create New Version" languagecode="1033" />
+    <label description="Crear nueva versión" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Create a new draft copy of this proposal with a new version number, and mark the current one as Superseded.">
+  <buttontooltipdescription default="Cree una nueva copia en borrador de esta propuesta con un nuevo número de versión y marque la actual como Reemplazada.">
     <label description="Create a new draft copy of this proposal with a new version number, and mark the current one as Superseded." languagecode="1033" />
+    <label description="Cree una nueva copia en borrador de esta propuesta con un nuevo número de versión y marque la actual como Reemplazada." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Create New Version">
+  <buttontooltiptitle default="Crear nueva versión">
     <label description="Create New Version" languagecode="1033" />
+    <label description="Crear nueva versión" languagecode="3082" />
   </buttontooltiptitle>
   <context>1</context>
   <contextentity>

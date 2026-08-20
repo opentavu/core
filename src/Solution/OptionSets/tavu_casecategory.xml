@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Case Category" languagecode="1033" />
+    <displayname description="Categoría del caso" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Active" languagecode="1033" />
+        <label description="Activo" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600001" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Resolved" languagecode="1033" />
+        <label description="Resuelto" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600002" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Cancelled" languagecode="1033" />
+        <label description="Cancelado" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

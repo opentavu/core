@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Message Interaction Direction" languagecode="1033" />
+    <displayname description="Dirección de interacción de mensaje" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Inbound" languagecode="1033" />
+        <label description="Entrante" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600001" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Outbound" languagecode="1033" />
+        <label description="Saliente" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600002" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Internal Note" languagecode="1033" />
+        <label description="Nota interna" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

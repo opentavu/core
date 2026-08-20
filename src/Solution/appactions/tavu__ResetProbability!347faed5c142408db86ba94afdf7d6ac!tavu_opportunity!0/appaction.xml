@@ -1,12 +1,15 @@
 <appaction uniquename="tavu__ResetProbability!347faed5c142408db86ba94afdf7d6ac!tavu_opportunity!0">
-  <buttonlabeltext default="Reset Probability">
+  <buttonlabeltext default="Restablecer probabilidad">
     <label description="Reset Probability" languagecode="1033" />
+    <label description="Restablecer probabilidad" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Discard the manual probability and restore the current Sales Stage's default. The deal returns to automatic mode, so future stage changes update the probability again.">
+  <buttontooltipdescription default="Descarta la probabilidad manual y restaura el valor predeterminado de la etapa de venta actual. El negocio vuelve al modo automático, por lo que los cambios de etapa futuros vuelven a actualizar la probabilidad.">
     <label description="Discard the manual probability and restore the current Sales Stage's default. The deal returns to automatic mode, so future stage changes update the probability again." languagecode="1033" />
+    <label description="Descarta la probabilidad manual y restaura el valor predeterminado de la etapa de venta actual. El negocio vuelve al modo automático, por lo que los cambios de etapa futuros vuelven a actualizar la probabilidad." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Reset Probability">
+  <buttontooltiptitle default="Restablecer probabilidad">
     <label description="Reset Probability" languagecode="1033" />
+    <label description="Restablecer probabilidad" languagecode="3082" />
   </buttontooltiptitle>
   <context>1</context>
   <contextentity>

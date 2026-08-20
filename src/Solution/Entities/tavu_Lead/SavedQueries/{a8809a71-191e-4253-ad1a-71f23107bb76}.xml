@@ -32,6 +32,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Lead Associated View" languagecode="1033" />
+      <LocalizedName description="Vista asociada de prospecto" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

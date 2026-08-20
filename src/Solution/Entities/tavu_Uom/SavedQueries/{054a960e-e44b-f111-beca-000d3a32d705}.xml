@@ -21,9 +21,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Unit of Measures" languagecode="1033" />
+      <LocalizedName description="Unidades de medida" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="All active Unit of Measures" languagecode="1033" />
+      <Description description="Todas las unidades de medida activas" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

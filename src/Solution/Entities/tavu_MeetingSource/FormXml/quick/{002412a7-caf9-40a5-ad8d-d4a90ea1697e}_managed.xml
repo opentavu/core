@@ -9,7 +9,7 @@
       <tabs>
         <tab verticallayout="true" id="{55985383-B174-4257-BA59-4FBCB37BF4F5}" IsUserDefined="1">
           <labels>
-            <label description="" languagecode="1033" />
+            <label description="" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +17,13 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{42E3057B-1F14-439C-8182-BE38E17A6570}">
                   <labels>
                     <label description="GENERAL" languagecode="1033" />
+                    <label description="GENERAL" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{53CBC920-3A61-41BB-A9EB-07FD005B622D}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_Name" />
                       </cell>
@@ -40,6 +41,7 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
   </systemform>
 </forms>

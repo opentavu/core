@@ -10,6 +10,7 @@
         <tab verticallayout="true" id="{8a10d23f-7d7a-406f-8423-f50ba6621ba5}" IsUserDefined="1">
           <labels>
             <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +18,14 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{9b0a8721-1bcf-4e4f-97ff-b19af810e8e4}">
                   <labels>
                     <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{aa4d2f6d-aca8-4f45-8306-9535b6ab1ff1}">
                         <labels>
                           <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
@@ -31,6 +34,7 @@
                       <cell id="{700af9f6-95a9-4467-937c-aba4c826f90e}">
                         <labels>
                           <label description="Owner" languagecode="1033" />
+                          <label description="Propietario" languagecode="3082" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>
@@ -39,6 +43,7 @@
                       <cell id="{2cf932a9-1a9b-4871-896e-3098fe37a1ff}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Body" languagecode="1033" />
+                          <label description="Cuerpo" languagecode="3082" />
                         </labels>
                         <control id="tavu_body" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_body" disabled="false" />
                       </cell>
@@ -47,6 +52,7 @@
                       <cell id="{a6bb6012-bb94-46e9-bd9a-627fef38399e}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Case" languagecode="1033" />
+                          <label description="Caso" languagecode="3082" />
                         </labels>
                         <control id="tavu_case" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_case" disabled="false" />
                       </cell>
@@ -55,6 +61,7 @@
                       <cell id="{6ddaf2ee-704e-4387-be5d-c8acc2106c2b}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Changed Fields" languagecode="1033" />
+                          <label description="Campos modificados" languagecode="3082" />
                         </labels>
                         <control id="tavu_changedfields" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_changedfields" disabled="false" />
                       </cell>
@@ -63,6 +70,7 @@
                       <cell id="{e6e4d29e-083f-4bb2-846c-d733e24505ef}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Channel" languagecode="1033" />
+                          <label description="Canal" languagecode="3082" />
                         </labels>
                         <control id="tavu_channel" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_channel" disabled="false" />
                       </cell>
@@ -71,6 +79,7 @@
                       <cell id="{e5a0d532-8f22-4f64-902e-b023f61dc74f}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Direction" languagecode="1033" />
+                          <label description="Dirección" languagecode="3082" />
                         </labels>
                         <control id="tavu_direction" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_direction" disabled="false" />
                       </cell>
@@ -79,6 +88,7 @@
                       <cell id="{d8c1f2e1-4e0e-41bb-9372-d85c181dcfb9}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="From Contact" languagecode="1033" />
+                          <label description="Del contacto" languagecode="3082" />
                         </labels>
                         <control id="tavu_fromcontact" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_fromcontact" disabled="false" />
                       </cell>
@@ -87,6 +97,7 @@
                       <cell id="{fa7446ee-3be6-4650-9ae9-c3d1ee9743a6}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Grounding Sources" languagecode="1033" />
+                          <label description="Fuentes de fundamentación" languagecode="3082" />
                         </labels>
                         <control id="tavu_groundingsources" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_groundingsources" disabled="false" />
                       </cell>
@@ -95,6 +106,7 @@
                       <cell id="{a2db0f3a-ac78-4fb8-94ea-b7763b2ec920}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Status After" languagecode="1033" />
+                          <label description="Estado posterior" languagecode="3082" />
                         </labels>
                         <control id="tavu_statusafter" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_statusafter" disabled="false" />
                       </cell>
@@ -103,6 +115,7 @@
                       <cell id="{28fc84a3-8d77-482d-af8b-e0eefd931b9e}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Status Before" languagecode="1033" />
+                          <label description="Estado anterior" languagecode="3082" />
                         </labels>
                         <control id="tavu_statusbefore" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_statusbefore" disabled="false" />
                       </cell>
@@ -119,17 +132,17 @@
           <row>
             <cell id="{5a51464f-8e7f-4acc-9444-b40a7825eb28}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{3f85d7ba-cfee-4a92-96f2-a9cc22eca308}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{fd48e2c6-5c64-4d52-959c-4ed7028182d8}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -140,17 +153,17 @@
           <row>
             <cell id="{e2eed0f7-fbb5-44c1-a732-f55e1fdd57e8}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{e96c139f-afb9-437a-95b5-3114bc0281da}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{be5875f2-386f-43f4-8540-a3e9eb8bedc4}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -164,9 +177,11 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Un formulario para esta entidad." languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

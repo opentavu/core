@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Origin" languagecode="1033" />
+    <displayname description="Origen" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Email" languagecode="1033" />
+        <label description="Correo electrónico" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600001" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Web Form" languagecode="1033" />
+        <label description="Formulario web" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600002" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Phone" languagecode="1033" />
+        <label description="Teléfono" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -39,6 +43,7 @@
     <option value="576600003" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Manual" languagecode="1033" />
+        <label description="Manual" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -47,6 +52,7 @@
     <option value="576600004" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Internal" languagecode="1033" />
+        <label description="Interno" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

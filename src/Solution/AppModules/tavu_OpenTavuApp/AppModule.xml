@@ -55,9 +55,11 @@
   </AppModuleRoleMaps>
   <LocalizedNames>
     <LocalizedName description="OpenTavu App" languagecode="1033" />
+    <LocalizedName description="Opentavu" languagecode="3082" />
   </LocalizedNames>
   <Descriptions>
     <Description description="AI-CRM for Professional Services - Pipeline, Cases, and Proposals in one place." languagecode="1033" />
+    <Description description="CRM con IA para servicios profesionales - Pipeline, casos y propuestas en un solo lugar." languagecode="3082" />
   </Descriptions>
   <appelements>
     <appelement uniquename="tavu_tavu_OpenTavuApp_canvasappid_tavu_opentavuappdefaultcommandlibrary_9129c">

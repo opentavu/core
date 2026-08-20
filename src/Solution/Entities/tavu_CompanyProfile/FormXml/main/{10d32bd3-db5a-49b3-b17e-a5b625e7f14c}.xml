@@ -10,6 +10,7 @@
         <tab verticallayout="true" id="{05160968-fb31-41c3-b19f-6ea8dd7d2c0f}" IsUserDefined="1">
           <labels>
             <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +18,14 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{5a366924-f07a-4e14-9e20-606a57ceccb9}">
                   <labels>
                     <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{4e58c80a-94d7-488b-901b-7d6dabfc809d}">
                         <labels>
                           <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
@@ -32,17 +35,18 @@
                 <section name="section_general" id="13e5348d-72ab-4765-9e8c-9079748dd87d" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
                   <labels>
                     <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell locklevel="0" id="{2f60cacf-0d1c-42bd-96bf-41cb0ffe630e}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                       <cell locklevel="0" id="{4f007987-4fc0-437f-8b28-756564fd94de}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -50,12 +54,14 @@
                       <cell id="{87caf495-e896-4404-836d-4aa4f2396f30}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Logo" languagecode="1033" />
+                          <label description="Logo" languagecode="3082" />
                         </labels>
                         <control id="tavu_logo" classid="{0A7FF475-B016-4687-9CE5-042BFDBD6519}" datafieldname="tavu_logo" disabled="false" />
                       </cell>
                       <cell id="{1f822c65-2e67-4a23-a9b2-c269236d8747}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Brand Accent Color" languagecode="1033" />
+                          <label description="Color de acento de marca" languagecode="3082" />
                         </labels>
                         <control id="tavu_brandaccentcolor" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_brandaccentcolor" disabled="false" />
                       </cell>
@@ -64,12 +70,14 @@
                       <cell id="{ace0318a-eb37-4b5e-a2af-1980382d9903}" locklevel="0" colspan="1" rowspan="2">
                         <labels>
                           <label description="Address" languagecode="1033" />
+                          <label description="Dirección" languagecode="3082" />
                         </labels>
                         <control id="tavu_address" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_address" disabled="false" />
                       </cell>
                       <cell id="{05e25389-6c5c-420f-afe8-71e9422efcd2}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Email" languagecode="1033" />
+                          <label description="Correo electrónico" languagecode="3082" />
                         </labels>
                         <control id="tavu_email" classid="{ADA2203E-B4CD-49BE-9DDF-234642B43B52}" datafieldname="tavu_email" disabled="false" />
                       </cell>
@@ -79,12 +87,14 @@
                       <cell id="{0410d2ef-00d7-48a8-949d-710ec62cd574}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Tax Id" languagecode="1033" />
+                          <label description="Id de impuesto" languagecode="3082" />
                         </labels>
                         <control id="tavu_taxid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_taxid" disabled="false" />
                       </cell>
                       <cell id="{bab4306b-1d02-49c2-9473-e8d088dd4843}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Phone" languagecode="1033" />
+                          <label description="Teléfono" languagecode="3082" />
                         </labels>
                         <control id="tavu_phone" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_phone" disabled="false" />
                       </cell>
@@ -92,12 +102,13 @@
                     <row>
                       <cell locklevel="0" id="{0e56fd49-0587-48c3-b135-cdb71bb87b8d}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                       <cell id="{64bfb6cc-3c75-4489-873e-f56bd2f1bd03}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Website" languagecode="1033" />
+                          <label description="Sitio web" languagecode="3082" />
                         </labels>
                         <control id="tavu_website" classid="{71716B6C-711E-476C-8AB8-5D11542BFB47}" datafieldname="tavu_website" disabled="false" />
                       </cell>
@@ -107,6 +118,7 @@
                 <section name="section_proposal" id="6499dd21-bc66-4088-85de-1544ae0a6e86" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Top" columns="1" labelwidth="115">
                   <labels>
                     <label description="Proposal terms" languagecode="1033" />
+                    <label description="Términos de la propuesta" languagecode="3082" />
                   </labels>
                   <rows>
                     <row />
@@ -114,6 +126,7 @@
                       <cell id="{278be9a0-a43f-4fe1-b78d-2d757e713ee8}" locklevel="0" colspan="1" rowspan="5" showlabel="false">
                         <labels>
                           <label description="Default proposal terms" languagecode="1033" />
+                          <label description="Términos de propuesta predeterminados" languagecode="3082" />
                         </labels>
                         <control id="tavu_defaultproposalterms" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_defaultproposalterms" disabled="false" />
                       </cell>
@@ -134,17 +147,17 @@
           <row>
             <cell id="{f1cc94f9-1e96-4dc1-8b93-a7b648bb8711}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{b95d0a9a-3b21-4e79-9974-a905dd9ae6a1}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{05e217e4-756d-4877-b849-3866ba5cd58b}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -155,17 +168,17 @@
           <row>
             <cell id="{1704e63c-a344-4eb9-b925-7de54be231f1}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{9cb8d7dc-535d-4d40-8894-fd10b8019eb0}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{cc6063d6-162b-4372-ac91-429d19c35eda}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -179,9 +192,11 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Un formulario para esta entidad." languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

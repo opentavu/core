@@ -22,9 +22,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="My Knowledge Articles" languagecode="1033" />
+      <LocalizedName description="Mis artículos de conocimiento" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="Active Knowledge Articles owned by me" languagecode="1033" />
+      <Description description="Artículos de conocimiento activos de mi propiedad" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

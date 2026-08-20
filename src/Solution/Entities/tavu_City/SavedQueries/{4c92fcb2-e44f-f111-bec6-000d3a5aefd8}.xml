@@ -21,9 +21,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Cities" languagecode="1033" />
+      <LocalizedName description="Ciudades" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="All active Cities" languagecode="1033" />
+      <Description description="Todas las ciudades activas" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

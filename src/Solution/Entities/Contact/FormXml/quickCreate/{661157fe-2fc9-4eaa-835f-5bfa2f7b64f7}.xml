@@ -10,9 +10,11 @@
     </form>
     <LocalizedNames>
       <LocalizedName description="Contact Quick Create" languagecode="1033" />
+      <LocalizedName description="Creación rápida de contacto" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="Default quick create form for Contact" languagecode="1033" />
+      <Description description="Formulario predeterminado de creación rápida para contacto" languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

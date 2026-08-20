@@ -46,6 +46,7 @@
     <IntroducedVersion>1.0.0.18</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Case Interactions Grid" languagecode="1033" />
+      <LocalizedName description="Cuadrícula de interacciones del caso" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

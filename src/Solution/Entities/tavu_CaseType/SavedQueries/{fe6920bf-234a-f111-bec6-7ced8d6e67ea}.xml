@@ -21,9 +21,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Case Types" languagecode="1033" />
+      <LocalizedName description="Tipos de caso" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="All active Case Types" languagecode="1033" />
+      <Description description="Todos los tipos de caso activos" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

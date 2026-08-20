@@ -2,14 +2,17 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Reopen Opportunity">
+  <buttonlabeltext default="Reabrir oportunidad">
     <label description="Reopen Opportunity" languagecode="1033" />
+    <label description="Reabrir oportunidad" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Reopen Opportunity">
+  <buttontooltipdescription default="Reabrir oportunidad">
     <label description="Reopen Opportunity" languagecode="1033" />
+    <label description="Reabrir oportunidad" languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Reopen Opportunity">
+  <buttontooltiptitle default="Reabrir oportunidad">
     <label description="Reopen Opportunity" languagecode="1033" />
+    <label description="Reabrir oportunidad" languagecode="3082" />
   </buttontooltiptitle>
   <context>1</context>
   <contextentity>

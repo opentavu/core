@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Time of Day" languagecode="1033" />
+    <displayname description="Hora del día" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="0" ExternalValue="" IsHidden="0">
       <labels>
         <label description="00:00" languagecode="1033" />
+        <label description="00:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="60" ExternalValue="" IsHidden="0">
       <labels>
         <label description="01:00" languagecode="1033" />
+        <label description="01:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="120" ExternalValue="" IsHidden="0">
       <labels>
         <label description="02:00" languagecode="1033" />
+        <label description="02:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -39,6 +43,7 @@
     <option value="180" ExternalValue="" IsHidden="0">
       <labels>
         <label description="03:00" languagecode="1033" />
+        <label description="03:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -47,6 +52,7 @@
     <option value="240" ExternalValue="" IsHidden="0">
       <labels>
         <label description="04:00" languagecode="1033" />
+        <label description="04:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -55,6 +61,7 @@
     <option value="300" ExternalValue="" IsHidden="0">
       <labels>
         <label description="05:00" languagecode="1033" />
+        <label description="05:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -63,6 +70,7 @@
     <option value="360" ExternalValue="" IsHidden="0">
       <labels>
         <label description="06:00" languagecode="1033" />
+        <label description="06:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -71,6 +79,7 @@
     <option value="420" ExternalValue="" IsHidden="0">
       <labels>
         <label description="07:00" languagecode="1033" />
+        <label description="07:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -79,6 +88,7 @@
     <option value="480" ExternalValue="" IsHidden="0">
       <labels>
         <label description="08:00" languagecode="1033" />
+        <label description="08:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -87,6 +97,7 @@
     <option value="540" ExternalValue="" IsHidden="0">
       <labels>
         <label description="09:00" languagecode="1033" />
+        <label description="09:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -95,6 +106,7 @@
     <option value="600" ExternalValue="" IsHidden="0">
       <labels>
         <label description="10:00" languagecode="1033" />
+        <label description="10:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -103,6 +115,7 @@
     <option value="660" ExternalValue="" IsHidden="0">
       <labels>
         <label description="11:00" languagecode="1033" />
+        <label description="11:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -111,6 +124,7 @@
     <option value="720" ExternalValue="" IsHidden="0">
       <labels>
         <label description="12:00" languagecode="1033" />
+        <label description="12:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -119,6 +133,7 @@
     <option value="780" ExternalValue="" IsHidden="0">
       <labels>
         <label description="13:00" languagecode="1033" />
+        <label description="13:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -127,6 +142,7 @@
     <option value="840" ExternalValue="" IsHidden="0">
       <labels>
         <label description="14:00" languagecode="1033" />
+        <label description="14:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -135,6 +151,7 @@
     <option value="900" ExternalValue="" IsHidden="0">
       <labels>
         <label description="15:00" languagecode="1033" />
+        <label description="15:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -143,6 +160,7 @@
     <option value="960" ExternalValue="" IsHidden="0">
       <labels>
         <label description="16:00" languagecode="1033" />
+        <label description="16:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -151,6 +169,7 @@
     <option value="1020" ExternalValue="" IsHidden="0">
       <labels>
         <label description="17:00" languagecode="1033" />
+        <label description="17:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -159,6 +178,7 @@
     <option value="1080" ExternalValue="" IsHidden="0">
       <labels>
         <label description="18:00" languagecode="1033" />
+        <label description="18:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -167,6 +187,7 @@
     <option value="1140" ExternalValue="" IsHidden="0">
       <labels>
         <label description="19:00" languagecode="1033" />
+        <label description="19:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -175,6 +196,7 @@
     <option value="1200" ExternalValue="" IsHidden="0">
       <labels>
         <label description="20:00" languagecode="1033" />
+        <label description="20:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -183,6 +205,7 @@
     <option value="1260" ExternalValue="" IsHidden="0">
       <labels>
         <label description="21:00" languagecode="1033" />
+        <label description="21:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -191,6 +214,7 @@
     <option value="1320" ExternalValue="" IsHidden="0">
       <labels>
         <label description="22:00" languagecode="1033" />
+        <label description="22:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -199,6 +223,7 @@
     <option value="1380" ExternalValue="" IsHidden="0">
       <labels>
         <label description="23:00" languagecode="1033" />
+        <label description="23:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -207,6 +232,7 @@
     <option value="1440" ExternalValue="" IsHidden="0">
       <labels>
         <label description="24:00" languagecode="1033" />
+        <label description="24:00" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

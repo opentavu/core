@@ -15,6 +15,7 @@
         <tab name="tab_summary" verticallayout="true" id="{9748ec98-3746-40cc-83bf-d15c7363166f}" IsUserDefined="0" labelid="{28bf4801-0903-41e8-b477-ec057d738bfa}">
           <labels>
             <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
           </labels>
           <columns>
             <column width="33%">
@@ -22,12 +23,14 @@
                 <section name="ContactInformation" showlabel="true" showbar="false" id="{90b0776f-2977-4695-9cd4-73bb6c820f88}" IsUserDefined="0" labelid="{66040b88-b047-4b8c-bdfe-d10c7c701ae8}" celllabelposition="Left" columns="1">
                   <labels>
                     <label description="Contact Information" languagecode="1033" />
+                    <label description="Información de contacto" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{478c8803-2686-4d10-8cf0-e6e5b3b6007f}" labelid="{6f2f7cae-fc53-4b68-98c1-9680d9c1540b}">
                         <labels>
                           <label description="First Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="firstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="firstname" />
                       </cell>
@@ -36,6 +39,7 @@
                       <cell id="{4fde05d9-89b1-4acf-a98f-13159f1bdcc8}" labelid="{8e4d2b2a-4508-48ff-9f86-0c5d34b90885}">
                         <labels>
                           <label description="Last Name" languagecode="1033" />
+                          <label description="Apellido" languagecode="3082" />
                         </labels>
                         <control id="lastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="lastname" />
                       </cell>
@@ -44,6 +48,7 @@
                       <cell id="{921eaba2-6044-405e-8354-c3c5dbe3e97f}" labelid="{24fbd192-ae36-4386-b27a-1fc1d170ee47}">
                         <labels>
                           <label description="Job Title" languagecode="1033" />
+                          <label description="Cargo" languagecode="3082" />
                         </labels>
                         <control id="jobtitle" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="jobtitle" />
                       </cell>
@@ -52,6 +57,7 @@
                       <cell id="{38d7b950-436b-412f-a71b-ae4187e60c14}" labelid="{1beef68d-67b7-49e1-b884-cb3a94e3630c}" colspan="1" rowspan="1">
                         <labels>
                           <label description="Email" languagecode="1033" />
+                          <label description="Correo electrónico" languagecode="3082" />
                         </labels>
                         <control id="emailaddress1" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="emailaddress1" />
                       </cell>
@@ -60,6 +66,7 @@
                       <cell id="{70d9cd8f-142b-4a88-bf82-4d2bc2972140}" labelid="{4d2c281a-96c2-400c-a6fc-885c8e0aa894}" colspan="1" rowspan="1">
                         <labels>
                           <label description="Mobile" languagecode="1033" />
+                          <label description="Móvil" languagecode="3082" />
                         </labels>
                         <control id="mobilephone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="mobilephone" />
                       </cell>
@@ -68,6 +75,7 @@
                       <cell id="{e0715d7d-d847-45cb-b9ec-aaaa797e2d5e}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Owner" languagecode="1033" />
+                          <label description="Propietario" languagecode="3082" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
                       </cell>
@@ -77,12 +85,13 @@
                 <section name="SectionClientStatus" id="a86eee3f-4bcb-41f6-aa72-afffc2ab2cd3" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="Client Status" languagecode="1033" />
+                    <label description="Estado del cliente" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{f8d18f86-e6fb-4f32-ab8f-dc75d40edc3c}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -90,6 +99,7 @@
                       <cell id="{9f94eeb8-233c-4625-88ef-b14cb450534c}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Customer Tier" languagecode="1033" />
+                          <label description="Nivel de cliente" languagecode="3082" />
                         </labels>
                         <control id="tavu_customertier" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_customertier" disabled="false" />
                       </cell>
@@ -98,6 +108,7 @@
                       <cell id="{e2cd4175-7b68-4d3a-8f9c-377bc9b47fbe}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Is Customer" languagecode="1033" />
+                          <label description="Es cliente" languagecode="3082" />
                         </labels>
                         <control id="tavu_iscustomer" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_iscustomer" disabled="false" uniqueid="{e13bac43-fe4d-4905-92dc-93f885de4e54}" />
                       </cell>
@@ -106,6 +117,7 @@
                       <cell id="{412252b6-9957-4f71-b02f-3b146cdd29b7}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Customer Since" languagecode="1033" />
+                          <label description="Cliente desde" languagecode="3082" />
                         </labels>
                         <control id="tavu_customersince" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_customersince" disabled="false" />
                       </cell>
@@ -114,6 +126,7 @@
                       <cell id="{1ecf861e-2a63-4d00-be20-4b35d822ef39}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Last Engagement Date" languagecode="1033" />
+                          <label description="Fecha de última interacción" languagecode="3082" />
                         </labels>
                         <control id="tavu_lastengagementdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_lastengagementdate" disabled="false" />
                       </cell>
@@ -123,12 +136,14 @@
                 <section name="Location" showlabel="true" showbar="true" id="{f2f6f734-1790-402f-8e2a-1eaecbceb9e3}" IsUserDefined="0" labelid="{58b90887-5278-4961-a74c-2207ab01617e}">
                   <labels>
                     <label description="Location" languagecode="1033" />
+                    <label description="Ubicación" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{9332b546-e984-4852-aaa5-6d53c5470732}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Country" languagecode="1033" />
+                          <label description="País" languagecode="3082" />
                         </labels>
                         <control id="tavu_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_country" disabled="false" />
                       </cell>
@@ -137,6 +152,7 @@
                       <cell id="{fcd72866-443c-4862-9e05-c4af6a435831}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="State/Province" languagecode="1033" />
+                          <label description="Estado/Provincia" languagecode="3082" />
                         </labels>
                         <control id="tavu_stateprovince" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_stateprovince" disabled="false" />
                       </cell>
@@ -145,6 +161,7 @@
                       <cell id="{790fcdee-133b-4080-b53d-6a23aabce146}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="City" languagecode="1033" />
+                          <label description="Ciudad" languagecode="3082" />
                         </labels>
                         <control id="tavu_city" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_city" disabled="false" />
                       </cell>
@@ -153,6 +170,7 @@
                       <cell id="{f16a045d-c30d-4189-ac3d-b5e8172e47da}" labelid="{43daeda3-fc9d-4ca4-a167-9636dcac824b}">
                         <labels>
                           <label description="Street" languagecode="1033" />
+                          <label description="Calle" languagecode="3082" />
                         </labels>
                         <control id="address1_line1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="address1_line1" />
                       </cell>
@@ -162,12 +180,13 @@
                 <section name="timeline" id="bc220add-3155-4e82-acd4-fbb721dfd0ae" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="New Section" languagecode="1033" />
+                    <label description="Nueva sección" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{02ad641b-d30d-48c0-8800-e5dcad956f7a}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -180,12 +199,13 @@
                 <section name="GeneralTabSubgrids" id="34141ff8-8be7-4f37-a323-54e7fdd39d01" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="New Section" languagecode="1033" />
+                    <label description="Nueva sección" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{55c3842e-030b-4d08-94d9-b4477b05dcb0}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -193,6 +213,7 @@
                       <cell locklevel="0" id="{2d67bc3b-8c4e-4377-9acf-a45cdce19ecc}" rowspan="4" colspan="1" auto="false">
                         <labels>
                           <label description="Opportunities" languagecode="1033" />
+                          <label description="Oportunidades" languagecode="3082" />
                         </labels>
                         <control indicationOfSubgrid="true" id="SubgridOpportunities" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
                           <parameters>
@@ -217,6 +238,7 @@
                       <cell locklevel="0" id="{951b1c95-46f1-4292-95ba-fa3bfb8e5127}" rowspan="4" colspan="1" auto="false">
                         <labels>
                           <label description="Cases" languagecode="1033" />
+                          <label description="Casos" languagecode="3082" />
                         </labels>
                         <control indicationOfSubgrid="true" id="SubgridCases" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
                           <parameters>
@@ -246,12 +268,13 @@
                 <section name="SectionKeyMetricsB2B" id="9010771d-6067-40a7-a4cb-85afa334d6c2" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="Key Metrics Account" languagecode="1033" />
+                    <label description="Métricas clave de la cuenta" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{7c5da0ee-59a5-4447-921c-7639e2b4ee68}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -259,6 +282,7 @@
                       <cell locklevel="0" id="{69aea597-6249-4dec-a608-b6192ef15459}" colspan="1" rowspan="1">
                         <labels>
                           <label description="Key Metrics" languagecode="1033" />
+                          <label description="Métricas clave" languagecode="3082" />
                         </labels>
                         <control id="QVCAccountKeyMetrics" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="parentcustomerid">
                           <parameters>
@@ -274,12 +298,14 @@
                 <section name="SectionKeyMetricsB2C" id="fe0e816b-a0c7-4814-808a-35b6c4ae6e30" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="Key Metrics Client" languagecode="1033" />
+                    <label description="Métricas clave del cliente" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{33363791-3087-479a-b95e-4600bf9df183}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Open Pipeline Value" languagecode="1033" />
+                          <label description="Valor del pipeline abierto" languagecode="3082" />
                         </labels>
                         <control id="tavu_openpipelinevalue" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_openpipelinevalue" disabled="false" />
                       </cell>
@@ -288,6 +314,7 @@
                       <cell id="{80f0dcca-ed11-46c1-9d20-4dc99e626e72}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Lifetime Revenue" languagecode="1033" />
+                          <label description="Ingresos de por vida" languagecode="3082" />
                         </labels>
                         <control id="tavu_lifetimerevenue" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_lifetimerevenue" disabled="false" />
                       </cell>
@@ -297,6 +324,7 @@
                 <section name="SectionParentAccountCard" id="6152c5d9-f1e4-47b4-9ac6-dc414b2bc036" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="Parent Account" languagecode="1033" />
+                    <label description="Cuenta principal" languagecode="3082" />
                   </labels>
                   <rows>
                     <row />
@@ -304,6 +332,7 @@
                       <cell id="{6e79ff83-4ea2-452e-9e92-24e5fab55600}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Originating Lead" languagecode="1033" />
+                          <label description="Prospecto de origen" languagecode="3082" />
                         </labels>
                         <control id="tavu_originatinglead" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_originatinglead" disabled="false" />
                       </cell>
@@ -312,6 +341,7 @@
                       <cell auto="false" showlabel="true" locklevel="0" rowspan="1" colspan="1" id="{1afed90e-5ba2-4868-b33f-e4ffe086596b}" labelid="{d4620d46-5d25-4904-82e8-10edb02c4d96}">
                         <labels>
                           <label description="Company Name" languagecode="1033" />
+                          <label description="Nombre de la empresa" languagecode="3082" />
                         </labels>
                         <events>
                           <event name="setadditionalparams" application="true" active="true">
@@ -327,6 +357,7 @@
                       <cell locklevel="0" id="{4d778db7-2096-40a4-9084-612f58b47872}" colspan="1" rowspan="1">
                         <labels>
                           <label description="Parent Account" languagecode="1033" />
+                          <label description="Cuenta principal" languagecode="3082" />
                         </labels>
                         <control id="QVCParentAccount" classid="{5C5600E0-1D6E-4205-A272-BE80DA87FD42}" datafieldname="parentcustomerid">
                           <parameters>
@@ -342,6 +373,7 @@
                 <section name="_section_480" id="951716c3-dcf0-409b-9335-7da1b559ecfb" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="New Section" languagecode="1033" />
+                    <label description="Nueva sección" languagecode="3082" />
                   </labels>
                   <rows>
                     <row />
@@ -349,6 +381,7 @@
                       <cell locklevel="0" id="{e1c9c5ce-1c27-473a-a76d-4a38ba36990c}" rowspan="15" colspan="1">
                         <labels>
                           <label description="Note Text" languagecode="1033" />
+                          <label description="Texto de la nota" languagecode="3082" />
                         </labels>
                         <control id="notescontrol" classid="{06375649-C143-495E-A496-C962E5B4488E}" disabled="false">
                           <parameters>
@@ -383,6 +416,7 @@
         <tab name="details" id="{cafbf41a-42bf-4665-8562-1e37017eba69}" IsUserDefined="0" labelid="{cfcfe4f4-c5fc-4bad-9503-370804025596}">
           <labels>
             <label description="Details" languagecode="1033" />
+            <label description="Detalles" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -390,18 +424,21 @@
                 <section name="professional information" showlabel="true" showbar="true" id="{a778d498-3bf2-4c33-85e2-7730d8ae126b}" IsUserDefined="0" labelid="{20cf2579-4106-4ec5-b34e-aee772ffbe3d}">
                   <labels>
                     <label description="Professional Information" languagecode="1033" />
+                    <label description="Información profesional" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{c21cf98d-7d3a-4e4c-815c-5fd6de4b89d7}" labelid="{15a23a35-0f8f-4e1f-a353-8f01dd805614}">
                         <labels>
                           <label description="Department" languagecode="1033" />
+                          <label description="Departamento" languagecode="3082" />
                         </labels>
                         <control id="department" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="department" />
                       </cell>
                       <cell id="{c545928a-8081-4b80-a21e-8a3c405dd0b0}" labelid="{df908251-ffef-47cb-8acd-9601c52d1662}">
                         <labels>
                           <label description="Role" languagecode="1033" />
+                          <label description="Rol" languagecode="3082" />
                         </labels>
                         <control id="accountrolecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="accountrolecode" />
                       </cell>
@@ -410,12 +447,14 @@
                       <cell id="{452ca48e-8c7b-4a96-81f7-387d0c9b033c}" labelid="{a428378b-8340-407f-af85-71873072c92b}">
                         <labels>
                           <label description="Manager" languagecode="1033" />
+                          <label description="Gerente" languagecode="3082" />
                         </labels>
                         <control id="managername" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="managername" />
                       </cell>
                       <cell id="{80128d81-f664-47c0-b348-d176679224b9}" labelid="{97403fb8-a7d2-4eeb-bbc8-ae56af1fc73a}">
                         <labels>
                           <label description="Assistant" languagecode="1033" />
+                          <label description="Asistente" languagecode="3082" />
                         </labels>
                         <control id="assistantname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="assistantname" />
                       </cell>
@@ -424,12 +463,14 @@
                       <cell id="{d336a999-cdf1-4109-bcbe-db27ec0b7e72}" labelid="{3f2af5a4-3e67-47ee-a9be-418b48c89f22}">
                         <labels>
                           <label description="Manager Phone" languagecode="1033" />
+                          <label description="Teléfono del gerente" languagecode="3082" />
                         </labels>
                         <control id="managerphone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="managerphone" />
                       </cell>
                       <cell id="{cb2ae5b6-2919-439e-ab41-327d880272a8}" labelid="{a5328577-dfb9-44ab-b858-776e1b12b8b2}">
                         <labels>
                           <label description="Assistant Phone" languagecode="1033" />
+                          <label description="Teléfono del asistente" languagecode="3082" />
                         </labels>
                         <control id="assistantphone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="assistantphone" />
                       </cell>
@@ -439,18 +480,21 @@
                 <section name="personal information" showlabel="true" showbar="true" id="{518cc50e-1350-4b4b-a056-fc3c0e7d36d7}" IsUserDefined="0" labelid="{311152ec-ee72-4b6b-903b-e329069eed15}">
                   <labels>
                     <label description="Personal Information" languagecode="1033" />
+                    <label description="Información personal" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{9748b178-14ab-49af-8985-c02de8892720}" labelid="{c3c58978-2053-41ee-be67-9f7d70662765}">
                         <labels>
                           <label description="Gender" languagecode="1033" />
+                          <label description="Género" languagecode="3082" />
                         </labels>
                         <control id="gendercode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="gendercode" />
                       </cell>
                       <cell id="{b2adc634-723e-4e87-b8f1-b62e3cf1fad1}" labelid="{85c8f1f1-5546-4e90-ad64-2d526d051add}">
                         <labels>
                           <label description="Birthday" languagecode="1033" />
+                          <label description="Cumpleaños" languagecode="3082" />
                         </labels>
                         <control id="birthdate" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="birthdate" />
                       </cell>
@@ -459,12 +503,14 @@
                       <cell id="{acac3dbc-a956-459f-9dba-8c3f5ce3777a}" labelid="{1ca28e36-32fa-490a-a44b-b91225673242}">
                         <labels>
                           <label description="Marital Status" languagecode="1033" />
+                          <label description="Estado civil" languagecode="3082" />
                         </labels>
                         <control id="familystatuscode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="familystatuscode" />
                       </cell>
                       <cell id="{4435fdd5-a586-436e-882c-58b516484ae1}" labelid="{1bb9bea2-b445-4eec-8eb1-e0c743a433ec}">
                         <labels>
                           <label description="Anniversary" languagecode="1033" />
+                          <label description="Aniversario" languagecode="3082" />
                         </labels>
                         <control id="anniversary" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="anniversary" />
                       </cell>
@@ -473,12 +519,13 @@
                       <cell id="{4bd24018-9343-41e8-b119-66c87186ef1c}" labelid="{c747b037-62ba-4d8a-9641-5e6f9f45618b}">
                         <labels>
                           <label description="Spouse/Partner Name" languagecode="1033" />
+                          <label description="Nombre del cónyuge/pareja" languagecode="3082" />
                         </labels>
                         <control id="spousesname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="spousesname" />
                       </cell>
                       <cell id="{4fbd33df-9d2c-4df4-a9e5-9d7219087f75}" labelid="{ad7ed9a9-09a8-4169-8b4e-8bb1b2ee7671}" showlabel="false">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -491,6 +538,7 @@
         <tab name="administration" id="{0dd7233e-247b-4eef-a71b-0185da6d16ad}" IsUserDefined="0" labelid="{ffa6d747-e770-43bd-a340-03c3861c6701}">
           <labels>
             <label description="Preferences" languagecode="1033" />
+            <label description="Preferencias" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -498,18 +546,20 @@
                 <section name="internal information" showlabel="false" showbar="false" id="{c3e86ffb-2b8b-4c56-877f-67bdaa5a7363}" IsUserDefined="0" labelid="{28b89564-76cf-4a5e-9f1e-e289e642f153}">
                   <labels>
                     <label description="Internal Information" languagecode="1033" />
+                    <label description="Información interna" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{2329843a-6ab4-4431-8a2b-101f3272e104}" labelid="{686a0ae5-0ebe-4a4e-8390-3e1ff324d160}">
                         <labels>
                           <label description="Owner" languagecode="1033" />
+                          <label description="Propietario" languagecode="3082" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>
                       <cell id="{f2399ce4-c0a8-4763-9cb0-e5b1bc678016}" labelid="{8fe82a47-e9cd-4608-9230-cde45d7c4336}" showlabel="false">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -518,18 +568,21 @@
                 <section name="billing information" showlabel="true" showbar="true" id="{0738bc1c-9226-486d-9258-9b6fc75cbaa7}" IsUserDefined="0" labelid="{b4b45a67-37b0-4f63-b69a-a7c0f3994ef1}">
                   <labels>
                     <label description="Billing Information" languagecode="1033" />
+                    <label description="Información de facturación" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{d9a0c6e4-2016-48cd-b0c1-a6a03e9d47c6}" labelid="{356178a0-5989-4b5d-a076-ea0f58c853f7}">
                         <labels>
                           <label description="Currency" languagecode="1033" />
+                          <label description="Moneda" languagecode="3082" />
                         </labels>
                         <control id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" />
                       </cell>
                       <cell id="{cf9708ff-df37-4fda-86c3-79896dbeaa2c}" labelid="{5b2a46f8-474b-4f51-9c0a-14765084f63b}">
                         <labels>
                           <label description="Payment Terms" languagecode="1033" />
+                          <label description="Términos de pago" languagecode="3082" />
                         </labels>
                         <control id="paymenttermscode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="paymenttermscode" />
                       </cell>
@@ -538,12 +591,13 @@
                       <cell id="{200a7ca9-4a7e-4462-8f22-9a13ce27bd46}" labelid="{a2c2b582-1ab7-4ccd-b700-fda90057e3ae}">
                         <labels>
                           <label description="Credit Limit" languagecode="1033" />
+                          <label description="Límite de crédito" languagecode="3082" />
                         </labels>
                         <control id="creditlimit" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="creditlimit" />
                       </cell>
                       <cell id="{ecdd6e65-cd72-4f7e-8d39-b2b3306bd295}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -551,12 +605,13 @@
                       <cell id="{86ed48db-8fdc-4880-aa78-1532af6060ee}" labelid="{1f591775-7f08-49cd-81be-c5c0f5affb3a}">
                         <labels>
                           <label description="Credit Hold" languagecode="1033" />
+                          <label description="Retención de crédito" languagecode="3082" />
                         </labels>
                         <control id="creditonhold" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="creditonhold" />
                       </cell>
                       <cell id="{cefb2966-525d-46c3-a248-764db1148978}" labelid="{c70d7dfd-9e30-4aed-96fc-4be9f9a59bed}" showlabel="false">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -565,18 +620,21 @@
                 <section name="contact methods" showlabel="true" showbar="true" id="{fa46a68d-a6b2-4cc1-9d00-4abd1d46c8f4}" IsUserDefined="0" labelid="{91db762d-5655-4bff-a2f8-9df93085b74c}">
                   <labels>
                     <label description="Contact Methods" languagecode="1033" />
+                    <label description="Métodos de contacto" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{18a3ffc9-8174-48a3-9317-78d287ffccbd}" labelid="{b063581b-026a-408f-9251-6216615c3f62}">
                         <labels>
                           <label description="Contact Method" languagecode="1033" />
+                          <label description="Método de contacto" languagecode="3082" />
                         </labels>
                         <control id="preferredcontactmethodcode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="preferredcontactmethodcode" />
                       </cell>
                       <cell id="{e19e07c7-983c-4abe-bae3-8f6428411493}" labelid="{942b6c86-efa9-4932-bc85-1d838dc274b1}">
                         <labels>
                           <label description="Bulk Email" languagecode="1033" />
+                          <label description="Correo electrónico masivo" languagecode="3082" />
                         </labels>
                         <control id="donotbulkemail" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotbulkemail" />
                       </cell>
@@ -585,12 +643,14 @@
                       <cell id="{b2bbf0b6-c969-4b89-8e50-786f268ff3b9}" labelid="{5fe7076e-3c90-4217-aa3a-3ef2857c5f17}">
                         <labels>
                           <label description="Email" languagecode="1033" />
+                          <label description="Correo electrónico" languagecode="3082" />
                         </labels>
                         <control id="donotemail" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotemail" />
                       </cell>
                       <cell id="{38287f59-6d80-4089-8537-ca504c5019a9}" labelid="{fbb80dcd-3cac-4b3b-874c-bf0e998daf88}">
                         <labels>
                           <label description="Fax" languagecode="1033" />
+                          <label description="Fax" languagecode="3082" />
                         </labels>
                         <control id="donotfax" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotfax" />
                       </cell>
@@ -599,12 +659,13 @@
                       <cell id="{c2f59461-c812-4b37-9fa8-45cfb6e3e2bb}" labelid="{9c6cb2fa-a85a-4673-9096-cbe382c2556d}">
                         <labels>
                           <label description="Phone" languagecode="1033" />
+                          <label description="Teléfono" languagecode="3082" />
                         </labels>
                         <control id="donotphone" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotphone" />
                       </cell>
                       <cell id="{9a8793a2-15ba-4963-aee6-901bce1466dc}" labelid="{b6a141ee-5506-4a98-be21-bdfd88651333}" showlabel="false">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -612,12 +673,13 @@
                       <cell id="{acf821a9-3afe-46bf-921e-1250ee3bb926}" labelid="{6fc32975-a19e-4de8-a4f1-ef4016fc7c98}">
                         <labels>
                           <label description="Mail" languagecode="1033" />
+                          <label description="Correo" languagecode="3082" />
                         </labels>
                         <control id="donotpostalmail" classid="{67FAC785-CD58-4f9f-ABB3-4B7DDC6ED5ED}" datafieldname="donotpostalmail" />
                       </cell>
                       <cell id="{07196ff5-08d4-4ed2-84a0-1630a841bec3}" labelid="{64dadc29-2617-4c32-9bf4-30f19b37f9bc}" showlabel="false">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -630,6 +692,7 @@
         <tab name="notes and activities" id="{A6C643C6-E98F-4738-812F-0B7F7FFC80F7}" IsUserDefined="0" expanded="false" labelid="{75008d75-e801-4e51-9edc-225db102e289}" visible="false">
           <labels>
             <label description="Notes &amp; Activities" languagecode="1033" />
+            <label description="Notas y actividades" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -637,12 +700,14 @@
                 <section name="activities" showlabel="true" showbar="true" id="{f5e95813-3c0a-4385-b2a8-5d88c9edfaf9}" IsUserDefined="0" height="auto" labelid="{617ba139-4eb7-4ac7-a3b5-fc2b60c7528d}">
                   <labels>
                     <label description="Activities" languagecode="1033" />
+                    <label description="Actividades" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{98af12b2-d2af-46c6-9bdf-9bc25684abd4}" showlabel="false" colspan="2" auto="true" rowspan="7" labelid="{ca932572-d4a9-4626-ac25-b8f38f245c26}">
                         <labels>
                           <label description="Activities" languagecode="1033" />
+                          <label description="Actividades" languagecode="3082" />
                         </labels>
                         <control id="contactactivitiesgrid" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
                           <parameters>
@@ -670,12 +735,14 @@
                 <section name="notes" showlabel="true" showbar="true" id="{B798FA27-F9FC-4580-988C-0BA75C444488}" IsUserDefined="0" height="auto" labelid="{0a319834-9c53-4e04-b458-d91a21d8b265}">
                   <labels>
                     <label description="Notes" languagecode="1033" />
+                    <label description="Notas" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell colspan="2" showlabel="false" rowspan="5" auto="false" id="{a9d8114e-4852-4462-84a3-f4b398a4fe71}" labelid="{f125f93c-3c65-4ed4-992a-a5a4f07e04fc}">
                         <labels>
                           <label description="Note Text" languagecode="1033" />
+                          <label description="Texto de la nota" languagecode="3082" />
                         </labels>
                         <control id="notescontrol" classid="{06375649-C143-495E-A496-C962E5B4488E}" />
                       </cell>
@@ -696,35 +763,39 @@
           <row>
             <cell locklevel="0" id="{4ed33ae9-4072-4d4f-a962-cc13716ff270}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell locklevel="0" id="{e32a1830-2915-4690-9f0c-85f46d9f30c0}" showlabel="false">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{744ea445-a710-493b-be97-2c912c0a05a0}" locklevel="0" colspan="1" rowspan="1">
               <labels>
                 <label description="Engagement Status" languagecode="1033" />
+                <label description="Estado de interacción" languagecode="3082" />
               </labels>
               <control id="header_tavu_engagementstatus" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_engagementstatus" disabled="false" />
             </cell>
             <cell id="{6020a672-38f0-4f22-9866-d17938cc02b6}" locklevel="0" colspan="1" rowspan="1">
               <labels>
                 <label description="Open Cases Count" languagecode="1033" />
+                <label description="Cantidad de casos abiertos" languagecode="3082" />
               </labels>
               <control id="header_tavu_opencasescount" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_opencasescount" disabled="false" />
             </cell>
             <cell id="{0efd951e-285c-4e57-bf96-2acd3b07fda5}" locklevel="0" colspan="1" rowspan="1">
               <labels>
                 <label description="Last Email Date" languagecode="1033" />
+                <label description="Fecha del último correo electrónico" languagecode="3082" />
               </labels>
               <control id="header_tavu_lastemaildate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_lastemaildate" disabled="false" />
             </cell>
             <cell id="{de23eb5d-f57a-429f-9dd2-f7f71696cf0f}" locklevel="0" colspan="1" rowspan="1">
               <labels>
                 <label description="Last Meeting Date" languagecode="1033" />
+                <label description="Fecha de última reunión" languagecode="3082" />
               </labels>
               <control id="header_tavu_lastmeetingdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_lastmeetingdate" disabled="false" />
             </cell>
@@ -805,17 +876,17 @@
           <row>
             <cell id="{f13f71fe-dc88-4e4e-9e9d-08fa75bef335}" showlabel="false" labelid="{796b84bb-b24a-47c5-9d10-e545dcbbf290}">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{29a7c875-9c97-4c70-8bef-da56a6078e40}" showlabel="false" labelid="{75bd891c-36b7-4cb4-a597-af6b3605df6c}">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{8779d23a-8d14-455f-a72c-fbc5556cf8d7}" showlabel="false" labelid="{6e13b263-7f05-47c2-8942-eb2b65b0f5f6}">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -873,9 +944,11 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Contact Information" languagecode="1033" />
+      <LocalizedName description="Información de contacto" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Un formulario para esta entidad." languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

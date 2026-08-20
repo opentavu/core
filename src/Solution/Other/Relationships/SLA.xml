@@ -18,6 +18,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Choose the service level agreement (SLA) that you want to apply to the case record." languagecode="1033" />
+        <Description description="Elija el acuerdo de nivel de servicio (SLA) que desea aplicar al registro de caso." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -52,6 +53,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
+        <Description description="Último SLA que se aplicó a este caso. Este campo es solo para uso interno." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -73,6 +75,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Choose the service level agreement (SLA) that you want to apply to the case record." languagecode="1033" />
+        <Description description="Elija el acuerdo de nivel de servicio (SLA) que desea aplicar al registro de caso." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -107,6 +110,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
+        <Description description="Último SLA que se aplicó a este caso. Este campo es solo para uso interno." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>
@@ -128,6 +132,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Choose the service level agreement (SLA) that you want to apply to the case record." languagecode="1033" />
+        <Description description="Elija el acuerdo de nivel de servicio (SLA) que desea aplicar al registro de caso." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
     <EntityRelationshipRoles>
@@ -162,6 +167,7 @@
     <RelationshipDescription>
       <Descriptions>
         <Description description="Last SLA that was applied to this case. This field is for internal use only." languagecode="1033" />
+        <Description description="Último SLA que se aplicó a este caso. Este campo es solo para uso interno." languagecode="3082" />
       </Descriptions>
     </RelationshipDescription>
   </EntityRelationship>

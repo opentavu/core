@@ -7,6 +7,7 @@
   <ExternalTypeName></ExternalTypeName>
   <displaynames>
     <displayname description="Engagement Status" languagecode="1033" />
+    <displayname description="Estado de interacción" languagecode="3082" />
   </displaynames>
   <Descriptions>
     <Description description="" languagecode="1033" />
@@ -15,6 +16,7 @@
     <option value="576600000" ExternalValue="" Color="#605E5C" IsHidden="0">
       <labels>
         <label description="Cold" languagecode="1033" />
+        <label description="Frío" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -23,6 +25,7 @@
     <option value="576600001" ExternalValue="" Color="#107C10" IsHidden="0">
       <labels>
         <label description="Engaged" languagecode="1033" />
+        <label description="Comprometido" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />
@@ -31,6 +34,7 @@
     <option value="576600002" ExternalValue="" Color="#A4262C" IsHidden="0">
       <labels>
         <label description="Inactive" languagecode="1033" />
+        <label description="Inactivo" languagecode="3082" />
       </labels>
       <Descriptions>
         <Description description="" languagecode="1033" />

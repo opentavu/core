@@ -10,6 +10,7 @@
         <tab id="ACBA75B7-97B6-4116-AA55-51312992B721" name="tab_1" showlabel="false" labelid="{5c9e144d-1486-41eb-b55d-c7a9d556908d}">
           <labels>
             <label description="New Tab" languagecode="1033" />
+            <label description="Nueva pestaña" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +18,13 @@
                 <section id="AD49B5BF-256F-46A8-9C75-947146172EB9" name="tab_1_column_1_section_1" columns="1" showlabel="false" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{92127ef0-40c9-4013-b1f6-23ea59bcaa79}">
                   <labels>
                     <label description="New Section" languagecode="1033" />
+                    <label description="Nueva sección" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="C0550AC7-0F44-45A4-8EF5-D2911C0689D9" labelid="{26da1489-528c-4864-a8c4-b9a1c21b66c2}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -30,6 +32,7 @@
                       <cell id="{3f6b3776-08ac-4008-802e-6221b5ae8226}" locklevel="0" colspan="1" rowspan="1" labelid="{f4e34df8-1f18-41a4-9dc5-06d0bc446407}">
                         <labels>
                           <label description="Customer Tier" languagecode="1033" />
+                          <label description="Nivel de cliente" languagecode="3082" />
                         </labels>
                         <control id="tavu_customertier" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_customertier" disabled="false" />
                       </cell>
@@ -38,6 +41,7 @@
                       <cell id="{4f184d00-e848-4959-9360-99379832d42d}" locklevel="0" colspan="1" rowspan="1" labelid="{f61f8947-ce23-48d4-9f6d-fca0174c240a}">
                         <labels>
                           <label description="Is Customer" languagecode="1033" />
+                          <label description="Es cliente" languagecode="3082" />
                         </labels>
                         <control id="tavu_iscustomer" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_iscustomer" disabled="false" />
                       </cell>
@@ -46,6 +50,7 @@
                       <cell id="{77f7fd61-ab9f-4a80-ac17-3e7df70a1b1e}" locklevel="0" colspan="1" rowspan="1" labelid="{8cc31f0f-05e7-4254-98c4-6c33e92f0426}">
                         <labels>
                           <label description="Customer Since" languagecode="1033" />
+                          <label description="Cliente desde" languagecode="3082" />
                         </labels>
                         <control id="tavu_customersince" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_customersince" disabled="false" />
                       </cell>
@@ -66,6 +71,7 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Customer Status" languagecode="1033" />
+      <LocalizedName description="Estado del cliente" languagecode="3082" />
     </LocalizedNames>
   </systemform>
 </forms>

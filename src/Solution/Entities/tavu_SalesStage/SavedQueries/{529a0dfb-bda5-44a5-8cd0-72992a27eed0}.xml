@@ -32,6 +32,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Sales Stage Associated View" languagecode="1033" />
+      <LocalizedName description="Vista asociada de etapas de venta" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

@@ -32,6 +32,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Customer Tier Definition Associated View" languagecode="1033" />
+      <LocalizedName description="Vista asociada de definición de nivel de cliente" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

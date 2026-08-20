@@ -40,6 +40,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Inactive Unit of Measures" languagecode="1033" />
+      <LocalizedName description="Unidades de medida inactivas" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>

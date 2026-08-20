@@ -10,6 +10,7 @@
         <tab id="ACBA75B7-97B6-4116-AA55-51312992B721" name="tab_1" showlabel="false" labelid="{eb95682b-65d0-4fe7-b728-236c9608a70e}">
           <labels>
             <label description="New Tab" languagecode="1033" />
+            <label description="Nueva pestaña" languagecode="3082" />
           </labels>
           <columns>
             <column width="100%">
@@ -17,12 +18,13 @@
                 <section id="AD49B5BF-256F-46A8-9C75-947146172EB9" name="tab_1_column_1_section_1" columns="1" showlabel="false" showbar="false" IsUserDefined="0" labelwidth="130" labelid="{9e15f46c-2533-44e1-9094-3a8e5d228f91}">
                   <labels>
                     <label description="New Section" languagecode="1033" />
+                    <label description="Nueva sección" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="C0550AC7-0F44-45A4-8EF5-D2911C0689D9" labelid="{26ead497-7a4d-4316-8b82-4cf9c40d424e}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                       </cell>
                     </row>
@@ -30,6 +32,7 @@
                       <cell id="{5835c2b4-24ee-49c7-a6c8-35448843d6f6}" locklevel="0" colspan="1" rowspan="1" labelid="{5af87324-ad59-40c9-b464-a43d05681f7c}">
                         <labels>
                           <label description="Primary Contact" languagecode="1033" />
+                          <label description="Contacto principal" languagecode="3082" />
                         </labels>
                         <control id="primarycontactid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="primarycontactid" disabled="false" />
                       </cell>
@@ -38,6 +41,7 @@
                       <cell id="{d21dad94-ec83-4557-897c-6650ff49cdbb}" locklevel="0" colspan="1" rowspan="1" labelid="{1a38fd54-64ca-488f-8fb6-1f3cbf8cc5be}">
                         <labels>
                           <label description="Is Customer" languagecode="1033" />
+                          <label description="Es cliente" languagecode="3082" />
                         </labels>
                         <control id="tavu_iscustomer" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_iscustomer" disabled="false" />
                       </cell>
@@ -46,6 +50,7 @@
                       <cell id="{15fbb463-027a-468f-9a76-4c6ffa1aea27}" locklevel="0" colspan="1" rowspan="1" labelid="{0be4d6df-0070-423f-9e99-3ae712de36bb}">
                         <labels>
                           <label description="Customer Tier" languagecode="1033" />
+                          <label description="Nivel de cliente" languagecode="3082" />
                         </labels>
                         <control id="tavu_customertier" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_customertier" disabled="false" />
                       </cell>
@@ -54,6 +59,7 @@
                       <cell id="{89633f0f-2fd1-48bb-bd1e-e62e489de2d6}" locklevel="0" colspan="1" rowspan="1" labelid="{4ae17101-52c4-4292-bfd1-f2f0a7df6145}">
                         <labels>
                           <label description="Customer Since" languagecode="1033" />
+                          <label description="Cliente desde" languagecode="3082" />
                         </labels>
                         <control id="tavu_customersince" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_customersince" disabled="false" />
                       </cell>
@@ -74,6 +80,7 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Customer Overview" languagecode="1033" />
+      <LocalizedName description="Resumen del cliente" languagecode="3082" />
     </LocalizedNames>
   </systemform>
 </forms>

@@ -10,6 +10,7 @@
         <tab verticallayout="true" id="{acc4d025-a70f-42ef-8ace-c3a49b914dde}" IsUserDefined="1">
           <labels>
             <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
           </labels>
           <columns>
             <column width="33%">
@@ -17,12 +18,14 @@
                 <section showlabel="false" showbar="false" IsUserDefined="0" id="{c589e65e-f14c-4372-ba65-e5389d8f718b}">
                   <labels>
                     <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell id="{5b18fefa-d918-42ae-b2c6-37bb3dca7876}">
                         <labels>
                           <label description="Subject" languagecode="1033" />
+                          <label description="Asunto" languagecode="3082" />
                         </labels>
                         <control id="subject" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="subject" />
                       </cell>
@@ -31,6 +34,7 @@
                       <cell id="{4d0473f7-4284-49bb-9bb7-2bdc156f86ce}">
                         <labels>
                           <label description="Owner" languagecode="1033" />
+                          <label description="Propietario" languagecode="3082" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>
@@ -39,6 +43,7 @@
                       <cell id="{d322dfe6-1023-48f6-813f-d8016ae2965a}">
                         <labels>
                           <label description="Regarding" languagecode="1033" />
+                          <label description="Referente a" languagecode="3082" />
                         </labels>
                         <control id="regardingobjectid" classid="{F3015350-44A2-4aa0-97B5-00166532B5E9}" datafieldname="regardingobjectid" />
                       </cell>
@@ -52,12 +57,14 @@
                 <section showlabel="false" showbar="false" id="{6b4e6124-e6fa-41a2-b634-17ee12d2a24f}" IsUserDefined="0" height="auto">
                   <labels>
                     <label description="Notes" languagecode="1033" />
+                    <label description="Notas" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
                       <cell showlabel="false" rowspan="15" auto="false" id="{f9b5bbbc-c69c-485e-88fc-35061a42acf8}">
                         <labels>
                           <label description="Note Text" languagecode="1033" />
+                          <label description="Texto de la nota" languagecode="3082" />
                         </labels>
                         <control id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}">
                           <parameters>
@@ -93,24 +100,28 @@
             <cell id="{a287e6bd-406d-4092-bab4-5cef499a9fcb}">
               <labels>
                 <label description="Priority" languagecode="1033" />
+                <label description="Prioridad" languagecode="3082" />
               </labels>
               <control id="header_prioritycode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="prioritycode" disabled="false" />
             </cell>
             <cell id="{9279a626-c186-45ca-8352-b41eb91c3fad}">
               <labels>
                 <label description="Due Date" languagecode="1033" />
+                <label description="Fecha de vencimiento" languagecode="3082" />
               </labels>
               <control id="header_scheduledend" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="scheduledend" disabled="false" />
             </cell>
             <cell id="{a41d3931-4290-45a0-bb1e-f71a7d491bec}">
               <labels>
                 <label description="Activity Status" languagecode="1033" />
+                <label description="Estado de la actividad" languagecode="3082" />
               </labels>
               <control id="header_statecode" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="statecode" disabled="false" />
             </cell>
             <cell id="{a04f8076-01eb-4762-9469-8801675c09d9}">
               <labels>
                 <label description="Owner" languagecode="1033" />
+                <label description="Propietario" languagecode="3082" />
               </labels>
               <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
             </cell>
@@ -122,9 +133,11 @@
     <CanBeDeleted>1</CanBeDeleted>
     <LocalizedNames>
       <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Un formulario para esta entidad." languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

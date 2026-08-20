@@ -21,9 +21,11 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Calendar Working Hours" languagecode="1033" />
+      <LocalizedName description="Horario laboral del calendario" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="All active Calendar Working Hours" languagecode="1033" />
+      <Description description="Todos los horarios laborales de calendario activos" languagecode="3082" />
     </Descriptions>
   </savedquery>
 </savedqueries>

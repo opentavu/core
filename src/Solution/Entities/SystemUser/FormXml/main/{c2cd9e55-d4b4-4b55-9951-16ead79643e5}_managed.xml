@@ -16,7 +16,7 @@
                     <row>
                       <cell id="{4a21d430-9144-47ef-a80e-4b809ef0f068}" locklevel="0" colspan="1" rowspan="1" ordinalvalue="10005" solutionaction="Added">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="" languagecode="3082" />
                         </labels>
                         <control id="tavu_meetingsyncenabled" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_meetingsyncenabled" disabled="false" uniqueid="{1b621fba-9a4f-4bda-a9ef-b02e0f7a6d05}" />
                       </cell>
@@ -47,17 +47,17 @@
           <row>
             <cell id="{4de02d43-621f-42e1-9d10-226f964904fd}" showlabel="false" ordinalvalue="10000">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{a890147f-1ff1-4da7-925b-b831c89d9d18}" showlabel="false" ordinalvalue="20001">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
             <cell id="{4b59cf8f-2174-4a42-8935-8173c5084108}" showlabel="false" ordinalvalue="30002">
               <labels>
-                <label description="" languagecode="1033" />
+                <label description="" languagecode="3082" />
               </labels>
             </cell>
           </row>
@@ -90,9 +90,11 @@
     </form>
     <LocalizedNames>
       <LocalizedName description="User" languagecode="1033" />
+      <LocalizedName description="Usuario" languagecode="3082" />
     </LocalizedNames>
     <Descriptions>
       <Description description="Updated default User form" languagecode="1033" />
+      <Description description="Formulario de usuario predeterminado actualizado" languagecode="3082" />
     </Descriptions>
   </systemform>
 </forms>

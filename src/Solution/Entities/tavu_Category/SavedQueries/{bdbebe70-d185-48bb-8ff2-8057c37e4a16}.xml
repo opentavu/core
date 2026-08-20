@@ -31,6 +31,7 @@
     <IntroducedVersion>1.0</IntroducedVersion>
     <LocalizedNames>
       <LocalizedName description="Category Lookup View" languagecode="1033" />
+      <LocalizedName description="Vista de búsqueda de categoría" languagecode="3082" />
     </LocalizedNames>
   </savedquery>
 </savedqueries>
