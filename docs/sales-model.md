@@ -500,7 +500,7 @@ This is the central table of the sales model. Each opportunity represents a spec
 
 OpenTavu deliberately keeps `statecode` and `statuscode` minimal and uses a dedicated lookup field (`tavu_salesstage` → `tavu_salesstage` configuration table, see Section 6.3bis) to represent the pipeline stage. This decision is grounded in a real-world observation: every firm has its own vocabulary for sales stages (one firm uses "RFI / Evaluation / RFP / Offer / Negotiation", another uses "Discovery / Proposal Drafted / Proposal Sent / Negotiation", another uses "Qualification / Demo / Quote / Commit"). Hardcoding these into `statuscode` makes the product un-deployable to firms with their own pipeline taxonomy — and locks the AI Forecasting roadmap module to a fixed vocabulary.
 
-By moving the granular pipeline stage to a configurable lookup, OpenTavu becomes truly multi-tenant deployable and prepares the data layer for the future "AI-Assisted Forecasting & Capacity Planning" module (see VISION.md Section 8 roadmap).
+By moving the granular pipeline stage to a configurable lookup, OpenTavu becomes truly multi-tenant deployable and prepares the data layer for the future "AI-Assisted Forecasting" module (see VISION.md Section 8 roadmap).
 
 | State (statecode) | Status Reasons (statuscode) | Meaning |
 | :---- | :---- | :---- |
@@ -528,6 +528,8 @@ By moving the granular pipeline stage to a configurable lookup, OpenTavu becomes
 | **Sales Stage** | **tavu\_salesstage** | **Lookup → tavu\_salesstage** | **Required** | **Configurable pipeline stage. See Section 6.3bis.** |
 | Probability | tavu\_probability | Whole Number (0-100) | Optional | Auto-populated from Sales Stage default. Editable. |
 | Probability Is Manual | tavu\_probabilityismanual | Yes/No | Optional | Set to Yes when consultant overrides default. Plugin reads this flag to decide whether to re-apply stage default on stage change. |
+| Forecast Category | tavu\_forecastcategory | Choice (Pipeline / Best Case / Committed / Closed) | Optional | Auto-populated from the Sales Stage's forecast category, but **settable per opportunity by the seller** — so a specific deal can be committed or held back independently of its stage. Same defaulting pattern as Probability. See Section 6.3bis. |
+| Forecast Category Is Manual | tavu\_forecastcategoryismanual | Yes/No | Optional | Set to Yes when the seller overrides the stage-default category. Plugin re-applies the stage default on stage change only when this is No (mirrors `tavu_probabilityismanual`). |
 | Discovery Notes | tavu\_discoverynotes | Multiple Lines | Optional |  |
 | Source Lead | tavu\_sourcelead | Lookup → tavu\_lead | Optional | If it came from Path B |
 | Lost Reason | tavu\_lostreason | Lookup → Global Choice tavu\_global\_lostreason | Optional | Mirror from close activity |
@@ -589,7 +591,7 @@ This master table captures the pipeline stages used by `tavu_opportunity`. It ex
 | Default Probability | tavu\_defaultprobability | Whole Number (0-100) | Required | Default probability applied to opportunities entering this stage |
 | Forecast Category | tavu\_forecastcategory | Choice | Required | Pipeline / Best Case / Committed / Closed |
 | Is Active | tavu\_isactive | Yes/No | Required | Default: Yes. Inactive stages disappear from new opportunity forms but remain readable for historical records |
-| Color | tavu\_color | Single Line | Optional | Hex code for Power BI funnel visualizations |
+| Color | tavu\_color | Single Line | Optional | Hex code for funnel visualizations (native charts, PCF/ECharts, or Power BI) |
 | Notes | tavu\_notes | Multiple Lines | Optional | Internal documentation: "When does an opportunity enter this stage? What signals justify advancing?" |
 
 **Forecast Category — semantic meaning:**
@@ -602,6 +604,10 @@ This Choice field is standard forecasting terminology in mature commercial organ
 | **Best Case** | Active engagement. Reasonable chance to close. | 40–65% |
 | **Committed** | Late-stage, strong signals of close. Forecast-grade. | 70–95% |
 | **Closed** | Terminal stage (Won or Lost). Probability = 100% or 0%. | — |
+
+**Stage default vs. per-opportunity override.** The forecast category on `tavu_salesstage` is the **default**; the operative category lives on the opportunity (`tavu_opportunity.tavu_forecastcategory`, added to the opportunity field list above). Each firm maps its own stages to the four standard categories (many stages → one category — e.g. a bid-driven shop maps *RFP* and *Offer* both to Best Case), and the forecasting engine only ever reasons about the four categories, never the firm's stage names. The seller can then commit or hold back a specific deal without changing its stage, following the same manual-override pattern as probability. This is the mature commit-forecasting model (Salesforce/Clari) and is required for the goal/attainment layer below.
+
+**Goal / quota, attainment, and coverage (forecasting layer).** Sales targets are held per user/team/period in a lean custom schema (`tavu_salesperiod`, `tavu_salestarget`, `tavu_forecastsnapshot`) using **native Dataverse rollup fields** for all attainment math — never the native Dynamics `Goal`/forecast tables, which are Restricted and would require a Dynamics 365 license, breaking the Power Apps Premium envelope. The forecast that leadership commits to is the **deterministic sum by category** (Closed Won + Committed), with a manager-adjustable number, not a probability-weighted expected-value sum (a fiction at low deal volume). **Pipeline coverage** is derived from each firm's own win rate rather than the generic SaaS "3–4×" heuristic; for professional services (win rates near ~50%) the healthy coverage is closer to **~2×**, and chasing 3–4× drives systematic over-selling beyond delivery capacity. Full design and evidence: `Research/Sales_Model/Forecasting-Design-Proposal-OpenTavu.md`.
 
 **Default seed data shipped with the managed solution:**
 
@@ -651,14 +657,18 @@ A "Reset Probability to Stage Default" button is available on the opportunity fo
 
 **Why this matters for AI-First:**
 
-The configurable stage table is not just a UX nicety — it is the **data foundation for the AI-Assisted Forecasting & Capacity Planning module** on the roadmap (VISION.md Section 8). When that module ships (target: Month 9–12, once each tenant has accumulated 30+ closed opportunities), it will:
+The configurable stage table is not just a UX nicety — it is the **data foundation for the AI-Assisted Forecasting module** on the roadmap (VISION.md Section 8). The forecasting capability is delivered in two layers with an explicit separation (full design: `Research/Sales_Model/Forecasting-Design-Proposal-OpenTavu.md`):
+
+**Deterministic layer (no AI, no historical data — ships early):** goal/quota & attainment tracking over `tavu_salesperiod` / `tavu_salestarget` / `tavu_forecastsnapshot` with native rollups — attainment %, gap-to-goal, win-rate-derived pipeline coverage (~2× for professional services), and pacing over weekly snapshots.
+
+**AI layer (rides on this stage table + Module 3 activity):**
 
 - Analyze historical Won/Lost ratios per stage **per tenant** (using each firm's own vocabulary)
-- Propose adjusted `tavu_defaultprobability` values to the admin (*"Your Negotiation stage actually closes at 65%, not the 80% currently configured — accept the update?"*)
+- Calibrate stage probabilities with **Empirical Bayes** — start from an industry prior and shrink toward the firm's own conversion as deals close (credible from ~10–50 deals), **instead of** a naïve recompute after a fixed count such as 30 closed deals (statistically unreliable at low volume) — and propose admin-approved adjustments to `tavu_defaultprobability` (*"Your Negotiation stage actually closes at 65%, not the 80% currently configured — accept the update?"*)
 - Generate forecast confidence intervals using the firm's actual conversion curves
-- Detect stuck opportunities relative to typical stage duration
+- Detect deal risk / stuck opportunities from stage duration and Module 3 activity (Azure OpenAI Batch API), surfaced as a view flag + in-app notification + Teams card — no BI license
 
-None of this is possible if pipeline stages live hardcoded in `statuscode`. The architectural decision in this section is the enabling condition for the AI forecasting roadmap module.
+None of this is possible if pipeline stages live hardcoded in `statuscode`. The architectural decision in this section is the enabling condition for the forecasting roadmap module.
 
 ### 6.4 Customer Mode and system-level configuration
 
@@ -1402,7 +1412,7 @@ RetailCorp chooses HubSpot. María clicks "Close Lost":
 
 System creates `tavu_opportunityclose` (Lost), mirrors lostreason and closenotes to opportunity. Proposal → Rejected by Client.
 
-**Power BI reports:** Lost Reasons by Quarter, Lost vs Won by Sales Stage, Pipeline by Forecast Category — all derived from clean structured data.
+**Reports:** Lost Reasons by Quarter, Lost vs Won by Sales Stage, Pipeline by Forecast Category — all derived from clean structured data and rendered through the native model-driven dashboards + PCF/ECharts analytics layer (no Power BI dependency; see `Research/Sales_Model/Analytics-Design-Proposal-OpenTavu.md`).
 
 ---
 
@@ -1638,5 +1648,6 @@ Yes, with one restriction: a proposal uses the currency of the assigned price li
 | 1.9 | July 10, 2026 | Gustavo González Villani (revision with Claude) | Implemented the deterministic **proposal lifecycle** (§8). (1) **Corrected §8.3**: `tavu_version` is real (defaulted to `v1`, incremented by Create New Version); removed the ghost `tavu_documenttype`; fixed `tavu_content` → `tavu_proposalcontent`. (2) New **`Pl.Proposal.LifecycleTracker`** (Pre-Op): version default, transition guard, lock (business `tavu_*` fields once Sent/closed), one Approved per opportunity. (3) **`Pl.ProposalLine.Calculator`**: added line-lock when the parent is locked. (4) New **`tavu_CloneProposalVersion` Custom API** (`Pl.Proposal.CloneVersion`): clones header+lines into a new Draft, increments version, supersedes source. (5) New **`tavu_proposal_form.js`**: Send to Client / Mark as Approved (rolls total to the opportunity + offers Close as Won) / Mark as Lost / Create New Version buttons; visual lock; header totals auto-refresh on add/edit (grid OnSave) and add/delete (subgrid addOnLoad row-count) using the modern Power Apps grid (editable). (6) **Standardized autonumber IDs** `OTC/OTO/OTP-{DATETIMEUTC:yyyy}-{SEQNUM:5}` across Case/Opportunity/Proposal. (7) Fixed the opportunity form JS `tavu_customerid` → `tavu_customer`. Full build detail in `docs/proposal-lifecycle.md`. |
 | 2.0 | July 29, 2026 | Gustavo González Villani (revision with Claude) | Proposal → client email draft + status-model cleanup. (1) **§8.2 statuses reduced**: `Under Internal Review` and `Awaiting Decision` hidden (reversible); active flow Draft / AI Generated → Sent, button-driven, **Status Reason read-only**. (2) New **`tavu_companyprofile`** (Organization-owned single record) for seller branding (logo/color/profile/terms), with `Pl.CompanyProfile.SingleRecordGuard` + `tavu_companyprofile_open` web resource. (3) New **`tavu_BuildProposalEmailDraft` Custom API** (`Pl.Proposal.BuildEmailDraft`): on Send to Client, builds a client email draft (AI body + branded PDF) and opens it in a modal OOB email dialog; toggle `tavu_systemsettings.tavu_proposalemaildraftenabled` (default on). (4) **Gateway** endpoint `/api/proposal/email-draft` (PdfSharpCore/MigraDocCore, MIT) renders the PDF data-driven from Company Profile — in the gateway, not the net462 plugin sandbox. Full detail in `proposal-lifecycle.md`; strategic record in the product master Decisión 43. |
 | 2.1 | July 30, 2026 | Gustavo González Villani (revision with Claude) | **§3.3 lead-processing refinement (design; Module 3 not built yet).** Deterministic dedup first (exact email/domain match — no AI tokens), AI only for fuzzy/uncertain cases. **Promotion boundary (Option A):** AI **auto-links** anonymous inbound that matches an existing Contact/Account (safe/reversible, no new master record); creating a **new** Account/Contact always requires a human **one-click Approve & Promote** (AI pre-fills everything) — protecting the clean master DB, per the triangulated fit-to-segment research. §3.4 updated accordingly. |
+| 2.2 | August 2026 | Gustavo González Villani (revision with Claude) | **Forecasting & analytics decisions (design; triangulated from two deep-research rounds).** (1) Added **opportunity-level `tavu_forecastcategory` + `tavu_forecastcategoryismanual`** (§6.2 opportunity fields) — the forecast category defaults from the stage but is settable per opportunity by the seller (mature commit-forecasting model), mirroring the probability-override pattern. (2) §6.3bis: documented the **stage→category mapping** (many stages → one of four categories; engine reasons only about categories) and the **goal/quota/attainment layer** (`tavu_salesperiod`/`tavu_salestarget`/`tavu_forecastsnapshot`, native rollups, deterministic commit-by-category forecast, manager-adjustable number, **win-rate-derived ~2× coverage** not SaaS 3–4×; never the Restricted native Goal/forecast tables). (3) Reframed the roadmap note as **two layers** — deterministic goal/attainment (ships early) + AI layer using **Empirical-Bayes** calibration (industry prior → shrink to firm data ~10–50 deals) instead of a fixed 30-deal recompute, plus Batch-API deal-risk detection over Module 3 activity. (4) **Analytics is provider-agnostic and Power-BI-free by default** — native model-driven dashboards + PCF/ECharts on pre-aggregated snapshot/cache tables; optional OSS upgrade (Synapse Link → ADLS Gen2 → Metabase). Full detail in `Research/Sales_Model/Forecasting-Design-Proposal-OpenTavu.md` and `Analytics-Design-Proposal-OpenTavu.md`. (5) Renamed the referenced roadmap module to **"AI-Assisted Forecasting"** (capacity planning reframed as light PSA-integration visibility). |
 
 *This document is the operational reference for OpenTavu's sales model.*
