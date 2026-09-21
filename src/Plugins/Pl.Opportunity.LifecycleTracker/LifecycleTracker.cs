@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using OpenTavu.Dataverse.Common;
@@ -9,21 +9,33 @@ namespace Pl.Opportunity.LifecycleTracker
 	/// Maintains derived lifecycle fields on tavu_opportunity records.
 	///
 	/// Currently handles:
-	///   - tavu_stagechangedate: stamped whenever the Sales Stage is set or changed
-	///                           (keyed off tavu_salesstage, not statuscode, so a
-	///                           close/reopen does not corrupt tavu_daysinstage).
-	///   - Close (Won/Lost):     validates the required close inputs (Actual Revenue
-	///                           for Won, Lost Reason for Lost), defaults the close
-	///                           date, and forces tavu_probability to 100 / 0.
-	///   - Reopen (to Open):     re-applies the Sales Stage default probability and
-	///                           clears the manual flag.
-	///   - tavu_probability:     otherwise defaulted from the selected Sales Stage's
-	///                           tavu_defaultprobability, honoring the manual
-	///                           override flag (tavu_probabilityismanual).
+	///   - tavu_stagechangedate:  stamped whenever the Sales Stage is set or changed
+	///                            (keyed off tavu_salesstage, not statuscode, so a
+	///                            close/reopen does not corrupt tavu_daysinstage).
+	///   - Close (Won/Lost):      validates the required close inputs (Actual Revenue
+	///                            for Won, Lost Reason for Lost), defaults the close
+	///                            date, forces tavu_probability to 100 / 0, and forces
+	///                            tavu_forecastcategory to Closed.
+	///   - Reopen (to Open):      re-applies the Sales Stage default probability AND
+	///                            forecast category, and clears both manual flags.
+	///   - tavu_probability:      otherwise defaulted from the selected Sales Stage's
+	///                            tavu_defaultprobability, honoring the manual override
+	///                            flag (tavu_probabilityismanual).
+	///   - tavu_forecastcategory: otherwise defaulted from the selected Sales Stage's
+	///                            tavu_forecastcategory, honoring its own manual override
+	///                            flag (tavu_forecastcategoryismanual). Same pattern as
+	///                            probability; see sales-model.md §6.3bis.
+	///   - tavu_businessline:     defaulted on Create from
+	///                            tavu_systemsettings.tavu_defaultbusinessline when the
+	///                            seller did not pick one (feeds per-business-line
+	///                            forecasting; single-practice firms get the seeded line).
 	///
 	/// The Post-Operation side effects of a close (historical close log, customer
 	/// status marking) live in the separate Pl.Opportunity.CloseOrchestrator
-	/// assembly. This plugin only maintains fields on the opportunity itself.
+	/// assembly. The forecasting target stamp (tavu_salestarget) lives in the separate
+	/// Pl.Opportunity.ForecastStamp assembly so this plugin stays decoupled from the
+	/// forecasting aggregate tables. This plugin only maintains fields on the
+	/// opportunity itself.
 	///
 	/// Designed to grow: additional lifecycle handlers (first activity stamping,
 	/// stalled-deal flagging) can be added as private methods invoked from
@@ -36,12 +48,14 @@ namespace Pl.Opportunity.LifecycleTracker
 	///     Message:              Update
 	///     Primary Entity:       tavu_opportunity
 	///     Filtering Attributes: statuscode, tavu_salesstage,
-	///                           tavu_probability, tavu_probabilityismanual
+	///                           tavu_probability, tavu_probabilityismanual,
+	///                           tavu_forecastcategory, tavu_forecastcategoryismanual
 	///     Stage:                20 (Pre-operation)
 	///     Execution Mode:       Synchronous
 	///     Deployment:           Server
 	///     Pre-Image "PreImg":   tavu_salesstage, tavu_probability,
-	///                           tavu_probabilityismanual, statecode,
+	///                           tavu_probabilityismanual, tavu_forecastcategory,
+	///                           tavu_forecastcategoryismanual, statecode,
 	///                           tavu_actualrevenue, tavu_lostreason
 	///
 	///   Step 2 — Create
@@ -50,17 +64,26 @@ namespace Pl.Opportunity.LifecycleTracker
 	///     Stage:                20 (Pre-operation)
 	///     Execution Mode:       Synchronous
 	///     Deployment:           Server
-	///     (No filtering attributes / no Pre-Image on Create.)
+	///     (No filtering attributes / no Pre-Image on Create. The business-line
+	///      default runs on Create only.)
 	///
 	/// Why Pre-Operation: modifications to the Target entity are persisted by the
 	/// same database write that the user/system originally triggered. No extra
 	/// Update call, no transaction overhead, no recursion risk.
 	///
-	/// Probability defaulting is the server-side safety net for entry paths that
-	/// do not run form scripts (bulk edit, data import, Power Automate, API). The
-	/// form JS (OpenTavu.Opportunity.MainForm) handles the interactive path and
-	/// always writes the manual flag explicitly, so on the form path this handler
-	/// is deterministic. Reference: sales-model.md §6.3bis.
+	/// Probability and forecast-category defaulting are the server-side safety net for
+	/// entry paths that do not run form scripts (bulk edit, data import, Power Automate,
+	/// API). The form JS (OpenTavu.Opportunity.MainForm) handles the interactive path and
+	/// always writes the manual flags explicitly, so on the form path this handler is
+	/// deterministic. Reference: sales-model.md §6.3bis.
+	///
+	/// PREREQUISITES (Step A schema, forecasting build plan §3): this assembly reads and
+	/// writes tavu_forecastcategory + tavu_forecastcategoryismanual + tavu_businessline on
+	/// tavu_opportunity, and tavu_defaultbusinessline on tavu_systemsettings. Those columns
+	/// must exist before build/register. The tavu_forecastcategory Choice on the opportunity
+	/// must bind to the SAME global choice as the stage (tavu_forecastcategory:
+	/// Pipeline 576600000, Best Case 576600001, Committed 576600002, Closed 576600003;
+	/// add Omitted 576600004). tavu_businessline reuses the EXISTING tavu_businessline table.
 	/// </remarks>
 	public class LifecycleTracker : PluginBase
 	{
@@ -77,6 +100,17 @@ namespace Pl.Opportunity.LifecycleTracker
 		private const string StageEntityName = "tavu_salesstage";
 		private const string AttrStageDefaultProbability = "tavu_defaultprobability";
 		private const string PreImageName = "PreImg";
+
+		// Forecast-category defaulting (global choice tavu_forecastcategory, shared with the stage)
+		private const string AttrForecastCategory = "tavu_forecastcategory";
+		private const string AttrForecastCategoryIsManual = "tavu_forecastcategoryismanual";
+		private const string AttrStageForecastCategory = "tavu_forecastcategory"; // on tavu_salesstage
+		private const int FORECAST_CATEGORY_CLOSED = 576600003;
+
+		// Business-line default (reuses the existing tavu_businessline table)
+		private const string AttrBusinessLine = "tavu_businessline";
+		private const string SettingsEntityName = "tavu_systemsettings";
+		private const string AttrDefaultBusinessLine = "tavu_defaultbusinessline";
 
 		// Lifecycle transitions (close / reopen)
 		private const string AttrStateCode = "statecode";
@@ -126,12 +160,17 @@ namespace Pl.Opportunity.LifecycleTracker
 			// whether the current change is relevant to its own concern.
 			HandleStageChangeDate(localContext, target);
 
-			// A close (Won/Lost) or reopen owns the probability explicitly, so it
-			// short-circuits the normal stage-based probability defaulting.
-			if (!HandleCloseAndReopen(localContext, target))
+			// A close (Won/Lost) or reopen owns probability AND forecast category
+			// explicitly, so it short-circuits the normal stage-based defaulting.
+			bool transition = HandleCloseAndReopen(localContext, target);
+			if (!transition)
 			{
 				ApplyProbabilityDefault(localContext, target);
+				ApplyForecastCategoryDefault(localContext, target);
 			}
+
+			// Business-line default runs regardless of transition (Create only, guarded inside).
+			ApplyBusinessLineDefault(localContext, target);
 
 			// Future handlers go here:
 			//   HandleFirstActivityStamping(localContext, target);
@@ -266,13 +305,151 @@ namespace Pl.Opportunity.LifecycleTracker
 		}
 
 		/// <summary>
-		/// Handles the two lifecycle transitions that own probability explicitly:
+		/// Defaults tavu_forecastcategory from the selected Sales Stage's
+		/// tavu_forecastcategory, honoring the seller's manual override
+		/// (tavu_forecastcategoryismanual). Exact mirror of ApplyProbabilityDefault:
+		/// the forecast category is a Choice (OptionSetValue) rather than an int, and
+		/// both fields bind to the SAME global choice, so the stage value is copied
+		/// verbatim (including Omitted, if a stage maps to it).
+		///
+		/// Mature commit-forecasting model (sales-model §6.3bis): the category defaults
+		/// from the stage but the seller can commit or hold back a specific deal without
+		/// changing its stage. "Reset Forecast Category to Stage Default" (which sets the
+		/// flag back to false) is the only path back to auto mode.
+		/// </summary>
+		private void ApplyForecastCategoryDefault(LocalPluginContext localContext,
+												  Entity target)
+		{
+			localContext.Trace("ApplyForecastCategoryDefault: entered.");
+
+			var context = localContext.PluginExecutionContext;
+			var service = localContext.SystemService;
+
+			bool catProvided = target.Contains(AttrForecastCategory);
+			bool stageProvided = target.Contains(AttrSalesStage);
+			bool flagProvided = target.Contains(AttrForecastCategoryIsManual);
+			bool isUpdate = string.Equals(
+				context.MessageName, "Update", StringComparison.OrdinalIgnoreCase);
+
+			Entity preImage = (isUpdate && context.PreEntityImages.Contains(PreImageName))
+				? context.PreEntityImages[PreImageName]
+				: null;
+
+			// Non-form path: explicit category with no flag is a deliberate (manual) value.
+			if (catProvided && !flagProvided)
+			{
+				localContext.Trace(
+					"Explicit forecast category with no manual flag. Marking as manual override.");
+				target[AttrForecastCategoryIsManual] = true;
+				return;
+			}
+
+			bool manual = flagProvided
+				? target.GetAttributeValue<bool>(AttrForecastCategoryIsManual)
+				: (preImage != null && preImage.GetAttributeValue<bool>(AttrForecastCategoryIsManual));
+
+			if (manual)
+			{
+				localContext.Trace("Manual override active. Leaving forecast category untouched.");
+				return;
+			}
+
+			if (isUpdate && !stageProvided)
+			{
+				localContext.Trace("Auto mode but stage unchanged. Nothing to do.");
+				return;
+			}
+
+			EntityReference stageRef = stageProvided
+				? target.GetAttributeValue<EntityReference>(AttrSalesStage)
+				: (preImage != null ? preImage.GetAttributeValue<EntityReference>(AttrSalesStage) : null);
+
+			if (stageRef == null)
+			{
+				localContext.Trace("No Sales Stage present. Leaving forecast category untouched.");
+				return;
+			}
+
+			var stage = service.Retrieve(
+				StageEntityName, stageRef.Id, new ColumnSet(AttrStageForecastCategory));
+			var cat = stage.GetAttributeValue<OptionSetValue>(AttrStageForecastCategory);
+
+			if (cat != null)
+			{
+				localContext.Trace("Applying stage default forecast category = {0}.", cat.Value);
+				target[AttrForecastCategory] = new OptionSetValue(cat.Value);
+				target[AttrForecastCategoryIsManual] = false; // keep the flag coherent in auto mode
+			}
+			else
+			{
+				localContext.Trace(
+					"Stage has no forecast category configured. Leaving forecast category as-is.");
+			}
+		}
+
+		/// <summary>
+		/// Defaults tavu_businessline on Create from the single tavu_systemsettings
+		/// record's tavu_defaultbusinessline, when the seller did not choose one. This
+		/// feeds per-business-line forecasting; single-practice firms get the seeded
+		/// "General Practice" line automatically. Update is left untouched: changing a
+		/// deal's business line is a deliberate seller action.
+		/// </summary>
+		private void ApplyBusinessLineDefault(LocalPluginContext localContext,
+											  Entity target)
+		{
+			var context = localContext.PluginExecutionContext;
+			bool isCreate = string.Equals(
+				context.MessageName, "Create", StringComparison.OrdinalIgnoreCase);
+			if (!isCreate)
+				return;
+
+			localContext.Trace("ApplyBusinessLineDefault: entered (Create).");
+
+			// Already chosen by the seller?
+			if (target.Contains(AttrBusinessLine)
+				&& target.GetAttributeValue<EntityReference>(AttrBusinessLine) != null)
+			{
+				localContext.Trace("Business Line already provided. Skipping default.");
+				return;
+			}
+
+			// Read the single System Settings record's default business line (SYSTEM:
+			// config data a low-privilege creator may not have Read on).
+			var query = new QueryExpression(SettingsEntityName)
+			{
+				ColumnSet = new ColumnSet(AttrDefaultBusinessLine),
+				TopCount = 1
+			};
+
+			var settings = localContext.SystemService.RetrieveMultiple(query);
+			if (settings.Entities.Count == 0)
+			{
+				localContext.Trace("No System Settings record found. Skipping business-line default.");
+				return;
+			}
+
+			var def = settings.Entities[0].GetAttributeValue<EntityReference>(AttrDefaultBusinessLine);
+			if (def != null)
+			{
+				target[AttrBusinessLine] = def;
+				localContext.Trace("Business Line defaulted from System Settings: {0}.", def.Id);
+			}
+			else
+			{
+				localContext.Trace("System Settings has no default business line. Leaving empty.");
+			}
+		}
+
+		/// <summary>
+		/// Handles the two lifecycle transitions that own probability AND forecast
+		/// category explicitly:
 		///   - Close (Won/Lost): validates the required close inputs, defaults the
-		///     close date if missing, and forces probability to 100 (Won) or 0 (Lost).
+		///     close date if missing, forces probability to 100 (Won) / 0 (Lost), and
+		///     forces forecast category to Closed.
 		///   - Reopen (back to Open from a closed state): re-applies the current Sales
-		///     Stage default probability and clears the manual flag.
+		///     Stage default probability and forecast category, and clears both flags.
 		/// Returns true when it handled a transition, so the caller skips the normal
-		/// stage-based probability defaulting.
+		/// stage-based defaulting for both fields.
 		/// </summary>
 		private bool HandleCloseAndReopen(LocalPluginContext localContext, Entity target)
 		{
@@ -304,6 +481,11 @@ namespace Pl.Opportunity.LifecycleTracker
 				target[AttrProbability] = isWon ? 100 : 0;
 				target[AttrProbabilityIsManual] = true; // system-forced; block auto override
 				localContext.Trace("Probability forced to {0}.", isWon ? 100 : 0);
+
+				// A closed deal is in the Closed forecast category, whatever it was before.
+				target[AttrForecastCategory] = new OptionSetValue(FORECAST_CATEGORY_CLOSED);
+				target[AttrForecastCategoryIsManual] = true; // system-forced; block auto override
+				localContext.Trace("Forecast category forced to Closed ({0}).", FORECAST_CATEGORY_CLOSED);
 				return true;
 			}
 
@@ -312,7 +494,7 @@ namespace Pl.Opportunity.LifecycleTracker
 				var prevState = preImage.GetAttributeValue<OptionSetValue>(AttrStateCode);
 				if (prevState != null && prevState.Value == STATE_INACTIVE)
 				{
-					localContext.Trace("Reopen detected. Re-applying stage default probability.");
+					localContext.Trace("Reopen detected. Re-applying stage default probability + category.");
 					ReapplyStageDefault(localContext, target, preImage);
 					return true;
 				}
@@ -351,9 +533,10 @@ namespace Pl.Opportunity.LifecycleTracker
 		}
 
 		/// <summary>
-		/// Re-applies the Sales Stage default probability on reopen and clears the
-		/// manual flag so the opportunity returns to auto mode. Uses the stage on the
-		/// Target if the reopen also set one, otherwise the stage from the Pre-Image.
+		/// Re-applies the Sales Stage default probability AND forecast category on reopen
+		/// and clears both manual flags so the opportunity returns to auto mode. Uses the
+		/// stage on the Target if the reopen also set one, otherwise the stage from the
+		/// Pre-Image.
 		/// </summary>
 		private void ReapplyStageDefault(LocalPluginContext localContext, Entity target,
 										 Entity preImage)
@@ -364,19 +547,28 @@ namespace Pl.Opportunity.LifecycleTracker
 
 			if (stageRef == null)
 			{
-				localContext.Trace("Reopen: no Sales Stage to resolve. Leaving probability as-is.");
+				localContext.Trace("Reopen: no Sales Stage to resolve. Leaving fields as-is.");
 				return;
 			}
 
 			var stage = localContext.SystemService.Retrieve(
-				StageEntityName, stageRef.Id, new ColumnSet(AttrStageDefaultProbability));
-			int? def = stage.GetAttributeValue<int?>(AttrStageDefaultProbability);
+				StageEntityName, stageRef.Id,
+				new ColumnSet(AttrStageDefaultProbability, AttrStageForecastCategory));
 
+			int? def = stage.GetAttributeValue<int?>(AttrStageDefaultProbability);
 			if (def.HasValue)
 			{
 				target[AttrProbability] = def.Value;
 				target[AttrProbabilityIsManual] = false;
 				localContext.Trace("Reopen: probability reset to stage default = {0}.", def.Value);
+			}
+
+			var cat = stage.GetAttributeValue<OptionSetValue>(AttrStageForecastCategory);
+			if (cat != null)
+			{
+				target[AttrForecastCategory] = new OptionSetValue(cat.Value);
+				target[AttrForecastCategoryIsManual] = false;
+				localContext.Trace("Reopen: forecast category reset to stage default = {0}.", cat.Value);
 			}
 		}
 

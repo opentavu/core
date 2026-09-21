@@ -85,6 +85,29 @@ The compose's AI-first endgame: Module 2 **drafts the reply** and **proposes** t
 
 ---
 
+## 6. Sales / Forecasting — activity goal templates and forecast-type extensibility  *(design captured)*
+
+From reviewing HubSpot's forecast configuration (Aug 21, 2026). The **Phase-1 forecasting build**
+(deterministic revenue goal/quota & attainment) is specified in `docs/forecasting-build-plan.md`
+(v1.1) and ships **Revenue only**. Its schema carries `tavu_goaltype`, `tavu_scope`, and
+`tavu_businessline` from day one so these follow-ups are configuration plus a flow branch, not
+rework. Full detail in the build plan §14; recorded here for roadmap visibility.
+
+- **Activity goal templates (record-count metric)**, PS priority order: **Meetings Booked**
+  (Module 3 meetings), **Proposals Sent** (`tavu_proposal`), **Deals / Opportunities Created**,
+  **Calls / Activities Made**. New `tavu_goaltype` rows; attainment is a grouped count per subject
+  per period, computed in the snapshot/cache flow (not a native rollup). Leading-indicator goals
+  for coaching the commercial team.
+- **Forecastable Revenue** goal type (revenue by forecast category).
+- **Amount-property extensibility:** ARR / ACV / recurring for retainer or subscription firms.
+- **Optional forecast-submission reminders** (HubSpot "submission schedule"): a light Power
+  Automate reminder for reps to review/submit their forecast. Deliberately **not** in the MVP; the
+  automatic weekly snapshot already captures the point-in-time forecast without rep data entry.
+- **AI-Assisted Forecasting, Phase 3** (separate): Empirical-Bayes probability calibration +
+  Batch-API deal-risk detection over Module 3 activity (in the design; unchanged by the above).
+
+---
+
 ## Done (moved out of backlog)
 
 - SLA countdown bar shows **"Cumplido" (green)** when the case resolves Met — no more red "Overdue" on the response bar for a met case (July 8, 2026).

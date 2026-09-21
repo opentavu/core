@@ -166,6 +166,14 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
         "Timeline"
     ];
 
+    // System-managed fields that must stay read-only in EVERY state (open or closed).
+    // The lifecycle lockdown re-enables controls while the deal is Open, which would
+    // otherwise clobber the designer's read-only setting on these — so they are pinned
+    // read-only here explicitly. tavu_opportunitynumber is the auto-generated deal number.
+    var ALWAYS_READONLY_FIELDS = [
+        "tavu_opportunitynumber"
+    ];
+
     var CUSTOMER_MODE = {
         B2B_ONLY: 576600000,
         B2C_ONLY: 576600001,
@@ -195,6 +203,13 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
 
     /** @param {Xrm.ExecutionContext} executionContext */
     Form.onLoad = function (executionContext) {
+        console.log("[OpenTavu.Opportunity.Form] onLoad fired.");
+        if (!executionContext || typeof executionContext.getFormContext !== "function") {
+            console.error(
+                "[OpenTavu.Opportunity.Form] onLoad: no execution context. " +
+                "Check 'Pass execution context as first parameter' on the OnLoad handler.");
+            return;
+        }
         refreshLifecycleUi(executionContext);
         Form.enforceReadOnlyFields(executionContext);
         Form.applyCustomerModeFilter(executionContext);
@@ -237,6 +252,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
                 // NOTE: the Account/Contact mirror is handled server-side by the
                 // Pl.Opportunity.CustomerSync plugin, so it applies across every entry
                 // path (UI, import, Power Automate, API). Here we only do visual validation.
+                loadPrimaryContact(formContext, customerValue[0]);
             },
             function () {
                 // Mode unavailable → permissive fallback. The server-side plugin would do the same.            
@@ -294,7 +310,7 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
 
     Form.enforceReadOnlyFields = function (executionContext) {
         var formContext = executionContext.getFormContext();
-        CLOSE_MANAGED_FIELDS.forEach(function (fieldName) {
+        CLOSE_MANAGED_FIELDS.concat(ALWAYS_READONLY_FIELDS).forEach(function (fieldName) {
             setControlDisabled(formContext, fieldName, true);
         });
     };
@@ -311,12 +327,14 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
             if (!ctrl || !ctrl.setDisabled) return;
             var ctrlName = ctrl.getName ? ctrl.getName() : null;
 
-            if (ctrlName && INTERACTIVE_WHEN_CLOSED.indexOf(ctrlName) >= 0) {
-                ctrl.setDisabled(false);
+            // Always read-only, regardless of open/closed (system-managed fields).
+            if (ctrlName && (ALWAYS_READONLY_FIELDS.indexOf(ctrlName) >= 0 ||
+                             CLOSE_MANAGED_FIELDS.indexOf(ctrlName) >= 0)) {
+                ctrl.setDisabled(true);
                 return;
             }
-            if (ctrlName && CLOSE_MANAGED_FIELDS.indexOf(ctrlName) >= 0) {
-                ctrl.setDisabled(true);
+            if (ctrlName && INTERACTIVE_WHEN_CLOSED.indexOf(ctrlName) >= 0) {
+                ctrl.setDisabled(false);
                 return;
             }
             ctrl.setDisabled(shouldLock);
@@ -389,8 +407,14 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
      * @param {Xrm.FormContext|Xrm.ExecutionContext} primaryControl
      */
     Form.resetProbability = function (primaryControl) {
+        console.log("[OpenTavu.Opportunity.Form] resetProbability invoked.");
         var formContext = resolveFormContext(primaryControl);
-        if (!formContext) return;
+        if (!formContext) {
+            console.error(
+                "[OpenTavu.Opportunity.Form] resetProbability: no form context. " +
+                "The command is not passing PrimaryControl as the first parameter.");
+            return;
+        }
 
         // A closed opportunity is historical/read-only — never touch it.
         if (isClosed(formContext)) {
@@ -817,6 +841,47 @@ OpenTavu.Opportunity.Form = OpenTavu.Opportunity.Form || {};
                 );
             }
         });
+    }
+
+    /**
+     * Loads the deal's Contact from the chosen Customer:
+     *   - Customer is a Contact  → mirror it into tavu_contact.
+     *   - Customer is an Account → load that account's Primary Contact (primarycontactid).
+     * Fill-if-empty: a Contact the user already picked is respected and never overwritten.
+     * Best-effort and non-blocking; a lookup failure just leaves the Contact empty.
+     *
+     * Client-side convenience for the form path. For non-form paths (import / API), the
+     * same defaulting belongs server-side in Pl.Opportunity.CustomerSync.
+     */
+    function loadPrimaryContact(formContext, customerRef) {
+        var contactAttr = formContext.getAttribute("tavu_contact");
+        if (!contactAttr || !customerRef) return; // Contact field not on the form
+
+        if (contactAttr.getValue() && contactAttr.getValue().length) return; // respect a chosen contact
+
+        if (customerRef.entityType === "contact") {
+            contactAttr.setValue([{
+                id: customerRef.id.replace(/[{}]/g, ""),
+                entityType: "contact",
+                name: customerRef.name || ""
+            }]);
+            return;
+        }
+        if (customerRef.entityType !== "account") return;
+
+        var accountId = customerRef.id.replace(/[{}]/g, "");
+        Xrm.WebApi.retrieveRecord("account", accountId, "?$select=_primarycontactid_value").then(
+            function (account) {
+                var pcId = account["_primarycontactid_value"];
+                if (!pcId) return; // the account has no primary contact set
+                if (contactAttr.getValue() && contactAttr.getValue().length) return; // user picked one meanwhile
+                var pcName = account["_primarycontactid_value@OData.Community.Display.V1.FormattedValue"] || "";
+                contactAttr.setValue([{ id: pcId, entityType: "contact", name: pcName }]);
+            },
+            function (error) {
+                console.warn("[OpenTavu.Opportunity.Form] loadPrimaryContact failed:", error && error.message);
+            }
+        );
     }
 
     function isCustomerTypeAllowed(entityType, mode) {

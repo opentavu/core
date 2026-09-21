@@ -1,0 +1,7 @@
+# PCF / npm build artifacts
+node_modules/
+out/
+obj/
+bin/
+*.pcfproj.user
+generated/

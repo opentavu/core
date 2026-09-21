@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<manifest>
+  <control namespace="OpenTavu.Controls" constructor="ForecastDashboard" version="0.0.2"
+           display-name-key="Forecast Dashboard"
+           description-key="Attainment and forecast-composition dashboard. Reads the pre-aggregated tavu_reportingcache and switches scope Company / Business Line / Rep. Dataset-bound, client-side only (non-premium)."
+           control-type="standard">
+
+    <external-service-usage enabled="false" />
+
+    <!--
+      Dataset bound to a tavu_reportingcache view. The bound view MUST include these
+      columns (read by logical name, null-guarded): tavu_scope, tavu_name,
+      tavu_targetamount, tavu_closedwonamount, tavu_committedamount, tavu_bestcaseamount,
+      tavu_openpipelineamount, tavu_forecastamount, tavu_attainment, tavu_gaptogoal,
+      tavu_coverageratio, tavu_salesperiod, tavu_salesrep, tavu_businessline.
+      Recommended: a "Forecast Cache (current)" view filtered to the active period.
+    -->
+    <data-set name="cacheDataSet" display-name-key="Reporting Cache">
+      <property-set name="scope"          display-name-key="Scope"           of-type="OptionSet"        usage="bound" required="false" />
+      <property-set name="subjectName"    display-name-key="Name"            of-type="SingleLine.Text"  usage="bound" required="false" />
+      <property-set name="targetAmount"   display-name-key="Target"          of-type="Currency"         usage="bound" required="false" />
+      <property-set name="closedWon"      display-name-key="Closed Won"      of-type="Currency"         usage="bound" required="false" />
+      <property-set name="committed"      display-name-key="Committed"       of-type="Currency"         usage="bound" required="false" />
+      <property-set name="bestCase"       display-name-key="Best Case"       of-type="Currency"         usage="bound" required="false" />
+      <property-set name="openPipeline"   display-name-key="Open Pipeline"   of-type="Currency"         usage="bound" required="false" />
+      <property-set name="forecast"       display-name-key="Forecast"        of-type="Currency"         usage="bound" required="false" />
+      <property-set name="attainment"     display-name-key="Attainment %"    of-type="Decimal"          usage="bound" required="false" />
+      <property-set name="gap"            display-name-key="Gap to Goal"     of-type="Currency"         usage="bound" required="false" />
+      <property-set name="coverage"       display-name-key="Coverage"        of-type="Decimal"          usage="bound" required="false" />
+    </data-set>
+
+    <resources>
+      <code path="index.ts" order="1" />
+      <css path="css/dashboard.css" order="1" />
+      <resx path="strings/ForecastDashboard.1033.resx" version="1.0.0" />
+      <resx path="strings/ForecastDashboard.3082.resx" version="1.0.0" />
+    </resources>
+
+  </control>
+</manifest>
