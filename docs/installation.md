@@ -8,7 +8,12 @@
 
 This guide walks a Power Platform consultant or integrator through installing OpenTavu into a client tenant: checking prerequisites, obtaining the managed solution, importing it, verifying the import, and handling version upgrades.
 
-OpenTavu is delivered as a **Microsoft Power Platform managed solution** (a `.zip`) that you import into the client's Dataverse environment. It ships tables, plugins, PCF controls, web resources, a model-driven app, and pre-loaded seed data. It is not a hosted SaaS product: the client brings their own Microsoft 365 and Azure (or alternative AI provider) subscriptions, and you configure OpenTavu to work on top of them.
+OpenTavu ships as two **Microsoft Power Platform managed solutions** (`.zip` files) you import into the client's Dataverse environment:
+
+- **OpenTavu Core**: tables, plugins, PCF controls, web resources, the model-driven app, forecasting, and pre-loaded seed data. It installs needing only the **Dataverse** connection, so a first deployment is friction-free.
+- **OpenTavu Integrations** (optional): the Power Automate flows that use email (SMTP / Office 365 Outlook), Microsoft Forms, and OneDrive. Add it only when the client wants those flows; it needs those extra connections.
+
+Install order is always **Core first, then Integrations**. OpenTavu is not a hosted SaaS product: the client brings their own Microsoft 365 and Azure (or alternative AI provider) subscriptions, and you configure OpenTavu to work on top of them.
 
 This document covers **deployment only**. Once the solution is imported, continue with [configuration.md](configuration.md), which covers AI wiring, system settings, security, Module 1, the SLA matrix, and the end-to-end smoke test.
 
@@ -29,6 +34,7 @@ Confirm every item below before you download anything. Missing a prerequisite he
 - A **Microsoft 365 tenant** for the client.
 - A **Dataverse environment** to deploy into. For a first deployment, use a dedicated **development or sandbox environment**, validate the full smoke test, then promote to production. Never do a first-time import directly into a production environment.
 - The environment must have a **Dataverse database** provisioned (an environment without a database cannot host a solution).
+- **Language (optional).** To use the Spanish UI (LCID 3082), enable the Spanish language in the environment (Power Platform admin center, Settings, Languages). If Spanish is not enabled, the Spanish labels are skipped during import with a harmless warning and the UI stays in English.
 
 ### 1.2 Licensing
 
@@ -58,17 +64,22 @@ Either way, you need an **Azure subscription with Azure OpenAI access** (the def
 
 ---
 
-## 2. Get the managed solution
+## 2. Get the managed solutions
 
-OpenTavu releases are published as managed solution files on **GitHub Releases**.
+OpenTavu releases are published as managed solution files on **GitHub Releases**. A release carries two assets:
+
+| Package | Asset (example) | Needs | When |
+|---|---|---|---|
+| **OpenTavu Core** | `OpenTavu_1_1_0_managed.zip` | Dataverse connection only | Always (this is the product) |
+| **OpenTavu Integrations** (optional) | `OpenTavuIntegrations_1_0_0_managed.zip` | Email (SMTP / Office 365 Outlook), Microsoft Forms, OneDrive connections | Only if the client wants the email / Forms / OneDrive flows |
 
 1. Open the OpenTavu `core` repository on GitHub and go to the **Releases** page.
-2. Download the latest release asset, named `OpenTavu_<major>_<minor>_<build>_<revision>.zip` (for example, `OpenTavu_1_0_0_28.zip`). Higher revision numbers are newer builds.
-3. Confirm you downloaded the **managed** build. Managed solutions are what you deploy into a client tenant: their components are locked against direct editing, which is exactly what you want in a client's production environment. Unmanaged builds are for OpenTavu development only, not for client deployment.
+2. Download the **Core** asset. Download the **Integrations** asset too only if you will use those flows.
+3. Confirm you downloaded the **managed** builds. Managed solutions are what you deploy into a client tenant: their components are locked against direct editing, which is exactly what you want in a client's production environment. Unmanaged builds are for OpenTavu development only, not for client deployment.
 
-> 📸 **Screenshot:** GitHub Releases page with the latest `OpenTavu_*.zip` asset highlighted.
+> 📸 **Screenshot:** GitHub Releases page with the Core `.zip` asset highlighted.
 
-> ✅ **Checkpoint:** You have the latest `OpenTavu_*.zip` managed solution file downloaded locally, and you have noted its version number for your deployment record.
+> ✅ **Checkpoint:** You have the latest Core `.zip` (and, if needed, the Integrations `.zip`) downloaded locally, and you have noted the version for your deployment record.
 
 ---
 
@@ -86,9 +97,9 @@ You can import through the maker portal (recommended for a first deployment beca
    > 📸 **Screenshot:** Import solution dialog with the OpenTavu package selected, showing the solution name, version, and "Managed" package type.
 
 5. Review the solution details (name, version, publisher). Confirm the **package type is Managed**.
-6. If the import prompts for **connection references** or **environment variables**, handle them as follows:
-   - **Environment variables for AI wiring** (`tavu_GatewayUrl`, `tavu_GatewayKey`): you may leave these blank during import and set them in [configuration.md](configuration.md) §2. Setting them now is fine only if you already have the gateway URL and per-tenant key in hand.
-   - **Connection references** (if any are prompted): create or select a connection using an account that has permission to run the associated flows. If you are unsure, complete them after import from the Solutions area.
+6. Handle the prompts:
+   - **Connection reference (Core):** Core prompts only for the **Microsoft Dataverse** connection. Sign in with an account that can run flows; it turns green and you continue. The email, Forms, and OneDrive connections are requested only by the optional Integrations package, not by Core.
+   - **Environment variables for AI wiring** (`tavu_GatewayUrl`, `tavu_GatewayKey`): leave these blank during import and set them in [configuration.md](configuration.md) §2. They do not block the import.
 7. Select **Import** and wait for the operation to complete. A managed solution of this size typically imports in a few minutes.
 
    > 📸 **Screenshot:** Import progress bar, followed by the "solution imported successfully" confirmation banner.
@@ -99,10 +110,12 @@ For scripted deployments:
 
 ```
 pac auth create --environment <ENVIRONMENT_URL>
-pac solution import --path .\OpenTavu_1_0_0_28.zip --async
+pac solution import --path .\OpenTavu_1_1_0_managed.zip --async
+# optional, ONLY if you use the email / Forms / OneDrive flows, and AFTER Core:
+pac solution import --path .\OpenTavuIntegrations_1_0_0_managed.zip --async
 ```
 
-`pac solution import` imports the file as-is (managed, because the packaged file is managed). Use `--async` for large solutions so the CLI polls the job to completion rather than timing out.
+`pac solution import` imports the file as-is (managed, because the packaged file is managed). Use `--async` for large solutions so the CLI polls the job to completion rather than timing out. The CLI does not force connection mapping up front; set connections after import if any flow needs them.
 
 > ✅ **Checkpoint:** The import completes with **no errors**. If the import surfaces warnings about missing dependencies, resolve those before proceeding: a partial import is not a valid OpenTavu deployment. If the import fails, read the downloadable import log, correct the cause (most often a missing license or an environment without a database), and re-import.
 

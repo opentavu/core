@@ -4,7 +4,7 @@
 **AI embedded in the core workflow, not bolted on. MIT licensed. Deployed into your own Microsoft tenant.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release: v1.0.0](https://img.shields.io/badge/Release-v1.0.0-green.svg)](https://github.com/opentavu/core/releases/tag/v1.0.0)
+[![Release: v1.1.0](https://img.shields.io/badge/Release-v1.1.0-green.svg)](https://github.com/opentavu/core/releases/tag/v1.1.0)
 [![Platform: Power Platform](https://img.shields.io/badge/Platform-Microsoft%20Power%20Platform-742774.svg)]()
 [![AI: Provider-agnostic](https://img.shields.io/badge/AI-Provider--agnostic-0078D4.svg)]()
 [![Languages: EN | ES](https://img.shields.io/badge/UI-English%20%7C%20Espa%C3%B1ol-lightgrey.svg)]()
@@ -25,9 +25,10 @@ OpenTavu is **not a hosted SaaS product**. There is no fee for the framework its
 
 ## Get started
 
-1. Download the managed solution from the latest release: [**OpenTavu v1.0.0**](https://github.com/opentavu/core/releases/tag/v1.0.0).
-2. Follow the [installation guide](docs/installation.md) (prerequisites, import, verification, upgrades).
-3. Follow the [configuration guide](docs/configuration.md) (AI wiring, system settings, security, SLA matrix, smoke test).
+1. Download the managed solutions from the latest release: [**OpenTavu v1.1.0**](https://github.com/opentavu/core/releases/tag/v1.1.0). The **Core** package is all you need to start; it installs needing only the Dataverse connection.
+2. (Optional) Add the **OpenTavu Integrations** package when you want the flows that use email, Microsoft Forms, and OneDrive. Install Core first, then Integrations.
+3. Follow the [installation guide](docs/installation.md) (prerequisites, import, verification, upgrades).
+4. Follow the [configuration guide](docs/configuration.md) (AI wiring, system settings, security, SLA matrix, smoke test).
 
 Import into a sandbox environment first, run the smoke test, then promote to production.
 
@@ -77,7 +78,7 @@ These problems persist because existing solutions are either too expensive (Dyna
 | AI gateway (optional) | Open-source [reference gateway](https://github.com/opentavu/gateway) (Azure Functions, .NET 8, MIT), self-hosted with your own keys; or direct mode without a gateway |
 | Analytics | Native model-driven dashboards and PCF chart controls; no per-user BI license required |
 | Localization | English and Spanish (LCID 3082) |
-| Distribution | Managed solution (.zip) via GitHub Releases |
+| Distribution | Managed solutions (.zip) via GitHub Releases: Core (installs with the Dataverse connection only) plus an optional Integrations module (email, Forms, OneDrive flows) |
 
 ---
 
@@ -260,7 +261,9 @@ The pain points driving the AI design were validated through independent deep re
 
 **v1.0.0, the first public release, shipped on September 21, 2026.** It includes the core data model, the full sales cycle (leads, opportunities with the close engine, proposals with quotation and versioning), the service model (cases, SLA matrix, case conversation), the live AI features above (Lead Triage, Meeting Capture, proposal email draft, Smart Case Categorization), deterministic sales forecasting, Spanish localization, and complete installation and configuration guides.
 
-Known limitations of v1.0.0 are listed in the [release notes](https://github.com/opentavu/core/releases/tag/v1.0.0). Work continues on the roadmap and on hardening the live features across more tenants and clients.
+**v1.1.0 repackages the release into a Core package plus an optional Integrations module**, so the Core installs needing only the Dataverse connection (the email, Microsoft Forms, and OneDrive flows moved to the optional module, and Spanish now covers the forecasting module too). Install order is Core first, then Integrations.
+
+Known limitations are listed in the [release notes](https://github.com/opentavu/core/releases/tag/v1.1.0). Work continues on the roadmap and on hardening the live features across more tenants and clients.
 
 ---
 
