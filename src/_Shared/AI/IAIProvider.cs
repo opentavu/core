@@ -62,10 +62,16 @@ namespace OpenTavu.Dataverse.AI
 
         /// <summary>Request timeout in seconds. Defaults applied by the provider if 0.</summary>
         public int TimeoutSeconds { get; set; }
+
+        /// <summary>
+        /// Gateway mode only: the model the firm chose for this task (tavu_aimodel.tavu_deploymentmodelid).
+        /// The gateway runs it when it serves that model, otherwise its default. Never carries a key.
+        /// </summary>
+        public string ModelHint { get; set; }
     }
 
     /// <summary>
-    /// Result of a completion. Never an exception for AI/transport errors —
+    /// Result of a completion. Never an exception for AI/transport errors ,
     /// inspect Success and ErrorMessage.
     /// </summary>
     public sealed class AICompletionResult
@@ -81,6 +87,9 @@ namespace OpenTavu.Dataverse.AI
         /// <summary>Token usage, for the execution log / budgeting (0 if the provider didn't report it).</summary>
         public int PromptTokens { get; set; }
         public int CompletionTokens { get; set; }
+
+        /// <summary>The model that actually ran, when the provider reports it (the gateway does).</summary>
+        public string Model { get; set; }
 
         public static AICompletionResult Ok(string content, int promptTokens, int completionTokens)
         {

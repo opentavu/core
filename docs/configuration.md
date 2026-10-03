@@ -24,7 +24,7 @@ OpenTavu splits configuration between two homes. Understanding the split prevent
 | Configuration | Home |
 |---|---|
 | AI provider endpoints, keys, deployments | **Gateway** (in gateway mode, the key never enters the client tenant) or the `tavu_aimodel` record (direct mode) |
-| Task prompts, model routing, parameters | Gateway (target) or the client task config today |
+| Task prompts, parameters, which model each task uses | **Client** (`tavu_aitaskconfiguration`); in gateway mode they travel with each request |
 | Taxonomy (case types, business line / category / subcategory) | **Client** (sent to the model in the request payload) |
 | Confidence threshold, AI kill switch | **Client** (`tavu_systemsettings`) |
 | Business calendars, SLAs, customer tiers | **Client** (business configuration) |
@@ -59,14 +59,16 @@ In gateway mode the client tenant holds only a base URL and a scoped per-tenant 
 
    > 📸 **Screenshot:** The two environment variables `tavu_GatewayUrl` and `tavu_GatewayKey` with values set (key masked).
 
-The plugin sends the system prompt, the case text, and the client's taxonomy to the gateway and receives the completion plus token counts. The AI key is never present in the client tenant.
+The plugin sends the system prompt, the case text, the client's taxonomy and the **name** of the model chosen for the task to the gateway, and receives the completion, the token counts and the model that ran. The AI key is never present in the client tenant.
+
+**Which model runs in gateway mode.** You still choose the model per task in the client: the task's **AI Model**, or the **Default AI Model** in System Settings. Only the model's **Deployment / Model ID** is used, as a request to the gateway. The gateway runs it when it serves that model (its default model or one listed in its `Ai__AllowedModels` setting) and otherwise runs its default model and logs a warning. In this mode the **Endpoint**, **API Version** and **Secret Name** of the `tavu_aimodel` record are ignored, because the gateway holds them. If you host the gateway yourself and want a task on a different model, add that model to `Ai__AllowedModels`.
 
 ### 2.2 Option B, Direct mode (simplest)
 
-In direct mode there is no gateway; the provider key lives in the client tenant on the `tavu_aimodel` record.
+In direct mode there is no gateway; the provider key lives in the client tenant, in a Dataverse environment variable that the `tavu_aimodel` record names.
 
 1. Leave `tavu_GatewayUrl` and `tavu_GatewayKey` **unset** (so the provider does not resolve to the gateway).
-2. Open the `tavu_aimodel` record for your provider and set the provider endpoint, deployment, and **key**. The default provider is Azure OpenAI; alternative providers (Anthropic Claude, Google Gemini, local models) are selected here through the same `IAIProvider` abstraction.
+2. Open the `tavu_aimodel` record for your provider and set the **Endpoint**, **Deployment / Model ID** and **Secret Name** (the schema name of the environment variable that holds the API key, for example `tavu_OpenAIKey`), then set that environment variable's value. The supported providers today are Azure OpenAI and OpenAI; other providers plug in as new `IAIProvider` implementations (roadmap).
 
 Direct mode is the fastest path to a working demo. The trade-off is that the provider key is stored inside the client environment, so treat that environment's access accordingly.
 

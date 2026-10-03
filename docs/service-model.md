@@ -715,7 +715,7 @@ When a client email arrives or a case is manually created:
 
 **State at this point:**
 - `statecode = Active`
-- `tavu_status = New` (the status flagged `IsDefaultNew`, set by a create plugin)
+- `tavu_status = New` (the status flagged `IsDefaultNew`, set by `Pl.Case.CustomerSync` on Create, pre-operation, whenever the incoming case has no status; this covers every write path, including the gateway email intake)
 - All other fields are empty.
 
 ### 7.2 Moment "AI Processing" — Automatic categorization

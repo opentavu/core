@@ -165,9 +165,23 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
                 id: e.tavu_casestatusid as string,
                 name: (e.tavu_name as string) || "(status)",
             }));
-            this.notifyOutputChanged();
+            this.rerender(); // async data arrived: ask the platform to call updateView again
         } catch (err) {
+            this.statusesLoaded = false; // allow a retry on the next render
             console.error("[CaseConversation] fetch statuses failed:", err);
+        }
+    }
+
+    /**
+     * Forces a new updateView after async data arrives. notifyOutputChanged() only signals that
+     * the control's OUTPUTS changed; it does not guarantee a re-render, so chips fetched after the
+     * first paint could stay invisible (a timing race). requestRender() is the PCF API for this.
+     */
+    private rerender(): void {
+        if (this.context?.factory?.requestRender) {
+            this.context.factory.requestRender();
+        } else {
+            this.notifyOutputChanged();
         }
     }
 
@@ -202,8 +216,9 @@ export class CaseConversation implements ComponentFramework.ReactControl<IInputs
                 });
             }
             this.attachments = map;
-            this.notifyOutputChanged(); // re-render with the fetched chips
+            this.rerender(); // re-render with the fetched chips
         } catch (err) {
+            this.attachmentSig = ""; // allow a retry on the next render instead of caching the failure
             console.error("[CaseConversation] fetch annotations failed:", err);
         }
     }

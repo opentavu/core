@@ -45,7 +45,8 @@ namespace OpenTavu.Dataverse.AI
                     UserContent = request.UserContent ?? string.Empty,
                     Temperature = request.Temperature,
                     MaxOutputTokens = request.MaxOutputTokens > 0 ? request.MaxOutputTokens : 800,
-                    JsonResponse = request.JsonResponse
+                    JsonResponse = request.JsonResponse,
+                    ModelHint = string.IsNullOrWhiteSpace(request.ModelHint) ? null : request.ModelHint.Trim()
                 };
 
                 byte[] payload = Encoding.UTF8.GetBytes(Serialize(body));
@@ -75,7 +76,9 @@ namespace OpenTavu.Dataverse.AI
                 if (parsed == null || parsed.Content == null)
                     return AICompletionResult.Fail("Gateway response had no content.");
 
-                return AICompletionResult.Ok(parsed.Content, parsed.PromptTokens, parsed.CompletionTokens);
+                var ok = AICompletionResult.Ok(parsed.Content, parsed.PromptTokens, parsed.CompletionTokens);
+                ok.Model = parsed.Model;
+                return ok;
             }
             catch (WebException wex)
             {
@@ -126,6 +129,7 @@ namespace OpenTavu.Dataverse.AI
             [DataMember(Name = "temperature", Order = 2)] public double Temperature { get; set; }
             [DataMember(Name = "maxOutputTokens", Order = 3)] public int MaxOutputTokens { get; set; }
             [DataMember(Name = "jsonResponse", Order = 4)] public bool JsonResponse { get; set; }
+            [DataMember(Name = "modelHint", Order = 5, EmitDefaultValue = false)] public string ModelHint { get; set; }
         }
 
         [DataContract]
@@ -134,6 +138,7 @@ namespace OpenTavu.Dataverse.AI
             [DataMember(Name = "content")] public string Content { get; set; }
             [DataMember(Name = "promptTokens")] public int PromptTokens { get; set; }
             [DataMember(Name = "completionTokens")] public int CompletionTokens { get; set; }
+            [DataMember(Name = "model")] public string Model { get; set; }
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Pl.Proposal.BuildEmailDraft
     /// <remarks>
     /// Registered as the plugin type of the Custom API tavu_BuildProposalEmailDraft
     /// (Global/unbound; Request: ProposalId [String]; Response: EmailId [String]).
-    /// No SDK message step to register — the Custom API message is the trigger.
+    /// No SDK message step to register: the Custom API message is the trigger.
     /// </remarks>
     public class BuildEmailDraft : PluginBase
     {
@@ -79,6 +79,19 @@ namespace Pl.Proposal.BuildEmailDraft
         // ===== gateway env vars =====
         private const string GatewayUrlVar = "tavu_GatewayUrl";
         private const string GatewayKeyVar = "tavu_GatewayKey";
+
+        // AI task configuration for the email body (config-over-code: each firm edits the prompt).
+        private const string AiTaskEntity      = "tavu_aitaskconfiguration";
+        private const string AiTaskKey         = "tavu_taskkey";
+        private const string AiTaskPrompt      = "tavu_systemprompt";
+        private const string AiTaskTemperature = "tavu_temperature";
+        private const string AiTaskMaxTokens   = "tavu_maxoutputtokens";
+        private const string AiTaskModel       = "tavu_model";               // Lookup -> tavu_aimodel
+        private const string SettingsEntity    = "tavu_systemsettings";
+        private const string SettingsDefaultModel = "tavu_defaultaimodel";
+        private const string ModelEntity       = "tavu_aimodel";
+        private const string ModelDeployment   = "tavu_deploymentmodelid";
+        private const int    TaskKeyProposalEmailDraft = 576600006;
         private const string TenantHeader = "X-OpenTavu-Tenant-Key";
         private const int GatewayTimeoutSeconds = 100;
 
@@ -174,9 +187,13 @@ namespace Pl.Proposal.BuildEmailDraft
                     "The AI gateway is not configured (tavu_GatewayUrl / tavu_GatewayKey). " +
                     "Proposal email drafting requires a configured gateway.");
 
+            // ----- AI task configuration (prompt lives in the tenant, travels with the request) -----
+            AiOptionsDto ai = ReadAiOptions(localContext, sys);
+
             // ----- build request + call gateway -----
             var request = new EmailDraftRequest
             {
+                Ai = ai,
                 Proposal = new ProposalDto
                 {
                     Name = proposal.GetAttributeValue<string>(PName),
@@ -458,6 +475,93 @@ namespace Pl.Proposal.BuildEmailDraft
         {
             [DataMember(Name = "proposal", Order = 0)] public ProposalDto Proposal { get; set; }
             [DataMember(Name = "branding", Order = 1)] public BrandingDto Branding { get; set; }
+            [DataMember(Name = "ai", Order = 2, EmitDefaultValue = false)] public AiOptionsDto Ai { get; set; }
+        }
+
+        /// <summary>The firm's prompt and parameters for the email body. Omitted when not configured,
+        /// so the gateway falls back to its built-in default.</summary>
+        [DataContract]
+        private class AiOptionsDto
+        {
+            [DataMember(Name = "systemPrompt", Order = 0, EmitDefaultValue = false)] public string SystemPrompt { get; set; }
+            [DataMember(Name = "temperature", Order = 1, EmitDefaultValue = false)] public double? Temperature { get; set; }
+            [DataMember(Name = "maxOutputTokens", Order = 2, EmitDefaultValue = false)] public int? MaxOutputTokens { get; set; }
+            [DataMember(Name = "modelHint", Order = 3, EmitDefaultValue = false)] public string ModelHint { get; set; }
+        }
+
+        /// <summary>Name of the firm's chosen model for this task (task model, else Default AI Model); null if none.</summary>
+        private static string ResolveModelHint(LocalPluginContext localContext, IOrganizationService sys, EntityReference taskModel)
+        {
+            try
+            {
+                EntityReference modelRef = taskModel;
+                if (modelRef == null)
+                {
+                    var sq = new QueryExpression(SettingsEntity) { ColumnSet = new ColumnSet(SettingsDefaultModel), TopCount = 1, NoLock = true };
+                    var settings = sys.RetrieveMultiple(sq).Entities;
+                    modelRef = settings.Count > 0 ? settings[0].GetAttributeValue<EntityReference>(SettingsDefaultModel) : null;
+                }
+                if (modelRef == null) return null;
+
+                string name = sys.Retrieve(ModelEntity, modelRef.Id, new ColumnSet(ModelDeployment)).GetAttributeValue<string>(ModelDeployment);
+                return string.IsNullOrWhiteSpace(name) ? null : name.Trim();
+            }
+            catch (Exception ex)
+            {
+                localContext.Trace("Could not resolve the model hint: {0}. The gateway default model will be used.", ex.Message);
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Reads the active "Proposal Email Draft" row of tavu_aitaskconfiguration. Returns null when
+        /// there is none or it has no prompt, so the gateway uses its default and nothing breaks.
+        /// SystemService: configuration table, the sending user may not have read rights on it.
+        /// </summary>
+        private AiOptionsDto ReadAiOptions(LocalPluginContext localContext, IOrganizationService sys)
+        {
+            try
+            {
+                var q = new QueryExpression(AiTaskEntity)
+                {
+                    ColumnSet = new ColumnSet(AiTaskPrompt, AiTaskTemperature, AiTaskMaxTokens, AiTaskModel),
+                    TopCount = 1,
+                    NoLock = true
+                };
+                q.Criteria.AddCondition(AiTaskKey, ConditionOperator.Equal, TaskKeyProposalEmailDraft);
+                q.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+                var rows = sys.RetrieveMultiple(q).Entities;
+                Entity row = rows.Count > 0 ? rows[0] : null;
+
+                // Model choice: the task's model, else the Default AI Model. Only its name travels.
+                string modelHint = ResolveModelHint(localContext, sys, row?.GetAttributeValue<EntityReference>(AiTaskModel));
+
+                if (row == null)
+                {
+                    localContext.Trace("No active 'Proposal Email Draft' AI task; the gateway default prompt will be used.");
+                    return modelHint == null ? null : new AiOptionsDto { ModelHint = modelHint };
+                }
+
+                string prompt = row.GetAttributeValue<string>(AiTaskPrompt);
+                if (string.IsNullOrWhiteSpace(prompt))
+                {
+                    localContext.Trace("'Proposal Email Draft' AI task has no prompt; the gateway default prompt will be used.");
+                    return modelHint == null ? null : new AiOptionsDto { ModelHint = modelHint };
+                }
+
+                var opts = new AiOptionsDto { SystemPrompt = prompt, ModelHint = modelHint };
+                if (row.Contains(AiTaskTemperature))
+                    opts.Temperature = (double)row.GetAttributeValue<decimal>(AiTaskTemperature);
+                if (row.Contains(AiTaskMaxTokens) && row.GetAttributeValue<int>(AiTaskMaxTokens) > 0)
+                    opts.MaxOutputTokens = row.GetAttributeValue<int>(AiTaskMaxTokens);
+                localContext.Trace("Using the tenant's 'Proposal Email Draft' prompt ({0} chars).", prompt.Length);
+                return opts;
+            }
+            catch (Exception ex)
+            {
+                localContext.Trace("Could not read the proposal email AI task: {0}. Gateway default will be used.", ex.Message);
+                return null;
+            }
         }
 
         [DataContract]

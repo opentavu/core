@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <manifest>
-  <control namespace="OpenTavu.Controls" constructor="CaseConversation" version="0.0.2"
+  <control namespace="OpenTavu.Controls" constructor="CaseConversation" version="0.0.3"
            display-name-key="Case Conversation"
            description-key="Threaded customer/agent conversation for a case, with per-interaction state traceability. Client-side render over tavu_caseinteraction."
            control-type="virtual">

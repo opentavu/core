@@ -7,7 +7,7 @@ namespace OpenTavu.Dataverse.AI
     /// </summary>
     public static class AIProviderFactory
     {
-        // tavu_provider option values — VERIFY against the actual choice values.
+        // tavu_provider option values: VERIFY against the actual choice values.
         public const int ProviderAzureOpenAI = 576600000;
         public const int ProviderOpenAI      = 576600001;
         // public const int ProviderAnthropic = 576600002;

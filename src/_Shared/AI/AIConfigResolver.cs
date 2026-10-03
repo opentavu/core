@@ -6,7 +6,7 @@ namespace OpenTavu.Dataverse.AI
 {
     /// <summary>
     /// Resolves, at runtime, the AI configuration for a given task:
-    ///   tavu_aitaskconfig (by Task Key) -> tavu_aimodel -> the API key (env variable),
+    ///   tavu_aitaskconfiguration (by Task Key) -> tavu_aimodel -> the API key (env variable),
     /// with fallback to tavu_systemsettings defaults. Reusable by every AI module.
     ///
     /// Sandbox-safe: only Microsoft.Xrm.Sdk. Lives in _Shared/AI and is linked into
@@ -15,7 +15,7 @@ namespace OpenTavu.Dataverse.AI
     public static class AIConfigResolver
     {
         // =====================================================================
-        // SCHEMA CONSTANTS — VERIFY each against the actual column logical names
+        // SCHEMA CONSTANTS: VERIFY each against the actual column logical names
         // (maker portal: table > column > "Schema name"). Adjust if they differ.
         // =====================================================================
 
@@ -51,7 +51,7 @@ namespace OpenTavu.Dataverse.AI
         private const int StateActive = 0;
 
         /// <summary>
-        /// Builds the resolved config for a task. Never throws for config gaps —
+        /// Builds the resolved config for a task. Never throws for config gaps ,
         /// returns a result whose Usable flag is false with a Reason instead, so the
         /// caller can route to Manual Review.
         /// </summary>
@@ -97,7 +97,7 @@ namespace OpenTavu.Dataverse.AI
 
             if (task == null)
             {
-                cfg.Reason = "No active tavu_aitaskconfig found for task key " + taskKeyOptionValue + ".";
+                cfg.Reason = "No active AI Task Configuration (tavu_aitaskconfiguration) found for task key " + taskKeyOptionValue + ".";
                 return cfg;
             }
 
@@ -124,6 +124,24 @@ namespace OpenTavu.Dataverse.AI
                 cfg.GatewayUrl = gatewayUrl;
                 cfg.GatewayKey = gatewayKey;
                 cfg.Found = true;
+
+                // The firm's model choice still matters: send only its NAME as a hint. The gateway
+                // runs it if it serves that model, else its default (and reports which one ran).
+                // Endpoint, key and secret name of the tavu_aimodel row are not used in this mode.
+                EntityReference hintRef = task.GetAttributeValue<EntityReference>(TaskModel) ?? defaultModelRef;
+                if (hintRef != null)
+                {
+                    try
+                    {
+                        Entity hintModel = service.Retrieve(ModelEntity, hintRef.Id, new ColumnSet(ModelDeployment));
+                        cfg.ModelId = hintModel.Id;
+                        cfg.ModelHint = hintModel.GetAttributeValue<string>(ModelDeployment);
+                    }
+                    catch
+                    {
+                        // A missing or inaccessible model row must not block AI: the gateway default runs.
+                    }
+                }
                 return cfg;
             }
 
@@ -167,6 +185,7 @@ namespace OpenTavu.Dataverse.AI
                 DeploymentOrModel = cfg.DeploymentOrModel,
                 ApiVersion = cfg.ApiVersion,
                 ApiKey = cfg.ApiKey,
+                ModelHint = cfg.UseGateway ? cfg.ModelHint : null,
                 SystemPrompt = cfg.SystemPrompt,
                 UserContent = userContent,
                 Temperature = cfg.Temperature,
@@ -231,6 +250,9 @@ namespace OpenTavu.Dataverse.AI
         public bool UseGateway { get; set; }
         public string GatewayUrl { get; set; }
         public string GatewayKey { get; set; }
+
+        /// <summary>Gateway mode: the model name the firm chose for this task (sent as a hint).</summary>
+        public string ModelHint { get; set; }
 
         public string Endpoint { get; set; }
         public string DeploymentOrModel { get; set; }

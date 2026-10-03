@@ -12,7 +12,12 @@ namespace Pl.Case.CustomerSync
     /// and validates the customer entity type against the tenant-wide Customer Mode
     /// (B2B Only / B2C Only / Mixed) in the tavu_systemsettings singleton.
     ///
-    /// Server-side so the rule applies to every write path (UI, import, Power Automate, API).
+    /// On Create it also assigns the initial operational status: if tavu_status is empty, it
+    /// sets the tavu_casestatus row flagged "Is Default (new)" (tavu_isdefaultnew = Yes).
+    /// Resolved by flag, never by name, so each firm can rename its statuses (config-over-code).
+    ///
+    /// Server-side so the rule applies to every write path (UI, import, Power Automate, API,
+    /// and the gateway email intake).
     /// This is the case-side twin of Pl.Opportunity.CustomerSync.
     /// </summary>
     /// <remarks>
@@ -33,6 +38,12 @@ namespace Pl.Case.CustomerSync
         private const string AttrAccount        = "tavu_account";
         private const string AttrContact        = "tavu_contact";
         private const string AttrPrimaryContact = "tavu_primarycontact";
+
+        // Initial status (Create only): lookup -> tavu_casestatus, resolved by the IsDefaultNew flag.
+        private const string AttrStatus          = "tavu_status";
+        private const string StatusEntityName    = "tavu_casestatus";
+        private const string AttrStatusIsDefault = "tavu_isdefaultnew";
+        private const string AttrStatusSortOrder = "tavu_sortorder";
 
         private const string EntityAccount = "account";
         private const string EntityContact = "contact";
@@ -67,6 +78,7 @@ namespace Pl.Case.CustomerSync
             }
 
             HandleCustomerMirroring(localContext, target);
+            HandleDefaultStatus(localContext, target);
 
             localContext.Trace("CustomerSync: ExecuteInternal exiting.");
         }
@@ -130,6 +142,46 @@ namespace Pl.Case.CustomerSync
             }
 
             localContext.Trace("HandleCustomerMirroring: exiting.");
+        }
+
+        /// <summary>
+        /// Create only: when the new case has no tavu_status, assigns the active tavu_casestatus
+        /// flagged tavu_isdefaultnew = Yes. Never blocks the create: if no default status is
+        /// configured, it traces an action hint and leaves the field as it is.
+        /// </summary>
+        private void HandleDefaultStatus(LocalPluginContext localContext, Entity target)
+        {
+            if (!string.Equals(localContext.PluginExecutionContext.MessageName, "Create", StringComparison.OrdinalIgnoreCase))
+                return;
+
+            if (target.GetAttributeValue<EntityReference>(AttrStatus) != null)
+            {
+                localContext.Trace("tavu_status already set on Create. Leaving it.");
+                return;
+            }
+
+            var query = new QueryExpression(StatusEntityName)
+            {
+                ColumnSet = new ColumnSet(false),
+                TopCount = 1,
+                NoLock = true
+            };
+            query.Criteria.AddCondition(AttrStatusIsDefault, ConditionOperator.Equal, true);
+            query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+            query.AddOrder(AttrStatusSortOrder, OrderType.Ascending);
+
+            // SystemService: reading a configuration table; the creating user (or the gateway's
+            // application user) may not have read rights on it.
+            var result = localContext.SystemService.RetrieveMultiple(query);
+            if (result.Entities.Count == 0)
+            {
+                localContext.Trace("No active tavu_casestatus flagged tavu_isdefaultnew. ACTION: mark one status " +
+                                   "as 'Is Default (new)'. Case created without an initial status.");
+                return;
+            }
+
+            target[AttrStatus] = new EntityReference(StatusEntityName, result.Entities[0].Id);
+            localContext.Trace("Initial status set to default-new tavu_casestatus {0}.", result.Entities[0].Id);
         }
 
         /// <summary>

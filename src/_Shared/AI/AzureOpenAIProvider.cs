@@ -10,7 +10,7 @@ namespace OpenTavu.Dataverse.AI
 {
     /// <summary>
     /// Default IAIProvider implementation: Azure OpenAI Chat Completions.
-    /// Sandbox-safe by design — uses only HttpWebRequest (System) and
+    /// Sandbox-safe by design: uses only HttpWebRequest (System) and
     /// DataContractJsonSerializer (System.Runtime.Serialization), so it can be
     /// linked into a plugin and deployed as a single assembly with no external
     /// dependency DLLs.

@@ -1,0 +1,5413 @@
+{
+  "schema": "opentavu-seed",
+  "version": "1.3.0",
+  "generatedFrom": "opentavu.crm.dynamics.com, curated 2026-10-02",
+  "rules": {
+    "matchBy": "keyField (natural key), never GUID",
+    "onExisting": "fill empty fields only, never overwrite values the firm changed",
+    "language": "rows are written in the organization base language: '@i18n.es' overrides apply when the base language is Spanish (3082)",
+    "lookups": "'@ref' resolves by the referenced table's keyField",
+    "runtime": "'@runtime' values are computed by the plugin at seed time",
+    "packs": "tables marked 'pack' are optional; the plugin seeds them unless the caller excludes the pack",
+    "compositeKeys": "keyField may be a list; all fields must match"
+  },
+  "tables": [
+    {
+      "table": "tavu_casestatus",
+      "keyField": "tavu_code",
+      "rows": [
+        {
+          "tavu_code": "CST-1000",
+          "tavu_name": "New",
+          "tavu_statecategory": 576600000,
+          "tavu_sortorder": 10,
+          "tavu_isdefaultnew": true,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Nuevo"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1001",
+          "tavu_name": "AI Processing",
+          "tavu_statecategory": 576600000,
+          "tavu_sortorder": 20,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Procesando con IA"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1002",
+          "tavu_name": "Categorized - Awaiting Assignment",
+          "tavu_statecategory": 576600000,
+          "tavu_sortorder": 30,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": true,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Categorizado - Pendiente de asignación"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1003",
+          "tavu_name": "In Progress",
+          "tavu_statecategory": 576600000,
+          "tavu_sortorder": 40,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": true,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "En progreso"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1004",
+          "tavu_name": "Manual Review Required",
+          "tavu_statecategory": 576600000,
+          "tavu_sortorder": 50,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": true,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Requiere revisión manual"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1005",
+          "tavu_name": "Waiting on Customer",
+          "tavu_statecategory": 576600000,
+          "tavu_sortorder": 60,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": true,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Esperando al cliente"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1006",
+          "tavu_name": "Solved",
+          "tavu_statecategory": 576600001,
+          "tavu_sortorder": 70,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Resuelto"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1007",
+          "tavu_name": "Information Provided",
+          "tavu_statecategory": 576600001,
+          "tavu_sortorder": 80,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Información entregada"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1008",
+          "tavu_name": "Duplicate",
+          "tavu_statecategory": 576600001,
+          "tavu_sortorder": 90,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Duplicado"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1009",
+          "tavu_name": "Out of Scope",
+          "tavu_statecategory": 576600001,
+          "tavu_sortorder": 100,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Fuera de alcance"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1010",
+          "tavu_name": "Cancelled by Customer",
+          "tavu_statecategory": 576600002,
+          "tavu_sortorder": 110,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Cancelado por el cliente"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1011",
+          "tavu_name": "Cannot Reproduce",
+          "tavu_statecategory": 576600002,
+          "tavu_sortorder": 120,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "No reproducible"
+            }
+          }
+        },
+        {
+          "tavu_code": "CST-1012",
+          "tavu_name": "Closed without Resolution",
+          "tavu_statecategory": 576600002,
+          "tavu_sortorder": 130,
+          "tavu_isdefaultnew": false,
+          "tavu_isaicategorized": false,
+          "tavu_ismanualreview": false,
+          "tavu_isresumetarget": false,
+          "tavu_pausessla": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Cerrado sin resolución"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_casetype",
+      "keyField": "tavu_code",
+      "rows": [
+        {
+          "tavu_code": "CT-1001",
+          "tavu_name": "General Inquiry",
+          "tavu_isdefault": true,
+          "tavu_sortorder": 10,
+          "tavu_defaultpriority": 576600000,
+          "tavu_description": "General questions and information requests.",
+          "tavu_aicategorizationhint": "Default fallback. Apply for general questions or information requests that don't clearly fit another type.",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Consulta general"
+            }
+          }
+        },
+        {
+          "tavu_code": "CT-1002",
+          "tavu_name": "Support Request",
+          "tavu_isdefault": false,
+          "tavu_sortorder": 20,
+          "tavu_defaultpriority": 576600000,
+          "tavu_description": "Technical support and incident reports.",
+          "tavu_aicategorizationhint": "Apply when the customer reports a technical problem or error, or needs help with a delivered product or service.",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Solicitud de soporte"
+            }
+          }
+        },
+        {
+          "tavu_code": "CT-1003",
+          "tavu_name": "RFP/Proposal Inquiry",
+          "tavu_isdefault": false,
+          "tavu_sortorder": 30,
+          "tavu_defaultpriority": 576600001,
+          "tavu_description": "Requests for proposals, quotes, or new-work opportunities.",
+          "tavu_aicategorizationhint": "Apply when the message is a request for proposal, quote, or SOW, or a pre-sales opportunity for new work.",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Consulta de RFP / propuesta"
+            }
+          }
+        },
+        {
+          "tavu_code": "CT-1004",
+          "tavu_name": "Billing Inquiry",
+          "tavu_isdefault": false,
+          "tavu_sortorder": 40,
+          "tavu_defaultpriority": 576600000,
+          "tavu_description": "Invoice, payment, and billing questions.",
+          "tavu_aicategorizationhint": "Apply for questions or disputes about invoices, charges, payments, or credits.",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Consulta de facturación"
+            }
+          }
+        },
+        {
+          "tavu_code": "CT-1005",
+          "tavu_name": "Scope Change Request",
+          "tavu_isdefault": false,
+          "tavu_sortorder": 50,
+          "tavu_defaultpriority": 576600001,
+          "tavu_description": "Requests to change or extend agreed scope.",
+          "tavu_aicategorizationhint": "Apply when the customer requests changes or additions to the agreed scope of an active engagement.",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Solicitud de cambio de alcance"
+            }
+          }
+        },
+        {
+          "tavu_code": "CT-1006",
+          "tavu_name": "Complaint",
+          "tavu_isdefault": false,
+          "tavu_sortorder": 60,
+          "tavu_defaultpriority": 576600002,
+          "tavu_description": "Dissatisfaction or service-failure reports.",
+          "tavu_aicategorizationhint": "Apply when the customer expresses dissatisfaction or frustration, or reports a service failure that affected their operations.",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Queja"
+            }
+          }
+        },
+        {
+          "tavu_code": "CT-1007",
+          "tavu_name": "Other",
+          "tavu_isdefault": false,
+          "tavu_sortorder": 70,
+          "tavu_defaultpriority": 576600000,
+          "tavu_description": "Anything not covered by other types.",
+          "tavu_aicategorizationhint": "Apply only when the case clearly does not fit any other active type.",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Otro"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_customertierdefinition",
+      "keyField": "tavu_code",
+      "rows": [
+        {
+          "tavu_code": "CTD-1000",
+          "tavu_name": "Standard",
+          "tavu_sortorder": 30,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Estándar"
+            }
+          }
+        },
+        {
+          "tavu_code": "CTD-1001",
+          "tavu_name": "Premium",
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Premium"
+            }
+          }
+        },
+        {
+          "tavu_code": "CTD-1002",
+          "tavu_name": "Strategic",
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Estratégico"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_businesscalendar",
+      "keyField": "tavu_code",
+      "rows": [
+        {
+          "tavu_code": "BC-1000",
+          "tavu_name": "Standard 8x5",
+          "tavu_is24x7": false,
+          "tavu_isdefault": true,
+          "tavu_timezone": {
+            "@runtime": "installerTimeZone"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Estándar 8x5"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_calendarworkinghours",
+      "keyField": "tavu_code",
+      "rows": [
+        {
+          "tavu_code": "CWH-1000",
+          "tavu_name": "Monday Morning",
+          "tavu_dayofweek": 1,
+          "tavu_starttime": 480,
+          "tavu_endtime": 720,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Lunes mañana"
+            }
+          }
+        },
+        {
+          "tavu_code": "CWH-1001",
+          "tavu_name": "Monday Afternoon",
+          "tavu_dayofweek": 1,
+          "tavu_starttime": 780,
+          "tavu_endtime": 1020,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Lunes tarde"
+            }
+          }
+        },
+        {
+          "tavu_code": "CWH-1002",
+          "tavu_name": "Tuesday Morning",
+          "tavu_dayofweek": 2,
+          "tavu_starttime": 480,
+          "tavu_endtime": 720,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Martes mañana"
+            }
+          }
+        },
+        {
+          "tavu_code": "CWH-1003",
+          "tavu_name": "Tuesday Afternoon",
+          "tavu_dayofweek": 2,
+          "tavu_starttime": 780,
+          "tavu_endtime": 1020,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Martes tarde"
+            }
+          }
+        },
+        {
+          "tavu_code": "CWH-1004",
+          "tavu_name": "Wednesday Morning",
+          "tavu_dayofweek": 3,
+          "tavu_starttime": 480,
+          "tavu_endtime": 720,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Miércoles mañana"
+            }
+          }
+        },
+        {
+          "tavu_code": "CWH-1005",
+          "tavu_name": "Wednesday Afternoon",
+          "tavu_dayofweek": 3,
+          "tavu_starttime": 780,
+          "tavu_endtime": 1020,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Miércoles tarde"
+            }
+          }
+        },
+        {
+          "tavu_code": "CWH-1006",
+          "tavu_name": "Thursday Morning",
+          "tavu_dayofweek": 4,
+          "tavu_starttime": 480,
+          "tavu_endtime": 720,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Jueves mañana"
+            }
+          }
+        },
+        {
+          "tavu_code": "CWH-1007",
+          "tavu_name": "Thursday Afternoon",
+          "tavu_dayofweek": 4,
+          "tavu_starttime": 780,
+          "tavu_endtime": 1020,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Jueves tarde"
+            }
+          }
+        },
+        {
+          "tavu_code": "CWH-1008",
+          "tavu_name": "Friday Morning",
+          "tavu_dayofweek": 5,
+          "tavu_starttime": 480,
+          "tavu_endtime": 720,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Viernes mañana"
+            }
+          }
+        },
+        {
+          "tavu_code": "CWH-1009",
+          "tavu_name": "Friday Afternoon",
+          "tavu_dayofweek": 5,
+          "tavu_starttime": 780,
+          "tavu_endtime": 1020,
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Viernes tarde"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_sla",
+      "keyField": "tavu_name",
+      "rows": [
+        {
+          "tavu_name": "Standard - Default",
+          "tavu_customertier": {
+            "@ref": "tavu_customertierdefinition",
+            "key": "CTD-1000"
+          },
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "tavu_responsetargethours": 8,
+          "tavu_resolutiontargethours": 48,
+          "tavu_evaluationpriority": 100,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Estándar - Predeterminado"
+            }
+          }
+        },
+        {
+          "tavu_name": "Premium - Default",
+          "tavu_customertier": {
+            "@ref": "tavu_customertierdefinition",
+            "key": "CTD-1001"
+          },
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "tavu_responsetargethours": 4,
+          "tavu_resolutiontargethours": 24,
+          "tavu_evaluationpriority": 100,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Premium - Predeterminado"
+            }
+          }
+        },
+        {
+          "tavu_name": "Strategic - Default",
+          "tavu_customertier": {
+            "@ref": "tavu_customertierdefinition",
+            "key": "CTD-1002"
+          },
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "tavu_responsetargethours": 1,
+          "tavu_resolutiontargethours": 8,
+          "tavu_evaluationpriority": 100,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Estratégico - Predeterminado"
+            }
+          }
+        },
+        {
+          "tavu_name": "Strategic - Complaint",
+          "tavu_customertier": {
+            "@ref": "tavu_customertierdefinition",
+            "key": "CTD-1002"
+          },
+          "tavu_calendar": {
+            "@ref": "tavu_businesscalendar",
+            "key": "BC-1000"
+          },
+          "tavu_responsetargethours": 0.5,
+          "tavu_resolutiontargethours": 4,
+          "tavu_evaluationpriority": 50,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Estratégico - Queja"
+            }
+          },
+          "tavu_casetype": {
+            "@ref": "tavu_casetype",
+            "key": "CT-1006"
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_businessline",
+      "keyField": "tavu_code",
+      "rows": [
+        {
+          "tavu_code": "BL-1000",
+          "tavu_name": "Application Support",
+          "tavu_description": "Issues with delivered applications and software.",
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Soporte de aplicaciones"
+            }
+          }
+        },
+        {
+          "tavu_code": "BL-1001",
+          "tavu_name": "Infrastructure & Operations",
+          "tavu_description": "Hosting, environments, integrations, and data operations.",
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Infraestructura y operaciones"
+            }
+          }
+        },
+        {
+          "tavu_code": "BL-1002",
+          "tavu_name": "Change & Enhancement",
+          "tavu_description": "Requests to change, configure, or extend delivered solutions.",
+          "tavu_sortorder": 30,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Cambios y mejoras"
+            }
+          }
+        },
+        {
+          "tavu_code": "BL-1003",
+          "tavu_name": "Account & Commercial",
+          "tavu_description": "Billing, contracts, licensing, and onboarding matters.",
+          "tavu_sortorder": 40,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Cuenta y comercial"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_category",
+      "keyField": "tavu_code",
+      "rows": [
+        {
+          "tavu_code": "C-1000",
+          "tavu_name": "Defect / Bug",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1000"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Defecto / Error"
+            }
+          }
+        },
+        {
+          "tavu_code": "C-1001",
+          "tavu_name": "Performance",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1000"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Rendimiento"
+            }
+          },
+          "tavu_aicategorizationhint": "Apply when the system works but is slow, laggy, or times out intermittently, not when it is fully down."
+        },
+        {
+          "tavu_code": "C-1002",
+          "tavu_name": "Access & Security",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1000"
+          },
+          "tavu_sortorder": 30,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Acceso y seguridad"
+            }
+          }
+        },
+        {
+          "tavu_code": "C-1003",
+          "tavu_name": "System Outage",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1001"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Caída del sistema"
+            }
+          },
+          "tavu_aicategorizationhint": "Apply only when the system is completely unavailable in production, blocking the customer's operations."
+        },
+        {
+          "tavu_code": "C-1004",
+          "tavu_name": "Integration / Connectivity",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1001"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Integración / Conectividad"
+            }
+          }
+        },
+        {
+          "tavu_code": "C-1005",
+          "tavu_name": "Data & Backup",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1001"
+          },
+          "tavu_sortorder": 30,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Datos y respaldo"
+            }
+          }
+        },
+        {
+          "tavu_code": "C-1006",
+          "tavu_name": "Configuration Change",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1002"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Cambio de configuración"
+            }
+          }
+        },
+        {
+          "tavu_code": "C-1007",
+          "tavu_name": "Feature Request",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1002"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Solicitud de funcionalidad"
+            }
+          },
+          "tavu_aicategorizationhint": "Apply when the customer requests new functionality that does not exist yet."
+        },
+        {
+          "tavu_code": "C-1008",
+          "tavu_name": "Scope Change",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1002"
+          },
+          "tavu_sortorder": 30,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Cambio de alcance"
+            }
+          },
+          "tavu_aicategorizationhint": "Apply when the request adds work beyond the agreed engagement scope."
+        },
+        {
+          "tavu_code": "C-1009",
+          "tavu_name": "Billing & Invoicing",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1003"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Facturación"
+            }
+          }
+        },
+        {
+          "tavu_code": "C-1010",
+          "tavu_name": "Contract & Licensing",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1003"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Contrato y licenciamiento"
+            }
+          }
+        },
+        {
+          "tavu_code": "C-1011",
+          "tavu_name": "Onboarding",
+          "tavu_businessline": {
+            "@ref": "tavu_businessline",
+            "key": "BL-1003"
+          },
+          "tavu_sortorder": 30,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Incorporación"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_subcategory",
+      "keyField": "tavu_code",
+      "rows": [
+        {
+          "tavu_code": "S-1000",
+          "tavu_name": "Functional Error",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1000"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Error funcional"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1001",
+          "tavu_name": "UI / Display Issue",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1000"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Problema de interfaz"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1002",
+          "tavu_name": "Data Integrity Issue",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1000"
+          },
+          "tavu_sortorder": 30,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Problema de integridad de datos"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1003",
+          "tavu_name": "Slow Response",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1001"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Respuesta lenta"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1004",
+          "tavu_name": "Timeout / Hang",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1001"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Tiempo de espera agotado / Bloqueo"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1005",
+          "tavu_name": "Login / Authentication",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1002"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Inicio de sesión / Autenticación"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1006",
+          "tavu_name": "Permissions / Roles",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1002"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Permisos / Roles"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1007",
+          "tavu_name": "Production Down",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1003"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Producción caída"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1008",
+          "tavu_name": "Partial Degradation",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1003"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Degradación parcial"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1009",
+          "tavu_name": "API / Interface Failure",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1004"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Falla de API / Interfaz"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1010",
+          "tavu_name": "Third-Party Service",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1004"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Servicio de terceros"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1011",
+          "tavu_name": "Data Loss / Recovery",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1005"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Pérdida / Recuperación de datos"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1012",
+          "tavu_name": "Migration Issue",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1005"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Problema de migración"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1013",
+          "tavu_name": "Setting / Parameter Update",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1006"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Ajuste de parámetros"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1014",
+          "tavu_name": "User / License Management",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1006"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Gestión de usuarios / licencias"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1015",
+          "tavu_name": "New Functionality",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1007"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Nueva funcionalidad"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1016",
+          "tavu_name": "Workflow / Automation",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1007"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Flujo / Automatización"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1017",
+          "tavu_name": "Additional Requirements",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1008"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Requisitos adicionales"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1018",
+          "tavu_name": "Invoice Query",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1009"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Consulta de factura"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1019",
+          "tavu_name": "Payment / Credit",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1009"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Pago / Crédito"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1020",
+          "tavu_name": "Renewal",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1010"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Renovación"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1021",
+          "tavu_name": "License Adjustment",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1010"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Ajuste de licencias"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1022",
+          "tavu_name": "New User Setup",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1011"
+          },
+          "tavu_sortorder": 10,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Alta de nuevo usuario"
+            }
+          }
+        },
+        {
+          "tavu_code": "S-1023",
+          "tavu_name": "Training Request",
+          "tavu_category": {
+            "@ref": "tavu_category",
+            "key": "C-1011"
+          },
+          "tavu_sortorder": 20,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Solicitud de capacitación"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_salesstage",
+      "keyField": "tavu_name",
+      "rows": [
+        {
+          "tavu_name": "Discovery",
+          "tavu_displayorder": 1,
+          "tavu_forecastcategory": 576600000,
+          "tavu_defaultprobability": 20,
+          "tavu_color": "#6C8EBF",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Descubrimiento"
+            }
+          }
+        },
+        {
+          "tavu_name": "Proposal Drafted",
+          "tavu_displayorder": 2,
+          "tavu_forecastcategory": 576600001,
+          "tavu_defaultprobability": 40,
+          "tavu_color": "#E9B949",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Propuesta en borrador"
+            }
+          }
+        },
+        {
+          "tavu_name": "Proposal Sent",
+          "tavu_displayorder": 3,
+          "tavu_forecastcategory": 576600001,
+          "tavu_defaultprobability": 60,
+          "tavu_color": "#D98A2B",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Propuesta enviada"
+            }
+          }
+        },
+        {
+          "tavu_name": "Negotiation",
+          "tavu_displayorder": 4,
+          "tavu_forecastcategory": 576600002,
+          "tavu_defaultprobability": 80,
+          "tavu_color": "#4A9B6E",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Negociación"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_goaltype",
+      "keyField": "tavu_name",
+      "rows": [
+        {
+          "tavu_name": "Revenue",
+          "tavu_sourceentity": "tavu_opportunity",
+          "tavu_dateproperty": "tavu_actualclosedate",
+          "tavu_amountproperty": "tavu_actualrevenue",
+          "tavu_metrickind": 576600000,
+          "tavu_usesforecastcategory": true,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Ingresos"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_salesperiod",
+      "keyField": "tavu_name",
+      "rows": [],
+      "@runtime": "when tavu_systemsettings.tavu_autocreatesalesperiods is Yes: ensure periods (Month or Quarter per tavu_forecastperiodtype) for the current and the next fiscal year, where the fiscal year starts on tavu_companyprofile.tavu_fiscalyearstartmonth (1-12; empty or no profile = January). Also run daily from Fl.Forecast.SnapshotDaily. Never modifies existing periods."
+    },
+    {
+      "table": "tavu_unitofmeasureschedule",
+      "keyField": "tavu_name",
+      "rows": [
+        {
+          "tavu_name": "Time",
+          "tavu_baseunit": "Hour",
+          "tavu_description": "Units of measure for time-based services.",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Tiempo",
+              "tavu_baseunit": "Hora",
+              "tavu_description": "Unidades de medida para servicios por tiempo."
+            }
+          }
+        },
+        {
+          "tavu_name": "Quantity",
+          "tavu_baseunit": "Unit",
+          "tavu_description": "Units of measure for countable items such as licenses.",
+          "@i18n": {
+            "es": {
+              "tavu_name": "Cantidad",
+              "tavu_baseunit": "Unidad",
+              "tavu_description": "Unidades de medida para elementos contables como licencias."
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_uom",
+      "keyField": "tavu_name",
+      "rows": [
+        {
+          "tavu_name": "Hour",
+          "tavu_unitgroup": {
+            "@ref": "tavu_unitofmeasureschedule",
+            "key": "Time"
+          },
+          "tavu_conversionfactor": 1,
+          "tavu_isbaseunit": true,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Hora"
+            }
+          }
+        },
+        {
+          "tavu_name": "Day",
+          "tavu_unitgroup": {
+            "@ref": "tavu_unitofmeasureschedule",
+            "key": "Time"
+          },
+          "tavu_conversionfactor": 8,
+          "tavu_isbaseunit": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Día"
+            }
+          }
+        },
+        {
+          "tavu_name": "Month",
+          "tavu_unitgroup": {
+            "@ref": "tavu_unitofmeasureschedule",
+            "key": "Time"
+          },
+          "tavu_conversionfactor": 160,
+          "tavu_isbaseunit": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Mes"
+            }
+          }
+        },
+        {
+          "tavu_name": "Unit",
+          "tavu_unitgroup": {
+            "@ref": "tavu_unitofmeasureschedule",
+            "key": "Quantity"
+          },
+          "tavu_conversionfactor": 1,
+          "tavu_isbaseunit": true,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Unidad"
+            }
+          }
+        },
+        {
+          "tavu_name": "License",
+          "tavu_unitgroup": {
+            "@ref": "tavu_unitofmeasureschedule",
+            "key": "Quantity"
+          },
+          "tavu_conversionfactor": 1,
+          "tavu_isbaseunit": false,
+          "@i18n": {
+            "es": {
+              "tavu_name": "Licencia"
+            }
+          }
+        }
+      ],
+      "note": "Day = 8 hours and Month = 160 hours (20 working days of 8 hours), aligned with the Standard 8x5 calendar. Firms adjust the factors."
+    },
+    {
+      "table": "tavu_country",
+      "keyField": "tavu_isocode2",
+      "pack": "geography",
+      "rows": [
+        {
+          "tavu_isocode2": "US",
+          "tavu_isocode3": "USA",
+          "tavu_numericcode": 840,
+          "tavu_name": "United States",
+          "tavu_phoneprefix": "+1",
+          "tavu_sortorder": 10,
+          "tavu_currency": {
+            "@ref": "transactioncurrency",
+            "key": "USD",
+            "keyField": "isocurrencycode",
+            "optional": true
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Estados Unidos"
+            }
+          }
+        },
+        {
+          "tavu_isocode2": "CO",
+          "tavu_isocode3": "COL",
+          "tavu_numericcode": 170,
+          "tavu_name": "Colombia",
+          "tavu_phoneprefix": "+57",
+          "tavu_sortorder": 20,
+          "tavu_currency": {
+            "@ref": "transactioncurrency",
+            "key": "COP",
+            "keyField": "isocurrencycode",
+            "optional": true
+          },
+          "@i18n": {
+            "es": {
+              "tavu_name": "Colombia"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_stateprovince",
+      "keyField": "tavu_isocode",
+      "pack": "geography",
+      "rows": [
+        {
+          "tavu_isocode": "US-AL",
+          "tavu_name": "Alabama",
+          "tavu_shortcode": "AL",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-AK",
+          "tavu_name": "Alaska",
+          "tavu_shortcode": "AK",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-AZ",
+          "tavu_name": "Arizona",
+          "tavu_shortcode": "AZ",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-AR",
+          "tavu_name": "Arkansas",
+          "tavu_shortcode": "AR",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-CA",
+          "tavu_name": "California",
+          "tavu_shortcode": "CA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-CO",
+          "tavu_name": "Colorado",
+          "tavu_shortcode": "CO",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-CT",
+          "tavu_name": "Connecticut",
+          "tavu_shortcode": "CT",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-DE",
+          "tavu_name": "Delaware",
+          "tavu_shortcode": "DE",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-FL",
+          "tavu_name": "Florida",
+          "tavu_shortcode": "FL",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-GA",
+          "tavu_name": "Georgia",
+          "tavu_shortcode": "GA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-HI",
+          "tavu_name": "Hawaii",
+          "tavu_shortcode": "HI",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-ID",
+          "tavu_name": "Idaho",
+          "tavu_shortcode": "ID",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-IL",
+          "tavu_name": "Illinois",
+          "tavu_shortcode": "IL",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-IN",
+          "tavu_name": "Indiana",
+          "tavu_shortcode": "IN",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-IA",
+          "tavu_name": "Iowa",
+          "tavu_shortcode": "IA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-KS",
+          "tavu_name": "Kansas",
+          "tavu_shortcode": "KS",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-KY",
+          "tavu_name": "Kentucky",
+          "tavu_shortcode": "KY",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-LA",
+          "tavu_name": "Louisiana",
+          "tavu_shortcode": "LA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-ME",
+          "tavu_name": "Maine",
+          "tavu_shortcode": "ME",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-MD",
+          "tavu_name": "Maryland",
+          "tavu_shortcode": "MD",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-MA",
+          "tavu_name": "Massachusetts",
+          "tavu_shortcode": "MA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-MI",
+          "tavu_name": "Michigan",
+          "tavu_shortcode": "MI",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-MN",
+          "tavu_name": "Minnesota",
+          "tavu_shortcode": "MN",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-MS",
+          "tavu_name": "Mississippi",
+          "tavu_shortcode": "MS",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-MO",
+          "tavu_name": "Missouri",
+          "tavu_shortcode": "MO",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-MT",
+          "tavu_name": "Montana",
+          "tavu_shortcode": "MT",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-NE",
+          "tavu_name": "Nebraska",
+          "tavu_shortcode": "NE",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-NV",
+          "tavu_name": "Nevada",
+          "tavu_shortcode": "NV",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-NH",
+          "tavu_name": "New Hampshire",
+          "tavu_shortcode": "NH",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-NJ",
+          "tavu_name": "New Jersey",
+          "tavu_shortcode": "NJ",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-NM",
+          "tavu_name": "New Mexico",
+          "tavu_shortcode": "NM",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-NY",
+          "tavu_name": "New York",
+          "tavu_shortcode": "NY",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-NC",
+          "tavu_name": "North Carolina",
+          "tavu_shortcode": "NC",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-ND",
+          "tavu_name": "North Dakota",
+          "tavu_shortcode": "ND",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-OH",
+          "tavu_name": "Ohio",
+          "tavu_shortcode": "OH",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-OK",
+          "tavu_name": "Oklahoma",
+          "tavu_shortcode": "OK",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-OR",
+          "tavu_name": "Oregon",
+          "tavu_shortcode": "OR",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-PA",
+          "tavu_name": "Pennsylvania",
+          "tavu_shortcode": "PA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-RI",
+          "tavu_name": "Rhode Island",
+          "tavu_shortcode": "RI",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-SC",
+          "tavu_name": "South Carolina",
+          "tavu_shortcode": "SC",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-SD",
+          "tavu_name": "South Dakota",
+          "tavu_shortcode": "SD",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-TN",
+          "tavu_name": "Tennessee",
+          "tavu_shortcode": "TN",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-TX",
+          "tavu_name": "Texas",
+          "tavu_shortcode": "TX",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-UT",
+          "tavu_name": "Utah",
+          "tavu_shortcode": "UT",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-VT",
+          "tavu_name": "Vermont",
+          "tavu_shortcode": "VT",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-VA",
+          "tavu_name": "Virginia",
+          "tavu_shortcode": "VA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-WA",
+          "tavu_name": "Washington",
+          "tavu_shortcode": "WA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-WV",
+          "tavu_name": "West Virginia",
+          "tavu_shortcode": "WV",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-WI",
+          "tavu_name": "Wisconsin",
+          "tavu_shortcode": "WI",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-WY",
+          "tavu_name": "Wyoming",
+          "tavu_shortcode": "WY",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-DC",
+          "tavu_name": "District of Columbia",
+          "tavu_shortcode": "DC",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "US-PR",
+          "tavu_name": "Puerto Rico",
+          "tavu_shortcode": "PR",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          }
+        },
+        {
+          "tavu_isocode": "CO-AMA",
+          "tavu_name": "Amazonas",
+          "tavu_shortcode": "AMA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-ANT",
+          "tavu_name": "Antioquia",
+          "tavu_shortcode": "ANT",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-ARA",
+          "tavu_name": "Arauca",
+          "tavu_shortcode": "ARA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-ATL",
+          "tavu_name": "Atlántico",
+          "tavu_shortcode": "ATL",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-BOL",
+          "tavu_name": "Bolívar",
+          "tavu_shortcode": "BOL",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-BOY",
+          "tavu_name": "Boyacá",
+          "tavu_shortcode": "BOY",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-CAL",
+          "tavu_name": "Caldas",
+          "tavu_shortcode": "CAL",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-CAQ",
+          "tavu_name": "Caquetá",
+          "tavu_shortcode": "CAQ",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-CAS",
+          "tavu_name": "Casanare",
+          "tavu_shortcode": "CAS",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-CAU",
+          "tavu_name": "Cauca",
+          "tavu_shortcode": "CAU",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-CES",
+          "tavu_name": "Cesar",
+          "tavu_shortcode": "CES",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-CHO",
+          "tavu_name": "Chocó",
+          "tavu_shortcode": "CHO",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-COR",
+          "tavu_name": "Córdoba",
+          "tavu_shortcode": "COR",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-CUN",
+          "tavu_name": "Cundinamarca",
+          "tavu_shortcode": "CUN",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-DC",
+          "tavu_name": "Distrito Capital de Bogotá",
+          "tavu_shortcode": "DC",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-GUA",
+          "tavu_name": "Guainía",
+          "tavu_shortcode": "GUA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-GUV",
+          "tavu_name": "Guaviare",
+          "tavu_shortcode": "GUV",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-HUI",
+          "tavu_name": "Huila",
+          "tavu_shortcode": "HUI",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-LAG",
+          "tavu_name": "La Guajira",
+          "tavu_shortcode": "LAG",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-MAG",
+          "tavu_name": "Magdalena",
+          "tavu_shortcode": "MAG",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-MET",
+          "tavu_name": "Meta",
+          "tavu_shortcode": "MET",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-NAR",
+          "tavu_name": "Nariño",
+          "tavu_shortcode": "NAR",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-NSA",
+          "tavu_name": "Norte de Santander",
+          "tavu_shortcode": "NSA",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-PUT",
+          "tavu_name": "Putumayo",
+          "tavu_shortcode": "PUT",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-QUI",
+          "tavu_name": "Quindío",
+          "tavu_shortcode": "QUI",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-RIS",
+          "tavu_name": "Risaralda",
+          "tavu_shortcode": "RIS",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-SAP",
+          "tavu_name": "San Andrés Providencia y Santa Catalina",
+          "tavu_shortcode": "SAP",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-SAN",
+          "tavu_name": "Santander",
+          "tavu_shortcode": "SAN",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-SUC",
+          "tavu_name": "Sucre",
+          "tavu_shortcode": "SUC",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-TOL",
+          "tavu_name": "Tolima",
+          "tavu_shortcode": "TOL",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-VAC",
+          "tavu_name": "Valle del Cauca",
+          "tavu_shortcode": "VAC",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-VAU",
+          "tavu_name": "Vaupés",
+          "tavu_shortcode": "VAU",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        },
+        {
+          "tavu_isocode": "CO-VID",
+          "tavu_name": "Vichada",
+          "tavu_shortcode": "VID",
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          }
+        }
+      ]
+    },
+    {
+      "table": "tavu_city",
+      "keyField": [
+        "tavu_name",
+        "tavu_stateprovince"
+      ],
+      "pack": "geography",
+      "rows": [
+        {
+          "tavu_name": "Leticia",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-AMA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Medellín",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-ANT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Bello",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-ANT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Envigado",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-ANT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Itagüí",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-ANT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Rionegro",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-ANT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Apartadó",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-ANT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Arauca",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-ARA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Barranquilla",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-ATL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Soledad",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-ATL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Cartagena",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-BOL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Tunja",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-BOY"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Duitama",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-BOY"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Sogamoso",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-BOY"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Manizales",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CAL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Florencia",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CAQ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Yopal",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CAS"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Popayán",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CAU"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Valledupar",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CES"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Quibdó",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CHO"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Montería",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-COR"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Bogotá",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-DC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Fusagasugá",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CUN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Girardot",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CUN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Zipaquirá",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CUN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Facatativá",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CUN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Chía",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CUN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Soacha",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CUN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Mosquera",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-CUN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Inírida",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-GUA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "San José del Guaviare",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-GUV"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Neiva",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-HUI"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Pitalito",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-HUI"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Riohacha",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-LAG"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Maicao",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-LAG"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Santa Marta",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-MAG"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Villavicencio",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-MET"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Pasto",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-NAR"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Tumaco",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-NAR"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Ipiales",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-NAR"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Cúcuta",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-NSA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Mocoa",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-PUT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Armenia",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-QUI"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Pereira",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-RIS"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Dosquebradas",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-RIS"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "San Andrés",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-SAP"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Bucaramanga",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-SAN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Barrancabermeja",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-SAN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Floridablanca",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-SAN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Sincelejo",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-SUC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Ibagué",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-TOL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Cali",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VAC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Buenaventura",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VAC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Palmira",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VAC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Tuluá",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VAC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Buga",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VAC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Cartago",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VAC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Jamundí",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VAC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Yumbo",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VAC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Mitú",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VAU"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Puerto Carreño",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "CO-VID"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "CO"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "New York",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NY"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Los Angeles",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Chicago",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-IL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Houston",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Phoenix",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Philadelphia",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-PA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "San Antonio",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "San Diego",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Dallas",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "San Jose",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Austin",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Jacksonville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Fort Worth",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Columbus",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OH"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Charlotte",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Indianapolis",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-IN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "San Francisco",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Seattle",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-WA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Denver",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CO"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Washington",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-DC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Nashville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Oklahoma City",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OK"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "El Paso",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Boston",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-MA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Portland",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OR"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Las Vegas",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NV"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Memphis",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Louisville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-KY"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Baltimore",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-MD"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Milwaukee",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-WI"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Albuquerque",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NM"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Tucson",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Fresno",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Mesa",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Sacramento",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Atlanta",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-GA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Kansas City",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-MO"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Omaha",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NE"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Colorado Springs",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CO"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Raleigh",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Long Beach",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Virginia Beach",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-VA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Miami",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Oakland",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Minneapolis",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-MN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Tulsa",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OK"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Tampa",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Arlington",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "New Orleans",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-LA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Wichita",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-KS"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Cleveland",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OH"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Bakersfield",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Aurora",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CO"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Anaheim",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Honolulu",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-HI"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Santa Ana",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Riverside",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Corpus Christi",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Lexington",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-KY"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Henderson",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NV"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Stockton",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Saint Paul",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-MN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Cincinnati",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OH"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Pittsburgh",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-PA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Greensboro",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Anchorage",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AK"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Plano",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Lincoln",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NE"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Orlando",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Irvine",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Newark",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NJ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Durham",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Chula Vista",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Toledo",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OH"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Fort Wayne",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-IN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "St. Petersburg",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Laredo",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Jersey City",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NJ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Chandler",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Madison",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-WI"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Lubbock",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Scottsdale",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Reno",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NV"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Buffalo",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NY"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Gilbert",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Glendale",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "North Las Vegas",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NV"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Winston-Salem",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Chesapeake",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-VA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Norfolk",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-VA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Fremont",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Garland",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Irving",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Hialeah",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Richmond",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-VA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Boise",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-ID"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Spokane",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-WA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Baton Rouge",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-LA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Tacoma",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-WA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "San Bernardino",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Modesto",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Fontana",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Des Moines",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-IA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Moreno Valley",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Santa Clarita",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Fayetteville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Birmingham",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Oxnard",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Rochester",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NY"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Port St. Lucie",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Grand Rapids",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-MI"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Huntsville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Salt Lake City",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-UT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Frisco",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Yonkers",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NY"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Amarillo",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Glendale",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Huntington Beach",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "McKinney",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Montgomery",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Augusta",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-GA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Tempe",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Akron",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OH"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Little Rock",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AR"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Brownsville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Columbus",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-GA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Grand Prairie",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Overland Park",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-KS"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Tallahassee",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Cape Coral",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Mobile",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Knoxville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Shreveport",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-LA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Worcester",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-MA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Ontario",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Vancouver",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-WA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Sioux Falls",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-SD"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Chattanooga",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Fort Lauderdale",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Providence",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-RI"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Newport News",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-VA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Rancho Cucamonga",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Santa Rosa",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Peoria",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Oceanside",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Elk Grove",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Salem",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OR"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Pembroke Pines",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Eugene",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OR"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Garden Grove",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Cary",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Corona",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Springfield",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-MO"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Jackson",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-MS"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Alexandria",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-VA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Hayward",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Clarksville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Lakewood",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CO"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Lancaster",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Salinas",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Palmdale",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Hollywood",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Sunnyvale",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Macon",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-GA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Pomona",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Escondido",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Savannah",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-GA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Bridgeport",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Naperville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-IL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Bellevue",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-WA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Joliet",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-IL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Rockford",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-IL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Paterson",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-NJ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Hartford",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CT"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Killeen",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "McAllen",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Torrance",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Olathe",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-KS"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Pasadena",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Miramar",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Dayton",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-OH"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Charleston",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-SC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Columbia",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-SC"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "Denton",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Midland",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Surprise",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-AZ"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Roseville",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Thornton",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CO"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Murfreesboro",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TN"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Fargo",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-ND"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Concord",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Santa Clara",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-CA"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Meridian",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-ID"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Topeka",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-KS"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        },
+        {
+          "tavu_name": "West Palm Beach",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-FL"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "Round Rock",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-TX"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": false
+        },
+        {
+          "tavu_name": "San Juan",
+          "tavu_stateprovince": {
+            "@ref": "tavu_stateprovince",
+            "key": "US-PR"
+          },
+          "tavu_country": {
+            "@ref": "tavu_country",
+            "key": "US"
+          },
+          "tavu_iscapital": true
+        }
+      ]
+    },
+    {
+      "table": "tavu_aitaskconfiguration",
+      "keyField": "tavu_taskkey",
+      "note": "No model binding: tasks use tavu_systemsettings.tavu_defaultaimodel, which the installer configures.",
+      "rows": [
+        {
+          "tavu_taskkey": 576600003,
+          "tavu_name": "Lead Triage",
+          "tavu_confidencethreshold": 0.75,
+          "tavu_temperature": 0.2,
+          "tavu_maxoutputtokens": 600,
+          "tavu_systemprompt": "You are the lead-triage assistant for a professional-services CRM. You receive one\nanonymous inbound lead and a list of candidate existing Contacts and Accounts that might\nmatch it. Your job: (1) decide whether the lead matches an EXISTING record, (2) judge\nwhether it is a real prospect or noise, (3) extract clean person/company fields.\n\nRules:\n- Only claim a match using the EXACT Name from the candidate list provided. If nothing\n matches, leave the match fields empty. Never invent a record.\n- Creating a new record is NOT your decision: if the lead is a real prospect with no\n existing match, recommend \"promote-create-new\"; a human will confirm.\n- Mark \"discard\" only for clear noise (no-reply, automated, spam, empty).\n- Return confidence in [0,1] reflecting how sure you are of the recommendation.\n- Do not use em dashes or long dashes anywhere in your output. Use commas, periods, colons, or parentheses instead.\n\nReturn ONLY this JSON object, no prose:\n{\n \"matchContactName\": \"\",\n \"matchAccountName\": \"\",\n \"recommendation\": \"\",\n \"isRealProspect\": true,\n \"firstName\": \"\",\n \"lastName\": \"\",\n \"companyName\": \"\",\n \"confidence\": 0.0,\n \"reasoning\": \"\"\n}"
+        },
+        {
+          "tavu_taskkey": 576600004,
+          "tavu_name": "Meeting Capture",
+          "tavu_confidencethreshold": 0.7,
+          "tavu_temperature": 0.2,
+          "tavu_maxoutputtokens": 800,
+          "tavu_systemprompt": "You are OpenTavu's meeting capture assistant for a professional-services consultancy.\n\nOUTPUT LANGUAGE: The user content includes a line \"OUTPUT LANGUAGE: <lang>\". Write \"summary\", \"discoveryExtract\" and \"reasoning\" ENTIRELY in that language, and in no other. The JSON keys stay in English; only the values follow that language.\n\nFrom the meeting transcript, produce a concise summary, a discovery extract, a suggested existing opportunity (only from the provided candidate list), and the prospect's account/contact details.\n\nPROSPECT = CLIENT SIDE: Never treat the seller/host running the call as the prospect. Choose the PRIMARY client contact (main decision maker or most senior person of the client's company) for the prospect fields, and the client's company for prospectCompanyName. Capture only that one primary contact.\n\nRules: use only what the transcript supports. Never invent an opportunity (pick an EXACT name from the candidate list or leave it empty). Never guess an email or phone; leave a prospect field empty if the transcript does not state it. No em dashes. \"confidence\" is a number from 0 to 1.\n\nReturn ONLY this strict JSON object, no other text:\n{\n \"summary\": \"<concise summary>\",\n \"discoveryExtract\": \"<needs, budget, timeline, decision makers, next steps>\",\n \"suggestedOpportunityName\": \"<exact candidate name or empty>\",\n \"confidence\": 0.0,\n \"reasoning\": \"<short justification>\",\n \"prospectCompanyName\": \"\",\n \"prospectFirstName\": \"\",\n \"prospectLastName\": \"\",\n \"prospectEmail\": \"\",\n \"prospectPhone\": \"\"\n}\n\nCOMPANY NAME FROM DOMAIN: When a client participant's email is available, derive prospectCompanyName and its spelling from the EMAIL DOMAIN (e.g., \"jane@contoso.com\" -> company \"Contoso\"), not from how a name sounds in the transcript. The email domain is authoritative over any phonetic guess. Ignore the internal/seller domain when choosing the client company."
+        },
+        {
+          "tavu_taskkey": 576600005,
+          "tavu_name": "Meeting Follow-up Email",
+          "tavu_temperature": 0.5,
+          "tavu_maxoutputtokens": 600,
+          "tavu_systemprompt": "You are the assistant of a professional-services consultant writing a follow-up email to a client after a meeting.\nWrite in the sender's voice: warm, concise, professional. Recap what was discussed, restate agreed next steps and owners, and close politely. Sign as the provided sender.\nLANGUAGE: write the entire email (subject and body) in the SAME LANGUAGE as the meeting summary and notes provided. If they are in Spanish, write in Spanish. Match the client's language, do not translate.\nRules: use only what the notes support, never invent commitments, dates, or numbers. Keep it under ~180 words. Plain sentences, no em dashes, no markdown.\nReturn ONLY a strict JSON object: {\"subject\": \"<short subject>\", \"body\": \"<email body with line breaks>\"}. No other text."
+        },
+        {
+          "tavu_taskkey": 576600000,
+          "tavu_name": "Case Categorization",
+          "tavu_confidencethreshold": 0.85,
+          "tavu_temperature": 0.0,
+          "tavu_maxoutputtokens": 800,
+          "tavu_systemprompt": "You are a customer-service case categorization assistant for a professional-services firm. Read the case plus the provided lists of valid Case Types and the Business Line > Category > Subcategory classification. Categorize using ONLY names that appear in those lists; if nothing fits a level, leave that field empty. Respond with a SINGLE JSON object (no markdown, no extra text) with exactly these keys:\n- type: the Case Type name\n- businessLine, category, subcategory: the classification names\n- priority: one of \"Standard\", \"Expedited\", \"Critical\"\n- priorityReason: short justification\n- isBillable: true or false\n- sentiment: one of \"Calm\", \"Concerned\", \"Frustrated\", \"Critical\", \"Unknown\"\n- summary: one executive sentence (max ~400 chars)\n- problem: the distilled core problem\n- businessImpact: the business risk or impact\n- missingInfo: information still needed to respond\n- multiIntent: true if the case contains several distinct requests\n- confidence: a number from 0.0 to 1.0 for your overall confidence\n- reasoning: brief explanation of your choices\nLANGUAGE: Write all free-text fields (summary, problem, businessImpact, missingInfo, priorityReason, reasoning) in the SAME language as the case Title and Description. Do NOT translate the classification values (type, businessLine, category, subcategory): return those EXACTLY as the names given in the lists above, in whatever language the lists use.\nDo not use em dashes or long dashes anywhere in your output. Use commas, periods, colons, or parentheses instead."
+        },
+        {
+          "tavu_taskkey": 576600006,
+          "tavu_name": "Proposal Email Draft",
+          "tavu_temperature": 0.3,
+          "tavu_maxoutputtokens": 400,
+          "tavu_systemprompt": "You write a short, warm, professional email from a consultant to a client, introducing an attached proposal PDF. 3-5 sentences, no pricing tables, briefly reference the engagement context.\nIf a recipient name is given, greet them by first name (e.g. 'Hi Carlos,'); if none is given, use 'Hello,'.\nIf a sender name is given, sign with it; if none is given, end with just 'Best regards,' and no name line.\nNEVER output bracketed placeholders such as [Client's Name] or [Your Name].\nWrite in the same language as the context provided.\nDo not use em dashes or long dashes anywhere in your output. Use commas, periods, colons, or parentheses instead.\nReturn ONLY JSON: {\"subject\":\"...\",\"body\":\"...\"}"
+        }
+      ]
+    },
+    {
+      "table": "tavu_meetingsource",
+      "keyField": "tavu_provider",
+      "rows": [
+        {
+          "tavu_name": "Teams",
+          "tavu_provider": 576600000,
+          "tavu_sourcetype": 576600000,
+          "tavu_enabled": false
+        }
+      ]
+    },
+    {
+      "table": "tavu_systemsettings",
+      "keyField": "@singleton",
+      "rows": [
+        {
+          "tavu_name": "System Settings",
+          "tavu_customermode": 576600002,
+          "tavu_aienabled": true,
+          "tavu_defaultconfidencethreshold": 0.85,
+          "tavu_defaultcustomertier": {
+            "@ref": "tavu_customertierdefinition",
+            "key": "CTD-1000"
+          },
+          "tavu_leadbufferagingdays": 7,
+          "tavu_leadbufferstaledays": 14,
+          "tavu_activitythresholddays": 90,
+          "tavu_proposalemaildraftenabled": true,
+          "tavu_slaautoresume": true,
+          "tavu_meetingautoprovision": true,
+          "tavu_meetingconsolidateddiscovery": true,
+          "tavu_meetingfollowupdraftenabled": true,
+          "tavu_meetingstampengagement": true,
+          "tavu_forecastperiodtype": 576600001,
+          "tavu_forecastsnapshotday": 5,
+          "tavu_coveragetarget": 2.0,
+          "tavu_autocreatesalesperiods": true
+        }
+      ]
+    }
+  ],
+  "notSeeded": {
+    "tavu_aimodel": "provider, endpoint and key are installer-specific; the diagnostic reports when none is configured",
+    "tavu_companyprofile": "firm data (logo, terms, fiscal year start month); the diagnostic reports when empty. An empty fiscal year start month means January",
+    "tavu_businessclosure": "holidays are country-specific",
+    "tavu_pricelist, tavu_pricelistitem, tavu_product, tavu_kitcomponent": "firm-specific catalog"
+  }
+}
