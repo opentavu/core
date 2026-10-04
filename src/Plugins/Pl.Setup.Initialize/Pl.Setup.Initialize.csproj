@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{$(NewGuid)}</ProjectGuid>
+    <ProjectGuid>{08153484-19F3-4BF2-A423-ACD37A37B980}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Pl.Setup.Initialize</RootNamespace>
@@ -46,6 +46,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
   </ItemGroup>
@@ -62,6 +63,13 @@
 
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The seed travels inside the assembly; Initialize.cs reads it by this logical name. -->
+    <EmbeddedResource Include="Seed\opentavu-seed.json">
+      <LogicalName>OpenTavu.Seed.json</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
 
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

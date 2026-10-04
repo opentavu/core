@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{$(NewGuid)}</ProjectGuid>
+    <ProjectGuid>{5D3C7A1E-8B42-4F6D-9E1A-2C7B4D8F0A31}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Pl.Entity.Action</RootNamespace>

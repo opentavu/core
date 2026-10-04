@@ -10,7 +10,7 @@ This guide walks a Power Platform consultant or integrator through installing Op
 
 OpenTavu ships as two **Microsoft Power Platform managed solutions** (`.zip` files) you import into the client's Dataverse environment:
 
-- **OpenTavu Core**: tables, plugins, PCF controls, web resources, the model-driven app, forecasting, and pre-loaded seed data. It installs needing only the **Dataverse** connection, so a first deployment is friction-free.
+- **OpenTavu Core**: tables, plugins, PCF controls, web resources, the model-driven app, forecasting, and the setup routine that creates the reference data after import (configuration guide §4). It installs needing only the **Dataverse** connection, so a first deployment is friction-free.
 - **OpenTavu Integrations** (optional): the Power Automate flows that use email (SMTP / Office 365 Outlook), Microsoft Forms, and OneDrive. Add it only when the client wants those flows; it needs those extra connections.
 
 Install order is always **Core first, then Integrations**. OpenTavu is not a hosted SaaS product: the client brings their own Microsoft 365 and Azure (or alternative AI provider) subscriptions, and you configure OpenTavu to work on top of them.
@@ -170,6 +170,7 @@ New OpenTavu releases are imported **on top of** the existing managed solution. 
 2. Import it the same way as in §3. Because a solution with the same name already exists, the platform treats this as an **upgrade**.
 3. When prompted, choose the **Stage and Upgrade** option so the new version is staged and then applied, which cleanly removes components deleted in the new release. (The classic "Update" option leaves removed components behind and should be avoided unless a release note specifically calls for it.)
 4. Wait for the upgrade to finish, then re-run the **post-import verification** in §4.
+5. Open **System Settings** and click **Verify and complete configuration**. It adds any reference rows a new release introduced and reports disabled plugin steps or missing settings. It never overwrites values you changed.
 
 ### 5.3 Rollback
 

@@ -11,6 +11,7 @@
   },
   "sourceName": "Pl.Entity.Action",
   "preferNameDirectory": true,
+  "guids": [ "5D3C7A1E-8B42-4F6D-9E1A-2C7B4D8F0A31" ],
   "symbols": {
     "entityName": {
       "type": "parameter",

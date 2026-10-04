@@ -21,6 +21,7 @@
     <Project Path="Plugins/Pl.Proposal.LifecycleTracker/Pl.Proposal.LifecycleTracker.csproj" />
     <Project Path="Plugins/Pl.ProposalLine.Calculator/Pl.ProposalLine.Calculator.csproj" />
     <Project Path="Plugins/Pl.SalesTarget.KeyStamp/Pl.SalesTarget.KeyStamp.csproj" Id="6e7a1c2b-3d4e-4f5a-9b8c-1a2b3c4d5e01" />
+    <Project Path="Plugins/Pl.Setup.Initialize/Pl.Setup.Initialize.csproj" Id="08153484-19f3-4bf2-a423-acd37a37b980" />
     <Project Path="Plugins/Pl.SystemSettings.SingleRecordGuard/Pl.SystemSettings.SingleRecordGuard.csproj" />
   </Folder>
   <Folder Name="/Solution/" />

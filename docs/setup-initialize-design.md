@@ -1,6 +1,6 @@
 # Setup: Initialize Configuration (design)
 
-**Status:** design approved (2026-10-02); seed data v1.1.0 ready (441 rows); security roles created; plugin not built yet.
+**Status:** built 2026-10-04 (plugin, Custom API contract, System Settings button script); tested offline against a simulated Dataverse with the tenant's real column types; pending registration and a clean-environment test.
 **Components:** Custom API `tavu_InitializeConfiguration`, plugin `Pl.Setup.Initialize`, seed file `src/Plugins/Pl.Setup.Initialize/Seed/opentavu-seed.json`, button on the System Settings form.
 
 ## Why
@@ -65,22 +65,61 @@ Activity tables (`tavu_meeting`, `tavu_opportunityclose`, `tavu_timeentry`) are 
 
 ## Sales periods: rolling horizon
 
-Periods change every year, so they must never depend on a person remembering. The plugin generates the periods of the current and next year, and the same logic runs daily from `Fl.Forecast.SnapshotDaily` (already a daily, Dataverse-only flow), so there is always a full year ahead. Granularity follows `tavu_forecastperiodtype` (Month or Quarter). Proposal pending approval: a `tavu_fiscalyearstartmonth` setting (default January) for firms whose fiscal year does not start in January.
+Periods change every year, so they must never depend on a person remembering. The plugin generates the periods of the current and next year, and the same logic runs daily from `Fl.Forecast.SnapshotDaily` (already a daily, Dataverse-only flow), so there is always a full year ahead. Granularity follows `tavu_forecastperiodtype` (Month or Quarter). Decided 2026-10-03:
+
+- **Fiscal Year Start Month** (`tavu_fiscalyearstartmonth`, whole number 1 to 12) lives on **`tavu_companyprofile`**: it is a fact about the firm, like its tax id. Empty, or no company profile yet, means January, so nothing has to be seeded.
+- **Auto-create Sales Periods** (`tavu_autocreatesalesperiods`, Yes/No, default Yes) lives on **`tavu_systemsettings`**, next to the other forecasting behavior settings. With No, the plugin and the daily run never create periods, and the diagnostic still reports when no period covers today.
+
+Rule for future fields: Company Profile answers "who the firm is"; System Settings answers "how OpenTavu behaves".
 
 ## Proposal email prompt: configurable, gateway stays stateless
 
 The prompt moves to `tavu_aitaskconfiguration` (new task key "Proposal Email Draft"). `Pl.Proposal.BuildEmailDraft` reads it in the tenant and sends prompt, temperature and max tokens with the request; the gateway uses what arrives and falls back to its built-in default only when nothing is sent (older tenants keep working). The gateway does not store or validate per-client configuration: configuration lives in each client's Dataverse and travels with the request, which keeps the gateway stateless, multi-tenant without a registry, and identical for self-hosters (Decisions 42 and 46).
 
+## AI model choice in gateway mode (decided 2026-10-03, option B)
+
+Problem: with the gateway configured, the firm could pick a model per task in `tavu_aimodel` and nothing changed, because the gateway always ran its own default. Fix: the tenant sends only the chosen model's name (`modelHint`, from the task's AI Model or the Default AI Model). The gateway runs it when it is its default or is listed in `Ai__AllowedModels` (same provider and key), otherwise runs its default and logs a warning; the response reports the model that ran. No key or endpoint leaves the tenant, and the gateway stays stateless. Changed: `_Shared/AI` (resolver, request, gateway provider), `Pl.Proposal.BuildEmailDraft`, gateway resolver and endpoints, `configuration.md`, gateway README.
+
+## Implementation (2026-10-04)
+
+| File | Role |
+|---|---|
+| `Initialize.cs` | Custom API entry point: reads Mode and ExcludePacks, runs seed, periods and checks, writes Summary, Report, Complete |
+| `SeedEngine.cs` | Idempotent seed: natural keys (composite allowed), fill-empty-only, `@ref`, `@i18n.es`, `@runtime`, optional packs, time budget |
+| `SalesPeriodGenerator.cs` | Rolling sales periods (current and next fiscal year), overlap-safe |
+| `Diagnostics.cs` | Read-only checks with what-to-do messages |
+| `SetupReport.cs` | Readable summary and JSON report |
+| `MiniJson.cs` | Sandbox-safe JSON reader (no package to merge) |
+| `Seed/opentavu-seed.json` | Embedded resource `OpenTavu.Seed.json` |
+| `WebResources/js/tavu_systemsettings_form.js` | Button handler; calls again while `Complete = false` (max 6 rounds) |
+
+**Transactions.** The Custom API runs in one database transaction and a failed Dataverse call rolls it back even when caught. So the engine never "skips and continues" after a failed call: missing tables and columns are detected with one metadata query (`RetrieveMetadataChanges`, which does not fail for a missing table), bad values are caught before any call, and anything else stops the run with a message naming the table. Nothing from a failed run is saved.
+
+**Time budget.** Seeding stops after 85 seconds (the sandbox limit is 2 minutes) and returns `Complete = false`; already-created rows are committed and the next call continues. In a simulated run the full seed (450 rows) needed 36 queries.
+
+**Translated keys.** Some tables are keyed by name. In a Spanish organization the row is stored with its Spanish name, but `@ref` keys in the seed are English; the engine registers both, so references still resolve and a re-run still matches.
+
+**Depth.** Rows created by the setup fire other OpenTavu plugins at depth 2, where `PluginBase` (MaxDepth 1) skips them. None of the seeded tables relies on a create plugin today; review this if one is added.
+
+### Registration
+
+1. Build `Pl.Setup.Initialize` (Release) and register the assembly in the Plug-in Registration Tool. No step: a Custom API calls the plugin type directly.
+2. Create the Custom API: unique name `tavu_InitializeConfiguration`, binding Global, not a function, allowed custom processing step type None, plugin type `Pl.Setup.Initialize.Initialize`, execute privilege `prvWritetavu_SystemSettings` (only administrators can edit System Settings).
+3. Request parameters (both optional, String): `Mode`, `ExcludePacks`. Response properties: `Summary` (String), `Report` (String), `Complete` (Boolean).
+4. Add the web resource `tavu_/js/tavu_systemsettings_form.js` and a command bar button on the System Settings main form: label "Verify and complete configuration", action JavaScript, function `OpenTavu.SystemSettings.Form.initializeConfiguration`, parameter PrimaryControl.
+5. In `Fl.Forecast.SnapshotDaily`, add a step "Perform an unbound action" `tavu_InitializeConfiguration` with Mode = `periods`.
+6. Add the Custom API, its parameters, the web resource and the assembly to the OpenTavu solution.
+
 ## Findings outside the seed (to decide)
 
 1. ~~No OpenTavu security roles exist~~: resolved 2026-10-02 (section above).
 2. ~~Legacy table `tavu_aitaskconfig`~~: deleted by Gustavo 2026-10-02. The resolver's error text still names it; fix the message.
-3. ~~Two default AI models; OpenAI model on `tavu_AzureOpenAIKey`~~: fixed 2026-10-02 (OpenAI is the only default; its secret name is now `tavu_OpenAIKey`). Note: with `tavu_GatewayUrl` and `tavu_GatewayKey` set, the tenant's model rows are not used at all; the gateway's own model runs.
-4. **The proposal email prompt is hardcoded in the gateway**: design agreed (section above); pending the new task-key option value.
-5. **Sales periods only cover 2026**: forecasting in this tenant stops having a current period on 2027-01-01.
+3. ~~Two default AI models; OpenAI model on `tavu_AzureOpenAIKey`~~: fixed 2026-10-02 (OpenAI is the only default; its secret name is now `tavu_OpenAIKey`). In gateway mode the model row's Deployment / Model ID now travels as a model hint (section below); its endpoint and secret are ignored.
+4. ~~The proposal email prompt is hardcoded in the gateway~~: resolved 2026-10-03 (task key "Proposal Email Draft" = 576600006; plugin sends prompt, temperature and max tokens; gateway deployed).
+5. ~~Sales periods only cover 2026~~: the first run of the button creates the 2027 periods; the daily flow keeps one year ahead.
 6. ~~Units of measure~~: resolved in seed v1.1.0.
 7. ~~Inactive duplicate case categorization~~: deleted by Gustavo 2026-10-02.
-8. **Seed CSVs in `1-Producto/Seed-data` are damaged**: headers start with the literal text `\xEF\xBB\xBF`, `seed_tavu_stateprovince.csv` has double-encoded accents ("AtlÃ¡ntico"), and `seed_tavu_city.csv` repeats Brownsville, Texas. The JSON seed is now the source of truth; the CSVs should be archived.
+8. ~~Seed CSVs in `1-Producto/Seed-data` are damaged~~ (archived 2026-10-03): headers start with the literal text `\xEF\xBB\xBF`, `seed_tavu_stateprovince.csv` has double-encoded accents ("AtlÃ¡ntico"), and `seed_tavu_city.csv` repeats Brownsville, Texas. The JSON seed is now the source of truth; the CSVs should be archived.
 
 ## Document control
 
@@ -88,3 +127,5 @@ The prompt moves to `tavu_aitaskconfiguration` (new task key "Proposal Email Dra
 |---|---|---|---|
 | 0.1 | 2026-10-02 | Gustavo González Villani (with Claude) | Initial design and seed inventory from a full review of the tenant. |
 | 0.2 | 2026-10-02 | Gustavo González Villani (with Claude) | Decisions recorded; geography pack and five units added (seed v1.1.0); security roles created; sales-period rolling horizon and stateless proposal-prompt design. |
+| 0.3 | 2026-10-03 | Gustavo González Villani (with Claude) | Fiscal year start month on Company Profile, auto-create toggle on System Settings (seed v1.3.0); proposal prompt resolved; AI model hint in gateway mode. |
+| 0.4 | 2026-10-04 | Gustavo González Villani (with Claude) | Implementation, transaction and time-budget design, translated keys, registration steps. |

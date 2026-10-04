@@ -1,6 +1,6 @@
 {
   "schema": "opentavu-seed",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "generatedFrom": "opentavu.crm.dynamics.com, curated 2026-10-02",
   "rules": {
     "matchBy": "keyField (natural key), never GUID",
@@ -9,7 +9,9 @@
     "lookups": "'@ref' resolves by the referenced table's keyField",
     "runtime": "'@runtime' values are computed by the plugin at seed time",
     "packs": "tables marked 'pack' are optional; the plugin seeds them unless the caller excludes the pack",
-    "compositeKeys": "keyField may be a list; all fields must match"
+    "compositeKeys": "keyField may be a list; all fields must match",
+    "fallbackKeyField": "optional per table: rows whose key is still empty (created before the table had a code) are matched once by this field, then get their code filled",
+    "autonumber": "after seeding, an autonumber key's counter is moved past the highest code in use, so the firm's next row never repeats a seeded code"
   },
   "tables": [
     {
@@ -554,9 +556,11 @@
     },
     {
       "table": "tavu_sla",
-      "keyField": "tavu_name",
+      "keyField": "tavu_code",
+      "fallbackKeyField": "tavu_name",
       "rows": [
         {
+          "tavu_code": "SLA-1000",
           "tavu_name": "Standard - Default",
           "tavu_customertier": {
             "@ref": "tavu_customertierdefinition",
@@ -576,6 +580,7 @@
           }
         },
         {
+          "tavu_code": "SLA-1001",
           "tavu_name": "Premium - Default",
           "tavu_customertier": {
             "@ref": "tavu_customertierdefinition",
@@ -595,6 +600,7 @@
           }
         },
         {
+          "tavu_code": "SLA-1002",
           "tavu_name": "Strategic - Default",
           "tavu_customertier": {
             "@ref": "tavu_customertierdefinition",
@@ -614,6 +620,7 @@
           }
         },
         {
+          "tavu_code": "SLA-1003",
           "tavu_name": "Strategic - Complaint",
           "tavu_customertier": {
             "@ref": "tavu_customertierdefinition",
@@ -1210,9 +1217,11 @@
     },
     {
       "table": "tavu_salesstage",
-      "keyField": "tavu_name",
+      "keyField": "tavu_code",
+      "fallbackKeyField": "tavu_name",
       "rows": [
         {
+          "tavu_code": "SST-1000",
           "tavu_name": "Discovery",
           "tavu_displayorder": 1,
           "tavu_forecastcategory": 576600000,
@@ -1225,6 +1234,7 @@
           }
         },
         {
+          "tavu_code": "SST-1001",
           "tavu_name": "Proposal Drafted",
           "tavu_displayorder": 2,
           "tavu_forecastcategory": 576600001,
@@ -1237,6 +1247,7 @@
           }
         },
         {
+          "tavu_code": "SST-1002",
           "tavu_name": "Proposal Sent",
           "tavu_displayorder": 3,
           "tavu_forecastcategory": 576600001,
@@ -1249,6 +1260,7 @@
           }
         },
         {
+          "tavu_code": "SST-1003",
           "tavu_name": "Negotiation",
           "tavu_displayorder": 4,
           "tavu_forecastcategory": 576600002,
@@ -1264,9 +1276,11 @@
     },
     {
       "table": "tavu_goaltype",
-      "keyField": "tavu_name",
+      "keyField": "tavu_code",
+      "fallbackKeyField": "tavu_name",
       "rows": [
         {
+          "tavu_code": "GT-1000",
           "tavu_name": "Revenue",
           "tavu_sourceentity": "tavu_opportunity",
           "tavu_dateproperty": "tavu_actualclosedate",
@@ -1284,14 +1298,16 @@
     {
       "table": "tavu_salesperiod",
       "keyField": "tavu_name",
-      "rows": [],
-      "@runtime": "when tavu_systemsettings.tavu_autocreatesalesperiods is Yes: ensure periods (Month or Quarter per tavu_forecastperiodtype) for the current and the next fiscal year, where the fiscal year starts on tavu_companyprofile.tavu_fiscalyearstartmonth (1-12; empty or no profile = January). Also run daily from Fl.Forecast.SnapshotDaily. Never modifies existing periods."
+      "@runtime": "when tavu_systemsettings.tavu_autocreatesalesperiods is Yes: ensure periods (Month or Quarter per tavu_forecastperiodtype) for the current and the next fiscal year, where the fiscal year starts on tavu_companyprofile.tavu_fiscalyearstartmonth (1-12; empty or no profile = January). Also run daily from Fl.Forecast.SnapshotDaily. Never modifies existing periods.",
+      "rows": []
     },
     {
       "table": "tavu_unitofmeasureschedule",
-      "keyField": "tavu_name",
+      "keyField": "tavu_code",
+      "fallbackKeyField": "tavu_name",
       "rows": [
         {
+          "tavu_code": "UMS-1000",
           "tavu_name": "Time",
           "tavu_baseunit": "Hour",
           "tavu_description": "Units of measure for time-based services.",
@@ -1304,6 +1320,7 @@
           }
         },
         {
+          "tavu_code": "UMS-1001",
           "tavu_name": "Quantity",
           "tavu_baseunit": "Unit",
           "tavu_description": "Units of measure for countable items such as licenses.",
@@ -1319,13 +1336,16 @@
     },
     {
       "table": "tavu_uom",
-      "keyField": "tavu_name",
+      "keyField": "tavu_code",
+      "fallbackKeyField": "tavu_name",
+      "note": "Day = 8 hours and Month = 160 hours (20 working days of 8 hours), aligned with the Standard 8x5 calendar. Firms adjust the factors.",
       "rows": [
         {
+          "tavu_code": "UOM-1000",
           "tavu_name": "Hour",
           "tavu_unitgroup": {
             "@ref": "tavu_unitofmeasureschedule",
-            "key": "Time"
+            "key": "UMS-1000"
           },
           "tavu_conversionfactor": 1,
           "tavu_isbaseunit": true,
@@ -1336,10 +1356,11 @@
           }
         },
         {
+          "tavu_code": "UOM-1001",
           "tavu_name": "Day",
           "tavu_unitgroup": {
             "@ref": "tavu_unitofmeasureschedule",
-            "key": "Time"
+            "key": "UMS-1000"
           },
           "tavu_conversionfactor": 8,
           "tavu_isbaseunit": false,
@@ -1350,10 +1371,11 @@
           }
         },
         {
+          "tavu_code": "UOM-1002",
           "tavu_name": "Month",
           "tavu_unitgroup": {
             "@ref": "tavu_unitofmeasureschedule",
-            "key": "Time"
+            "key": "UMS-1000"
           },
           "tavu_conversionfactor": 160,
           "tavu_isbaseunit": false,
@@ -1364,10 +1386,11 @@
           }
         },
         {
+          "tavu_code": "UOM-1003",
           "tavu_name": "Unit",
           "tavu_unitgroup": {
             "@ref": "tavu_unitofmeasureschedule",
-            "key": "Quantity"
+            "key": "UMS-1001"
           },
           "tavu_conversionfactor": 1,
           "tavu_isbaseunit": true,
@@ -1378,10 +1401,11 @@
           }
         },
         {
+          "tavu_code": "UOM-1004",
           "tavu_name": "License",
           "tavu_unitgroup": {
             "@ref": "tavu_unitofmeasureschedule",
-            "key": "Quantity"
+            "key": "UMS-1001"
           },
           "tavu_conversionfactor": 1,
           "tavu_isbaseunit": false,
@@ -1391,8 +1415,7 @@
             }
           }
         }
-      ],
-      "note": "Day = 8 hours and Month = 160 hours (20 working days of 8 hours), aligned with the Standard 8x5 calendar. Firms adjust the factors."
+      ]
     },
     {
       "table": "tavu_country",

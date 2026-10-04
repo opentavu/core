@@ -80,7 +80,7 @@ Direct mode is the fastest path to a working demo. The trade-off is that the pro
 
 OpenTavu keeps tenant-level settings in a single `tavu_systemsettings` record (a singleton enforced by the `Pl.SystemSettings.SingleRecordGuard` plugin).
 
-1. Open the **System Settings** entry (Configuration area, or the settings web resource). If no record exists yet, create one; the guard ensures only one can exist.
+1. Open the **System Settings** entry (Configuration area, or the settings web resource). On a fresh install no record exists yet: create one with just a **Name** and save it (the guard ensures only one can exist), then run **Verify and complete configuration** (§4) before continuing, because it fills every setting below with its default.
 2. Set **Customer Mode** (`tavu_customermode`) to match the client firm:
    - `B2B_Only` for firms that sell to companies (customer is an `account`).
    - `B2C_Only` for firms that sell to individuals (customer is a `contact`).
@@ -95,45 +95,57 @@ OpenTavu keeps tenant-level settings in a single `tavu_systemsettings` record (a
 
 ---
 
-## 4. Verify and extend seed data
+## 4. Create and verify the reference data
 
-OpenTavu ships reference data pre-loaded in the managed solution. Verify it imported, then extend it for the client **without editing the shipped defaults** (so future upgrades stay clean).
+A managed solution carries no rows, and the OpenTavu engine depends on configuration rows (case statuses and their flags, the SLA matrix, a business calendar, sales stages, AI task prompts). One button creates them and checks the install.
+
+1. Open the **System Settings** record.
+2. Click **Verify and complete configuration** on the command bar and confirm.
+3. Read the summary. It lists how many rows were created or completed, then every **error** and **warning** with what to do. Typical findings on a new install: no AI model or gateway yet (§2), an empty company profile, plugin steps that are disabled.
+
+What it creates: 13 case statuses with explicit behavior flags, 7 case types, 3 customer tiers, the **Standard 8x5** business calendar (in your time zone) with its working hours, 4 SLAs, a starter taxonomy (4 business lines, 12 categories, 24 subcategories), 4 sales stages, the Revenue goal type, units of measure (Hour, Day = 8 h, Month = 160 h, Unit, License), the 5 AI task prompts (without a model, so they use the Default AI Model), the Teams meeting source (disabled), the System Settings defaults, and the optional **geography** pack (United States and Colombia: countries, states, main cities). If **Auto-create Sales Periods** is Yes, it also creates the sales periods of the current and next fiscal year; the daily forecast flow keeps them ahead from then on.
+
+Rules: rows are matched by code or name, never duplicated; existing rows only get their **empty** fields filled; a value you changed is never overwritten; a row you deactivated is not re-created. If your organization's base language is Spanish, names are created in Spanish. Run it again after every upgrade. On a slow environment it may need more than one round; the button continues automatically.
+
+Not created, because they belong to your firm: AI models and keys (§2), the company profile, holidays (business closures), price lists and products.
+
+Then extend the data for the client. Prefer adding rows over renaming the shipped ones, so the next run of the button and future upgrades stay predictable.
 
 ### 4.1 Case types (`tavu_casetype`)
 
-Confirm the seven default case types are present and active:
+The seven case types created by the button:
 
 | Name | Code | Default Priority |
 |---|---|---|
-| General Inquiry | GEN | Standard |
-| Support Request | SUP | Standard |
-| RFP / Proposal Inquiry | RFP | Expedited |
-| Billing Inquiry | BIL | Standard |
-| Scope Change Request | SCO | Expedited |
-| Complaint | CMP | Critical |
-| Other | OTH | Standard |
+| General Inquiry (default) | CT-1001 | Standard |
+| Support Request | CT-1002 | Standard |
+| RFP/Proposal Inquiry | CT-1003 | Expedited |
+| Billing Inquiry | CT-1004 | Standard |
+| Scope Change Request | CT-1005 | Expedited |
+| Complaint | CT-1006 | Critical |
+| Other | CT-1007 | Standard |
 
 To add a client-specific type (for example a QA boutique's "Bug Report" or "Test Cycle"), create a new `tavu_casetype` row with its own name, code, and default priority. Each case type also carries an `tavu_aihint` used by Module 1; you fill that in §6.
 
 ### 4.2 Customer tiers (`tavu_customertierdefinition`)
 
-Confirm the three default tiers:
+The three tiers created by the button:
 
-| Name | Sort Order | Meaning |
+| Name | Code | Sort Order |
 |---|---|---|
-| Standard | 100 | Default tier for regular clients |
-| Premium | 50 | Extended SLA or preferred contracts |
-| Strategic | 10 | Top tier, maximum priority |
+| Strategic | CTD-1002 | 10 |
+| Premium | CTD-1001 | 20 |
+| Standard (default) | CTD-1000 | 30 |
 
 Add tiers as needed (for example a "Trial" tier for a software QA boutique). Lower sort-order values indicate higher priority.
 
 ### 4.3 Other seed data
 
-- **Units of measure** (`tavu_uom`) and the product/pricing catalog ship pre-loaded for the quotation model.
-- **Geography** seed (country, state/province, city) ships pre-loaded.
-- **Business calendars and holidays are not shipped as canonical seed**; they are per-client configuration you create in §7.
+- **Units of measure** (`tavu_uom`): Day = 8 hours and Month = 160 hours match the Standard 8x5 calendar; adjust the factors if the firm works differently. The product and pricing catalog is not created: it is the firm's own.
+- **Geography** (country, state/province, city) is an optional pack, created by default.
+- **Business calendar:** one generic Standard 8x5 calendar is created; adjust its hours and add holidays (business closures) in §7.
 
-> ✅ **Checkpoint:** The seven case types and three customer tiers are present and active, plus any client-specific rows you added. Shipped defaults are untouched.
+> ✅ **Checkpoint:** The button's summary shows no errors (warnings about AI or the company profile are fine until you finish §2 and the profile). The seven case types and three customer tiers are present and active, plus any client-specific rows you added.
 
 ---
 
@@ -353,7 +365,7 @@ A one-page recap to tick through per deployment:
 
 - [ ] AI wired: gateway mode (`tavu_GatewayUrl` + `tavu_GatewayKey`) **or** direct mode (`tavu_aimodel` key)
 - [ ] `tavu_systemsettings`: one record, Customer Mode set, confidence threshold set (0.85 default), AI Enabled = Yes
-- [ ] Seed data verified: 7 case types, 3 customer tiers; client-specific rows added without editing defaults
+- [ ] **Verify and complete configuration** run with no errors; client-specific rows added
 - [ ] Security roles assigned to all users
 - [ ] Field Security Profile protects `tavu_grossmargin`, `tavu_totalcost`, `tavu_linecost`, `tavu_unitcost`, `tavu_cost`, `tavu_costrate`; sellers excluded, verified with a test user
 - [ ] Module 1: task prompt reviewed, `tavu_aihint` written for every active case type

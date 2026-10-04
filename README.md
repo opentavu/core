@@ -112,7 +112,7 @@ The proposal module includes a complete quotation layer with multi-currency supp
 | `tavu_pricelist` + `tavu_pricelistitem` | Multi-currency price lists |
 | `tavu_servicerole` | Delivery roles with default rate and cost per profile |
 
-Design decisions in the quotation model: kits are single-level in MVP (BOM expansion happens in memory at PDF generation time, never written back to Dataverse); tax is a manual decimal field; gross margin and total cost fields are hidden from sellers via Field Security Profile; all seed data ships pre-loaded in the managed solution.
+Design decisions in the quotation model: kits are single-level in MVP (BOM expansion happens in memory at PDF generation time, never written back to Dataverse); tax is a manual decimal field; gross margin and total cost fields are hidden from sellers via Field Security Profile; reference data is created after import by the "Verify and complete configuration" button on System Settings (a managed solution carries no rows).
 
 #### Forecasting model (new in v1.0.0)
 
@@ -143,27 +143,31 @@ The core service loop: a case arrives, AI categorizes it with a confidence score
 
 Cases below the confidence threshold (default: 0.85) are flagged for human review rather than auto-applied.
 
-#### Case type seed data (pre-loaded)
+#### Reference data
+
+A managed solution carries tables, plugins and flows, but no rows. After import, the **Verify and complete configuration** button on System Settings (Custom API `tavu_InitializeConfiguration`, plugin `Pl.Setup.Initialize`) creates the reference data the engine needs and checks the install: case statuses with their behavior flags, case types, customer tiers, a Standard 8x5 business calendar in the installer's time zone, the SLA matrix, a starter case taxonomy, sales stages, the Revenue goal type, units of measure, the AI task prompts, and an optional geography pack (United States and Colombia). It is idempotent: it matches rows by code or name, only fills empty fields, and never overwrites what the firm changed, so it is safe to run after every upgrade. The data lives in [`opentavu-seed.json`](src/Plugins/Pl.Setup.Initialize/Seed/opentavu-seed.json).
+
+Case types:
 
 | Name | Code | Default Priority |
 |---|---|---|
-| General Inquiry | GEN | Standard |
-| Support Request | SUP | Standard |
-| RFP / Proposal Inquiry | RFP | Expedited |
-| Billing Inquiry | BIL | Standard |
-| Scope Change Request | SCO | Expedited |
-| Complaint | CMP | Critical |
-| Other | OTH | Standard |
+| General Inquiry (default) | CT-1001 | Standard |
+| Support Request | CT-1002 | Standard |
+| RFP/Proposal Inquiry | CT-1003 | Expedited |
+| Billing Inquiry | CT-1004 | Standard |
+| Scope Change Request | CT-1005 | Expedited |
+| Complaint | CT-1006 | Critical |
+| Other | CT-1007 | Standard |
 
-#### Customer tier seed data (pre-loaded)
+Customer tiers:
 
-| Name | Sort Order | Description |
+| Name | Code | Sort Order |
 |---|---|---|
-| Standard | 100 | Default tier for regular clients |
-| Premium | 50 | Clients with extended SLA or preferred contracts |
-| Strategic | 10 | Top tier, maximum priority |
+| Strategic | CTD-1002 | 10 |
+| Premium | CTD-1001 | 20 |
+| Standard (default) | CTD-1000 | 30 |
 
-Both seed datasets ship pre-loaded in the managed solution and can be extended without modifying defaults.
+Firms extend or rename these freely; the engine resolves them by flags and codes, not by names.
 
 ---
 
