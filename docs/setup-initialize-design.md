@@ -11,7 +11,7 @@ This is an adoption prerequisite, not a feature: without it no third-party insta
 
 ## What it does
 
-One button, "Verify and complete configuration", on the System Settings form, calling `tavu_InitializeConfiguration`:
+One button, "Verify Setup" (Spanish: "Verificar ajustes"), on the System Settings form, calling `tavu_InitializeConfiguration`:
 
 1. **Seed** the rows in `opentavu-seed.json`, in dependency order. Idempotent: match by a natural key (code or name, never GUID), create what is missing, fill empty fields of existing rows, never overwrite a value the firm already changed. Safe to re-run after every upgrade.
 2. **Diagnose** the install and return a checklist: disabled OpenTavu plugin steps, status behavior flags missing or duplicated, gateway environment variables empty, no AI model or no default model, company profile empty, no sales period covering today.
@@ -106,7 +106,7 @@ Problem: with the gateway configured, the firm could pick a model per task in `t
 1. Build `Pl.Setup.Initialize` (Release) and register the assembly in the Plug-in Registration Tool. No step: a Custom API calls the plugin type directly.
 2. Create the Custom API: unique name `tavu_InitializeConfiguration`, binding Global, not a function, allowed custom processing step type None, plugin type `Pl.Setup.Initialize.Initialize`, execute privilege `prvWritetavu_SystemSettings` (only administrators can edit System Settings).
 3. Request parameters (both optional, String): `Mode`, `ExcludePacks`. Response properties: `Summary` (String), `Report` (String), `Complete` (Boolean).
-4. Add the web resource `tavu_/js/tavu_systemsettings_form.js` and a command bar button on the System Settings main form: label "Verify and complete configuration", action JavaScript, function `OpenTavu.SystemSettings.Form.initializeConfiguration`, parameter PrimaryControl.
+4. Add the web resource `tavu_/js/tavu_systemsettings_form.js` and a command bar button on the System Settings main form: label "Verify Setup" (Spanish: "Verificar ajustes"), action JavaScript, function `OpenTavu.SystemSettings.Form.initializeConfiguration`, parameter PrimaryControl.
 5. In `Fl.Forecast.SnapshotDaily`, add a step "Perform an unbound action" `tavu_InitializeConfiguration` with Mode = `periods`.
 6. Add the Custom API, its parameters, the web resource and the assembly to the OpenTavu solution.
 

@@ -112,7 +112,7 @@ The proposal module includes a complete quotation layer with multi-currency supp
 | `tavu_pricelist` + `tavu_pricelistitem` | Multi-currency price lists |
 | `tavu_servicerole` | Delivery roles with default rate and cost per profile |
 
-Design decisions in the quotation model: kits are single-level in MVP (BOM expansion happens in memory at PDF generation time, never written back to Dataverse); tax is a manual decimal field; gross margin and total cost fields are hidden from sellers via Field Security Profile; reference data is created after import by the "Verify and complete configuration" button on System Settings (a managed solution carries no rows).
+Design decisions in the quotation model: kits are single-level in MVP (BOM expansion happens in memory at PDF generation time, never written back to Dataverse); tax is a manual decimal field; gross margin and total cost fields are hidden from sellers via Field Security Profile; reference data is created after import by the **Verify Setup** button on System Settings (a managed solution carries no rows).
 
 #### Forecasting model (new in v1.0.0)
 
@@ -145,7 +145,7 @@ Cases below the confidence threshold (default: 0.85) are flagged for human revie
 
 #### Reference data
 
-A managed solution carries tables, plugins and flows, but no rows. After import, the **Verify and complete configuration** button on System Settings (Custom API `tavu_InitializeConfiguration`, plugin `Pl.Setup.Initialize`) creates the reference data the engine needs and checks the install: case statuses with their behavior flags, case types, customer tiers, a Standard 8x5 business calendar in the installer's time zone, the SLA matrix, a starter case taxonomy, sales stages, the Revenue goal type, units of measure, the AI task prompts, and an optional geography pack (United States and Colombia). It is idempotent: it matches rows by code or name, only fills empty fields, and never overwrites what the firm changed, so it is safe to run after every upgrade. The data lives in [`opentavu-seed.json`](src/Plugins/Pl.Setup.Initialize/Seed/opentavu-seed.json).
+A managed solution carries tables, plugins and flows, but no rows. After import, the **Verify Setup** button on System Settings (Custom API `tavu_InitializeConfiguration`, plugin `Pl.Setup.Initialize`) creates the reference data the engine needs and checks the install: case statuses with their behavior flags, case types, customer tiers, a Standard 8x5 business calendar in the installer's time zone, the SLA matrix, a starter case taxonomy, sales stages, the Revenue goal type, units of measure, the AI task prompts, and an optional geography pack (United States and Colombia). It is idempotent: it matches rows by code or name, only fills empty fields, and never overwrites what the firm changed, so it is safe to run after every upgrade. The data lives in [`opentavu-seed.json`](src/Plugins/Pl.Setup.Initialize/Seed/opentavu-seed.json).
 
 Case types:
 

@@ -80,7 +80,7 @@ Direct mode is the fastest path to a working demo. The trade-off is that the pro
 
 OpenTavu keeps tenant-level settings in a single `tavu_systemsettings` record (a singleton enforced by the `Pl.SystemSettings.SingleRecordGuard` plugin).
 
-1. Open the **System Settings** entry (Configuration area, or the settings web resource). On a fresh install no record exists yet: create one with just a **Name** and save it (the guard ensures only one can exist), then run **Verify and complete configuration** (§4) before continuing, because it fills every setting below with its default.
+1. Open the **System Settings** entry (Configuration area, or the settings web resource). On a fresh install no record exists yet: create one with just a **Name** and save it (the guard ensures only one can exist), then run **Verify Setup** (§4) before continuing, because it fills every setting below with its default.
 2. Set **Customer Mode** (`tavu_customermode`) to match the client firm:
    - `B2B_Only` for firms that sell to companies (customer is an `account`).
    - `B2C_Only` for firms that sell to individuals (customer is a `contact`).
@@ -100,7 +100,7 @@ OpenTavu keeps tenant-level settings in a single `tavu_systemsettings` record (a
 A managed solution carries no rows, and the OpenTavu engine depends on configuration rows (case statuses and their flags, the SLA matrix, a business calendar, sales stages, AI task prompts). One button creates them and checks the install.
 
 1. Open the **System Settings** record.
-2. Click **Verify and complete configuration** on the command bar and confirm.
+2. Click **Verify Setup** on the command bar and confirm.
 3. Read the summary. It lists how many rows were created or completed, then every **error** and **warning** with what to do. Typical findings on a new install: no AI model or gateway yet (§2), an empty company profile, plugin steps that are disabled.
 
 What it creates: 13 case statuses with explicit behavior flags, 7 case types, 3 customer tiers, the **Standard 8x5** business calendar (in your time zone) with its working hours, 4 SLAs, a starter taxonomy (4 business lines, 12 categories, 24 subcategories), 4 sales stages, the Revenue goal type, units of measure (Hour, Day = 8 h, Month = 160 h, Unit, License), the 5 AI task prompts (without a model, so they use the Default AI Model), the Teams meeting source (disabled), the System Settings defaults, and the optional **geography** pack (United States and Colombia: countries, states, main cities). If **Auto-create Sales Periods** is Yes, it also creates the sales periods of the current and next fiscal year; the daily forecast flow keeps them ahead from then on.
@@ -365,7 +365,7 @@ A one-page recap to tick through per deployment:
 
 - [ ] AI wired: gateway mode (`tavu_GatewayUrl` + `tavu_GatewayKey`) **or** direct mode (`tavu_aimodel` key)
 - [ ] `tavu_systemsettings`: one record, Customer Mode set, confidence threshold set (0.85 default), AI Enabled = Yes
-- [ ] **Verify and complete configuration** run with no errors; client-specific rows added
+- [ ] **Verify Setup** run with no errors; client-specific rows added
 - [ ] Security roles assigned to all users
 - [ ] Field Security Profile protects `tavu_grossmargin`, `tavu_totalcost`, `tavu_linecost`, `tavu_unitcost`, `tavu_cost`, `tavu_costrate`; sellers excluded, verified with a test user
 - [ ] Module 1: task prompt reviewed, `tavu_aihint` written for every active case type

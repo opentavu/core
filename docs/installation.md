@@ -170,7 +170,7 @@ New OpenTavu releases are imported **on top of** the existing managed solution. 
 2. Import it the same way as in §3. Because a solution with the same name already exists, the platform treats this as an **upgrade**.
 3. When prompted, choose the **Stage and Upgrade** option so the new version is staged and then applied, which cleanly removes components deleted in the new release. (The classic "Update" option leaves removed components behind and should be avoided unless a release note specifically calls for it.)
 4. Wait for the upgrade to finish, then re-run the **post-import verification** in §4.
-5. Open **System Settings** and click **Verify and complete configuration**. It adds any reference rows a new release introduced and reports disabled plugin steps or missing settings. It never overwrites values you changed.
+5. Open **System Settings** and click **Verify Setup**. It adds any reference rows a new release introduced and reports disabled plugin steps or missing settings. It never overwrites values you changed.
 
 ### 5.3 Rollback
 
