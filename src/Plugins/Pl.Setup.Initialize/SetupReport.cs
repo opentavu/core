@@ -27,6 +27,8 @@ namespace Pl.Setup.Initialize
         public int Filled;
         public int Skipped;
         public bool Complete = true;
+        /// <summary>True when only sales periods were maintained (Mode = periods): the seed did not run.</summary>
+        public bool PeriodsOnly;
 
         public void Add(Level level, string area, string message)
         {
@@ -50,10 +52,13 @@ namespace Pl.Setup.Initialize
         public string ToSummary()
         {
             var sb = new StringBuilder();
-            sb.AppendFormat(CultureInfo.InvariantCulture,
-                "Configuration: {0} rows created, {1} rows completed, {2} already set.{3}",
-                Created, Filled, Skipped,
-                Complete ? string.Empty : " Not finished yet: run it again to continue.");
+            if (PeriodsOnly)
+                sb.AppendFormat(CultureInfo.InvariantCulture, "Sales periods: {0} created.", Created);
+            else
+                sb.AppendFormat(CultureInfo.InvariantCulture,
+                    "Configuration: {0} rows created, {1} rows completed, {2} already set.{3}",
+                    Created, Filled, Skipped,
+                    Complete ? string.Empty : " Not finished yet: run it again to continue.");
             sb.AppendLine();
             sb.AppendFormat(CultureInfo.InvariantCulture,
                 "Checks: {0} errors, {1} warnings.", Count(Level.Error), Count(Level.Warning));

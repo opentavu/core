@@ -36,7 +36,8 @@ OpenTavu.SystemSettings.Form = OpenTavu.SystemSettings.Form || {};
                 "doneTitleIssues": "Configuration checked: action needed",
                 "notFinished": "The setup did not finish after several rounds. Run it again to continue.",
                 "error": "The configuration could not be completed: ",
-                "unknownError": "unknown error"
+                "unknownError": "unknown error",
+                "savePending": "Save your pending changes first, then run Verify Setup."
             },
             3082: {
                 "confirmTitle": "Verificar y completar la configuración",
@@ -46,7 +47,8 @@ OpenTavu.SystemSettings.Form = OpenTavu.SystemSettings.Form || {};
                 "doneTitleIssues": "Configuración revisada: hay acciones pendientes",
                 "notFinished": "La configuración no terminó después de varias rondas. Ejecútela de nuevo para continuar.",
                 "error": "No se pudo completar la configuración: ",
-                "unknownError": "error desconocido"
+                "unknownError": "error desconocido",
+                "savePending": "Guarde primero los cambios pendientes y luego ejecute Verify Setup."
             }
         };
         function lc() { try { return Xrm.Utility.getGlobalContext().userSettings.languageId; } catch (e) { return 1033; } }
@@ -89,10 +91,13 @@ OpenTavu.SystemSettings.Form = OpenTavu.SystemSettings.Form || {};
             try { report = JSON.parse((result && result.Report) || "{}"); } catch (e) { report = {}; }
             if (result && result.Complete === false) summary = TAVU_I18N("notFinished") + "\n\n" + summary;
 
-            var issues = (report.errors || 0) + (report.warnings || 0) > 0 || (result && result.Complete === false);
+            var findings = (report.errors || 0) + (report.warnings || 0);
+            var issues = findings > 0 || (result && result.Complete === false);
+            // Size the dialog to its content: two lines when all is well, taller per finding.
+            var height = issues ? Math.min(560, 260 + findings * 40) : 200;
             return Xrm.Navigation.openAlertDialog(
                 { title: TAVU_I18N(issues ? "doneTitleIssues" : "doneTitle"), text: summary },
-                { height: 420, width: 640 }
+                { height: height, width: 600 }
             ).then(function () {
                 if (formContext && formContext.data) formContext.data.refresh(false);
             });
@@ -105,6 +110,16 @@ OpenTavu.SystemSettings.Form = OpenTavu.SystemSettings.Form || {};
      */
     Form.initializeConfiguration = function (primaryControl) {
         var formContext = primaryControl;
+
+        // The setup fills empty fields of this record on the server; a later save of unsaved
+        // edits would overwrite them. Ask for a save first, as the proposal form does.
+        try {
+            if (formContext && formContext.data && formContext.data.entity.getIsDirty()) {
+                Xrm.Navigation.openAlertDialog({ text: TAVU_I18N("savePending") });
+                return;
+            }
+        } catch (e) { /* no form context: continue */ }
+
         Xrm.Navigation.openConfirmDialog({
             title: TAVU_I18N("confirmTitle"),
             text: TAVU_I18N("confirmText")

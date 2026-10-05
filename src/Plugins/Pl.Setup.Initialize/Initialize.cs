@@ -75,7 +75,7 @@ namespace Pl.Setup.Initialize
             int timeZoneCode = UserTimeZone(svc, ctx.InitiatingUserId);
             localContext.Trace("Initialize: mode={0}, language={1}, timeZone={2}.", mode, languageCode, timeZoneCode);
 
-            var report = new SetupReport();
+            var report = new SetupReport { PeriodsOnly = mode == ModePeriods };
 
             if (mode == ModeFull)
             {
