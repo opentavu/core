@@ -1,9 +1,11 @@
 <customapirequestparameter uniquename="UserId">
   <description default="Entra (AAD) object id of the user to probe. Empty = the gateway probes the first user flagged with Meeting Sync Enabled">
     <label description="Entra (AAD) object id of the user to probe. Empty = the gateway probes the first user flagged with Meeting Sync Enabled" languagecode="1033" />
+    <label description="Entra (AAD) object id of the user to probe. Empty = the gateway probes the first user flagged with Meeting Sync Enabled" languagecode="3082" />
   </description>
   <displayname default="ProbeMeetingSource-In-UserId">
     <label description="ProbeMeetingSource-In-UserId" languagecode="1033" />
+    <label description="ProbeMeetingSource-In-UserId" languagecode="3082" />
   </displayname>
   <iscustomizable>0</iscustomizable>
   <isoptional>1</isoptional>

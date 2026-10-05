@@ -1,0 +1,13 @@
+<customapiresponseproperty uniquename="Report">
+  <description default="Same result as JSON: complete, created, filled, skipped, errors, warnings and the list of findings.">
+    <label description="Same result as JSON: complete, created, filled, skipped, errors, warnings and the list of findings." languagecode="1033" />
+    <label description="El mismo resultado en JSON: complete, created, filled, skipped, errors, warnings y la lista de hallazgos." languagecode="3082" />
+  </description>
+  <displayname default="Report">
+    <label description="Report" languagecode="1033" />
+    <label description="Reporte" languagecode="3082" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>Report</name>
+  <type>10</type>
+</customapiresponseproperty>

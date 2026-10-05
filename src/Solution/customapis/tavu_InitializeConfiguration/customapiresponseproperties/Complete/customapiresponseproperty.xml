@@ -1,0 +1,13 @@
+<customapiresponseproperty uniquename="Complete">
+  <description default="False when the time limit was reached before the seed finished; call again to continue.">
+    <label description="False when the time limit was reached before the seed finished; call again to continue." languagecode="1033" />
+    <label description="Falso cuando se alcanzó el límite de tiempo antes de terminar; vuelva a llamarla para continuar." languagecode="3082" />
+  </description>
+  <displayname default="Complete">
+    <label description="Complete" languagecode="1033" />
+    <label description="Completo" languagecode="3082" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>Complete</name>
+  <type>0</type>
+</customapiresponseproperty>

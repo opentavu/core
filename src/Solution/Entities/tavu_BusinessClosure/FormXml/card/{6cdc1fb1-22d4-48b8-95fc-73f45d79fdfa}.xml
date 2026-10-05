@@ -9,7 +9,7 @@
       <tabs>
         <tab name="general" verticallayout="true" id="{e7ddf51f-2a4a-4472-8278-8838eccd80a1}" IsUserDefined="0">
           <labels>
-            <label description="" languagecode="3082" />
+            <label description="" languagecode="1033" />
           </labels>
           <columns>
             <column width="25%">
@@ -40,12 +40,12 @@
                       </cell>
                       <cell id="{0994ea3d-a736-4a0a-a038-a37a826c6bdc}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                       <cell id="{cfb519dd-9b0b-4acb-b8e0-7c1eeb303503}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                     </row>
@@ -84,12 +84,12 @@
                       </cell>
                       <cell id="{5d34427b-21fb-4e37-9473-44b625ea98dc}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                       <cell id="{9c98aa98-54d8-4ac0-af40-dc547d008020}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                     </row>

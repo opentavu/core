@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{8a16968c-5197-4e69-8ac5-c9d70e6aa3c0}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_goaltypeid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_metrickind" width="109" />
+          <cell name="tavu_sourceentity" width="117" />
+          <cell name="tavu_usesforecastcategory" width="173" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_goaltype">
+          <attribute name="tavu_goaltypeid" />
+          <attribute name="tavu_name" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_metrickind" />
+          <attribute name="tavu_sourceentity" />
+          <attribute name="tavu_usesforecastcategory" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Goal Types" languagecode="1033" />
+      <LocalizedName description="Goal Types activo" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

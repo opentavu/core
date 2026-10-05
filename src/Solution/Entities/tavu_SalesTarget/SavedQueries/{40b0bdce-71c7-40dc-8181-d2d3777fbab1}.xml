@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{40b0bdce-71c7-40dc-8181-d2d3777fbab1}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_salestargetid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_scope" width="100" />
+          <cell name="tavu_salesrep" width="185" />
+          <cell name="tavu_team" width="153" />
+          <cell name="tavu_salesperiod" width="123" />
+          <cell name="tavu_targetamount" width="125" />
+          <cell name="tavu_closedwonamount" width="158" />
+          <cell name="tavu_attainmentpct" width="125" />
+          <cell name="tavu_gaptogoal" width="109" />
+          <cell name="tavu_coverageratio" width="128" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_salestarget">
+          <attribute name="tavu_salestargetid" />
+          <attribute name="tavu_name" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_scope" />
+          <attribute name="tavu_salesrep" />
+          <attribute name="tavu_team" />
+          <attribute name="tavu_salesperiod" />
+          <attribute name="tavu_targetamount" />
+          <attribute name="tavu_closedwonamount" />
+          <attribute name="tavu_attainmentpct" />
+          <attribute name="tavu_gaptogoal" />
+          <attribute name="tavu_coverageratio" />
+          <order attribute="tavu_salesperiod" descending="true" />
+          <order attribute="tavu_name" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Sales Targets" languagecode="1033" />
+      <LocalizedName description="Objetivos de ventas activos" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

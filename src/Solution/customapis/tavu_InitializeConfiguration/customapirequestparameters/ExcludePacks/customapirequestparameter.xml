@@ -1,0 +1,14 @@
+<customapirequestparameter uniquename="ExcludePacks">
+  <description default="Comma-separated optional seed packs to skip, for example geography.">
+    <label description="Comma-separated optional seed packs to skip, for example geography." languagecode="1033" />
+    <label description="Paquetes opcionales de datos que se omiten, separados por comas, por ejemplo geography." languagecode="3082" />
+  </description>
+  <displayname default="ExcludePacks">
+    <label description="ExcludePacks" languagecode="1033" />
+    <label description="Paquetes excluidos" languagecode="3082" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>ExcludePacks</name>
+  <type>10</type>
+</customapirequestparameter>

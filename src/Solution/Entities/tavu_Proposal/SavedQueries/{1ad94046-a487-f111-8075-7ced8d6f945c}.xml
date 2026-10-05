@@ -32,11 +32,11 @@
           <attribute name="tavu_opportunity" />
           <attribute name="tavu_subtotal" />
           <attribute name="tavu_total" />
-          <attribute name="tavu_totaltax" />
           <attribute name="tavu_totalcost" />
           <attribute name="statuscode" />
           <attribute name="tavu_sentdate" />
           <order attribute="createdon" descending="true" />
+          <attribute name="tavu_totaltax" />
         </entity>
       </fetch>
     </fetchxml>

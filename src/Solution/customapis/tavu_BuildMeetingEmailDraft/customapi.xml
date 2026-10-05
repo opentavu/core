@@ -3,9 +3,11 @@
   <bindingtype>0</bindingtype>
   <description default="Drafts an AI follow-up email from a captured meeting (summary and discovery) and creates it as a draft email activity, regarding the associated opportunity, for the rep to review and send">
     <label description="Drafts an AI follow-up email from a captured meeting (summary and discovery) and creates it as a draft email activity, regarding the associated opportunity, for the rep to review and send" languagecode="1033" />
+    <label description="Drafts an AI follow-up email from a captured meeting (summary and discovery) and creates it as a draft email activity, regarding the associated opportunity, for the rep to review and send" languagecode="3082" />
   </description>
   <displayname default="BuildMeetingEmailDraft">
     <label description="BuildMeetingEmailDraft" languagecode="1033" />
+    <label description="BuildMeetingEmailDraft" languagecode="3082" />
   </displayname>
   <iscustomizable>1</iscustomizable>
   <isfunction>0</isfunction>

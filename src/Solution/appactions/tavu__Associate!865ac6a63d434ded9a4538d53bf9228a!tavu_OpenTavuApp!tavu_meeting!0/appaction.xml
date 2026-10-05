@@ -2,15 +2,15 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Asociar">
+  <buttonlabeltext default="Associate">
     <label description="Associate" languagecode="1033" />
     <label description="Asociar" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Vincule esta reunión a la oportunidad sugerida por IA, o elija una. Completa la reunión y actualiza las notas de descubrimiento de la oportunidad.">
+  <buttontooltipdescription default="Link this meeting to the AI-suggested opportunity, or pick one. Completes the meeting and updates the opportunity's discovery notes.">
     <label description="Link this meeting to the AI-suggested opportunity, or pick one. Completes the meeting and updates the opportunity's discovery notes." languagecode="1033" />
     <label description="Vincule esta reunión a la oportunidad sugerida por IA, o elija una. Completa la reunión y actualiza las notas de descubrimiento de la oportunidad." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Asociar a la oportunidad">
+  <buttontooltiptitle default="Associate to opportunity">
     <label description="Associate to opportunity" languagecode="1033" />
     <label description="Asociar a la oportunidad" languagecode="3082" />
   </buttontooltiptitle>

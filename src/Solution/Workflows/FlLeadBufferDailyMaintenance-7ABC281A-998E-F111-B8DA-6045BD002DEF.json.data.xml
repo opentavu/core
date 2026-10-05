@@ -23,5 +23,6 @@
   <PrimaryEntity>none</PrimaryEntity>
   <LocalizedNames>
     <LocalizedName languagecode="1033" description="Fl.Lead.BufferDailyMaintenance" />
+    <LocalizedName languagecode="3082" description="Fl.Lead.BufferDailyMaintenance" />
   </LocalizedNames>
 </Workflow>

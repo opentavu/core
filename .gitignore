@@ -38,3 +38,7 @@ appsettings.Development.json
 *.log
 # Transient solution exports
 /_export/
+
+# ===== AI agent local context (private, never published) =====
+CLAUDE.local.md
+.claude/settings.local.json

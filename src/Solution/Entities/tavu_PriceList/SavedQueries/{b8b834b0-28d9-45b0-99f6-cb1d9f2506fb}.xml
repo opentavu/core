@@ -11,7 +11,7 @@
       <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
         <row name="result" id="tavu_pricelistid">
           <cell name="tavu_name" width="300" />
-          <cell name="transactioncurrencyid" width="100" />
+          <cell name="tavu_currency" width="144" />
           <cell name="tavu_startdate" width="100" />
           <cell name="tavu_enddate" width="100" />
           <cell name="tavu_isdefault" width="100" />
@@ -33,7 +33,7 @@
           <attribute name="tavu_startdate" />
           <attribute name="tavu_enddate" />
           <attribute name="tavu_isdefault" />
-          <attribute name="transactioncurrencyid" />
+          <attribute name="tavu_currency" />
         </entity>
       </fetch>
     </fetchxml>

@@ -3,9 +3,11 @@
   <bindingtype>0</bindingtype>
   <description default="Generates an AI-drafted client email for a proposal (subject and body from the proposal, opportunity, and sender profile) and creates it as a draft email activity for the consultant to review and send.">
     <label description="Generates an AI-drafted client email for a proposal (subject and body from the proposal, opportunity, and sender profile) and creates it as a draft email activity for the consultant to review and send." languagecode="1033" />
+    <label description="Generates an AI-drafted client email for a proposal (subject and body from the proposal, opportunity, and sender profile) and creates it as a draft email activity for the consultant to review and send." languagecode="3082" />
   </description>
   <displayname default="BuildProposalEmailDraft">
     <label description="BuildProposalEmailDraft" languagecode="1033" />
+    <label description="BuildProposalEmailDraft" languagecode="3082" />
   </displayname>
   <iscustomizable>1</iscustomizable>
   <isfunction>0</isfunction>

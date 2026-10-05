@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{2fe6e408-a8a1-4805-a184-8fe4fdeee8a4}</savedqueryid>
+    <querytype>8192</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical" output-format="xml-platform">
+        <entity name="tavu_goaltype">
+          <attribute name="tavu_goaltypeid" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="My Goal Types" languagecode="1033" />
+      <LocalizedName description="Mis Goal Types" languagecode="3082" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="All active Goal Types" languagecode="1033" />
+      <Description description="Todas las entidades Goal Types activas" languagecode="3082" />
+    </Descriptions>
+  </savedquery>
+</savedqueries>

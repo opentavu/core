@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value></resheader>
+  <data name="title" xml:space="preserve"><value>Forecast</value></data>
+  <data name="scopeCompany" xml:space="preserve"><value>Company</value></data>
+  <data name="scopeLine" xml:space="preserve"><value>Business Line</value></data>
+  <data name="scopeRep" xml:space="preserve"><value>Rep</value></data>
+  <data name="cardComposition" xml:space="preserve"><value>Forecast composition vs target</value></data>
+  <data name="cardAttainment" xml:space="preserve"><value>Attainment %</value></data>
+  <data name="tileAttainment" xml:space="preserve"><value>Attainment</value></data>
+  <data name="tileForecast" xml:space="preserve"><value>Forecast (Won + Committed)</value></data>
+  <data name="tileGap" xml:space="preserve"><value>Gap to goal</value></data>
+  <data name="tileCoverage" xml:space="preserve"><value>Coverage</value></data>
+  <data name="ofAmount" xml:space="preserve"><value>{0} of {1}</value></data>
+  <data name="pctOfTarget" xml:space="preserve"><value>{0} of target</value></data>
+  <data name="goalMet" xml:space="preserve"><value>Goal met</value></data>
+  <data name="openAmount" xml:space="preserve"><value>{0} open</value></data>
+  <data name="seriesWon" xml:space="preserve"><value>Closed Won</value></data>
+  <data name="seriesCommitted" xml:space="preserve"><value>Committed</value></data>
+  <data name="seriesBestCase" xml:space="preserve"><value>Best Case</value></data>
+  <data name="seriesOpen" xml:space="preserve"><value>Open Pipeline</value></data>
+  <data name="seriesTarget" xml:space="preserve"><value>Target</value></data>
+  <data name="emptyState" xml:space="preserve"><value>No rows for this scope yet. Create a Sales Target and run the Fl.Forecast.SnapshotWeekly flow.</value></data>
+  <data name="notAvailable" xml:space="preserve"><value>N/A</value></data>
+</root>

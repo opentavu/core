@@ -1,0 +1,43 @@
+<appaction uniquename="tavu__Verifyandcomplete!065602508dfd4bb7867e0db9773a7d9c!tavu_OpenTavuApp!tavu_systemsettings!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Verify Setup">
+    <label description="Verify Setup" languagecode="1033" />
+    <label description="Verificar ajustes" languagecode="3082" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Creates the reference data that is missing, keeps sales periods one year ahead and checks the install. Never overwrites values you changed. Safe to run after every upgrade.">
+    <label description="Creates the reference data that is missing, keeps sales periods one year ahead and checks the install. Never overwrites values you changed. Safe to run after every upgrade." languagecode="1033" />
+    <label description="Crea los datos de referencia que falten, mantiene los periodos de venta un año adelante y revisa la instalación. Nunca sobrescribe valores que usted cambió. Se puede ejecutar después de cada actualización." languagecode="3082" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Verify and complete configuration">
+    <label description="Verify and complete configuration" languagecode="1033" />
+    <label description="Verificar y completar la configuración" languagecode="3082" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_systemsettings</logicalname>
+  </contextentity>
+  <contextvalue>tavu_systemsettings</contextvalue>
+  <hidden>0</hidden>
+  <iconwebresourceid>
+    <webresourceid>2bc31788-3dc0-f111-a05a-6045bd0870c9</webresourceid>
+  </iconwebresourceid>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>Verifyandcomplete!065602508dfd4bb7867e0db9773a7d9c</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.SystemSettings.Form.initializeConfiguration</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>71d07658-3cc0-f111-a05a-6045bd0870c9</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100037.5000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilitytype>0</visibilitytype>
+</appaction>

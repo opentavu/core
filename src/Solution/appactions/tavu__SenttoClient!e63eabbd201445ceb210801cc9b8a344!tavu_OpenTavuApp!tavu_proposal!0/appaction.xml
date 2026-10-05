@@ -2,15 +2,15 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Enviado al cliente">
+  <buttonlabeltext default="Sent to Client">
     <label description="Sent to Client" languagecode="1033" />
     <label description="Enviado al cliente" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Marcar esta propuesta como enviada al cliente y bloquearla para edición">
+  <buttontooltipdescription default="Mark this proposal as sent to the client and lock it for editing">
     <label description="Mark this proposal as sent to the client and lock it for editing" languagecode="1033" />
     <label description="Marcar esta propuesta como enviada al cliente y bloquearla para edición" languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Marcar esta propuesta como enviada al cliente y bloquearla para edición">
+  <buttontooltiptitle default="Mark this proposal as sent to the client and lock it for editing">
     <label description="Mark this proposal as sent to the client and lock it for editing" languagecode="1033" />
     <label description="Marcar esta propuesta como enviada al cliente y bloquearla para edición" languagecode="3082" />
   </buttontooltiptitle>

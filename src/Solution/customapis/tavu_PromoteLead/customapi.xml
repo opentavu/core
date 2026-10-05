@@ -3,9 +3,11 @@
   <bindingtype>0</bindingtype>
   <description default="Human gate of Lead Triage (Module 3A): promotes a reviewed lead into the clean master database, either by linking it to an existing contact or by creating a new contact (and account) from the lead, then closes the lead as Promoted to Contact.">
     <label description="Human gate of Lead Triage (Module 3A): promotes a reviewed lead into the clean master database, either by linking it to an existing contact or by creating a new contact (and account) from the lead, then closes the lead as Promoted to Contact." languagecode="1033" />
+    <label description="Human gate of Lead Triage (Module 3A): promotes a reviewed lead into the clean master database, either by linking it to an existing contact or by creating a new contact (and account) from the lead, then closes the lead as Promoted to Contact." languagecode="3082" />
   </description>
   <displayname default="PromoteLead">
     <label description="PromoteLead" languagecode="1033" />
+    <label description="PromoteLead" languagecode="3082" />
   </displayname>
   <iscustomizable>1</iscustomizable>
   <isfunction>0</isfunction>

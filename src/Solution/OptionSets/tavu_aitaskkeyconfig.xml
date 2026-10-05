@@ -67,5 +67,14 @@
         <Description description="" languagecode="1033" />
       </Descriptions>
     </option>
+    <option value="576600006" IsHidden="0">
+      <labels>
+        <label description="Proposal Email Draft" languagecode="1033" />
+        <label description="Borrador de correo de propuesta" languagecode="3082" />
+      </labels>
+      <Descriptions>
+        <Description description="" languagecode="1033" />
+      </Descriptions>
+    </option>
   </options>
 </optionset>

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26082.126" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26082.00127">
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26094.133" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26094.00133">
   <Entities />
   <Roles />
   <Workflows />
@@ -9,6 +9,7 @@
   <EntityRelationships />
   <OrganizationSettings />
   <optionsets />
+  <Dashboards />
   <WebResources />
   <CustomControls />
   <SolutionPluginAssemblies />
@@ -17,58 +18,195 @@
   <AppModules />
   <EntityDataProviders />
   <CanvasApps />
+  <appaction_appactionrule_classicrulesset>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityHasStatecode!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsInactive!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.AssignPrimaryPermission!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.AssignPrimaryPermission!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.FormStateNotNew!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.NotClosedActivity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityHasStatecode!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsActive!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsActivity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityHasStatecode!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsActive!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CanDeletePrimary!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.DeletePrimaryEntityPermission!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.FormStateNotNew!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CreatePrimaryEntityPermission!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.HideInLegacyRibbon!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.FormStateNotNew!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CanSavePrimary!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CanSavePrimaryEntityType!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsActivity!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.ReadPrimaryPermission!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.CopilotClientApi!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.EnableCopilotSummarizeFeatures!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.FormStateNotNew!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.HideOnMobile!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+    <appaction_appactionrule_classicrules appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" appactionruleid.uniquename="msdyn_Mscrm.IsAppCopilotEnabled!0">
+      <iscustomizable>1</iscustomizable>
+    </appaction_appactionrule_classicrules>
+  </appaction_appactionrule_classicrulesset>
   <connectionreferences>
     <connectionreference connectionreferencelogicalname="tavu_sharedcommondataserviceforapps_18f0f">
       <connectionreferencedisplayname>Microsoft Dataverse OpenTavu-18f0f</connectionreferencedisplayname>
       <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="tavu_sharedmicrosoftforms_40371">
-      <connectionreferencedisplayname>Microsoft Forms OpenTavu-40371</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_microsoftforms</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="tavu_sharedoffice365_e014b">
-      <connectionreferencedisplayname>Office 365 Outlook OpenTavu-e014b</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_office365</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="tavu_sharedonedriveforbusiness_84191">
-      <connectionreferencedisplayname>OneDrive for Business OpenTavu-84191</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_onedriveforbusiness</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="tavu_sharedsendmail_0bd97">
-      <connectionreferencedisplayname>Mail OpenTavu-0bd97</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_sendmail</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="tavu_sharedsmtp_e921f">
-      <connectionreferencedisplayname>SMTP OpenTavu-e921f</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_smtp</connectorid>
-      <iscustomizable>1</iscustomizable>
-      <promptingbehavior>0</promptingbehavior>
-      <statecode>0</statecode>
-      <statuscode>1</statuscode>
-    </connectionreference>
-    <connectionreference connectionreferencelogicalname="tavu_sharedsmtp_f8d97">
-      <connectionreferencedisplayname>SMTP OpenTavu-f8d97</connectionreferencedisplayname>
-      <connectorid>/providers/Microsoft.PowerApps/apis/shared_smtp</connectorid>
       <iscustomizable>1</iscustomizable>
       <promptingbehavior>0</promptingbehavior>
       <statecode>0</statecode>

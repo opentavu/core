@@ -24,7 +24,7 @@
                     <row>
                       <cell id="{8e28b500-9129-47a4-a82a-02e95856b4a2}" locklevel="0" colspan="1" rowspan="1" visible="false">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_proposal" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_proposal" disabled="true" />
                       </cell>
@@ -68,7 +68,7 @@
                     <row>
                       <cell id="{753fca4e-14ba-43be-a979-8a4675ae68a8}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_overrideprice" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_overrideprice" disabled="false" uniqueid="{0f516330-ac49-41ab-b040-cd116287155f}" />
                       </cell>
@@ -106,7 +106,7 @@
                     <row>
                       <cell id="266FE48D-4D04-4E9A-8C5A-7DEF9A2F059B" labelid="{ef55b3fd-cc09-45b4-b9d4-fe3109f89ffc}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                     </row>
@@ -125,7 +125,7 @@
                     <row>
                       <cell id="07C04A4E-A482-45CC-BAB7-7FCA3CD02938" labelid="{baa61923-1c07-4709-a8c1-865fd55ccceb}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                     </row>

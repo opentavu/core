@@ -1,6 +1,7 @@
 <environmentvariabledefinition schemaname="tavu_GatewayUrl">
   <displayname default="Gateway Url">
     <label description="Gateway Url" languagecode="1033" />
+    <label description="Gateway Url" languagecode="3082" />
   </displayname>
   <introducedversion>1.0.0.17</introducedversion>
   <iscustomizable>1</iscustomizable>

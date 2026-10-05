@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <LocalizedNames>
+    <LocalizedName description="Forecast" languagecode="1033" />
+    <LocalizedName description="Pronóstico" languagecode="3082" />
+  </LocalizedNames>
+  <FormId>{5d0fc785-fab2-f111-aaad-70a8a59b73ad}</FormId>
+  <IsCustomizable>1</IsCustomizable>
+  <IsDefault>0</IsDefault>
+  <FormXml>
+    <forms type="dashboard">
+      <form>
+        <tabs>
+          <tab showlabel="false" verticallayout="true" id="{42a4ac12-5e81-489b-ad3d-0b222210c242}">
+            <labels>
+              <label description="Tab" languagecode="1033" />
+              <label description="Pestaña" languagecode="3082" />
+            </labels>
+            <columns>
+              <column width="100%">
+                <sections>
+                  <section showlabel="false" showbar="false" columns="1111" id="{f89abc63-1186-46bf-aae3-77fe6dbdd298}">
+                    <labels>
+                      <label description="Section" languagecode="1033" />
+                      <label description="Sección" languagecode="3082" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell colspan="4" rowspan="21" showlabel="false" id="{a48d5624-c16a-447c-9652-bd7257f41b2b}" auto="false">
+                          <labels>
+                            <label description="Reporting Caches" languagecode="1033" />
+                            <label description="Reporting Caches" languagecode="3082" />
+                          </labels>
+                          <control id="ComponentForecastReportingCache" uniqueid="{82a15931-e2d8-0127-b8a5-ac695661acbe}" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" indicationOfSubgrid="true">
+                            <parameters>
+                              <TargetEntityType>tavu_reportingcache</TargetEntityType>
+                              <ChartGridMode>Grid</ChartGridMode>
+                              <EnableQuickFind>true</EnableQuickFind>
+                              <EnableViewPicker>true</EnableViewPicker>
+                              <EnableJumpBar>true</EnableJumpBar>
+                              <RecordsPerPage>17</RecordsPerPage>
+                              <HeaderColorCode>#F3F3F3</HeaderColorCode>
+                              <ViewId>{ABBC9AD5-F8B2-F111-AAAD-70A8A59B73AD}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId />
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                    </rows>
+                  </section>
+                </sections>
+              </column>
+            </columns>
+          </tab>
+        </tabs>
+        <controlDescriptions>
+          <controlDescription forControl="{82a15931-e2d8-0127-b8a5-ac695661acbe}">
+            <customControl id="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+              <parameters>
+                <TargetEntityType>tavu_reportingcache</TargetEntityType>
+                <ChartGridMode>Grid</ChartGridMode>
+                <EnableQuickFind>true</EnableQuickFind>
+                <EnableViewPicker>true</EnableViewPicker>
+                <EnableJumpBar>true</EnableJumpBar>
+                <RecordsPerPage>8</RecordsPerPage>
+                <HeaderColorCode>#F3F3F3</HeaderColorCode>
+                <ViewId>{ABBC9AD5-F8B2-F111-AAAD-70A8A59B73AD}</ViewId>
+                <IsUserView>false</IsUserView>
+                <ViewIds />
+                <AutoExpand>Fixed</AutoExpand>
+                <VisualizationId />
+                <IsUserChart>false</IsUserChart>
+                <EnableChartPicker>false</EnableChartPicker>
+                <RelationshipName />
+              </parameters>
+            </customControl>
+            <customControl formFactor="0" name="tavu_OpenTavu.Controls.ForecastDashboard">
+              <parameters>
+                <data-set name="cacheDataSet">
+                  <ViewId>{ABBC9AD5-F8B2-F111-AAAD-70A8A59B73AD}</ViewId>
+                  <scope>tavu_scope</scope>
+                  <subjectName>tavu_name</subjectName>
+                  <targetAmount>tavu_targetamount</targetAmount>
+                  <closedWon>tavu_closedwonamount</closedWon>
+                  <committed>tavu_committedamount</committed>
+                  <bestCase>tavu_bestcaseamount</bestCase>
+                  <openPipeline>tavu_openpipelineamount</openPipeline>
+                  <forecast>tavu_forecastamount</forecast>
+                  <attainment>tavu_attainment</attainment>
+                  <gap>tavu_gaptogoal</gap>
+                  <coverage>tavu_coverageratio</coverage>
+                  <IsUserView>false</IsUserView>
+                  <TargetEntityType>tavu_reportingcache</TargetEntityType>
+                  <EnableViewPicker>true</EnableViewPicker>
+                  <FilteredViewIds />
+                </data-set>
+              </parameters>
+            </customControl>
+            <customControl formFactor="1" name="tavu_OpenTavu.Controls.ForecastDashboard">
+              <parameters>
+                <data-set name="cacheDataSet">
+                  <ViewId>{ABBC9AD5-F8B2-F111-AAAD-70A8A59B73AD}</ViewId>
+                  <scope>tavu_scope</scope>
+                  <subjectName>tavu_name</subjectName>
+                  <targetAmount>tavu_targetamount</targetAmount>
+                  <closedWon>tavu_closedwonamount</closedWon>
+                  <committed>tavu_committedamount</committed>
+                  <bestCase>tavu_bestcaseamount</bestCase>
+                  <openPipeline>tavu_openpipelineamount</openPipeline>
+                  <forecast>tavu_forecastamount</forecast>
+                  <attainment>tavu_attainment</attainment>
+                  <gap>tavu_gaptogoal</gap>
+                  <coverage>tavu_coverageratio</coverage>
+                  <IsUserView>false</IsUserView>
+                  <TargetEntityType>tavu_reportingcache</TargetEntityType>
+                  <EnableViewPicker>true</EnableViewPicker>
+                  <FilteredViewIds />
+                </data-set>
+              </parameters>
+            </customControl>
+            <customControl formFactor="2" name="tavu_OpenTavu.Controls.ForecastDashboard">
+              <parameters>
+                <data-set name="cacheDataSet">
+                  <ViewId>{ABBC9AD5-F8B2-F111-AAAD-70A8A59B73AD}</ViewId>
+                  <scope>tavu_scope</scope>
+                  <subjectName>tavu_name</subjectName>
+                  <targetAmount>tavu_targetamount</targetAmount>
+                  <closedWon>tavu_closedwonamount</closedWon>
+                  <committed>tavu_committedamount</committed>
+                  <bestCase>tavu_bestcaseamount</bestCase>
+                  <openPipeline>tavu_openpipelineamount</openPipeline>
+                  <forecast>tavu_forecastamount</forecast>
+                  <attainment>tavu_attainment</attainment>
+                  <gap>tavu_gaptogoal</gap>
+                  <coverage>tavu_coverageratio</coverage>
+                  <IsUserView>false</IsUserView>
+                  <TargetEntityType>tavu_reportingcache</TargetEntityType>
+                  <EnableViewPicker>true</EnableViewPicker>
+                  <FilteredViewIds />
+                </data-set>
+              </parameters>
+            </customControl>
+          </controlDescription>
+        </controlDescriptions>
+      </form>
+    </forms>
+  </FormXml>
+  <IntroducedVersion>1.0.0.34</IntroducedVersion>
+  <IsTabletEnabled>0</IsTabletEnabled>
+</Dashboard>

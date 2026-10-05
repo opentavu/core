@@ -15,8 +15,8 @@
           <cell name="statuscode" width="119" />
           <cell name="tavu_sentdate" width="100" />
           <cell name="tavu_subtotal" width="100" />
-          <cell name="tavu_totalcost" width="100" />
           <cell name="tavu_totaltax" width="100" />
+          <cell name="tavu_totalcost" width="100" />
           <cell name="tavu_total" width="100" />
           <cell name="createdon" width="125" />
         </row>
@@ -38,8 +38,8 @@
           <attribute name="tavu_subtotal" />
           <attribute name="tavu_total" />
           <attribute name="tavu_totalcost" />
-          <attribute name="tavu_totaltax" />
           <attribute name="tavu_sentdate" />
+          <attribute name="tavu_totaltax" />
         </entity>
       </fetch>
     </fetchxml>

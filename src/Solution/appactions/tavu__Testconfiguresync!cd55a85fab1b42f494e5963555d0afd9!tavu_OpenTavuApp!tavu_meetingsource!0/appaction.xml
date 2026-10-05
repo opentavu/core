@@ -2,15 +2,15 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Probar y configurar sincronización">
+  <buttonlabeltext default="Test &amp; configure sync">
     <label description="Test &amp; configure sync" languagecode="1033" />
     <label description="Probar y configurar sincronización" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Verifica los requisitos de configuración de transcripción de Teams y obtén soluciones paso a paso">
+  <buttontooltipdescription default="Check the Teams transcript setup gates and get step-by-step fixes">
     <label description="Check the Teams transcript setup gates and get step-by-step fixes" languagecode="1033" />
     <label description="Verifica los requisitos de configuración de transcripción de Teams y obtén soluciones paso a paso" languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Probar y configurar sincronización">
+  <buttontooltiptitle default="Test &amp; configure sync">
     <label description="Test &amp; configure sync" languagecode="1033" />
     <label description="Probar y configurar sincronización" languagecode="3082" />
   </buttontooltiptitle>

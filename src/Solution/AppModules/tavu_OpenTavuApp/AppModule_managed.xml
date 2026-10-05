@@ -28,6 +28,7 @@
     <AppModuleComponent type="1" schemaName="tavu_companyprofile" />
     <AppModuleComponent type="1" schemaName="tavu_country" />
     <AppModuleComponent type="1" schemaName="tavu_customertierdefinition" />
+    <AppModuleComponent type="1" schemaName="tavu_goaltype" />
     <AppModuleComponent type="1" schemaName="tavu_knowledgearticle" />
     <AppModuleComponent type="1" schemaName="tavu_lead" />
     <AppModuleComponent type="1" schemaName="tavu_meeting" />
@@ -37,14 +38,19 @@
     <AppModuleComponent type="1" schemaName="tavu_product" />
     <AppModuleComponent type="1" schemaName="tavu_proposal" />
     <AppModuleComponent type="1" schemaName="tavu_proposalline" />
+    <AppModuleComponent type="1" schemaName="tavu_reportingcache" />
+    <AppModuleComponent type="1" schemaName="tavu_salesperiod" />
     <AppModuleComponent type="1" schemaName="tavu_salesstage" />
+    <AppModuleComponent type="1" schemaName="tavu_salestarget" />
     <AppModuleComponent type="1" schemaName="tavu_sla" />
     <AppModuleComponent type="1" schemaName="tavu_stateprovince" />
     <AppModuleComponent type="1" schemaName="tavu_subcategory" />
+    <AppModuleComponent type="1" schemaName="tavu_systemsettings" />
     <AppModuleComponent type="1" schemaName="tavu_unitofmeasureschedule" />
     <AppModuleComponent type="1" schemaName="tavu_uom" />
     <AppModuleComponent type="60" id="{1718b862-0f68-f111-ab0c-0022480a59ac}" />
     <AppModuleComponent type="60" id="{90bb23fc-68d5-4ddd-afcc-10ac001d0682}" />
+    <AppModuleComponent type="60" id="{5d0fc785-fab2-f111-aaad-70a8a59b73ad}" />
     <AppModuleComponent type="60" id="{0e2bda6a-e874-f111-ab0e-7ced8d6f4a65}" />
     <AppModuleComponent type="60" id="{e19109c4-bff2-4c6c-953e-f0bb48c9df4b}" />
     <AppModuleComponent type="62" schemaName="tavu_OpenTavuApp" />
@@ -54,7 +60,7 @@
     <Role id="{119f245c-3cc8-4b62-b31c-d1a046ced15d}" />
   </AppModuleRoleMaps>
   <LocalizedNames>
-    <LocalizedName description="OpenTavu App" languagecode="1033" />
+    <LocalizedName description="Opentavu" languagecode="1033" />
     <LocalizedName description="Opentavu" languagecode="3082" />
   </LocalizedNames>
   <Descriptions>
@@ -79,6 +85,10 @@
   </appelements>
   <appsettings>
     <appsetting settingdefinitionid.uniquename="AppChannel">
+      <iscustomizable>1</iscustomizable>
+      <value>1</value>
+    </appsetting>
+    <appsetting settingdefinitionid.uniquename="HeaderAndNavigationRefresh">
       <iscustomizable>1</iscustomizable>
       <value>1</value>
     </appsetting>

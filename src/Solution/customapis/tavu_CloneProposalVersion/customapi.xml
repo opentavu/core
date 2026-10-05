@@ -3,9 +3,11 @@
   <bindingtype>0</bindingtype>
   <description default="Creates a new draft version of a proposal by cloning its header and active lines, increments the version, and supersedes the source proposal.">
     <label description="Creates a new draft version of a proposal by cloning its header and active lines, increments the version, and supersedes the source proposal." languagecode="1033" />
+    <label description="Creates a new draft version of a proposal by cloning its header and active lines, increments the version, and supersedes the source proposal." languagecode="3082" />
   </description>
   <displayname default="Clone Proposal Version">
     <label description="Clone Proposal Version" languagecode="1033" />
+    <label description="Clone Proposal Version" languagecode="3082" />
   </displayname>
   <iscustomizable>1</iscustomizable>
   <isfunction>0</isfunction>

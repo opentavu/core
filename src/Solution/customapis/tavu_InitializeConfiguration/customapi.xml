@@ -1,0 +1,21 @@
+<customapi uniquename="tavu_InitializeConfiguration">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default=" Creates the OpenTavu reference data that is missing (case statuses, SLAs, calendar, sales stages, AI task prompts, units, geography), keeps sales periods one fiscal year ahead, and checks the install. Idempotent: never overwrites values the firm changed.">
+    <label description=" Creates the OpenTavu reference data that is missing (case statuses, SLAs, calendar, sales stages, AI task prompts, units, geography), keeps sales periods one fiscal year ahead, and checks the install. Idempotent: never overwrites values the firm changed." languagecode="1033" />
+    <label description="Crea los datos de referencia de OpenTavu que falten (estados de caso, SLA, calendario, etapas de venta, prompts de tareas de IA, unidades, geografía), mantiene los periodos de venta un año fiscal adelante y revisa la instalación. Idempotente: nunca sobrescribe valores que la firma cambió." languagecode="3082" />
+  </description>
+  <displayname default="Initialize Configuration">
+    <label description="Initialize Configuration" languagecode="1033" />
+    <label description="Inicializar configuración" languagecode="3082" />
+  </displayname>
+  <executeprivilegename>prvWritetavu_SystemSettings</executeprivilegename>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>InitializeConfiguration</name>
+  <plugintypeid>
+    <plugintypeexportkey>d6fb3bb9-8d5e-4db2-9feb-73887a1bfca6</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

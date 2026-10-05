@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{a4381c78-9e64-4e41-9e69-f31ad2d5a158}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{D8F9E23C-E951-43A4-ABD9-345125A99EFA}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{72174FF7-F7A3-4228-A271-74B6E91B2B58}" columns="11" name="section_general">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{8B2650B6-E3FD-4E9A-A0E6-8CD4725A8ACC}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_Name" />
+                      </cell>
+                      <cell id="{804f32b5-b585-44c9-898f-e3d799fd2995}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Date Property" languagecode="1033" />
+                          <label description="Propiedad de fecha" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_dateproperty" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_dateproperty" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7672383d-ddd5-4130-ad0d-39922ffa1550}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Code" languagecode="1033" />
+                          <label description="Código" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_code" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_code" disabled="true" />
+                      </cell>
+                      <cell id="{06f577e8-61f9-418c-814a-3ee39083d151}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Amount Property" languagecode="1033" />
+                          <label description="Propiedad de monto" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_amountproperty" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_amountproperty" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2f745272-9eee-4a2e-a4b8-db4719156452}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                          <label description="Name" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_name" disabled="false" />
+                      </cell>
+                      <cell id="{20f98102-fbb6-4be7-889a-d5371c54eeb3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Uses Forecast Category" languagecode="1033" />
+                          <label description="Usa categoría de pronóstico" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_usesforecastcategory" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_usesforecastcategory" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4565a37b-1eb4-43c2-b610-249dc2cc8a7f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Metric Kind" languagecode="1033" />
+                          <label description="Tipo de métrica" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_metrickind" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_metrickind" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{3947e04d-f9a6-4fa1-90c6-9ce03538fc98}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{06181239-e82d-4849-896b-f1f8e099de6d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Source Entity" languagecode="1033" />
+                          <label description="Entidad de origen" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_sourceentity" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_sourceentity" disabled="false" />
+                      </cell>
+                      <cell locklevel="0" id="{0ebc9872-1b70-4632-a8d3-d25e4b357543}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{468226f7-73b5-4b51-b1ba-296026eda330}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{070e9c1d-ef44-4bb4-844f-f814dbdd218c}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{063103f6-db40-4570-b1ed-ee755115466e}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{b7c5e859-1b35-41c5-9c3c-edf6bd499508}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{88840aeb-c31d-46e7-a83c-b39c7c823d85}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{6bcd3230-479f-4946-a18b-e6067731ecfa}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{a19e500e-e643-48dd-987d-cea0683670c8}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{6a56792d-c942-4b06-8a8f-fb25e4334276}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Formulario para esta entidad." languagecode="3082" />
+    </Descriptions>
+  </systemform>
+</forms>

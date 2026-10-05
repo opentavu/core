@@ -102,7 +102,7 @@
                     <row>
                       <cell id="{96579477-ae15-4c6e-99ce-5f6879befb4b}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_country" disabled="false" />
                       </cell>
@@ -110,7 +110,7 @@
                     <row>
                       <cell id="{1bff9f9c-adce-4f53-8811-42247a1d278b}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_stateprovince" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_stateprovince" disabled="false" />
                       </cell>
@@ -118,7 +118,7 @@
                     <row>
                       <cell id="{9d4ceebd-4d71-46f3-a98c-6777805a8ecd}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_city" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_city" disabled="false" />
                       </cell>

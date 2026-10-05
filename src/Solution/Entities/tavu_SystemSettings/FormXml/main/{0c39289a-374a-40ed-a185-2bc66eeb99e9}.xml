@@ -42,7 +42,7 @@
                     <row>
                       <cell locklevel="0" id="{9e7f4ade-ebb5-4fe1-bcaa-05cdf53f43d9}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                       <cell id="{861046a1-0c94-4966-96a4-a17e2f2b4dc8}" locklevel="0" colspan="1" rowspan="1">
@@ -88,7 +88,7 @@
                       </cell>
                       <cell locklevel="0" id="{799bcc25-cd29-457f-bdc0-73ca3105eeea}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                     </row>
@@ -201,6 +201,61 @@
                     </row>
                   </rows>
                 </section>
+                <section name="section_forecasting" id="49578a26-acca-496f-b20b-a6606d1106e8" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Forecasting" languagecode="1033" />
+                    <label description="Pronóstico" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{1052453f-3e27-4266-8689-228df536421d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Forecast Period Type" languagecode="1033" />
+                          <label description="Tipo de período del pronóstico" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_forecastperiodtype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_forecastperiodtype" disabled="false" />
+                      </cell>
+                      <cell id="{f514a32d-9c2f-454e-909f-f3fc34efa704}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Coverage Target" languagecode="1033" />
+                          <label description="Objetivo de cobertura" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_coveragetarget" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_coveragetarget" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ffe89b50-4765-446c-ad70-49b0ed7f79ca}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Forecast Snapshot Day" languagecode="1033" />
+                          <label description="Día de instantánea del pronóstico" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_forecastsnapshotday" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_forecastsnapshotday" disabled="false" />
+                      </cell>
+                      <cell id="{8b804366-da1d-4ad2-9acb-94f1e9430ed5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Default Business Line" languagecode="1033" />
+                          <label description="Línea de negocio predeterminada" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_defaultbusinessline" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_defaultbusinessline" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ce12eaff-04ff-4844-b92c-af196d442f7c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Auto-create Sales Periods" languagecode="1033" />
+                          <label description="Crear periodos de venta automáticamente" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_autocreatesalesperiods" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_autocreatesalesperiods" disabled="false" uniqueid="{32201b2f-e9c5-464b-8372-4fb4c0051451}" />
+                      </cell>
+                      <cell locklevel="0" id="{12d7cd5f-e6cb-4df8-9aee-346a47403b31}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
               </sections>
             </column>
           </columns>
@@ -211,17 +266,17 @@
           <row>
             <cell id="{403de0d5-7d33-44d5-ac2d-c09706389fa9}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{58b913b8-eaef-47cc-9251-e488ec40e1e6}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{3a54fd32-661d-49d0-9af4-51d39bba0233}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>
@@ -232,17 +287,17 @@
           <row>
             <cell id="{7d2b725c-7225-45e4-acee-f20cff6a42a1}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{baee4d90-6bdb-489d-b8d2-33fbdc99f9ad}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{58de43e0-6cc5-4986-99d0-202705cc0781}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>
@@ -403,6 +458,28 @@
           <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
             <parameters>
               <value type="TwoOptions">tavu_meetingstampengagement</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{32201b2f-e9c5-464b-8372-4fb4c0051451}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_autocreatesalesperiods</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_autocreatesalesperiods</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_autocreatesalesperiods</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_autocreatesalesperiods</value>
             </parameters>
           </customControl>
         </controlDescription>

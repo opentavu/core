@@ -1,0 +1,13 @@
+<customapiresponseproperty uniquename="Summary">
+  <description default="Readable result: rows created and completed, then every error and warning with what to do.">
+    <label description="Readable result: rows created and completed, then every error and warning with what to do." languagecode="1033" />
+    <label description="Resultado legible: filas creadas y completadas, y luego cada error y advertencia con lo que hay que hacer." languagecode="3082" />
+  </description>
+  <displayname default="Summary">
+    <label description="Summary" languagecode="1033" />
+    <label description="Resumen" languagecode="3082" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>Summary</name>
+  <type>10</type>
+</customapiresponseproperty>

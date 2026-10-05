@@ -1,9 +1,11 @@
 <customapirequestparameter uniquename="LinkToContactId">
   <description default="Optional. When provided, links the lead to this existing contact and creates no new records (link-to-existing mode)">
     <label description="Optional. When provided, links the lead to this existing contact and creates no new records (link-to-existing mode)" languagecode="1033" />
+    <label description="Optional. When provided, links the lead to this existing contact and creates no new records (link-to-existing mode)" languagecode="3082" />
   </description>
   <displayname default="PromoteLead-In-LinkToContactId">
     <label description="PromoteLead-In-LinkToContactId" languagecode="1033" />
+    <label description="PromoteLead-In-LinkToContactId" languagecode="3082" />
   </displayname>
   <iscustomizable>0</iscustomizable>
   <isoptional>1</isoptional>

@@ -49,12 +49,30 @@
                       </cell>
                     </row>
                     <row>
+                      <cell id="{55fe9ad6-0e05-4936-9758-28e3f7c75f52}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Business Line" languagecode="1033" />
+                          <label description="Línea de negocio" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_businessline" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_businessline" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
                       <cell id="{88c3073f-92d5-4a07-ac24-ff54e4c58ca0}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Sales Stage" languagecode="1033" />
                           <label description="Etapa de venta" languagecode="3082" />
                         </labels>
                         <control id="tavu_salesstage" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_salesstage" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{74e87411-7a93-4193-8c2a-8b78338ed56b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Forecast Category" languagecode="1033" />
+                          <label description="Categoría de pronóstico" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_forecastcategory" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_forecastcategory" disabled="false" />
                       </cell>
                     </row>
                     <row>
@@ -332,6 +350,33 @@
                     </row>
                   </rows>
                 </section>
+                <section name="section_forecasting" id="216d205e-f936-4990-ab35-a88e61977591" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Forecasting" languagecode="1033" />
+                    <label description="Pronóstico" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{2112d0c1-bb20-4875-8245-3bd78858c185}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Forecast Category Is Manual" languagecode="1033" />
+                          <label description="Categoría de pronóstico es manual" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_forecastcategoryismanual" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_forecastcategoryismanual" disabled="false" uniqueid="{741c3f29-f5e1-4ee7-a930-b698c7ce9a12}" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2ec74506-754f-4929-8769-6b6d8b3e775f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Sales Target" languagecode="1033" />
+                          <label description="Objetivo de ventas" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_salestarget" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_salestarget" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
               </sections>
             </column>
           </columns>
@@ -342,17 +387,17 @@
           <row>
             <cell id="{f02ee50e-9d6a-4472-b612-e74cb2f65088}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{436990e8-de9f-4029-96d4-7760d5926cef}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{4da85647-9aca-40aa-ba8c-45b8dbe57f72}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{55f15556-5d77-44de-88db-b64d769a0c7e}" locklevel="0" colspan="1" rowspan="1">
@@ -391,17 +436,17 @@
           <row>
             <cell id="{f2975f59-b1cf-4c86-8be9-ba9030751e16}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{9f483a82-fe26-4222-91ff-13eded896086}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{d45381b4-73f5-434b-b31c-8cf6e3f5b963}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>
@@ -460,6 +505,28 @@
           <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
             <parameters>
               <value type="TwoOptions">tavu_probabilityismanual</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{741c3f29-f5e1-4ee7-a930-b698c7ce9a12}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_forecastcategoryismanual</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_forecastcategoryismanual</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_forecastcategoryismanual</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_forecastcategoryismanual</value>
             </parameters>
           </customControl>
         </controlDescription>

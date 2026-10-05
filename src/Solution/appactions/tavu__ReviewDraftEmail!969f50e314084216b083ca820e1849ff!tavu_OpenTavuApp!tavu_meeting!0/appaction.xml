@@ -2,15 +2,15 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Revisar borrador de correo">
+  <buttonlabeltext default="Review Draft Email">
     <label description="Review Draft Email" languagecode="1033" />
     <label description="Revisar borrador de correo" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Abra el borrador de seguimiento de IA para revisarlo y enviarlo al cliente.">
+  <buttontooltipdescription default="Open the AI follow-up draft to review and send it to the customer.">
     <label description="Open the AI follow-up draft to review and send it to the customer." languagecode="1033" />
     <label description="Abra el borrador de seguimiento de IA para revisarlo y enviarlo al cliente." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Revisar borrador de correo">
+  <buttontooltiptitle default="Review draft email">
     <label description="Review draft email" languagecode="1033" />
     <label description="Revisar borrador de correo" languagecode="3082" />
   </buttontooltiptitle>

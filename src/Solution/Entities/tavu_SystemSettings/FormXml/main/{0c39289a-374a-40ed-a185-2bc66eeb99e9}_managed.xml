@@ -24,7 +24,7 @@
                     <row>
                       <cell id="{8ab865de-3478-43de-ae3d-d4ca246c6437}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
@@ -41,12 +41,12 @@
                     <row>
                       <cell locklevel="0" id="{9e7f4ade-ebb5-4fe1-bcaa-05cdf53f43d9}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                       <cell id="{861046a1-0c94-4966-96a4-a17e2f2b4dc8}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_activitythresholddays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_activitythresholddays" disabled="false" />
                       </cell>
@@ -54,13 +54,13 @@
                     <row>
                       <cell id="{6f6b5d7c-3bed-4fa9-b6b0-7c0fd7d75641}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_defaultcountry" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_defaultcountry" disabled="false" />
                       </cell>
                       <cell id="{fbb0aa44-88ab-4c9e-91af-b77cb01ebcd5}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_defaultcustomertier" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_defaultcustomertier" disabled="false" />
                       </cell>
@@ -68,7 +68,7 @@
                     <row>
                       <cell id="{2ae745a1-d71f-4260-8e09-bc74a825d5ee}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_customermode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_customermode" disabled="false" />
                       </cell>
@@ -76,13 +76,13 @@
                     <row>
                       <cell id="{98278fd1-8827-4909-bb3a-815a920e283e}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_slaautoresume" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_slaautoresume" disabled="false" uniqueid="{c709bb30-6a32-4520-90a2-cdf6b68d10a0}" />
                       </cell>
                       <cell locklevel="0" id="{799bcc25-cd29-457f-bdc0-73ca3105eeea}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                     </row>
@@ -123,13 +123,13 @@
                     <row>
                       <cell id="{edf97e5b-8af5-4b2c-91d3-00dc16ca216f}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_aienabled" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_aienabled" disabled="false" uniqueid="{819a14da-2230-4e0b-aac5-a1aa6ca868ff}" />
                       </cell>
                       <cell id="{79036631-4679-40b9-9225-221bd90b79ff}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_defaultaimodel" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_defaultaimodel" disabled="false" />
                       </cell>
@@ -137,13 +137,13 @@
                     <row>
                       <cell id="{e503682f-f4de-4610-8dcf-a42dcebb6fba}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_proposalemaildraftenabled" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_proposalemaildraftenabled" disabled="false" uniqueid="{4031932a-c509-426a-bc46-e7119521c44e}" />
                       </cell>
                       <cell id="{15391095-8822-471a-9294-436c77bd6291}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_defaultconfidencethreshold" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_defaultconfidencethreshold" disabled="false" />
                       </cell>
@@ -160,13 +160,13 @@
                     <row>
                       <cell id="{d7715dcc-a04c-4597-be4e-0c554dbf0b11}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_meetingautoprovision" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_meetingautoprovision" disabled="false" uniqueid="{a27ef35b-9c54-40d1-b3ed-bbfd06e309c3}" />
                       </cell>
                       <cell id="{57b00841-e3b0-420b-8ee5-c1df6f92446c}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_meetingfollowupdraftenabled" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_meetingfollowupdraftenabled" disabled="false" uniqueid="{ff5b360f-7f42-4fc6-af50-27b1aefd4f51}" />
                       </cell>
@@ -174,15 +174,65 @@
                     <row>
                       <cell id="{6a149fd9-8b80-452b-b4f1-0bd78054595a}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_meetingconsolidateddiscovery" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_meetingconsolidateddiscovery" disabled="false" uniqueid="{96bce795-0c4d-45be-8567-906dc4d9b53a}" />
                       </cell>
                       <cell id="{6aa07a13-e8cc-40f0-be9b-6aa89cc733d8}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_meetingstampengagement" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_meetingstampengagement" disabled="false" uniqueid="{6a23a690-c31f-4bb6-bc36-d1b2bea7e8ef}" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_forecasting" id="49578a26-acca-496f-b20b-a6606d1106e8" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Forecasting" languagecode="1033" />
+                    <label description="Pronóstico" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{1052453f-3e27-4266-8689-228df536421d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_forecastperiodtype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_forecastperiodtype" disabled="false" />
+                      </cell>
+                      <cell id="{f514a32d-9c2f-454e-909f-f3fc34efa704}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_coveragetarget" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_coveragetarget" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ffe89b50-4765-446c-ad70-49b0ed7f79ca}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_forecastsnapshotday" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_forecastsnapshotday" disabled="false" />
+                      </cell>
+                      <cell id="{8b804366-da1d-4ad2-9acb-94f1e9430ed5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_defaultbusinessline" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_defaultbusinessline" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{ce12eaff-04ff-4844-b92c-af196d442f7c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_autocreatesalesperiods" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_autocreatesalesperiods" disabled="false" uniqueid="{32201b2f-e9c5-464b-8372-4fb4c0051451}" />
+                      </cell>
+                      <cell locklevel="0" id="{12d7cd5f-e6cb-4df8-9aee-346a47403b31}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
                       </cell>
                     </row>
                   </rows>
@@ -197,17 +247,17 @@
           <row>
             <cell id="{403de0d5-7d33-44d5-ac2d-c09706389fa9}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{58b913b8-eaef-47cc-9251-e488ec40e1e6}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{3a54fd32-661d-49d0-9af4-51d39bba0233}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>
@@ -218,17 +268,17 @@
           <row>
             <cell id="{7d2b725c-7225-45e4-acee-f20cff6a42a1}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{baee4d90-6bdb-489d-b8d2-33fbdc99f9ad}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{58de43e0-6cc5-4986-99d0-202705cc0781}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>
@@ -389,6 +439,28 @@
           <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
             <parameters>
               <value type="TwoOptions">tavu_meetingstampengagement</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{32201b2f-e9c5-464b-8372-4fb4c0051451}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_autocreatesalesperiods</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_autocreatesalesperiods</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_autocreatesalesperiods</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_autocreatesalesperiods</value>
             </parameters>
           </customControl>
         </controlDescription>

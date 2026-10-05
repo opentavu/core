@@ -15,12 +15,21 @@
           <columns>
             <column width="100%">
               <sections>
-                <section showlabel="false" showbar="false" IsUserDefined="0" id="{ce4d6eb8-50fb-4150-9551-5620cd11bd17}">
+                <section showlabel="false" showbar="false" IsUserDefined="0" id="{ce4d6eb8-50fb-4150-9551-5620cd11bd17}" name="section_general">
                   <labels>
                     <label description="General" languagecode="1033" />
                     <label description="General" languagecode="3082" />
                   </labels>
                   <rows>
+                    <row>
+                      <cell id="{040473cc-fb73-4864-add2-5856fe06b301}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Code" languagecode="1033" />
+                          <label description="Código" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_code" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_code" disabled="true" />
+                      </cell>
+                    </row>
                     <row>
                       <cell id="{2e406445-d1d2-4cd6-a028-435cb7595a0f}">
                         <labels>
@@ -69,17 +78,17 @@
           <row>
             <cell id="{12e01dd4-d78a-4219-8c01-80595e392a10}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{acf0c26d-697e-4841-bbbb-930da180e746}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{be279d55-09b1-4726-8f27-a3c7b53faf93}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>
@@ -90,17 +99,17 @@
           <row>
             <cell id="{ac8aaddc-f532-4a82-b325-4ac8bd151945}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{4565b51a-575c-4f45-9f10-6d1c8624f8c9}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{dbeca3a8-71e1-4f2e-acd6-2f2db8675816}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>

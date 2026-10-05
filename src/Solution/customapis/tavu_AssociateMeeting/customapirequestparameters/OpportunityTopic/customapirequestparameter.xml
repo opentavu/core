@@ -1,9 +1,11 @@
 <customapirequestparameter uniquename="OpportunityTopic">
   <description default="Optional. Title for the opportunity created when CreateNewOpportunity is true. Defaults to the meeting subject if left empty.">
     <label description="Optional. Title for the opportunity created when CreateNewOpportunity is true. Defaults to the meeting subject if left empty." languagecode="1033" />
+    <label description="Optional. Title for the opportunity created when CreateNewOpportunity is true. Defaults to the meeting subject if left empty." languagecode="3082" />
   </description>
   <displayname default="AssociateMeeting-In-OpportunityTopic">
     <label description="AssociateMeeting-In-OpportunityTopic" languagecode="1033" />
+    <label description="AssociateMeeting-In-OpportunityTopic" languagecode="3082" />
   </displayname>
   <iscustomizable>0</iscustomizable>
   <isoptional>1</isoptional>

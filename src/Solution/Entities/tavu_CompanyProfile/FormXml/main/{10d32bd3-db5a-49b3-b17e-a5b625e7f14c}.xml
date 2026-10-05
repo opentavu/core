@@ -41,12 +41,12 @@
                     <row>
                       <cell locklevel="0" id="{2f60cacf-0d1c-42bd-96bf-41cb0ffe630e}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                       <cell locklevel="0" id="{4f007987-4fc0-437f-8b28-756564fd94de}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                       </cell>
                     </row>
@@ -100,10 +100,12 @@
                       </cell>
                     </row>
                     <row>
-                      <cell locklevel="0" id="{0e56fd49-0587-48c3-b135-cdb71bb87b8d}">
+                      <cell id="{a91f9743-4257-4dfa-8346-752f4bb71f1a}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="Fiscal Year Start Month" languagecode="1033" />
+                          <label description="Mes de inicio del año fiscal" languagecode="3082" />
                         </labels>
+                        <control id="tavu_fiscalyearstartmonth" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_fiscalyearstartmonth" disabled="false" />
                       </cell>
                       <cell id="{64bfb6cc-3c75-4489-873e-f56bd2f1bd03}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
@@ -147,17 +149,17 @@
           <row>
             <cell id="{f1cc94f9-1e96-4dc1-8b93-a7b648bb8711}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{b95d0a9a-3b21-4e79-9974-a905dd9ae6a1}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{05e217e4-756d-4877-b849-3866ba5cd58b}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>
@@ -168,17 +170,17 @@
           <row>
             <cell id="{1704e63c-a344-4eb9-b925-7de54be231f1}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{9cb8d7dc-535d-4d40-8894-fd10b8019eb0}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{cc6063d6-162b-4372-ac91-429d19c35eda}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>

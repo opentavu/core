@@ -1,0 +1,854 @@
+{
+  "properties": {
+    "connectionReferences": {
+      "shared_commondataserviceforapps": {
+        "runtimeSource": "embedded",
+        "connection": {
+          "connectionReferenceLogicalName": "tavu_sharedcommondataserviceforapps_18f0f"
+        },
+        "api": {
+          "name": "shared_commondataserviceforapps"
+        }
+      }
+    },
+    "definition": {
+      "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "$connections": {
+          "defaultValue": {},
+          "type": "Object"
+        },
+        "$authentication": {
+          "defaultValue": {},
+          "type": "SecureObject"
+        }
+      },
+      "triggers": {
+        "Recurrence": {
+          "recurrence": {
+            "frequency": "Week",
+            "interval": 1,
+            "startTime": "2026-09-07T05:00:00Z",
+            "schedule": {
+              "weekDays": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+                "Sunday"
+              ]
+            }
+          },
+          "metadata": {
+            "operationMetadataId": "c4aaaabf-78b0-42bf-b804-f48f92dc27af"
+          },
+          "type": "Recurrence"
+        }
+      },
+      "actions": {
+        "Keep_sales_periods_ahead": {
+          "runAfter": {},
+          "metadata": {
+            "operationMetadataId": "6f1e2c4a-3b7d-4e8a-9c21-5a0b7d3e9f12"
+          },
+          "description": "Creates the sales periods of the current and next fiscal year when Auto-create Sales Periods is on (tavu_InitializeConfiguration, Mode = periods). Never modifies existing periods.",
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "PerformUnboundAction",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "actionName": "tavu_InitializeConfiguration",
+              "item/Mode": "periods"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "List_the_User-scope_targets_to_snapshot": {
+          "runAfter": {
+            "Keep_sales_periods_ahead": [
+              "Succeeded",
+              "Failed",
+              "Skipped",
+              "TimedOut"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "c50924c9-6a53-4dba-8459-d3c62fa3f53f"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "tavu_salestargets",
+              "$select": "tavu_salestargetid,tavu_name,tavu_scope,tavu_targetamount,tavu_closedwonamount,tavu_committedamount,tavu_bestcaseamount,tavu_openpipelineamount,tavu_forecastamount,tavu_forecastfinal,tavu_attainmentpct,tavu_forecastattainmentpct,tavu_gaptogoal,tavu_coverageratio,_tavu_salesperiod_value,_tavu_businessline_value,_tavu_salesrep_value",
+              "$filter": "statecode eq 0 and tavu_scope eq 576600000",
+              "$expand": "tavu_SalesPeriod($select=tavu_startdate,tavu_enddate,tavu_name)"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Apply_to_each": {
+          "foreach": "@outputs('List_the_User-scope_targets_to_snapshot')?['body/value']",
+          "actions": {
+            "Compose-PeriodElapsedPct": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "b7cfd92a-7436-440c-8294-e68fca1fe324"
+              },
+              "type": "Compose",
+              "inputs": "@if(\n  greaterOrEquals(ticks(utcNow()), ticks(items('Apply_to_each')?['tavu_SalesPeriod']?['tavu_enddate'])),\n  100,\n  if(\n    lessOrEquals(ticks(utcNow()), ticks(items('Apply_to_each')?['tavu_SalesPeriod']?['tavu_startdate'])),\n    0,\n    div(\n      mul(sub(ticks(utcNow()), ticks(items('Apply_to_each')?['tavu_SalesPeriod']?['tavu_startdate'])), 100.0),\n      sub(ticks(items('Apply_to_each')?['tavu_SalesPeriod']?['tavu_enddate']), ticks(items('Apply_to_each')?['tavu_SalesPeriod']?['tavu_startdate']))\n    )\n  )\n)"
+            },
+            "Compose-ExpectedPaceAmount": {
+              "runAfter": {
+                "Compose-PeriodElapsedPct": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "6d23e6c3-3df5-4216-82fc-88177a3e30fb"
+              },
+              "type": "Compose",
+              "inputs": "@div(\n  mul(coalesce(items('Apply_to_each')?['tavu_targetamount'], 0), outputs('Compose-PeriodElapsedPct')),\n  100.0\n)"
+            },
+            "Compose-SnapshotKey": {
+              "runAfter": {
+                "Compose-ExpectedPaceAmount": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "ac6b11a2-f926-43a5-9fbe-ec958b05c0cf"
+              },
+              "type": "Compose",
+              "inputs": "@concat(items('Apply_to_each')?['tavu_salestargetid'], '|', utcNow('yyyy-MM-dd'))"
+            },
+            "List_rows_existing_snapshot": {
+              "runAfter": {
+                "Compose-SnapshotKey": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "f0c511f1-f60f-4a19-8318-bef32815297c"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "tavu_forecastsnapshots",
+                  "$select": "tavu_forecastsnapshotid",
+                  "$filter": "tavu_snapshotkey eq '@{outputs('Compose-SnapshotKey')}'",
+                  "$top": 1
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Condition": {
+              "actions": {
+                "Add_a_new_row_Forecast_Snapshot": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "633cf2a4-b15b-44d2-b101-e07632f948d4"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "CreateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "tavu_forecastsnapshots",
+                      "item/tavu_SalesPeriod@odata.bind": "/tavu_salesperiods(@{items('Apply_to_each')?['_tavu_salesperiod_value']})",
+                      "item/tavu_SalesTarget@odata.bind": "/tavu_salestargets(@{items('Apply_to_each')?['tavu_salestargetid']})",
+                      "item/tavu_snapshotdate": "@utcNow()",
+                      "item/tavu_snapshotkey": "@outputs('Compose-SnapshotKey')",
+                      "item/tavu_attainment": "@items('Apply_to_each')?['tavu_attainmentpct']",
+                      "item/tavu_bestcaseamount": "@items('Apply_to_each')?['tavu_bestcaseamount']",
+                      "item/tavu_closedwonamount": "@items('Apply_to_each')?['tavu_closedwonamount']",
+                      "item/tavu_committedamount": "@items('Apply_to_each')?['tavu_committedamount']",
+                      "item/tavu_coverageratio": "@items('Apply_to_each')?['tavu_coverageratio']",
+                      "item/tavu_expectedpaceamount": "@outputs('Compose-ExpectedPaceAmount')",
+                      "item/tavu_forecastamount": "@items('Apply_to_each')?['tavu_forecastamount']",
+                      "item/tavu_gaptogoal": "@items('Apply_to_each')?['tavu_gaptogoal']",
+                      "item/tavu_name": "@concat('Snapshot ', items('Apply_to_each')?['tavu_name'], ' ', utcNow('yyyy-MM-dd'))",
+                      "item/tavu_openpipelineamount": "@items('Apply_to_each')?['tavu_openpipelineamount']",
+                      "item/tavu_periodelapsed": "@outputs('Compose-PeriodElapsedPct')",
+                      "item/tavu_scope": "@items('Apply_to_each')?['tavu_scope']",
+                      "item/tavu_targetamount": "@items('Apply_to_each')?['tavu_targetamount']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {
+                "List_rows_existing_snapshot": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Update_Forecast_Snapshot": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "c24cff02-d13a-4808-a465-7e3c3fdfa97f"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                      },
+                      "parameters": {
+                        "entityName": "tavu_forecastsnapshots",
+                        "recordId": "@first(outputs('List_rows_existing_snapshot')?['body/value'])?['tavu_forecastsnapshotid']",
+                        "item/tavu_SalesPeriod@odata.bind": "/tavu_salesperiods(@{items('Apply_to_each')?['_tavu_salesperiod_value']})",
+                        "item/tavu_SalesTarget@odata.bind": "/tavu_salestargets(@{items('Apply_to_each')?['tavu_salestargetid']})",
+                        "item/tavu_snapshotdate": "@utcNow()",
+                        "item/tavu_snapshotkey": "@outputs('Compose-SnapshotKey')",
+                        "item/tavu_attainment": "@items('Apply_to_each')?['tavu_attainmentpct']",
+                        "item/tavu_bestcaseamount": "@items('Apply_to_each')?['tavu_bestcaseamount']",
+                        "item/tavu_closedwonamount": "@items('Apply_to_each')?['tavu_closedwonamount']",
+                        "item/tavu_committedamount": "@items('Apply_to_each')?['tavu_committedamount']",
+                        "item/tavu_coverageratio": "@items('Apply_to_each')?['tavu_coverageratio']",
+                        "item/tavu_expectedpaceamount": "@outputs('Compose-ExpectedPaceAmount')",
+                        "item/tavu_forecastamount": "@items('Apply_to_each')?['tavu_forecastamount']",
+                        "item/tavu_gaptogoal": "@items('Apply_to_each')?['tavu_gaptogoal']",
+                        "item/tavu_name": "@concat('Snapshot ', items('Apply_to_each')?['tavu_name'], ' ', utcNow('yyyy-MM-dd'))",
+                        "item/tavu_openpipelineamount": "@items('Apply_to_each')?['tavu_openpipelineamount']",
+                        "item/tavu_periodelapsed": "@outputs('Compose-PeriodElapsedPct')",
+                        "item/tavu_scope": "@items('Apply_to_each')?['tavu_scope']",
+                        "item/tavu_targetamount": "@items('Apply_to_each')?['tavu_targetamount']"
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@length(outputs('List_rows_existing_snapshot')?['body/value'])",
+                  0
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "93e962bc-9350-4d54-997c-357ac1640cbc"
+              },
+              "type": "If"
+            },
+            "Compose-CacheKey": {
+              "runAfter": {
+                "Condition": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a1b2c3d4-0001-4a00-9000-000000000001"
+              },
+              "type": "Compose",
+              "inputs": "@concat(string(items('Apply_to_each')?['tavu_scope']), '|', coalesce(items('Apply_to_each')?['_tavu_salesrep_value'], ''), '|', items('Apply_to_each')?['_tavu_salesperiod_value'], '|', coalesce(items('Apply_to_each')?['_tavu_businessline_value'], ''))"
+            },
+            "List_rows_existing_cache": {
+              "runAfter": {
+                "Compose-CacheKey": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a1b2c3d4-0002-4a00-9000-000000000002"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "tavu_reportingcaches",
+                  "$select": "tavu_reportingcacheid",
+                  "$filter": "tavu_cachekey eq '@{outputs('Compose-CacheKey')}'",
+                  "$top": 1
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Condition_Cache": {
+              "actions": {
+                "Add_a_new_row_Reporting_Cache": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "a1b2c3d4-0003-4a00-9000-000000000003"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "CreateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "tavu_reportingcaches",
+                      "item/tavu_cachekey": "@outputs('Compose-CacheKey')",
+                      "item/tavu_computedon": "@utcNow()",
+                      "item/tavu_SalesPeriod@odata.bind": "/tavu_salesperiods(@{items('Apply_to_each')?['_tavu_salesperiod_value']})",
+                      "item/tavu_scope": "@items('Apply_to_each')?['tavu_scope']",
+                      "item/tavu_attainment": "@items('Apply_to_each')?['tavu_attainmentpct']",
+                      "item/tavu_bestcaseamount": "@items('Apply_to_each')?['tavu_bestcaseamount']",
+                      "item/tavu_BusinessLine@odata.bind": "@if(empty(coalesce(items('Apply_to_each')?['_tavu_businessline_value'], '')), null, concat('/tavu_businesslines(', items('Apply_to_each')?['_tavu_businessline_value'], ')'))",
+                      "item/tavu_closedwonamount": "@items('Apply_to_each')?['tavu_closedwonamount']",
+                      "item/tavu_committedamount": "@items('Apply_to_each')?['tavu_committedamount']",
+                      "item/tavu_coverageratio": "@items('Apply_to_each')?['tavu_coverageratio']",
+                      "item/tavu_forecastfinal": "@items('Apply_to_each')?['tavu_forecastfinal']",
+                      "item/tavu_forecastamount": "@items('Apply_to_each')?['tavu_forecastamount']",
+                      "item/tavu_forecastattainment": "@items('Apply_to_each')?['tavu_forecastattainmentpct']",
+                      "item/tavu_gaptogoal": "@items('Apply_to_each')?['tavu_gaptogoal']",
+                      "item/tavu_name": "@concat('User: ', items('Apply_to_each')?['tavu_name'])",
+                      "item/tavu_openpipelineamount": "@items('Apply_to_each')?['tavu_openpipelineamount']",
+                      "item/tavu_SalesRep@odata.bind": "@if(empty(coalesce(items('Apply_to_each')?['_tavu_salesrep_value'], '')), null, concat('/systemusers(', items('Apply_to_each')?['_tavu_salesrep_value'], ')'))",
+                      "item/tavu_SalesTarget@odata.bind": "/tavu_salestargets(@{items('Apply_to_each')?['tavu_salestargetid']})",
+                      "item/tavu_targetamount": "@items('Apply_to_each')?['tavu_targetamount']"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {
+                "List_rows_existing_cache": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Update_Reporting_Cache": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "a1b2c3d4-0004-4a00-9000-000000000004"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                      },
+                      "parameters": {
+                        "entityName": "tavu_reportingcaches",
+                        "recordId": "@first(outputs('List_rows_existing_cache')?['body/value'])?['tavu_reportingcacheid']",
+                        "item/tavu_cachekey": "@outputs('Compose-CacheKey')",
+                        "item/tavu_computedon": "@utcNow()",
+                        "item/tavu_SalesPeriod@odata.bind": "/tavu_salesperiods(@{items('Apply_to_each')?['_tavu_salesperiod_value']})",
+                        "item/tavu_scope": "@items('Apply_to_each')?['tavu_scope']",
+                        "item/tavu_attainment": "@items('Apply_to_each')?['tavu_attainmentpct']",
+                        "item/tavu_bestcaseamount": "@items('Apply_to_each')?['tavu_bestcaseamount']",
+                        "item/tavu_BusinessLine@odata.bind": "@if(empty(coalesce(items('Apply_to_each')?['_tavu_businessline_value'], '')), null, concat('/tavu_businesslines(', items('Apply_to_each')?['_tavu_businessline_value'], ')'))",
+                        "item/tavu_closedwonamount": "@items('Apply_to_each')?['tavu_closedwonamount']",
+                        "item/tavu_committedamount": "@items('Apply_to_each')?['tavu_committedamount']",
+                        "item/tavu_coverageratio": "@items('Apply_to_each')?['tavu_coverageratio']",
+                        "item/tavu_forecastfinal": "@items('Apply_to_each')?['tavu_forecastfinal']",
+                        "item/tavu_forecastamount": "@items('Apply_to_each')?['tavu_forecastamount']",
+                        "item/tavu_forecastattainment": "@items('Apply_to_each')?['tavu_forecastattainmentpct']",
+                        "item/tavu_gaptogoal": "@items('Apply_to_each')?['tavu_gaptogoal']",
+                        "item/tavu_name": "@concat('User: ', items('Apply_to_each')?['tavu_name'])",
+                        "item/tavu_openpipelineamount": "@items('Apply_to_each')?['tavu_openpipelineamount']",
+                        "item/tavu_SalesRep@odata.bind": "@if(empty(coalesce(items('Apply_to_each')?['_tavu_salesrep_value'], '')), null, concat('/systemusers(', items('Apply_to_each')?['_tavu_salesrep_value'], ')'))",
+                        "item/tavu_SalesTarget@odata.bind": "/tavu_salestargets(@{items('Apply_to_each')?['tavu_salestargetid']})",
+                        "item/tavu_targetamount": "@items('Apply_to_each')?['tavu_targetamount']"
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@length(outputs('List_rows_existing_cache')?['body/value'])",
+                  0
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "a1b2c3d4-0005-4a00-9000-000000000005"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "List_the_User-scope_targets_to_snapshot": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "501221d2-5117-4521-99ed-572fa6ecb702"
+          },
+          "type": "Foreach"
+        },
+        "List_higher_scope_targets": {
+          "runAfter": {
+            "Apply_to_each": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b0000000-0000-4000-9000-000000000001"
+          },
+          "type": "OpenApiConnection",
+          "inputs": {
+            "host": {
+              "connectionName": "shared_commondataserviceforapps",
+              "operationId": "ListRecords",
+              "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+            },
+            "parameters": {
+              "entityName": "tavu_salestargets",
+              "$select": "tavu_salestargetid,tavu_name,tavu_scope,tavu_targetamount,_tavu_salesperiod_value,_tavu_businessline_value",
+              "$filter": "statecode eq 0 and (tavu_scope eq 576600002 or tavu_scope eq 576600003)"
+            },
+            "authentication": "@parameters('$authentication')"
+          }
+        },
+        "Apply_to_each_higher": {
+          "foreach": "@outputs('List_higher_scope_targets')?['body/value']",
+          "actions": {
+            "Compose-B-ChildFetch": {
+              "runAfter": {},
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@concat('<fetch aggregate=\"true\"><entity name=\"tavu_salestarget\">','<attribute name=\"tavu_closedwonamount\" alias=\"won\" aggregate=\"sum\"/>','<attribute name=\"tavu_committedamount\" alias=\"com\" aggregate=\"sum\"/>','<attribute name=\"tavu_bestcaseamount\" alias=\"best\" aggregate=\"sum\"/>','<attribute name=\"tavu_openpipelineamount\" alias=\"opn\" aggregate=\"sum\"/>','<filter type=\"and\">','<condition attribute=\"statecode\" operator=\"eq\" value=\"0\"/>','<condition attribute=\"tavu_scope\" operator=\"eq\" value=\"576600000\"/>','<condition attribute=\"tavu_salesperiod\" operator=\"eq\" value=\"', items('Apply_to_each_higher')?['_tavu_salesperiod_value'], '\"/>',if(equals(items('Apply_to_each_higher')?['tavu_scope'], 576600002), concat('<condition attribute=\"tavu_businessline\" operator=\"eq\" value=\"', coalesce(items('Apply_to_each_higher')?['_tavu_businessline_value'], ''), '\"/>'), ''),'</filter></entity></fetch>')"
+            },
+            "List_children_sum": {
+              "runAfter": {
+                "Compose-B-ChildFetch": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-000000000010"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "tavu_salestargets",
+                  "fetchXml": "@outputs('Compose-B-ChildFetch')"
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Compose-B-Won": {
+              "runAfter": {
+                "List_children_sum": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@coalesce(first(outputs('List_children_sum')?['body/value'])?['won'], 0)"
+            },
+            "Compose-B-Com": {
+              "runAfter": {
+                "Compose-B-Won": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@coalesce(first(outputs('List_children_sum')?['body/value'])?['com'], 0)"
+            },
+            "Compose-B-Best": {
+              "runAfter": {
+                "Compose-B-Com": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@coalesce(first(outputs('List_children_sum')?['body/value'])?['best'], 0)"
+            },
+            "Compose-B-Opn": {
+              "runAfter": {
+                "Compose-B-Best": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@coalesce(first(outputs('List_children_sum')?['body/value'])?['opn'], 0)"
+            },
+            "Compose-B-Target": {
+              "runAfter": {
+                "Compose-B-Opn": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@coalesce(items('Apply_to_each_higher')?['tavu_targetamount'], 0)"
+            },
+            "Compose-B-Gap": {
+              "runAfter": {
+                "Compose-B-Target": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@sub(outputs('Compose-B-Target'), outputs('Compose-B-Won'))"
+            },
+            "Compose-B-Forecast": {
+              "runAfter": {
+                "Compose-B-Gap": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@add(outputs('Compose-B-Won'), outputs('Compose-B-Com'))"
+            },
+            "Compose-B-Attain": {
+              "runAfter": {
+                "Compose-B-Forecast": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@if(equals(outputs('Compose-B-Target'),0), null, mul(div(outputs('Compose-B-Won'), outputs('Compose-B-Target')), 100))"
+            },
+            "Compose-B-ForecastAttain": {
+              "runAfter": {
+                "Compose-B-Attain": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@if(equals(outputs('Compose-B-Target'),0), null, mul(div(outputs('Compose-B-Forecast'), outputs('Compose-B-Target')), 100))"
+            },
+            "Compose-B-Coverage": {
+              "runAfter": {
+                "Compose-B-ForecastAttain": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@if(lessOrEquals(outputs('Compose-B-Gap'),0), null, div(outputs('Compose-B-Opn'), outputs('Compose-B-Gap')))"
+            },
+            "Compose-B-SnapKey": {
+              "runAfter": {
+                "Compose-B-Coverage": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@concat(items('Apply_to_each_higher')?['tavu_salestargetid'], '|', utcNow('yyyy-MM-dd'))"
+            },
+            "Compose-B-CacheKey": {
+              "runAfter": {
+                "Compose-B-SnapKey": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-0000000000ff"
+              },
+              "type": "Compose",
+              "inputs": "@concat(string(items('Apply_to_each_higher')?['tavu_scope']), '||', items('Apply_to_each_higher')?['_tavu_salesperiod_value'], '|', if(equals(items('Apply_to_each_higher')?['tavu_scope'],576600002), coalesce(items('Apply_to_each_higher')?['_tavu_businessline_value'],''), ''))"
+            },
+            "List_existing_snapshot_h": {
+              "runAfter": {
+                "Compose-B-CacheKey": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-000000000020"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "tavu_forecastsnapshots",
+                  "$select": "tavu_forecastsnapshotid",
+                  "$filter": "tavu_snapshotkey eq '@{outputs('Compose-B-SnapKey')}'",
+                  "$top": 1
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Condition_Snapshot_h": {
+              "actions": {
+                "Add_snapshot_h": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "b0000000-0000-4000-9000-000000000022"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "CreateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "tavu_forecastsnapshots",
+                      "item/tavu_SalesPeriod@odata.bind": "/tavu_salesperiods(@{items('Apply_to_each_higher')?['_tavu_salesperiod_value']})",
+                      "item/tavu_SalesTarget@odata.bind": "/tavu_salestargets(@{items('Apply_to_each_higher')?['tavu_salestargetid']})",
+                      "item/tavu_snapshotdate": "@utcNow()",
+                      "item/tavu_snapshotkey": "@outputs('Compose-B-SnapKey')",
+                      "item/tavu_attainment": "@outputs('Compose-B-Attain')",
+                      "item/tavu_bestcaseamount": "@outputs('Compose-B-Best')",
+                      "item/tavu_closedwonamount": "@outputs('Compose-B-Won')",
+                      "item/tavu_committedamount": "@outputs('Compose-B-Com')",
+                      "item/tavu_coverageratio": "@outputs('Compose-B-Coverage')",
+                      "item/tavu_forecastamount": "@outputs('Compose-B-Forecast')",
+                      "item/tavu_gaptogoal": "@outputs('Compose-B-Gap')",
+                      "item/tavu_name": "@concat(items('Apply_to_each_higher')?['tavu_name'], ' ', utcNow('yyyy-MM-dd'))",
+                      "item/tavu_openpipelineamount": "@outputs('Compose-B-Opn')",
+                      "item/tavu_scope": "@items('Apply_to_each_higher')?['tavu_scope']",
+                      "item/tavu_targetamount": "@outputs('Compose-B-Target')"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {
+                "List_existing_snapshot_h": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Update_snapshot_h": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "b0000000-0000-4000-9000-000000000023"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                      },
+                      "parameters": {
+                        "entityName": "tavu_forecastsnapshots",
+                        "recordId": "@first(outputs('List_existing_snapshot_h')?['body/value'])?['tavu_forecastsnapshotid']",
+                        "item/tavu_SalesPeriod@odata.bind": "/tavu_salesperiods(@{items('Apply_to_each_higher')?['_tavu_salesperiod_value']})",
+                        "item/tavu_SalesTarget@odata.bind": "/tavu_salestargets(@{items('Apply_to_each_higher')?['tavu_salestargetid']})",
+                        "item/tavu_snapshotdate": "@utcNow()",
+                        "item/tavu_snapshotkey": "@outputs('Compose-B-SnapKey')",
+                        "item/tavu_attainment": "@outputs('Compose-B-Attain')",
+                        "item/tavu_bestcaseamount": "@outputs('Compose-B-Best')",
+                        "item/tavu_closedwonamount": "@outputs('Compose-B-Won')",
+                        "item/tavu_committedamount": "@outputs('Compose-B-Com')",
+                        "item/tavu_coverageratio": "@outputs('Compose-B-Coverage')",
+                        "item/tavu_forecastamount": "@outputs('Compose-B-Forecast')",
+                        "item/tavu_gaptogoal": "@outputs('Compose-B-Gap')",
+                        "item/tavu_name": "@concat(items('Apply_to_each_higher')?['tavu_name'], ' ', utcNow('yyyy-MM-dd'))",
+                        "item/tavu_openpipelineamount": "@outputs('Compose-B-Opn')",
+                        "item/tavu_scope": "@items('Apply_to_each_higher')?['tavu_scope']",
+                        "item/tavu_targetamount": "@outputs('Compose-B-Target')"
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@length(outputs('List_existing_snapshot_h')?['body/value'])",
+                  0
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-000000000021"
+              },
+              "type": "If"
+            },
+            "List_existing_cache_h": {
+              "runAfter": {
+                "Condition_Snapshot_h": [
+                  "Succeeded"
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-000000000030"
+              },
+              "type": "OpenApiConnection",
+              "inputs": {
+                "host": {
+                  "connectionName": "shared_commondataserviceforapps",
+                  "operationId": "ListRecords",
+                  "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                },
+                "parameters": {
+                  "entityName": "tavu_reportingcaches",
+                  "$select": "tavu_reportingcacheid",
+                  "$filter": "tavu_cachekey eq '@{outputs('Compose-B-CacheKey')}'",
+                  "$top": 1
+                },
+                "authentication": "@parameters('$authentication')"
+              }
+            },
+            "Condition_Cache_h": {
+              "actions": {
+                "Add_cache_h": {
+                  "runAfter": {},
+                  "metadata": {
+                    "operationMetadataId": "b0000000-0000-4000-9000-000000000032"
+                  },
+                  "type": "OpenApiConnection",
+                  "inputs": {
+                    "host": {
+                      "connectionName": "shared_commondataserviceforapps",
+                      "operationId": "CreateRecord",
+                      "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                    },
+                    "parameters": {
+                      "entityName": "tavu_reportingcaches",
+                      "item/tavu_cachekey": "@outputs('Compose-B-CacheKey')",
+                      "item/tavu_computedon": "@utcNow()",
+                      "item/tavu_SalesPeriod@odata.bind": "/tavu_salesperiods(@{items('Apply_to_each_higher')?['_tavu_salesperiod_value']})",
+                      "item/tavu_scope": "@items('Apply_to_each_higher')?['tavu_scope']",
+                      "item/tavu_attainment": "@outputs('Compose-B-Attain')",
+                      "item/tavu_bestcaseamount": "@outputs('Compose-B-Best')",
+                      "item/tavu_BusinessLine@odata.bind": "@if(equals(items('Apply_to_each_higher')?['tavu_scope'],576600002), if(empty(coalesce(items('Apply_to_each_higher')?['_tavu_businessline_value'],'')), null, concat('/tavu_businesslines(', items('Apply_to_each_higher')?['_tavu_businessline_value'], ')')), null)",
+                      "item/tavu_closedwonamount": "@outputs('Compose-B-Won')",
+                      "item/tavu_committedamount": "@outputs('Compose-B-Com')",
+                      "item/tavu_coverageratio": "@outputs('Compose-B-Coverage')",
+                      "item/tavu_forecastfinal": "@outputs('Compose-B-Forecast')",
+                      "item/tavu_forecastamount": "@outputs('Compose-B-Forecast')",
+                      "item/tavu_forecastattainment": "@outputs('Compose-B-ForecastAttain')",
+                      "item/tavu_gaptogoal": "@outputs('Compose-B-Gap')",
+                      "item/tavu_name": "@items('Apply_to_each_higher')?['tavu_name']",
+                      "item/tavu_openpipelineamount": "@outputs('Compose-B-Opn')",
+                      "item/tavu_SalesTarget@odata.bind": "/tavu_salestargets(@{items('Apply_to_each_higher')?['tavu_salestargetid']})",
+                      "item/tavu_targetamount": "@outputs('Compose-B-Target')"
+                    },
+                    "authentication": "@parameters('$authentication')"
+                  }
+                }
+              },
+              "runAfter": {
+                "List_existing_cache_h": [
+                  "Succeeded"
+                ]
+              },
+              "else": {
+                "actions": {
+                  "Update_cache_h": {
+                    "runAfter": {},
+                    "metadata": {
+                      "operationMetadataId": "b0000000-0000-4000-9000-000000000033"
+                    },
+                    "type": "OpenApiConnection",
+                    "inputs": {
+                      "host": {
+                        "connectionName": "shared_commondataserviceforapps",
+                        "operationId": "UpdateOnlyRecord",
+                        "apiId": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps"
+                      },
+                      "parameters": {
+                        "entityName": "tavu_reportingcaches",
+                        "recordId": "@first(outputs('List_existing_cache_h')?['body/value'])?['tavu_reportingcacheid']",
+                        "item/tavu_cachekey": "@outputs('Compose-B-CacheKey')",
+                        "item/tavu_computedon": "@utcNow()",
+                        "item/tavu_SalesPeriod@odata.bind": "/tavu_salesperiods(@{items('Apply_to_each_higher')?['_tavu_salesperiod_value']})",
+                        "item/tavu_scope": "@items('Apply_to_each_higher')?['tavu_scope']",
+                        "item/tavu_attainment": "@outputs('Compose-B-Attain')",
+                        "item/tavu_bestcaseamount": "@outputs('Compose-B-Best')",
+                        "item/tavu_BusinessLine@odata.bind": "@if(equals(items('Apply_to_each_higher')?['tavu_scope'],576600002), if(empty(coalesce(items('Apply_to_each_higher')?['_tavu_businessline_value'],'')), null, concat('/tavu_businesslines(', items('Apply_to_each_higher')?['_tavu_businessline_value'], ')')), null)",
+                        "item/tavu_closedwonamount": "@outputs('Compose-B-Won')",
+                        "item/tavu_committedamount": "@outputs('Compose-B-Com')",
+                        "item/tavu_coverageratio": "@outputs('Compose-B-Coverage')",
+                        "item/tavu_forecastfinal": "@outputs('Compose-B-Forecast')",
+                        "item/tavu_forecastamount": "@outputs('Compose-B-Forecast')",
+                        "item/tavu_forecastattainment": "@outputs('Compose-B-ForecastAttain')",
+                        "item/tavu_gaptogoal": "@outputs('Compose-B-Gap')",
+                        "item/tavu_name": "@items('Apply_to_each_higher')?['tavu_name']",
+                        "item/tavu_openpipelineamount": "@outputs('Compose-B-Opn')",
+                        "item/tavu_SalesTarget@odata.bind": "/tavu_salestargets(@{items('Apply_to_each_higher')?['tavu_salestargetid']})",
+                        "item/tavu_targetamount": "@outputs('Compose-B-Target')"
+                      },
+                      "authentication": "@parameters('$authentication')"
+                    }
+                  }
+                }
+              },
+              "expression": {
+                "equals": [
+                  "@length(outputs('List_existing_cache_h')?['body/value'])",
+                  0
+                ]
+              },
+              "metadata": {
+                "operationMetadataId": "b0000000-0000-4000-9000-000000000031"
+              },
+              "type": "If"
+            }
+          },
+          "runAfter": {
+            "List_higher_scope_targets": [
+              "Succeeded"
+            ]
+          },
+          "metadata": {
+            "operationMetadataId": "b0000000-0000-4000-9000-000000000002"
+          },
+          "type": "Foreach"
+        }
+      }
+    },
+    "templateName": ""
+  },
+  "schemaVersion": "1.0.0.0"
+}

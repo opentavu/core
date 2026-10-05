@@ -103,7 +103,7 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{9232ea46-bfb6-4373-87b9-1c8b3d4eda63}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{cedbe15a-64e4-4960-bbb7-133bd79da65d}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Total Tax" languagecode="1033" />
                           <label description="Impuesto total" languagecode="3082" />
@@ -328,17 +328,17 @@
           <row>
             <cell id="{27eb014e-2f55-4d2a-bd62-7aaee35de718}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{6de5951c-73f7-425e-b1d1-57f4989e1c5d}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{6275a665-eb08-4ac1-969e-ab729998d13d}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{e470b339-a55b-47c5-bc6c-248267d163e0}" locklevel="0" colspan="1" rowspan="1">
@@ -377,17 +377,17 @@
           <row>
             <cell id="{ac785acf-d790-4f63-80aa-2b09b2a2f1bb}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{3ee2662f-4ce1-4aa6-9b1e-9c7c4dd6c1a7}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{e2de084d-ca67-4237-b4a9-4fde18d854fd}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>

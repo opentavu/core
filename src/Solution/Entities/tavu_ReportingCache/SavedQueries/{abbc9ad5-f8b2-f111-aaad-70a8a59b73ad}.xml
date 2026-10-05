@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{abbc9ad5-f8b2-f111-aaad-70a8a59b73ad}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_reportingcacheid">
+          <cell name="tavu_name" width="281" />
+          <cell name="tavu_scope" width="100" />
+          <cell name="tavu_targetamount" width="118" />
+          <cell name="tavu_closedwonamount" width="158" />
+          <cell name="tavu_committedamount" width="147" />
+          <cell name="tavu_bestcaseamount" width="137" />
+          <cell name="tavu_openpipelineamount" width="170" />
+          <cell name="tavu_forecastamount" width="137" />
+          <cell name="tavu_attainment" width="119" />
+          <cell name="tavu_gaptogoal" width="109" />
+          <cell name="tavu_coverageratio" width="128" />
+          <cell name="tavu_salesperiod" width="110" />
+          <cell name="tavu_salesrep" width="100" />
+          <cell name="tavu_businessline" width="119" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical">
+        <entity name="tavu_reportingcache">
+          <attribute name="tavu_name" />
+          <attribute name="tavu_reportingcacheid" />
+          <attribute name="tavu_scope" />
+          <attribute name="tavu_targetamount" />
+          <attribute name="tavu_closedwonamount" />
+          <attribute name="tavu_committedamount" />
+          <attribute name="tavu_bestcaseamount" />
+          <attribute name="tavu_openpipelineamount" />
+          <attribute name="tavu_forecastamount" />
+          <attribute name="tavu_attainment" />
+          <attribute name="tavu_gaptogoal" />
+          <attribute name="tavu_coverageratio" />
+          <attribute name="tavu_salesperiod" />
+          <attribute name="tavu_salesrep" />
+          <attribute name="tavu_businessline" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.34</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Forecast Cache (current)" languagecode="1033" />
+      <LocalizedName description="Caché de pronóstico (actual)" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

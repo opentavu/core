@@ -9,7 +9,7 @@
       <tabs>
         <tab verticallayout="true" id="{e8a41df9-5f99-4ead-bcb7-357943d151ac}" IsUserDefined="1">
           <labels>
-            <label description="" languagecode="3082" />
+            <label description="" languagecode="1033" />
           </labels>
           <columns>
             <column width="100%">
@@ -23,7 +23,7 @@
                     <row>
                       <cell id="{cc0da64a-25ac-4877-bf26-070b549f2134}">
                         <labels>
-                          <label description="" languagecode="3082" />
+                          <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>

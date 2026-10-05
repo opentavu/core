@@ -1,0 +1,14 @@
+<customapirequestparameter uniquename="Mode">
+  <description default="full (default): seed, sales periods and all checks. periods: sales periods and the current-period check, used by the daily forecast flow. diagnose: checks only, writes nothing.">
+    <label description="full (default): seed, sales periods and all checks. periods: sales periods and the current-period check, used by the daily forecast flow. diagnose: checks only, writes nothing." languagecode="1033" />
+    <label description="full (predeterminado): datos de referencia, periodos de venta y todas las revisiones. periods: periodos de venta y la revisión del periodo actual, usado por el flujo diario de pronóstico. diagnose: solo revisiones, no escribe nada." languagecode="3082" />
+  </description>
+  <displayname default="Mode">
+    <label description="Mode" languagecode="1033" />
+    <label description="Modo" languagecode="3082" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <isoptional>1</isoptional>
+  <name>Mode</name>
+  <type>10</type>
+</customapirequestparameter>

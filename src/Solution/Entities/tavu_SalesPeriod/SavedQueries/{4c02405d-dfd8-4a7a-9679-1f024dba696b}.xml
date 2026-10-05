@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{4c02405d-dfd8-4a7a-9679-1f024dba696b}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_salesperiodid">
+          <cell name="tavu_name" width="300" />
+          <cell name="tavu_periodtype" width="108" />
+          <cell name="tavu_fiscalyear" width="103" />
+          <cell name="tavu_startdate" width="100" />
+          <cell name="tavu_enddate" width="109" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_salesperiod">
+          <attribute name="tavu_salesperiodid" />
+          <attribute name="tavu_name" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+          <attribute name="tavu_periodtype" />
+          <attribute name="tavu_fiscalyear" />
+          <attribute name="tavu_startdate" />
+          <attribute name="tavu_enddate" />
+          <order attribute="tavu_fiscalyear" descending="false" />
+          <order attribute="tavu_startdate" descending="false" />
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Sales Periods" languagecode="1033" />
+      <LocalizedName description="Sales Periods activo" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

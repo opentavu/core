@@ -2,15 +2,15 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Descartar">
+  <buttonlabeltext default="Discard">
     <label description="Discard" languagecode="1033" />
     <label description="Descartar" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Cierre esta reunión como descartada cuando no tenga valor de descubrimiento. No se afecta ninguna oportunidad.">
+  <buttontooltipdescription default="Close this meeting as discarded when it has no discovery value. No opportunity is affected.">
     <label description="Close this meeting as discarded when it has no discovery value. No opportunity is affected." languagecode="1033" />
     <label description="Cierre esta reunión como descartada cuando no tenga valor de descubrimiento. No se afecta ninguna oportunidad." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Descartar reunión">
+  <buttontooltiptitle default="Discard meeting">
     <label description="Discard meeting" languagecode="1033" />
     <label description="Descartar reunión" languagecode="3082" />
   </buttontooltiptitle>

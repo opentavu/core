@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{149f58b7-e6e2-482b-a6a7-9dee56af17fa}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab verticallayout="true" id="{c278fac8-f50b-4476-813f-c800ba3a9034}" IsUserDefined="1">
+          <labels>
+            <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section showlabel="true" showbar="false" IsUserDefined="0" id="{eb8acf16-39b4-48c7-811f-ae0e9e49aad8}" columns="11" visible="true" name="section_general">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{2115ca2f-2014-41c9-8ef5-056339a20f38}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
+                      </cell>
+                      <cell id="{3032eaa1-a791-4e20-a51e-856a302e6ad7}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_scope" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_scope" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{c1bd67e2-1d1f-417e-aaba-d9edfb567fb5}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{31f48d0a-7629-43ab-8c99-eb9633e7daae}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_salesrep" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_salesrep" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a15a384a-fadd-4bb4-9b23-67ca70cd278a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_goaltype" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_goaltype" disabled="false" />
+                      </cell>
+                      <cell id="{38215fdb-32cd-46b7-91a2-a24847b936d1}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_team" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_team" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{6b9d9812-3c11-4e13-a9c9-6f783327da00}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{3c960aa4-a7c0-401d-ad76-ea746c08c494}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_businessline" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_businessline" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{42c0d2d0-3800-4428-895d-72dde8ed16e4}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{3f2a0fe4-959a-405c-ba98-8d81c44d23aa}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_salesperiod" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_salesperiod" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{2c9c028a-2302-4709-817d-eb95677758ef}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{a48c6eb0-dd74-403c-9489-e4dfe743e7f9}" visible="false" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_target" id="d95335b0-ca86-41f5-b836-6ceb608144f1" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Target" languagecode="1033" />
+                    <label description="Objetivo" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{0ee9f622-ba7d-4e1b-a1b3-2b768b024d70}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_targetamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_targetamount" disabled="false" />
+                      </cell>
+                      <cell id="{ac2ede7a-b3b5-4ea6-907c-58907968dbf4}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_manageradjustedamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_manageradjustedamount" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{df5269f3-2f88-4850-bc0f-16c74f519c43}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_stretchtarget" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_stretchtarget" disabled="false" />
+                      </cell>
+                      <cell id="{cf62aa22-fdad-457f-9fe0-e9df436aa210}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_manageradjustmentnote" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_manageradjustmentnote" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+                <section name="section_attainment" id="2bb259ad-cdbc-4cbf-96e7-eba73666b441" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Attainment" languagecode="1033" />
+                    <label description="Cumplimiento" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{c2b64d42-b993-450c-831d-06713ae09335}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_closedwonamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_closedwonamount" disabled="false" />
+                      </cell>
+                      <cell id="{d52b95d7-b24a-415d-be3a-e55157a154ee}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Attainment %" languagecode="1033" />
+                          <label description="Cumplimiento %" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_attainmentpct" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_attainmentpct" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{4ace28b1-65e8-42ac-9daf-3e647a82845c}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_committedamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_committedamount" disabled="false" />
+                      </cell>
+                      <cell id="{6bef7383-a250-4a2e-b88e-700c86d0293b}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_forecastfinal" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_forecastfinal" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{74f25780-ebc6-48b3-9b8e-efa41dc8fd6a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_bestcaseamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_bestcaseamount" disabled="false" />
+                      </cell>
+                      <cell id="{7c98a8fc-5dbc-45ae-9019-dfc12f50fa87}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_gaptogoal" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_gaptogoal" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c6e4c182-28f0-4b83-a7d5-57e1154ba5d6}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_openpipelineamount" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="tavu_openpipelineamount" disabled="false" />
+                      </cell>
+                      <cell id="{ca238a6f-d044-40a3-b5b5-fb741922538f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_coverageratio" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_coverageratio" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{d29d90cd-1f0a-4712-81e4-5e707e8add89}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{2ad11dbf-6f36-4ed4-91ed-f51444e21a7a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_forecastamount" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_forecastamount" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{a1e57ecc-4a62-49f3-bd40-066c6f9e0b2a}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{74c7c27a-f147-47ec-b79b-6d05933589f6}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_upsideamount" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_upsideamount" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{f60dae41-9191-4df3-8143-22392fe39302}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{510660c5-af72-479f-8d98-11bc6e88351f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Forecast Attainment %" languagecode="1033" />
+                          <label description="Cumplimiento del pronóstico %" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_forecastattainmentpct" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_forecastattainmentpct" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell locklevel="0" id="{15cb06e6-0baa-4a1f-857a-83be509b4c03}">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                      <cell id="{8734b434-5a92-4e77-963f-1501997d7526}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Open Opportunity Count" languagecode="1033" />
+                          <label description="Cantidad de oportunidades abiertas" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_opencount" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_opencount" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_system_fields" id="60faeb3a-3556-4272-ade9-0edbcd35efaa" IsUserDefined="0" locklevel="0" showlabel="true" expanded="false" visible="false">
+          <labels>
+            <label description="System Fields" languagecode="1033" />
+            <label description="Campos del sistema" languagecode="3082" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="tab_general" id="ad455211-d7bd-4914-ad83-b911ac1e5056" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="General" languagecode="1033" />
+                    <label description="General" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row />
+                    <row>
+                      <cell id="{98a3d983-a981-4823-9b41-ec35326aff06}" locklevel="0" colspan="1" rowspan="1" showlabel="true">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_targetkey" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_targetkey" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{c5ba4e7d-ffaa-4fef-bf2a-2e4c642f851a}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{be510625-6c3f-4100-b450-28c69149d734}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{0a714fac-26c7-480c-94d6-0cc770fde363}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{2b1b4e96-9759-43fa-9dad-0de5f469e865}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{aaa4f1ca-4882-4293-b0bc-0dc9ac37ab3a}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{bf84db0c-4edc-4320-ae0b-977fb108e257}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{be9d9cf6-93d7-4557-86fa-206d2e98d892}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{e17d2606-03eb-4e38-905a-75d0eb8f450b}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+      <formLibraries>
+        <Library name="tavu_salestarget_form" libraryUniqueId="{6c51c4ee-9b6a-4bc5-a606-2f73a2cdda3e}" />
+      </formLibraries>
+      <events>
+        <event name="onload" application="false" active="false">
+          <Handlers>
+            <Handler functionName="OpenTavu.SalesTarget.Form.onLoad" libraryName="tavu_salestarget_form" handlerUniqueId="{8c1fc344-ecb5-450f-96ee-55454f5c72b6}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+        <event name="onchange" application="false" active="false" attribute="tavu_scope">
+          <Handlers>
+            <Handler functionName="OpenTavu.SalesTarget.Form.onScopeChange" libraryName="tavu_salestarget_form" handlerUniqueId="{34d5b96e-e5d9-489a-8d70-154f3982fd10}" enabled="true" parameters="" passExecutionContext="true" />
+          </Handlers>
+        </event>
+      </events>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+      <Description description="Un formulario para esta entidad." languagecode="3082" />
+    </Descriptions>
+  </systemform>
+</forms>

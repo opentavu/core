@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonaccessibilitytext default="Delete">
+    <label description="Delete" languagecode="1033" />
+    <label description="Eliminar" languagecode="3082" />
+  </buttonaccessibilitytext>
+  <buttonlabeltext default="Delete">
+    <label description="Delete" languagecode="1033" />
+    <label description="Eliminar" languagecode="3082" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Delete this {EntityLogicalNameMarker}. This action cannot be undone.">
+    <label description="Delete this {EntityLogicalNameMarker}. This action cannot be undone." languagecode="1033" />
+    <label description="Eliminar este {EntityLogicalNameMarker}. Esta acción no se puede deshacer." languagecode="3082" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Delete">
+    <label description="Delete" languagecode="1033" />
+    <label description="Eliminar" languagecode="3082" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_systemsettings</logicalname>
+  </contextentity>
+  <contextvalue>tavu_systemsettings</contextvalue>
+  <fonticon>$clientsvg:Delete</fonticon>
+  <hidden>1</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>Mscrm.Form.{!EntityLogicalName}.Delete</name>
+  <onclickeventjavascriptfunctionname>XrmCore.Commands.Delete.deletePrimaryRecord</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":4,"value":null},{"type":2,"value":null}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>adea1aea-b2aa-e611-80d6-00155d88c343</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>2</origin>
+  <sequence>100100070.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilitytype>2</visibilitytype>
+</appaction>

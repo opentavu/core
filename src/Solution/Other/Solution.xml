@@ -1,17 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.26082.126" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26082.126" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26082.00127">
+<ImportExportXml version="9.2.26094.133" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26094.133" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26094.00133">
   <SolutionManifest>
     <UniqueName>OpenTavu</UniqueName>
     <LocalizedNames>
       <LocalizedName description="OpenTavu" languagecode="1033" />
+      <LocalizedName description="OpenTavu Core" languagecode="3082" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.0.0.30</Version>
+    <Version>1.2.0.0</Version>
     <Managed>2</Managed>
     <Publisher>
       <UniqueName>OpenTavu</UniqueName>
       <LocalizedNames>
         <LocalizedName description="OpenTavu" languagecode="1033" />
+        <LocalizedName description="OpenTavu" languagecode="3082" />
       </LocalizedNames>
       <Descriptions />
       <EMailAddress xsi:nil="true"></EMailAddress>
@@ -97,6 +99,8 @@
       <RootComponent type="1" schemaName="tavu_companyprofile" behavior="0" />
       <RootComponent type="1" schemaName="tavu_country" behavior="0" />
       <RootComponent type="1" schemaName="tavu_customertierdefinition" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_forecastsnapshot" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_goaltype" behavior="0" />
       <RootComponent type="1" schemaName="tavu_kitcomponent" behavior="0" />
       <RootComponent type="1" schemaName="tavu_knowledgearticle" behavior="0" />
       <RootComponent type="1" schemaName="tavu_lead" behavior="0" />
@@ -109,7 +113,10 @@
       <RootComponent type="1" schemaName="tavu_product" behavior="0" />
       <RootComponent type="1" schemaName="tavu_proposal" behavior="0" />
       <RootComponent type="1" schemaName="tavu_proposalline" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_reportingcache" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_salesperiod" behavior="0" />
       <RootComponent type="1" schemaName="tavu_salesstage" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_salestarget" behavior="0" />
       <RootComponent type="1" schemaName="tavu_sla" behavior="0" />
       <RootComponent type="1" schemaName="tavu_stateprovince" behavior="0" />
       <RootComponent type="1" schemaName="tavu_subcategory" behavior="0" />
@@ -119,12 +126,16 @@
       <RootComponent type="1" schemaName="tavu_uom" behavior="0" />
       <RootComponent type="1" schemaName="team" behavior="1" />
       <RootComponent type="1" schemaName="transactioncurrency" behavior="1" />
-      <RootComponent type="29" id="{02e9cdee-8679-f111-ab0e-70a8a59d4d26}" behavior="0" />
-      <RootComponent type="29" id="{1ea7bc40-e598-f111-b8dd-6045bd023c7d}" behavior="0" />
+      <RootComponent type="20" id="{218090c6-7bbe-f111-aaad-6045bd009596}" behavior="0" />
+      <RootComponent type="20" id="{40657bc0-7bbe-f111-aaad-6045bd009596}" behavior="0" />
+      <RootComponent type="20" id="{418190c6-7bbe-f111-aaad-6045bd009596}" behavior="0" />
+      <RootComponent type="20" id="{b4647bc0-7bbe-f111-aaad-6045bd009596}" behavior="0" />
       <RootComponent type="29" id="{7abc281a-998e-f111-b8da-6045bd002def}" behavior="0" />
+      <RootComponent type="29" id="{d064249b-2ba7-f111-aaab-000d3a340b09}" behavior="0" />
       <RootComponent type="300" schemaName="tavu_opentavuappdefaultcommandlibrary_9129c" behavior="0" />
       <RootComponent type="300" schemaName="tavu_opentavudefaultcommandlibrary_7f0d4" behavior="0" />
       <RootComponent type="300" schemaName="tavu_opportunityclosedialog_31702" behavior="0" />
+      <RootComponent type="60" id="{5d0fc785-fab2-f111-aaad-70a8a59b73ad}" behavior="0" />
       <RootComponent type="61" schemaName="tavu_account_form" behavior="0" />
       <RootComponent type="61" schemaName="tavu_aimodel" behavior="0" />
       <RootComponent type="61" schemaName="tavu_aitaskconfiguration" behavior="0" />
@@ -147,6 +158,8 @@
       <RootComponent type="61" schemaName="tavu_customertierdefinition" behavior="0" />
       <RootComponent type="61" schemaName="tavu_discardlead" behavior="0" />
       <RootComponent type="61" schemaName="tavu_discardmeeting" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_forecasting" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_goaltype" behavior="0" />
       <RootComponent type="61" schemaName="tavu_kit" behavior="0" />
       <RootComponent type="61" schemaName="tavu_knowledgearticle" behavior="0" />
       <RootComponent type="61" schemaName="tavu_lead" behavior="0" />
@@ -159,6 +172,7 @@
       <RootComponent type="61" schemaName="tavu_meetingsources" behavior="0" />
       <RootComponent type="61" schemaName="tavu_newversionproposal" behavior="0" />
       <RootComponent type="61" schemaName="tavu_OpenTavuAppLogo" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_OpentavuLogo" behavior="0" />
       <RootComponent type="61" schemaName="tavu_opplost" behavior="0" />
       <RootComponent type="61" schemaName="tavu_opportunity" behavior="0" />
       <RootComponent type="61" schemaName="tavu_opportunity_form" behavior="0" />
@@ -173,24 +187,31 @@
       <RootComponent type="61" schemaName="tavu_proposalline" behavior="0" />
       <RootComponent type="61" schemaName="tavu_proposalline_form" behavior="0" />
       <RootComponent type="61" schemaName="tavu_reopenopp" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_reportingcache" behavior="0" />
       <RootComponent type="61" schemaName="tavu_resetprobability" behavior="0" />
       <RootComponent type="61" schemaName="tavu_reviewdraftemail" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_salesperiod" behavior="0" />
       <RootComponent type="61" schemaName="tavu_salesstages" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_salestarget" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_salestarget_form" behavior="0" />
       <RootComponent type="61" schemaName="tavu_sendproposal" behavior="0" />
       <RootComponent type="61" schemaName="tavu_sla" behavior="0" />
       <RootComponent type="61" schemaName="tavu_stateprovince" behavior="0" />
       <RootComponent type="61" schemaName="tavu_subcategory" behavior="0" />
       <RootComponent type="61" schemaName="tavu_systemsettings" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_systemsettings_form" behavior="0" />
       <RootComponent type="61" schemaName="tavu_systemsettings_open" behavior="0" />
       <RootComponent type="61" schemaName="tavu_teamssyncwizard" behavior="0" />
       <RootComponent type="61" schemaName="tavu_timeentry" behavior="0" />
       <RootComponent type="61" schemaName="tavu_uom" behavior="0" />
       <RootComponent type="61" schemaName="tavu_uomschedule" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_verifycompleteconfiguration" behavior="0" />
       <RootComponent type="61" schemaName="tavu_videocallsync" behavior="0" />
       <RootComponent type="61" schemaName="tavu_workinghours" behavior="0" />
       <RootComponent type="62" schemaName="tavu_OpenTavuApp" behavior="0" />
       <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.AiAssessment" behavior="0" />
       <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.CaseConversation" behavior="0" />
+      <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.ForecastDashboard" behavior="0" />
       <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.MeetingAiSummary" behavior="0" />
       <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.SlaCountdown" behavior="0" />
       <RootComponent type="80" schemaName="tavu_OpenTavuApp" behavior="0" />
@@ -214,7 +235,10 @@
       <RootComponent type="9" schemaName="tavu_meetingsource" behavior="0" />
       <RootComponent type="9" schemaName="tavu_meetingsourcetype" behavior="0" />
       <RootComponent type="9" schemaName="tavu_messageinteractiondirection" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_metrickind" behavior="0" />
       <RootComponent type="9" schemaName="tavu_origin" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_periodtype" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_scope" behavior="0" />
       <RootComponent type="9" schemaName="tavu_slastatus" behavior="0" />
       <RootComponent type="9" schemaName="tavu_timeofday" behavior="0" />
       <RootComponent type="9" schemaName="tavu_worktype" behavior="0" />
@@ -231,17 +255,25 @@
       <RootComponent type="91" id="{4e9e1462-fa4d-4ffd-93cb-96948c21b538}" schemaName="Pl.MeetingSource.Probe, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
       <RootComponent type="91" id="{1bf249da-ab17-44db-97f5-049f0eb8af1c}" schemaName="Pl.Opportunity.CloseOrchestrator, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
       <RootComponent type="91" id="{672c16a1-ceec-49e2-ae57-3c9cdd21f213}" schemaName="Pl.Opportunity.CustomerSync, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{ccc40af8-1ae3-4f46-aae2-029790ba60f4}" schemaName="Pl.Opportunity.ForecastStamp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
       <RootComponent type="91" id="{ea19be2a-9def-4e3c-9ebf-510db24075aa}" schemaName="Pl.Opportunity.LifecycleTracker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
       <RootComponent type="91" id="{77214691-5a91-4230-8b25-ef3c263230f3}" schemaName="Pl.Proposal.BuildEmailDraft, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
       <RootComponent type="91" id="{4b7c8522-2769-4f4f-8587-bbe592fdc738}" schemaName="Pl.Proposal.CloneVersion, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
       <RootComponent type="91" id="{144a3eab-993c-4da8-92a9-c865b42ea6ce}" schemaName="Pl.Proposal.LifecycleTracker, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
       <RootComponent type="91" id="{48fb4dcf-6657-4441-abd1-a3b8e1f28a73}" schemaName="Pl.ProposalLine.Calculator, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{aebf2152-efd6-4850-876d-95d486a5051f}" schemaName="Pl.SalesTarget.KeyStamp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
+      <RootComponent type="91" id="{32bd3e1d-a667-4811-a3ae-16c001c70e81}" schemaName="Pl.Setup.Initialize, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
       <RootComponent type="91" id="{0ba6bf36-8e50-49bb-8e84-7803a4c24c0a}" schemaName="Pl.SystemSettings.SingleRecordGuard, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" behavior="0" />
       <RootComponent type="92" id="{157a1aa5-c27c-f111-ab0e-000d3a33441f}" behavior="0" />
+      <RootComponent type="92" id="{1ac7701d-a6a8-f111-aaab-000d3a340b09}" behavior="0" />
       <RootComponent type="92" id="{2bb31b19-d38a-f111-8076-7ced8d715683}" behavior="0" />
+      <RootComponent type="92" id="{2cd30141-a5a8-f111-aaab-000d3a340b09}" behavior="0" />
       <RootComponent type="92" id="{2ebf87da-6c58-f111-a825-0022480a59ac}" behavior="0" />
       <RootComponent type="92" id="{3bbc900e-8e79-f111-ab0e-70a8a59d4d26}" behavior="0" />
+      <RootComponent type="92" id="{3fa164fa-18a7-f111-aaab-000d3a340b09}" behavior="0" />
+      <RootComponent type="92" id="{3ff82f95-28a7-f111-aaab-000d3a340b09}" behavior="0" />
       <RootComponent type="92" id="{5950b30a-5a76-f111-ab0e-6045bd09b203}" behavior="0" />
+      <RootComponent type="92" id="{6043c2c4-18a7-f111-aaab-000d3a340b09}" behavior="0" />
       <RootComponent type="92" id="{814e7e30-747a-f111-ab0e-70a8a59d4d26}" behavior="0" />
       <RootComponent type="92" id="{81a7eaa5-1d74-f111-ab0e-7ced8d6f4a65}" behavior="0" />
       <RootComponent type="92" id="{88a7fa97-9c86-f111-8075-7ced8d6f945c}" behavior="0" />
@@ -266,7 +298,7 @@
     <MissingDependencies>
       <MissingDependency>
         <Required type="1" schemaName="applicationuser" displayName="ApplicationUser" solution="ApplicationUserSolution (1.0.1.4)">
-          <package appName="Microsoft S2SCDSCoreApplication Package" version="1.0.1.29">MicrosoftS2SApplicationIdentitiesCoreTst (1.0.1.29)</package>
+          <package appName="Microsoft S2SCDSCoreApplication Package" version="1.0.1.31">MicrosoftS2SApplicationIdentitiesCoreTst (1.0.1.31)</package>
         </Required>
         <Dependent type="80" schemaName="tavu_OpenTavuApp" displayName="Opentavu" />
       </MissingDependency>
@@ -274,115 +306,499 @@
         <Required type="2" schemaName="systemmanagedusertype" displayName="System Managed User Type" parentSchemaName="systemuser" parentDisplayName="User" solution="AuthorizationCore (1.137.0.0)">
           <package appName="Authorization Package" version="1.7.0.0">msft_PrivilegeChecker (1.7.0.0)</package>
         </Required>
-        <Dependent type="26" schemaName="Usuarios habilitados" displayName="Usuarios habilitados" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
+        <Dependent type="26" schemaName="Enabled Users" displayName="Enabled Users" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="60" displayName="Creación rápida de contacto" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}">
-          <package appName="msdynce_AppCommon" version="9.0.26071.10001">msdynce_AppCommonAnchor (9.0.26071.10001)</package>
+        <Required type="60" displayName="Contact Quick Create" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}">
+          <package appName="msdynce_AppCommon" version="9.0.26092.10001">msdynce_AppCommonAnchor (9.0.26092.10001)</package>
         </Required>
-        <Dependent type="60" displayName="Creación rápida de contacto" parentDisplayName="Contact" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" />
+        <Dependent type="60" displayName="Contact Quick Create" parentDisplayName="Contact" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="Microsoft.PowerApps.PowerAppsOneGrid" displayName="Microsoft.PowerApps.PowerAppsOneGrid" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="61" schemaName="msdyn_CopilotIcon.svg" displayName="msdyn_CopilotIcon.svg" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
         </Required>
-        <Dependent type="60" displayName="Información de la propuesta" parentDisplayName="Proposal" id="{6ecaf5ab-0dd2-4816-90a5-b3b9fc17958e}" />
+        <Dependent type="appaction" displayName="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="61" schemaName="msdyn_CopilotSummarizeLibrary.js" displayName="msdyn_CopilotSummarizeLibrary.js" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
         </Required>
-        <Dependent type="60" displayName="Información" parentDisplayName="System Settings" id="{0c39289a-374a-40ed-a185-2bc66eeb99e9}" />
+        <Dependent type="appaction" displayName="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="Microsoft.PowerApps.PowerAppsOneGrid" displayName="Microsoft.PowerApps.PowerAppsOneGrid" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="QC - Línea de propuesta" parentDisplayName="Proposal Line" id="{1718b862-0f68-f111-ab0c-0022480a59ac}" />
+        <Dependent type="60" displayName="Proposal Information" parentDisplayName="Proposal" id="{6ecaf5ab-0dd2-4816-90a5-b3b9fc17958e}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información de la oportunidad" parentDisplayName="Opportunity" id="{2a5b0891-7395-4bd7-b908-2517ac5ec3bc}" />
+        <Dependent type="60" displayName="Information" parentDisplayName="System Settings" id="{0c39289a-374a-40ed-a185-2bc66eeb99e9}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información" parentDisplayName="Meeting Source" id="{5d91af56-2e11-4feb-9504-97c72ba4c3ff}" />
+        <Dependent type="60" displayName="QC - Proposal Line" parentDisplayName="Proposal Line" id="{1718b862-0f68-f111-ab0c-0022480a59ac}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información del producto" parentDisplayName="Product" id="{73d96964-e4a2-4711-88a4-9db45ff6accc}" />
+        <Dependent type="60" displayName="Opportunity Information" parentDisplayName="Opportunity" id="{2a5b0891-7395-4bd7-b908-2517ac5ec3bc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información" parentDisplayName="Business Calendar" id="{931ae7bd-c6bc-4255-be44-b18086f8aef9}" />
+        <Dependent type="60" displayName="Information" parentDisplayName="Meeting Source" id="{5d91af56-2e11-4feb-9504-97c72ba4c3ff}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información" parentDisplayName="City" id="{95a69929-7186-403f-a2f8-69cba7d45a97}" />
+        <Dependent type="60" displayName="Product Information" parentDisplayName="Product" id="{73d96964-e4a2-4711-88a4-9db45ff6accc}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información" parentDisplayName="AI Model" id="{97cd6d85-94c8-4484-9801-73e68ea002be}" />
+        <Dependent type="60" displayName="Information" parentDisplayName="Business Calendar" id="{931ae7bd-c6bc-4255-be44-b18086f8aef9}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información de la línea de propuesta" parentDisplayName="Proposal Line" id="{9e7ae295-526d-492c-881c-cad37027308d}" />
+        <Dependent type="60" displayName="Information" parentDisplayName="City" id="{95a69929-7186-403f-a2f8-69cba7d45a97}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Usuario" parentDisplayName="User" id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" />
+        <Dependent type="60" displayName="Information" parentDisplayName="AI Model" id="{97cd6d85-94c8-4484-9801-73e68ea002be}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información" parentDisplayName="Unit of Measure" id="{d745dcf2-e300-446c-9909-6fada861b6a5}" />
+        <Dependent type="60" displayName="Proposal Line Information" parentDisplayName="Proposal Line" id="{9e7ae295-526d-492c-881c-cad37027308d}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información" parentDisplayName="Case Status" id="{e2b0c0b5-0a34-403b-ac4e-ff9a834242b6}" />
+        <Dependent type="60" displayName="User" parentDisplayName="User" id="{c2cd9e55-d4b4-4b55-9951-16ead79643e5}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información" parentDisplayName="Price List" id="{f782db30-6f34-4829-bae7-4f8d284d58f7}" />
+        <Dependent type="60" displayName="Information" parentDisplayName="Unit of Measure" id="{d745dcf2-e300-446c-9909-6fada861b6a5}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="60" displayName="Información de contacto" parentDisplayName="Contact" id="{f98718fb-9d53-f111-a824-0022480a59ac}" />
+        <Dependent type="60" displayName="Information" parentDisplayName="Case Status" id="{e2b0c0b5-0a34-403b-ac4e-ff9a834242b6}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2608.2008)">
-          <package appName="Base Custom Controls" version="9.0.2608.2008">BaseCustomControlsCore (9.0.2608.2008)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
-        <Dependent type="26" schemaName="Usuarios habilitados" displayName="Usuarios habilitados" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
+        <Dependent type="60" displayName="Information" parentDisplayName="Price List" id="{f782db30-6f34-4829-bae7-4f8d284d58f7}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.19)" id.uniquename="AppChannel">
-          <package appName="PowerAppsAppFramework Package" version="1.0.0.25">PowerAppsAppFramework_Anchor (1.0.0.25)</package>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
+        </Required>
+        <Dependent type="60" displayName="Contact Information" parentDisplayName="Contact" id="{f98718fb-9d53-f111-a824-0022480a59ac}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.Grid.GridControl" displayName="MscrmControls.Grid.GridControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
+        </Required>
+        <Dependent type="26" schemaName="Enabled Users" displayName="Enabled Users" parentSchemaName="systemuser" parentDisplayName="User" id="{00000000-0000-0000-00aa-000010001019}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.AssignPrimaryPermission!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.AssignPrimaryPermission!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Assign!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.AssignPrimaryPermission!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.AssignPrimaryPermission!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.AssignPrimaryPermission!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.AssignPrimaryPermission!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Assign!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.AssignPrimaryPermission!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.AssignPrimaryPermission!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.AvailableOnForm!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.AvailableOnForm!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.AvailableOnForm!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.AvailableOnForm!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.AvailableOnForm!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.AvailableOnForm!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.AvailableOnForm!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.AvailableOnForm!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CanDeletePrimary!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CanDeletePrimary!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Delete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanDeletePrimary!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanDeletePrimary!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CanSavePrimary!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CanSavePrimary!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanSavePrimary!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanSavePrimary!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CanSavePrimaryEntityType!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CanSavePrimaryEntityType!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanSavePrimaryEntityType!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanSavePrimaryEntityType!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CanWritePrimary!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CanWritePrimary!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Activate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanWritePrimary!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CanWritePrimary!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CanWritePrimary!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Close!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanWritePrimary!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CanWritePrimary!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CanWritePrimary!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanWritePrimary!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CanWritePrimary!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CanWritePrimary!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Activate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanWritePrimary!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CanWritePrimary!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CanWritePrimary!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Close!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanWritePrimary!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CanWritePrimary!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CanWritePrimary!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanWritePrimary!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CopilotClientApi!1" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.CopilotClientApi!1">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CopilotClientApi!1" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CopilotClientApi!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CreatePrimaryEntityPermission!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.CreatePrimaryEntityPermission!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CreatePrimaryEntityPermission!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CreatePrimaryEntityPermission!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.DeletePrimaryEntityPermission!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.DeletePrimaryEntityPermission!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Delete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.DeletePrimaryEntityPermission!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.DeletePrimaryEntityPermission!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.EnableCopilotSummarizeFeatures!1" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.EnableCopilotSummarizeFeatures!1">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.EnableCopilotSummarizeFeatures!1" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.EnableCopilotSummarizeFeatures!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.FormStateNotNew!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.FormStateNotNew!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Assign!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.FormStateNotNew!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.FormStateNotNew!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.FormStateNotNew!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.FormStateNotNew!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Delete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.FormStateNotNew!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.FormStateNotNew!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.FormStateNotNew!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.FormStateNotNew!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.FormStateNotNew!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.FormStateNotNew!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.FormStateNotNew!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.FormStateNotNew!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.FormStateNotNew!0" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.FormStateNotNew!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.HideInLegacyRibbon!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.HideInLegacyRibbon!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.HideInLegacyRibbon!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.HideInLegacyRibbon!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.HideOnMobile!0" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.HideOnMobile!0">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.HideOnMobile!0" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.HideOnMobile!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsAppCopilotEnabled!0" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.IsAppCopilotEnabled!0">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsAppCopilotEnabled!0" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsAppCopilotEnabled!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsBPFEntityCustomizationFeatureEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Delete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsEntityAvailableForUserInMocaOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsPUV2EntityCustomizationEnabled!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.NotClosedActivity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.NotClosedActivity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Assign!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.NotClosedActivity!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.NotClosedActivity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.NotOffline!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.NotOffline!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Assign!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.NotOffline!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.NotOffline!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Activate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Assign!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Assign!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Close!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Delete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.OutlookRenderTypeWeb!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.OutlookRenderTypeWeb!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.OutlookRenderTypeWeb!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryEntityHasStatecode!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryEntityHasStatecode!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Activate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryEntityHasStatecode!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityHasStatecode!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryEntityHasStatecode!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryEntityHasStatecode!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Close!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryEntityHasStatecode!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityHasStatecode!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryEntityHasStatecode!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryEntityHasStatecode!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryEntityHasStatecode!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityHasStatecode!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryEntityIsBPFEntity!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecordForBPFEntity!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryEntityIsBPFEntity!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.OpenActiveStage!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsBPFEntity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryEntityIsNotBPFEntity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryIsActive!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryIsActive!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Close!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryIsActive!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsActive!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryIsActive!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryIsActive!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryIsActive!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsActive!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryIsActivity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryIsActivity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Close!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryIsActivity!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Close!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsActivity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryIsActivity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryIsActivity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryIsActivity!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsActivity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryIsInactive!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryIsInactive!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Activate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryIsInactive!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsInactive!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryIsNotActivity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Activate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryIsNotActivity!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Activate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryIsNotActivity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryIsNotActivity!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.PrimaryIsNotActivity!1" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.PrimaryIsNotActivity!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.PrimaryIsNotActivity!1" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.ReadPrimaryPermission!0" solution="msdyn_SystemAppActions (9.1.0.57)" id.uniquename="msdyn_Mscrm.ReadPrimaryPermission!0">
+          <package appName="PowerAppsActions Package" version="9.1.0.57">PowerAppsActions_Anchor (9.1.0.57)</package>
+        </Required>
+        <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.ReadPrimaryPermission!0" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.ReadPrimaryPermission!0" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.27)" id.uniquename="AppChannel">
+          <package appName="PowerAppsAppFramework Package" version="1.0.0.27">PowerAppsAppFramework_Anchor (1.0.0.27)</package>
         </Required>
         <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=tavu_OpenTavuApp,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="tavu_OpenTavuApp" id.settingdefinitionid.uniquename="AppChannel" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="HeaderAndNavigationRefresh" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.27)" id.uniquename="HeaderAndNavigationRefresh">
+          <package appName="PowerAppsAppFramework Package" version="1.0.0.27">PowerAppsAppFramework_Anchor (1.0.0.27)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=tavu_OpenTavuApp,settingdefinitionid.uniquename=HeaderAndNavigationRefresh" id.parentappmoduleid.uniquename="tavu_OpenTavuApp" id.settingdefinitionid.uniquename="HeaderAndNavigationRefresh" />
       </MissingDependency>
       <MissingDependency>
         <Required type="SettingDefinition" displayName="IsSmartEmailAddressValidationControlEnabled" solution="msdyn_EmailAddressValidation (1.0.0.4)" id.uniquename="IsSmartEmailAddressValidationControlEnabled">

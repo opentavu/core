@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.26094.133" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26094.133" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26094.00133">
+  <SolutionManifest>
+    <UniqueName>OpentavuIntegrations</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="Opentavu Integrations" languagecode="1033" />
+      <LocalizedName description="Opentavu Integrations" languagecode="3082" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0.0.0</Version>
+    <Managed>2</Managed>
+    <Publisher>
+      <UniqueName>OpenTavu</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="OpenTavu" languagecode="1033" />
+        <LocalizedName description="OpenTavu" languagecode="3082" />
+      </LocalizedNames>
+      <Descriptions />
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+      <CustomizationPrefix>tavu</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>57660</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="29" id="{02e9cdee-8679-f111-ab0e-70a8a59d4d26}" behavior="0" />
+      <RootComponent type="29" id="{1ea7bc40-e598-f111-b8dd-6045bd023c7d}" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="1" schemaName="tavu_case" displayName="Case" solution="Active" />
+        <Dependent type="29" displayName="Fl.CaseInteraction.SendEmail" id="{02e9cdee-8679-f111-ab0e-70a8a59d4d26}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="tavu_caseinteraction" displayName="Case Interaction" solution="Active" />
+        <Dependent type="29" displayName="Fl.CaseInteraction.SendEmail" id="{02e9cdee-8679-f111-ab0e-70a8a59d4d26}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="1" schemaName="tavu_lead" displayName="Lead" solution="Active" />
+        <Dependent type="29" displayName="Fl.Lead.WebToLead" id="{1ea7bc40-e598-f111-b8dd-6045bd023c7d}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="connectionreference" displayName="tavu_sharedcommondataserviceforapps_18f0f" solution="Active" id.connectionreferencelogicalname="tavu_sharedcommondataserviceforapps_18f0f" />
+        <Dependent type="29" displayName="Fl.CaseInteraction.SendEmail" id="{02e9cdee-8679-f111-ab0e-70a8a59d4d26}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="connectionreference" displayName="tavu_sharedcommondataserviceforapps_18f0f" solution="Active" id.connectionreferencelogicalname="tavu_sharedcommondataserviceforapps_18f0f" />
+        <Dependent type="29" displayName="Fl.Lead.WebToLead" id="{1ea7bc40-e598-f111-b8dd-6045bd023c7d}" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

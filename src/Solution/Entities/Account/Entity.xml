@@ -5,12 +5,15 @@
     <entity Name="Account">
       <LocalizedNames>
         <LocalizedName description="Account" languagecode="1033" />
+        <LocalizedName description="Cuenta" languagecode="3082" />
       </LocalizedNames>
       <LocalizedCollectionNames>
         <LocalizedCollectionName description="Accounts" languagecode="1033" />
+        <LocalizedCollectionName description="Cuentas" languagecode="3082" />
       </LocalizedCollectionNames>
       <Descriptions>
         <Description description="Business that represents a customer or potential customer. The company that is billed in business transactions." languagecode="1033" />
+        <Description description="Empresa que representa a un cliente o cliente potencial. La empresa a la que se factura en transacciones comerciales." languagecode="3082" />
       </Descriptions>
       <attributes>
         <attribute PhysicalName="tavu_City">
@@ -543,6 +546,7 @@
           <LogicalName>tavu_originatinglead</LogicalName>
           <RequiredLevel>none</RequiredLevel>
           <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>
           <ValidForCreateApi>1</ValidForCreateApi>

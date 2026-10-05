@@ -31,12 +31,12 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{026f34f1-4e2f-42cd-b5e6-15feb6ee95bf}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{8760b0a6-ba28-4a4d-aa20-741c88b92534}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="Currency" languagecode="1033" />
-                          <label description="Moneda" languagecode="3082" />
+                          <label description="List Currency" languagecode="1033" />
+                          <label description="Moneda de la lista" languagecode="3082" />
                         </labels>
-                        <control id="transactioncurrencyid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="transactioncurrencyid" disabled="false" />
+                        <control id="tavu_currency" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_currency" disabled="false" />
                       </cell>
                     </row>
                     <row>
@@ -116,17 +116,17 @@
           <row>
             <cell id="{63d0b60f-966c-46f1-a70b-a90c7d6dafc6}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{ae3fe18d-fd1c-48b8-92f4-fcf724301b7c}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{aad8e4e1-df7f-4094-a596-e28c0d03eaa3}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>
@@ -137,17 +137,17 @@
           <row>
             <cell id="{d8b4e06e-19b6-4de1-bcd7-5c331f4c2d4b}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{2dc6c320-8e88-4173-a81c-d398a8f2f7c2}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
             <cell id="{4ba5bcec-5cbd-4964-bea5-bd7e3b82dcda}" showlabel="false">
               <labels>
-                <label description="" languagecode="3082" />
+                <label description="" languagecode="1033" />
               </labels>
             </cell>
           </row>

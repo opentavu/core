@@ -2,15 +2,15 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Marcar como aprobada">
+  <buttonlabeltext default="Mark as Approved">
     <label description="Mark as Approved" languagecode="1033" />
     <label description="Marcar como aprobada" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Marcar esta propuesta como la propuesta ganadora y cerrar la oportunidad como ganada.">
+  <buttontooltipdescription default="Mark this proposal as the winning proposal and close the opportunity as Won.">
     <label description="Mark this proposal as the winning proposal and close the opportunity as Won." languagecode="1033" />
     <label description="Marcar esta propuesta como la propuesta ganadora y cerrar la oportunidad como ganada." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Marcar la propuesta como aprobada y cerrar la oportunidad como ganada">
+  <buttontooltiptitle default="Mark Proposal as Approved and Close the opportunity as Won">
     <label description="Mark Proposal as Approved and Close the opportunity as Won" languagecode="1033" />
     <label description="Marcar la propuesta como aprobada y cerrar la oportunidad como ganada" languagecode="3082" />
   </buttontooltiptitle>

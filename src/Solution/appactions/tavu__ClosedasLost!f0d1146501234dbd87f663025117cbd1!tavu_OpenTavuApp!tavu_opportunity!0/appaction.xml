@@ -2,15 +2,15 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Cerrado como perdido">
+  <buttonlabeltext default="Closed as Lost">
     <label description="Closed as Lost" languagecode="1033" />
     <label description="Cerrado como perdido" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Cierre esta oportunidad como perdida y registre el motivo">
+  <buttontooltipdescription default="Close this opportunity as lost and record the reason">
     <label description="Close this opportunity as lost and record the reason" languagecode="1033" />
     <label description="Cierre esta oportunidad como perdida y registre el motivo" languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Cierre esta oportunidad como perdida y registre el motivo">
+  <buttontooltiptitle default="Close this opportunity as lost and record the reason">
     <label description="Close this opportunity as lost and record the reason" languagecode="1033" />
     <label description="Cierre esta oportunidad como perdida y registre el motivo" languagecode="3082" />
   </buttontooltiptitle>

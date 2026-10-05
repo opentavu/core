@@ -1,9 +1,11 @@
 <customapirequestparameter uniquename="ProposalId">
   <description default="The tavu_proposal to draft the client email for. Required. GUID as string.">
     <label description="The tavu_proposal to draft the client email for. Required. GUID as string." languagecode="1033" />
+    <label description="The tavu_proposal to draft the client email for. Required. GUID as string." languagecode="3082" />
   </description>
   <displayname default="BuildProposalEmailDraft-In-ProposalId">
     <label description="BuildProposalEmailDraft-In-ProposalId" languagecode="1033" />
+    <label description="BuildProposalEmailDraft-In-ProposalId" languagecode="3082" />
   </displayname>
   <iscustomizable>0</iscustomizable>
   <isoptional>0</isoptional>

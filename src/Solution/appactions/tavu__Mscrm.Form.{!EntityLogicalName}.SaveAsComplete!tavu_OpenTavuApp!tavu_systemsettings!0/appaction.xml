@@ -1,0 +1,45 @@
+<appaction uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.SaveAsComplete!tavu_OpenTavuApp!tavu_systemsettings!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonaccessibilitytext default="Mark Complete">
+    <label description="Mark Complete" languagecode="1033" />
+    <label description="Marcar como completado" languagecode="3082" />
+  </buttonaccessibilitytext>
+  <buttonlabeltext default="Mark Complete">
+    <label description="Mark Complete" languagecode="1033" />
+    <label description="Marcar como completado" languagecode="3082" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Save the {EntityLogicalNameMarker} and change the status to Completed.">
+    <label description="Save the {EntityLogicalNameMarker} and change the status to Completed." languagecode="1033" />
+    <label description="Guardar el {EntityLogicalNameMarker} y cambiar su estado a Completado." languagecode="3082" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Mark Complete">
+    <label description="Mark Complete" languagecode="1033" />
+    <label description="Marcar como completado" languagecode="3082" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_systemsettings</logicalname>
+  </contextentity>
+  <contextvalue>tavu_systemsettings</contextvalue>
+  <fonticon>$clientsvg:Accept</fonticon>
+  <hidden>1</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>Mscrm.Form.{!EntityLogicalName}.SaveAsComplete</name>
+  <onclickeventjavascriptfunctionname>XrmCore.Commands.Save.saveAsCompleted</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>adea1aea-b2aa-e611-80d6-00155d88c343</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>2</origin>
+  <sequence>100100020.0000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilitytype>2</visibilitytype>
+</appaction>

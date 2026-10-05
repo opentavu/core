@@ -9,7 +9,7 @@
       <tabs>
         <tab verticallayout="true" id="{c19db236-0c2b-4aed-8e15-ccb14b3a5468}" IsUserDefined="1">
           <labels>
-            <label description="" languagecode="3082" />
+            <label description="" languagecode="1033" />
           </labels>
           <columns>
             <column width="100%">

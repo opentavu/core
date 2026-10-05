@@ -2,15 +2,15 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Crear oportunidad">
+  <buttonlabeltext default="Create Opportunity">
     <label description="Create Opportunity" languagecode="1033" />
     <label description="Crear oportunidad" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Cree una nueva oportunidad a partir del cliente de esta reunión y asocie la reunión a ella.">
+  <buttontooltipdescription default="Create a new opportunity from this meeting's customer and associate the meeting to it.">
     <label description="Create a new opportunity from this meeting's customer and associate the meeting to it." languagecode="1033" />
     <label description="Cree una nueva oportunidad a partir del cliente de esta reunión y asocie la reunión a ella." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Crear oportunidad">
+  <buttontooltiptitle default="Create opportunity">
     <label description="Create opportunity" languagecode="1033" />
     <label description="Crear oportunidad" languagecode="3082" />
   </buttontooltiptitle>

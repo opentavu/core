@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Pl.SalesTarget.KeyStamp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginAssemblyId="aebf2152-efd6-4850-876d-95d486a5051f" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/PlSalesTargetKeyStamp-AEBF2152-EFD6-4850-876D-95D486A5051F/PlSalesTargetKeyStamp.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Pl.SalesTarget.KeyStamp.KeyStamp, Pl.SalesTarget.KeyStamp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginTypeId="9b031517-f0bb-4a90-8129-d8ac4b173048" Name="Pl.SalesTarget.KeyStamp.KeyStamp">
+      <FriendlyName>b28e285e-6954-4892-a855-56085b10e82e</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

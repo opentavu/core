@@ -1,9 +1,11 @@
 <customapiresponseproperty uniquename="DiscoveryConsolidated">
   <description default="True if the opportunity's discovery notes were refreshed by the AI consolidation step.">
     <label description="True if the opportunity's discovery notes were refreshed by the AI consolidation step." languagecode="1033" />
+    <label description="True if the opportunity's discovery notes were refreshed by the AI consolidation step." languagecode="3082" />
   </description>
   <displayname default="AssociateMeeting-Out-DiscoveryConsolidated">
     <label description="AssociateMeeting-Out-DiscoveryConsolidated" languagecode="1033" />
+    <label description="AssociateMeeting-Out-DiscoveryConsolidated" languagecode="3082" />
   </displayname>
   <iscustomizable>0</iscustomizable>
   <name>AssociateMeeting-Out-DiscoveryConsolidated</name>

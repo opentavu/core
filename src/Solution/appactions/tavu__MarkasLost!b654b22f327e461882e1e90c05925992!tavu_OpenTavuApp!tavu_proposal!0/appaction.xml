@@ -2,15 +2,15 @@
   <appmoduleid>
     <uniquename>tavu_OpenTavuApp</uniquename>
   </appmoduleid>
-  <buttonlabeltext default="Marcar como perdida">
+  <buttonlabeltext default="Mark as Lost">
     <label description="Mark as Lost" languagecode="1033" />
     <label description="Marcar como perdida" languagecode="3082" />
   </buttonlabeltext>
-  <buttontooltipdescription default="Marcar esta propuesta como rechazada por el cliente.">
+  <buttontooltipdescription default="Mark this proposal as rejected by the client.">
     <label description="Mark this proposal as rejected by the client." languagecode="1033" />
     <label description="Marcar esta propuesta como rechazada por el cliente." languagecode="3082" />
   </buttontooltipdescription>
-  <buttontooltiptitle default="Marcar esta propuesta como rechazada por el cliente.">
+  <buttontooltiptitle default="Mark this proposal as rejected by the client.">
     <label description="Mark this proposal as rejected by the client." languagecode="1033" />
     <label description="Marcar esta propuesta como rechazada por el cliente." languagecode="3082" />
   </buttontooltiptitle>

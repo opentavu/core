@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PluginAssembly FullName="Pl.Setup.Initialize, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginAssemblyId="32bd3e1d-a667-4811-a3ae-16c001c70e81" CustomizationLevel="1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <IsolationMode>2</IsolationMode>
+  <SourceType>0</SourceType>
+  <IntroducedVersion>1.0</IntroducedVersion>
+  <FileName>/PluginAssemblies/PlSetupInitialize-32BD3E1D-A667-4811-A3AE-16C001C70E81/PlSetupInitialize.dll</FileName>
+  <PluginTypes>
+    <PluginType AssemblyQualifiedName="Pl.Setup.Initialize.Initialize, Pl.Setup.Initialize, Version=0.0.0.0, Culture=neutral, PublicKeyToken=d68045e98a1f10d5" PluginTypeId="d6fb3bb9-8d5e-4db2-9feb-73887a1bfca6" Name="Pl.Setup.Initialize.Initialize">
+      <FriendlyName>6020391d-5834-4e40-a4aa-c8d06ae347fc</FriendlyName>
+    </PluginType>
+  </PluginTypes>
+</PluginAssembly>

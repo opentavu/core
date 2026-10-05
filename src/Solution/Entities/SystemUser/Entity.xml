@@ -3,6 +3,18 @@
   <Name LocalizedName="User" OriginalName="">SystemUser</Name>
   <EntityInfo>
     <entity Name="SystemUser">
+      <LocalizedNames>
+        <LocalizedName description="User" languagecode="1033" />
+        <LocalizedName description="Usuario" languagecode="3082" />
+      </LocalizedNames>
+      <LocalizedCollectionNames>
+        <LocalizedCollectionName description="Users" languagecode="1033" />
+        <LocalizedCollectionName description="Usuarios" languagecode="3082" />
+      </LocalizedCollectionNames>
+      <Descriptions>
+        <Description description="Person with access to the Microsoft CRM system and who owns objects in the Microsoft CRM database." languagecode="1033" />
+        <Description description="Persona con acceso al sistema de Microsoft CRM y propietaria de objetos de la base de datos de Microsoft CRM." languagecode="3082" />
+      </Descriptions>
       <attributes>
         <attribute PhysicalName="tavu_MeetingSyncEnabled">
           <Type>bit</Type>

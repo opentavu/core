@@ -1,0 +1,7 @@
+tavu_attainmentpct: =If(Decimal(tavu_targetamount) = 0, Blank(), Decimal(tavu_closedwonamount) / Decimal(tavu_targetamount) * 100)
+tavu_coverageratio: =If(Decimal(tavu_targetamount) - Decimal(tavu_closedwonamount) <= 0, Blank(), Decimal(tavu_openpipelineamount) / (Decimal(tavu_targetamount) - Decimal(tavu_closedwonamount)))
+tavu_forecastamount: =Decimal(tavu_closedwonamount) + Decimal(tavu_committedamount)
+tavu_forecastattainmentpct: =If(Decimal(tavu_targetamount) = 0, Blank(), (Decimal(tavu_closedwonamount) + Decimal(tavu_committedamount)) / Decimal(tavu_targetamount) * 100)
+tavu_forecastfinal: =If(!IsBlank(Decimal(tavu_manageradjustedamount)) && Decimal(tavu_manageradjustedamount) <> 0, Decimal(tavu_manageradjustedamount), Decimal(tavu_closedwonamount) + Decimal(tavu_committedamount))
+tavu_gaptogoal: =Decimal(tavu_targetamount) - Decimal(tavu_closedwonamount)
+tavu_upsideamount: =Decimal(tavu_closedwonamount) + Decimal(tavu_committedamount) + Decimal(tavu_bestcaseamount)
