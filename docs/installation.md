@@ -70,8 +70,8 @@ OpenTavu releases are published as managed solution files on **GitHub Releases**
 
 | Package | Asset (example) | Needs | When |
 |---|---|---|---|
-| **OpenTavu Core** | `OpenTavu_1_1_0_managed.zip` | Dataverse connection only | Always (this is the product) |
-| **OpenTavu Integrations** (optional) | `OpenTavuIntegrations_1_0_0_managed.zip` | Email (SMTP / Office 365 Outlook), Microsoft Forms, OneDrive connections | Only if the client wants the email / Forms / OneDrive flows |
+| **OpenTavu Core** | `OpenTavu_1_2_0_0_managed.zip` | Dataverse connection only | Always (this is the product) |
+| **OpenTavu Integrations** (optional) | `OpentavuIntegrations_1_0_0_0_managed.zip` | Email (SMTP / Office 365 Outlook), Microsoft Forms, OneDrive connections | Only if the client wants the email / Forms / OneDrive flows |
 
 1. Open the OpenTavu `core` repository on GitHub and go to the **Releases** page.
 2. Download the **Core** asset. Download the **Integrations** asset too only if you will use those flows.
@@ -110,7 +110,7 @@ For scripted deployments:
 
 ```
 pac auth create --environment <ENVIRONMENT_URL>
-pac solution import --path .\OpenTavu_1_1_0_managed.zip --async
+pac solution import --path .\OpenTavu_1_2_0_0_managed.zip --async
 # optional, ONLY if you use the email / Forms / OneDrive flows, and AFTER Core:
 pac solution import --path .\OpenTavuIntegrations_1_0_0_managed.zip --async
 ```

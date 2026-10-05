@@ -4,7 +4,7 @@
 **AI embedded in the core workflow, not bolted on. MIT licensed. Deployed into your own Microsoft tenant.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release: v1.1.0](https://img.shields.io/badge/Release-v1.1.0-green.svg)](https://github.com/opentavu/core/releases/tag/v1.1.0)
+[![Release: v1.2.0](https://img.shields.io/badge/Release-v1.2.0-green.svg)](https://github.com/opentavu/core/releases/tag/v1.2.0)
 [![Platform: Power Platform](https://img.shields.io/badge/Platform-Microsoft%20Power%20Platform-742774.svg)]()
 [![AI: Provider-agnostic](https://img.shields.io/badge/AI-Provider--agnostic-0078D4.svg)]()
 [![Languages: EN | ES](https://img.shields.io/badge/UI-English%20%7C%20Espa%C3%B1ol-lightgrey.svg)]()
@@ -25,7 +25,7 @@ OpenTavu is **not a hosted SaaS product**. There is no fee for the framework its
 
 ## Get started
 
-1. Download the managed solutions from the latest release: [**OpenTavu v1.1.0**](https://github.com/opentavu/core/releases/tag/v1.1.0). The **Core** package is all you need to start; it installs needing only the Dataverse connection.
+1. Download the managed solutions from the latest release: [**OpenTavu v1.2.0**](https://github.com/opentavu/core/releases/tag/v1.2.0). The **Core** package is all you need to start; it installs needing only the Dataverse connection.
 2. (Optional) Add the **OpenTavu Integrations** package when you want the flows that use email, Microsoft Forms, and OneDrive. Install Core first, then Integrations.
 3. Follow the [installation guide](docs/installation.md) (prerequisites, import, verification, upgrades).
 4. Follow the [configuration guide](docs/configuration.md) (AI wiring, system settings, security, SLA matrix, smoke test).
@@ -267,7 +267,9 @@ The pain points driving the AI design were validated through independent deep re
 
 **v1.1.0 repackages the release into a Core package plus an optional Integrations module**, so the Core installs needing only the Dataverse connection (the email, Microsoft Forms, and OneDrive flows moved to the optional module, and Spanish now covers the forecasting module too). Install order is Core first, then Integrations.
 
-Known limitations are listed in the [release notes](https://github.com/opentavu/core/releases/tag/v1.1.0). Work continues on the roadmap and on hardening the live features across more tenants and clients.
+**v1.2.0 (October 5, 2026) makes a fresh install configure itself.** The **Verify Setup** button on System Settings creates the reference data the engine needs and reports what is still missing; sales periods roll forward automatically from the fiscal year start month; configuration tables carry stable codes; and proposal Total Tax is now calculated from the lines. Validated with a clean install in a freshly reset environment.
+
+Known limitations are listed in the [release notes](https://github.com/opentavu/core/releases/tag/v1.2.0). Work continues on the roadmap and on hardening the live features across more tenants and clients.
 
 ---
 
