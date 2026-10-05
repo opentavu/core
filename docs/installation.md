@@ -112,7 +112,7 @@ For scripted deployments:
 pac auth create --environment <ENVIRONMENT_URL>
 pac solution import --path .\OpenTavu_1_2_0_0_managed.zip --async
 # optional, ONLY if you use the email / Forms / OneDrive flows, and AFTER Core:
-pac solution import --path .\OpenTavuIntegrations_1_0_0_managed.zip --async
+pac solution import --path .\OpentavuIntegrations_1_0_0_0_managed.zip --async
 ```
 
 `pac solution import` imports the file as-is (managed, because the packaged file is managed). Use `--async` for large solutions so the CLI polls the job to completion rather than timing out. The CLI does not force connection mapping up front; set connections after import if any flow needs them.

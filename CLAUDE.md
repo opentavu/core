@@ -109,8 +109,9 @@ A feature (plugin, Custom API, AI task, flow, table) is done only when, in the s
 
 1. Commit all code; run `tools/sync-solution.ps1` and review the diff.
 2. Check custom tables for an orphaned system `transactioncurrencyid` still referenced by a view (breaks managed import on a clean org).
-3. Export managed Core and Integrations; run `tools/release-smoke.ps1` against a disposable environment. It must end with 0 errors.
-4. Update release notes, `docs/installation.md` asset names, README and VISION.
+3. Export managed Core and Integrations once; run `tools/release-smoke.ps1` against a freshly created or reset disposable environment. It must end with 0 errors.
+4. Upload to the GitHub release the exact zips the smoke test imported (rename them, never re-export). Bump a solution's version before exporting it whenever it changed; never ship a lower version than the previous release.
+5. Update release notes, `docs/installation.md` asset names (they must match the uploaded files exactly), README and VISION.
 
 ## Docs map
 
