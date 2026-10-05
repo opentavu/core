@@ -45,23 +45,43 @@ Before naming anything, list the existing siblings in `src/Solution` (or `src/Pl
 
 ## Plugins
 
-Create new plugin projects with the template, from `src/Plugins`, always with `-n`:
+Before creating any component (plugin, Custom Workflow Activity, web resource, `.snk` setup), check for an existing template, script or convention in this repo. There usually is one.
+
+### New plugin project: always the template
+
+Run from `src\Plugins`, always with `-n`:
 
 ```powershell
 cd src\Plugins
 dotnet new opentavu-plugin -n Pl.<Short>.<Action> --entityName <tavu_table> --actionName <Action> --entityShortName <Short>
 ```
 
-Without `-n` the template dumps files into the current folder with broken `_Shared` paths. Full details: `templates/README.md`.
+Non-negotiable (skipping any of these produces a broken project):
 
-Contract (read `src/_Shared/Common/PluginBase.cs` and `LocalPluginContext.cs` before writing plugin code; do not guess signatures):
+- `-n` is mandatory and names both the project and its folder. Without it, `dotnet new` uses the current folder name and dumps files there (run from `src\` you get `src.csproj`, `namespace src` and broken `_Shared\Common\` paths). `--entityShortName` does not drive the folder name.
+- Run it from `src\Plugins\`, so the project lands two levels below `src\` as the template's relative paths assume.
+- The generated `.csproj` resolves `Microsoft.Xrm.Sdk` / `Microsoft.Crm.Sdk.Proxy` through `HintPath` into `packages\Microsoft.CrmSdk.CoreAssemblies.<version>\`, coupled to the template's `packages.config`. A `CS0246` on SDK types means the restore or HintPath is wrong, not the code.
+- If the template's own files change (`.csproj`, `Action.cs`, `template.json`), refresh the installed copy: `dotnet new install .\templates\opentavu-plugin --force`.
 
-- Inherit `OpenTavu.Dataverse.Common.PluginBase`; business logic only in `ExecuteInternal(LocalPluginContext localContext)`. `PluginBase` handles service extraction, errors and `MaxDepth` (anti-recursion).
-- `UserService` for anything that must respect the caller's privileges. `SystemService` only when a bypass is justified (reading configuration tables, writing derived or audit fields). A wrong choice causes silent failures for low-privilege users and imports.
-- Trace with `localContext.Trace(...)`, never `TracingService.Trace` directly.
-- Schema constants at the top of the class. Router pattern: private handlers that decide for themselves whether the current change concerns them.
+Full details: `templates/README.md`. Strong-name key and shared folder convention: `src/_Shared/Common/README.md`. Custom Workflow Activities: an `opentavu-cwa` template is planned, not built yet; when needed it follows the same pattern.
+
+### Base contract
+
+Read `src/_Shared/Common/PluginBase.cs` and `src/_Shared/Common/LocalPluginContext.cs` (namespace `OpenTavu.Dataverse.Common`) before writing or changing plugin logic. Do not guess signatures or property names.
+
+- Inherit `OpenTavu.Dataverse.Common.PluginBase`; business logic only in `ExecuteInternal(LocalPluginContext localContext)`. `PluginBase` handles service extraction, error handling and `MaxDepth` (1 by default, aborts recursion).
+- `LocalPluginContext` exposes `PluginExecutionContext`, `UserService`, `SystemService`, `TracingService` and `Trace(...)`.
+- `UserService` for anything that must respect the caller's privileges. `SystemService` only when a bypass is justified (reading configuration tables such as `tavu_salesstage`, writing derived or audit fields the user cannot touch). A wrong choice causes silent failures for low-privilege users, imports and integrations.
+- Trace with `localContext.Trace(...)` (it prepends message, stage and depth), never `TracingService.Trace` directly.
+
+### Plugin pattern
+
+Mirror the existing plugins (`Pl.Opportunity.LifecycleTracker`, `Pl.Opportunity.CustomerSync`, `Pl.Opportunity.CloseOrchestrator`, `Pl.Proposal.LifecycleTracker`, `Pl.Proposal.CloneVersion`, `Pl.ProposalLine.Calculator`).
+
+- Schema constants at the top of the class.
+- Router pattern: private handlers that decide for themselves whether the current change concerns them.
 - Pre-Operation by default (modify Target in place: no extra Update, no recursion).
-- Group by functional category: if new logic shares a trigger with an existing plugin, add a handler there instead of a new assembly.
+- Group by functional category: if new logic shares a trigger or lifecycle point with an existing plugin, add a handler there instead of a new assembly.
 - Plugins target **net462** (Dataverse sandbox). Libraries that need modern .NET (PDF rendering, long-running orchestration, agent loops) belong in the gateway, not in a plugin.
 
 ## Design rules (apply to every change)
