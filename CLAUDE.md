@@ -109,7 +109,7 @@ Mirror the existing plugins (`Pl.Opportunity.LifecycleTracker`, `Pl.Opportunity.
 ## Writing style
 
 - Never use em dashes (the long dash) anywhere: code strings, comments, prompts, docs, commit messages. Use commas, periods, colons or parentheses.
-- Public docs are in English. Spanish UI strings follow the localization plan (LCID 3082).
+- Everything persisted is in English: docs, file and folder names, code, comments, commit messages, and briefs for agents, in this repo and anywhere under `C:\Code`. Chat with Gustavo can be in Spanish; what gets written to disk cannot. The only Spanish allowed is UI strings, which follow the localization plan (LCID 3082).
 - Present capabilities in commercial lifecycle order (sales first, then service), not by module number.
 
 ## Definition of done
