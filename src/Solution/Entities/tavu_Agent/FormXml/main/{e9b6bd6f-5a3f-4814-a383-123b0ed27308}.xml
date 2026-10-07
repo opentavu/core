@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{e9b6bd6f-5a3f-4814-a383-123b0ed27308}</formid>
+    <IntroducedVersion>1.2.0.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form headerdensity="HighWithControls">
+      <tabs>
+        <tab name="tab_general" id="{d9532883-4f0b-4cb7-bd4a-e9eb16a310eb}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" verticallayout="true">
+          <labels>
+            <label description="General" languagecode="1033" />
+            <label description="General" languagecode="3082" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section name="section_identity" id="{7089dfb3-5778-410c-a78e-43b4348f2d12}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Agent" languagecode="1033" />
+                    <label description="Agente" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{c35c2479-1b4e-4b4e-a81a-678fae399b9a}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_name" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_name" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{56292382-66f2-46b9-adb1-c4b90546279f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Agent Type" languagecode="1033" />
+                          <label description="Tipo de agente" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_agenttype" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_agenttype" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7795ec11-206e-4347-a0d9-9480ab1c5e66}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Mode" languagecode="1033" />
+                          <label description="Modo" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_mode" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_mode" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{596ad58e-29ca-47b1-b46f-3733bf507387}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="AI Task Configuration" languagecode="1033" />
+                          <label description="Configuración de tarea de IA" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_aitaskconfiguration" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_aitaskconfiguration" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7f6c53eb-3a39-4dcc-82b6-8bbbe707fe3e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Business Calendar" languagecode="1033" />
+                          <label description="Calendario laboral" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_businesscalendar" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_businesscalendar" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8276b699-ac96-495c-bf93-db0c6fa2dc8e}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Handoff User" languagecode="1033" />
+                          <label description="Usuario de traspaso" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_handoffuser" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_handoffuser" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{36f41669-ccdf-4213-973f-e6667e5d3c67}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Handoff Team" languagecode="1033" />
+                          <label description="Equipo de traspaso" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_handoffteam" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_handoffteam" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_sources" id="{dc532592-8111-4f6f-b968-add56b09a088}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Sources the agent may answer from" languagecode="1033" />
+                    <label description="Fuentes desde las que puede responder" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{91c79d83-6e59-49a3-8239-12ecfadfcb75}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Use Company Profile" languagecode="1033" />
+                          <label description="Usar perfil de la empresa" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_usecompanyprofile" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_usecompanyprofile" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{0c3c6852-71db-4c4d-a2c8-979f105731bb}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Use Working Hours" languagecode="1033" />
+                          <label description="Usar horario laboral" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_useworkinghours" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_useworkinghours" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{cede67d3-0648-4916-9bda-6f1592d592f8}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Use Knowledge Articles" languagecode="1033" />
+                          <label description="Usar artículos de conocimiento" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_useknowledgearticles" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_useknowledgearticles" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_limits" id="{7a769df7-9597-458b-ab30-7345d7823ede}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Limits" languagecode="1033" />
+                    <label description="Límites" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{3054b854-ea85-4254-82cf-ec7c60622a85}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Turn Limit" languagecode="1033" />
+                          <label description="Límite de turnos" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_turnlimit" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_turnlimit" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{99d43292-ccfd-43a3-b80e-a68ba99664fe}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Abandon After (Hours)" languagecode="1033" />
+                          <label description="Abandonar tras (horas)" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_abandonafterhours" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_abandonafterhours" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{e2de14d1-7abf-4466-9fd0-a58d5833f7ef}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Approval Timeout (Minutes)" languagecode="1033" />
+                          <label description="Tiempo de aprobación (minutos)" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_approvaltimeoutminutes" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_approvaltimeoutminutes" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{179d3685-80ed-4b7e-8c39-ecfaf7e981fd}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Token Budget" languagecode="1033" />
+                          <label description="Presupuesto de tokens" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_tokenbudget" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_tokenbudget" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section name="section_criteria" id="{ac15c755-a320-48d3-b5c6-b429f1c67d9f}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Qualification Criteria" languagecode="1033" />
+                    <label description="Criterios de calificación" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{49bb8e80-8e45-4905-be9e-93bd0f2474fe}" locklevel="0" colspan="1" rowspan="4" auto="false">
+                        <labels>
+                          <label description="Qualification Criteria" languagecode="1033" />
+                          <label description="Criterios de calificación" languagecode="3082" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="SubgridCriteria" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>5</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <EnableChartPicker>false</EnableChartPicker>
+                            <ChartGridMode>Grid</ChartGridMode>
+                            <RelationshipName>tavu_qualificationcriterion_Agent_tavu_agent</RelationshipName>
+                            <TargetEntityType>tavu_qualificationcriterion</TargetEntityType>
+                            <ViewId>{A6BE337F-2DA7-4541-8287-6148DA076164}</ViewId>
+                            <ViewIds>{A6BE337F-2DA7-4541-8287-6148DA076164}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+                <section name="section_messages" id="{5562ae01-5b90-48af-9080-ba68272e5234}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Messages" languagecode="1033" />
+                    <label description="Mensajes" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{af9fbcf4-76f9-410e-8012-133f2686fe22}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Greeting" languagecode="1033" />
+                          <label description="Saludo" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_greeting" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_greeting" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1bd6ba06-23d3-4630-9a2d-3d6cca8bd5c1}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Out-of-Hours Message" languagecode="1033" />
+                          <label description="Mensaje fuera de horario" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_outofhoursmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_outofhoursmessage" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c53dd84a-cef8-4d8c-862b-2e08a97a04a5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Next Step Message" languagecode="1033" />
+                          <label description="Mensaje de siguiente paso" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_nextstepmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_nextstepmessage" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{af31d237-bdcc-4b9f-8256-ef5aa375eee6}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Booking URL" languagecode="1033" />
+                          <label description="URL de reserva" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_bookingurl" classid="{71716B6C-711E-476C-8AB8-5D11542BFB47}" datafieldname="tavu_bookingurl" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8ca67018-4163-418b-b486-8939ed94bdb5}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Holding Message" languagecode="1033" />
+                          <label description="Mensaje de espera" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_holdingmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_holdingmessage" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <DisplayConditions Order="0" FallbackForm="true">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Information" languagecode="1033" />
+      <LocalizedName description="Información" languagecode="3082" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="A form for this entity." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

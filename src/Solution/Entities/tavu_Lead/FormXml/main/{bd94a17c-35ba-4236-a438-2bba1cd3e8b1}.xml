@@ -218,6 +218,39 @@
                     </row>
                   </rows>
                 </section>
+                <section name="Section_Conversations" id="{314d32bc-5d4d-4b04-80c3-9549f14675b0}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Conversations" languagecode="1033" />
+                    <label description="Conversaciones" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{123c6cb6-e8d9-462d-82da-6b7a1ffd493e}" locklevel="0" colspan="1" rowspan="4" auto="false">
+                        <labels>
+                          <label description="Conversations" languagecode="1033" />
+                          <label description="Conversaciones" languagecode="3082" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="SubgridConversations" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>5</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>true</EnableViewPicker>
+                            <EnableChartPicker>false</EnableChartPicker>
+                            <ChartGridMode>Grid</ChartGridMode>
+                            <RelationshipName>tavu_conversation_Lead_tavu_lead</RelationshipName>
+                            <TargetEntityType>tavu_conversation</TargetEntityType>
+                            <ViewId>{F8008EC3-9608-4688-82E6-9D8BBF123396}</ViewId>
+                            <ViewIds>{F8008EC3-9608-4688-82E6-9D8BBF123396},{FFA2F43A-72EE-4EC7-84F9-068B29BA4935}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
               </sections>
             </column>
           </columns>

@@ -72,6 +72,15 @@
                       </cell>
                     </row>
                     <row>
+                      <cell id="{28b83b0d-e1d3-44bd-8902-9587e829f294}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="WhatsApp ID" languagecode="1033" />
+                          <label description="ID de WhatsApp" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_whatsappid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_whatsappid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
                       <cell id="{e0715d7d-d847-45cb-b9ec-aaaa797e2d5e}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="Owner" languagecode="1033" />
@@ -252,6 +261,31 @@
                             <TargetEntityType>tavu_case</TargetEntityType>
                             <ViewId>{BD3DF87F-A209-4471-AA04-3DEAEB95438D}</ViewId>
                             <ViewIds>{BD3DF87F-A209-4471-AA04-3DEAEB95438D}</ViewIds>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row>
+                      <cell id="{0c4331d1-7b1b-4e2b-81b7-f2563247a5ff}" locklevel="0" colspan="1" rowspan="4" auto="false">
+                        <labels>
+                          <label description="Conversations" languagecode="1033" />
+                          <label description="Conversaciones" languagecode="3082" />
+                        </labels>
+                        <control indicationOfSubgrid="true" id="SubgridConversations" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
+                          <parameters>
+                            <RecordsPerPage>5</RecordsPerPage>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>true</EnableViewPicker>
+                            <EnableChartPicker>false</EnableChartPicker>
+                            <ChartGridMode>Grid</ChartGridMode>
+                            <RelationshipName>tavu_conversation_Contact_contact</RelationshipName>
+                            <TargetEntityType>tavu_conversation</TargetEntityType>
+                            <ViewId>{F8008EC3-9608-4688-82E6-9D8BBF123396}</ViewId>
+                            <ViewIds>{F8008EC3-9608-4688-82E6-9D8BBF123396},{FFA2F43A-72EE-4EC7-84F9-068B29BA4935}</ViewIds>
                           </parameters>
                         </control>
                       </cell>

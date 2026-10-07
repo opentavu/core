@@ -76,5 +76,11 @@
         <Description description="" languagecode="1033" />
       </Descriptions>
     </option>
+    <option value="576600007" IsHidden="0">
+      <labels>
+        <label description="Lead Qualification" languagecode="1033" />
+        <label description="Calificación de prospectos" languagecode="3082" />
+      </labels>
+    </option>
   </options>
 </optionset>

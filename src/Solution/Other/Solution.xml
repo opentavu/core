@@ -84,6 +84,7 @@
       <RootComponent type="1" schemaName="contact" behavior="1" />
       <RootComponent type="1" schemaName="email" behavior="1" />
       <RootComponent type="1" schemaName="systemuser" behavior="1" />
+      <RootComponent type="1" schemaName="tavu_agent" behavior="0" />
       <RootComponent type="1" schemaName="tavu_aimodel" behavior="0" />
       <RootComponent type="1" schemaName="tavu_aitaskconfiguration" behavior="0" />
       <RootComponent type="1" schemaName="tavu_businesscalendar" behavior="0" />
@@ -97,6 +98,7 @@
       <RootComponent type="1" schemaName="tavu_category" behavior="0" />
       <RootComponent type="1" schemaName="tavu_city" behavior="0" />
       <RootComponent type="1" schemaName="tavu_companyprofile" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_conversation" behavior="0" />
       <RootComponent type="1" schemaName="tavu_country" behavior="0" />
       <RootComponent type="1" schemaName="tavu_customertierdefinition" behavior="0" />
       <RootComponent type="1" schemaName="tavu_forecastsnapshot" behavior="0" />
@@ -113,6 +115,7 @@
       <RootComponent type="1" schemaName="tavu_product" behavior="0" />
       <RootComponent type="1" schemaName="tavu_proposal" behavior="0" />
       <RootComponent type="1" schemaName="tavu_proposalline" behavior="0" />
+      <RootComponent type="1" schemaName="tavu_qualificationcriterion" behavior="0" />
       <RootComponent type="1" schemaName="tavu_reportingcache" behavior="0" />
       <RootComponent type="1" schemaName="tavu_salesperiod" behavior="0" />
       <RootComponent type="1" schemaName="tavu_salesstage" behavior="0" />
@@ -215,12 +218,15 @@
       <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.MeetingAiSummary" behavior="0" />
       <RootComponent type="66" schemaName="tavu_OpenTavu.Controls.SlaCountdown" behavior="0" />
       <RootComponent type="80" schemaName="tavu_OpenTavuApp" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_agentmode" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_agenttype" behavior="0" />
       <RootComponent type="9" schemaName="tavu_aiprovider" behavior="0" />
       <RootComponent type="9" schemaName="tavu_aisentiment" behavior="0" />
       <RootComponent type="9" schemaName="tavu_aitaskkeyconfig" behavior="0" />
       <RootComponent type="9" schemaName="tavu_bufferalert" behavior="0" />
       <RootComponent type="9" schemaName="tavu_casecategory" behavior="0" />
       <RootComponent type="9" schemaName="tavu_channelmessage" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_conversationchannel" behavior="0" />
       <RootComponent type="9" schemaName="tavu_costtier" behavior="0" />
       <RootComponent type="9" schemaName="tavu_coveragehours" behavior="0" />
       <RootComponent type="9" schemaName="tavu_customermode" behavior="0" />
@@ -229,6 +235,8 @@
       <RootComponent type="9" schemaName="tavu_engagementstatus" behavior="0" />
       <RootComponent type="9" schemaName="tavu_engagementtype" behavior="0" />
       <RootComponent type="9" schemaName="tavu_forecastcategory" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_intent" behavior="0" />
+      <RootComponent type="9" schemaName="tavu_knowledgeaudience" behavior="0" />
       <RootComponent type="9" schemaName="tavu_language" behavior="0" />
       <RootComponent type="9" schemaName="tavu_leadsource" behavior="0" />
       <RootComponent type="9" schemaName="tavu_lostreason" behavior="0" />

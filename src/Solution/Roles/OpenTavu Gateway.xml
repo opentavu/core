@@ -8,9 +8,12 @@
     <RolePrivilege name="prvAppendNote" level="Global" />
     <RolePrivilege name="prvAppendtavu_Case" level="Global" />
     <RolePrivilege name="prvAppendtavu_CaseInteraction" level="Global" />
+    <RolePrivilege name="prvAppendtavu_Conversation" level="Global" />
+    <RolePrivilege name="prvAppendtavu_Lead" level="Global" />
     <RolePrivilege name="prvAppendToAccount" level="Global" />
     <RolePrivilege name="prvAppendToActivity" level="Global" />
     <RolePrivilege name="prvAppendToContact" level="Global" />
+    <RolePrivilege name="prvAppendTotavu_Agent" level="Global" />
     <RolePrivilege name="prvAppendTotavu_AIModel" level="Global" />
     <RolePrivilege name="prvAppendTotavu_AITaskConfiguration" level="Global" />
     <RolePrivilege name="prvAppendTotavu_BusinessCalendar" level="Global" />
@@ -24,6 +27,7 @@
     <RolePrivilege name="prvAppendTotavu_Category" level="Global" />
     <RolePrivilege name="prvAppendTotavu_City" level="Global" />
     <RolePrivilege name="prvAppendTotavu_CompanyProfile" level="Global" />
+    <RolePrivilege name="prvAppendTotavu_Conversation" level="Global" />
     <RolePrivilege name="prvAppendTotavu_Country" level="Global" />
     <RolePrivilege name="prvAppendTotavu_CustomerTierDefinition" level="Global" />
     <RolePrivilege name="prvAppendTotavu_ForecastSnapshot" level="Global" />
@@ -48,12 +52,16 @@
     <RolePrivilege name="prvAppendTotavu_SystemSettings" level="Global" />
     <RolePrivilege name="prvAppendTotavu_UnitofMeasureSchedule" level="Global" />
     <RolePrivilege name="prvAppendTotavu_Uom" level="Global" />
+    <RolePrivilege name="prvAssigntavu_Conversation" level="Global" />
+    <RolePrivilege name="prvAssigntavu_Lead" level="Global" />
     <RolePrivilege name="prvCreateActivity" level="Global" />
     <RolePrivilege name="prvCreateContact" level="Global" />
     <RolePrivilege name="prvCreateNote" level="Global" />
     <RolePrivilege name="prvCreateSharePointData" level="Global" />
     <RolePrivilege name="prvCreatetavu_Case" level="Global" />
     <RolePrivilege name="prvCreatetavu_CaseInteraction" level="Global" />
+    <RolePrivilege name="prvCreatetavu_Conversation" level="Global" />
+    <RolePrivilege name="prvCreatetavu_Lead" level="Global" />
     <RolePrivilege name="prvReadAccount" level="Global" />
     <RolePrivilege name="prvReadActivity" level="Global" />
     <RolePrivilege name="prvReadContact" level="Global" />
@@ -66,6 +74,7 @@
     <RolePrivilege name="prvReadSdkMessageProcessingStepImage" level="Global" />
     <RolePrivilege name="prvReadSharePointData" level="Global" />
     <RolePrivilege name="prvReadSharePointDocument" level="Global" />
+    <RolePrivilege name="prvReadtavu_Agent" level="Global" />
     <RolePrivilege name="prvReadtavu_AIModel" level="Global" />
     <RolePrivilege name="prvReadtavu_AITaskConfiguration" level="Global" />
     <RolePrivilege name="prvReadtavu_BusinessCalendar" level="Global" />
@@ -79,6 +88,7 @@
     <RolePrivilege name="prvReadtavu_Category" level="Global" />
     <RolePrivilege name="prvReadtavu_City" level="Global" />
     <RolePrivilege name="prvReadtavu_CompanyProfile" level="Global" />
+    <RolePrivilege name="prvReadtavu_Conversation" level="Global" />
     <RolePrivilege name="prvReadtavu_Country" level="Global" />
     <RolePrivilege name="prvReadtavu_CustomerTierDefinition" level="Global" />
     <RolePrivilege name="prvReadtavu_ForecastSnapshot" level="Global" />
@@ -93,6 +103,7 @@
     <RolePrivilege name="prvReadtavu_Product" level="Global" />
     <RolePrivilege name="prvReadtavu_Proposal" level="Global" />
     <RolePrivilege name="prvReadtavu_ProposalLine" level="Global" />
+    <RolePrivilege name="prvReadtavu_QualificationCriterion" level="Global" />
     <RolePrivilege name="prvReadtavu_ReportingCache" level="Global" />
     <RolePrivilege name="prvReadtavu_SalesPeriod" level="Global" />
     <RolePrivilege name="prvReadtavu_SalesStage" level="Global" />
@@ -103,12 +114,15 @@
     <RolePrivilege name="prvReadtavu_SystemSettings" level="Global" />
     <RolePrivilege name="prvReadtavu_UnitofMeasureSchedule" level="Global" />
     <RolePrivilege name="prvReadtavu_Uom" level="Global" />
+    <RolePrivilege name="prvReadTeam" level="Global" />
     <RolePrivilege name="prvReadUser" level="Global" />
     <RolePrivilege name="prvWriteActivity" level="Global" />
     <RolePrivilege name="prvWriteContact" level="Global" />
     <RolePrivilege name="prvWriteSharePointData" level="Global" />
     <RolePrivilege name="prvWritetavu_Case" level="Global" />
     <RolePrivilege name="prvWritetavu_CaseInteraction" level="Global" />
+    <RolePrivilege name="prvWritetavu_Conversation" level="Global" />
+    <RolePrivilege name="prvWritetavu_Lead" level="Global" />
     <RolePrivilege name="prvWritetavu_MeetingSource" level="Global" />
   </RolePrivileges>
 </Role>

@@ -625,8 +625,14 @@
             <statuses>
               <status value="1" state="0" IsHidden="0">
                 <labels>
-                  <label description="Active" languagecode="1033" />
-                  <label description="Activo" languagecode="3082" />
+                  <label description="Draft" languagecode="1033" />
+                  <label description="Borrador" languagecode="3082" />
+                </labels>
+              </status>
+              <status value="576600000" state="0" IsHidden="0">
+                <labels>
+                  <label description="Published" languagecode="1033" />
+                  <label description="Publicado" languagecode="3082" />
                 </labels>
               </status>
               <status value="2" state="1" IsHidden="0">
@@ -644,6 +650,88 @@
           <Descriptions>
             <Description description="Reason for the status of the Knowledge Article" languagecode="1033" />
             <Description description="Motivo del estado del artículo de conocimiento" languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_Audience">
+          <Type>picklist</Type>
+          <Name>tavu_audience</Name>
+          <LogicalName>tavu_audience</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <AppDefaultValue>576600001</AppDefaultValue>
+          <OptionSetName>tavu_knowledgeaudience</OptionSetName>
+          <displaynames>
+            <displayname description="Audience" languagecode="1033" />
+            <displayname description="Audiencia" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Agents only read Public articles that are Published." languagecode="1033" />
+            <Description description="Los agentes solo leen artículos Públicos y Publicados." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_Body">
+          <Type>ntext</Type>
+          <Name>tavu_body</Name>
+          <LogicalName>tavu_body</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>100000</MaxLength>
+          <displaynames>
+            <displayname description="Body" languagecode="1033" />
+            <displayname description="Contenido" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Article content." languagecode="1033" />
+            <Description description="Contenido del artículo." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_KnowledgeArticleId">

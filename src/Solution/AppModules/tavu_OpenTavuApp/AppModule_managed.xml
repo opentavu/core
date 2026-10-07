@@ -13,6 +13,9 @@
     <AppModuleComponent type="1" schemaName="account" />
     <AppModuleComponent type="1" schemaName="applicationuser" />
     <AppModuleComponent type="1" schemaName="contact" />
+    <AppModuleComponent type="1" schemaName="entity" />
+    <AppModuleComponent type="1" schemaName="entity" />
+    <AppModuleComponent type="1" schemaName="entity" />
     <AppModuleComponent type="1" schemaName="systemuser" />
     <AppModuleComponent type="1" schemaName="tavu_aimodel" />
     <AppModuleComponent type="1" schemaName="tavu_aitaskconfiguration" />

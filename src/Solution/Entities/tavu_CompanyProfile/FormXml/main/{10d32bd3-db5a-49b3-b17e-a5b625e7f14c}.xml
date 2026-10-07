@@ -117,6 +117,50 @@
                     </row>
                   </rows>
                 </section>
+                <section name="section_agentcontext" id="{89373017-cd86-45ee-bdde-32f7dfa79a65}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Context for AI Agents" languagecode="1033" />
+                    <label description="Contexto para agentes de IA" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{149e46a8-7b5f-4fec-a92d-6826035b5a72}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Services Description" languagecode="1033" />
+                          <label description="Descripción de servicios" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_servicesdescription" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_servicesdescription" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{472c1efd-448e-42ea-a292-17645e26ba24}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Target Customer" languagecode="1033" />
+                          <label description="Cliente objetivo" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_targetcustomer" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_targetcustomer" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b6d4e922-0c60-4b54-82b8-cbd1ee318b7f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Tone" languagecode="1033" />
+                          <label description="Tono" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_tone" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_tone" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{16484241-92c8-420e-914e-bf246744173f}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Never Say" languagecode="1033" />
+                          <label description="Nunca decir" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_neversay" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_neversay" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
                 <section name="section_proposal" id="6499dd21-bc66-4088-85de-1544ae0a6e86" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Top" columns="1" labelwidth="115">
                   <labels>
                     <label description="Proposal terms" languagecode="1033" />

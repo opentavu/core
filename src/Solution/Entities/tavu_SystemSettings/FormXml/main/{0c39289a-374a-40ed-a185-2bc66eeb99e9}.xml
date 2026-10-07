@@ -117,6 +117,15 @@
                         <control id="tavu_leadbufferstaledays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_leadbufferstaledays" disabled="false" />
                       </cell>
                     </row>
+                    <row>
+                      <cell id="{995c040a-0072-4ddf-8875-ffbcf6ff209d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Conversation Retention (Days)" languagecode="1033" />
+                          <label description="Retención de conversaciones (días)" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_conversationretentiondays" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_conversationretentiondays" disabled="false" />
+                      </cell>
+                    </row>
                   </rows>
                 </section>
                 <section name="Section_AISettings" id="144b1203-ff87-4735-b00f-c704deead145" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">

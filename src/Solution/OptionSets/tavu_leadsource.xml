@@ -76,6 +76,18 @@
         <Description description="" languagecode="1033" />
       </Descriptions>
     </option>
+    <option value="576600008" IsHidden="0">
+      <labels>
+        <label description="WhatsApp" languagecode="1033" />
+        <label description="WhatsApp" languagecode="3082" />
+      </labels>
+    </option>
+    <option value="576600009" IsHidden="0">
+      <labels>
+        <label description="Email" languagecode="1033" />
+        <label description="Correo electrónico" languagecode="3082" />
+      </labels>
+    </option>
     <option value="576600006" ExternalValue="" IsHidden="0">
       <labels>
         <label description="Other" languagecode="1033" />

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>0</isdefault>
+    <savedqueryid>{5d9418ca-e56c-43d6-ab44-fb424f040f23}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_qualificationcriterionid">
+          <cell name="tavu_name" width="200" />
+          <cell name="tavu_agent" width="150" />
+          <cell name="tavu_order" width="80" />
+          <cell name="tavu_required" width="100" />
+          <cell name="tavu_weight" width="80" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_qualificationcriterion">
+          <attribute name="tavu_qualificationcriterionid" />
+          <attribute name="tavu_name" />
+          <attribute name="tavu_agent" />
+          <attribute name="tavu_order" />
+          <attribute name="tavu_required" />
+          <attribute name="tavu_weight" />
+          <order attribute="tavu_agent" descending="false" />
+          <order attribute="tavu_order" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="1" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.2.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Inactive Qualification Criteria" languagecode="1033" />
+      <LocalizedName description="Criterios de calificación inactivos" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

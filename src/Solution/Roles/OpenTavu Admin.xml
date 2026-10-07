@@ -7,6 +7,7 @@
     <RolePrivilege name="prvAppendActivity" level="Global" />
     <RolePrivilege name="prvAppendContact" level="Global" />
     <RolePrivilege name="prvAppendNote" level="Global" />
+    <RolePrivilege name="prvAppendtavu_Agent" level="Global" />
     <RolePrivilege name="prvAppendtavu_AIModel" level="Global" />
     <RolePrivilege name="prvAppendtavu_AITaskConfiguration" level="Global" />
     <RolePrivilege name="prvAppendtavu_BusinessCalendar" level="Global" />
@@ -20,6 +21,7 @@
     <RolePrivilege name="prvAppendtavu_Category" level="Global" />
     <RolePrivilege name="prvAppendtavu_City" level="Global" />
     <RolePrivilege name="prvAppendtavu_CompanyProfile" level="Global" />
+    <RolePrivilege name="prvAppendtavu_Conversation" level="Global" />
     <RolePrivilege name="prvAppendtavu_Country" level="Global" />
     <RolePrivilege name="prvAppendtavu_CustomerTierDefinition" level="Global" />
     <RolePrivilege name="prvAppendtavu_ForecastSnapshot" level="Global" />
@@ -34,6 +36,7 @@
     <RolePrivilege name="prvAppendtavu_Product" level="Global" />
     <RolePrivilege name="prvAppendtavu_Proposal" level="Global" />
     <RolePrivilege name="prvAppendtavu_ProposalLine" level="Global" />
+    <RolePrivilege name="prvAppendtavu_QualificationCriterion" level="Global" />
     <RolePrivilege name="prvAppendtavu_ReportingCache" level="Global" />
     <RolePrivilege name="prvAppendtavu_SalesPeriod" level="Global" />
     <RolePrivilege name="prvAppendtavu_SalesStage" level="Global" />
@@ -48,6 +51,7 @@
     <RolePrivilege name="prvAppendToActivity" level="Global" />
     <RolePrivilege name="prvAppendToContact" level="Global" />
     <RolePrivilege name="prvAppendToNote" level="Global" />
+    <RolePrivilege name="prvAppendTotavu_Agent" level="Global" />
     <RolePrivilege name="prvAppendTotavu_AIModel" level="Global" />
     <RolePrivilege name="prvAppendTotavu_AITaskConfiguration" level="Global" />
     <RolePrivilege name="prvAppendTotavu_BusinessCalendar" level="Global" />
@@ -61,6 +65,7 @@
     <RolePrivilege name="prvAppendTotavu_Category" level="Global" />
     <RolePrivilege name="prvAppendTotavu_City" level="Global" />
     <RolePrivilege name="prvAppendTotavu_CompanyProfile" level="Global" />
+    <RolePrivilege name="prvAppendTotavu_Conversation" level="Global" />
     <RolePrivilege name="prvAppendTotavu_Country" level="Global" />
     <RolePrivilege name="prvAppendTotavu_CustomerTierDefinition" level="Global" />
     <RolePrivilege name="prvAppendTotavu_ForecastSnapshot" level="Global" />
@@ -75,6 +80,7 @@
     <RolePrivilege name="prvAppendTotavu_Product" level="Global" />
     <RolePrivilege name="prvAppendTotavu_Proposal" level="Global" />
     <RolePrivilege name="prvAppendTotavu_ProposalLine" level="Global" />
+    <RolePrivilege name="prvAppendTotavu_QualificationCriterion" level="Global" />
     <RolePrivilege name="prvAppendTotavu_ReportingCache" level="Global" />
     <RolePrivilege name="prvAppendTotavu_SalesPeriod" level="Global" />
     <RolePrivilege name="prvAppendTotavu_SalesStage" level="Global" />
@@ -91,6 +97,7 @@
     <RolePrivilege name="prvAssignNote" level="Global" />
     <RolePrivilege name="prvAssigntavu_Case" level="Global" />
     <RolePrivilege name="prvAssigntavu_CaseInteraction" level="Global" />
+    <RolePrivilege name="prvAssigntavu_Conversation" level="Global" />
     <RolePrivilege name="prvAssigntavu_ForecastSnapshot" level="Global" />
     <RolePrivilege name="prvAssigntavu_KnowledgeArticle" level="Global" />
     <RolePrivilege name="prvAssigntavu_Lead" level="Global" />
@@ -104,6 +111,7 @@
     <RolePrivilege name="prvCreateContact" level="Global" />
     <RolePrivilege name="prvCreateNote" level="Global" />
     <RolePrivilege name="prvCreateSharePointData" level="Global" />
+    <RolePrivilege name="prvCreatetavu_Agent" level="Global" />
     <RolePrivilege name="prvCreatetavu_AIModel" level="Global" />
     <RolePrivilege name="prvCreatetavu_AITaskConfiguration" level="Global" />
     <RolePrivilege name="prvCreatetavu_BusinessCalendar" level="Global" />
@@ -117,6 +125,7 @@
     <RolePrivilege name="prvCreatetavu_Category" level="Global" />
     <RolePrivilege name="prvCreatetavu_City" level="Global" />
     <RolePrivilege name="prvCreatetavu_CompanyProfile" level="Global" />
+    <RolePrivilege name="prvCreatetavu_Conversation" level="Global" />
     <RolePrivilege name="prvCreatetavu_Country" level="Global" />
     <RolePrivilege name="prvCreatetavu_CustomerTierDefinition" level="Global" />
     <RolePrivilege name="prvCreatetavu_ForecastSnapshot" level="Global" />
@@ -131,6 +140,7 @@
     <RolePrivilege name="prvCreatetavu_Product" level="Global" />
     <RolePrivilege name="prvCreatetavu_Proposal" level="Global" />
     <RolePrivilege name="prvCreatetavu_ProposalLine" level="Global" />
+    <RolePrivilege name="prvCreatetavu_QualificationCriterion" level="Global" />
     <RolePrivilege name="prvCreatetavu_ReportingCache" level="Global" />
     <RolePrivilege name="prvCreatetavu_SalesPeriod" level="Global" />
     <RolePrivilege name="prvCreatetavu_SalesStage" level="Global" />
@@ -145,6 +155,7 @@
     <RolePrivilege name="prvDeleteActivity" level="Global" />
     <RolePrivilege name="prvDeleteContact" level="Global" />
     <RolePrivilege name="prvDeleteNote" level="Global" />
+    <RolePrivilege name="prvDeletetavu_Agent" level="Global" />
     <RolePrivilege name="prvDeletetavu_AIModel" level="Global" />
     <RolePrivilege name="prvDeletetavu_AITaskConfiguration" level="Global" />
     <RolePrivilege name="prvDeletetavu_BusinessCalendar" level="Global" />
@@ -158,6 +169,7 @@
     <RolePrivilege name="prvDeletetavu_Category" level="Global" />
     <RolePrivilege name="prvDeletetavu_City" level="Global" />
     <RolePrivilege name="prvDeletetavu_CompanyProfile" level="Global" />
+    <RolePrivilege name="prvDeletetavu_Conversation" level="Global" />
     <RolePrivilege name="prvDeletetavu_Country" level="Global" />
     <RolePrivilege name="prvDeletetavu_CustomerTierDefinition" level="Global" />
     <RolePrivilege name="prvDeletetavu_ForecastSnapshot" level="Global" />
@@ -172,6 +184,7 @@
     <RolePrivilege name="prvDeletetavu_Product" level="Global" />
     <RolePrivilege name="prvDeletetavu_Proposal" level="Global" />
     <RolePrivilege name="prvDeletetavu_ProposalLine" level="Global" />
+    <RolePrivilege name="prvDeletetavu_QualificationCriterion" level="Global" />
     <RolePrivilege name="prvDeletetavu_ReportingCache" level="Global" />
     <RolePrivilege name="prvDeletetavu_SalesPeriod" level="Global" />
     <RolePrivilege name="prvDeletetavu_SalesStage" level="Global" />
@@ -194,6 +207,7 @@
     <RolePrivilege name="prvReadSdkMessageProcessingStepImage" level="Global" />
     <RolePrivilege name="prvReadSharePointData" level="Global" />
     <RolePrivilege name="prvReadSharePointDocument" level="Global" />
+    <RolePrivilege name="prvReadtavu_Agent" level="Global" />
     <RolePrivilege name="prvReadtavu_AIModel" level="Global" />
     <RolePrivilege name="prvReadtavu_AITaskConfiguration" level="Global" />
     <RolePrivilege name="prvReadtavu_BusinessCalendar" level="Global" />
@@ -207,6 +221,7 @@
     <RolePrivilege name="prvReadtavu_Category" level="Global" />
     <RolePrivilege name="prvReadtavu_City" level="Global" />
     <RolePrivilege name="prvReadtavu_CompanyProfile" level="Global" />
+    <RolePrivilege name="prvReadtavu_Conversation" level="Global" />
     <RolePrivilege name="prvReadtavu_Country" level="Global" />
     <RolePrivilege name="prvReadtavu_CustomerTierDefinition" level="Global" />
     <RolePrivilege name="prvReadtavu_ForecastSnapshot" level="Global" />
@@ -221,6 +236,7 @@
     <RolePrivilege name="prvReadtavu_Product" level="Global" />
     <RolePrivilege name="prvReadtavu_Proposal" level="Global" />
     <RolePrivilege name="prvReadtavu_ProposalLine" level="Global" />
+    <RolePrivilege name="prvReadtavu_QualificationCriterion" level="Global" />
     <RolePrivilege name="prvReadtavu_ReportingCache" level="Global" />
     <RolePrivilege name="prvReadtavu_SalesPeriod" level="Global" />
     <RolePrivilege name="prvReadtavu_SalesStage" level="Global" />
@@ -238,6 +254,7 @@
     <RolePrivilege name="prvShareNote" level="Global" />
     <RolePrivilege name="prvSharetavu_Case" level="Global" />
     <RolePrivilege name="prvSharetavu_CaseInteraction" level="Global" />
+    <RolePrivilege name="prvSharetavu_Conversation" level="Global" />
     <RolePrivilege name="prvSharetavu_ForecastSnapshot" level="Global" />
     <RolePrivilege name="prvSharetavu_KnowledgeArticle" level="Global" />
     <RolePrivilege name="prvSharetavu_Lead" level="Global" />
@@ -251,6 +268,7 @@
     <RolePrivilege name="prvWriteContact" level="Global" />
     <RolePrivilege name="prvWriteNote" level="Global" />
     <RolePrivilege name="prvWriteSharePointData" level="Global" />
+    <RolePrivilege name="prvWritetavu_Agent" level="Global" />
     <RolePrivilege name="prvWritetavu_AIModel" level="Global" />
     <RolePrivilege name="prvWritetavu_AITaskConfiguration" level="Global" />
     <RolePrivilege name="prvWritetavu_BusinessCalendar" level="Global" />
@@ -264,6 +282,7 @@
     <RolePrivilege name="prvWritetavu_Category" level="Global" />
     <RolePrivilege name="prvWritetavu_City" level="Global" />
     <RolePrivilege name="prvWritetavu_CompanyProfile" level="Global" />
+    <RolePrivilege name="prvWritetavu_Conversation" level="Global" />
     <RolePrivilege name="prvWritetavu_Country" level="Global" />
     <RolePrivilege name="prvWritetavu_CustomerTierDefinition" level="Global" />
     <RolePrivilege name="prvWritetavu_ForecastSnapshot" level="Global" />
@@ -278,6 +297,7 @@
     <RolePrivilege name="prvWritetavu_Product" level="Global" />
     <RolePrivilege name="prvWritetavu_Proposal" level="Global" />
     <RolePrivilege name="prvWritetavu_ProposalLine" level="Global" />
+    <RolePrivilege name="prvWritetavu_QualificationCriterion" level="Global" />
     <RolePrivilege name="prvWritetavu_ReportingCache" level="Global" />
     <RolePrivilege name="prvWritetavu_SalesPeriod" level="Global" />
     <RolePrivilege name="prvWritetavu_SalesStage" level="Global" />

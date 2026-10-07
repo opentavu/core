@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="tavu_knowledgeaudience" localizedName="Knowledge Audience" description="Knowledge Audience" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.2.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <displaynames>
+    <displayname description="Knowledge Audience" languagecode="1033" />
+    <displayname description="Audiencia del conocimiento" languagecode="3082" />
+  </displaynames>
+  <Descriptions>
+    <Description description="Knowledge Audience" languagecode="1033" />
+    <Description description="Audiencia del conocimiento" languagecode="3082" />
+  </Descriptions>
+  <options>
+    <option value="576600000" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Public" languagecode="1033" />
+        <label description="Público" languagecode="3082" />
+      </labels>
+    </option>
+    <option value="576600001" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Internal" languagecode="1033" />
+        <label description="Interno" languagecode="3082" />
+      </labels>
+    </option>
+  </options>
+</optionset>

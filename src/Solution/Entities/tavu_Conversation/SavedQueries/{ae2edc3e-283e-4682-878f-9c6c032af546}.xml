@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{ae2edc3e-283e-4682-878f-9c6c032af546}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_conversationid">
+          <cell name="tavu_name" width="200" />
+          <cell name="tavu_channel" width="100" />
+          <cell name="tavu_displayname" width="150" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>64</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_conversation">
+          <attribute name="tavu_conversationid" />
+          <attribute name="tavu_name" />
+          <attribute name="tavu_channel" />
+          <attribute name="tavu_displayname" />
+          <order attribute="tavu_lastinboundon" descending="true" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.2.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Conversation Lookup View" languagecode="1033" />
+      <LocalizedName description="Vista de búsqueda de conversaciones" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

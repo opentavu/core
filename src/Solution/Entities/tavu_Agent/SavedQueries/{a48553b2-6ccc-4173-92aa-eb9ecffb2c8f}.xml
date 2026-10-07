@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{a48553b2-6ccc-4173-92aa-eb9ecffb2c8f}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_agentid">
+          <cell name="tavu_name" width="200" />
+          <cell name="tavu_agenttype" width="150" />
+          <cell name="tavu_mode" width="100" />
+          <cell name="tavu_businesscalendar" width="150" />
+          <cell name="tavu_turnlimit" width="100" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>2</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_agent">
+          <attribute name="tavu_agentid" />
+          <attribute name="tavu_name" />
+          <attribute name="tavu_agenttype" />
+          <attribute name="tavu_mode" />
+          <attribute name="tavu_businesscalendar" />
+          <attribute name="tavu_turnlimit" />
+          <order attribute="tavu_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.2.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Agent Associated View" languagecode="1033" />
+      <LocalizedName description="Vista asociada de agentes" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

@@ -9,6 +9,7 @@
     <RolePrivilege name="prvAppendNote" level="Global" />
     <RolePrivilege name="prvAppendtavu_Case" level="Global" />
     <RolePrivilege name="prvAppendtavu_CaseInteraction" level="Global" />
+    <RolePrivilege name="prvAppendtavu_Conversation" level="Local" />
     <RolePrivilege name="prvAppendtavu_KnowledgeArticle" level="Global" />
     <RolePrivilege name="prvAppendtavu_Lead" level="Global" />
     <RolePrivilege name="prvAppendtavu_Opportunity" level="Global" />
@@ -55,6 +56,7 @@
     <RolePrivilege name="prvAssignAccount" level="Local" />
     <RolePrivilege name="prvAssignActivity" level="Local" />
     <RolePrivilege name="prvAssignContact" level="Local" />
+    <RolePrivilege name="prvAssigntavu_Conversation" level="Local" />
     <RolePrivilege name="prvAssigntavu_Lead" level="Local" />
     <RolePrivilege name="prvAssigntavu_Opportunity" level="Local" />
     <RolePrivilege name="prvAssigntavu_Proposal" level="Local" />
@@ -86,6 +88,7 @@
     <RolePrivilege name="prvReadSdkMessageProcessingStepImage" level="Global" />
     <RolePrivilege name="prvReadSharePointData" level="Global" />
     <RolePrivilege name="prvReadSharePointDocument" level="Global" />
+    <RolePrivilege name="prvReadtavu_Agent" level="Global" />
     <RolePrivilege name="prvReadtavu_AIModel" level="Global" />
     <RolePrivilege name="prvReadtavu_AITaskConfiguration" level="Global" />
     <RolePrivilege name="prvReadtavu_BusinessCalendar" level="Global" />
@@ -99,6 +102,7 @@
     <RolePrivilege name="prvReadtavu_Category" level="Global" />
     <RolePrivilege name="prvReadtavu_City" level="Global" />
     <RolePrivilege name="prvReadtavu_CompanyProfile" level="Global" />
+    <RolePrivilege name="prvReadtavu_Conversation" level="Local" />
     <RolePrivilege name="prvReadtavu_Country" level="Global" />
     <RolePrivilege name="prvReadtavu_CustomerTierDefinition" level="Global" />
     <RolePrivilege name="prvReadtavu_ForecastSnapshot" level="Global" />
@@ -113,6 +117,7 @@
     <RolePrivilege name="prvReadtavu_Product" level="Global" />
     <RolePrivilege name="prvReadtavu_Proposal" level="Global" />
     <RolePrivilege name="prvReadtavu_ProposalLine" level="Global" />
+    <RolePrivilege name="prvReadtavu_QualificationCriterion" level="Global" />
     <RolePrivilege name="prvReadtavu_ReportingCache" level="Global" />
     <RolePrivilege name="prvReadtavu_SalesPeriod" level="Global" />
     <RolePrivilege name="prvReadtavu_SalesStage" level="Global" />
@@ -136,6 +141,7 @@
     <RolePrivilege name="prvWriteContact" level="Local" />
     <RolePrivilege name="prvWriteNote" level="Basic" />
     <RolePrivilege name="prvWriteSharePointData" level="Global" />
+    <RolePrivilege name="prvWritetavu_Conversation" level="Local" />
     <RolePrivilege name="prvWritetavu_Lead" level="Local" />
     <RolePrivilege name="prvWritetavu_Opportunity" level="Local" />
     <RolePrivilege name="prvWritetavu_Proposal" level="Local" />

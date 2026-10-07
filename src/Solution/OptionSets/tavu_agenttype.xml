@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="tavu_agenttype" localizedName="Agent Type" description="Agent Type" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.2.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <displaynames>
+    <displayname description="Agent Type" languagecode="1033" />
+    <displayname description="Tipo de agente" languagecode="3082" />
+  </displaynames>
+  <Descriptions>
+    <Description description="Agent Type" languagecode="1033" />
+    <Description description="Tipo de agente" languagecode="3082" />
+  </Descriptions>
+  <options>
+    <option value="576600000" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Lead Qualification" languagecode="1033" />
+        <label description="Calificación de prospectos" languagecode="3082" />
+      </labels>
+    </option>
+    <option value="576600001" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Post-Meeting" languagecode="1033" />
+        <label description="Posterior a la reunión" languagecode="3082" />
+      </labels>
+    </option>
+  </options>
+</optionset>

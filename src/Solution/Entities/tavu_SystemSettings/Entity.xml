@@ -693,6 +693,48 @@
             <Description description="Si es Sí, OpenTavu mantiene creados automáticamente los periodos de venta (meses o trimestres, según el Tipo de periodo de pronóstico) del año fiscal actual y del siguiente, para que el pronóstico nunca se quede sin periodos. Nunca modifica periodos existentes. Póngalo en No si prefiere crear y administrar los periodos manualmente." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_ConversationRetentionDays">
+          <Type>int</Type>
+          <Name>tavu_conversationretentiondays</Name>
+          <LogicalName>tavu_conversationretentiondays</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>none</Format>
+          <MinValue>1</MinValue>
+          <MaxValue>36500</MaxValue>
+          <displaynames>
+            <displayname description="Conversation Retention (Days)" languagecode="1033" />
+            <displayname description="Retención de conversaciones (días)" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Days to keep closed conversations. Empty means keep." languagecode="1033" />
+            <Description description="Días que se conservan las conversaciones cerradas. Vacío significa conservar." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_CoverageTarget">
           <Type>decimal</Type>
           <Name>tavu_coveragetarget</Name>

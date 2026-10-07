@@ -11,6 +11,7 @@
   <EntityRelationship Name="adx_invitation_tavu_TimeEntries" />
   <EntityRelationship Name="business_unit_tavu_case" />
   <EntityRelationship Name="business_unit_tavu_caseinteraction" />
+  <EntityRelationship Name="business_unit_tavu_conversation" />
   <EntityRelationship Name="business_unit_tavu_forecastsnapshot" />
   <EntityRelationship Name="business_unit_tavu_knowledgearticle" />
   <EntityRelationship Name="business_unit_tavu_lead" />
@@ -23,6 +24,7 @@
   <EntityRelationship Name="contact_tavu_OpportunityCloses" />
   <EntityRelationship Name="contact_tavu_TimeEntries" />
   <EntityRelationship Name="FileAttachment_tavu_CompanyProfile_tavu_Logo" />
+  <EntityRelationship Name="FileAttachment_tavu_Conversation_tavu_Transcript" />
   <EntityRelationship Name="interactionforemail_tavu_Meetings" />
   <EntityRelationship Name="interactionforemail_tavu_OpportunityCloses" />
   <EntityRelationship Name="interactionforemail_tavu_TimeEntries" />
@@ -32,6 +34,8 @@
   <EntityRelationship Name="knowledgebaserecord_tavu_Meetings" />
   <EntityRelationship Name="knowledgebaserecord_tavu_OpportunityCloses" />
   <EntityRelationship Name="knowledgebaserecord_tavu_TimeEntries" />
+  <EntityRelationship Name="lk_tavu_agent_createdby" />
+  <EntityRelationship Name="lk_tavu_agent_modifiedby" />
   <EntityRelationship Name="lk_tavu_aimodel_createdby" />
   <EntityRelationship Name="lk_tavu_aimodel_modifiedby" />
   <EntityRelationship Name="lk_tavu_aitaskconfiguration_createdby" />
@@ -58,6 +62,8 @@
   <EntityRelationship Name="lk_tavu_city_modifiedby" />
   <EntityRelationship Name="lk_tavu_companyprofile_createdby" />
   <EntityRelationship Name="lk_tavu_companyprofile_modifiedby" />
+  <EntityRelationship Name="lk_tavu_conversation_createdby" />
+  <EntityRelationship Name="lk_tavu_conversation_modifiedby" />
   <EntityRelationship Name="lk_tavu_country_createdby" />
   <EntityRelationship Name="lk_tavu_country_modifiedby" />
   <EntityRelationship Name="lk_tavu_customertierdefinition_createdby" />
@@ -86,6 +92,8 @@
   <EntityRelationship Name="lk_tavu_proposal_modifiedby" />
   <EntityRelationship Name="lk_tavu_proposalline_createdby" />
   <EntityRelationship Name="lk_tavu_proposalline_modifiedby" />
+  <EntityRelationship Name="lk_tavu_qualificationcriterion_createdby" />
+  <EntityRelationship Name="lk_tavu_qualificationcriterion_modifiedby" />
   <EntityRelationship Name="lk_tavu_reportingcache_createdby" />
   <EntityRelationship Name="lk_tavu_reportingcache_modifiedby" />
   <EntityRelationship Name="lk_tavu_salesperiod_createdby" />
@@ -124,6 +132,7 @@
   <EntityRelationship Name="mspp_website_tavu_Meetings" />
   <EntityRelationship Name="mspp_website_tavu_OpportunityCloses" />
   <EntityRelationship Name="mspp_website_tavu_TimeEntries" />
+  <EntityRelationship Name="organization_tavu_agent" />
   <EntityRelationship Name="organization_tavu_aimodel" />
   <EntityRelationship Name="organization_tavu_aitaskconfiguration" />
   <EntityRelationship Name="organization_tavu_businesscalendar" />
@@ -143,6 +152,7 @@
   <EntityRelationship Name="organization_tavu_pricelist" />
   <EntityRelationship Name="organization_tavu_pricelistitem" />
   <EntityRelationship Name="organization_tavu_product" />
+  <EntityRelationship Name="organization_tavu_qualificationcriterion" />
   <EntityRelationship Name="organization_tavu_salesperiod" />
   <EntityRelationship Name="organization_tavu_salesstage" />
   <EntityRelationship Name="organization_tavu_sla" />
@@ -153,6 +163,7 @@
   <EntityRelationship Name="organization_tavu_uom" />
   <EntityRelationship Name="owner_tavu_case" />
   <EntityRelationship Name="owner_tavu_caseinteraction" />
+  <EntityRelationship Name="owner_tavu_conversation" />
   <EntityRelationship Name="owner_tavu_forecastsnapshot" />
   <EntityRelationship Name="owner_tavu_knowledgearticle" />
   <EntityRelationship Name="owner_tavu_lead" />
@@ -169,6 +180,10 @@
   <EntityRelationship Name="tavu_account_tavu_case" />
   <EntityRelationship Name="tavu_account_tavu_opportunity_457" />
   <EntityRelationship Name="tavu_account_tavu_proposal_customer" />
+  <EntityRelationship Name="tavu_agent_AITaskConfiguration_tavu_aitaskconfiguration" />
+  <EntityRelationship Name="tavu_agent_BusinessCalendar_tavu_businesscalendar" />
+  <EntityRelationship Name="tavu_agent_HandoffTeam_team" />
+  <EntityRelationship Name="tavu_agent_HandoffUser_systemuser" />
   <EntityRelationship Name="tavu_aitaskconfiguration_Model_tavu_aimodel" />
   <EntityRelationship Name="tavu_businessclosure_Calendar_tavu_businesscalendar" />
   <EntityRelationship Name="tavu_calendarworkinghours_Calendar_tavu_businesscalendar" />
@@ -199,6 +214,9 @@
   <EntityRelationship Name="tavu_contact_tavu_case" />
   <EntityRelationship Name="tavu_contact_tavu_opportunity_457" />
   <EntityRelationship Name="tavu_contact_tavu_proposal_customer" />
+  <EntityRelationship Name="tavu_conversation_Agent_tavu_agent" />
+  <EntityRelationship Name="tavu_conversation_Contact_contact" />
+  <EntityRelationship Name="tavu_conversation_Lead_tavu_lead" />
   <EntityRelationship Name="tavu_country_Currency_transactioncurrency" />
   <EntityRelationship Name="tavu_forecastsnapshot_SalesPeriod_tavu_salesperiod" />
   <EntityRelationship Name="tavu_forecastsnapshot_SalesTarget_tavu_salestarget" />
@@ -264,6 +282,7 @@
   <EntityRelationship Name="tavu_proposalline_Product_tavu_product" />
   <EntityRelationship Name="tavu_proposalline_Proposal_tavu_proposal" />
   <EntityRelationship Name="tavu_proposalline_UnitofMeasure_tavu_uom" />
+  <EntityRelationship Name="tavu_qualificationcriterion_Agent_tavu_agent" />
   <EntityRelationship Name="tavu_reportingcache_BusinessLine_tavu_businessline" />
   <EntityRelationship Name="tavu_reportingcache_SalesPeriod_tavu_salesperiod" />
   <EntityRelationship Name="tavu_reportingcache_SalesRep_systemuser" />
@@ -298,6 +317,7 @@
   <EntityRelationship Name="tavu_uom_UnitGroup_tavu_unitofmeasureschedule" />
   <EntityRelationship Name="team_tavu_case" />
   <EntityRelationship Name="team_tavu_caseinteraction" />
+  <EntityRelationship Name="team_tavu_conversation" />
   <EntityRelationship Name="team_tavu_forecastsnapshot" />
   <EntityRelationship Name="team_tavu_knowledgearticle" />
   <EntityRelationship Name="team_tavu_lead" />
@@ -316,6 +336,7 @@
   <EntityRelationship Name="TransactionCurrency_tavu_SalesTarget" />
   <EntityRelationship Name="user_tavu_case" />
   <EntityRelationship Name="user_tavu_caseinteraction" />
+  <EntityRelationship Name="user_tavu_conversation" />
   <EntityRelationship Name="user_tavu_forecastsnapshot" />
   <EntityRelationship Name="user_tavu_knowledgearticle" />
   <EntityRelationship Name="user_tavu_lead" />

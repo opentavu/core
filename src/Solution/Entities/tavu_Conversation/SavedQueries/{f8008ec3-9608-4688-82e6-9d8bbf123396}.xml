@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{f8008ec3-9608-4688-82e6-9d8bbf123396}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="tavu_name" select="1" icon="1" preview="1">
+        <row name="result" id="tavu_conversationid">
+          <cell name="tavu_name" width="200" />
+          <cell name="tavu_channel" width="100" />
+          <cell name="tavu_displayname" width="150" />
+          <cell name="statuscode" width="130" />
+          <cell name="tavu_score" width="70" />
+          <cell name="tavu_intent" width="90" />
+          <cell name="tavu_lastmessagepreview" width="250" />
+          <cell name="tavu_lastinboundon" width="140" />
+          <cell name="ownerid" width="130" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" mapping="logical">
+        <entity name="tavu_conversation">
+          <attribute name="tavu_conversationid" />
+          <attribute name="tavu_name" />
+          <attribute name="tavu_channel" />
+          <attribute name="tavu_displayname" />
+          <attribute name="statuscode" />
+          <attribute name="tavu_score" />
+          <attribute name="tavu_intent" />
+          <attribute name="tavu_lastmessagepreview" />
+          <attribute name="tavu_lastinboundon" />
+          <attribute name="ownerid" />
+          <order attribute="tavu_lastinboundon" descending="true" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.2.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Active Conversations" languagecode="1033" />
+      <LocalizedName description="Conversaciones activas" languagecode="3082" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

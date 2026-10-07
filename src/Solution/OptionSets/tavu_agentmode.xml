@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<optionset Name="tavu_agentmode" localizedName="Agent Mode" description="Agent Mode" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <OptionSetType>picklist</OptionSetType>
+  <IsGlobal>1</IsGlobal>
+  <IntroducedVersion>1.2.0.0</IntroducedVersion>
+  <IsCustomizable>1</IsCustomizable>
+  <displaynames>
+    <displayname description="Agent Mode" languagecode="1033" />
+    <displayname description="Modo del agente" languagecode="3082" />
+  </displaynames>
+  <Descriptions>
+    <Description description="Agent Mode" languagecode="1033" />
+    <Description description="Modo del agente" languagecode="3082" />
+  </Descriptions>
+  <options>
+    <option value="576600000" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Act" languagecode="1033" />
+        <label description="Actuar" languagecode="3082" />
+      </labels>
+    </option>
+    <option value="576600001" ExternalValue="" IsHidden="0">
+      <labels>
+        <label description="Propose" languagecode="1033" />
+        <label description="Proponer" languagecode="3082" />
+      </labels>
+    </option>
+  </options>
+</optionset>
