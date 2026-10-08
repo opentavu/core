@@ -90,7 +90,7 @@
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
-                        <control id="tavu_usecompanyprofile" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_usecompanyprofile" disabled="false" />
+                        <control id="tavu_usecompanyprofile" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_usecompanyprofile" disabled="false" uniqueid="{22f61821-281a-41ca-a389-b25b523bd07f}" />
                       </cell>
                     </row>
                     <row>
@@ -98,7 +98,7 @@
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
-                        <control id="tavu_useworkinghours" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_useworkinghours" disabled="false" />
+                        <control id="tavu_useworkinghours" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_useworkinghours" disabled="false" uniqueid="{a3da0b96-f021-42fa-9b35-12e591dd3352}" />
                       </cell>
                     </row>
                     <row>
@@ -106,7 +106,7 @@
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
-                        <control id="tavu_useknowledgearticles" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_useknowledgearticles" disabled="false" />
+                        <control id="tavu_useknowledgearticles" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_useknowledgearticles" disabled="false" uniqueid="{61458608-dc9d-4bd5-b9c7-64841cafb973}" />
                       </cell>
                     </row>
                   </rows>
@@ -155,7 +155,7 @@
             </column>
             <column width="50%">
               <sections>
-                <section name="section_criteria" id="{ac15c755-a320-48d3-b5c6-b429f1c67d9f}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                <section name="section_criteria" id="{ac15c755-a320-48d3-b5c6-b429f1c67d9f}" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
                     <label description="Qualification Criteria" languagecode="1033" />
                     <label description="Criterios de calificación" languagecode="3082" />
@@ -243,6 +243,116 @@
       <DisplayConditions Order="0" FallbackForm="true">
         <Everyone />
       </DisplayConditions>
+      <header id="{fb727aac-b842-459a-a8a4-4317c3ec139f}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{383b0ccf-a12a-4c29-a197-2039f3906ffd}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{2aff0b77-2116-4e28-aa96-2e57a86ea995}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{c41a033f-c974-4b57-8cf3-386addcb938a}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{55a51638-db86-424f-8300-ab13a1cf5481}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{6f16efbf-b9e4-4e66-b53c-7da0d58a750d}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{71f4b28d-405d-4d49-8603-647405a0e6f0}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{670bc97e-d351-4c37-a83a-e7d79091dcdf}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <controlDescriptions>
+        <controlDescription forControl="{22f61821-281a-41ca-a389-b25b523bd07f}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_usecompanyprofile</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_usecompanyprofile</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_usecompanyprofile</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_usecompanyprofile</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{a3da0b96-f021-42fa-9b35-12e591dd3352}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_useworkinghours</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_useworkinghours</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_useworkinghours</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_useworkinghours</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{61458608-dc9d-4bd5-b9c7-64841cafb973}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_useknowledgearticles</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_useknowledgearticles</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_useknowledgearticles</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_useknowledgearticles</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
     </form>
     <IsCustomizable>1</IsCustomizable>
     <CanBeDeleted>1</CanBeDeleted>

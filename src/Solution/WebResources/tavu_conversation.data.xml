@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{adefa588-93c2-f111-a05a-000d3a5caaed}</WebResourceId>
+  <Name>tavu_conversation</Name>
+  <DisplayName>Icon - conversation</DisplayName>
+  <WebResourceType>11</WebResourceType>
+  <IntroducedVersion>1.2.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>1</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>1</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/tavu_conversationADEFA588-93C2-F111-A05A-000D3A5CAAED</FileName>
+</WebResource>

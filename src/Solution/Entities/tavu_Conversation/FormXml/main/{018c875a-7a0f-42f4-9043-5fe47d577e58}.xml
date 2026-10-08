@@ -102,7 +102,7 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{2656b434-8623-423a-bd5c-f14b85694695}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{2656b434-8623-423a-bd5c-f14b85694695}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="Outcome Reason" languagecode="1033" />
                           <label description="Motivo del resultado" languagecode="3082" />
@@ -110,6 +110,10 @@
                         <control id="tavu_outcomereason" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_outcomereason" disabled="false" />
                       </cell>
                     </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                   </rows>
                 </section>
                 <section name="section_answers" id="{c3dea3d1-0601-4756-9ab8-ef6ef9e8e2ed}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
@@ -128,7 +132,7 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{109d970f-90ef-4e82-881b-de842a8e901c}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{109d970f-90ef-4e82-881b-de842a8e901c}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="Answers" languagecode="1033" />
                           <label description="Respuestas" languagecode="3082" />
@@ -136,6 +140,10 @@
                         <control id="tavu_answers" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_answers" disabled="true" />
                       </cell>
                     </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                   </rows>
                 </section>
               </sections>
@@ -149,7 +157,7 @@
                   </labels>
                   <rows>
                     <row>
-                      <cell id="{ab52727a-aa85-4b88-8dab-5bfa1d5718a1}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{ab52727a-aa85-4b88-8dab-5bfa1d5718a1}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="Pending Reply" languagecode="1033" />
                           <label description="Respuesta pendiente" languagecode="3082" />
@@ -157,6 +165,10 @@
                         <control id="tavu_pendingreply" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_pendingreply" disabled="false" />
                       </cell>
                     </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                   </rows>
                 </section>
                 <section name="section_metrics" id="{39afd2c6-4140-4aa3-ae27-18cc2d394ac0}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
@@ -284,6 +296,27 @@
       <DisplayConditions Order="0" FallbackForm="true">
         <Everyone />
       </DisplayConditions>
+      <footer id="{d04c324f-10ee-4416-86c8-96a9cb8b398f}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{fd57925c-f232-4f1c-b7e0-215f757dd911}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{96627113-1c37-4fc1-8b5b-71109b08cc65}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{aa2b4d7a-5bf4-468d-b857-28e079fd96e1}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
     </form>
     <IsCustomizable>1</IsCustomizable>
     <CanBeDeleted>1</CanBeDeleted>

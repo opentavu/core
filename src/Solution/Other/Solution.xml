@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.26094.133" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26094.133" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26094.00133">
+<ImportExportXml version="9.2.26094.133" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26094.133" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26094.00135">
   <SolutionManifest>
     <UniqueName>OpenTavu</UniqueName>
     <LocalizedNames>
@@ -140,6 +140,7 @@
       <RootComponent type="300" schemaName="tavu_opportunityclosedialog_31702" behavior="0" />
       <RootComponent type="60" id="{5d0fc785-fab2-f111-aaad-70a8a59b73ad}" behavior="0" />
       <RootComponent type="61" schemaName="tavu_account_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_agent" behavior="0" />
       <RootComponent type="61" schemaName="tavu_aimodel" behavior="0" />
       <RootComponent type="61" schemaName="tavu_aitaskconfiguration" behavior="0" />
       <RootComponent type="61" schemaName="tavu_ApproveAndPromote" behavior="0" />
@@ -156,6 +157,7 @@
       <RootComponent type="61" schemaName="tavu_company" behavior="0" />
       <RootComponent type="61" schemaName="tavu_companyprofile_open" behavior="0" />
       <RootComponent type="61" schemaName="tavu_contact_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_conversation" behavior="0" />
       <RootComponent type="61" schemaName="tavu_country" behavior="0" />
       <RootComponent type="61" schemaName="tavu_createopp" behavior="0" />
       <RootComponent type="61" schemaName="tavu_customertierdefinition" behavior="0" />
@@ -189,6 +191,7 @@
       <RootComponent type="61" schemaName="tavu_proposal_form" behavior="0" />
       <RootComponent type="61" schemaName="tavu_proposalline" behavior="0" />
       <RootComponent type="61" schemaName="tavu_proposalline_form" behavior="0" />
+      <RootComponent type="61" schemaName="tavu_qualificationcriterion" behavior="0" />
       <RootComponent type="61" schemaName="tavu_reopenopp" behavior="0" />
       <RootComponent type="61" schemaName="tavu_reportingcache" behavior="0" />
       <RootComponent type="61" schemaName="tavu_resetprobability" behavior="0" />
@@ -362,6 +365,12 @@
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
           <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="Qualification Criterion" id="{33cd06a9-01ee-4c69-b09a-887153705313}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
+        </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="Meeting Source" id="{5d91af56-2e11-4feb-9504-97c72ba4c3ff}" />
       </MissingDependency>
       <MissingDependency>
@@ -411,6 +420,12 @@
           <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
         </Required>
         <Dependent type="60" displayName="Information" parentDisplayName="Case Status" id="{e2b0c0b5-0a34-403b-ac4e-ff9a834242b6}" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">
+          <package appName="Base Custom Controls" version="9.0.2609.4004">BaseCustomControlsCore (9.0.2609.4004)</package>
+        </Required>
+        <Dependent type="60" displayName="Information" parentDisplayName="Agent" id="{e9b6bd6f-5a3f-4814-a383-123b0ed27308}" />
       </MissingDependency>
       <MissingDependency>
         <Required type="66" schemaName="MscrmControls.FieldControls.ToggleControl" displayName="MscrmControls.FieldControls.ToggleControl" solution="BaseCustomControlsCore (9.0.2609.4004)">

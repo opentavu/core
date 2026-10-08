@@ -46,19 +46,23 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{678a6f00-e0dd-4d5a-a1dc-61269e6ac15f}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{678a6f00-e0dd-4d5a-a1dc-61269e6ac15f}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_purpose" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_purpose" disabled="false" />
                       </cell>
                     </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                     <row>
                       <cell id="{f748583e-0042-44b6-93d8-927fbe54a393}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
-                        <control id="tavu_required" classid="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}" datafieldname="tavu_required" disabled="false" />
+                        <control id="tavu_required" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_required" disabled="false" uniqueid="{beea1f4f-128b-4fed-b04d-4dff39f2514c}" />
                       </cell>
                     </row>
                     <row>
@@ -70,13 +74,17 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{079ee89e-4182-463f-b987-5a4bb32241ea}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{079ee89e-4182-463f-b987-5a4bb32241ea}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_disqualifyingrule" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_disqualifyingrule" disabled="false" />
                       </cell>
                     </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                     <row>
                       <cell id="{fdd7c468-ec16-4b55-9853-f62de5cc087a}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
@@ -95,6 +103,72 @@
       <DisplayConditions Order="0" FallbackForm="true">
         <Everyone />
       </DisplayConditions>
+      <header id="{b5751aab-265c-4053-993d-e1fde21b33dd}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{bd7b9d4b-f06f-4264-93ac-6a3410211ef5}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{308da646-3dae-4f0a-9ef4-99c3963be782}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{dfffe876-03e6-492f-a4ca-553ce0bcb3c7}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <footer id="{be73963a-f98f-4a0d-9902-439e17a08b9b}" celllabelposition="Top" columns="111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{393bd994-d803-4b07-89a5-96343a15b45f}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{53293842-21e0-46e5-881b-0393f9fb8930}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+            <cell id="{5141a710-c215-42f0-93af-55cc1507c440}" showlabel="false">
+              <labels>
+                <label description="" languagecode="1033" />
+              </labels>
+            </cell>
+          </row>
+        </rows>
+      </footer>
+      <controlDescriptions>
+        <controlDescription forControl="{beea1f4f-128b-4fed-b04d-4dff39f2514c}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_required</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_required</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_required</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_required</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+      </controlDescriptions>
     </form>
     <IsCustomizable>1</IsCustomizable>
     <CanBeDeleted>1</CanBeDeleted>

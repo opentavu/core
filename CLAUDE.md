@@ -91,6 +91,15 @@ Mirror the existing plugins (`Pl.Opportunity.LifecycleTracker`, `Pl.Opportunity.
 3. **Simplicity.** Fewer fields than Dynamics out of the box. The burden of proof is on adding a field.
 4. **Configuration over code.** Anything that varies per firm (stages, case types, tiers, SLAs, business lines, prompts, models) lives in a `tavu_*` configuration table, never in `statuscode` values or code. Company Profile (`tavu_companyprofile`) says who the firm is; System Settings (`tavu_systemsettings`) says how OpenTavu behaves.
 
+## Form layout rules
+
+Apply when creating or changing any model-driven form (main, quick create, quick view).
+
+- **Yes/No columns render as a toggle**, never as radio buttons or a dropdown (form control: Toggle).
+- **Long text gets room.** Multi-line text columns meant for descriptions or free text show at least 5 rows on the form, not 1.
+- **No section label over a grid.** When a section contains only subgrids (one or several), hide the section label and give each subgrid its own label. The grid title is enough.
+- **Labels in both languages.** Every new tab, section and field label carries English (1033) and Spanish (3082). When updating an existing form through the API, rebuild it from the copy in `src/Solution` so existing Spanish labels are kept.
+
 ## AI rules
 
 - Every AI task is a row in `tavu_aitaskconfiguration` (model, temperature, confidence threshold, max tokens, prompt). Never hardcode a prompt or a model name in code.
