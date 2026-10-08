@@ -194,29 +194,41 @@
                   </labels>
                   <rows>
                     <row>
-                      <cell id="{af9fbcf4-76f9-410e-8012-133f2686fe22}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{af9fbcf4-76f9-410e-8012-133f2686fe22}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_greeting" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_greeting" disabled="false" />
                       </cell>
                     </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                     <row>
-                      <cell id="{1bd6ba06-23d3-4630-9a2d-3d6cca8bd5c1}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{1bd6ba06-23d3-4630-9a2d-3d6cca8bd5c1}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_outofhoursmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_outofhoursmessage" disabled="false" />
                       </cell>
                     </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                     <row>
-                      <cell id="{c53dd84a-cef8-4d8c-862b-2e08a97a04a5}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{c53dd84a-cef8-4d8c-862b-2e08a97a04a5}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_nextstepmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_nextstepmessage" disabled="false" />
                       </cell>
                     </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                     <row>
                       <cell id="{af31d237-bdcc-4b9f-8256-ef5aa375eee6}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
@@ -226,13 +238,17 @@
                       </cell>
                     </row>
                     <row>
-                      <cell id="{8ca67018-4163-418b-b486-8939ed94bdb5}" locklevel="0" colspan="1" rowspan="1">
+                      <cell id="{8ca67018-4163-418b-b486-8939ed94bdb5}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_holdingmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_holdingmessage" disabled="false" />
                       </cell>
                     </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                   </rows>
                 </section>
               </sections>

@@ -46,6 +46,14 @@
                       </cell>
                     </row>
                     <row>
+                      <cell id="{44ce9ff6-1d12-494e-9175-bde035c219fc}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_phone" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_phone" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
                       <cell id="{9dd1afa0-a606-474f-91b7-e6cf5152d338}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
                           <label description="" languagecode="1033" />
