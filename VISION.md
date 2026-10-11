@@ -1,9 +1,9 @@
-# OpenTavu
+# Opentavu
 ## AI-First SMB CRM Accelerator
-### Vision Document, v1.3
+### Vision Document, v1.4
 
 **Author:** Gustavo González Villani
-**Date:** September 2026
+**Date:** October 2026
 **Status:** Public foundational draft — open to community feedback
 **Target audience:** Power Platform consultants, MVPs, SMB integrators, and small-to-mid-market business leaders evaluating AI-enabled CRM strategies
 **Project home:** opentavu.com
@@ -12,19 +12,19 @@
 
 ## 1. Executive Summary
 
-**OpenTavu** is an open-source AI-First SMB CRM Accelerator (MIT license) that gives small and mid-market businesses a production-grade Customer Relationship Management foundation with artificial intelligence embedded in the core workflow — not added as an afterthought.
+**Opentavu** is an open-source AI-First SMB CRM Accelerator (MIT license) that gives small and mid-market businesses a production-grade Customer Relationship Management foundation with artificial intelligence embedded in the core workflow — not added as an afterthought.
 
-OpenTavu is built on **Microsoft Power Platform** (Dataverse + Power Apps Premium) and **Azure OpenAI** by default, designed to operate within the licensing and economic envelope that small and mid-market businesses can actually afford. Implementation is delivered through a network of consultants and integrators who download the framework from GitHub and adapt it to client needs, rather than as a turnkey product sold directly to end users.
+Opentavu is built on **Microsoft Power Platform** (Dataverse + Power Apps Premium) and **Azure OpenAI** by default, designed to operate within the licensing and economic envelope that small and mid-market businesses can actually afford. Implementation is delivered through a network of consultants and integrators who download the framework from GitHub and adapt it to client needs, rather than as a turnkey product sold directly to end users.
 
 **Why this matters now.** Enterprise AI capabilities for customer-facing operations have matured rapidly since 2023. Large enterprises have absorbed these capabilities through major platform investments. Small and mid-market businesses — which represent the vast majority of firms in the United States and most economies — have largely been left out: either priced out of the enterprise CRM tier where AI lives natively, or forced to retrofit AI onto legacy CRM systems that were not designed for it.
 
-**What OpenTavu provides.** A production-grade, AI-first CRM foundation with three initial AI modules (Smart Case Categorization, Context-Aware Customer Communication Assistant, AI Activity Capture & CRM Hygiene Assistant), a base data model designed around how professional services firms actually work, automation flows, mobile-friendly canvas apps, analytics dashboards, and complete implementation documentation — released as a managed Power Platform solution that consultants can deploy into a client's tenant in hours, not months.
+**What Opentavu provides.** A production-grade, AI-first CRM foundation with three initial AI modules (Smart Case Categorization, Context-Aware Customer Communication Assistant, AI Activity Capture & CRM Hygiene Assistant), a base data model designed around how professional services firms actually work, automation flows, mobile-friendly canvas apps, analytics dashboards, and complete implementation documentation — released as a managed Power Platform solution that consultants can deploy into a client's tenant in hours, not months.
 
 **Initial focus vertical:** Professional services SMBs in the United States: engineering and architecture practices, B2B agencies, legal and accounting firms, software/QA boutiques, and IT and management consultancies. The framework's architecture is horizontal and applicable to most SMB segments; the initial public adoption narrative is anchored in professional services because of direct domain experience and the size of that segment in the US economy.
 
-**Customer model coverage.** OpenTavu explicitly supports three customer models within the Professional Services vertical: B2B-only firms (selling exclusively to businesses), B2C/individual-client firms (selling to natural persons — examples include some legal boutiques, independent coaches, individual wealth advisors), and hybrid firms (serving both segments simultaneously, such as legal boutiques with corporate and individual clients, accounting firms with business and personal returns, or wealth managers). The product architecture supports all three models without requiring artificial adaptations.
+**Customer model coverage.** Opentavu explicitly supports three customer models within the Professional Services vertical: B2B-only firms (selling exclusively to businesses), B2C/individual-client firms (selling to natural persons — examples include some legal boutiques, independent coaches, individual wealth advisors), and hybrid firms (serving both segments simultaneously, such as legal boutiques with corporate and individual clients, accounting firms with business and personal returns, or wealth managers). The product architecture supports all three models without requiring artificial adaptations.
 
-**Foundation.** OpenTavu extends a 2017 Master's thesis from Universidad Icesi that proposed and empirically validated a model for how SMBs should select, implement, and operate cloud CRM systems. The thesis identified the functional requirements common to most SMBs across sales, marketing, and customer service; OpenTavu carries that work forward by re-imagining how those functional requirements should be executed when artificial intelligence is available as a first-class capability rather than a bolted-on extension.
+**Foundation.** Opentavu extends a 2017 Master's thesis from Universidad Icesi that proposed and empirically validated a model for how SMBs should select, implement, and operate cloud CRM systems. The thesis identified the functional requirements common to most SMBs across sales, marketing, and customer service; Opentavu carries that work forward by re-imagining how those functional requirements should be executed when artificial intelligence is available as a first-class capability rather than a bolted-on extension.
 
 ---
 
@@ -40,13 +40,13 @@ The mainstream narrative of 2024-2026 has been that "every business will use AI.
 
 The combination of these three factors creates a structural exclusion: the businesses that most need productivity gains from AI — small firms competing with larger ones on the basis of agility — are the ones least likely to obtain them.
 
-OpenTavu exists to close that implementation gap.
+Opentavu exists to close that implementation gap.
 
 ---
 
 ## 3. Pain Points: What the Evidence Shows
 
-OpenTavu is not designed from intuition. The selection of initial modules and the architecture of the base data model are anchored in a review of:
+Opentavu is not designed from intuition. The selection of initial modules and the architecture of the base data model are anchored in a review of:
 
 - The Master's thesis methodology (González Villani & Lasso Cortés, 2017), which empirically validated functional requirements for SMB CRM adoption with three Colombian SMBs and a panel of ITIL experts.
 - A 2026 review of professional services CRM literature, including comparative reviews on G2 and Capterra, industry guides from BigTime, Productive, Drum, OnePageCRM, Capsule, 4Degrees, Theo, DelveAnt, and Consulting Success, and feature analyses from CMap and Business News Daily.
@@ -62,38 +62,38 @@ Seven concrete pain points emerged consistently across these sources for profess
 
 **Pain #4 — Follow-up discipline degrades as relationships scale.** Activity reminders that prevent missed follow-ups on proposals and client engagements are repeatedly cited as a common pain point for busy consultants. As consultants scale relationships from dozens to hundreds of contacts, the cognitive load exceeds what unassisted human memory can sustain. The structural problem is not forgetting to set an Outlook reminder — it is the absence of an algorithmic alert when a strategic relationship has fallen below an optimal interaction threshold (Theo CRM, 2026; Close, 2026).
 
-**Pain #5 — Time tracking and capacity visibility are persistent gaps.** Tracking time and expenses is consistently identified as a pain point for firms in professional services. Capacity visibility — knowing which team members are available and for how long — is described as one of the most valuable yet often overlooked CRM features in the segment. Standard CRMs typically lack native billable-hour tracking or resource allocation, forcing consulting firms to rely on separate tools (CMap, 2026; BigTime, 2026; DelveAnt, 2026). OpenTavu addresses this through integration with specialized PSA tools rather than native implementation (see scope boundary in Section 9).
+**Pain #5 — Time tracking and capacity visibility are persistent gaps.** Tracking time and expenses is consistently identified as a pain point for firms in professional services. Capacity visibility — knowing which team members are available and for how long — is described as one of the most valuable yet often overlooked CRM features in the segment. Standard CRMs typically lack native billable-hour tracking or resource allocation, forcing consulting firms to rely on separate tools (CMap, 2026; BigTime, 2026; DelveAnt, 2026). Opentavu addresses this through integration with specialized PSA tools rather than native implementation (see scope boundary in Section 9).
 
 **Pain #6 — Email and meeting context is lost.** Consultants often do not update the CRM after calls and meetings, losing critical context. Without integrated email capture, different team members hold different fragments of the conversation history, and clients receive inconsistent information. Tactical knowledge about budgets, objections, and political risks remains trapped in individual email threads, inaccessible to the firm as an entity (DelveAnt, 2026; SigParser, 2025).
 
 **Pain #7 — RFP and questionnaire fatigue.** Corporate procurement increasingly requires boutique firms to respond to extensive Request for Proposal documents (RFPs), Due Diligence Questionnaires (DDQs), and information-security assessments before winning contracts. Industry data indicates teams spend an average of 36 hours responding to a single RFP, with management consulting leading globally in submission volume. The workflow involves downloading complex documents, extracting requirements, searching past responses, and coordinating with solution engineers. Non-standard proposals and questionnaires effectively paralyze small firms; the lack of an intelligent system that categorizes requirements and generates first drafts based on corporate knowledge severely limits the volume of bids a 20-person firm can pursue. AI specialized in RFP analysis has been shown to reduce response times by 40–60%, allowing firms to participate in more opportunities without expanding headcount (industry RFP automation studies, 2025–2026).
 
-These seven pain points anchor the design of OpenTavu. The three initial AI modules (Section 8) are selected to address Pains #1, #4, and #6 directly. The base data model and commercial flow (Section 7) are designed to mitigate Pains #1, #2, and #4. Future modules on the roadmap (Section 8) address Pains #3, #5, and #7.
+These seven pain points anchor the design of Opentavu. The three initial AI modules (Section 8) are selected to address Pains #1, #4, and #6 directly. The base data model and commercial flow (Section 7) are designed to mitigate Pains #1, #2, and #4. Future modules on the roadmap (Section 8) address Pains #3, #5, and #7.
 
 ---
 
 ## 4. The Vision: AI-First, Not AI-Bolted-On
 
-The central design principle of OpenTavu is that artificial intelligence is treated as a **first-class element of the CRM workflow**, not a feature added on top of a traditional CRM.
+The central design principle of Opentavu is that artificial intelligence is treated as a **first-class element of the CRM workflow**, not a feature added on top of a traditional CRM.
 
 The distinction matters in practice:
 
 - **AI-bolted-on:** An incoming case is created by a human, categorized by a human, assigned by a human, drafted by a human. Then, somewhere in the workflow, an AI assistant is offered to "help" — usually as a sidebar or a button. The human remains the default agent of every action.
 - **AI-first:** An incoming case arrives. The categorization is performed by AI with confidence thresholds, validated against the active typifications of the CRM, and only escalated to a human when confidence is insufficient or an exception is detected. The draft response is generated by AI based on the customer's history and the case context, presented to a human for review and editing rather than for composition. The AI is the default first responder; the human is the editor and the exception handler.
 
-OpenTavu is opinionated about this. The base data model, the automation flows, and the canvas apps are designed assuming AI is part of the operational loop. Removing the AI components leaves a functional CRM, but the design is meant to be experienced with AI active.
+Opentavu is opinionated about this. The base data model, the automation flows, and the canvas apps are designed assuming AI is part of the operational loop. Removing the AI components leaves a functional CRM, but the design is meant to be experienced with AI active.
 
 This posture has direct implications:
 
 - **Confidence and validation are first-order concerns.** Every AI output that affects a record passes through validation (against active typifications, against business rules, against confidence thresholds) before persistence. Hallucinations are treated as a risk to be engineered against, not a feature to be excused.
-- **The economic envelope drives architecture.** OpenTavu is designed to operate on Power Apps Premium (~US$20 per user per month for the platform, plus pay-as-you-go Azure OpenAI consumption typically in the US$20–US$200/month range for an SMB), without requiring Dynamics 365 enterprise licensing. This is not a workaround; it is a deliberate architectural choice. The base entities use Dataverse standard tables where applicable (`account`, `contact`) and custom tables (`tavu_lead`, `tavu_opportunity`, `tavu_case`, `tavu_proposal`, `tavu_knowledge_article`, `tavu_systemsettings`) for entities that would otherwise be tied to Dynamics 365 licensing restrictions or for product-level configuration.
-- **The framework is meant to be implemented by consultants, not end users.** The audience that downloads, evaluates, forks, and recommends OpenTavu is the Power Platform consultant and integrator community. SMB end users consume the result — a working AI-first CRM in their tenant — but they do not interact with GitHub. This shapes how the documentation is written and how releases are packaged.
+- **The economic envelope drives architecture.** Opentavu is designed to operate on Power Apps Premium (~US$20 per user per month for the platform, plus pay-as-you-go Azure OpenAI consumption typically in the US$20–US$200/month range for an SMB), without requiring Dynamics 365 enterprise licensing. This is not a workaround; it is a deliberate architectural choice. The base entities use Dataverse standard tables where applicable (`account`, `contact`) and custom tables (`tavu_lead`, `tavu_opportunity`, `tavu_case`, `tavu_proposal`, `tavu_knowledge_article`, `tavu_systemsettings`) for entities that would otherwise be tied to Dynamics 365 licensing restrictions or for product-level configuration.
+- **The framework is meant to be implemented by consultants, not end users.** The audience that downloads, evaluates, forks, and recommends Opentavu is the Power Platform consultant and integrator community. SMB end users consume the result — a working AI-first CRM in their tenant — but they do not interact with GitHub. This shapes how the documentation is written and how releases are packaged.
 
 ---
 
 ## 5. Academic Foundation: From Thesis (2017) to Production (2026)
 
-OpenTavu is the applied evolution of a 2017 Master's thesis at Universidad Icesi (Cali, Colombia), titled *"Modelo para la selección, gestión y operación de sistemas que permitan efectuar la gestión de clientes en la nube para las PYMES"* (Model for the Selection, Management, and Operation of Cloud Customer Management Systems for SMEs).
+Opentavu is the applied evolution of a 2017 Master's thesis at Universidad Icesi (Cali, Colombia), titled *"Modelo para la selección, gestión y operación de sistemas que permitan efectuar la gestión de clientes en la nube para las PYMES"* (Model for the Selection, Management, and Operation of Cloud Customer Management Systems for SMEs).
 
 The thesis, co-authored with Ginna Marcela Lasso Cortés under the advisorship of Álvaro Pachón de la Cruz, PhD, produced a two-phase model:
 
@@ -103,9 +103,9 @@ The thesis, co-authored with Ginna Marcela Lasso Cortés under the advisorship o
 
 What the thesis identified — and what remains substantially unchanged in 2026 — is the set of functional requirements that most SMBs share across sales, marketing, and customer service operations. The names of the products have shifted, the deployment models have moved from cloud-as-novelty to cloud-as-default, but the underlying functional needs are remarkably stable.
 
-What has changed, and what OpenTavu addresses, is **how those functional requirements should be executed**. In 2017, generative AI was not a viable production capability. In 2026, it is. OpenTavu is the natural next step of the thesis: taking the same functional foundation and re-implementing it under the assumption that AI capabilities are part of the operational loop from day one.
+What has changed, and what Opentavu addresses, is **how those functional requirements should be executed**. In 2017, generative AI was not a viable production capability. In 2026, it is. Opentavu is the natural next step of the thesis: taking the same functional foundation and re-implementing it under the assumption that AI capabilities are part of the operational loop from day one.
 
-This connection is not decorative. The thesis methodology directly informs OpenTavu's functional coverage map (Section 9) and its design principle of explicit validation against business rules and active configurations.
+This connection is not decorative. The thesis methodology directly informs Opentavu's functional coverage map (Section 9) and its design principle of explicit validation against business rules and active configurations.
 
 The thesis is publicly available through Universidad Icesi's institutional repository (citation will be linked once the public URL is confirmed) and is referenced in the author's professional profile.
 
@@ -113,31 +113,31 @@ The thesis is publicly available through Universidad Icesi's institutional repos
 
 ## 6. Architecture and Design Principles
 
-OpenTavu follows seven design principles.
+Opentavu follows seven design principles.
 
-**1. Operate within Power Apps Premium licensing.** OpenTavu uses a deliberate mixed-table architecture: Dataverse standard tables (`account`, `contact`) for entities that are not licensing-restricted, plus custom tables (`tavu_*` namespace) for entities that would otherwise require Dynamics 365 licensing. This is a deliberate architectural decision that allows the framework to run on Power Apps Premium licensing (~US$20 per user per month) rather than requiring Dynamics 365 enterprise licensing (US$65–US$150+ per user per month). The economic envelope of an SMB drives the architecture, not the other way around.
+**1. Operate within Power Apps Premium licensing.** Opentavu uses a deliberate mixed-table architecture: Dataverse standard tables (`account`, `contact`) for entities that are not licensing-restricted, plus custom tables (`tavu_*` namespace) for entities that would otherwise require Dynamics 365 licensing. This is a deliberate architectural decision that allows the framework to run on Power Apps Premium licensing (~US$20 per user per month) rather than requiring Dynamics 365 enterprise licensing (US$65–US$150+ per user per month). The economic envelope of an SMB drives the architecture, not the other way around.
 
 **2. AI as a first-class workflow component.** AI invocations are implemented as custom C# Workflow Activities and Power Automate flows that participate in the CRM's standard processing pipeline. They are not external integrations called via webhook. They run inside Dataverse transactions, with proper error handling and observability.
 
 **3. Validation before persistence.** Any AI output that affects a record is validated before write. Smart Case Categorization, for example, validates the proposed category against the customer's active typification configuration, applies a confidence threshold, and only persists if both checks pass. Cases below the threshold are flagged for human review, not silently degraded.
 
-**4. Configuration over code wherever possible.** OpenTavu prefers system parameter tables, JSON configuration entities, and metadata-driven behavior over hardcoded logic. This allows a consultant to adapt the framework to a client's vocabulary and process without writing C# code in most cases.
+**4. Configuration over code wherever possible.** Opentavu prefers system parameter tables, JSON configuration entities, and metadata-driven behavior over hardcoded logic. This allows a consultant to adapt the framework to a client's vocabulary and process without writing C# code in most cases.
 
 **5. Mobile-friendly by default.** SMB sales and service teams operate on the move. The base canvas apps are designed mobile-first, with model-driven apps providing the back-office desktop experience.
 
-**6. Production-grade, not demo-grade.** OpenTavu prioritizes traceability, error logging, retry logic, token budgeting, and graceful degradation when external services are unavailable. The Smart Case Categorization module, for example, includes execution section tracking, hallucination prevention, and confidence-based routing — patterns derived from a real production deployment, not a tutorial.
+**6. Production-grade, not demo-grade.** Opentavu prioritizes traceability, error logging, retry logic, token budgeting, and graceful degradation when external services are unavailable. The Smart Case Categorization module, for example, includes execution section tracking, hallucination prevention, and confidence-based routing — patterns derived from a real production deployment, not a tutorial.
 
-**7. Documentation as a first-class deliverable.** OpenTavu is meant to be implemented by consultants who did not write it. Implementation documentation is part of every release, not an afterthought.
+**7. Documentation as a first-class deliverable.** Opentavu is meant to be implemented by consultants who did not write it. Implementation documentation is part of every release, not an afterthought.
 
 ### Why mixed-table architecture (standard + custom)
 
-OpenTavu's data model uses a deliberate combination of Dataverse standard tables and custom tables, rather than going purely custom or purely standard. The reasoning:
+Opentavu's data model uses a deliberate combination of Dataverse standard tables and custom tables, rather than going purely custom or purely standard. The reasoning:
 
 **Standard tables (`account`, `contact`)** are used because they are mature, well-indexed, integrated natively with Microsoft Graph (Outlook, Teams, Power BI), supported by the broader Power Platform ecosystem (third-party connectors, Microsoft documentation, MVPs' tutorials), and — critically — fully accessible under Power Apps Premium licensing without requiring Dynamics 365. Reinventing them as custom would lose all these advantages without producing meaningful differentiation. Microsoft itself recommends using standard tables when applicable and customizing them with additional columns rather than creating duplicate custom tables. The author follows that guidance.
 
-**Custom tables (`tavu_lead`, `tavu_opportunity`, `tavu_case`, `tavu_proposal`, `tavu_knowledge_article`)** are used for entities whose Dataverse standard versions are restricted tables — meaning their use requires Dynamics 365 licensing for create, update, and delete operations. These restrictions make the standard versions unsuitable for the SMB price point OpenTavu targets. The custom versions serve the same functional purpose while remaining within Power Apps Premium licensing scope.
+**Custom tables (`tavu_lead`, `tavu_opportunity`, `tavu_case`, `tavu_proposal`, `tavu_knowledge_article`)** are used for entities whose Dataverse standard versions are restricted tables — meaning their use requires Dynamics 365 licensing for create, update, and delete operations. These restrictions make the standard versions unsuitable for the SMB price point Opentavu targets. The custom versions serve the same functional purpose while remaining within Power Apps Premium licensing scope.
 
-**Customer model coverage:** OpenTavu explicitly supports three customer models within the Professional Services SMB vertical:
+**Customer model coverage:** Opentavu explicitly supports three customer models within the Professional Services SMB vertical:
 
 - **B2B-only firms:** sell exclusively to businesses (IT consultancies, B2B agencies, software QA boutiques)
 - **B2C/individual-client firms:** sell to natural persons (some legal boutiques, independent coaches, individual wealth advisors)
@@ -149,7 +149,7 @@ A useful side effect of this architecture: a client who outgrows the SMB tier an
 
 ### Provider-agnostic AI architecture
 
-OpenTavu defaults to **Azure OpenAI** as its AI provider for three reasons: (a) architectural coherence with the Microsoft Power Platform stack, (b) unified enterprise contracts for SMB clients already on Microsoft 365 (a single Microsoft Customer Agreement covers Dataverse, Power Platform, and Azure OpenAI), and (c) authentication via Microsoft Entra ID without managing separate API key rotation across providers.
+Opentavu defaults to **Azure OpenAI** as its AI provider for three reasons: (a) architectural coherence with the Microsoft Power Platform stack, (b) unified enterprise contracts for SMB clients already on Microsoft 365 (a single Microsoft Customer Agreement covers Dataverse, Power Platform, and Azure OpenAI), and (c) authentication via Microsoft Entra ID without managing separate API key rotation across providers.
 
 However, the framework's AI invocation layer is designed as a **provider abstraction interface**. Concrete implementations for alternative providers (Anthropic Claude, Google Gemini, others) can be added without changing the modules that consume them. This protects implementations from vendor lock-in, enables comparative evaluation when a client has specific preferences, and signals senior architectural intent rather than hard dependency on a single vendor.
 
@@ -161,14 +161,14 @@ In the optional managed-service deployment, the same `IAIProvider` abstraction p
 
 A common failure mode for AI-enabled SMB applications is unbounded growth in inference costs. Microsoft pricing calculators often show illustrative low-end estimates (e.g., a few US dollars per month for small workloads), but real production deployments — particularly those involving background tasks like data hygiene, lead enrichment, historical email analysis — can produce monthly costs an order of magnitude higher if naively implemented. For an SMB operating on tight margins, an unexpected Azure invoice will end adoption faster than any technical defect.
 
-OpenTavu builds in cost-defensive patterns from day one:
+Opentavu builds in cost-defensive patterns from day one:
 
 - **Batch processing for asynchronous workloads.** Tasks that do not require real-time response (overnight database normalization, retroactive email analysis, periodic relationship-health computation) are routed through the **Azure OpenAI Batch API**, which Microsoft prices at approximately half the rate of synchronous calls and avoids per-minute rate limit pressure.
 - **Token budgeting per module.** Each module declares a token budget; if exceeded within a configurable window, non-critical operations are deferred or downgraded to a smaller model.
 - **Confidence-gated operations.** Operations with low expected utility (e.g., re-enriching a contact whose data has not changed) are skipped, not queued.
 - **Configurable model tiers per task.** High-precision tasks (SOW drafting in a future module) use higher-capability models; routine tasks (case categorization, activity extraction) use cost-efficient models. The provider abstraction interface makes this swappable.
 
-These patterns are documented in the framework's implementation guide so that consultants deploying OpenTavu in client tenants can configure budgets appropriate to that client.
+These patterns are documented in the framework's implementation guide so that consultants deploying Opentavu in client tenants can configure budgets appropriate to that client.
 
 ### A note on first-party AI assistants (Microsoft Copilot for Sales, Salesforce Einstein, etc.)
 
@@ -178,11 +178,11 @@ The answer is two-fold: price-tier accessibility, and depth of CRM integration.
 
 **Price-tier accessibility.** Microsoft Copilot for Sales requires a Dynamics 365 Sales Enterprise license (US$95+ per user per month) plus a Copilot for Sales add-on (US$40+ per user per month) — a combined US$135+ per user per month before AI consumption costs. Salesforce Einstein and HubSpot Sales AI follow comparable patterns. These offerings are excellent for the businesses that can afford them, but they are precisely the tier from which the structural exclusion described in Section 2 arises.
 
-**Depth of CRM integration.** General-purpose AI assistants like Microsoft 365 Copilot operate primarily on user-level signals (the email currently open, the document being edited, the meeting just held). They are not deeply tied to CRM record structure or to organization-wide context. OpenTavu's modules, by contrast, operate inside Dataverse: they read from and write to specific records, validate against organization-specific configuration (typifications, configurable pipeline stages, business rules), and treat the CRM as the system of record rather than a reference.
+**Depth of CRM integration.** General-purpose AI assistants like Microsoft 365 Copilot operate primarily on user-level signals (the email currently open, the document being edited, the meeting just held). They are not deeply tied to CRM record structure or to organization-wide context. Opentavu's modules, by contrast, operate inside Dataverse: they read from and write to specific records, validate against organization-specific configuration (typifications, configurable pipeline stages, business rules), and treat the CRM as the system of record rather than a reference.
 
-OpenTavu is not designed to outperform Copilot for Sales feature-for-feature; it is designed to bring AI-augmented CRM workflow to the SMB price tier (~US$20 per user per month + AI consumption), with deeper CRM-record integration than general-purpose assistants. That is a different segment of the market and a different value proposition. Where a client has the budget for Dynamics 365 Sales Enterprise and Copilot for Sales, that is often the right choice; where they do not, OpenTavu exists.
+Opentavu is not designed to outperform Copilot for Sales feature-for-feature; it is designed to bring AI-augmented CRM workflow to the SMB price tier (~US$20 per user per month + AI consumption), with deeper CRM-record integration than general-purpose assistants. That is a different segment of the market and a different value proposition. Where a client has the budget for Dynamics 365 Sales Enterprise and Copilot for Sales, that is often the right choice; where they do not, Opentavu exists.
 
-**A note on convergence with incumbent direction.** As of 2026, major CRM vendors — HubSpot prominent among them — are publicly articulating the same thesis OpenTavu is built on: that the bottleneck for AI in customer-facing operations is not model capability but the availability of business context at the moment of decision, and that AI grounded in the system of record outperforms general-purpose assistants operating on isolated signals. This convergence is corroborating evidence that the problem OpenTavu targets is real and economically significant; it is not a claim of conceptual uniqueness. OpenTavu's defensibility does not rest on the idea of context-grounded AI — that idea is now shared by well-funded incumbents. It rests on three structural factors those incumbents do not address for this segment: (1) **price tier** — incumbents embed AI in paid tiers (HubSpot's AI-bearing Hubs, Dynamics 365 Sales Enterprise + Copilot for Sales, Salesforce Einstein) priced well above the ~US$20/user + consumption envelope OpenTavu targets, which is precisely the structural exclusion described in Section 2; (2) **Microsoft/Dataverse ecosystem fit** — for an SMB already operating in Microsoft 365, OpenTavu requires no second vendor, while incumbent platforms are separate ecosystems; (3) **open-source distribution and configuration-over-code multi-tenancy** — OpenTavu is forked, deployed into the client's own tenant, and reconfigured per firm without code, a model the proprietary incumbents do not offer. The differentiator is tier, ecosystem, and distribution model — not the concept.
+**A note on convergence with incumbent direction.** As of 2026, major CRM vendors — HubSpot prominent among them — are publicly articulating the same thesis Opentavu is built on: that the bottleneck for AI in customer-facing operations is not model capability but the availability of business context at the moment of decision, and that AI grounded in the system of record outperforms general-purpose assistants operating on isolated signals. This convergence is corroborating evidence that the problem Opentavu targets is real and economically significant; it is not a claim of conceptual uniqueness. Opentavu's defensibility does not rest on the idea of context-grounded AI — that idea is now shared by well-funded incumbents. It rests on three structural factors those incumbents do not address for this segment: (1) **price tier** — incumbents embed AI in paid tiers (HubSpot's AI-bearing Hubs, Dynamics 365 Sales Enterprise + Copilot for Sales, Salesforce Einstein) priced well above the ~US$20/user + consumption envelope Opentavu targets, which is precisely the structural exclusion described in Section 2; (2) **Microsoft/Dataverse ecosystem fit** — for an SMB already operating in Microsoft 365, Opentavu requires no second vendor, while incumbent platforms are separate ecosystems; (3) **open-source distribution and configuration-over-code multi-tenancy** — Opentavu is forked, deployed into the client's own tenant, and reconfigured per firm without code, a model the proprietary incumbents do not offer. The differentiator is tier, ecosystem, and distribution model — not the concept.
 
 ### Stack at a glance
 
@@ -205,7 +205,7 @@ Most CRM platforms inherit a commercial flow originally designed for high-volume
 
 A more recent pattern, popularized by HubSpot and adopted by modern CRMs like Attio, Folk, 4Degrees, and Theo, eliminates the Lead as a separate entity entirely and uses a **Lifecycle Stage** field on the Contact record. This is closer to how professional services firms actually work, but it introduces a different problem: anonymous inbound (a form submission from someone unknown, a `sales@` email, an unsolicited message) has nowhere to land before being promoted to a full Contact and Account, which can pollute the master database with low-quality records.
 
-OpenTavu adopts a **hybrid model: Single Lifecycle, Dual Entry**.
+Opentavu adopts a **hybrid model: Single Lifecycle, Dual Entry**.
 
 > **Terminology note.** "Single Lifecycle" refers to the lifecycle of opportunities (where the commercial cycle truly lives), not to a Lifecycle Stage field on Contact. Earlier model proposals included a Lifecycle Stage on Contact (Cold → Engaged → Qualified → Customer); this approach was deprecated upon recognizing that in B2B Professional Services the commercial subject is the Account, while in B2C it is the Contact, and that representing this state through relationships with opportunities and cases is more accurate than collapsing it into a single label field on Contact. "Dual Entry" remains valid: Path A (direct Contact + Account creation) vs Path B (anonymous inbound buffered in tavu_lead).
 
@@ -239,17 +239,17 @@ This hybrid is opinionated and defensible:
 - It **gives the AI Activity Capture module a clear, valuable role:** orchestrating the promotion from buffer to master record automatically, with confidence thresholds, instead of asking the consultant to do it manually.
 - It **does not radically reinvent CRM data modeling.** It synthesizes proven patterns from Dynamics (entity separation for ingestion buffer; polymorphic customer field with auto-populated typed lookups, as used in Quote, Order, and Invoice) and from HubSpot (lifecycle tracking concepts) into a model adapted to professional services SMBs. The hybrid customer field architecture (polymorphic primary `tavu_customer` with auto-populated typed `tavu_account` and `tavu_contact`) gives both UX simplicity and reporting cleanliness — a deliberate engineering judgment, not novelty for its own sake.
 
-Implementation details (specific Choice columns, status reasons, security roles, view configurations) are documented in OpenTavu's technical guide.
+Implementation details (specific Choice columns, status reasons, security roles, view configurations) are documented in Opentavu's technical guide.
 
 ---
 
 ## 8. Initial AI Modules
 
-OpenTavu ships three AI modules. They keep their module numbers as identity labels (Module 1 was the first built and production-tested), but they are presented here across the client lifecycle, from first lead to ongoing service, which is also the order in which they build on one another. Each ships as an independently consumable component with its own documentation, configuration, and validation logic, and addresses one or more of the pain points in Section 3. The foundation comes first.
+Opentavu ships three AI modules. They keep their module numbers as identity labels (Module 1 was the first built and production-tested), but they are presented here across the client lifecycle, from first lead to ongoing service, which is also the order in which they build on one another. Each ships as an independently consumable component with its own documentation, configuration, and validation logic, and addresses one or more of the pain points in Section 3. The foundation comes first.
 
 ### Module 3 — AI Activity Capture & CRM Hygiene Assistant *(the foundation)*
 
-**Foundational, not merely additive.** OpenTavu leads with this module on purpose. Every other module, and every roadmap module, depends on a clean, context-complete record layer. AI operating on stale or partial data scales effort, not results (the "context gap"). The hygiene and capture layer is a prerequisite for the rest of the AI-first thesis, and the sequencing reflects that: capture clean, context-rich data from the first lead and the first meeting, and everything downstream inherits it.
+**Foundational, not merely additive.** Opentavu leads with this module on purpose. Every other module, and every roadmap module, depends on a clean, context-complete record layer. AI operating on stale or partial data scales effort, not results (the "context gap"). The hygiene and capture layer is a prerequisite for the rest of the AI-first thesis, and the sequencing reflects that: capture clean, context-rich data from the first lead and the first meeting, and everything downstream inherits it.
 
 **Pain addressed:** Pain #1 (manual data entry / CRM abandonment), the most cited pain point in the evidence reviewed. Also Pain #6 (lost context), and it supports the commercial flow in Section 7.
 
@@ -268,7 +268,7 @@ OpenTavu ships three AI modules. They keep their module numbers as identity labe
 
 **What it does.** Generates draft communications grounded in the customer's full CRM history, not just the message currently open. Drafts are presented to the human for review rather than auto-sent.
 
-**Live today.** The first gate is the proposal **Send to Client** email: when a proposal is sent, OpenTavu writes the client email (AI body grounded in the proposal) and attaches a branded PDF, opened for the seller to review and send. Config-gated by `tavu_proposalemaildraftenabled` (default on).
+**Live today.** The first gate is the proposal **Send to Client** email: when a proposal is sent, Opentavu writes the client email (AI body grounded in the proposal) and attaches a branded PDF, opened for the seller to review and send. Config-gated by `tavu_proposalemaildraftenabled` (default on).
 
 **How it works.** The module gathers structured context from across Dataverse, invokes the configured AI provider (Azure OpenAI by default) with a consultant-configurable prompt, and writes the generated draft for human review. The CRM-record-grounded context distinguishes this from general-purpose email assistants that operate only on the thread itself.
 
@@ -286,11 +286,11 @@ OpenTavu ships three AI modules. They keep their module numbers as identity labe
 
 **Why it matters for SMBs.** Small support teams cannot afford to spend the first 30 seconds of every case deciding where it belongs. Automating categorization frees scarce attention for the parts of service that need human judgment. In professional services this applies to RFP intake, billing inquiries, scope-change requests, and routine support; the categorization vocabulary changes per client, the pattern is universal. A natural extension toward RFP-specific intake analysis is recorded on the roadmap below.
 
-**Status.** Live. Originally production-tested in a prior deployment; the OpenTavu version is an abstracted, sanitized, and generalized re-implementation.
+**Status.** Live. Originally production-tested in a prior deployment; the Opentavu version is an abstracted, sanitized, and generalized re-implementation.
 
 ### Roadmap modules (documented but not yet built)
 
-The following modules are explicitly on the roadmap and address the remaining pain points identified in Section 3. They are documented now so OpenTavu's direction is clear, but they will not be built in the first 12 months.
+The following modules are explicitly on the roadmap and address the remaining pain points identified in Section 3. They are documented now so Opentavu's direction is clear, but they will not be built in the first 12 months.
 
 - **AI RFP & Proposal Architect** — addresses Pain #3 and Pain #7. Ingests RFP and DDQ documents, parses requirements, searches a corporate response library, and assembles first drafts of structured proposals or Statements of Work. Leverages the `tavu_proposal` entity. The strategic priority of this module is high — it addresses the costliest bottleneck for senior consultants — but the implementation complexity (template engineering, prior-content libraries, legal sensitivity) places it after the three foundational modules establish a clean data layer.
 - **AI Meeting Summarizer & Action Item Extractor** — addresses Pain #6. Takes Teams meeting transcripts (or pasted notes), generates a structured summary, extracts action items with owner and deadline, creates follow-up tasks linked to the relevant opportunity or account. Crucially, also writes structured updates back to opportunity records (e.g., new close date, identified budget) — going beyond generic transcription summaries.
@@ -300,13 +300,13 @@ The following modules are explicitly on the roadmap and address the remaining pa
 - **Document Intelligence** — automated processing of contracts, invoices, NDAs.
 - **Conversational AI Search** — natural-language querying over CRM data.
 - **AI grounding transparency (context completeness)** — surfaces, per AI-assisted operation, how many of the available grounding sources actually fed it (e.g., *"this draft used 3 of 5 available context sources: case history ✓, active opportunity ✓, meeting summaries ✗"*). It operationalizes trust — the leading adoption barrier for AI in customer-facing work — by making the AI auditable about its own grounding, and hooks natively into the existing confidence-gating. Documented as roadmap; the enabling design decision (each module emitting its grounding signal to a shared convention from the start, rather than retrofitting the telemetry later) is reserved now.
-- **Channel-agnostic activity capture** — extends Module 3's capture architecture beyond the default Microsoft Graph connectors (Outlook email, Teams meetings, calendar). Module 3 is designed so that capture sources are pluggable connectors rather than hardcoded integrations; Microsoft Graph is the default binding. Additional channels (WhatsApp Business, SMS, other messaging platforms) can be added as configurable per-tenant connectors without altering the module's core logic, consistent with OpenTavu's configuration-over-code principle. This is documented as roadmap because the initial vertical (US Professional Services SMBs) is served well by the Microsoft Graph default; channels such as WhatsApp are dominant in some non-US markets (industry data places WhatsApp among the top business communication channels in Latin America and Spain), where an implementing consultant could enable the corresponding connector. WhatsApp is therefore never product architecture — it is a connector a tenant may activate.
+- **Channel-agnostic activity capture** — extends Module 3's capture architecture beyond the default Microsoft Graph connectors (Outlook email, Teams meetings, calendar). Module 3 is designed so that capture sources are pluggable connectors rather than hardcoded integrations; Microsoft Graph is the default binding. Additional channels (WhatsApp Business, SMS, other messaging platforms) can be added as configurable per-tenant connectors without altering the module's core logic, consistent with Opentavu's configuration-over-code principle. This is documented as roadmap because the initial vertical (US Professional Services SMBs) is served well by the Microsoft Graph default; channels such as WhatsApp are dominant in some non-US markets (industry data places WhatsApp among the top business communication channels in Latin America and Spain), where an implementing consultant could enable the corresponding connector. WhatsApp is therefore never product architecture — it is a connector a tenant may activate.
 
 ---
 
 ## 9. Functional Coverage Map
 
-OpenTavu covers the functional surface area common to most professional services SMB CRM operations across three areas, derived from the 2017 thesis methodology and updated to reflect 2026 capabilities and the pain points identified in Section 3. AI-augmented capabilities are highlighted in **bold**.
+Opentavu covers the functional surface area common to most professional services SMB CRM operations across three areas, derived from the 2017 thesis methodology and updated to reflect 2026 capabilities and the pain points identified in Section 3. AI-augmented capabilities are highlighted in **bold**.
 
 ### Sales
 
@@ -348,26 +348,26 @@ OpenTavu covers the functional surface area common to most professional services
 
 - Mobile-friendly canvas apps for field roles
 - **Capacity visibility** — basic reporting on consultant availability, current commitments, and upcoming workload, supporting resource decisions during the sales-to-delivery handoff.
-- **Time tracking integration** — OpenTavu does not implement its own time-tracking engine. It integrates with specialized tools (Harvest, Toggl, Clockify, Microsoft Project, BigTime) so that time entries can be associated with opportunities and cases without duplicating data. Addresses Pain #5.
+- **Time tracking integration** — Opentavu does not implement its own time-tracking engine. It integrates with specialized tools (Harvest, Toggl, Clockify, Microsoft Project, BigTime) so that time entries can be associated with opportunities and cases without duplicating data. Addresses Pain #5.
 - Dashboards and charts (sales pipeline, conversion rates, agent performance, AI confidence metrics, time-on-engagement) delivered through **native model-driven dashboards and PCF chart controls within Power Apps Premium — no per-user BI license required**; a provider-agnostic reporting layer allows an optional open-source upgrade (Azure Synapse Link → ADLS Gen2 → Metabase) or Power BI where a client already owns it
 - Implementation documentation and consultant onboarding kit
 - Configuration entities for tenant-specific customization
 
 ### Scope boundary: CRM, not PSA
 
-**OpenTavu is a CRM AI-First framework, not a Professional Services Automation (PSA) suite.** It deliberately does not implement invoicing, expense management, full project management, or detailed resource planning. These functions are well-served by specialized tools (BigTime, Productive, Kantata, Microsoft Project, accounting suites), and reproducing them inside OpenTavu would dilute focus and inflate complexity without competitive advantage.
+**Opentavu is a CRM AI-First framework, not a Professional Services Automation (PSA) suite.** It deliberately does not implement invoicing, expense management, full project management, or detailed resource planning. These functions are well-served by specialized tools (BigTime, Productive, Kantata, Microsoft Project, accounting suites), and reproducing them inside Opentavu would dilute focus and inflate complexity without competitive advantage.
 
-OpenTavu's role in the SMB tech stack is to be the **system of record for client relationships and AI-augmented operational workflow**, integrated cleanly with PSA, accounting, and project tools rather than replacing them. This boundary is deliberate.
+Opentavu's role in the SMB tech stack is to be the **system of record for client relationships and AI-augmented operational workflow**, integrated cleanly with PSA, accounting, and project tools rather than replacing them. This boundary is deliberate.
 
 ---
 
 ## 10. Roadmap and 12-Month Public Commitments
 
-This section commits to specific, modest, defensible targets for the first 12 months of OpenTavu's public life. These commitments are public on purpose: they exist to be evaluated against actual progress.
+This section commits to specific, modest, defensible targets for the first 12 months of Opentavu's public life. These commitments are public on purpose: they exist to be evaluated against actual progress.
 
 ### Concrete commitments (controllable)
 
-- **Implement OpenTavu with 2–3 SMB clients** in the professional services vertical, with documented metrics and formal written permission to publish results.
+- **Implement Opentavu with 2–3 SMB clients** in the professional services vertical, with documented metrics and formal written permission to publish results.
 - **Publish at least 3 long-form technical articles** documenting the architecture, implementation, and lessons learned — through LinkedIn Articles, Microsoft Tech Community, or equivalent platforms.
 - **Deliver 1–2 public talks** at Power Platform user groups or technical conferences.
 - **Maintain an active GitHub repository** with documented releases, complete technical documentation, and timely engagement with community questions and issues.
@@ -378,7 +378,7 @@ This section commits to specific, modest, defensible targets for the first 12 mo
 - **20–50 GitHub stars** in the first 12 months
 - **3–8 forks**
 - **2–5 substantive issues or discussions** opened by external contributors
-- **1–3 public mentions** of OpenTavu by people outside the author's direct network
+- **1–3 public mentions** of Opentavu by people outside the author's direct network
 - **3–5 public testimonials** from verifiable individuals (Microsoft MVPs, recognized Power Platform consultants, academic faculty) who have reviewed, commented on, or validated the framework
 
 ### Qualitative direction (no specific numbers)
@@ -387,27 +387,27 @@ This section commits to specific, modest, defensible targets for the first 12 mo
 - Recognition within the Microsoft Power Platform community as a reference framework for AI-enabled CRM in small and mid-market businesses
 - Citations or references in academic or industry publications
 
-These commitments will be reviewed and reported transparently in OpenTavu's public roadmap at opentavu.com.
+These commitments will be reviewed and reported transparently in Opentavu's public roadmap at opentavu.com.
 
 ---
 
 ## 11. How to Contribute and Adopt
 
-OpenTavu is open-source under the MIT license, and the framework itself is free — this open contribution to the Power Platform ecosystem is the point. There is no commercial license tier or enterprise edition of the framework. Two adoption paths coexist: (a) a consultant or integrator downloads it from GitHub and deploys it into a client's own tenant, and (b) an optional **managed service** — offered by the author and, in time, other partners — in which the provider hosts the shared AI and scheduling infrastructure so a client with no technical team can adopt the CRM for a single per-user price. The managed service is a **vehicle for adoption and impact, not a gate on the technology**: the framework remains fully usable and free on its own. (Architecture of the managed layer is documented in `architecture.md`.)
+Opentavu is open-source under the MIT license, and the framework itself is free — this open contribution to the Power Platform ecosystem is the point. There is no commercial license tier or enterprise edition of the framework. Two adoption paths coexist: (a) a consultant or integrator downloads it from GitHub and deploys it into a client's own tenant, and (b) an optional **managed service** — offered by the author and, in time, other partners — in which the provider hosts the shared AI and scheduling infrastructure so a client with no technical team can adopt the CRM for a single per-user price. The managed service is a **vehicle for adoption and impact, not a gate on the technology**: the framework remains fully usable and free on its own. (Architecture of the managed layer is documented in `architecture.md`.)
 
 ### For SMB business leaders
 
-If you are a small or mid-market business considering an AI-first CRM, OpenTavu is meant to be deployed by a consultant or integrator who downloads it, configures it for your tenant, and provides ongoing support. You will need:
+If you are a small or mid-market business considering an AI-first CRM, Opentavu is meant to be deployed by a consultant or integrator who downloads it, configures it for your tenant, and provides ongoing support. You will need:
 
 - A Microsoft 365 tenant with Power Apps Premium licenses (per user)
-- An Azure subscription with Azure OpenAI access (or willingness to provision one), or an alternative AI provider via OpenTavu's provider-agnostic interface — **unless** you adopt via the managed service, in which case the provider supplies the AI layer and you configure nothing
+- An Azure subscription with Azure OpenAI access (or willingness to provision one), or an alternative AI provider via Opentavu's provider-agnostic interface — **unless** you adopt via the managed service, in which case the provider supplies the AI layer and you configure nothing
 - An implementation partner — the author, a consultant from the Power Platform ecosystem, or your existing Microsoft partner
 
 Contact the author through LinkedIn or via the repository's discussions for an introduction or implementation referral.
 
 ### For consultants and integrators
 
-You can clone or fork the repository, evaluate OpenTavu, adapt it for a client engagement, and contribute improvements back. Contributions welcomed include:
+You can clone or fork the repository, evaluate Opentavu, adapt it for a client engagement, and contribute improvements back. Contributions welcomed include:
 
 - Bug reports and reproductions
 - New AI modules or extensions of existing ones
@@ -420,11 +420,11 @@ Contribution guidelines are in `CONTRIBUTING.md`.
 
 ### For Microsoft MVPs and the Power Platform community
 
-Reviews, technical critique, and feedback on architectural choices are explicitly invited. OpenTavu is opinionated, but the opinions are open to revision based on community input. Feel free to open an issue, write a review, or reach out directly.
+Reviews, technical critique, and feedback on architectural choices are explicitly invited. Opentavu is opinionated, but the opinions are open to revision based on community input. Feel free to open an issue, write a review, or reach out directly.
 
 ### License and warranty
 
-OpenTavu is released under the **MIT License**. It is provided as-is, without warranty of any kind, express or implied. This is a community framework; production deployments require independent evaluation, testing, and adaptation to the specific environment.
+Opentavu is released under the **MIT License**. It is provided as-is, without warranty of any kind, express or implied. This is a community framework; production deployments require independent evaluation, testing, and adaptation to the specific environment.
 
 ---
 
@@ -489,6 +489,7 @@ OpenTavu is released under the **MIT License**. It is provided as-is, without wa
 | 1.0 | July 2026 | Gustavo González Villani (revision with Claude) | Commercial-model clarification: framed OpenTavu as two coexisting layers — the free MIT open-source framework (the contribution to the field) plus an **optional managed service** in which the provider hosts a shared AI/scheduling gateway so SMBs without a technical team adopt for a single per-user price. Positioned the managed service as a vehicle for adoption and impact, not a gate on the technology. Added a light note in Section 6 (provider-agnostic AI) that the same `IAIProvider` abstraction can point at a central AI gateway in the managed deployment. Detailed architecture (multi-tenant, S2S auth, config split, onboarding, SLA scheduler) lives in the new `architecture.md`. |
 | 1.2 | August 2026 | Gustavo González Villani (revision with Claude) | Forecasting and analytics decisions from two triangulated deep-research rounds (ChatGPT + Gemini) — full detail in `Research/Sales_Model/Forecasting-Design-Proposal-OpenTavu.md` and `Analytics-Design-Proposal-OpenTavu.md`. (1) **Analytics layer is provider-agnostic and no longer assumes Power BI**: Stack at a glance and Section 9 now specify native model-driven dashboards + PCF (ECharts/Recharts) charts reading pre-aggregated snapshot/cache tables, entirely within Power Apps Premium (no per-user BI license); optional OSS upgrade via Azure Synapse Link → ADLS Gen2 → Metabase, or Power BI only where a client already owns it. Rationale: embedded Power BI requires a per-viewer Pro/PPU license (or ~$5k/mo F64 capacity), breaking the SMB envelope. (2) **AI-Assisted Forecasting roadmap entry (Section 8) revised**: separated a deterministic goal/quota & attainment layer (ships early, no AI/no history) from an AI layer using Empirical-Bayes probability calibration (industry prior → shrink to firm data from ~10–50 deals) instead of a fixed 30-deal recompute, plus Batch-API deal-risk/slippage detection over Module 3 activity. (3) **Section 9 Sales**: added sales goals/quota & attainment (gap-to-goal, win-rate-derived ~2× coverage, pacing over weekly snapshots) and noted the forecast category defaults from stage but is settable per opportunity by the seller. (4) **Renamed the roadmap module to "AI-Assisted Forecasting"** (dropped "& Capacity Planning"); capacity reframed as light integration-fed visibility, not a resource-planning engine, per the CRM-not-PSA boundary. |
 | 1.3 | September 2026 | Gustavo González Villani (revision with Claude) | Documentation sync after the first public release (v1.0.0, September 21, 2026): header version corrected (it still read v0.9 while the changelog had reached 1.2); the deterministic layer of AI-Assisted Forecasting (targets, attainment, snapshots, cache-fed dashboard) marked as live in Section 8 and Section 9, with the AI layer (Empirical-Bayes calibration, deal-risk detection) kept on the roadmap. No design change. |
+| 1.4 | October 2026 | Gustavo González Villani (revision with Claude) | Brand spelling: the product is written **Opentavu** on public, commercial text (Decision 55 of the product master). Code identifiers, Dataverse solution names (for example the OpenTavu Integrations package), file names and earlier changelog rows keep their original spelling. |
 
-This document is meant to be revised as OpenTavu evolves. Substantive changes will be tracked here.
+This document is meant to be revised as Opentavu evolves. Substantive changes will be tracked here.
 *Feedback and critique welcomed via the repository's Discussions tab or directly to the author through LinkedIn.*
