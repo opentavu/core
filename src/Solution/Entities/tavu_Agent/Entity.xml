@@ -722,6 +722,90 @@
             <Description description="Modo Proponer: minutos antes de enviar el mensaje de espera (por defecto 5)." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_BookingsBusiness">
+          <Type>nvarchar</Type>
+          <Name>tavu_bookingsbusiness</Name>
+          <LogicalName>tavu_bookingsbusiness</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>text</Format>
+          <MaxLength>320</MaxLength>
+          <Length>640</Length>
+          <displaynames>
+            <displayname description="Bookings Business" languagecode="1033" />
+            <displayname description="Negocio de Bookings" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Microsoft Bookings business where the agent books meetings (its email address or id). Empty, or no service ID: the agent sends the booking URL instead." languagecode="1033" />
+            <Description description="Negocio de Microsoft Bookings donde el agente agenda reuniones (su correo o id). Vacío, o sin ID de servicio: el agente envía la URL de reserva." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_BookingsServiceId">
+          <Type>nvarchar</Type>
+          <Name>tavu_bookingsserviceid</Name>
+          <LogicalName>tavu_bookingsserviceid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>text</Format>
+          <MaxLength>100</MaxLength>
+          <Length>200</Length>
+          <displaynames>
+            <displayname description="Bookings Service ID" languagecode="1033" />
+            <displayname description="ID del servicio de Bookings" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="ID of the Bookings service the agent books (duration, hours and lead times come from the service). Empty, or no business: the agent sends the booking URL instead." languagecode="1033" />
+            <Description description="ID del servicio de Bookings que agenda el agente (la duración, el horario y los plazos vienen del servicio). Vacío, o sin negocio: el agente envía la URL de reserva." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_BookingUrl">
           <Type>nvarchar</Type>
           <Name>tavu_bookingurl</Name>
@@ -962,8 +1046,8 @@
             <displayname description="Mensaje de espera" languagecode="3082" />
           </displaynames>
           <Descriptions>
-            <Description description="Propose mode: sent once when a draft waits longer than the approval timeout." languagecode="1033" />
-            <Description description="Modo Proponer: se envía una vez cuando un borrador espera más que el tiempo de aprobación." languagecode="3082" />
+            <Description description="Propose mode: sent once when a draft waits longer than the approval timeout. One line per language allowed (en: ..., es: ...); the line in the conversation's language is sent." languagecode="1033" />
+            <Description description="Modo Proponer: se envía una vez cuando un borrador espera más que el tiempo de aprobación. Admite una línea por idioma (en: ..., es: ...); se envía la del idioma de la conversación." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_Mode">
@@ -1086,8 +1170,8 @@
             <displayname description="Mensaje de siguiente paso" languagecode="3082" />
           </displaynames>
           <Descriptions>
-            <Description description="The concrete commitment sent at handoff." languagecode="1033" />
-            <Description description="El compromiso concreto que se envía en el traspaso." languagecode="3082" />
+            <Description description="The concrete commitment sent at handoff. One line per language allowed (en: ..., es: ...); the line in the conversation's language is sent." languagecode="1033" />
+            <Description description="El compromiso concreto que se envía en el traspaso. Admite una línea por idioma (en: ..., es: ...); se envía la del idioma de la conversación." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_OutOfHoursMessage">
@@ -1127,8 +1211,8 @@
             <displayname description="Mensaje fuera de horario" languagecode="3082" />
           </displaynames>
           <Descriptions>
-            <Description description="Sent once when a message arrives outside working hours." languagecode="1033" />
-            <Description description="Se envía una vez cuando llega un mensaje fuera del horario laboral." languagecode="3082" />
+            <Description description="Sent once when a message arrives outside working hours. One line per language allowed (en: ..., es: ...); the line in the conversation's language is sent." languagecode="1033" />
+            <Description description="Se envía una vez cuando llega un mensaje fuera del horario laboral. Admite una línea por idioma (en: ..., es: ...); se envía la del idioma de la conversación." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_TokenBudget">

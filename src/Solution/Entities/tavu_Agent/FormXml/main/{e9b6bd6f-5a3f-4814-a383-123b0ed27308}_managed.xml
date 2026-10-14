@@ -230,14 +230,6 @@
                     <row />
                     <row />
                     <row>
-                      <cell id="{af31d237-bdcc-4b9f-8256-ef5aa375eee6}" locklevel="0" colspan="1" rowspan="1">
-                        <labels>
-                          <label description="" languagecode="1033" />
-                        </labels>
-                        <control id="tavu_bookingurl" classid="{71716B6C-711E-476C-8AB8-5D11542BFB47}" datafieldname="tavu_bookingurl" disabled="false" />
-                      </cell>
-                    </row>
-                    <row>
                       <cell id="{8ca67018-4163-418b-b486-8939ed94bdb5}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
@@ -249,6 +241,38 @@
                     <row />
                     <row />
                     <row />
+                  </rows>
+                </section>
+                <section name="section_booking" id="{1c679290-d54b-4eee-8480-5f2faf41eda1}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Booking" languagecode="1033" />
+                    <label description="Reserva de reuniones" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{ebbc73eb-6acf-4901-ae07-e49709bf05b4}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_bookingsbusiness" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_bookingsbusiness" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{868a4539-5b51-4c44-a850-2b6f17a77018}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_bookingsserviceid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_bookingsserviceid" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{af31d237-bdcc-4b9f-8256-ef5aa375eee6}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_bookingurl" classid="{71716B6C-711E-476C-8AB8-5D11542BFB47}" datafieldname="tavu_bookingurl" disabled="false" />
+                      </cell>
+                    </row>
                   </rows>
                 </section>
               </sections>

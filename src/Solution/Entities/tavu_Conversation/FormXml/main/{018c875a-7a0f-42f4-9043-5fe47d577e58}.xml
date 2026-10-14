@@ -123,6 +123,28 @@
                     <row />
                     <row />
                     <row />
+                    <row>
+                      <cell id="{4a8ae3fd-beaf-4676-9455-1f2c6d1e693d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="Appointment ID" languagecode="1033" />
+                          <label description="ID de la cita" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_appointmentid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_appointmentid" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{620fd49f-984b-40b7-8b48-43cb995f463b}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="Booking State" languagecode="1033" />
+                          <label description="Estado de la reserva" languagecode="3082" />
+                        </labels>
+                        <control id="tavu_booking" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_booking" disabled="true" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                   </rows>
                 </section>
                 <section name="section_answers" id="{c3dea3d1-0601-4756-9ab8-ef6ef9e8e2ed}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">

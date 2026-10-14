@@ -263,6 +263,32 @@ On **Send to Client**, OpenTavu drafts the client email (AI body grounded in the
 
 > ✅ **Checkpoint:** on a Sent proposal, the email draft opens with the branded PDF attached.
 
+### 6.8 Lead Qualification Agent: in-chat booking (optional)
+
+The Lead Qualification Agent (WhatsApp, through the gateway) can book the first meeting in the chat with Microsoft Bookings. Without it, a qualified person gets the agent's next-step message with the **Booking URL**.
+
+1. In Microsoft Bookings, create the business (shared booking page) and the service for the first call: its duration, time-slot interval, minimum lead time, maximum advance and hours, and **online meeting** on. Turn on sending meeting invites to customers if the person should get a calendar invitation. The agent takes all of these from Bookings, never from OpenTavu.
+2. In the Entra app the gateway uses, add the Microsoft Graph **application** permissions **Bookings.Read.All** and **BookingsAppointment.ReadWrite.All**, and have an administrator of the tenant where the Bookings business lives grant admin consent. These permissions are tenant-wide: the gateway could read and book in any Bookings business of that tenant, and it only uses the one set on the agent. A gateway that serves several tenants needs the consent again in each tenant.
+   If the tenant restricts the gateway app to a group of mailboxes with an Exchange Online Application Access Policy (`RestrictAccess`), add the Bookings business mailbox to that group (and the staff members' mailboxes, if that proves necessary). Without it, availability works but creating the appointment returns HTTP 500 `UnknownError` with an empty message, and the conversation's transcript shows a hint about the access policy. In Exchange Online PowerShell:
+
+   ```powershell
+   Connect-ExchangeOnline
+   # Is the gateway app restricted? Note the group in PolicyScopeGroupId.
+   Get-ApplicationAccessPolicy | Where-Object AppId -eq "<gateway app id>" | Format-List AppId, PolicyScopeGroupId, AccessRight, Description
+   # Can the app reach the Bookings mailbox? Denied is the problem.
+   Test-ApplicationAccessPolicy -Identity "<bookings business mailbox>" -AppId "<gateway app id>"
+   # Allow it: add the Bookings mailbox to the policy's group, then test again until it says Granted.
+   Add-DistributionGroupMember -Identity "<policy group>" -Member "<bookings business mailbox>"
+   ```
+
+   Graph can take an hour or more to apply the change (Exchange caches app permissions for 30 minutes to 2 hours), even when `Test-ApplicationAccessPolicy` already says Granted. Microsoft now recommends RBAC for Applications, which replaces Application Access Policies; with it, the Bookings mailbox must be inside the app's management scope. The gateway repository's `tools/bookings-probe.ps1` checks all of this with the gateway's own identity.
+3. On the agent (**Booking** section), set **Bookings Business** (the business's id or SMTP address) and **Bookings Service ID** (the service's id, from Microsoft Graph). Keep **Booking URL** set: it is the fallback when the booking cannot be completed in the chat. Leave both Bookings columns empty to keep booking off.
+4. Add a qualification criterion for the email with **Lead Field** `tavu_email`, optional and with weight 0. The agent never asks it while qualifying; it asks it at booking time only if the person has not given it.
+
+The conversation shows the result: **Appointment ID** and **Booking State** on the conversation form, and the outcome reason "meeting booked" or "qualified, booking not completed".
+
+> ✅ **Checkpoint:** qualify a test conversation from a phone; the agent offers 3 times, books the chosen one, the invitation arrives with the Teams link, and the appointment's internal notes carry the qualification summary.
+
 ## 7. SLA matrix and business calendars
 
 When a case is categorized, the `Pl.Case.SlaAssignment` plugin looks up the SLA for the case's **Tier and Type**, then computes response and resolution target dates against a **business calendar**. Configure calendars first, then the SLA matrix.
