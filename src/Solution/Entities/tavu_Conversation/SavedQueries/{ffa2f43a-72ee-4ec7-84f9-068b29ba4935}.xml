@@ -12,11 +12,13 @@
         <row name="result" id="tavu_conversationid">
           <cell name="tavu_name" width="200" />
           <cell name="tavu_channel" width="100" />
+          <cell name="tavu_displayname" width="150" />
           <cell name="statuscode" width="130" />
+          <cell name="tavu_outcomereason" width="250" />
           <cell name="tavu_score" width="70" />
           <cell name="tavu_intent" width="90" />
           <cell name="tavu_lead" width="150" />
-          <cell name="modifiedon" width="140" />
+          <cell name="tavu_lastinboundon" width="140" />
         </row>
       </grid>
     </layoutxml>
@@ -27,12 +29,14 @@
           <attribute name="tavu_conversationid" />
           <attribute name="tavu_name" />
           <attribute name="tavu_channel" />
+          <attribute name="tavu_displayname" />
           <attribute name="statuscode" />
+          <attribute name="tavu_outcomereason" />
           <attribute name="tavu_score" />
           <attribute name="tavu_intent" />
           <attribute name="tavu_lead" />
-          <attribute name="modifiedon" />
-          <order attribute="modifiedon" descending="true" />
+          <attribute name="tavu_lastinboundon" />
+          <order attribute="tavu_lastinboundon" descending="true" />
           <filter type="and">
             <condition attribute="statecode" operator="eq" value="1" />
           </filter>

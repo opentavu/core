@@ -113,34 +113,29 @@
                     <row />
                     <row />
                     <row />
-                    <row>
-                      <cell id="{4a8ae3fd-beaf-4676-9455-1f2c6d1e693d}" locklevel="0" colspan="1" rowspan="1">
-                        <labels>
-                          <label description="" languagecode="1033" />
-                        </labels>
-                        <control id="tavu_appointmentid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_appointmentid" disabled="true" />
-                      </cell>
-                    </row>
-                    <row>
-                      <cell id="{620fd49f-984b-40b7-8b48-43cb995f463b}" locklevel="0" colspan="1" rowspan="5">
-                        <labels>
-                          <label description="" languagecode="1033" />
-                        </labels>
-                        <control id="tavu_booking" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_booking" disabled="true" />
-                      </cell>
-                    </row>
-                    <row />
-                    <row />
-                    <row />
-                    <row />
                   </rows>
                 </section>
                 <section name="section_answers" id="{c3dea3d1-0601-4756-9ab8-ef6ef9e8e2ed}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
-                    <label description="Captured Answers" languagecode="1033" />
-                    <label description="Respuestas capturadas" languagecode="3082" />
+                    <label description="Summary" languagecode="1033" />
+                    <label description="Resumen" languagecode="3082" />
                   </labels>
                   <rows>
+                    <row>
+                      <cell id="{0aba502a-698e-4433-a7d7-600d0769faac}" locklevel="0" colspan="1" rowspan="8">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_summary" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_summary" disabled="true" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
                     <row>
                       <cell id="{55f336a6-d367-48c2-b788-5ce4672a3145}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
@@ -149,18 +144,6 @@
                         <control id="tavu_lastmessagepreview" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_lastmessagepreview" disabled="true" />
                       </cell>
                     </row>
-                    <row>
-                      <cell id="{109d970f-90ef-4e82-881b-de842a8e901c}" locklevel="0" colspan="1" rowspan="5">
-                        <labels>
-                          <label description="" languagecode="1033" />
-                        </labels>
-                        <control id="tavu_answers" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_answers" disabled="true" />
-                      </cell>
-                    </row>
-                    <row />
-                    <row />
-                    <row />
-                    <row />
                   </rows>
                 </section>
               </sections>
@@ -261,6 +244,58 @@
                     <label description="Transcripción" languagecode="3082" />
                   </labels>
                   <rows>
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_technical" id="{8b0b6d51-5b1c-41a0-a0a9-30b61a13d21a}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" verticallayout="true">
+          <labels>
+            <label description="Technical" languagecode="1033" />
+            <label description="Técnico" languagecode="3082" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="section_technical" id="{052b0ff8-f01f-4497-a86b-c3f6b1403bf5}" IsUserDefined="0" locklevel="0" showlabel="false" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                  <labels>
+                    <label description="Technical" languagecode="1033" />
+                    <label description="Técnico" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{109d970f-90ef-4e82-881b-de842a8e901c}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_answers" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_answers" disabled="true" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row>
+                      <cell id="{4a8ae3fd-beaf-4676-9455-1f2c6d1e693d}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_appointmentid" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_appointmentid" disabled="true" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{620fd49f-984b-40b7-8b48-43cb995f463b}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_booking" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_booking" disabled="true" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
                     <row />
                   </rows>
                 </section>

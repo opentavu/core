@@ -77,6 +77,14 @@
                         <control id="tavu_handoffteam" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_handoffteam" disabled="false" />
                       </cell>
                     </row>
+                    <row>
+                      <cell id="{971a3c39-35fe-4066-ac38-ddcd9a682407}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_createleadfordisqualified" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_createleadfordisqualified" disabled="false" uniqueid="{ecd919f3-9b21-4ba4-988e-8d1673e40456}" />
+                      </cell>
+                    </row>
                   </rows>
                 </section>
                 <section name="section_sources" id="{dc532592-8111-4f6f-b968-add56b09a088}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
@@ -131,6 +139,14 @@
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_abandonafterhours" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_abandonafterhours" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{6d6e8583-f0c2-4c81-8876-3a5ec10f70cc}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_reopenafterhours" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_reopenafterhours" disabled="false" />
                       </cell>
                     </row>
                     <row>
@@ -389,6 +405,28 @@
           <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
             <parameters>
               <value type="TwoOptions">tavu_useknowledgearticles</value>
+            </parameters>
+          </customControl>
+        </controlDescription>
+        <controlDescription forControl="{ecd919f3-9b21-4ba4-988e-8d1673e40456}">
+          <customControl id="{67FAC785-CD58-4F9F-ABB3-4B7DDC6ED5ED}">
+            <parameters>
+              <datafieldname>tavu_createleadfordisqualified</datafieldname>
+            </parameters>
+          </customControl>
+          <customControl formFactor="0" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_createleadfordisqualified</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="2" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_createleadfordisqualified</value>
+            </parameters>
+          </customControl>
+          <customControl formFactor="1" name="MscrmControls.FieldControls.ToggleControl">
+            <parameters>
+              <value type="TwoOptions">tavu_createleadfordisqualified</value>
             </parameters>
           </customControl>
         </controlDescription>

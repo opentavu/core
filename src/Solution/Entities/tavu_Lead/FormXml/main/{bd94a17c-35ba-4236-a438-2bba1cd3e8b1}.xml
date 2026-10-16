@@ -240,8 +240,8 @@
                             <ChartGridMode>Grid</ChartGridMode>
                             <RelationshipName>tavu_conversation_Lead_tavu_lead</RelationshipName>
                             <TargetEntityType>tavu_conversation</TargetEntityType>
-                            <ViewId>{F8008EC3-9608-4688-82E6-9D8BBF123396}</ViewId>
-                            <ViewIds>{F8008EC3-9608-4688-82E6-9D8BBF123396},{FFA2F43A-72EE-4EC7-84F9-068B29BA4935}</ViewIds>
+                            <ViewId>{88BD6710-384C-4442-8C36-F8601F305AB4}</ViewId>
+                            <ViewIds>{88BD6710-384C-4442-8C36-F8601F305AB4},{F8008EC3-9608-4688-82E6-9D8BBF123396},{FFA2F43A-72EE-4EC7-84F9-068B29BA4935}</ViewIds>
                           </parameters>
                         </control>
                       </cell>

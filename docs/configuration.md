@@ -269,25 +269,53 @@ The Lead Qualification Agent (WhatsApp, through the gateway) can book the first 
 
 1. In Microsoft Bookings, create the business (shared booking page) and the service for the first call: its duration, time-slot interval, minimum lead time, maximum advance and hours, and **online meeting** on. Turn on sending meeting invites to customers if the person should get a calendar invitation. The agent takes all of these from Bookings, never from OpenTavu.
 2. In the Entra app the gateway uses, add the Microsoft Graph **application** permissions **Bookings.Read.All** and **BookingsAppointment.ReadWrite.All**, and have an administrator of the tenant where the Bookings business lives grant admin consent. These permissions are tenant-wide: the gateway could read and book in any Bookings business of that tenant, and it only uses the one set on the agent. A gateway that serves several tenants needs the consent again in each tenant.
-   If the tenant restricts the gateway app to a group of mailboxes with an Exchange Online Application Access Policy (`RestrictAccess`), add the Bookings business mailbox to that group (and the staff members' mailboxes, if that proves necessary). Without it, availability works but creating the appointment returns HTTP 500 `UnknownError` with an empty message, and the conversation's transcript shows a hint about the access policy. In Exchange Online PowerShell:
+   The gateway creates appointments on Microsoft Graph **beta** by default (gateway setting `Bookings__ApiVersion`) and reads on v1.0. For at least one Bookings business, creating an appointment on v1.0 returns HTTP 500 `UnknownError` with an empty message while beta creates the same appointment. When Microsoft fixes v1.0, set `Bookings__ApiVersion` to `v1.0`; the gateway repository's `tools/bookings-probe.ps1 -ApiVersion v1.0` checks it with the gateway's own identity.
+
+   Still to be confirmed as a requirement: if the tenant restricts the gateway app to a group of mailboxes with an Exchange Online Application Access Policy (`RestrictAccess`), the Bookings business mailbox may have to be in that group (and possibly the staff members' mailboxes). It was suspected while the v1.0 create was failing and has not been confirmed as needed. If creating appointments fails on beta too, check it in Exchange Online PowerShell:
 
    ```powershell
    Connect-ExchangeOnline
    # Is the gateway app restricted? Note the group in PolicyScopeGroupId.
    Get-ApplicationAccessPolicy | Where-Object AppId -eq "<gateway app id>" | Format-List AppId, PolicyScopeGroupId, AccessRight, Description
-   # Can the app reach the Bookings mailbox? Denied is the problem.
+   # Can the app reach the Bookings mailbox?
    Test-ApplicationAccessPolicy -Identity "<bookings business mailbox>" -AppId "<gateway app id>"
    # Allow it: add the Bookings mailbox to the policy's group, then test again until it says Granted.
    Add-DistributionGroupMember -Identity "<policy group>" -Member "<bookings business mailbox>"
    ```
 
-   Graph can take an hour or more to apply the change (Exchange caches app permissions for 30 minutes to 2 hours), even when `Test-ApplicationAccessPolicy` already says Granted. Microsoft now recommends RBAC for Applications, which replaces Application Access Policies; with it, the Bookings mailbox must be inside the app's management scope. The gateway repository's `tools/bookings-probe.ps1` checks all of this with the gateway's own identity.
+   Graph can take an hour or more to apply the change (Exchange caches app permissions for 30 minutes to 2 hours), even when `Test-ApplicationAccessPolicy` already says Granted. Microsoft now recommends RBAC for Applications, which replaces Application Access Policies; with it, the Bookings mailbox would have to be inside the app's management scope.
 3. On the agent (**Booking** section), set **Bookings Business** (the business's id or SMTP address) and **Bookings Service ID** (the service's id, from Microsoft Graph). Keep **Booking URL** set: it is the fallback when the booking cannot be completed in the chat. Leave both Bookings columns empty to keep booking off.
 4. Add a qualification criterion for the email with **Lead Field** `tavu_email`, optional and with weight 0. The agent never asks it while qualifying; it asks it at booking time only if the person has not given it.
 
 The conversation shows the result: **Appointment ID** and **Booking State** on the conversation form, and the outcome reason "meeting booked" or "qualified, booking not completed".
 
 > ✅ **Checkpoint:** qualify a test conversation from a phone; the agent offers 3 times, books the chosen one, the invitation arrives with the Teams link, and the appointment's internal notes carry the qualification summary.
+
+### 6.9 Lead Qualification Agent: leads from conversations
+
+When the agent qualifies a person, it creates or updates a lead, links it to the conversation (**Lead** on the conversation form) and then starts the booking, so the lead exists even if the booking does not finish.
+
+- **Which lead:** an open lead with the same email (any case), else one with the same mobile phone (compared in E.164 whatever format it is stored in, in **Mobile Phone** or **Phone**), is updated; otherwise a new lead is created. Contacts and accounts are not matched here: Lead Triage does that right after, on every lead the agent creates, exactly as on leads from other sources.
+- **What it writes:** the name the channel gave, the mobile phone, the email when known, the language, **Source** WhatsApp, and in **Source Details** the qualification summary (each criterion and answer, score, intent, booking result). Company name and subject only through criteria whose **Lead Field** is `tavu_companyname` or `tavu_subject` (the email through `tavu_email`); any other Lead Field is ignored. On an existing lead, an empty value never replaces a filled one and the owner does not change. The AI and triage columns are never written.
+- **Owner of a new lead:** the agent's **Handoff User**, else its **Handoff Team**, else the gateway's identity (the transcript says so).
+- **Disqualified conversations:** no lead by default. Turn on **Create Lead for Disqualified** on the agent (next to the handoff user and team) to also create or update one, with the disqualifying answer in the summary. Opted-out, off-topic and abandoned-before-qualifying conversations, and those handed to a person, never create a lead.
+- **Name:** a one-word name goes to **First Name**; a two-word name is split into first and last name; a longer one sets only the full name.
+- **Source Details** holds one block per conversation, newest last, up to 2000 characters. When it is full, the oldest agent blocks are dropped first; text written by another source (a web form, for example) is kept.
+- If Dataverse refuses the lead, the conversation goes on (the booking still runs) and the owner is notified with the summary to create it by hand.
+
+Closed conversations are in the **Inactive Conversations** view: status reason, outcome reason, score, intent and the linked lead, newest first. On a lead, the **Conversations** subgrid lists all of its conversations, open or closed.
+
+The conversation form shows the same summary in **Summary** (answers so far, score, intent, booking result in the business's and the person's local time), updated by the agent on every turn. The raw data the agent keeps (**Answers**, **Booking State**, **Appointment ID**) is in the **Technical** tab.
+
+### 6.10 Lead Qualification Agent: writing again after a close
+
+When the agent closes a conversation as off-topic, opted out or Disqualified, the person's next messages go to that closed conversation and the agent does not answer them. Off-topic messages are only recorded; for Disqualified and opted out, the owner is notified of each one. This lasts for **Reopen After (Hours)** on the agent (**Limits** section, after **Abandon After (Hours)**), counted from the moment the conversation closed. After that, the person's next message starts a new conversation, which greets and qualifies them like any first message.
+
+- Empty means 24 hours. 0 means no window: the next message starts a new conversation at once.
+- A qualified conversation never reopens: later messages are only recorded and the owner is notified. A conversation closed as abandoned always lets the next message start a new one.
+- An opt-out writes nothing on the contact. The closed conversation keeps its status and outcome reason "opted out"; a new conversation starts only when the person writes first after the window, and the agent never writes first.
+
+> ✅ **Checkpoint:** to test the window quickly, set **Reopen After (Hours)** to 0 on the agent, get a test conversation closed (for example, answer "I'm looking for a job" to the business type question), then write again: a new conversation starts and the agent greets you. Then clear **Reopen After (Hours)** back to empty (24 hours).
 
 ## 7. SLA matrix and business calendars
 

@@ -1618,6 +1618,47 @@
             <Description description="Puntuación de ajuste: suma de los pesos de los criterios respondidos (0 a 100)." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_Summary">
+          <Type>ntext</Type>
+          <Name>tavu_summary</Name>
+          <LogicalName>tavu_summary</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>0</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>4000</MaxLength>
+          <displaynames>
+            <displayname description="Summary" languagecode="1033" />
+            <displayname description="Resumen" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Written by the agent: the answers so far, score, intent and booking result, in plain text. The same text the lead gets in Source Details." languagecode="1033" />
+            <Description description="Lo escribe el agente: las respuestas obtenidas, puntaje, intención y resultado de la reserva, en texto plano. Es el mismo texto que recibe el prospecto en Detalles del origen." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_TokensUsed">
           <Type>int</Type>
           <Name>tavu_tokensused</Name>

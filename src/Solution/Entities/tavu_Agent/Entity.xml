@@ -888,6 +888,73 @@
             <Description description="Horario laboral del agente." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_CreateLeadForDisqualified">
+          <Type>bit</Type>
+          <Name>tavu_createleadfordisqualified</Name>
+          <LogicalName>tavu_createleadfordisqualified</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <AppDefaultValue>0</AppDefaultValue>
+          <optionset Name="tavu_agent_tavu_createleadfordisqualified">
+            <OptionSetType>bit</OptionSetType>
+            <IntroducedVersion>1.2.0.0</IntroducedVersion>
+            <IsCustomizable>1</IsCustomizable>
+            <displaynames>
+              <displayname description="Create Lead for Disqualified" languagecode="1033" />
+              <displayname description="Crear prospecto para descalificados" languagecode="3082" />
+            </displaynames>
+            <Descriptions>
+              <Description description="When Yes, a disqualified conversation also creates or updates a lead. Qualified conversations always do." languagecode="1033" />
+              <Description description="Si es Sí, una conversación descalificada también crea o actualiza un prospecto. Las calificadas siempre lo hacen." languagecode="3082" />
+            </Descriptions>
+            <options>
+              <option value="1" ExternalValue="" IsHidden="0">
+                <labels>
+                  <label description="Yes" languagecode="1033" />
+                  <label description="Sí" languagecode="3082" />
+                </labels>
+              </option>
+              <option value="0" ExternalValue="" IsHidden="0">
+                <labels>
+                  <label description="No" languagecode="1033" />
+                  <label description="No" languagecode="3082" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="Create Lead for Disqualified" languagecode="1033" />
+            <displayname description="Crear prospecto para descalificados" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="When Yes, a disqualified conversation also creates or updates a lead. Qualified conversations always do." languagecode="1033" />
+            <Description description="Si es Sí, una conversación descalificada también crea o actualiza un prospecto. Las calificadas siempre lo hacen." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_Greeting">
           <Type>ntext</Type>
           <Name>tavu_greeting</Name>
@@ -1213,6 +1280,48 @@
           <Descriptions>
             <Description description="Sent once when a message arrives outside working hours. One line per language allowed (en: ..., es: ...); the line in the conversation's language is sent." languagecode="1033" />
             <Description description="Se envía una vez cuando llega un mensaje fuera del horario laboral. Admite una línea por idioma (en: ..., es: ...); se envía la del idioma de la conversación." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_ReopenAfterHours">
+          <Type>int</Type>
+          <Name>tavu_reopenafterhours</Name>
+          <LogicalName>tavu_reopenafterhours</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>none</Format>
+          <MinValue>0</MinValue>
+          <MaxValue>720</MaxValue>
+          <displaynames>
+            <displayname description="Reopen After (Hours)" languagecode="1033" />
+            <displayname description="Reabrir tras (horas)" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Hours after a conversation closes as off-topic, opted out or disqualified during which new messages are only recorded; after that, a new message starts a new conversation. Empty means 24; 0 starts a new one at once." languagecode="1033" />
+            <Description description="Horas después de cerrar una conversación como fuera de tema, baja voluntaria o descalificada durante las que los mensajes nuevos solo se registran; después, un mensaje nuevo inicia otra conversación. Vacío equivale a 24; 0 inicia otra de inmediato." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_TokenBudget">

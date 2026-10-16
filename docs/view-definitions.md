@@ -799,6 +799,65 @@ Same columns. This is the approver's queue.
 
 ---
 
+### 23\. Conversation (`tavu_conversation`)
+
+**User context:** One record per conversation of the Lead Qualification Agent (WhatsApp, through the gateway). Active conversations are the ones the agent or a person is still handling; inactive ones are its results.
+
+> **Status reasons:** Active 1 · Awaiting Approval 576600000 · With Human 576600001 (statecode Active); Qualified 576600002 · Disqualified 576600003 · Closed 2 (statecode Inactive).
+
+#### Active Conversations view (default)
+
+*Filter: `statecode = Active`* *Sort: `tavu_lastinboundon` descending*
+
+| \# | Column | Field | Why |
+| :---- | :---- | :---- | :---- |
+| 1 | **Name** | `tavu_name` |  |
+| 2 | **Channel** | `tavu_channel` |  |
+| 3 | **Display Name** | `tavu_displayname` | Who is writing, as the channel gave it |
+| 4 | **Status Reason** | `statuscode` | Active / Awaiting Approval / With Human: who must act |
+| 5 | **Score** | `tavu_score` |  |
+| 6 | **Intent** | `tavu_intent` |  |
+| 7 | **Last Message** | `tavu_lastmessagepreview` |  |
+| 8 | **Last Inbound On** | `tavu_lastinboundon` |  |
+| 9 | **Owner** | `ownerid` |  |
+
+#### Inactive Conversations view (all closed)
+
+*Filter: `statecode = Inactive` (Qualified, Disqualified, Closed)* *Sort: `tavu_lastinboundon` descending*
+
+| \# | Column | Field | Why |
+| :---- | :---- | :---- | :---- |
+| 1 | **Name** | `tavu_name` |  |
+| 2 | **Channel** | `tavu_channel` |  |
+| 3 | **Display Name** | `tavu_displayname` |  |
+| 4 | **Status Reason** | `statuscode` | Qualified / Disqualified / Closed: the result |
+| 5 | **Outcome Reason** | `tavu_outcomereason` | Why it closed (meeting booked, qualified but booking not completed, the disqualifying answer, opted out, off-topic, abandoned) |
+| 6 | **Score** | `tavu_score` |  |
+| 7 | **Intent** | `tavu_intent` |  |
+| 8 | **Lead** | `tavu_lead` | The lead the agent created or updated |
+| 9 | **Last Inbound On** | `tavu_lastinboundon` | When the person last wrote |
+
+**Notes:** This is the system inactive view, kept under the `Inactive {TableName}` name ("Closed" is also one of the three status reasons, so "Closed Conversations" would read as that one). Nine columns, like Active Conversations, because this is where a qualified or booked result is reviewed. Sorted by the person's last message, not by `modifiedon`, so a later system update does not reorder the list.
+
+#### Conversation Associated View (all states)
+
+*Filter: none (every state)* *Sort: `tavu_lastinboundon` descending*
+
+| \# | Column | Field | Why |
+| :---- | :---- | :---- | :---- |
+| 1 | **Name** | `tavu_name` |  |
+| 2 | **Channel** | `tavu_channel` |  |
+| 3 | **Status Reason** | `statuscode` | Open or the result |
+| 4 | **Outcome Reason** | `tavu_outcomereason` | Why it closed |
+| 5 | **Score** | `tavu_score` |  |
+| 6 | **Intent** | `tavu_intent` |  |
+| 7 | **Last Inbound On** | `tavu_lastinboundon` |  |
+| 8 | **Owner** | `ownerid` |  |
+
+**Notes:** Used by the Conversations subgrid on the lead form (Active and Inactive Conversations stay in its view picker) and by the Related tab of leads, contacts and agents. No state filter: an agent conversation usually ends inactive, so an Active-only list on a lead was always empty. No display name, because the parent record (the lead or contact) already says who it is.
+
+---
+
 ## VIEW IMPLEMENTATION NOTES
 
 ### How to create views in the App Designer
@@ -890,5 +949,7 @@ Native model-driven app conditional formatting is limited; the following are sug
 
 | 1.5 | August 6, 2026 | Gustavo González Villani (with Cowork) | **Added the Meeting (`tavu_meeting`) activity table (§22)** for Module 3 Part B (Activity Capture): the primary **Meetings to Review** AI queue (Open + Processed / Manual Review Required), an **Active Meetings** view, and a combined **Reviewed Meetings** closed view. Documented meeting status reasons and activity statecode, the opportunity-timeline behavior (via `regardingobjectid`), and app placement (meetings in Workspace, meeting sources in Settings). Added the naming-convention and conditional-formatting rows. Capture-source column on Meeting is `tavu_source` (the same global choice `tavu_meetingsource` is `tavu_provider` on the Meeting Source config table). |
 | 1.6 | August 12, 2026 | Gustavo González Villani (with Cowork) | **Clarified the Meetings to Review sort (§22).** Confirmed against the live view designer that a Choice column sorts by its **label**, not its numeric value: `statuscode` **ascending** correctly puts "Manual Review Required" above "Processed" (M before P). Documented the queue-vs-feed intent (most-urgent + oldest-first, deliberately not newest-first; use Active Meetings for newest-first) and flagged the label-ordering fragility if status labels are renamed. No column changes. |
+| 1.7 | October 14, 2026 | Gustavo González Villani (with Claude) | **Added the Conversation (`tavu_conversation`) table (§23)** for the Lead Qualification Agent: Active Conversations (as built) and the reshaped Inactive Conversations view (display name, outcome reason and last inbound on added, sorted by last inbound on). |
+| 1.8 | October 15, 2026 | Gustavo González Villani (with Claude) | **Conversation Associated View (§23)** shows every state (the `statecode = Active` filter removed), with outcome reason added and display name and last message removed; the lead form's Conversations subgrid now uses it, so a lead lists its closed agent conversations. |
 
 *This document is the operational reference for OpenTavu's view definitions in the model-driven app.*  
