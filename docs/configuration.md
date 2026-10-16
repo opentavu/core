@@ -317,6 +317,29 @@ When the agent closes a conversation as off-topic, opted out or Disqualified, th
 
 > ✅ **Checkpoint:** to test the window quickly, set **Reopen After (Hours)** to 0 on the agent, get a test conversation closed (for example, answer "I'm looking for a job" to the business type question), then write again: a new conversation starts and the agent greets you. Then clear **Reopen After (Hours)** back to empty (24 hours).
 
+### 6.11 Lead Qualification Agent: owner notifications by email
+
+When the agent needs a person (a qualified lead, a request for a human, a question it cannot answer, a failed reply, a lead Dataverse refused, a booking left unfinished, a message on a closed conversation), the gateway emails the agent's **Handoff User**, or, without one, the members of its **Handoff Team** (at most 20). The email carries the notification, the person's name and phone, their last message, the conversation's **Summary**, and links that open the conversation and the lead. A message on a closed conversation is emailed at most once every 30 minutes per conversation. Every notification is also recorded in the conversation's transcript, with what happened to the email.
+
+1. Create a dedicated shared mailbox for the notifications (for example `notifications@yourfirm.com`). Never use a mailbox whose incoming mail becomes cases, such as the support address: a reply to a notification would become a case.
+2. Give the gateway's Entra app the right to send from that mailbox only, with Exchange Online **RBAC for Applications**. Do not grant Mail.Send in Entra: it would let the app send as any mailbox, and the Exchange scope only adds to it. On a new or small tenant, Exchange Online may still be "dehydrated", and `New-ManagementScope` and `New-ManagementRoleAssignment` fail until it is not: run `Enable-OrganizationCustomization` first (it can take hours) and go on only when `Get-OrganizationConfig | Select IsDehydrated` says `False`.
+
+   ```powershell
+   Connect-ExchangeOnline
+   Get-OrganizationConfig | Select IsDehydrated
+   Enable-OrganizationCustomization   # only when IsDehydrated is True; wait until it says False before going on
+   New-ServicePrincipal -AppId <gateway app id> -ObjectId <enterprise app object id> -DisplayName "<display name>"
+   New-ManagementScope -Name "Gateway notification sender" -RecipientRestrictionFilter "PrimarySmtpAddress -eq '<sender mailbox>'"
+   New-ManagementRoleAssignment -App <gateway app id> -Role "Application Mail.Send" -CustomResourceScope "Gateway notification sender"
+   Test-ServicePrincipalAuthorization -Identity <gateway app id> -Resource <sender mailbox>
+   ```
+
+   The app id is the gateway's `Entra__ClientId`; the object id is the one of its enterprise application (service principal) in Entra. Exchange can take from 30 minutes to 2 hours to apply the role.
+3. Set the gateway setting `Agent__NotifySenderMailbox` to that mailbox and restart the gateway. While it is empty, notifications are only recorded in the transcript.
+4. Make sure the handoff user (or the team's members) is enabled and has a primary email in Dataverse.
+
+> ✅ **Checkpoint:** qualify a test conversation; one email arrives with the final summary, your last message, and links to the conversation and the lead. The conversation's transcript says "emailed to 1 recipient".
+
 ## 7. SLA matrix and business calendars
 
 When a case is categorized, the `Pl.Case.SlaAssignment` plugin looks up the SLA for the case's **Tier and Type**, then computes response and resolution target dates against a **business calendar**. Configure calendars first, then the SLA matrix.
