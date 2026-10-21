@@ -722,6 +722,88 @@
             <Description description="Modo Proponer: minutos antes de enviar el mensaje de espera (por defecto 5)." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_BookedMessage">
+          <Type>ntext</Type>
+          <Name>tavu_bookedmessage</Name>
+          <LogicalName>tavu_bookedmessage</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>2000</MaxLength>
+          <displaynames>
+            <displayname description="Booked Message" languagecode="1033" />
+            <displayname description="Mensaje de reunión agendada" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Sent when the meeting is booked. One line per language (es: ..., en: ...). Must contain {slot} (the date and time, written by the system); may contain {zone}. Empty: the shipped text (&quot;Listo, quedó agendada para {slot} (hora de {zone}). Te llegará la invitación a tu correo.&quot; / &quot;Done, it's booked for {slot} ({zone} time). The invitation will arrive in your email.&quot;). No other dates, times, prices or links." languagecode="1033" />
+            <Description description="Se envía cuando la reunión queda agendada. Una línea por idioma (es: ..., en: ...). Debe contener {slot} (la fecha y hora, que escribe el sistema); puede contener {zone}. Vacío: el texto incluido (&quot;Listo, quedó agendada para {slot} (hora de {zone}). Te llegará la invitación a tu correo.&quot;). Sin otras fechas, horas, precios ni enlaces." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_BookingIntro">
+          <Type>ntext</Type>
+          <Name>tavu_bookingintro</Name>
+          <LogicalName>tavu_bookingintro</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>2000</MaxLength>
+          <displaynames>
+            <displayname description="Booking Intro" languagecode="1033" />
+            <displayname description="Inicio del agendamiento" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Sent when the agent starts booking a call in the chat. One line per language (es: ..., en: ...). Must contain {minutes} (the meeting's length from the scheduling provider). Empty: the shipped text (&quot;Perfecto, agendemos una llamada de {minutes} minutos.&quot; / &quot;Great, let's book a {minutes}-minute call.&quot;). No dates, times, prices or links." languagecode="1033" />
+            <Description description="Se envía cuando el agente empieza a agendar una llamada en el chat. Una línea por idioma (es: ..., en: ...). Debe contener {minutes} (la duración que da el proveedor de agenda). Vacío: el texto incluido (&quot;Perfecto, agendemos una llamada de {minutes} minutos.&quot;). Sin fechas, horas, precios ni enlaces." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_BookingsBusiness">
           <Type>nvarchar</Type>
           <Name>tavu_bookingsbusiness</Name>
@@ -888,6 +970,47 @@
             <Description description="Horario laboral del agente." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_CancelledMessage">
+          <Type>ntext</Type>
+          <Name>tavu_cancelledmessage</Name>
+          <LogicalName>tavu_cancelledmessage</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>2000</MaxLength>
+          <displaynames>
+            <displayname description="Cancelled Meeting Message" languagecode="1033" />
+            <displayname description="Mensaje de reunión cancelada" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Sent when the person's meeting is cancelled. One line per language (es: ..., en: ...). Empty: the shipped text (&quot;Listo, cancelé tu reunión. Si quieres otro horario, dime y te propongo opciones.&quot; / &quot;Done, I cancelled your meeting. If you'd like another time, tell me and I'll suggest some options.&quot;). No dates, times, prices or links." languagecode="1033" />
+            <Description description="Se envía cuando se cancela la reunión de la persona. Una línea por idioma (es: ..., en: ...). Vacío: el texto incluido (&quot;Listo, cancelé tu reunión. Si quieres otro horario, dime y te propongo opciones.&quot;). Sin fechas, horas, precios ni enlaces." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_CreateLeadForDisqualified">
           <Type>bit</Type>
           <Name>tavu_createleadfordisqualified</Name>
@@ -953,6 +1076,88 @@
           <Descriptions>
             <Description description="When Yes, a disqualified conversation also creates or updates a lead. Qualified conversations always do." languagecode="1033" />
             <Description description="Si es Sí, una conversación descalificada también crea o actualiza un prospecto. Las calificadas siempre lo hacen." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_DisqualifiedMessage">
+          <Type>ntext</Type>
+          <Name>tavu_disqualifiedmessage</Name>
+          <LogicalName>tavu_disqualifiedmessage</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>2000</MaxLength>
+          <displaynames>
+            <displayname description="Disqualified Close Message" languagecode="1033" />
+            <displayname description="Mensaje de cierre sin calificar" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Sent when an answer disqualifies the person and the model wrote no proper goodbye. One line per language (es: ..., en: ...). Empty: the shipped text (&quot;Por ahora no es algo en lo que podamos ayudarte, así que cierro esta conversación. Gracias por escribirnos.&quot; / &quot;This isn't something we can help with right now, so I'm closing this conversation. Thanks for writing to us.&quot;). No dates, times, prices or links." languagecode="1033" />
+            <Description description="Se envía cuando una respuesta descalifica a la persona y el modelo no escribió una despedida adecuada. Una línea por idioma (es: ..., en: ...). Vacío: el texto incluido (&quot;Por ahora no es algo en lo que podamos ayudarte, así que cierro esta conversación. Gracias por escribirnos.&quot;). Sin fechas, horas, precios ni enlaces." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_FollowUpGreeting">
+          <Type>ntext</Type>
+          <Name>tavu_followupgreeting</Name>
+          <LogicalName>tavu_followupgreeting</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>2000</MaxLength>
+          <displaynames>
+            <displayname description="Follow-Up Greeting" languagecode="1033" />
+            <displayname description="Saludo de seguimiento" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Sent when a person with a booked meeting writes again with a greeting. One line per language (es: ..., en: ...). Must contain {slot} (the meeting's date and time, written by the system); may contain {zone}. Empty: the shipped text (&quot;¡Hola de nuevo! Tu reunión es {slot} (hora de {zone}). ¿Te ayudo con algo, por ejemplo cambiarla?&quot; / &quot;Hi again! Your meeting is on {slot} ({zone} time). Can I help you with anything, for example moving it?&quot;). No other dates, times, prices or links." languagecode="1033" />
+            <Description description="Se envía cuando una persona con reunión agendada vuelve a escribir con un saludo. Una línea por idioma (es: ..., en: ...). Debe contener {slot} (la fecha y hora de la reunión, que escribe el sistema); puede contener {zone}. Vacío: el texto incluido (&quot;¡Hola de nuevo! Tu reunión es {slot} (hora de {zone}). ¿Te ayudo con algo, por ejemplo cambiarla?&quot;). Sin otras fechas, horas, precios ni enlaces." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_Greeting">
@@ -1117,6 +1322,47 @@
             <Description description="Modo Proponer: se envía una vez cuando un borrador espera más que el tiempo de aprobación. Admite una línea por idioma (en: ..., es: ...); se envía la del idioma de la conversación." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_KeptMessage">
+          <Type>ntext</Type>
+          <Name>tavu_keptmessage</Name>
+          <LogicalName>tavu_keptmessage</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>2000</MaxLength>
+          <displaynames>
+            <displayname description="Kept Meeting Message" languagecode="1033" />
+            <displayname description="Mensaje de reunión mantenida" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Sent when the person keeps their meeting instead of moving it. One line per language (es: ..., en: ...). Must contain {slot} ({slotOf} gives &quot;del lunes...&quot; in Spanish); may contain {zone}. Empty: the shipped text (&quot;Listo, mantenemos tu reunión {slotOf} (hora de {zone}).&quot; / &quot;All right, we'll keep your meeting on {slot} ({zone} time).&quot;). No other dates, times, prices or links." languagecode="1033" />
+            <Description description="Se envía cuando la persona mantiene su reunión en vez de moverla. Una línea por idioma (es: ..., en: ...). Debe contener {slot} ({slotOf} da &quot;del lunes...&quot;); puede contener {zone}. Vacío: el texto incluido (&quot;Listo, mantenemos tu reunión {slotOf} (hora de {zone}).&quot;). Sin otras fechas, horas, precios ni enlaces." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_Mode">
           <Type>picklist</Type>
           <Name>tavu_mode</Name>
@@ -1241,6 +1487,47 @@
             <Description description="El compromiso concreto que se envía en el traspaso. Admite una línea por idioma (en: ..., es: ...); se envía la del idioma de la conversación." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_OffTopicCloseMessage">
+          <Type>ntext</Type>
+          <Name>tavu_offtopicclosemessage</Name>
+          <LogicalName>tavu_offtopicclosemessage</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>2000</MaxLength>
+          <displaynames>
+            <displayname description="Off-Topic Close Message" languagecode="1033" />
+            <displayname description="Mensaje de cierre fuera de tema" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Sent before the conversation closes after three off-topic messages in a row. One line per language (es: ..., en: ...). It should not invite the person to write again. Empty: the shipped text (&quot;Voy a cerrar esta conversación. Gracias por escribirnos.&quot; / &quot;I'm closing this conversation now. Thanks for writing to us.&quot;). No dates, times, prices or links." languagecode="1033" />
+            <Description description="Se envía antes de cerrar la conversación tras tres mensajes seguidos fuera de tema. Una línea por idioma (es: ..., en: ...). No debe invitar a escribir de nuevo. Vacío: el texto incluido (&quot;Voy a cerrar esta conversación. Gracias por escribirnos.&quot;). Sin fechas, horas, precios ni enlaces." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_OutOfHoursMessage">
           <Type>ntext</Type>
           <Name>tavu_outofhoursmessage</Name>
@@ -1280,6 +1567,47 @@
           <Descriptions>
             <Description description="Sent once when a message arrives outside working hours. One line per language allowed (en: ..., es: ...); the line in the conversation's language is sent." languagecode="1033" />
             <Description description="Se envía una vez cuando llega un mensaje fuera del horario laboral. Admite una línea por idioma (en: ..., es: ...); se envía la del idioma de la conversación." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_PassedToTeamMessage">
+          <Type>ntext</Type>
+          <Name>tavu_passedtoteammessage</Name>
+          <LogicalName>tavu_passedtoteammessage</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>textarea</Format>
+          <MaxLength>2000</MaxLength>
+          <displaynames>
+            <displayname description="Passed-to-Team Message" languagecode="1033" />
+            <displayname description="Mensaje al pasar al equipo" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Sent when the agent passes a question to the team after qualifying. One line per language (es: ..., en: ...). Empty: the shipped text (&quot;Le pasé tu pregunta al equipo; te responderán antes de la reunión.&quot; / &quot;I passed your question to the team; they will reply before the meeting.&quot;). No dates, times, prices or links." languagecode="1033" />
+            <Description description="Se envía cuando el agente pasa una pregunta al equipo después de calificar. Una línea por idioma (es: ..., en: ...). Vacío: el texto incluido (&quot;Le pasé tu pregunta al equipo; te responderán antes de la reunión.&quot;). Sin fechas, horas, precios ni enlaces." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_ReopenAfterHours">

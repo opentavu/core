@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.26101.138" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26101.138" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26101.00157">
+<ImportExportXml version="9.2.26101.138" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26101.138" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26102.00116">
   <SolutionManifest>
     <UniqueName>OpenTavu</UniqueName>
     <LocalizedNames>
@@ -321,19 +321,19 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="60" displayName="Contact Quick Create" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}">
-          <package appName="msdynce_AppCommon" version="9.0.26094.10001">msdynce_AppCommonAnchor (9.0.26094.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26102.10001">msdynce_AppCommonAnchor (9.0.26102.10001)</package>
         </Required>
         <Dependent type="60" displayName="Contact Quick Create" parentDisplayName="Contact" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="61" schemaName="msdyn_CopilotIcon.svg" displayName="msdyn_CopilotIcon.svg" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)">
-          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        <Required type="61" schemaName="msdyn_CopilotIcon.svg" displayName="msdyn_CopilotIcon.svg" solution="msdyn_AppCopilotFeatures (9.2.2026095.260925087)">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.9">msdyn_M365CopilotAppInfraSettings (9.2.0.9)</package>
         </Required>
         <Dependent type="appaction" displayName="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="61" schemaName="msdyn_CopilotSummarizeLibrary.js" displayName="msdyn_CopilotSummarizeLibrary.js" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)">
-          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        <Required type="61" schemaName="msdyn_CopilotSummarizeLibrary.js" displayName="msdyn_CopilotSummarizeLibrary.js" solution="msdyn_AppCopilotFeatures (9.2.2026095.260925087)">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.9">msdyn_M365CopilotAppInfraSettings (9.2.0.9)</package>
         </Required>
         <Dependent type="appaction" displayName="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" />
       </MissingDependency>
@@ -530,8 +530,8 @@
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CanWritePrimary!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Deactivate!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CanWritePrimary!1" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="appactionrule" displayName="msdyn_Mscrm.CopilotClientApi!1" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.CopilotClientApi!1">
-          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.CopilotClientApi!1" solution="msdyn_AppCopilotFeatures (9.2.2026095.260925087)" id.uniquename="msdyn_Mscrm.CopilotClientApi!1">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.9">msdyn_M365CopilotAppInfraSettings (9.2.0.9)</package>
         </Required>
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.CopilotClientApi!1" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.CopilotClientApi!1" />
       </MissingDependency>
@@ -548,14 +548,14 @@
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.Delete!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.DeletePrimaryEntityPermission!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.Delete!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.DeletePrimaryEntityPermission!1" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="appactionrule" displayName="msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1">
-          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1" solution="msdyn_AppCopilotFeatures (9.2.2026095.260925087)" id.uniquename="msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.9">msdyn_M365CopilotAppInfraSettings (9.2.0.9)</package>
         </Required>
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.EnableCopilotSummarizeCommandButton!1" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="appactionrule" displayName="msdyn_Mscrm.EnableCopilotSummarizeFeatures!1" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.EnableCopilotSummarizeFeatures!1">
-          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.EnableCopilotSummarizeFeatures!1" solution="msdyn_AppCopilotFeatures (9.2.2026095.260925087)" id.uniquename="msdyn_Mscrm.EnableCopilotSummarizeFeatures!1">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.9">msdyn_M365CopilotAppInfraSettings (9.2.0.9)</package>
         </Required>
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.EnableCopilotSummarizeFeatures!1" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.EnableCopilotSummarizeFeatures!1" />
       </MissingDependency>
@@ -590,20 +590,20 @@
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__Mscrm.Form.%7B!EntityLogicalName%7D.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.HideInLegacyRibbon!1" id.appactionid.uniquename="tavu__Mscrm.Form.{!EntityLogicalName}.NewRecord!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.HideInLegacyRibbon!1" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="appactionrule" displayName="msdyn_Mscrm.HideOnMobile!0" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.HideOnMobile!0">
-          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.HideOnMobile!0" solution="msdyn_AppCopilotFeatures (9.2.2026095.260925087)" id.uniquename="msdyn_Mscrm.HideOnMobile!0">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.9">msdyn_M365CopilotAppInfraSettings (9.2.0.9)</package>
         </Required>
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.HideOnMobile!0" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.HideOnMobile!0" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="appactionrule" displayName="msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1">
-          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1" solution="msdyn_AppCopilotFeatures (9.2.2026095.260925087)" id.uniquename="msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.9">msdyn_M365CopilotAppInfraSettings (9.2.0.9)</package>
         </Required>
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.InitializeCopilotSidePaneOnBoot!1" />
       </MissingDependency>
       <MissingDependency>
-        <Required type="appactionrule" displayName="msdyn_Mscrm.IsAppCopilotEnabled!0" solution="msdyn_AppCopilotFeatures (9.2.2026084.260813071)" id.uniquename="msdyn_Mscrm.IsAppCopilotEnabled!0">
-          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.5">msdyn_M365CopilotAppInfraSettings (9.2.0.5)</package>
+        <Required type="appactionrule" displayName="msdyn_Mscrm.IsAppCopilotEnabled!0" solution="msdyn_AppCopilotFeatures (9.2.2026095.260925087)" id.uniquename="msdyn_Mscrm.IsAppCopilotEnabled!0">
+          <package appName="PowerAppsAppCopilotApp Package" version="9.2.0.9">msdyn_M365CopilotAppInfraSettings (9.2.0.9)</package>
         </Required>
         <Dependent type="appaction_appactionrule_classicrules" displayName="appactionid.uniquename=tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0,appactionruleid.uniquename=msdyn_Mscrm.IsAppCopilotEnabled!0" id.appactionid.uniquename="tavu__msdyn_Mscrm.Form.Copilot.Summarize!tavu_OpenTavuApp!tavu_systemsettings!0" id.appactionruleid.uniquename="msdyn_Mscrm.IsAppCopilotEnabled!0" />
       </MissingDependency>
