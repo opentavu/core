@@ -203,10 +203,37 @@
                     <row />
                   </rows>
                 </section>
-                <section name="section_messages" id="{5562ae01-5b90-48af-9080-ba68272e5234}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_messages" id="{3f6a2c1e-8b4d-4e7a-9c25-71d0e5b9a463}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" verticallayout="true">
+          <labels>
+            <label description="Messages" languagecode="1033" />
+            <label description="Mensajes" languagecode="3082" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="section_messagesnote" id="{6c2d9f0b-1e47-4a83-b5d6-0f8a3e71c294}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Top" columns="1" labelwidth="115">
                   <labels>
-                    <label description="Messages" languagecode="1033" />
-                    <label description="Mensajes" languagecode="3082" />
+                    <label description="Empty: the shipped text is used." languagecode="1033" />
+                    <label description="Vacío: se usa el texto incluido." languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{d4b17e3a-92c5-4f68-a01e-5e3c8b2d7f96}" locklevel="0" colspan="1" rowspan="1" showlabel="false" userspacer="true">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="section_start" id="{9e05b3c7-4a1d-4f2e-8b69-c37d1a5e0f48}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Top" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Start" languagecode="1033" />
+                    <label description="Inicio" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
@@ -216,29 +243,11 @@
                         </labels>
                         <control id="tavu_greeting" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_greeting" disabled="false" />
                       </cell>
-                    </row>
-                    <row />
-                    <row />
-                    <row />
-                    <row />
-                    <row>
                       <cell id="{1bd6ba06-23d3-4630-9a2d-3d6cca8bd5c1}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_outofhoursmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_outofhoursmessage" disabled="false" />
-                      </cell>
-                    </row>
-                    <row />
-                    <row />
-                    <row />
-                    <row />
-                    <row>
-                      <cell id="{c53dd84a-cef8-4d8c-862b-2e08a97a04a5}" locklevel="0" colspan="1" rowspan="5">
-                        <labels>
-                          <label description="" languagecode="1033" />
-                        </labels>
-                        <control id="tavu_nextstepmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_nextstepmessage" disabled="false" />
                       </cell>
                     </row>
                     <row />
@@ -252,6 +261,12 @@
                         </labels>
                         <control id="tavu_holdingmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_holdingmessage" disabled="false" />
                       </cell>
+                      <cell id="{c53dd84a-cef8-4d8c-862b-2e08a97a04a5}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_nextstepmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_nextstepmessage" disabled="false" />
+                      </cell>
                     </row>
                     <row />
                     <row />
@@ -259,44 +274,20 @@
                     <row />
                   </rows>
                 </section>
-                <section name="section_agenttexts" id="{5bc1bd32-b5df-47da-a51d-5e8394338ed4}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
+                <section name="section_bookingtexts" id="{2b7f4e91-6d3a-4c58-9e10-a4f5d2c83b67}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Top" columns="11" labelwidth="115">
                   <labels>
-                    <label description="Agent Texts (empty: the shipped text)" languagecode="1033" />
-                    <label description="Textos del agente (vacío: el texto incluido)" languagecode="3082" />
+                    <label description="Booking" languagecode="1033" />
+                    <label description="Agendamiento" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
-                      <cell id="{b93d2ebb-d409-419c-a67c-1d364ae5cc5d}" locklevel="0" colspan="1" rowspan="3">
-                        <labels>
-                          <label description="" languagecode="1033" />
-                        </labels>
-                        <control id="tavu_passedtoteammessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_passedtoteammessage" disabled="false" />
-                      </cell>
-                    </row>
-                    <row />
-                    <row />
-                    <row>
-                      <cell id="{f46401a2-a3c7-4b86-a1c5-4a535c448a3b}" locklevel="0" colspan="1" rowspan="3">
-                        <labels>
-                          <label description="" languagecode="1033" />
-                        </labels>
-                        <control id="tavu_followupgreeting" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_followupgreeting" disabled="false" />
-                      </cell>
-                    </row>
-                    <row />
-                    <row />
-                    <row>
-                      <cell id="{046f44bb-3df7-4c70-a49b-30ff42b4df2a}" locklevel="0" colspan="1" rowspan="3">
+                      <cell id="{046f44bb-3df7-4c70-a49b-30ff42b4df2a}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_bookingintro" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_bookingintro" disabled="false" />
                       </cell>
-                    </row>
-                    <row />
-                    <row />
-                    <row>
-                      <cell id="{511e2b18-8202-4e60-baa7-084b5ef526e4}" locklevel="0" colspan="1" rowspan="3">
+                      <cell id="{511e2b18-8202-4e60-baa7-084b5ef526e4}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
@@ -305,18 +296,16 @@
                     </row>
                     <row />
                     <row />
+                    <row />
+                    <row />
                     <row>
-                      <cell id="{e7d59381-cb26-41e4-abcb-463d5008889f}" locklevel="0" colspan="1" rowspan="3">
+                      <cell id="{e7d59381-cb26-41e4-abcb-463d5008889f}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_keptmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_keptmessage" disabled="false" />
                       </cell>
-                    </row>
-                    <row />
-                    <row />
-                    <row>
-                      <cell id="{b3402674-be60-492b-bd7f-38891039d0fa}" locklevel="0" colspan="1" rowspan="3">
+                      <cell id="{b3402674-be60-492b-bd7f-38891039d0fa}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
@@ -325,18 +314,50 @@
                     </row>
                     <row />
                     <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+                <section name="section_followup" id="{f1c86a2d-3b5e-4970-a2d4-8e6b0c19f735}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Top" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Follow-up" languagecode="1033" />
+                    <label description="Seguimiento" languagecode="3082" />
+                  </labels>
+                  <rows>
                     <row>
-                      <cell id="{2d9789cd-c780-44c9-abe1-b657207b9d0f}" locklevel="0" colspan="1" rowspan="3">
+                      <cell id="{f46401a2-a3c7-4b86-a1c5-4a535c448a3b}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_followupgreeting" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_followupgreeting" disabled="false" />
+                      </cell>
+                      <cell id="{b93d2ebb-d409-419c-a67c-1d364ae5cc5d}" locklevel="0" colspan="1" rowspan="5">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_passedtoteammessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_passedtoteammessage" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+                <section name="section_closes" id="{74e3d0b8-c12f-4a9d-b6e5-19a2f7c4d083}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Top" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Closes" languagecode="1033" />
+                    <label description="Cierres" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{2d9789cd-c780-44c9-abe1-b657207b9d0f}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
                         <control id="tavu_disqualifiedmessage" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_disqualifiedmessage" disabled="false" />
                       </cell>
-                    </row>
-                    <row />
-                    <row />
-                    <row>
-                      <cell id="{819121bf-0af3-4876-abec-cafdeeacb6f0}" locklevel="0" colspan="1" rowspan="3">
+                      <cell id="{819121bf-0af3-4876-abec-cafdeeacb6f0}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
                           <label description="" languagecode="1033" />
                         </labels>
@@ -345,12 +366,26 @@
                     </row>
                     <row />
                     <row />
+                    <row />
+                    <row />
                   </rows>
                 </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="tab_scheduling" id="{a81e47d2-5c39-4b06-8f1a-2d94c7e6b015}" IsUserDefined="0" locklevel="0" showlabel="true" expanded="true" verticallayout="true">
+          <labels>
+            <label description="Scheduling" languagecode="1033" />
+            <label description="Agendamiento" languagecode="3082" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
                 <section name="section_booking" id="{1c679290-d54b-4eee-8480-5f2faf41eda1}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="1" labelwidth="115">
                   <labels>
-                    <label description="Booking" languagecode="1033" />
-                    <label description="Reserva de reuniones" languagecode="3082" />
+                    <label description="Microsoft Bookings" languagecode="1033" />
+                    <label description="Microsoft Bookings" languagecode="3082" />
                   </labels>
                   <rows>
                     <row>
