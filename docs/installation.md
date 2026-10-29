@@ -13,7 +13,7 @@ OpenTavu ships as two **Microsoft Power Platform managed solutions** (`.zip` fil
 - **OpenTavu Core**: tables, plugins, PCF controls, web resources, the model-driven app, forecasting, and the setup routine that creates the reference data after import (configuration guide §4). It installs needing only the **Dataverse** connection, so a first deployment is friction-free.
 - **OpenTavu Integrations** (optional): the Power Automate flows that use email (SMTP / Office 365 Outlook), Microsoft Forms, and OneDrive. Add it only when the client wants those flows; it needs those extra connections.
 
-Install order is always **Core first, then Integrations**. OpenTavu is not a hosted SaaS product: the client brings their own Microsoft 365 and Azure (or alternative AI provider) subscriptions, and you configure OpenTavu to work on top of them.
+Install order is always **Core first, then Integrations**. Opentavu is not a hosted SaaS product. Every client firm has its own Microsoft tenant and its own Azure subscription, and everything Opentavu runs lives there: the Dataverse environment, the gateway and the AI model. The firm pays Microsoft directly for licenses, capacity, AI usage and hosting; Opentavu LLC, or the integrator you are, implements and supports the installation (see [architecture.md](architecture.md)).
 
 This document covers **deployment only**. Once the solution is imported, continue with [configuration.md](configuration.md), which covers AI wiring, system settings, security, Module 1, the SLA matrix, and the end-to-end smoke test.
 
@@ -31,36 +31,37 @@ Confirm every item below before you download anything. Missing a prerequisite he
 
 ### 1.1 Microsoft 365 and Dataverse
 
-- A **Microsoft 365 tenant** for the client.
+- A **Microsoft 365 tenant** for the client firm (its own, not the integrator's).
+- An **Azure subscription** in that same tenant, owned and paid by the firm (it needs a company credit card). The gateway, its storage, Key Vault, Application Insights and the AI model are created there.
 - A **Dataverse environment** to deploy into. For a first deployment, use a dedicated **development or sandbox environment**, validate the full smoke test, then promote to production. Never do a first-time import directly into a production environment.
 - The environment must have a **Dataverse database** provisioned (an environment without a database cannot host a solution).
 - **Language (optional).** To use the Spanish UI (LCID 3082), enable the Spanish language in the environment (Power Platform admin center, Settings, Languages). If Spanish is not enabled, the Spanish labels are skipped during import with a harmless warning and the UI stays in English.
 
 ### 1.2 Licensing
 
-- **Power Apps Premium** licenses (approximately $20 per user per month) for every user who will work in OpenTavu. Premium is required because OpenTavu uses custom `tavu_*` tables and plugins; the seeded standard tables (`account`, `contact`) alone would not be enough.
-- No Dynamics 365 license is required. OpenTavu deliberately replaces licensing-restricted entities with custom `tavu_*` equivalents so the per-user cost stays at the Premium tier.
+- **Power Apps licenses:** the pay-as-you-go plan (about USD 10 per active user per app per month, billed to the firm's Azure subscription) or Premium per user (about USD 20 per user per month); which one costs less depends on the number of users and the database size. Either way no Dynamics 365 license, because Opentavu uses custom `tavu_*` tables and plugins.
 
 ### 1.3 AI provider
 
 OpenTavu's AI modules (starting with Module 1, Smart Case Categorization) need a language-model backend. Decide **now** which of the two open wiring paths you will use; both are configured after import in [configuration.md](configuration.md).
 
-- **Gateway mode (recommended):** the client tenant points at an **AI gateway** through two environment variables (`tavu_GatewayUrl`, `tavu_GatewayKey`). The real provider keys live in the gateway, never in the client tenant. OpenTavu publishes a **self-hosted reference gateway** (MIT, single-tenant, bring-your-own-model) that you deploy with the client's own keys. See the gateway project's README for its deployment.
+- **Gateway mode (recommended):** the firm's environment points at **its own gateway** through two environment variables (`tavu_GatewayUrl`, `tavu_GatewayKey`). The gateway is the open-source Opentavu gateway (MIT, `github.com/opentavu/gateway`), deployed as one Azure Function App per firm in the firm's own Azure subscription; the model key lives in that subscription's Key Vault, never in Dataverse. Hosting: Flex Consumption with one always-ready instance is the target; Windows Consumption until then (Linux Consumption cannot run .NET 10). See the gateway README for its deployment. The gateway also runs the SLA timers, the email and Teams intakes and the Lead Qualification Agent.
 - **Direct mode (simplest):** no gateway. The provider key is stored in the client tenant on the `tavu_aimodel` record. This is the easiest path to a working demo, with the trade-off that the key lives inside the client environment.
 
-Either way, you need an **Azure subscription with Azure OpenAI access** (the default provider), or credentials for an alternative provider (Anthropic Claude, Google Gemini, or a local model) that OpenTavu reaches through its provider-agnostic `IAIProvider` interface.
+Either way, the model is the firm's: an **Azure OpenAI resource in the firm's subscription** (the default provider), or the firm's own credentials for an alternative provider (Anthropic Claude, Google Gemini, or a local model) that Opentavu reaches through its provider-agnostic `IAIProvider` interface.
 
 ### 1.4 Permissions
 
 - **System Administrator** security role on the target Dataverse environment (required to import a solution and register plugins).
-- For **gateway mode**, a **Microsoft Entra tenant administrator** to grant one-time admin consent to the gateway's multi-tenant app registration (this creates an application user in the client's Dataverse so the gateway can write results back). This is a one-click consent, described in the gateway deployment steps.
+- For **gateway mode**, a **Microsoft Entra administrator** of the firm's tenant to create the gateway's app registration there and grant its admin consent, and to add it as an application user in the firm's Dataverse so the gateway can write results back. Rights to create resources in the firm's Azure subscription (Contributor on its resource group).
+- **Support access, when Opentavu LLC (or another provider) manages the installation:** the firm delegates its Azure resources through **Azure Lighthouse** (an ARM template; the firm sees and can revoke it under "Service providers"), and, until GDAP is available, creates a named admin account for the provider with only Power Platform Administrator, Cloud Application Administrator and Exchange Administrator, with MFA. Never Global Administrator.
 
 ### 1.5 Tooling
 
 - Access to the **Power Platform admin center** (admin.powerplatform.microsoft.com) and **make.powerapps.com**.
 - Optional but recommended: the **Power Platform CLI** (`pac`) for scripted or repeatable imports.
 
-> ✅ **Checkpoint:** You have a target environment with a Dataverse database, Premium licenses assigned, an AI provider decision made, System Administrator rights, and (for gateway mode) a tenant admin lined up for consent.
+> ✅ **Checkpoint:** You have a target environment with a Dataverse database, Power Apps licenses (pay-as-you-go or Premium), an AI provider decision made, System Administrator rights, and (for gateway mode) the firm's own Azure subscription, an Entra administrator of the firm's tenant lined up for the app registration and consent, and, for a managed installation, the Lighthouse delegation and the provider's admin account.
 
 ---
 
