@@ -6,6 +6,7 @@
   <PrimaryEntity>tavu_opportunity</PrimaryEntity>
   <AsyncAutoDelete>0</AsyncAutoDelete>
   <FilteringAttributes>ownerid,statecode,statuscode,tavu_actualclosedate,tavu_businessline,tavu_estimatedclosedate</FilteringAttributes>
+  <ImpersonatingUserIdName></ImpersonatingUserIdName>
   <InvocationSource>1</InvocationSource>
   <Mode>0</Mode>
   <Rank>2</Rank>

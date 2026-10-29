@@ -7,6 +7,7 @@
   <AsyncAutoDelete>0</AsyncAutoDelete>
   <Description>LifecycleTracker — Pre-Op stamp tavu_stagechangedate when statuscode changes</Description>
   <FilteringAttributes>statuscode,tavu_forecastcategory,tavu_forecastcategoryismanual,tavu_probability,tavu_probabilityismanual,tavu_salesstage</FilteringAttributes>
+  <ImpersonatingUserIdName></ImpersonatingUserIdName>
   <InvocationSource>1</InvocationSource>
   <Mode>0</Mode>
   <Rank>1</Rank>

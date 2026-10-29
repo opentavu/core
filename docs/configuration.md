@@ -88,6 +88,9 @@ OpenTavu keeps tenant-level settings in a single `tavu_systemsettings` record (a
    This flag drives the behavior of the polymorphic `tavu_customer` lookup on opportunities and cases. Changing it later (for example B2B_Only to Mixed) does not affect existing records and needs no downtime.
 3. Set the **AI Confidence Threshold** (`tavu_aiconfidencethreshold`). Default is **0.85**, and it is **inclusive**: a case scoring exactly 0.85 is auto-processed; below 0.85 it goes to Manual Review. Raise it for more caution (more human review), lower it for more automation.
 4. Confirm the **AI Enabled** master kill switch (`tavu_aienabled`) is **Yes**. When set to No, cases skip AI entirely and route straight to Manual Review (graceful degradation), which is useful during maintenance but must be On for Module 1 to run.
+5. In the **Microsoft 365 Mailboxes** section, set the firm's own mailboxes the gateway uses (both optional; the gateway reads them within 5 minutes, with no restart):
+   - **Notification Sender Mailbox** (`tavu_notificationsendermailbox`): the mailbox the Lead Qualification Agent's owner notifications are sent from (§6.11). Empty: no owner emails.
+   - **Case Intake Mailbox** (`tavu_caseintakemailbox`): the Microsoft 365 mailbox whose new emails become cases, read through Microsoft Graph. Empty: intake through Microsoft 365 is off. The gateway's app needs Mail.ReadWrite on that mailbox only (to mark each email as read once it is processed).
 
    > 📸 **Screenshot:** The System Settings record showing Customer Mode, AI Confidence Threshold, and AI Enabled.
 
@@ -319,10 +322,12 @@ When the agent closes a conversation as off-topic, opted out or Disqualified, th
 
 ### 6.11 Lead Qualification Agent: owner notifications by email
 
-When the agent needs a person (a qualified lead, a request for a human, a question it cannot answer, a failed reply, a lead Dataverse refused, a booking left unfinished, a message on a closed conversation), the gateway emails the agent's **Handoff User**, or, without one, the members of its **Handoff Team** (at most 20). The email carries the notification, the person's name and phone, their last message, the conversation's **Summary**, and links that open the conversation and the lead. A message on a closed conversation is emailed at most once every 30 minutes per conversation. Every notification is also recorded in the conversation's transcript, with what happened to the email.
+When the agent needs a person (a qualified lead, a request for a human, a question it cannot answer, a failed reply, a lead Dataverse refused, a booking left unfinished, a message on a closed conversation), the gateway emails the agent's **Handoff User**, or, without one, the members of its **Handoff Team** (at most 20). The email carries the notification, the person's name and phone, their last message, the conversation's **Summary**, and links that open the conversation and the lead. A message on a closed conversation is emailed at most once per conversation within the agent's **Owner Email Interval (Minutes)** (§6.12, 30 by default). Every notification is also recorded in the conversation's transcript, with what happened to the email.
+
+The emails go out from the firm's own mailbox, in the firm's own Microsoft 365, never from one of Opentavu's.
 
 1. Create a dedicated shared mailbox for the notifications (for example `notifications@yourfirm.com`). Never use a mailbox whose incoming mail becomes cases, such as the support address: a reply to a notification would become a case.
-2. Give the gateway's Entra app the right to send from that mailbox only, with Exchange Online **RBAC for Applications**. Do not grant Mail.Send in Entra: it would let the app send as any mailbox, and the Exchange scope only adds to it. On a new or small tenant, Exchange Online may still be "dehydrated", and `New-ManagementScope` and `New-ManagementRoleAssignment` fail until it is not: run `Enable-OrganizationCustomization` first (it can take hours) and go on only when `Get-OrganizationConfig | Select IsDehydrated` says `False`.
+2. Give the gateway's Entra app **Mail.Send** for that mailbox only. Scope it in Exchange Online with **RBAC for Applications**, which replaces application access policies: a management scope with only the sender mailbox, and the "Application Mail.Send" role assigned to the app within it. Do not grant Mail.Send in Entra: it would let the app send as any mailbox, and the Exchange scope only adds to it. On a new or small tenant, Exchange Online may still be "dehydrated", and `New-ManagementScope` and `New-ManagementRoleAssignment` fail until it is not: run `Enable-OrganizationCustomization` first (it can take hours) and go on only when `Get-OrganizationConfig | Select IsDehydrated` says `False`.
 
    ```powershell
    Connect-ExchangeOnline
@@ -335,10 +340,30 @@ When the agent needs a person (a qualified lead, a request for a human, a questi
    ```
 
    The app id is the gateway's `Entra__ClientId`; the object id is the one of its enterprise application (service principal) in Entra. Exchange can take from 30 minutes to 2 hours to apply the role.
-3. Set the gateway setting `Agent__NotifySenderMailbox` to that mailbox and restart the gateway. While it is empty, notifications are only recorded in the transcript.
+3. In **System Settings**, set **Notification Sender Mailbox** to that mailbox (§3). The gateway reads it within 5 minutes; no restart. While it is empty, notifications are only recorded in the transcript, and **Verify Setup** warns that owner emails are off while an agent is active. (Transition: a gateway configured before this column still uses its `Agent__NotifySenderMailbox` setting while System Settings is empty, and logs a warning.)
 4. Make sure the handoff user (or the team's members) is enabled and has a primary email in Dataverse.
 
 > ✅ **Checkpoint:** qualify a test conversation; one email arrives with the final summary, your last message, and links to the conversation and the lead. The conversation's transcript says "emailed to 1 recipient".
+
+### 6.12 Lead Qualification Agent: WhatsApp number and conversation limits
+
+**WhatsApp Phone Number ID** (agent form, General tab, below Name; `tavu_whatsappphonenumberid`): the **Phone number ID** of the firm's WhatsApp Business number (Meta, WhatsApp > API Setup), not the phone number itself. A message that arrives on that number goes to this agent, and the agent's replies go out from it. With one agent, a message on a number no agent has goes to the oldest active Lead Qualification agent, as before the column existed; with more than one agent, set the number on each, and give each agent its own: **Verify Setup** warns about a missing or shared number. (Transition: while the agent's number is empty, the gateway sends from its `WhatsApp__PhoneNumberId` setting and logs a warning.)
+
+**Online Meeting** (Scheduling tab, after Booking URL; `tavu_onlinemeeting`, default Yes): the meetings the agent books in the chat get an online meeting link (Teams, with Microsoft Bookings). No books them without one.
+
+**Conversation tab** (collapsed by default): how this firm's conversations behave. Every field is optional: empty means the default below. The gateway's operator sets the allowed range of each value (the same for every firm the gateway runs; the defaults below). A value outside the range is adjusted to it, never refused, and a conversation never stops over it; **Verify Setup** reports the value and what it will be adjusted to.
+
+| Field | Column | Empty means | Allowed range (default) |
+|---|---|---|---|
+| Slot Search Days | `tavu_slotsearchdays` | 14: the most days ahead, today included, the agent looks for free times (the search stops at the first days with room, and the booking service's maximum advance also bounds it) | 1 to 60 |
+| Times per Offer | `tavu_slotsperoffer` | 3 free times in one message | 1 to 5 |
+| Declines Before the Booking Link | `tavu_bookingdeclinesbeforelink` | 2: after this many declines of the offered times, the agent sends the booking link | 1 to 5 |
+| Declines Before Keeping a Meeting | `tavu_movedeclinesbeforekeep` | 1: when moving a meeting, after this many declines of the new times the meeting stays as it was | 1 to 5 |
+| Confirmation Valid For (Minutes) | `tavu_confirmationlimitminutes` | 30: a "yes" to move or cancel after this long gets the question again | 5 to 1,440 |
+| Owner Email Interval (Minutes) | `tavu_owneremailintervalminutes` | 30: the least time between two emails to the owner about one conversation; notices in between go together | 5 to 1,440 |
+| Off-Topic Messages Before Closing | `tavu_offtopiclimit` | 3 off-topic messages in a row close the conversation | 2 to 5 |
+
+The operator's ranges also apply to two fields of the **Limits** section: **Turn Limit** (empty: 12; range 4 to 40) and **Token Budget** (tokens per conversation, prompt plus answer over all turns; empty: the operator's maximum, 100,000 by default).
 
 ## 7. SLA matrix and business calendars
 

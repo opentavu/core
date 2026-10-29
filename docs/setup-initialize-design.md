@@ -14,7 +14,7 @@ This is an adoption prerequisite, not a feature: without it no third-party insta
 One button, "Verify Setup" (Spanish: "Verificar ajustes"), on the System Settings form, calling `tavu_InitializeConfiguration`:
 
 1. **Seed** the rows in `opentavu-seed.json`, in dependency order. Idempotent: match by a natural key (code or name, never GUID), create what is missing, fill empty fields of existing rows, never overwrite a value the firm already changed. Safe to re-run after every upgrade.
-2. **Diagnose** the install and return a checklist: disabled OpenTavu plugin steps, status behavior flags missing or duplicated, gateway environment variables empty, no AI model or no default model, company profile empty, no sales period covering today.
+2. **Diagnose** the install and return a checklist: disabled OpenTavu plugin steps, status behavior flags missing or duplicated, gateway environment variables empty, no AI model or no default model, company profile empty, active agents (a limit outside the gateway's default range, with what it will be clamped to; a WhatsApp number missing while several agents are active, or shared by two), the System Settings mailboxes (not an email address; no notification sender while an agent is active: owner emails are off), no sales period covering today.
 
 Language: rows are written in the organization base language (`@i18n.es` overrides for 3082). Runtime values: the business calendar takes the installer's time zone; sales periods are generated for the current and next calendar year.
 
