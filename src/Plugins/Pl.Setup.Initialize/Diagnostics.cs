@@ -342,15 +342,16 @@ namespace Pl.Setup.Initialize
             string intake = settings == null ? null : settings.GetAttributeValue<string>("tavu_caseintakemailbox");
             if (string.IsNullOrWhiteSpace(sender) && Top1Active("tavu_agent") != null)
                 _report.Warn("Mailboxes", "An agent is active and System Settings has no Notification Sender Mailbox, so owner emails are off. Set a mailbox of your Microsoft 365; the gateway's app needs Mail.Send limited to it.");
-            else if (!LooksLikeMailbox(sender))
+            else if (!string.IsNullOrWhiteSpace(sender) && !LooksLikeMailbox(sender))
                 _report.Warn("Mailboxes", "The Notification Sender Mailbox '" + sender.Trim() + "' is not an email address; owner emails will fail.");
             if (!string.IsNullOrWhiteSpace(intake) && !LooksLikeMailbox(intake))
                 _report.Warn("Mailboxes", "The Case Intake Mailbox '" + intake.Trim() + "' is not an email address; the gateway cannot read it.");
         }
 
-        /// <summary>One "@", something before it, a dot after it, and no spaces.</summary>
+        /// <summary>One "@", something before it, a dot after it, and no spaces. False for an empty value.</summary>
         private static bool LooksLikeMailbox(string value)
         {
+            if (string.IsNullOrWhiteSpace(value)) return false;
             string v = value.Trim();
             int at = v.IndexOf('@');
             return at > 0 && at == v.LastIndexOf('@') && v.IndexOf('.', at) > at + 1 && !v.EndsWith(".", StringComparison.Ordinal) && v.IndexOf(' ') < 0;
