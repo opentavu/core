@@ -162,7 +162,7 @@ New OpenTavu releases are imported **on top of** the existing managed solution. 
 ### 5.1 Before upgrading
 
 1. **Record the current version** (from the Solutions list) so you can identify what changed.
-2. **Back up** the environment: export the current solution, or take an environment backup from the Power Platform admin center. Client configuration and data (seed extensions, calendars, SLA rows, cases, opportunities) live as **data**, not as solution components, so a standard import does not overwrite them; the backup is your rollback safety net regardless.
+2. **Back up** the environment: export the current solution, or take an environment backup from the Power Platform admin center. Client configuration and data (seed extensions, calendars, SLA rows, cases, opportunities) live as **data**, not as solution components, so a standard import does not overwrite them; the backup is your rollback safety net regardless. Keep a configuration export as well (§6): it is the firm's setup as files, independent of the environment.
 3. Review the release notes for the new version to see whether any post-upgrade configuration steps are required.
 
 ### 5.2 Performing the upgrade
@@ -181,6 +181,37 @@ If an upgrade causes a problem you cannot resolve quickly, restore from the envi
 
 ---
 
-## 6. Next step
+## 6. Move a firm's configuration between environments
+
+A managed solution carries the schema, not the firm's configuration rows: the agent and its criteria and texts, the company profile and logo, the AI task prompts and models, System Settings, the business calendar and its holidays, the meeting source. Two scripts in `tools/` copy those rows from one environment to another (from a sandbox to production, into a rebuilt environment, or as the configuration half of a backup):
+
+- `tools/export-config.ps1` reads an environment and writes one JSON file per table plus `manifest.json` (and the logo as a file) into a folder.
+- `tools/import-config.ps1` reads that folder and upserts the rows into a target environment.
+
+```powershell
+az login   # a user who can read the source and is System Administrator in the target
+.	ools\export-config.ps1 -EnvironmentUrl https://<source-org>.crm.dynamics.com -OutputDir .\<firm>-config
+.	ools\import-config.ps1 -EnvironmentUrl https://<target-org>.crm.dynamics.com -InputDir .\<firm>-config -WhatIf
+.	ools\import-config.ps1 -EnvironmentUrl https://<target-org>.crm.dynamics.com -InputDir .\<firm>-config
+```
+
+How rows are matched. Never by GUID, which differs between environments: by a natural key (AI tasks by their task key, calendars and working hours by code, holidays by calendar and date, AI models and agents by name, criteria by agent and name, System Settings and the company profile as the single row). References are written by the referenced row's key and resolved in the target: the handoff user by email, the handoff team by name, the calendar by code, the AI task by task key. A reference the target cannot resolve is left as it is and listed as a manual step.
+
+What an import does. It creates missing rows and updates only the columns whose value differs, so a second run changes nothing; rows that exist only in the target are left alone. Unlike Verify Setup, which only fills empty fields, it makes the carried columns equal to the files. Run **Verify Setup** in the target first, so the seeded reference rows (business lines, countries, customer tiers) exist, and always run with `-WhatIf` before the real import.
+
+What is never exported. Secrets of any kind (model keys, the gateway key, client secrets; an AI model carries only the name of its secret), environment variable values, business data (leads, conversations, accounts, cases), and user-specific settings. After an import, do these by hand in the target, as the script lists them:
+
+1. Set the environment variables `tavu_GatewayUrl` and `tavu_GatewayKey`.
+2. Add the gateway's app registration as an application user with its security role.
+3. Store the model keys in the gateway's Key Vault under the secret names the AI models carry.
+4. Turn on **Meeting Sync** on each user whose Teams meetings are captured.
+
+The export folder holds the firm's own texts and settings: keep it private.
+
+Both scripts are tested on Windows PowerShell 5.1 only.
+
+---
+
+## 7. Next step
 
 The solution is installed and verified. Continue with **[configuration.md](configuration.md)** to wire up AI, set system settings, verify and extend seed data, configure security and Field Security Profiles, configure Module 1 (Smart Case Categorization) and the SLA matrix, and run the end-to-end smoke test.
