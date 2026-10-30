@@ -83,13 +83,17 @@ function Format-Literal($Value) {
 }
 
 # A reference resolved in the target: the id of the row whose key field holds the key, or $null (cached).
+# With -WhatIf nothing is created, so a row this run would create earlier (an AI model, the agent) is not there yet;
+# such a reference resolves to $plannedId, so the dry run reports what the real run does.
 $refCache = @{}
+$planned = @{}
+$plannedId = '00000000-0000-0000-0000-000000000000'
 function Resolve-Ref($Ref) {
     $k = "$($Ref.'@ref')|$($Ref.keyField)|$($Ref.key)"
     if (-not $refCache.ContainsKey($k)) {
         $m = Get-Meta $Ref.'@ref'
         $found = @((Get-Api "$($m.Set)?`$select=$($m.Id)&`$filter=$($Ref.keyField) eq $(Format-Literal $Ref.key)").value)
-        $refCache[$k] = if ($found.Count -eq 1) { $found[0].($m.Id) } else { $null }
+        $refCache[$k] = if ($found.Count -eq 1) { $found[0].($m.Id) } elseif ($found.Count -eq 0 -and $planned.ContainsKey($k)) { $plannedId } else { $null }
         if ($found.Count -gt 1) { Write-Warning "$($Ref.'@ref') has $($found.Count) rows with $($Ref.keyField) = $($Ref.key); the reference is not set." }
     }
     $refCache[$k]
@@ -181,7 +185,15 @@ foreach ($table in $manifest.tables) {
 
         if ($changed.Count -eq 0) { $count.unchanged++; Write-Verbose "$label unchanged"; continue }
         $action = if ($current) { "update $($changed -join ', ')" } else { 'create' }
-        if (-not $PSCmdlet.ShouldProcess($label, $action)) { if ($current) { $count.updated++ } else { $count.created++ }; continue }
+        if (-not $PSCmdlet.ShouldProcess($label, $action)) {
+            if ($current) { $count.updated++ }
+            else {
+                $count.created++
+                # Later references to this row by any of its plain values resolve in the dry run.
+                foreach ($n in $want.Keys) { if ($null -ne $want[$n]) { $planned["$table|$n|$($want[$n])"] = $true } }
+            }
+            continue
+        }
 
         # 4. Write.
         if ($current) {
@@ -213,5 +225,6 @@ Write-Host "`nManual steps in $org (never carried by these files):"
 foreach ($s in $manual) { Write-Host "  - $s" }
 Write-Host "  - Environment variables tavu_GatewayUrl and tavu_GatewayKey (the key is a secret)."
 Write-Host "  - The gateway's application user and its security role."
-Write-Host "  - Model keys and other secrets, in the gateway's Key Vault, under the secret names the AI models carry."
+Write-Host "  - Model keys and other secrets, under the secret names the AI models carry: in the gateway's Key Vault (gateway mode),"
+Write-Host "    or as the values of the environment variables with those names (direct mode)."
 Write-Host "  - Users whose Teams meetings are captured: turn on Meeting Sync (tavu_meetingsyncenabled) on each user."

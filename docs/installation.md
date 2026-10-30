@@ -203,7 +203,7 @@ What is never exported. Secrets of any kind (model keys, the gateway key, client
 
 1. Set the environment variables `tavu_GatewayUrl` and `tavu_GatewayKey`.
 2. Add the gateway's app registration as an application user with its security role.
-3. Store the model keys in the gateway's Key Vault under the secret names the AI models carry.
+3. Store the model keys under the secret names the AI models carry: in the gateway's Key Vault in gateway mode, or as the values of the environment variables with those names in direct mode (Verify Setup reports a missing one).
 4. Turn on **Meeting Sync** on each user whose Teams meetings are captured.
 
 The export folder holds the firm's own texts and settings: keep it private.
