@@ -763,6 +763,48 @@
             <Description description="Se envía cuando la reunión queda agendada. Una línea por idioma (es: ..., en: ...). Debe contener {slot} (la fecha y hora, que escribe el sistema); puede contener {zone}. Vacío: el texto incluido (&quot;Listo, quedó agendada para {slot} (hora de {zone}). Te llegará la invitación a tu correo.&quot;). Sin otras fechas, horas, precios ni enlaces." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_BookingDeclinesBeforeLink">
+          <Type>int</Type>
+          <Name>tavu_bookingdeclinesbeforelink</Name>
+          <LogicalName>tavu_bookingdeclinesbeforelink</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>none</Format>
+          <MinValue>1</MinValue>
+          <MaxValue>5</MaxValue>
+          <displaynames>
+            <displayname description="Declines Before the Booking Link" languagecode="1033" />
+            <displayname description="Rechazos antes del enlace de reserva" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Times the person can decline the offered times before the agent sends the booking link. Empty: 2." languagecode="1033" />
+            <Description description="Veces que la persona puede rechazar los horarios ofrecidos antes de que el agente envíe el enlace de reserva. Vacío: 2." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_BookingIntro">
           <Type>ntext</Type>
           <Name>tavu_bookingintro</Name>
@@ -1009,6 +1051,48 @@
           <Descriptions>
             <Description description="Sent when the person's meeting is cancelled. One line per language (es: ..., en: ...). Empty: the shipped text (&quot;Listo, cancelé tu reunión. Si quieres otro horario, dime y te propongo opciones.&quot; / &quot;Done, I cancelled your meeting. If you'd like another time, tell me and I'll suggest some options.&quot;). No dates, times, prices or links." languagecode="1033" />
             <Description description="Se envía cuando se cancela la reunión de la persona. Una línea por idioma (es: ..., en: ...). Vacío: el texto incluido (&quot;Listo, cancelé tu reunión. Si quieres otro horario, dime y te propongo opciones.&quot;). Sin fechas, horas, precios ni enlaces." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_ConfirmationLimitMinutes">
+          <Type>int</Type>
+          <Name>tavu_confirmationlimitminutes</Name>
+          <LogicalName>tavu_confirmationlimitminutes</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>none</Format>
+          <MinValue>5</MinValue>
+          <MaxValue>1440</MaxValue>
+          <displaynames>
+            <displayname description="Confirmation Valid For (Minutes)" languagecode="1033" />
+            <displayname description="Validez de la confirmación (minutos)" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="How long a question to confirm a move or a cancellation stays valid. Empty: 30." languagecode="1033" />
+            <Description description="Cuánto tiempo sigue vigente una pregunta para confirmar un cambio o una cancelación. Vacío: 30." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_CreateLeadForDisqualified">
@@ -1404,6 +1488,48 @@
             <Description description="Actuar envía las respuestas por sí solo; Proponer espera a que una persona apruebe cada respuesta." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_MoveDeclinesBeforeKeep">
+          <Type>int</Type>
+          <Name>tavu_movedeclinesbeforekeep</Name>
+          <LogicalName>tavu_movedeclinesbeforekeep</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>none</Format>
+          <MinValue>1</MinValue>
+          <MaxValue>5</MaxValue>
+          <displaynames>
+            <displayname description="Declines Before Keeping a Meeting" languagecode="1033" />
+            <displayname description="Rechazos antes de mantener la reunión" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="When moving a meeting, times the person can decline the new times before the meeting stays as it was. Empty: 1." languagecode="1033" />
+            <Description description="Al mover una reunión, veces que la persona puede rechazar los nuevos horarios antes de que la reunión quede como estaba. Vacío: 1." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_Name">
           <Type>nvarchar</Type>
           <Name>tavu_name</Name>
@@ -1528,6 +1654,115 @@
             <Description description="Se envía antes de cerrar la conversación tras tres mensajes seguidos fuera de tema. Una línea por idioma (es: ..., en: ...). No debe invitar a escribir de nuevo. Vacío: el texto incluido (&quot;Voy a cerrar esta conversación. Gracias por escribirnos.&quot;). Sin fechas, horas, precios ni enlaces." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_OffTopicLimit">
+          <Type>int</Type>
+          <Name>tavu_offtopiclimit</Name>
+          <LogicalName>tavu_offtopiclimit</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>none</Format>
+          <MinValue>2</MinValue>
+          <MaxValue>5</MaxValue>
+          <displaynames>
+            <displayname description="Off-Topic Messages Before Closing" languagecode="1033" />
+            <displayname description="Mensajes fuera de tema antes de cerrar" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Off-topic messages in a row that close the conversation. Empty: 3." languagecode="1033" />
+            <Description description="Mensajes fuera de tema seguidos que cierran la conversación. Vacío: 3." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_OnlineMeeting">
+          <Type>bit</Type>
+          <Name>tavu_onlinemeeting</Name>
+          <LogicalName>tavu_onlinemeeting</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <AppDefaultValue>1</AppDefaultValue>
+          <optionset Name="tavu_agent_tavu_onlinemeeting">
+            <OptionSetType>bit</OptionSetType>
+            <IntroducedVersion>1.2.0.0</IntroducedVersion>
+            <IsCustomizable>1</IsCustomizable>
+            <displaynames>
+              <displayname description="Online Meeting" languagecode="1033" />
+              <displayname description="Reunión en línea" languagecode="3082" />
+            </displaynames>
+            <Descriptions>
+              <Description description="Bookings meetings include a Teams link. Empty or Yes: online." languagecode="1033" />
+              <Description description="Las reuniones de Bookings incluyen un enlace de Teams. Vacío o Sí: en línea." languagecode="3082" />
+            </Descriptions>
+            <options>
+              <option value="1" ExternalValue="" IsHidden="0">
+                <labels>
+                  <label description="Yes" languagecode="1033" />
+                  <label description="Sí" languagecode="3082" />
+                </labels>
+              </option>
+              <option value="0" ExternalValue="" IsHidden="0">
+                <labels>
+                  <label description="No" languagecode="1033" />
+                  <label description="No" languagecode="3082" />
+                </labels>
+              </option>
+            </options>
+          </optionset>
+          <displaynames>
+            <displayname description="Online Meeting" languagecode="1033" />
+            <displayname description="Reunión en línea" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Bookings meetings include a Teams link. Empty or Yes: online." languagecode="1033" />
+            <Description description="Las reuniones de Bookings incluyen un enlace de Teams. Vacío o Sí: en línea." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_OutOfHoursMessage">
           <Type>ntext</Type>
           <Name>tavu_outofhoursmessage</Name>
@@ -1567,6 +1802,48 @@
           <Descriptions>
             <Description description="Sent once when a message arrives outside working hours. One line per language allowed (en: ..., es: ...); the line in the conversation's language is sent." languagecode="1033" />
             <Description description="Se envía una vez cuando llega un mensaje fuera del horario laboral. Admite una línea por idioma (en: ..., es: ...); se envía la del idioma de la conversación." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_OwnerEmailIntervalMinutes">
+          <Type>int</Type>
+          <Name>tavu_owneremailintervalminutes</Name>
+          <LogicalName>tavu_owneremailintervalminutes</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>none</Format>
+          <MinValue>5</MinValue>
+          <MaxValue>1440</MaxValue>
+          <displaynames>
+            <displayname description="Owner Email Interval (Minutes)" languagecode="1033" />
+            <displayname description="Intervalo de correos al responsable (minutos)" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="The least time between two emails to the owner about one conversation; notices in between are sent together. Empty: 30." languagecode="1033" />
+            <Description description="Tiempo mínimo entre dos correos al responsable sobre una conversación; los avisos intermedios se envían juntos. Vacío: 30." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_PassedToTeamMessage">
@@ -1652,6 +1929,90 @@
             <Description description="Horas después de cerrar una conversación como fuera de tema, baja voluntaria o descalificada durante las que los mensajes nuevos solo se registran; después, un mensaje nuevo inicia otra conversación. Vacío equivale a 24; 0 inicia otra de inmediato." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_SlotSearchDays">
+          <Type>int</Type>
+          <Name>tavu_slotsearchdays</Name>
+          <LogicalName>tavu_slotsearchdays</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>none</Format>
+          <MinValue>1</MinValue>
+          <MaxValue>60</MaxValue>
+          <displaynames>
+            <displayname description="Slot Search Days" languagecode="1033" />
+            <displayname description="Días de búsqueda de horarios" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="The most days ahead, today included, the agent looks for free times. Empty: 14." languagecode="1033" />
+            <Description description="Máximo de días hacia adelante, hoy incluido, en que el agente busca horarios libres. Vacío: 14." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_SlotsPerOffer">
+          <Type>int</Type>
+          <Name>tavu_slotsperoffer</Name>
+          <LogicalName>tavu_slotsperoffer</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>disabled</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>none</Format>
+          <MinValue>1</MinValue>
+          <MaxValue>5</MaxValue>
+          <displaynames>
+            <displayname description="Times per Offer" languagecode="1033" />
+            <displayname description="Horarios por oferta" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Free times offered in one message. Empty: 3." languagecode="1033" />
+            <Description description="Horarios libres ofrecidos en un mensaje. Vacío: 3." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_TokenBudget">
           <Type>int</Type>
           <Name>tavu_tokenbudget</Name>
@@ -1690,8 +2051,8 @@
             <displayname description="Presupuesto de tokens" languagecode="3082" />
           </displaynames>
           <Descriptions>
-            <Description description="Maximum tokens per conversation. Empty means no limit." languagecode="1033" />
-            <Description description="Máximo de tokens por conversación. Vacío significa sin límite." languagecode="3082" />
+            <Description description="Maximum tokens per conversation (prompt plus answer, all turns). Empty: the operator's maximum (100,000 by default)." languagecode="1033" />
+            <Description description="Máximo de tokens por conversación (instrucciones más respuesta, todos los turnos). Vacío: el máximo del operador (100.000 por defecto)." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_TurnLimit">
@@ -1732,8 +2093,8 @@
             <displayname description="Límite de turnos" languagecode="3082" />
           </displaynames>
           <Descriptions>
-            <Description description="Maximum agent turns before handing off to a person (default 12)." languagecode="1033" />
-            <Description description="Máximo de turnos del agente antes de pasar a una persona (por defecto 12)." languagecode="3082" />
+            <Description description="Maximum agent turns before handing off to a person (default 12). The operator's range applies (4 to 40 by default)." languagecode="1033" />
+            <Description description="Máximo de turnos del agente antes de pasar a una persona (por defecto 12). Se aplica el rango del operador (4 a 40 por defecto)." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_UseCompanyProfile">
@@ -1935,6 +2296,48 @@
           <Descriptions>
             <Description description="The agent may answer from the working hours of the business calendar." languagecode="1033" />
             <Description description="El agente puede responder con el horario del calendario laboral." languagecode="3082" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_WhatsAppPhoneNumberId">
+          <Type>nvarchar</Type>
+          <Name>tavu_whatsappphonenumberid</Name>
+          <LogicalName>tavu_whatsappphonenumberid</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>text</Format>
+          <MaxLength>50</MaxLength>
+          <Length>100</Length>
+          <displaynames>
+            <displayname description="WhatsApp Phone Number ID" languagecode="1033" />
+            <displayname description="ID del número de WhatsApp" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="The phone number ID from WhatsApp Business (Meta), not the phone number. Messages that arrive on this number go to this agent, and its replies are sent from it." languagecode="1033" />
+            <Description description="El ID del número de WhatsApp Business (Meta), no el número de teléfono. Los mensajes que llegan a este número van a este agente, y sus respuestas salen desde él." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="TimeZoneRuleVersionNumber">

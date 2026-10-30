@@ -37,6 +37,8 @@ namespace Pl.Setup.Initialize
                 "No active business calendar is marked as default; SLA target dates cannot be calculated."));
             RunCheck("AI", CheckAi);
             RunCheck("Company profile", CheckCompanyProfile);
+            RunCheck("Agents", CheckAgents);
+            RunCheck("Mailboxes", CheckMailboxes);
             RunCheck("Sales periods", CheckCurrentPeriod);
         }
 
@@ -256,6 +258,104 @@ namespace Pl.Setup.Initialize
                 _report.Warn("Company profile", "The company profile is empty: proposal PDFs have no letterhead and the fiscal year is assumed to start in January. Fill it in Settings > Company Profile.");
         }
 
+        /// <summary>
+        /// The gateway's default operator range for each agent limit (gateway AgentCaps.Defaults; an operator can change them
+        /// with Agent__Caps__* app settings). A value outside is clamped by the gateway, never refused.
+        /// </summary>
+        private static readonly string[][] AgentLimitRanges =
+        {
+            new[] { "tavu_slotsearchdays", "Slot Search Days", "1", "60" },
+            new[] { "tavu_slotsperoffer", "Times per Offer", "1", "5" },
+            new[] { "tavu_bookingdeclinesbeforelink", "Declines Before the Booking Link", "1", "5" },
+            new[] { "tavu_movedeclinesbeforekeep", "Declines Before Keeping a Meeting", "1", "5" },
+            new[] { "tavu_confirmationlimitminutes", "Confirmation Valid For (Minutes)", "5", "1440" },
+            new[] { "tavu_owneremailintervalminutes", "Owner Email Interval (Minutes)", "5", "1440" },
+            new[] { "tavu_offtopiclimit", "Off-Topic Messages Before Closing", "2", "5" },
+            new[] { "tavu_turnlimit", "Turn Limit", "4", "40" },
+            new[] { "tavu_tokenbudget", "Token Budget", "1", "100000" },
+        };
+
+        /// <summary>
+        /// Active agents: limits outside the gateway's default ranges, WhatsApp numbers missing (with more than one agent) or
+        /// shared, and the System Settings mailboxes the gateway reads (owner notification sender, case intake).
+        /// </summary>
+        private void CheckAgents()
+        {
+            var columns = new List<string> { "tavu_name", "tavu_whatsappphonenumberid" };
+            foreach (string[] r in AgentLimitRanges) columns.Add(r[0]);
+            var q = new QueryExpression("tavu_agent") { ColumnSet = new ColumnSet(columns.ToArray()), NoLock = true };
+            q.Criteria.AddCondition("statecode", ConditionOperator.Equal, StateActive);
+            q.AddOrder("createdon", OrderType.Ascending);
+            DataCollection<Entity> agents = _svc.RetrieveMultiple(q).Entities;
+            if (agents.Count == 0) return;
+
+            int problems = 0;
+            var byNumber = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+            foreach (Entity a in agents)
+            {
+                string name = a.GetAttributeValue<string>("tavu_name");
+                foreach (string[] r in AgentLimitRanges)
+                {
+                    if (!a.Contains(r[0])) continue;
+                    int value = a.GetAttributeValue<int>(r[0]);
+                    // An empty or zero turn limit or token budget means the default.
+                    if (value == 0 && (r[0] == "tavu_turnlimit" || r[0] == "tavu_tokenbudget")) continue;
+                    int min = int.Parse(r[2], CultureInfo.InvariantCulture), max = int.Parse(r[3], CultureInfo.InvariantCulture);
+                    if (value >= min && value <= max) continue;
+                    problems++;
+                    _report.Warn("Agents", string.Format(CultureInfo.InvariantCulture,
+                        "Agent '{0}': {1} is {2}, outside the gateway's range {3} to {4}; it will be clamped to {5}. Set a value in the range, or ask the gateway operator to widen it.",
+                        name, r[1], value, min, max, value < min ? min : max));
+                }
+
+                string number = (a.GetAttributeValue<string>("tavu_whatsappphonenumberid") ?? string.Empty).Trim();
+                if (number.Length == 0) continue;
+                List<string> same;
+                if (!byNumber.TryGetValue(number, out same)) { same = new List<string>(); byNumber[number] = same; }
+                same.Add(name);
+            }
+
+            if (agents.Count > 1)
+                foreach (Entity a in agents)
+                {
+                    if (!string.IsNullOrWhiteSpace(a.GetAttributeValue<string>("tavu_whatsappphonenumberid"))) continue;
+                    problems++;
+                    _report.Warn("Agents", "Agent '" + a.GetAttributeValue<string>("tavu_name") + "' has no WhatsApp Phone Number ID while " +
+                        agents.Count.ToString(CultureInfo.InvariantCulture) + " agents are active. A message that arrives on a number no agent has goes to the oldest Lead Qualification agent. Set the number on each agent.");
+                }
+            foreach (var kv in byNumber)
+            {
+                if (kv.Value.Count < 2) continue;
+                problems++;
+                _report.Warn("Agents", "Agents " + string.Join(", ", kv.Value.ToArray()) + " have the same WhatsApp Phone Number ID (" + kv.Key +
+                    "); the oldest gets every message. Give each agent its own number, or deactivate one.");
+            }
+            if (problems == 0)
+                _report.Ok("Agents", agents.Count.ToString(CultureInfo.InvariantCulture) + " active agent(s); limits within the gateway's default ranges.");
+        }
+
+        /// <summary>The System Settings mailboxes: well formed, and a sender while an agent is active (else no owner emails).</summary>
+        private void CheckMailboxes()
+        {
+            Entity settings = Top1("tavu_systemsettings", new ColumnSet("tavu_notificationsendermailbox", "tavu_caseintakemailbox"));
+            string sender = settings == null ? null : settings.GetAttributeValue<string>("tavu_notificationsendermailbox");
+            string intake = settings == null ? null : settings.GetAttributeValue<string>("tavu_caseintakemailbox");
+            if (string.IsNullOrWhiteSpace(sender) && Top1Active("tavu_agent") != null)
+                _report.Warn("Mailboxes", "An agent is active and System Settings has no Notification Sender Mailbox, so owner emails are off. Set a mailbox of your Microsoft 365; the gateway's app needs Mail.Send limited to it.");
+            else if (!LooksLikeMailbox(sender))
+                _report.Warn("Mailboxes", "The Notification Sender Mailbox '" + sender.Trim() + "' is not an email address; owner emails will fail.");
+            if (!string.IsNullOrWhiteSpace(intake) && !LooksLikeMailbox(intake))
+                _report.Warn("Mailboxes", "The Case Intake Mailbox '" + intake.Trim() + "' is not an email address; the gateway cannot read it.");
+        }
+
+        /// <summary>One "@", something before it, a dot after it, and no spaces.</summary>
+        private static bool LooksLikeMailbox(string value)
+        {
+            string v = value.Trim();
+            int at = v.IndexOf('@');
+            return at > 0 && at == v.LastIndexOf('@') && v.IndexOf('.', at) > at + 1 && !v.EndsWith(".", StringComparison.Ordinal) && v.IndexOf(' ') < 0;
+        }
+
         private void CheckCurrentPeriod()
         {
             DateTime now = DateTime.UtcNow;
@@ -269,6 +369,14 @@ namespace Pl.Setup.Initialize
         }
 
         // ------------------------------------------------------------------ helpers
+
+        private Entity Top1Active(string entity)
+        {
+            var q = new QueryExpression(entity) { ColumnSet = new ColumnSet(false), TopCount = 1, NoLock = true };
+            q.Criteria.AddCondition("statecode", ConditionOperator.Equal, StateActive);
+            EntityCollection r = _svc.RetrieveMultiple(q);
+            return r.Entities.Count > 0 ? r.Entities[0] : null;
+        }
 
         private Entity Top1(string entity, ColumnSet columns)
         {

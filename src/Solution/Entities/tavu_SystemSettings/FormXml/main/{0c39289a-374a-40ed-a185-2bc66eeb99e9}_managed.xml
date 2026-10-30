@@ -195,6 +195,28 @@
                     </row>
                   </rows>
                 </section>
+                <section name="section_m365mailboxes" id="{8480293a-061a-451f-8d2d-06f2a959c632}" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
+                  <labels>
+                    <label description="Microsoft 365 Mailboxes" languagecode="1033" />
+                    <label description="Buzones de Microsoft 365" languagecode="3082" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{917eb8be-ba8c-4642-9bd5-ea7a1710b529}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_notificationsendermailbox" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_notificationsendermailbox" disabled="false" />
+                      </cell>
+                      <cell id="{c785c474-e5fa-4c69-9138-7f33208d09b3}" locklevel="0" colspan="1" rowspan="1">
+                        <labels>
+                          <label description="" languagecode="1033" />
+                        </labels>
+                        <control id="tavu_caseintakemailbox" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_caseintakemailbox" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
                 <section name="section_forecasting" id="49578a26-acca-496f-b20b-a6606d1106e8" IsUserDefined="0" locklevel="0" showlabel="true" showbar="false" layout="varwidth" celllabelalignment="Left" celllabelposition="Left" columns="11" labelwidth="115">
                   <labels>
                     <label description="Forecasting" languagecode="1033" />

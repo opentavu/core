@@ -693,6 +693,48 @@
             <Description description="Si es Sí, OpenTavu mantiene creados automáticamente los periodos de venta (meses o trimestres, según el Tipo de periodo de pronóstico) del año fiscal actual y del siguiente, para que el pronóstico nunca se quede sin periodos. Nunca modifica periodos existentes. Póngalo en No si prefiere crear y administrar los periodos manualmente." languagecode="3082" />
           </Descriptions>
         </attribute>
+        <attribute PhysicalName="tavu_CaseIntakeMailbox">
+          <Type>nvarchar</Type>
+          <Name>tavu_caseintakemailbox</Name>
+          <LogicalName>tavu_caseintakemailbox</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>email</Format>
+          <MaxLength>320</MaxLength>
+          <Length>640</Length>
+          <displaynames>
+            <displayname description="Case Intake Mailbox" languagecode="1033" />
+            <displayname description="Buzón de entrada de casos" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Microsoft 365 mailbox whose new emails become cases. Empty: intake through Microsoft 365 is off." languagecode="1033" />
+            <Description description="Buzón de Microsoft 365 cuyos correos nuevos se convierten en casos. Vacío: la entrada por Microsoft 365 está desactivada." languagecode="3082" />
+          </Descriptions>
+        </attribute>
         <attribute PhysicalName="tavu_ConversationRetentionDays">
           <Type>int</Type>
           <Name>tavu_conversationretentiondays</Name>
@@ -1484,6 +1526,48 @@
           </displaynames>
           <Descriptions>
             <Description description="" languagecode="1033" />
+          </Descriptions>
+        </attribute>
+        <attribute PhysicalName="tavu_NotificationSenderMailbox">
+          <Type>nvarchar</Type>
+          <Name>tavu_notificationsendermailbox</Name>
+          <LogicalName>tavu_notificationsendermailbox</LogicalName>
+          <RequiredLevel>none</RequiredLevel>
+          <DisplayMask>ValidForAdvancedFind|ValidForForm|ValidForGrid</DisplayMask>
+          <ImeMode>auto</ImeMode>
+          <ValidForUpdateApi>1</ValidForUpdateApi>
+          <ValidForReadApi>1</ValidForReadApi>
+          <ValidForCreateApi>1</ValidForCreateApi>
+          <IsCustomField>1</IsCustomField>
+          <IsAuditEnabled>1</IsAuditEnabled>
+          <IsSecured>0</IsSecured>
+          <IntroducedVersion>1.2.0.0</IntroducedVersion>
+          <IsCustomizable>1</IsCustomizable>
+          <IsRenameable>1</IsRenameable>
+          <CanModifySearchSettings>1</CanModifySearchSettings>
+          <CanModifyRequirementLevelSettings>1</CanModifyRequirementLevelSettings>
+          <CanModifyAdditionalSettings>1</CanModifyAdditionalSettings>
+          <SourceType>0</SourceType>
+          <IsGlobalFilterEnabled>0</IsGlobalFilterEnabled>
+          <IsSortableEnabled>0</IsSortableEnabled>
+          <CanModifyGlobalFilterSettings>1</CanModifyGlobalFilterSettings>
+          <CanModifyIsSortableSettings>1</CanModifyIsSortableSettings>
+          <IsDataSourceSecret>0</IsDataSourceSecret>
+          <AutoNumberFormat></AutoNumberFormat>
+          <IsSearchable>0</IsSearchable>
+          <IsFilterable>0</IsFilterable>
+          <IsRetrievable>0</IsRetrievable>
+          <IsLocalizable>0</IsLocalizable>
+          <Format>email</Format>
+          <MaxLength>320</MaxLength>
+          <Length>640</Length>
+          <displaynames>
+            <displayname description="Notification Sender Mailbox" languagecode="1033" />
+            <displayname description="Buzón remitente de notificaciones" languagecode="3082" />
+          </displaynames>
+          <Descriptions>
+            <Description description="Mailbox in your Microsoft 365 that sends owner notifications. The gateway's app needs Mail.Send limited to this mailbox. Empty: no owner emails." languagecode="1033" />
+            <Description description="Buzón de su Microsoft 365 que envía las notificaciones al responsable. La app del gateway necesita Mail.Send limitado a este buzón. Vacío: sin correos al responsable." languagecode="3082" />
           </Descriptions>
         </attribute>
         <attribute PhysicalName="tavu_ProposalEmailDraftEnabled">
