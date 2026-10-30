@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.26103.145" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26103.145" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26103.00145">
+<ImportExportXml version="9.2.26103.145" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26103.145" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26103.00147">
   <SolutionManifest>
     <UniqueName>OpenTavu</UniqueName>
     <LocalizedNames>
@@ -7,7 +7,7 @@
       <LocalizedName description="OpenTavu Core" languagecode="3082" />
     </LocalizedNames>
     <Descriptions />
-    <Version>1.2.0.0</Version>
+    <Version>1.3.0.0</Version>
     <Managed>2</Managed>
     <Publisher>
       <UniqueName>OpenTavu</UniqueName>
@@ -321,7 +321,7 @@
       </MissingDependency>
       <MissingDependency>
         <Required type="60" displayName="Contact Quick Create" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}">
-          <package appName="msdynce_AppCommon" version="9.0.26103.10001">msdynce_AppCommonAnchor (9.0.26103.10001)</package>
+          <package appName="msdynce_AppCommon" version="9.0.26104.10001">msdynce_AppCommonAnchor (9.0.26104.10001)</package>
         </Required>
         <Dependent type="60" displayName="Contact Quick Create" parentDisplayName="Contact" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" />
       </MissingDependency>
