@@ -20,7 +20,7 @@ src/
   Controls/               PCF controls: Ctrl.<Area>.<Name>
   WebResources/js/        Form scripts: tavu_<table>_form.js
 templates/                dotnet new templates (opentavu-plugin)
-tools/                    sync-solution.ps1, release-smoke.ps1
+tools/                    sync-solution.ps1, release-smoke.ps1, export-config.ps1, import-config.ps1
 docs/                     Living product documentation (see "Docs map")
 ```
 
