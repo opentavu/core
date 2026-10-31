@@ -1,0 +1,5 @@
+using System.Runtime.CompilerServices;
+
+// The Core plugin tests (tests/OpenTavu.Plugins.Tests) reach Diagnostics, SetupReport and SalesPeriodGenerator.
+// Both assemblies are signed with OpenTavu.snk; this is its public key.
+[assembly: InternalsVisibleTo("OpenTavu.Plugins.Tests, PublicKey=0024000004800000940000000602000000240000525341310004000001000100512a40c54e7206e80dd596c1d133581637d0ffea0ea584f90dbaeaefaee4528618ba1bd4297eefe5f7913d66662f721a08c2af0e22bd5fa7954dbb4b23c7c487c1d46696c977f0ef52cf6f98f94abaf4dc0ce9c66418b9ab2ebe870b0bd49f13060c3a45339d41c8976d6442869f8d50d39c2e55cf4fa003d3c6d172076a12e7")]
