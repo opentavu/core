@@ -4,7 +4,7 @@
 **AI embedded in the core workflow, not bolted on. MIT licensed. Deployed into your own Microsoft tenant.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Release: v1.2.0](https://img.shields.io/badge/Release-v1.2.0-green.svg)](https://github.com/opentavu/core/releases/tag/v1.2.0)
+[![Release: v1.3.0](https://img.shields.io/badge/Release-v1.3.0-green.svg)](https://github.com/opentavu/core/releases/tag/v1.3.0)
 [![Platform: Power Platform](https://img.shields.io/badge/Platform-Microsoft%20Power%20Platform-742774.svg)]()
 [![AI: Provider-agnostic](https://img.shields.io/badge/AI-Provider--agnostic-0078D4.svg)]()
 [![Languages: EN | ES](https://img.shields.io/badge/UI-English%20%7C%20Espa%C3%B1ol-lightgrey.svg)]()
@@ -25,7 +25,7 @@ Opentavu is **not a hosted SaaS product**. There is no fee for the framework its
 
 ## Get started
 
-1. Download the managed solutions from the latest release: [**Opentavu v1.2.0**](https://github.com/opentavu/core/releases/tag/v1.2.0). The **Core** package is all you need to start; it installs needing only the Dataverse connection.
+1. Download the managed solutions from the latest release: [**Opentavu v1.3.0**](https://github.com/opentavu/core/releases/tag/v1.3.0). The **Core** package is all you need to start; it installs needing only the Dataverse connection.
 2. (Optional) Add the **OpenTavu Integrations** package when you want the flows that use email, Microsoft Forms, and OneDrive. Install Core first, then Integrations.
 3. Follow the [installation guide](docs/installation.md) (prerequisites, import, verification, upgrades).
 4. Follow the [configuration guide](docs/configuration.md) (AI wiring, system settings, security, SLA matrix, smoke test).
@@ -178,12 +178,19 @@ Firms extend or rename these freely; the engine resolves them by flags and codes
 | `tavu_systemsettings` | Tenant-level settings, including `tavu_customermode` (B2B_Only / B2C_Only / Mixed), AI kill switch and defaults, lead buffer aging, and forecasting cadence |
 | `tavu_companyprofile` | The firm's branding (logo, accent color, default proposal terms) used in generated documents |
 | `tavu_aitaskconfiguration` | One row per AI task: model, temperature, confidence threshold, max output tokens, and prompt |
+| `tavu_agent`, `tavu_qualificationcriterion`, `tavu_conversation` | The Lead Qualification Agent: its number, texts, limits and scheduling; the firm's qualification questions; and each conversation with its summary and transcript |
 
 ---
 
 ## Capabilities (in client lifecycle order)
 
 Opentavu's AI is organized as three modules for design and evidence purposes: Module 1 (Smart Case Categorization), Module 2 (Context-Aware Communication), and Module 3 (Activity Capture and CRM Hygiene). The module numbers are identity labels; the capabilities below follow the client lifecycle, sales first. Every AI feature proposes and a human confirms before a new master record is created or a client email is sent.
+
+### Lead Qualification Agent *(live since v1.3.0, the first L2 agent)*
+
+A new lead writes to the firm's WhatsApp number. The agent asks the firm's own qualification questions one at a time, in the lead's language, answers questions about the firm from the company profile and knowledge articles, books the meeting in the chat through Microsoft Bookings (and lets the lead move or cancel it later), creates or updates the lead with a summary, and emails the owner. It hands the conversation to a person when it cannot help or when asked. The model chooses one allowed action per turn and the runtime guards every action, so dates, times and fixed texts are never invented. Everything that makes it one firm's agent (number, texts, limits, mailboxes) is configured in that firm's Dataverse. WhatsApp is the first channel; web form, email and web chat come next on the same agent.
+
+**Pain addressed:** slow response to new leads and manual qualification (Pain #1 and Pain #4).
 
 ### Lead Triage *(live, Module 3 Part A)*
 
@@ -217,14 +224,16 @@ Once a prospect becomes a client, every incoming case is read, categorized into 
 
 **Status:** originally production-tested in a prior enterprise deployment (Azure OpenAI + Dynamics 365 Customer Service); the Opentavu version is an abstracted, generalized re-implementation.
 
-> **Gateway note.** AI features run through the open-source reference gateway or in direct mode. Email-to-case intake, Teams transcript sync, and SLA timer transitions (Warning / Breached) currently run in the hosted gateway and are being published to the [reference gateway](https://github.com/opentavu/gateway) so that every capability can be self-hosted.
+> **Gateway note.** AI features run through the open-source [gateway](https://github.com/opentavu/gateway) or in direct mode. The gateway carries every capability that needs it (the Lead Qualification Agent, email-to-case intake, Teams transcript sync, SLA timer transitions, the proposal email and PDF), so each firm can run its own in its own Azure subscription.
 
 ---
 
 ## Roadmap
 
 - **AI Lead Scoring:** optional module for firms with higher inbound volume.
-- **Channel-agnostic activity capture:** additional capture channels (for example WhatsApp Business or SMS) as per-tenant connectors over the same capture architecture.
+- **More agent channels:** web form, email and web chat for the Lead Qualification Agent, over the same channel-agnostic runtime.
+- **Lead fit judgment:** the agent judges how well a lead fits the firm (fit, partial, not fit, with a confidence), separate from how many questions were answered.
+- **Post-Meeting Agent:** the second agent on the same runtime, acting on captured meetings.
 - **AI Meeting Summarizer & Action Item Extractor:** extracts action items from meetings and writes structured updates back to opportunity records.
 - **AI Relationship Health Monitor:** surfaces retainer relationships showing early cooling signals before churn.
 - **AI RFP & Proposal Architect:** ingests RFP and DDQ documents, searches a corporate response library, and assembles first proposal drafts. Addresses the 36-hour-per-RFP bottleneck.
@@ -269,7 +278,9 @@ The pain points driving the AI design were validated through independent deep re
 
 **v1.2.0 (October 5, 2026) makes a fresh install configure itself.** The **Verify Setup** button on System Settings creates the reference data the engine needs and reports what is still missing; sales periods roll forward automatically from the fiscal year start month; configuration tables carry stable codes; and proposal Total Tax is now calculated from the lines. Validated with a clean install in a freshly reset environment.
 
-Known limitations are listed in the [release notes](https://github.com/opentavu/core/releases/tag/v1.2.0). Work continues on the roadmap and on hardening the live features across more tenants and clients.
+**v1.3.0 (October 30, 2026) is the agent release.** The Lead Qualification Agent answers new leads on WhatsApp, qualifies them against the firm's own criteria and books the meeting in the chat; each firm configures it in its own Dataverse; Verify Setup checks it; and two scripts move a firm's configuration between environments. Validated with a clean install by the release smoke test.
+
+Known limitations are listed in the [release notes](https://github.com/opentavu/core/releases/tag/v1.3.0). Work continues on the roadmap and on hardening the live features across more tenants and clients.
 
 ---
 

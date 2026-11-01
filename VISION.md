@@ -1,6 +1,6 @@
 # Opentavu
 ## AI-first CRM framework for professional-services firms
-### Vision Document, v1.4
+### Vision Document, v1.5
 
 **Author:** Gustavo González Villani
 **Date:** October 2026
@@ -247,6 +247,12 @@ Implementation details (specific Choice columns, status reasons, security roles,
 
 Opentavu ships three AI modules. They keep their module numbers as identity labels (Module 1 was the first built and production-tested), but they are presented here across the client lifecycle, from first lead to ongoing service, which is also the order in which they build on one another. Each ships as an independently consumable component with its own documentation, configuration, and validation logic, and addresses one or more of the pain points in Section 3. The foundation comes first.
 
+### The Lead Qualification Agent *(live since v1.3.0, the first L2 agent)*
+
+Before any module works on a record, a new lead has to be answered. The Lead Qualification Agent does that on the firm's WhatsApp number: it asks the firm's own qualification questions in the lead's language, answers questions about the firm from the company profile and knowledge articles, books the meeting in the chat through Microsoft Bookings, creates or updates the lead with a summary, and hands the conversation to a person when it cannot help. It is Opentavu's first agent in the L0 to L3 autonomy vocabulary: the model chooses one allowed action per turn and the runtime guards each action, so dates, times and fixed texts are never invented. Each firm configures it in its own Dataverse (number, texts, limits, mailboxes). The runtime is channel-agnostic: web form, email and web chat come next, and a Post-Meeting Agent will run on the same runtime.
+
+**Pain addressed:** Pain #1 (manual entry: the lead arrives qualified and summarized) and Pain #4 (follow-up discipline: no new lead waits for an answer).
+
 ### Module 3 — AI Activity Capture & CRM Hygiene Assistant *(the foundation)*
 
 **Foundational, not merely additive.** Opentavu leads with this module on purpose. Every other module, and every roadmap module, depends on a clean, context-complete record layer. AI operating on stale or partial data scales effort, not results (the "context gap"). The hygiene and capture layer is a prerequisite for the rest of the AI-first thesis, and the sequencing reflects that: capture clean, context-rich data from the first lead and the first meeting, and everything downstream inherits it.
@@ -312,6 +318,7 @@ Opentavu covers the functional surface area common to most professional services
 
 - Account and contact management (`account`, `contact` standard Dataverse)
 - Inbound signal ingestion through `tavu_lead` buffer (see Section 7)
+- **Lead Qualification Agent on WhatsApp** (live since v1.3.0): qualifies new leads against the firm's own criteria and books the meeting in the chat (`tavu_agent`, `tavu_qualificationcriterion`, `tavu_conversation`)
 - Customer status tracking on Account and Contact (`tavu_iscustomer`, `tavu_customersince`, `tavu_lastengagementdate`); engagement tracking on Contact (`tavu_engagementstatus`: Cold / Engaged / Inactive)
 - Tenant-level Customer Mode configuration (`tavu_systemsettings.tavu_customermode`: B2B_Only / B2C_Only / Mixed) controlling lookup behavior across the application
 - Hybrid customer field architecture in opportunity and case (polymorphic primary + auto-populated typed lookups), supporting B2B, B2C, and hybrid firms without artificial adaptations
@@ -490,6 +497,7 @@ Opentavu is released under the **MIT License**. It is provided as-is, without wa
 | 1.2 | August 2026 | Gustavo González Villani (revision with Claude) | Forecasting and analytics decisions from two triangulated deep-research rounds (ChatGPT + Gemini) — full detail in `Research/Sales_Model/Forecasting-Design-Proposal-OpenTavu.md` and `Analytics-Design-Proposal-OpenTavu.md`. (1) **Analytics layer is provider-agnostic and no longer assumes Power BI**: Stack at a glance and Section 9 now specify native model-driven dashboards + PCF (ECharts/Recharts) charts reading pre-aggregated snapshot/cache tables, entirely within Power Apps Premium (no per-user BI license); optional OSS upgrade via Azure Synapse Link → ADLS Gen2 → Metabase, or Power BI only where a client already owns it. Rationale: embedded Power BI requires a per-viewer Pro/PPU license (or ~$5k/mo F64 capacity), breaking the SMB envelope. (2) **AI-Assisted Forecasting roadmap entry (Section 8) revised**: separated a deterministic goal/quota & attainment layer (ships early, no AI/no history) from an AI layer using Empirical-Bayes probability calibration (industry prior → shrink to firm data from ~10–50 deals) instead of a fixed 30-deal recompute, plus Batch-API deal-risk/slippage detection over Module 3 activity. (3) **Section 9 Sales**: added sales goals/quota & attainment (gap-to-goal, win-rate-derived ~2× coverage, pacing over weekly snapshots) and noted the forecast category defaults from stage but is settable per opportunity by the seller. (4) **Renamed the roadmap module to "AI-Assisted Forecasting"** (dropped "& Capacity Planning"); capacity reframed as light integration-fed visibility, not a resource-planning engine, per the CRM-not-PSA boundary. |
 | 1.3 | September 2026 | Gustavo González Villani (revision with Claude) | Documentation sync after the first public release (v1.0.0, September 21, 2026): header version corrected (it still read v0.9 while the changelog had reached 1.2); the deterministic layer of AI-Assisted Forecasting (targets, attainment, snapshots, cache-fed dashboard) marked as live in Section 8 and Section 9, with the AI layer (Empirical-Bayes calibration, deal-risk detection) kept on the roadmap. No design change. |
 | 1.4 | October 2026 | Gustavo González Villani (revision with Claude) | Brand spelling: the product is written **Opentavu** on public, commercial text (Decision 55 of the product master). Code identifiers, Dataverse solution names (for example the OpenTavu Integrations package), file names and earlier changelog rows keep their original spelling. The subtitle and the opening sentence drop the superseded name "AI-First SMB CRM Accelerator" for "AI-first CRM framework". |
+| 1.5 | October 2026 | Gustavo González Villani (revision with Claude) | Release v1.3.0 (October 30, 2026): the Lead Qualification Agent added to Section 8 (live, the first L2 agent, WhatsApp first, configured per firm in its own Dataverse) and to the Sales coverage in Section 9. |
 
 This document is meant to be revised as Opentavu evolves. Substantive changes will be tracked here.
 *Feedback and critique welcomed via the repository's Discussions tab or directly to the author through LinkedIn.*
