@@ -131,8 +131,8 @@ A feature (plugin, Custom API, AI task, flow, table) is done only when, in the s
 
 ## What agents may and may not do
 
-- May: read and edit code and docs, run `dotnet build`, run read-only `pac` commands, run `tools/sync-solution.ps1` against the dev environment, propose diffs.
-- Must not, without explicit human approval in the conversation: `git push`, create or delete repos or releases, register plugins or change Dataverse metadata, run `pac solution import` against any environment other than a disposable test environment, or commit anything containing a secret, a tenant URL default, or a key.
+- May: read and edit code and docs; run `dotnet build` and tests; run read-only `pac` commands; run `tools/sync-solution.ps1` against the development environment; commit on branches; push a working branch (never `main`) and open a pull request whose text holds no private path, tenant URL, firm wording, personal data or secret; make additive metadata changes in the development environment (new tables, columns, choice values, and forms or views for them) followed by `tools/sync-solution.ps1`; deploy a branch for testing when the maintainer asks.
+- Must not, without explicit human approval in the conversation: change `main` other than through a reviewed pull request the maintainer merges; create or delete repos or releases; make destructive metadata changes (delete, rename, type change, removing a choice value); edit AI prompts, agent texts or other configuration data in any environment; run `pac solution import` against any environment other than a disposable test environment; change Azure resources other than a deploy for testing; or commit anything containing a secret, a tenant URL default, or a key.
 
 ## Release checklist
 
