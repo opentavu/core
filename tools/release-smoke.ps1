@@ -50,7 +50,8 @@ param(
         '^The company profile is empty'
     ),
     [string[]]$ProtectedUrls = @(
-        'https://opentavu.crm.dynamics.com'
+        'https://opentavu.crm.dynamics.com',
+        'https://opentavudev.crm.dynamics.com'
     ),
     [string]$ReportPath
 )

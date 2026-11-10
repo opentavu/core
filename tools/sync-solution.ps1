@@ -29,7 +29,7 @@
   Continue even if src/Solution* has uncommitted changes (they would be overwritten).
 
 .EXAMPLE
-  .\tools\sync-solution.ps1 -Environment https://opentavu.crm.dynamics.com
+  .\tools\sync-solution.ps1 -Environment https://opentavudev.crm.dynamics.com
 #>
 [CmdletBinding()]
 param(
