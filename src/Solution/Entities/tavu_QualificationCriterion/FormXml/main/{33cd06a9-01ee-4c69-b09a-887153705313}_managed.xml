@@ -24,7 +24,8 @@
                     <row>
                       <cell id="{6e0f5cd2-eb2a-4483-b068-c8511edeed63}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_name" disabled="false" />
                       </cell>
@@ -32,7 +33,8 @@
                     <row>
                       <cell id="{fa05d71e-d283-47b2-8e98-1771958e6cc0}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Agent" languagecode="1033" />
+                          <label description="Agente" languagecode="3082" />
                         </labels>
                         <control id="tavu_agent" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_agent" disabled="false" />
                       </cell>
@@ -40,7 +42,8 @@
                     <row>
                       <cell id="{3a451e4e-d83a-447b-a19c-18fba3161fe5}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Order" languagecode="1033" />
+                          <label description="Orden" languagecode="3082" />
                         </labels>
                         <control id="tavu_order" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_order" disabled="false" />
                       </cell>
@@ -48,7 +51,8 @@
                     <row>
                       <cell id="{678a6f00-e0dd-4d5a-a1dc-61269e6ac15f}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Purpose" languagecode="1033" />
+                          <label description="Propósito" languagecode="3082" />
                         </labels>
                         <control id="tavu_purpose" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_purpose" disabled="false" />
                       </cell>
@@ -60,7 +64,8 @@
                     <row>
                       <cell id="{f748583e-0042-44b6-93d8-927fbe54a393}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Required" languagecode="1033" />
+                          <label description="Obligatorio" languagecode="3082" />
                         </labels>
                         <control id="tavu_required" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_required" disabled="false" uniqueid="{beea1f4f-128b-4fed-b04d-4dff39f2514c}" />
                       </cell>
@@ -68,7 +73,8 @@
                     <row>
                       <cell id="{f3d68e79-d11c-4f07-a29f-ec173d48c1f2}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Weight" languagecode="1033" />
+                          <label description="Peso" languagecode="3082" />
                         </labels>
                         <control id="tavu_weight" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_weight" disabled="false" />
                       </cell>
@@ -76,7 +82,8 @@
                     <row>
                       <cell id="{079ee89e-4182-463f-b987-5a4bb32241ea}" locklevel="0" colspan="1" rowspan="5">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Disqualifying Rule" languagecode="1033" />
+                          <label description="Regla de descalificación" languagecode="3082" />
                         </labels>
                         <control id="tavu_disqualifyingrule" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_disqualifyingrule" disabled="false" />
                       </cell>
@@ -88,7 +95,8 @@
                     <row>
                       <cell id="{fdd7c468-ec16-4b55-9853-f62de5cc087a}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Lead Field" languagecode="1033" />
+                          <label description="Campo del prospecto" languagecode="3082" />
                         </labels>
                         <control id="tavu_leadfield" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_leadfield" disabled="false" />
                       </cell>

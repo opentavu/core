@@ -23,7 +23,8 @@
                     <row>
                       <cell id="{00e182d9-76b8-468a-80c7-07f008f3ff6b}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Topic" languagecode="1033" />
+                          <label description="Tema" languagecode="3082" />
                         </labels>
                         <control id="tavu_topic" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_topic" />
                       </cell>
@@ -31,7 +32,8 @@
                     <row>
                       <cell id="{420412d2-fe63-4ba0-adac-d9057b472f94}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Owner" languagecode="1033" />
+                          <label description="Propietario" languagecode="3082" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>

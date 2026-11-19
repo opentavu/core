@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>tavu_opentavudefaultcommandlibrary_7f0d4</Name>
-  <AppVersion>2026-08-20T16:04:03Z</AppVersion>
+  <AppVersion>2026-11-16T19:38:14Z</AppVersion>
   <Status>Ready</Status>
   <CreatedByClientVersion>3.26061.9.0</CreatedByClientVersion>
   <MinClientVersion>0.0.0.0</MinClientVersion>
@@ -21,7 +21,6 @@
   <CanConsumeAppPass>1</CanConsumeAppPass>
   <CanvasAppType>1</CanvasAppType>
   <BypassConsent>0</BypassConsent>
-  <AdminControlBypassConsent>0</AdminControlBypassConsent>
   <EmbeddedApp xsi:nil="true"></EmbeddedApp>
   <IntroducedVersion>1.0</IntroducedVersion>
   <CdsDependencies>{"cdsdependencies":[]}</CdsDependencies>

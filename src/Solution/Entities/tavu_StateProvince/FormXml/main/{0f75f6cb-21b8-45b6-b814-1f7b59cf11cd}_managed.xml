@@ -24,7 +24,8 @@
                     <row>
                       <cell id="{61e7d8ec-9463-4e7d-ab21-6756d4aef421}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
@@ -41,13 +42,15 @@
                     <row>
                       <cell id="{e8482423-4a53-4287-bf05-404524c98340}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Country" languagecode="1033" />
+                          <label description="País" languagecode="3082" />
                         </labels>
                         <control id="tavu_country" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_country" disabled="false" />
                       </cell>
                       <cell id="{4dbb25e3-f9d9-4632-aeab-2432c509ce98}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Iso Code" languagecode="1033" />
+                          <label description="Código ISO" languagecode="3082" />
                         </labels>
                         <control id="tavu_isocode" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_isocode" disabled="false" />
                       </cell>
@@ -55,13 +58,15 @@
                     <row>
                       <cell id="{a76977e5-8271-4ca7-ac5d-9f0d1b9a485d}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Short Code" languagecode="1033" />
+                          <label description="Código corto" languagecode="3082" />
                         </labels>
                         <control id="tavu_shortcode" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_shortcode" disabled="false" />
                       </cell>
                       <cell id="{f5a053a4-aed0-46f4-b9b6-c946b836576b}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Local Code" languagecode="1033" />
+                          <label description="Código local" languagecode="3082" />
                         </labels>
                         <control id="tavu_localcode" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_localcode" disabled="false" />
                       </cell>

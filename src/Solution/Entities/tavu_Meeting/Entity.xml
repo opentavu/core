@@ -897,7 +897,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tavu_meeting_instancetypecode">
             <OptionSetType>picklist</OptionSetType>
-            <IntroducedVersion>1.0.0.27</IntroducedVersion>
+            <IntroducedVersion>1.3.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Appointment Type" languagecode="1033" />
@@ -982,7 +982,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tavu_meeting_isbilled">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.27</IntroducedVersion>
+            <IntroducedVersion>1.3.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Is Billed" languagecode="1033" />
@@ -1048,7 +1048,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tavu_meeting_ismapiprivate">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.27</IntroducedVersion>
+            <IntroducedVersion>1.3.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Is Private" languagecode="1033" />
@@ -1156,7 +1156,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tavu_meeting_isworkflowcreated">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.27</IntroducedVersion>
+            <IntroducedVersion>1.3.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Is Workflow Created" languagecode="1033" />
@@ -1265,7 +1265,7 @@
           <AppDefaultValue>0</AppDefaultValue>
           <optionset Name="tavu_meeting_leftvoicemail">
             <OptionSetType>bit</OptionSetType>
-            <IntroducedVersion>1.0.0.27</IntroducedVersion>
+            <IntroducedVersion>1.3.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Left Voice Mail" languagecode="1033" />
@@ -1888,7 +1888,7 @@
           <AppDefaultValue>1</AppDefaultValue>
           <optionset Name="tavu_meeting_prioritycode">
             <OptionSetType>picklist</OptionSetType>
-            <IntroducedVersion>1.0.0.27</IntroducedVersion>
+            <IntroducedVersion>1.3.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Priority" languagecode="1033" />
@@ -2537,7 +2537,7 @@
           <IsLocalizable>0</IsLocalizable>
           <optionset Name="tavu_meeting_statecode">
             <OptionSetType>state</OptionSetType>
-            <IntroducedVersion>1.0.0.27</IntroducedVersion>
+            <IntroducedVersion>1.3.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Activity Status" languagecode="1033" />
@@ -2615,7 +2615,7 @@
           <IsLocalizable>0</IsLocalizable>
           <optionset Name="tavu_meeting_statuscode">
             <OptionSetType>status</OptionSetType>
-            <IntroducedVersion>1.0.0.27</IntroducedVersion>
+            <IntroducedVersion>1.3.0.0</IntroducedVersion>
             <IsCustomizable>1</IsCustomizable>
             <displaynames>
               <displayname description="Status Reason" languagecode="1033" />

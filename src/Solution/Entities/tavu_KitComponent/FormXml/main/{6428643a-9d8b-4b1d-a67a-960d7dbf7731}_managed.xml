@@ -24,13 +24,15 @@
                     <row>
                       <cell id="{70500183-5f21-4eb1-a478-c8540d9be0a6}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
                       <cell id="{67669de5-8a91-44e8-8509-b3e8d5c7e9b1}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Unit of Measure" languagecode="1033" />
+                          <label description="Unidad de medida" languagecode="3082" />
                         </labels>
                         <control id="tavu_unitofmeasure" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_unitofmeasure" disabled="false" />
                       </cell>
@@ -38,13 +40,15 @@
                     <row>
                       <cell id="{c2b1b931-1a52-4663-ae53-ea6205b5cdf4}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Child Product" languagecode="1033" />
+                          <label description="Producto secundario" languagecode="3082" />
                         </labels>
                         <control id="tavu_childproduct" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_childproduct" disabled="false" />
                       </cell>
                       <cell id="{372c8acc-bbdb-457d-ad12-35721bd282b6}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Quantity" languagecode="1033" />
+                          <label description="Cantidad" languagecode="3082" />
                         </labels>
                         <control id="tavu_quantity" classid="{C3EFE0C3-0EC6-42BE-8349-CBD9079DFD8E}" datafieldname="tavu_quantity" disabled="false" />
                       </cell>
@@ -52,7 +56,8 @@
                     <row>
                       <cell id="{27cd509b-59be-4778-987d-e7d21aa2c6ca}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Parent Product" languagecode="1033" />
+                          <label description="Producto principal" languagecode="3082" />
                         </labels>
                         <control id="tavu_parentproduct" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_parentproduct" disabled="false" />
                       </cell>

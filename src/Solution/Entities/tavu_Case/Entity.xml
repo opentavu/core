@@ -2281,7 +2281,7 @@
           <Name>tavu_title</Name>
           <LogicalName>tavu_title</LogicalName>
           <RequiredLevel>required</RequiredLevel>
-          <DisplayMask>ActivityPointerRegardingName|PrimaryName|ValidForAdvancedFind|ValidForForm|ValidForGrid|RequiredForForm</DisplayMask>
+          <DisplayMask>QueueItemTitle|ActivityPointerRegardingName|PrimaryName|ValidForAdvancedFind|ValidForForm|ValidForGrid|RequiredForForm</DisplayMask>
           <ImeMode>auto</ImeMode>
           <ValidForUpdateApi>1</ValidForUpdateApi>
           <ValidForReadApi>1</ValidForReadApi>

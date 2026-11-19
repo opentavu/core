@@ -52,6 +52,7 @@
     <RolePrivilege name="prvAppendTotavu_SystemSettings" level="Global" />
     <RolePrivilege name="prvAppendTotavu_UnitofMeasureSchedule" level="Global" />
     <RolePrivilege name="prvAppendTotavu_Uom" level="Global" />
+    <RolePrivilege name="prvAssignActivity" level="Basic" />
     <RolePrivilege name="prvAssigntavu_Conversation" level="Global" />
     <RolePrivilege name="prvAssigntavu_Lead" level="Global" />
     <RolePrivilege name="prvCreateActivity" level="Global" />
@@ -64,7 +65,9 @@
     <RolePrivilege name="prvCreatetavu_Lead" level="Global" />
     <RolePrivilege name="prvReadAccount" level="Global" />
     <RolePrivilege name="prvReadActivity" level="Global" />
+    <RolePrivilege name="prvReadAsyncOperation" level="Basic" />
     <RolePrivilege name="prvReadContact" level="Global" />
+    <RolePrivilege name="prvReadEntity" level="Global" />
     <RolePrivilege name="prvReadEnvironmentVariableDefinition" level="Global" />
     <RolePrivilege name="prvReadNote" level="Global" />
     <RolePrivilege name="prvReadPluginAssembly" level="Global" />

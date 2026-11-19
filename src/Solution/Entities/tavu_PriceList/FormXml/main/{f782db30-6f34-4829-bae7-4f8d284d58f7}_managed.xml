@@ -24,7 +24,8 @@
                     <row>
                       <cell id="{560d0ef2-be73-4033-953b-d46d3ae0626f}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
@@ -32,6 +33,7 @@
                     <row>
                       <cell id="{8760b0a6-ba28-4a4d-aa20-741c88b92534}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
+                          <label description="List Currency" languagecode="1033" />
                           <label description="Moneda de la lista" languagecode="3082" />
                         </labels>
                         <control id="tavu_currency" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_currency" disabled="false" />
@@ -40,7 +42,8 @@
                     <row>
                       <cell id="{aa05eac9-3a13-4b32-a8c6-77354fa8b16e}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Start Date" languagecode="1033" />
+                          <label description="Fecha de inicio" languagecode="3082" />
                         </labels>
                         <control id="tavu_startdate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_startdate" disabled="false" />
                       </cell>
@@ -48,7 +51,8 @@
                     <row>
                       <cell id="{9b38cbda-c39c-478f-93d4-5bc3e3e7fcde}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="End Date" languagecode="1033" />
+                          <label description="Fecha de finalización" languagecode="3082" />
                         </labels>
                         <control id="tavu_enddate" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="tavu_enddate" disabled="false" />
                       </cell>
@@ -56,7 +60,8 @@
                     <row>
                       <cell id="{5caaa82d-c2b1-4d1a-bd70-05ca76c1d94c}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Is Default" languagecode="1033" />
+                          <label description="Es predeterminado" languagecode="3082" />
                         </labels>
                         <control id="tavu_isdefault" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_isdefault" disabled="false" uniqueid="{058fb9b4-012d-40d8-823d-5a6aa97b1a48}" />
                       </cell>
@@ -77,7 +82,8 @@
                     <row>
                       <cell locklevel="0" id="{ffd82dc7-963d-4f36-9a7d-535dad3f7975}" rowspan="4" colspan="1" auto="false">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Price List Items" languagecode="1033" />
+                          <label description="Ítems de lista de precios" languagecode="3082" />
                         </labels>
                         <control indicationOfSubgrid="true" id="Subgrid_PriceListItems" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
                           <parameters>

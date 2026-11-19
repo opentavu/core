@@ -32,7 +32,8 @@
                     <row>
                       <cell id="{BE9464D6-F4E7-4AB0-9BAF-E373FAD0C9CC}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Owner" languagecode="1033" />
+                          <label description="Propietario" languagecode="3082" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" />
                       </cell>

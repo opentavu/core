@@ -33,7 +33,8 @@
                     <row>
                       <cell id="{cad5c143-b7c9-4bac-9f2a-e14a92547472}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Status Reason" languagecode="1033" />
+                          <label description="Motivo del estado" languagecode="3082" />
                         </labels>
                         <control id="statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="false" />
                       </cell>
@@ -59,7 +60,8 @@
                     <row>
                       <cell id="{eb53ba94-22be-4412-b5ea-b4165e0af310}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" disabled="false" />
                       </cell>
@@ -75,7 +77,8 @@
                     <row>
                       <cell id="{6f918e4e-e3b3-4cff-b8cb-ea0dfbf5b30d}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Created On" languagecode="1033" />
+                          <label description="Fecha de creación" languagecode="3082" />
                         </labels>
                         <control id="createdon" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdon" disabled="false" />
                       </cell>

@@ -24,13 +24,15 @@
                     <row>
                       <cell id="{347967f5-16c3-41ed-9001-81fcb111a6a0}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Code" languagecode="1033" />
+                          <label description="Código" languagecode="3082" />
                         </labels>
                         <control id="tavu_code" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_code" disabled="true" />
                       </cell>
                       <cell id="{782b8090-13e0-4543-b603-c9acc2d397fb}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Is Default" languagecode="1033" />
+                          <label description="Es predeterminado" languagecode="3082" />
                         </labels>
                         <control id="tavu_isdefault" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_isdefault" disabled="false" uniqueid="{2c7ce21e-2852-4859-9d16-d8e9de3b6e39}" />
                       </cell>
@@ -38,13 +40,15 @@
                     <row>
                       <cell id="{3fe215aa-ef6e-4567-bd0a-03b9ce32ffa6}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
                       <cell id="{b29faea9-1d0b-4fa0-8acb-fbbde0fb0ef7}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Is 24x7" languagecode="1033" />
+                          <label description="Es 24x7" languagecode="3082" />
                         </labels>
                         <control id="tavu_is24x7" classid="{F9A8A302-114E-466A-B582-6771B2AE0D92}" datafieldname="tavu_is24x7" disabled="false" uniqueid="{32446f85-dfb0-4413-9822-23f9922872bf}" />
                       </cell>
@@ -52,7 +56,8 @@
                     <row>
                       <cell id="{06ae1521-0ec1-4e03-9fbb-d47c15572da0}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Time Zone" languagecode="1033" />
+                          <label description="Zona horaria" languagecode="3082" />
                         </labels>
                         <control id="tavu_timezone" classid="{7C624A0B-F59E-493D-9583-638D34759266}" datafieldname="tavu_timezone" disabled="false" />
                       </cell>
@@ -74,7 +79,8 @@
                     <row>
                       <cell id="{8916e8a6-e386-476f-b118-6b9fe4a582af}" locklevel="0" colspan="1" rowspan="3">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Description" languagecode="1033" />
+                          <label description="Descripción" languagecode="3082" />
                         </labels>
                         <control id="tavu_description" classid="{E0DECE4B-6FC8-4A8F-A065-082708572369}" datafieldname="tavu_description" disabled="false" />
                       </cell>
@@ -93,7 +99,8 @@
                     <row>
                       <cell locklevel="0" id="{87ac5f49-5500-4169-9108-ed855befdffe}" rowspan="4" colspan="1" auto="false">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Calendar Working Hours" languagecode="1033" />
+                          <label description="Horario laboral del calendario" languagecode="3082" />
                         </labels>
                         <control indicationOfSubgrid="true" id="Subgrid_Calendar_Working_Hours" classid="{E7A81278-8635-4D9E-8D4D-59480B391C5B}">
                           <parameters>

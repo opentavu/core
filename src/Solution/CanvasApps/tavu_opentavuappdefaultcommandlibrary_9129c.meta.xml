@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>tavu_opentavuappdefaultcommandlibrary_9129c</Name>
-  <AppVersion>2026-10-04T21:56:19Z</AppVersion>
+  <AppVersion>2026-11-16T19:38:13Z</AppVersion>
   <Status>Ready</Status>
   <CreatedByClientVersion>3.26094.6.0</CreatedByClientVersion>
   <MinClientVersion>0.0.0.0</MinClientVersion>
@@ -10,7 +10,7 @@
   <GalleryItemId xsi:nil="true"></GalleryItemId>
   <BackgroundColor>rgba(0, 176, 240, 1)</BackgroundColor>
   <DisplayName>OpenTavuApp_DefaultCommandLibrary</DisplayName>
-  <Description xsi:nil="true"></Description>
+  <Description></Description>
   <CommitMessage>Saved by Command designer.</CommitMessage>
   <Publisher></Publisher>
   <AuthorizationReferences>[]</AuthorizationReferences>
@@ -21,10 +21,9 @@
   <CanConsumeAppPass>1</CanConsumeAppPass>
   <CanvasAppType>1</CanvasAppType>
   <BypassConsent>0</BypassConsent>
-  <AdminControlBypassConsent>0</AdminControlBypassConsent>
   <EmbeddedApp xsi:nil="true"></EmbeddedApp>
   <IntroducedVersion>1.0</IntroducedVersion>
-  <CdsDependencies>{"cdsdependencies":[{"logicalname":"tavu_opportunity","componenttype":1},{"logicalname":"tavu_proposal","componenttype":1},{"logicalname":"tavu_lead","componenttype":1},{"logicalname":"tavu_meeting","componenttype":1},{"logicalname":"tavu_meetingsource","componenttype":1}]}</CdsDependencies>
+  <CdsDependencies>{"cdsdependencies":[{"componenttype":1,"logicalname":"tavu_opportunity"},{"componenttype":1,"logicalname":"tavu_proposal"},{"componenttype":1,"logicalname":"tavu_lead"},{"componenttype":1,"logicalname":"tavu_meeting"},{"componenttype":1,"logicalname":"tavu_meetingsource"}]}</CdsDependencies>
   <IsCustomizable>1</IsCustomizable>
   <BackgroundImageUri>/CanvasApps/tavu_opentavuappdefaultcommandlibrary_9129c_BackgroundImageUri</BackgroundImageUri>
   <DocumentUri>/CanvasApps/tavu_opentavuappdefaultcommandlibrary_9129c_DocumentUri.msapp</DocumentUri>
