@@ -74,7 +74,7 @@
   <EntityRelationship Name="tavu_meeting_team_owningteam">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.27</IntroducedVersion>
+    <IntroducedVersion>1.3.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tavu_Meeting</ReferencingEntityName>
     <ReferencedEntityName>Team</ReferencedEntityName>
@@ -96,7 +96,7 @@
   <EntityRelationship Name="tavu_opportunityclose_team_owningteam">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IntroducedVersion>1.3.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tavu_OpportunityClose</ReferencingEntityName>
     <ReferencedEntityName>Team</ReferencedEntityName>
@@ -188,7 +188,7 @@
   <EntityRelationship Name="tavu_timeentry_team_owningteam">
     <EntityRelationshipType>OneToMany</EntityRelationshipType>
     <IsCustomizable>1</IsCustomizable>
-    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <IntroducedVersion>1.3.0.0</IntroducedVersion>
     <IsHierarchical>0</IsHierarchical>
     <ReferencingEntityName>tavu_TimeEntry</ReferencingEntityName>
     <ReferencedEntityName>Team</ReferencedEntityName>

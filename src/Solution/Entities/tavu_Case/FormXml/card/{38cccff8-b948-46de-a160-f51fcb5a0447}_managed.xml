@@ -33,7 +33,8 @@
                     <row>
                       <cell id="{523fb877-6e6d-4b2f-8439-01f1b0a45c5f}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Status Reason" languagecode="1033" />
+                          <label description="Motivo del estado" languagecode="3082" />
                         </labels>
                         <control id="statuscode" classid="{5D68B988-0661-4db2-BC3E-17598AD3BE6C}" datafieldname="statuscode" disabled="false" />
                       </cell>
@@ -59,7 +60,8 @@
                     <row>
                       <cell id="{262fa203-0218-456c-9ba8-049ce7c516a9}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Title" languagecode="1033" />
+                          <label description="Título" languagecode="3082" />
                         </labels>
                         <control id="tavu_title" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_title" disabled="false" />
                       </cell>
@@ -75,13 +77,15 @@
                     <row>
                       <cell id="{5a140827-8659-4279-9b3e-fd292842b8d7}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Owner" languagecode="1033" />
+                          <label description="Propietario" languagecode="3082" />
                         </labels>
                         <control id="ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
                       </cell>
                       <cell id="{a3fc323c-a045-402f-8c7f-627c0cee45fe}" showlabel="true" locklevel="0">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Created On" languagecode="1033" />
+                          <label description="Fecha de creación" languagecode="3082" />
                         </labels>
                         <control id="createdon" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="createdon" disabled="false" />
                       </cell>

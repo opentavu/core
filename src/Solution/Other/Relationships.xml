@@ -254,7 +254,7 @@
   <EntityRelationship Name="tavu_opportunity_SalesStage_tavu_salesstage" />
   <EntityRelationship Name="tavu_opportunity_SalesTarget_tavu_salestarget" />
   <EntityRelationship Name="tavu_opportunity_SourceLead_tavu_lead" />
-  <EntityRelationship Name="tavu_opportunity_tavu_Meetings" />
+  <EntityRelationship Name="tavu_opportunity_tavu_OpportunityCloses" />
   <EntityRelationship Name="tavu_opportunity_tavu_TimeEntries" />
   <EntityRelationship Name="tavu_opportunityclose_businessunit_owningbusinessunit" />
   <EntityRelationship Name="tavu_opportunityclose_mailbox_sendermailboxid" />
@@ -276,8 +276,6 @@
   <EntityRelationship Name="tavu_proposal_Opportunity_tavu_opportunity" />
   <EntityRelationship Name="tavu_proposal_PriceList_tavu_pricelist" />
   <EntityRelationship Name="tavu_proposal_PrimaryContact_contact" />
-  <EntityRelationship Name="tavu_proposal_tavu_Meetings" />
-  <EntityRelationship Name="tavu_proposal_tavu_OpportunityCloses" />
   <EntityRelationship Name="tavu_proposal_tavu_TimeEntries" />
   <EntityRelationship Name="tavu_proposalline_Product_tavu_product" />
   <EntityRelationship Name="tavu_proposalline_Proposal_tavu_proposal" />

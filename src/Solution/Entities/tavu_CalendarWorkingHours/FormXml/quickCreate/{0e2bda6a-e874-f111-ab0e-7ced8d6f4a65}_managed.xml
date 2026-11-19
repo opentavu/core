@@ -58,7 +58,8 @@
                     <row>
                       <cell id="{c906a828-5de8-48d6-aff0-1eec2d33ec69}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Start Time" languagecode="1033" />
+                          <label description="Hora de inicio" languagecode="3082" />
                         </labels>
                         <control id="tavu_starttime" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_starttime" disabled="false" />
                       </cell>
@@ -66,7 +67,8 @@
                     <row>
                       <cell id="{cb8cd77e-194a-4cbc-958a-c74161a81baa}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="End Time" languagecode="1033" />
+                          <label description="Hora de finalización" languagecode="3082" />
                         </labels>
                         <control id="tavu_endtime" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_endtime" disabled="false" />
                       </cell>

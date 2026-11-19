@@ -6,6 +6,120 @@
     <FormPresentation>0</FormPresentation>
     <FormActivationState>1</FormActivationState>
     <form maxWidth="1900">
+      <tabs>
+        <tab id="{ee019344-2ac2-4ade-b2b8-630ff38801b1}" name="tab_1" showlabel="false" IsUserDefined="0" ordinalvalue="0">
+          <columns>
+            <column width="33%" id="0">
+              <sections>
+                <section id="{be7e5181-f67d-4fac-9420-ed9e2ac588fd}" name="tab_1_column_1_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{a2528d42-720c-9931-81ca-784c1881b8c2}" showlabel="true" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="Nombre de pila" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7a7e1043-ea62-1a5d-44c8-68757777c3d0}" showlabel="true" locklevel="0" ordinalvalue="10001">
+                        <labels>
+                          <label description="Apellidos" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{c7039214-3590-a99c-cce7-e18a7895d74e}" showlabel="true" locklevel="0" ordinalvalue="10002">
+                        <labels>
+                          <label description="Puesto" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{64cb3028-1866-28da-8268-c5487ce86317}" showlabel="true" locklevel="0" ordinalvalue="10003">
+                        <labels>
+                          <label description="Nombre de la compañía" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%" id="1">
+              <sections>
+                <section id="{b5f2a6a1-d1e1-439d-ab76-fbb48f1381d4}" name="tab_1_column_2_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{a6b833e8-225b-4986-c283-067453a7daa2}" showlabel="true" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="Correo electrónico" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{192e5ab2-2129-ee55-cd56-2846649cbe47}" showlabel="true" locklevel="0" ordinalvalue="10001">
+                        <labels>
+                          <label description="Teléfono móvil" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d5a423e7-3536-2052-4e49-5d4b3ce1c0ae}" showlabel="true" locklevel="0" ordinalvalue="10002">
+                        <labels>
+                          <label description="Teléfono del trabajo" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{abb75da6-8727-e2a0-dccb-9ce591c107b7}" showlabel="true" locklevel="0" rowspan="1" ordinalvalue="10003">
+                        <labels>
+                          <label description="Descripción" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%" id="2">
+              <sections>
+                <section id="{4e35e9f6-ac81-44cf-b8d6-91149b679634}" name="tab_1_column_3_section_1" columns="1" showlabel="true" showbar="false" IsUserDefined="0" locklevel="0" labelwidth="115" celllabelalignment="Left" celllabelposition="Left" ordinalvalue="0">
+                  <rows>
+                    <row>
+                      <cell id="{9E47DA5C-45B2-4D9B-8C83-2633E2FB68A5}" showlabel="true" locklevel="0" ordinalvalue="10000">
+                        <labels>
+                          <label description="Dirección 1: calle 1" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{67473FA2-07D2-485B-BC63-7B05D02D5230}" showlabel="true" locklevel="0" ordinalvalue="10001">
+                        <labels>
+                          <label description="Dirección 1: calle 2" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{F43497C8-73CC-4853-9736-964446900C81}" showlabel="true" locklevel="0" ordinalvalue="10002">
+                        <labels>
+                          <label description="Dirección 1: ciudad" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2AC67B8F-6335-4448-9E85-1601793BF072}" showlabel="true" locklevel="0" ordinalvalue="10003">
+                        <labels>
+                          <label description="Dirección 1: código postal" languagecode="3082" solutionaction="Added" />
+                        </labels>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
       <DisplayConditions FallbackForm="false" Order="2" solutionaction="Modified" />
     </form>
     <LocalizedNames>

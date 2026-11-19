@@ -24,13 +24,15 @@
                     <row>
                       <cell id="{3a4e367e-0e1b-49ac-91a1-cd8bb2789b22}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Code" languagecode="1033" />
+                          <label description="Código" languagecode="3082" />
                         </labels>
                         <control id="tavu_code" classid="{4273EDBD-AC1D-40D3-9FB2-095C621B552D}" datafieldname="tavu_code" disabled="true" />
                       </cell>
                       <cell id="{1e98541b-bdc9-4d7f-a010-0f32439d9378}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Calendar" languagecode="1033" />
+                          <label description="Calendario" languagecode="3082" />
                         </labels>
                         <control id="tavu_calendar" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="tavu_calendar" disabled="false" />
                       </cell>
@@ -43,7 +45,8 @@
                       </cell>
                       <cell id="{29e6e984-0f62-4213-9284-1c66eda75c4c}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Start Time" languagecode="1033" />
+                          <label description="Hora de inicio" languagecode="3082" />
                         </labels>
                         <control id="tavu_starttime" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_starttime" disabled="false" />
                       </cell>
@@ -51,13 +54,15 @@
                     <row>
                       <cell id="{411670af-937a-4f43-bf08-1cebd3a96ffd}">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Name" languagecode="1033" />
+                          <label description="Nombre" languagecode="3082" />
                         </labels>
                         <control id="tavu_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="tavu_name" />
                       </cell>
                       <cell id="{d19a2ee3-0149-46e1-a38b-3707a2448aee}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="End Time" languagecode="1033" />
+                          <label description="Hora de finalización" languagecode="3082" />
                         </labels>
                         <control id="tavu_endtime" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_endtime" disabled="false" />
                       </cell>
@@ -65,7 +70,8 @@
                     <row>
                       <cell id="{14717445-d78f-4567-b478-c8838a4dd1f9}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="" languagecode="1033" />
+                          <label description="Day of Week" languagecode="1033" />
+                          <label description="Día de la semana" languagecode="3082" />
                         </labels>
                         <control id="tavu_dayofweek" classid="{3EF39988-22BB-4F0B-BBBE-64B5A3748AEE}" datafieldname="tavu_dayofweek" disabled="false" />
                       </cell>
