@@ -61,7 +61,7 @@ Users get **Basic User** (Microsoft) plus one OpenTavu role. In a single busines
 | OpenTavu Admin | Everything, organization-wide, including configuration tables | Full | Full |
 | OpenTavu Gateway | Cases and interactions: create, read, write. Meeting source: read, write. Everything else: read | Read | Contacts: create and write. Accounts: read. Notes: create. Activities (meetings): create and write |
 
-Activity tables (`tavu_meeting`, `tavu_opportunityclose`, `tavu_timeentry`) are governed by Dataverse's shared Activity privileges, not per-table privileges. The Gateway role is meant to replace System Administrator on the gateway's application user (least privilege), after a test run.
+Activity tables (`tavu_meeting`, `tavu_opportunityclose`, `tavu_timeentry`) are governed by Dataverse's shared Activity privileges, not per-table privileges. The Gateway role is the gateway application user's only role (least privilege). Every release is checked by the least-privilege check of `tools/release-smoke.ps1` (`-GatewayAppId`): it runs the gateway's Dataverse reads and writes as an application user that holds only this role and fails the smoke test when any call is refused. The check mirrors the calls of the gateway's `DataverseClient` (`OpenTavu.Gateway/Dataverse/DataverseClient.cs`); that is the contract: when `DataverseClient` gains a new Dataverse call, the check gets the same call.
 
 ## Sales periods: rolling horizon
 
