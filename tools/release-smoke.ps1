@@ -15,15 +15,23 @@
      write paths (agent runtime reads, contact, conversation and transcript file, lead with the
      handoff owner, the agent's hand-to-human and close updates, case with interaction, note and
      SLA status, meeting with the owner change and the Meeting Source status) as a principal that
-     holds only that role, and fails the run when any call is refused.
+     holds only that role, and fails the run when any call is refused. Among the privileges these
+     paths need beyond table access: prvReadAsyncOperation (creates that start system jobs),
+     prvAssignActivity (the meeting owner change), prvReadEntity and prvReadAttribute (the
+     tavu_meeting.tavu_source option metadata read).
 
   The principal is the application user of the Entra app given in -GatewayAppId: the script finds
   it (or creates it in the root business unit), adds the "OpenTavu Gateway" role when it is
   missing, and fails without changing anything when the user holds any other role, directly or
-  through a team. No client secret is read or needed: every call of the check is sent with the
-  administrator's token and the MSCRMCallerID header (impersonation), and the first call, WhoAmI,
-  must return the principal's id or the check stops. Impersonation requires the signed-in user to
-  hold prvActOnBehalfOfAnotherUser (System Administrator does).
+  through a team. No client secret is read or needed: every gateway call of the check is sent with the
+  administrator's token and the MSCRMCallerID header (impersonation). The Web API WhoAmI returns
+  the signed-in caller even when impersonating, so it cannot prove impersonation. The proof is a
+  row instead: the first impersonated call creates a contact (as the gateway's contact create
+  does), the administrator reads its created-by user, which must be the application user or the
+  check stops ("impersonation not in effect"), and then deletes that probe contact (the role holds
+  no contact delete). A refused probe create is a FAIL with the privilege name and also stops the
+  check. Impersonation requires the signed-in user to hold prvActOnBehalfOfAnotherUser (System
+  Administrator does).
 
   The check writes test rows (prefix "release-smoke role check", example.com email, a fictitious
   phone number) and leaves them in the disposable environment; only its fixture agent is
@@ -388,7 +396,6 @@ function Invoke-RoleCheck {
         $r = Invoke-Step -AsAdmin -Name 'setup: administrator Entra object id' -Method 'GET' -Path ('systemusers({0})?$select=azureactivedirectoryobjectid' -f $adminId)
         if ($r) { $adminAad = [string](Get-Json $r).azureactivedirectoryobjectid }
 
-        $rootBu = $null
         $r = Invoke-Step -AsAdmin -Name 'setup: root business unit' -Method 'GET' -Path 'businessunits?$select=businessunitid,name&$filter=_parentbusinessunitid_value eq null' -Validate {
             param($x) if (@(Get-Rows $x).Count -ne 1) { 'expected exactly one root business unit' }
         }
@@ -418,7 +425,7 @@ function Invoke-RoleCheck {
             $script:created['applicationUser'] = $principal
         }
         $state.principalId = $principal
-        $r = Invoke-Step -AsAdmin -Name 'setup: application user enabled' -Method 'GET' -Path ('systemusers({0})?$select=isdisabled' -f $principal) -Needs ([ordered]@{ 'the application user' = $principal }) -Validate {
+        $r = Invoke-Step -AsAdmin -Name 'setup: application user enabled' -Method 'GET' -Path ('systemusers({0})?$select=isdisabled' -f $principal) -Needs ([ordered]@{ 'setup: create the application user' = $principal }) -Validate {
             param($x) if ((Get-Json $x).isdisabled -eq $true) { 'the application user is disabled; enable it and run again' }
         }
         if (-not $r) { return }
@@ -480,10 +487,25 @@ function Invoke-RoleCheck {
         # ----- Impersonation -----
         $script:principalId = $principal
         Write-Host "`nImpersonated as the application user (MSCRMCallerID):" -ForegroundColor DarkGray
-        $r = Invoke-Step -Name 'WhoAmI impersonated' -Method 'GET' -Path 'WhoAmI' -Validate {
-            param($x) if ([string](Get-Json $x).UserId -ine $principal) { 'impersonation not in effect: WhoAmI did not return the application user' }
+        # Proof of impersonation. The Web API WhoAmI returns the signed-in caller even with MSCRMCallerID,
+        # so a row is the proof: create a contact impersonated (the gateway's contact create), read its
+        # created-by user as the administrator, then delete it as the administrator (the role holds no
+        # contact delete). A refused create or a different creator stops the check.
+        $probeStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
+        $r = Invoke-Step -Name 'impersonation proof: contact create' -Method 'POST' -Path 'contacts' -Body ([ordered]@{
+            lastname      = "release-smoke role check $probeStamp impersonation proof"
+            emailaddress1 = "release-smoke-$probeStamp-proof@example.com"
+        }) -Validate {
+            param($x) if (-not (Get-CreatedId $x)) { 'the create returned no row id' }
         }
         if (-not $r) { return }
+        $probeId = Get-CreatedId $r
+        $proof = Invoke-Step -AsAdmin -Name 'impersonation proof: created by the application user' -Method 'GET' -Path ('contacts({0})?$select=_createdby_value' -f $probeId) -Validate {
+            param($x) if ([string](Get-Json $x)._createdby_value -ine $principal) { 'impersonation not in effect: the row was not created by the application user' }
+        }
+        $del = Invoke-Step -AsAdmin -Name 'impersonation proof: delete the probe contact' -Method 'DELETE' -Path ('contacts({0})' -f $probeId)
+        if (-not $del) { $script:created['impersonationProbeContact'] = $probeId }
+        if (-not $proof) { return }
 
         # ----- Test values -----
         $nowUtc = (Get-Date).ToUniversalTime()
@@ -545,7 +567,7 @@ function Invoke-RoleCheck {
         $r = Invoke-Step -Name 'team: pick one (an agent''s handoff team)' -Method 'GET' -Path ('teams?$select=teamid,name&$filter=_businessunitid_value eq {0}&$top=1' -f $rootBu)
         $rows = @(Get-Rows $r)
         if ($rows.Count) { $teamId = [string]$rows[0].teamid }
-        [void](Invoke-Step -Name 'team member emails' -Method 'GET' -Path ('systemusers?$select=internalemailaddress&$filter=isdisabled eq false and internalemailaddress ne null and teammembership_association/any(t:t/teamid eq {0})&$top=5' -f $teamId) -Needs ([ordered]@{ 'team: pick one' = $teamId }))
+        [void](Invoke-Step -Name 'team member emails' -Method 'GET' -Path ('systemusers?$select=internalemailaddress&$filter=isdisabled eq false and internalemailaddress ne null and teammembership_association/any(t:t/teamid eq {0})&$top=5' -f $teamId) -Needs ([ordered]@{ 'team: pick one (an agent''s handoff team)' = $teamId }))
         [void](Invoke-Step -Name 'agent timer: open conversations' -Method 'GET' -Path ('tavu_conversations?$select={0}&$filter=statecode eq 0 and (statuscode eq 1 or statuscode eq 576600000)&$orderby=tavu_lastinboundon asc&$top=5' -f $conversationSelect))
 
         # ----- Contact (agent runtime match and email intake) -----
@@ -635,14 +657,14 @@ function Invoke-RoleCheck {
             'ownerid@odata.bind' = "/systemusers($adminId)"
         })
         if ($r) { $script:created['lead'] = $leadId } else { $leadId = $null }
-        $needLead = [ordered]@{ 'lead: create' = $leadId }
+        $needLead = [ordered]@{ 'lead: create with the handoff owner' = $leadId }
         [void](Invoke-Step -Name 'lead: by id' -Method 'GET' -Path ('tavu_leads?$select={0}&$filter=tavu_leadid eq {1}' -f $leadSelect, $leadId) -Needs $needLead)
         [void](Invoke-Step -Name 'lead: update' -Method 'PATCH' -Path "tavu_leads($leadId)" -Extra $ifMatch -Needs $needLead -Body ([ordered]@{
             tavu_email         = $email
             tavu_sourcedetails = "Lead Qualification Agent, conversation ${convRef}:`n$prefix summary, updated"
         }))
         [void](Invoke-Step -Name 'conversation: link the lead' -Method 'PATCH' -Path $convPath -Extra $ifMatch `
-            -Needs ([ordered]@{ 'conversation: create' = $conversationId; 'lead: create' = $leadId }) -Body @{ 'tavu_Lead@odata.bind' = "/tavu_leads($leadId)" })
+            -Needs ([ordered]@{ 'conversation: create' = $conversationId; 'lead: create with the handoff owner' = $leadId }) -Body @{ 'tavu_Lead@odata.bind' = "/tavu_leads($leadId)" })
 
         # ----- The agent's closing updates -----
         [void](Invoke-Step -Name 'conversation: hand to human' -Method 'PATCH' -Path $convPath -Extra $ifMatch -Needs $needConv -Body ([ordered]@{
@@ -712,7 +734,11 @@ function Invoke-RoleCheck {
             })
         if ($script:teamsOption) { $teamsValue = $script:teamsOption }
         $sha = [Security.Cryptography.SHA256]::Create()
-        $externalId = -join ($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes("release-smoke-$stamp")) | ForEach-Object { $_.ToString('x2') })
+        try {
+            $externalId = -join ($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes("release-smoke-$stamp")) | ForEach-Object { $_.ToString('x2') })
+        } finally {
+            $sha.Dispose()
+        }
         [void](Invoke-Step -Name 'meeting: by external id' -Method 'GET' -Path ('tavu_meetings?$select=activityid&$filter=tavu_externalmeetingid eq ''{0}''&$top=1' -f $externalId))
         $start = Get-IsoUtc $nowUtc.AddHours(-1)
         $r = Invoke-Step -Name 'meeting: create' -Method 'POST' -Path 'tavu_meetings' -Body ([ordered]@{
@@ -737,7 +763,7 @@ function Invoke-RoleCheck {
         if ($r) { $ownerId = [string](Get-Rows $r)[0].systemuserid }
         # The gateway treats a failure here as a warning; the check counts it as a failure.
         [void](Invoke-Step -Name 'meeting: owner change to the organizer' -Method 'PATCH' -Path "tavu_meetings($meetingId)" `
-            -Needs ([ordered]@{ 'meeting: create' = $meetingId; 'meeting: organizer user' = $ownerId }) -Body @{ 'ownerid@odata.bind' = "/systemusers($ownerId)" })
+            -Needs ([ordered]@{ 'meeting: create' = $meetingId; 'meeting: organizer user by Entra object id' = $ownerId }) -Body @{ 'ownerid@odata.bind' = "/systemusers($ownerId)" })
         $sourceId = $null
         $r = Invoke-Step -Name 'meeting source: Teams row' -Method 'GET' -Path 'tavu_meetingsources?$select=tavu_meetingsourceid&$filter=tavu_name eq ''Teams''&$top=1' -Validate {
             param($x) if (@(Get-Rows $x).Count -eq 0) { 'no Meeting Source row named Teams (run the setup routine)' }
