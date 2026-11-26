@@ -16,9 +16,10 @@
      handoff owner, the agent's hand-to-human and close updates, case with interaction, note and
      SLA status, meeting with the owner change and the Meeting Source status) as a principal that
      holds only that role, and fails the run when any call is refused. Among the privileges these
-     paths need beyond table access: prvReadAsyncOperation (creates that start system jobs),
-     prvAssignActivity (the meeting owner change), prvReadEntity and prvReadAttribute (the
-     tavu_meeting.tavu_source option metadata read).
+     paths need beyond table access: prvReadAsyncOperation (creates that start system jobs) and
+     prvAssignActivity (the meeting owner change). The gateway reads no Dataverse metadata, so the
+     role needs no metadata privilege; the meeting create writes the solution's fixed Teams option
+     of tavu_meetingsource (576600000) as tavu_source, as the gateway does.
 
   The principal is the application user of the Entra app given in -GatewayAppId: the script finds
   it (or creates it in the root business unit), adds the "OpenTavu Gateway" role when it is
@@ -714,26 +715,8 @@ function Invoke-RoleCheck {
         [void](Invoke-Step -Name 'case: SLA status Warning' -Method 'PATCH' -Path "tavu_cases($caseId)" -Extra $ifMatch -Needs $needCase -Body @{ tavu_slastatus = 576600001 })
 
         # ----- Meeting (Teams intake) -----
+        # The gateway writes the solution's fixed "Teams" option of tavu_meetingsource; no metadata read.
         $teamsValue = 576600000
-        $script:teamsOption = $null
-        [void](Invoke-Step -Name 'meeting: Teams source option' -Method 'GET' `
-            -Path 'EntityDefinitions(LogicalName=''tavu_meeting'')/Attributes(LogicalName=''tavu_source'')/Microsoft.Dynamics.CRM.PicklistAttributeMetadata?$select=LogicalName&$expand=OptionSet($select=Options),GlobalOptionSet($select=Options)' `
-            -Validate {
-                param($x)
-                $j = Get-Json $x
-                $found = $null
-                foreach ($set in @($j.OptionSet, $j.GlobalOptionSet)) {
-                    if ($null -eq $set) { continue }
-                    foreach ($o in @($set.Options)) {
-                        foreach ($l in @($o.Label.LocalizedLabels)) {
-                            if ($l.LanguageCode -eq 1033 -and $l.Label -ieq 'Teams') { $found = [int]$o.Value }
-                        }
-                    }
-                }
-                if ($null -eq $found) { 'no option labelled Teams in tavu_meeting.tavu_source' }
-                else { $script:teamsOption = $found }
-            })
-        if ($script:teamsOption) { $teamsValue = $script:teamsOption }
         $sha = [Security.Cryptography.SHA256]::Create()
         try {
             $externalId = -join ($sha.ComputeHash([Text.Encoding]::UTF8.GetBytes("release-smoke-$stamp")) | ForEach-Object { $_.ToString('x2') })
