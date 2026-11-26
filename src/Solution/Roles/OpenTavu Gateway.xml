@@ -66,9 +66,7 @@
     <RolePrivilege name="prvReadAccount" level="Global" />
     <RolePrivilege name="prvReadActivity" level="Global" />
     <RolePrivilege name="prvReadAsyncOperation" level="Basic" />
-    <RolePrivilege name="prvReadAttribute" level="Global" />
     <RolePrivilege name="prvReadContact" level="Global" />
-    <RolePrivilege name="prvReadEntity" level="Global" />
     <RolePrivilege name="prvReadEnvironmentVariableDefinition" level="Global" />
     <RolePrivilege name="prvReadNote" level="Global" />
     <RolePrivilege name="prvReadPluginAssembly" level="Global" />
