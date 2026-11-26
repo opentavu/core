@@ -491,9 +491,10 @@ function Invoke-RoleCheck {
         # so a row is the proof: create a contact impersonated (the gateway's contact create), read its
         # created-by user as the administrator, then delete it as the administrator (the role holds no
         # contact delete). A refused create or a different creator stops the check.
+        # contact.lastname holds at most 50 characters (platform default): this value is 46.
         $probeStamp = Get-Date -Format 'yyyyMMdd-HHmmss'
         $r = Invoke-Step -Name 'impersonation proof: contact create' -Method 'POST' -Path 'contacts' -Body ([ordered]@{
-            lastname      = "release-smoke role check $probeStamp impersonation proof"
+            lastname      = "release-smoke role check $probeStamp proof"
             emailaddress1 = "release-smoke-$probeStamp-proof@example.com"
         }) -Validate {
             param($x) if (-not (Get-CreatedId $x)) { 'the create returned no row id' }
