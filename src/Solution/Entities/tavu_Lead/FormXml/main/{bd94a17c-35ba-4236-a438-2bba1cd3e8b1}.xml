@@ -210,10 +210,10 @@
                     <row>
                       <cell id="{d801fd91-f453-4b0b-ab87-175dcd2009e8}" locklevel="0" colspan="1" rowspan="1">
                         <labels>
-                          <label description="Days In Buffer" languagecode="1033" />
-                          <label description="Días en buffer" languagecode="3082" />
+                          <label description="Created On" languagecode="1033" />
+                          <label description="Fecha de creación" languagecode="3082" />
                         </labels>
-                        <control id="tavu_daysinbuffer" classid="{C6D124CA-7EDA-4A60-AEA9-7FB8D318B68F}" datafieldname="tavu_daysinbuffer" disabled="true" />
+                        <control id="createdon" classid="{5B773807-9FB2-42DB-97C3-7A91EFF8ADFF}" datafieldname="createdon" disabled="true" />
                       </cell>
                     </row>
                   </rows>

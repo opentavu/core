@@ -1,7 +1,7 @@
 <customapiresponseproperty uniquename="TargetsProcessed">
   <description default="Sales targets read in this call.">
     <label description="Sales targets read in this call." languagecode="1033" />
-    <label description="Metas de venta le�das en esta llamada." languagecode="3082" />
+    <label description="Metas de venta leídas en esta llamada." languagecode="3082" />
   </description>
   <displayname default="Targets Processed">
     <label description="Targets Processed" languagecode="1033" />

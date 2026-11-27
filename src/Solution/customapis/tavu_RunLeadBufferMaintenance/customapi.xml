@@ -3,13 +3,13 @@
   <bindingtype>0</bindingtype>
   <description default="Updates the buffer band of active leads by age (System Settings aging and stale days) and closes Awaiting Human Review leads past the stale limit as Stale. Writes only leads whose band changes; stamps Daily Jobs Last Run when complete; call again while Complete is false.">
     <label description="Updates the buffer band of active leads by age (System Settings aging and stale days) and closes Awaiting Human Review leads past the stale limit as Stale. Writes only leads whose band changes; stamps Daily Jobs Last Run when complete; call again while Complete is false." languagecode="1033" />
-    <label description="Actualiza la banda de buffer de los leads activos seg�n su antig�edad (d�as de envejecimiento y de vencimiento en Ajustes del sistema) y cierra como vencidos los leads en espera de revisi�n humana que pasaron el l�mite. Solo escribe los leads cuya banda cambia; marca la �ltima ejecuci�n de tareas diarias al terminar; vuelva a llamarla mientras Completo sea falso." languagecode="3082" />
+    <label description="Actualiza la banda de buffer de los leads activos según su antigüedad (días de envejecimiento y de vencimiento en Ajustes del sistema) y cierra como vencidos los leads en espera de revisión humana que pasaron el límite. Solo escribe los leads cuya banda cambia; marca la última ejecución de tareas diarias al terminar; vuelva a llamarla mientras Completo sea falso." languagecode="3082" />
   </description>
   <displayname default="Run Lead Buffer Maintenance">
     <label description="Run Lead Buffer Maintenance" languagecode="1033" />
     <label description="Ejecutar mantenimiento del buffer de leads" languagecode="3082" />
   </displayname>
-  <executeprivilegename>prvWritetavu_SystemSettings</executeprivilegename>
+  <executeprivilegename>prvWritetavu_Lead</executeprivilegename>
   <iscustomizable>1</iscustomizable>
   <isfunction>0</isfunction>
   <isprivate>0</isprivate>

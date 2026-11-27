@@ -1,7 +1,7 @@
 <customapiresponseproperty uniquename="Summary">
   <description default="One-line result of the run.">
     <label description="One-line result of the run." languagecode="1033" />
-    <label description="Resultado de la ejecuci�n en una l�nea." languagecode="3082" />
+    <label description="Resultado de la ejecución en una línea." languagecode="3082" />
   </description>
   <displayname default="Summary">
     <label description="Summary" languagecode="1033" />

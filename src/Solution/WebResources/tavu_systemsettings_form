@@ -12,8 +12,8 @@
  * limit and answers Complete = false when there is more to do; this script calls it again
  * automatically (up to MAX_ROUNDS) and then shows the final summary.
  *
- * Run daily jobs now calls what the gateway's daily timer calls, in the same order: tavu_InitializeConfiguration
- * (Mode = "periods"), tavu_RunForecastSnapshot, tavu_RunLeadBufferMaintenance, each again while it answers
+ * Run daily jobs now calls what the gateway's daily timer calls, in the same order: tavu_RunForecastSnapshot (which
+ * also creates the upcoming sales periods), then tavu_RunLeadBufferMaintenance, each again while it answers
  * Complete = false, and shows their summaries. For firms without a gateway, and to catch up after an outage.
  *
  * @author OpenTavu, Gustavo González Villani
@@ -154,7 +154,7 @@ OpenTavu.SystemSettings.Form = OpenTavu.SystemSettings.Form || {};
 
     /** One daily job, called again while it answers Complete = false; resolves to its last summary. */
     function runJob(name, mode, step, round) {
-        Xrm.Utility.showProgressIndicator(TAVU_I18N("jobsWorking", step + "/3"));
+        Xrm.Utility.showProgressIndicator(TAVU_I18N("jobsWorking", step + "/2"));
         return callApi(name, mode).then(function (result) {
             if (result && result.Complete === false && round < MAX_ROUNDS) return runJob(name, mode, step, round + 1);
             var summary = (result && result.Summary) || "";
@@ -181,9 +181,8 @@ OpenTavu.SystemSettings.Form = OpenTavu.SystemSettings.Form || {};
         }).then(function (confirm) {
             if (!confirm.confirmed) return;
             var summaries = [];
-            runJob(INITIALIZE_API, "periods", 1, 1)
-                .then(function (s) { summaries.push(s); return runJob(SNAPSHOT_API, null, 2, 1); })
-                .then(function (s) { summaries.push(s); return runJob(BUFFER_API, null, 3, 1); })
+            runJob(SNAPSHOT_API, null, 1, 1)
+                .then(function (s) { summaries.push(s); return runJob(BUFFER_API, null, 2, 1); })
                 .then(function (s) {
                     summaries.push(s);
                     Xrm.Utility.closeProgressIndicator();

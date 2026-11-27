@@ -8,7 +8,7 @@
   </buttonlabeltext>
   <buttontooltipdescription default="Runs now what the gateway's daily timer runs at its hour: keeps sales periods ahead, writes today's forecast snapshots, and updates the lead buffer. Safe to run more than once a day.">
     <label description="Runs now what the gateway's daily timer runs at its hour: keeps sales periods ahead, writes today's forecast snapshots, and updates the lead buffer. Safe to run more than once a day." languagecode="1033" />
-    <label description="Ejecuta ahora lo que el temporizador diario del gateway ejecuta a su hora: mantiene los periodos de venta adelante, escribe las instant�neas de pron�stico de hoy y actualiza el buffer de leads. Se puede ejecutar m�s de una vez al d�a." languagecode="3082" />
+    <label description="Ejecuta ahora lo que el temporizador diario del gateway ejecuta a su hora: mantiene los periodos de venta adelante, escribe las instantáneas de pronóstico de hoy y actualiza el buffer de leads. Se puede ejecutar más de una vez al día." languagecode="3082" />
   </buttontooltipdescription>
   <buttontooltiptitle default="Run daily jobs now">
     <label description="Run daily jobs now" languagecode="1033" />

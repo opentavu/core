@@ -1,7 +1,7 @@
 <customapiresponseproperty uniquename="LeadsClosedStale">
   <description default="Awaiting Human Review leads closed as Stale in this call.">
     <label description="Awaiting Human Review leads closed as Stale in this call." languagecode="1033" />
-    <label description="Leads en espera de revisi�n humana cerrados como vencidos en esta llamada." languagecode="3082" />
+    <label description="Leads en espera de revisión humana cerrados como vencidos en esta llamada." languagecode="3082" />
   </description>
   <displayname default="Leads Closed Stale">
     <label description="Leads Closed Stale" languagecode="1033" />
