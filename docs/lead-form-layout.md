@@ -19,7 +19,7 @@ proposal), which use a **three-column** body and a **header** carrying Status Re
 | Title | `tavu_subject` | Primary column |
 | 1 | `statuscode` (Status Reason) | Read-only, the ribbon buttons drive transitions, not the picklist |
 | 2 | `tavu_aiconfidencescore` (AI Confidence Score) | AI-set |
-| 3 | `tavu_bufferalert` (Buffer Alert) | Fresh / Aging / Stale colored pill; set by the daily flow (Step E) |
+| 3 | `tavu_bufferalert` (Buffer Alert) | Fresh / Aging / Stale colored pill; set by the daily lead buffer job (`tavu_RunLeadBufferMaintenance`, Step E) |
 
 ## Tab "General", three columns
 
@@ -37,12 +37,12 @@ tall) · `ownerid`
 **Column 3, Match Context** (who this might be / the outcome; **read-only**):
 
 `tavu_matchedcontact` · `tavu_matchedaccount` · `tavu_promotedcontact` (filled after
-Approve/Link) · `tavu_daysinbuffer`
+Approve/Link) · `createdon` (Created On; it replaced Days in Buffer in v1.4.0, which the daily job now writes only on band changes)
 
 ## Field settings
 
 - **Read-only (locked):** everything AI/system-derived, Status Reason, AI Recommendation,
-  Last AI Processing Date, Matched Contact, Matched Account, Promoted Contact, Days in Buffer.
+  Last AI Processing Date, Matched Contact, Matched Account, Promoted Contact, Created On.
 - **Editable:** the Signal Information column only.
 - **Not on the form:** `tavu_fullname` (calculated; First + Last already shown).
 

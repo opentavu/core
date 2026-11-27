@@ -43,15 +43,15 @@
 - [ ] **F7, Guards.** On a non-Awaiting lead, any button warns "not awaiting review". With unsaved edits, warns "save your pending changes first". A closed lead opens locked.
 - [ ] **F8, Idempotency.** On an already-promoted lead (if you can re-invoke), Approve does **not** create a duplicate contact, it returns the existing one.
 
-## 3. Step E, daily buffer maintenance flow
+## 3. Step E, daily lead buffer job
 
-> Run the flow manually (Flow → Run) instead of waiting for the schedule.
+> Since v1.4.0 the job is the Custom API `tavu_RunLeadBufferMaintenance` (no flow). Run it with **Run daily jobs now** on System Settings instead of waiting for the gateway's daily timer.
 
-- [ ] **E1, Buffer fields refresh.** Run the flow. → every **active** lead gets `Days In Buffer` computed and `Buffer Alert` set (Fresh/Aging/Stale pill).
-- [ ] **E2, Band boundaries.** Verify the pill matches the age against aging=7 / stale=14. **Tip:** `createdon` can't be backdated, so to force bands temporarily set aging/stale days low (e.g. 0/0) in System Settings, run the flow, confirm leads flip to Aging/Stale, then restore 7/14.
+- [ ] **E1, Buffer band.** Run the job. → every **active** lead whose band changed gets `Buffer Alert` (Fresh/Aging/Stale pill) and `Days In Buffer` set; a lead already in its band is not written. A second run the same day changes nothing.
+- [ ] **E2, Band boundaries.** Verify the pill matches the age against aging=7 / stale=14. **Tip:** to force bands temporarily set aging/stale days low (e.g. 0/0) in System Settings, run the job, confirm leads flip to Aging/Stale, then restore 7/14 (or create test leads with `overriddencreatedon` through the Web API).
 - [ ] **E3, Auto-stale.** With `stale days` temporarily = 0, an **Awaiting Human Review** lead → after the run → **Inactive / Stale** (576600009). Restore to 14 after.
-- [ ] **E4, Non-awaiting leads are not auto-closed.** A lead in **New** (not Awaiting Human Review), even past the stale threshold, keeps its status but still gets `Days In Buffer` / `Buffer Alert` updated. (Only Awaiting Human Review leads auto-close.)
-- [ ] **E5, Parameterization.** Change `stale days` in System Settings to a new value → rerun → behavior follows the new number. Clear the settings fields → rerun → falls back to defaults 7/14 (the flow's `coalesce`).
+- [ ] **E4, Non-awaiting leads are not auto-closed.** A lead in **New** (not Awaiting Human Review), even past the stale threshold, keeps its status but still gets the Stale band. (Only Awaiting Human Review leads auto-close.)
+- [ ] **E5, Parameterization.** Change `stale days` in System Settings to a new value → rerun → behavior follows the new number. Clear the settings fields → rerun → falls back to defaults 7/14.
 
 ## 4. Sign-off
 

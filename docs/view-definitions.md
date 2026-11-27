@@ -113,12 +113,12 @@
 | 4 | **Company** | `tavu_companyname` | Raw company name extracted |
 | 5 | **Source** | `tavu_source` | Web Form / Email / LinkedIn / Partner Referral — channel context |
 | 6 | **AI Confidence** | `tavu_aiconfidencescore` | 0–1 score — drives urgency of human review |
-| 7 | **Days in Buffer** | `tavu_daysinbuffer` | How long it has been waiting — staleness alert |
-| 8 | **Created On** | `createdon` |  |
+| 7 | **Buffer Alert** | `tavu_bufferalert` | Fresh / Aging / Stale pill, set by the daily lead buffer job |
+| 8 | **Created On** | `createdon` | How long it has been waiting (always exact) |
 
-**Notes:** This view is the AI review queue. Sorting by `statuscode` first surfaces Manual Review Required and Awaiting Human Review records before AI Processing. Oldest-first secondary sort ensures nothing is forgotten. Conditional formatting on `tavu_daysinbuffer` (\>7 days \= amber, \>14 days \= red) makes staleness immediately visible.
+**Notes:** This view is the AI review queue. Sorting by `statuscode` first surfaces Manual Review Required and Awaiting Human Review records before AI Processing. Oldest-first secondary sort ensures nothing is forgotten. The Buffer Alert pill makes staleness visible. Days in Buffer is not shown: since v1.4.0 the daily job writes it only when the band changes (decision B of the daily jobs brief), so between changes it shows the days at the last change; Created On is always exact.
 
-**Recommended secondary view — Needs Human Decision:** *Filter: `statecode = Active` AND `statuscode IN (Awaiting Human Review, Manual Review Required)`* *Sort: `tavu_daysinbuffer` descending*
+**Secondary view, "Needs Review":** *Filter: `statecode = Active` AND `statuscode IN (Awaiting Human Review, Manual Review Required)`* *Sort: `createdon` ascending (oldest first; the same order the days in buffer gave, always exact)*
 
 Same columns as Active Leads. This is the daily triage queue — the sales rep's "inbox" for AI escalations.
 

@@ -165,8 +165,8 @@ This flow applies when an external signal arrives that cannot be cleanly attribu
 | AI Confidence Score | tavu\_aiconfidencescore | Decimal (0-1) | AI fills after processing |
 | AI Recommendation | tavu\_airecommendation | Multiple Lines | AI fills: promote / discard / review |
 | Promoted Contact | tavu\_promotedcontact | Lookup → Contact | Filled when promoted |
-| Days in Buffer | tavu\_daysinbuffer | Whole Number | Calculated daily by scheduled flow |
-| Buffer Alert | tavu\_bufferalert | Choice | Auto-populated by scheduled flow |
+| Days in Buffer | tavu\_daysinbuffer | Whole Number | Days at the last band change, written by the daily lead buffer job |
+| Buffer Alert | tavu\_bufferalert | Choice | Set by the daily lead buffer job |
 | Last AI Processing Date | tavu\_lastaiprocessingdate | DateTime | AI fills after each processing |
 
 **Choice values for `tavu_bufferalert`:**
@@ -177,7 +177,7 @@ This flow applies when an external signal arrives that cannot be cleanly attribu
 | 2 | Aging (8-14 days) | \#CA5010 (amber) |
 | 3 | Stale (15+ days) | \#D13438 (red) |
 
-Auto-populated by the same daily scheduled Power Automate flow that calculates `tavu_daysinbuffer`. The flow sets the alert level based on the current buffer days. Choice colors render as colored pills in the MDA view grid natively — no custom code required.
+Set by the daily lead buffer job (Custom API `tavu_RunLeadBufferMaintenance`, called by the gateway's daily timer or Run daily jobs now; until v1.4.0 a Power Automate flow did this). The job writes a lead only when its band changes, together with `tavu_daysinbuffer` (the days at that change), so no lead is touched daily; views and the form show Created On for the exact age. Choice colors render as colored pills in the MDA view grid natively — no custom code required.
 
 ### 3.3 Lead processing flow (Path B)
 
@@ -207,17 +207,17 @@ Auto-populated by the same daily scheduled Power Automate flow that calculates `
 - **Link to existing** → if the AI matched imperfectly, point it to the right record; lead \= `Inactive / Promoted to Contact`.  
 - **Discard** → lead \= `Inactive / Discarded as Noise` (or `Not Qualified`).
 
-**Step 4 — Auto-cleanup of stale leads:** Scheduled Power Automate flow (runs daily):
+**Step 4 — Auto-cleanup of stale leads:** the daily lead buffer job (`tavu_RunLeadBufferMaintenance`):
 
-- Query: leads where `statecode = Active` AND `statuscode = Awaiting Human Review` AND `tavu_daysinbuffer > 14`  
+- Query: leads where `statecode = Active` AND `statuscode = Awaiting Human Review` AND whole days since `createdon` (UTC) greater than System Settings' stale days (14 when empty)  
 - Action: change to `Inactive / Stale`  
 - Optional notification to owner
 
-The same scheduled flow also updates `tavu_bufferalert` on all Active leads:
+The same job also sets `tavu_bufferalert` on the Active leads whose band changed (days from `createdon`, aging and stale days from System Settings, 7 and 14 when empty):
 
-- tavu\_daysinbuffer ≤ 7 → Fresh  
-- tavu\_daysinbuffer 8–14 → Aging  
-- tavu\_daysinbuffer ≥ 15 → Stale
+- days ≤ 7 → Fresh  
+- days 8–14 → Aging  
+- days ≥ 15 → Stale (New, AI Processing and Manual Review Required leads get the band but are never closed)
 
 This prevents abandoned leads from polluting views indefinitely.
 

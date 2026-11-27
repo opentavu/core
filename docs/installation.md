@@ -173,6 +173,13 @@ New OpenTavu releases are imported **on top of** the existing managed solution. 
 4. Wait for the upgrade to finish, then re-run the **post-import verification** in §4.
 5. Open **System Settings** and click **Verify Setup**. It adds any reference rows a new release introduced and reports disabled plugin steps or missing settings. It never overwrites values you changed.
 
+**Upgrading from v1.3.0 to v1.4.0.** v1.4.0 removes the two Core flows `Fl.Forecast.SnapshotDaily` and `Fl.Lead.BufferDailyMaintenance` (Decision 60: no capability depends on Power Automate); **Stage and Upgrade** deletes them. Their work moves to the Custom APIs `tavu_RunForecastSnapshot` and `tavu_RunLeadBufferMaintenance`:
+
+- **Gateway mode:** the gateway runs them every day (deploy a gateway version with the daily jobs timer before or with the upgrade). Nothing else to do.
+- **Direct mode (no gateway):** run them with **Run daily jobs now** on System Settings, or call the two APIs once a day from your own scheduler, in that order, each again while it answers `Complete = false`. A Power Automate flow can do it too, if you accept its licensing cost.
+
+After the upgrade, click **Run daily jobs now** once and check that Verify Setup reports no daily jobs warning.
+
 ### 5.3 Rollback
 
 If an upgrade causes a problem you cannot resolve quickly, restore from the environment backup taken in §5.1, or re-import the previously known-good `OpenTavu_*.zip`. Because business data is separate from solution components, restoring the prior solution version does not lose the client's records.

@@ -1,5 +1,10 @@
 # Fl.Forecast.SnapshotWeekly — build guide (Power Automate)
 
+> **Historical since v1.4.0.** The forecast snapshot no longer runs in Power Automate (Decision 60): the Custom API
+> `tavu_RunForecastSnapshot` (`Pl.Forecast.Snapshot`) writes the same snapshot and reporting cache rows with the same
+> keys and formulas, once a day from the gateway's daily timer or the Run daily jobs now button. This guide is kept as
+> the record of how the flow was built.
+
 > Companion to `forecasting-build-plan.md` §7 and `forecasting-step-a-guide.md`. Builds the
 > weekly forecast flow **in the maker/designer**, in stages you can test one at a time, rather
 > than as a hand-authored import JSON (which rarely imports cleanly for multi-step Dataverse
