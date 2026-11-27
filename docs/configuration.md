@@ -94,6 +94,8 @@ OpenTavu keeps tenant-level settings in a single `tavu_systemsettings` record (a
 
    > 📸 **Screenshot:** The System Settings record showing Customer Mode, AI Confidence Threshold, and AI Enabled.
 
+6. **Daily jobs.** The forecast snapshots, the upcoming sales periods and the lead buffer are kept by two Custom APIs, `tavu_RunForecastSnapshot` and `tavu_RunLeadBufferMaintenance`. In gateway mode the gateway calls them every day (its `DailyJobs__Hour` setting, 05:00 UTC by default). In direct mode, use **Run daily jobs now** on System Settings or call the two APIs daily from your own scheduler. **Daily Jobs Last Run** (`tavu_dailyjobslastrun`) shows when they last completed; Verify Setup warns when that is more than two days ago.
+
 > ✅ **Checkpoint:** Exactly one `tavu_systemsettings` record exists. Customer Mode matches the client firm type, the confidence threshold is set (0.85 unless the client asked otherwise), and AI Enabled is Yes.
 
 ---

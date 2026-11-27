@@ -1,0 +1,21 @@
+<customapi uniquename="tavu_RunForecastSnapshot">
+  <allowedcustomprocessingsteptype>0</allowedcustomprocessingsteptype>
+  <bindingtype>0</bindingtype>
+  <description default="Writes today's forecast snapshot and reporting cache for every active sales target (user scope, then the business line and company roll-ups). Writes only what changed; call again while Complete is false.">
+    <label description="Writes today's forecast snapshot and reporting cache for every active sales target (user scope, then the business line and company roll-ups). Writes only what changed; call again while Complete is false." languagecode="1033" />
+    <label description="Escribe la instantánea de pronóstico y la caché de reportes de hoy para cada meta de venta activa (alcance de usuario, luego los totales por línea de negocio y de la empresa). Solo escribe lo que cambió; vuelva a llamarla mientras Completo sea falso." languagecode="3082" />
+  </description>
+  <displayname default="Run Forecast Snapshot">
+    <label description="Run Forecast Snapshot" languagecode="1033" />
+    <label description="Ejecutar instantánea de pronóstico" languagecode="3082" />
+  </displayname>
+  <executeprivilegename>prvWritetavu_ForecastSnapshot</executeprivilegename>
+  <iscustomizable>1</iscustomizable>
+  <isfunction>0</isfunction>
+  <isprivate>0</isprivate>
+  <name>RunForecastSnapshot</name>
+  <plugintypeid>
+    <plugintypeexportkey>b5f2cdb7-adea-f111-84e9-00224809e78b</plugintypeexportkey>
+  </plugintypeid>
+  <workflowsdkstepenabled>0</workflowsdkstepenabled>
+</customapi>

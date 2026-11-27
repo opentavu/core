@@ -1,0 +1,13 @@
+<customapiresponseproperty uniquename="SnapshotsWritten">
+  <description default="Forecast snapshots created or updated in this call.">
+    <label description="Forecast snapshots created or updated in this call." languagecode="1033" />
+    <label description="Instantáneas de pronóstico creadas o actualizadas en esta llamada." languagecode="3082" />
+  </description>
+  <displayname default="Snapshots Written">
+    <label description="Snapshots Written" languagecode="1033" />
+    <label description="Instantáneas escritas" languagecode="3082" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>SnapshotsWritten</name>
+  <type>7</type>
+</customapiresponseproperty>

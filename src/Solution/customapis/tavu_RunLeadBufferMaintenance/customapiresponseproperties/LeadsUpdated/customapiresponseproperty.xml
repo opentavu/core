@@ -1,0 +1,13 @@
+<customapiresponseproperty uniquename="LeadsUpdated">
+  <description default="Leads whose buffer band changed in this call.">
+    <label description="Leads whose buffer band changed in this call." languagecode="1033" />
+    <label description="Leads cuya banda de buffer cambió en esta llamada." languagecode="3082" />
+  </description>
+  <displayname default="Leads Updated">
+    <label description="Leads Updated" languagecode="1033" />
+    <label description="Leads actualizados" languagecode="3082" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>LeadsUpdated</name>
+  <type>7</type>
+</customapiresponseproperty>

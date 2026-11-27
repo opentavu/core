@@ -14,10 +14,12 @@
   4. Least-privilege check of the "OpenTavu Gateway" role. Runs the gateway's Dataverse read and
      write paths (agent runtime reads, contact, conversation and transcript file, lead with the
      handoff owner, the agent's hand-to-human and close updates, case with interaction, note and
-     SLA status, meeting with the owner change and the Meeting Source status) as a principal that
-     holds only that role, and fails the run when any call is refused. Among the privileges these
-     paths need beyond table access: prvReadAsyncOperation (creates that start system jobs) and
-     prvAssignActivity (the meeting owner change). The gateway reads no Dataverse metadata, so the
+     SLA status, meeting with the owner change and the Meeting Source status, and the two daily-job
+     Custom APIs its daily timer calls, tavu_RunForecastSnapshot and tavu_RunLeadBufferMaintenance) as
+     a principal that holds only that role, and fails the run when any call is refused. Among the
+     privileges these paths need beyond table access: prvReadAsyncOperation (creates that start system
+     jobs), prvAssignActivity (the meeting owner change) and prvAppendToUser (the reporting cache row's
+     sales rep). The gateway reads no Dataverse metadata, so the
      role needs no metadata privilege; the meeting create writes the solution's fixed Teams option
      of tavu_meetingsource (576600000) as tavu_source, as the gateway does.
 
@@ -758,6 +760,16 @@ function Invoke-RoleCheck {
                 tavu_lastsync     = (Get-IsoUtc $nowUtc)
                 tavu_itemscreated = 1
             }))
+        # The gateway's daily timer: both daily-job Custom APIs, each called again while it answers Complete = false.
+        foreach ($api in @('tavu_RunForecastSnapshot', 'tavu_RunLeadBufferMaintenance')) {
+            for ($call = 1; $call -le 5; $call++) {
+                $stepName = if ($call -eq 1) { "daily jobs: $api" } else { "daily jobs: $api (call $call)" }
+                $r = Invoke-Step -Name $stepName -Method 'POST' -Path $api -Body @{} -Validate {
+                    param($x) $j = Get-Json $x; if ($null -eq $j -or $null -eq $j.Complete) { 'the response has no Complete' }
+                }
+                if (-not $r -or (Get-Json $r).Complete -ne $false) { break }
+            }
+        }
     } finally {
         $script:principalId = $null
         if ($fixtureAgentId) {

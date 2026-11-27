@@ -40,7 +40,11 @@ namespace Pl.Setup.Initialize
             RunCheck("Agents", CheckAgents);
             RunCheck("Mailboxes", CheckMailboxes);
             RunCheck("Sales periods", CheckCurrentPeriod);
+            RunCheck("Daily jobs", CheckDailyJobs);
         }
+
+        /// <summary>Two scheduled daily runs missed (with an hour's slack for a late run).</summary>
+        internal static readonly TimeSpan DailyJobsLate = TimeSpan.FromHours(49);
 
         /// <summary>Only the check the daily flow needs.</summary>
         public void RunPeriodsOnly()
@@ -355,6 +359,23 @@ namespace Pl.Setup.Initialize
             string v = value.Trim();
             int at = v.IndexOf('@');
             return at > 0 && at == v.LastIndexOf('@') && v.IndexOf('.', at) > at + 1 && !v.EndsWith(".", StringComparison.Ordinal) && v.IndexOf(' ') < 0;
+        }
+
+        /// <summary>
+        /// tavu_dailyjobslastrun, stamped by tavu_RunLeadBufferMaintenance (the last of the daily calls) when it completes.
+        /// Never run: information (a fresh install). More than two days ago: a warning.
+        /// </summary>
+        private void CheckDailyJobs()
+        {
+            Entity settings = Top1("tavu_systemsettings", new ColumnSet("tavu_dailyjobslastrun"));
+            if (settings == null) return;
+            DateTime? last = settings.GetAttributeValue<DateTime?>("tavu_dailyjobslastrun");
+            if (!last.HasValue)
+                _report.Info("Daily jobs", "The daily jobs (sales periods, forecast snapshots, lead buffer) have not run yet. The gateway runs them every day; without a gateway, use Run daily jobs now or call the Custom APIs from your own scheduler.");
+            else if (DateTime.UtcNow - last.Value.ToUniversalTime() > DailyJobsLate)
+                _report.Warn("Daily jobs", string.Format(CultureInfo.InvariantCulture,
+                    "The daily jobs last ran on {0:yyyy-MM-dd HH:mm} UTC, more than two days ago, so forecast snapshots and the lead buffer are behind. Check the gateway's daily timer, or use Run daily jobs now.",
+                    last.Value.ToUniversalTime()));
         }
 
         private void CheckCurrentPeriod()

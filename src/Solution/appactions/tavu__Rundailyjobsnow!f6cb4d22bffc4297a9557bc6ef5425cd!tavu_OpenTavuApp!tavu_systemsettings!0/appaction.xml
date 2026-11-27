@@ -1,0 +1,41 @@
+<appaction uniquename="tavu__Rundailyjobsnow!f6cb4d22bffc4297a9557bc6ef5425cd!tavu_OpenTavuApp!tavu_systemsettings!0">
+  <appmoduleid>
+    <uniquename>tavu_OpenTavuApp</uniquename>
+  </appmoduleid>
+  <buttonlabeltext default="Run daily jobs now">
+    <label description="Run daily jobs now" languagecode="1033" />
+    <label description="Ejecutar tareas diarias ahora" languagecode="3082" />
+  </buttonlabeltext>
+  <buttontooltipdescription default="Runs now what the gateway's daily timer runs at its hour: keeps sales periods ahead, writes today's forecast snapshots, and updates the lead buffer. Safe to run more than once a day.">
+    <label description="Runs now what the gateway's daily timer runs at its hour: keeps sales periods ahead, writes today's forecast snapshots, and updates the lead buffer. Safe to run more than once a day." languagecode="1033" />
+    <label description="Ejecuta ahora lo que el temporizador diario del gateway ejecuta a su hora: mantiene los periodos de venta adelante, escribe las instantáneas de pronóstico de hoy y actualiza el buffer de leads. Se puede ejecutar más de una vez al día." languagecode="3082" />
+  </buttontooltipdescription>
+  <buttontooltiptitle default="Run daily jobs now">
+    <label description="Run daily jobs now" languagecode="1033" />
+    <label description="Ejecutar tareas diarias ahora" languagecode="3082" />
+  </buttontooltiptitle>
+  <context>1</context>
+  <contextentity>
+    <logicalname>tavu_systemsettings</logicalname>
+  </contextentity>
+  <contextvalue>tavu_systemsettings</contextvalue>
+  <fonticon>Play</fonticon>
+  <hidden>0</hidden>
+  <iscustomizable>1</iscustomizable>
+  <isdisabled>0</isdisabled>
+  <isgrouptitlehidden>0</isgrouptitlehidden>
+  <location>0</location>
+  <name>Rundailyjobsnow!f6cb4d22bffc4297a9557bc6ef5425cd</name>
+  <onclickeventjavascriptfunctionname>OpenTavu.SystemSettings.Form.runDailyJobs</onclickeventjavascriptfunctionname>
+  <onclickeventjavascriptparameters>[{"type":5}]</onclickeventjavascriptparameters>
+  <onclickeventjavascriptwebresourceid>
+    <webresourceid>71d07658-3cc0-f111-a05a-6045bd0870c9</webresourceid>
+  </onclickeventjavascriptwebresourceid>
+  <onclickeventtype>2</onclickeventtype>
+  <origin>0</origin>
+  <sequence>100100038.5000000000</sequence>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <type>0</type>
+  <visibilitytype>0</visibilitytype>
+</appaction>

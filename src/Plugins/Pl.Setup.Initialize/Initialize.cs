@@ -21,7 +21,7 @@ namespace Pl.Setup.Initialize
     ///
     /// Request parameters (all optional):
     ///   Mode          "full" (default): seed + sales periods + all checks. Used by the System Settings button.
-    ///                 "periods": sales periods + the current-period check. Used daily by Fl.Forecast.SnapshotDaily.
+    ///                 "periods": sales periods + the current-period check (tavu_RunForecastSnapshot also keeps periods ahead daily).
     ///                 "diagnose": checks only, writes nothing.
     ///   ExcludePacks  comma-separated optional packs to skip (for example "geography").
     /// Response:
@@ -47,7 +47,6 @@ namespace Pl.Setup.Initialize
         private const string ModeDiagnose = "diagnose";
 
         private const string SeedResource = "OpenTavu.Seed.json";
-        private const int FallbackTimeZoneCode = 92; // (UTC) Coordinated Universal Time
 
         // The sandbox kills a plugin at 2 minutes; stop seeding well before that and report "not finished".
         private static readonly TimeSpan SeedBudget = TimeSpan.FromSeconds(85);
@@ -71,8 +70,8 @@ namespace Pl.Setup.Initialize
             if (!string.IsNullOrWhiteSpace(packs))
                 foreach (string p in packs.Split(',')) if (p.Trim().Length > 0) excluded.Add(p.Trim());
 
-            int languageCode = OrganizationLanguage(svc);
-            int timeZoneCode = UserTimeZone(svc, ctx.InitiatingUserId);
+            int languageCode = SalesPeriodSettings.OrganizationLanguage(svc);
+            int timeZoneCode = SalesPeriodSettings.UserTimeZone(svc, ctx.InitiatingUserId);
             localContext.Trace("Initialize: mode={0}, language={1}, timeZone={2}.", mode, languageCode, timeZoneCode);
 
             var report = new SetupReport { PeriodsOnly = mode == ModePeriods };
@@ -86,8 +85,13 @@ namespace Pl.Setup.Initialize
             // Sales periods depend on System Settings, which the seed may have just created.
             if (mode != ModeDiagnose && report.Complete)
             {
+                // Periods follow the firm's calendar, not whoever calls (tavu_RunForecastSnapshot builds them the same way
+                // when the gateway's application user calls it daily); the seed above uses the installer's time zone for
+                // the calendar it creates.
+                int periodTimeZone = SalesPeriodSettings.PeriodTimeZone(svc, timeZoneCode);
+                localContext.Trace("Initialize: sales periods in time zone {0}.", periodTimeZone);
                 // A failed Dataverse call rolls back the whole run, so failures are not caught here.
-                new SalesPeriodGenerator(svc, localContext, report, timeZoneCode, languageCode).Run();
+                new SalesPeriodGenerator(svc, localContext, report, periodTimeZone, languageCode).Run();
             }
 
             var checks = new Diagnostics(svc, localContext, report);
@@ -116,21 +120,8 @@ namespace Pl.Setup.Initialize
             }
         }
 
-        private static int OrganizationLanguage(IOrganizationService svc)
-        {
-            var q = new QueryExpression("organization") { ColumnSet = new ColumnSet("languagecode"), TopCount = 1, NoLock = true };
-            EntityCollection r = svc.RetrieveMultiple(q);
-            return r.Entities.Count > 0 ? r.Entities[0].GetAttributeValue<int>("languagecode") : 1033;
-        }
-
-        private static int UserTimeZone(IOrganizationService svc, Guid userId)
-        {
-            var q = new QueryExpression("usersettings") { ColumnSet = new ColumnSet("timezonecode"), TopCount = 1, NoLock = true };
-            q.Criteria.AddCondition("systemuserid", ConditionOperator.Equal, userId);
-            EntityCollection r = svc.RetrieveMultiple(q);
-            if (r.Entities.Count == 0 || !r.Entities[0].Contains("timezonecode")) return FallbackTimeZoneCode;
-            return r.Entities[0].GetAttributeValue<int>("timezonecode");
-        }
+        /// <summary>Decision A: the default business calendar's time zone, else <paramref name="fallback"/> (the caller's).</summary>
+        internal static int PeriodTimeZone(IOrganizationService svc, int fallback) => SalesPeriodSettings.PeriodTimeZone(svc, fallback);
 
         private static string ReadString(IPluginExecutionContext ctx, string name)
         {
