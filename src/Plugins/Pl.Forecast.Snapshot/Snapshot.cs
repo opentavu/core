@@ -5,14 +5,18 @@ using System.Globalization;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 using OpenTavu.Dataverse.Common;
+using Pl.Setup.Initialize;
 
 namespace Pl.Forecast.Snapshot
 {
     /// <summary>
     /// Custom API <c>tavu_RunForecastSnapshot</c>: the daily forecast snapshot that Fl.Forecast.SnapshotDaily wrote
-    /// (Decision 60: no capability depends on Power Automate). The gateway calls it once a day, after
-    /// tavu_InitializeConfiguration with Mode = periods; the System Settings button "Run daily jobs now" calls it too.
+    /// (Decision 60: no capability depends on Power Automate). The gateway's daily timer calls it as its application
+    /// user; the System Settings button "Run daily jobs now" calls it too.
     ///
+    ///   0. Sales periods are kept ahead first, with the generator of tavu_InitializeConfiguration Mode = periods (the
+    ///      fiscal year of today and the next one, in the default business calendar's time zone), so a new quarter
+    ///      always has its period before its snapshots.
     ///   1. Every active User-scope sales target with a sales period: a tavu_forecastsnapshot for today, keyed
     ///      "{target id}|{yyyy-MM-dd}" (UTC), and a tavu_reportingcache row keyed "{scope}|{sales rep}|{period}|{business line}".
     ///   2. Every active business-line and company target: the same two rows, with won, committed, best case and open
@@ -28,8 +32,11 @@ namespace Pl.Forecast.Snapshot
     /// The call stops after <see cref="Budget"/> and answers Complete = false; calling again finishes the rest.
     /// </summary>
     /// <remarks>
-    /// Registration: Custom API tavu_RunForecastSnapshot (unbound action, execute privilege prvWritetavu_SystemSettings),
-    /// main operation, synchronous. Runs with the system service: it writes derived rows users cannot edit.
+    /// Registration: Custom API tavu_RunForecastSnapshot (unbound action, execute privilege prvWritetavu_ForecastSnapshot),
+    /// main operation, synchronous. Targets are read and snapshots and cache rows written with the caller's privileges
+    /// (the user service), so the caller needs read on sales targets and periods and create and write on forecast
+    /// snapshots and reporting caches; only the missing sales periods are created with the system service (Decision 60
+    /// amendment of 2026-11-27: the gateway's role never gets write on System Settings).
     /// </remarks>
     public class Snapshot : PluginBase
     {
@@ -115,11 +122,13 @@ namespace Pl.Forecast.Snapshot
         protected override void ExecuteInternal(LocalPluginContext localContext)
         {
             if (localContext == null) throw new ArgumentNullException(nameof(localContext));
-            IOrganizationService svc = localContext.SystemService;
+            IOrganizationService svc = localContext.UserService;
             var clock = Stopwatch.StartNew();
             DateTime now = _utcNow();
             DateTime day = DateTime.SpecifyKind(now.Date, DateTimeKind.Utc);
             string dayText = day.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+
+            int periodsCreated = KeepPeriodsAhead(localContext);
 
             var periods = new Dictionary<Guid, Entity>();
             int processed = 0, skipped = 0, snapshots = 0, caches = 0;
@@ -241,8 +250,8 @@ namespace Pl.Forecast.Snapshot
             }
 
             string summary = string.Format(CultureInfo.InvariantCulture,
-                "Forecast snapshot {0}: {1} targets, {2} snapshots and {3} cache rows written, {4} targets without a sales period skipped.{5}",
-                dayText, processed, snapshots, caches, skipped, complete ? string.Empty : " Not finished yet: call again to continue.");
+                "Forecast snapshot {0}: {1} sales periods created, {2} targets, {3} snapshots and {4} cache rows written, {5} targets without a sales period skipped.{6}",
+                dayText, periodsCreated, processed, snapshots, caches, skipped, complete ? string.Empty : " Not finished yet: call again to continue.");
             localContext.Trace(summary);
             ParameterCollection outputs = localContext.PluginExecutionContext.OutputParameters;
             outputs[OutSummary] = summary;
@@ -253,6 +262,22 @@ namespace Pl.Forecast.Snapshot
         }
 
         // ------------------------------------------------------------------ helpers
+
+        /// <summary>
+        /// Creates the missing sales periods, as tavu_InitializeConfiguration Mode = periods does, with the system
+        /// service (the gateway's role has no create on sales periods and reads System Settings only). Returns how many
+        /// were created.
+        /// </summary>
+        private static int KeepPeriodsAhead(LocalPluginContext localContext)
+        {
+            IOrganizationService system = localContext.SystemService;
+            int callerZone = SalesPeriodSettings.UserTimeZone(system, localContext.PluginExecutionContext.InitiatingUserId);
+            int zone = SalesPeriodSettings.PeriodTimeZone(system, callerZone);
+            var report = new SetupReport();
+            new SalesPeriodGenerator(system, localContext, report, zone, SalesPeriodSettings.OrganizationLanguage(system)).Run();
+            localContext.Trace(report.ToSummary());
+            return report.Created;
+        }
 
         private static QueryExpression TargetsQuery(params int[] scopes)
         {

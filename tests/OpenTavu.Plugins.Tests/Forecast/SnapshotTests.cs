@@ -15,9 +15,12 @@ namespace OpenTavu.Plugins.Tests.Forecast
 
         private readonly PluginHarness _h = new PluginHarness();
         private readonly Guid _period;
+        private readonly Guid _settings;
 
         public SnapshotTests()
         {
+            // Automatic sales periods off, so each case sees only the period below; the periods cases turn it on.
+            _settings = _h.Service.Seed(new Entity("tavu_systemsettings") { ["tavu_autocreatesalesperiods"] = false });
             // November 2026 in UTC: on the 16th at 00:00, 15 of 30 days have passed (50 %).
             _period = _h.Service.Seed(new Entity("tavu_salesperiod")
             {
@@ -232,6 +235,46 @@ namespace OpenTavu.Plugins.Tests.Forecast
 
             Assert.Equal(5, outputs["TargetsProcessed"]);
             Assert.Equal(5, _h.Service.Rows("tavu_forecastsnapshot").Count());
+        }
+
+        [Fact]
+        public void Missing_sales_periods_are_created_first_with_the_system_service()
+        {
+            _h.Service.Update(new Entity("tavu_systemsettings", _settings) { ["tavu_autocreatesalesperiods"] = true });
+            UserTarget("Ana Q4", 1000m, 300m, 200m);
+
+            ParameterCollection outputs = Run();
+
+            List<string> periodWrites = _h.WritesBy.Where(w => w.EndsWith(" tavu_salesperiod", StringComparison.Ordinal)).ToList();
+            Assert.Equal(8, periodWrites.Count);                                   // the quarters of this fiscal year and the next
+            Assert.All(periodWrites, w => Assert.Equal("system Create tavu_salesperiod", w));
+            Assert.True(_h.WritesBy.IndexOf(periodWrites[0]) < _h.WritesBy.IndexOf("user Create tavu_forecastsnapshot"));
+            Assert.StartsWith("Forecast snapshot 2026-11-16: 8 sales periods created,", (string)outputs["Summary"]);
+        }
+
+        [Fact]
+        public void A_second_run_creates_no_sales_period()
+        {
+            _h.Service.Update(new Entity("tavu_systemsettings", _settings) { ["tavu_autocreatesalesperiods"] = true });
+            Run();
+            _h.WritesBy.Clear();
+
+            ParameterCollection outputs = Run();
+
+            Assert.DoesNotContain(_h.WritesBy, w => w.EndsWith(" tavu_salesperiod", StringComparison.Ordinal));
+            Assert.StartsWith("Forecast snapshot 2026-11-16: 0 sales periods created,", (string)outputs["Summary"]);
+        }
+
+        [Fact]
+        public void Snapshots_and_cache_rows_are_written_with_the_callers_privileges()
+        {
+            UserTarget("Ana Q4", 1000m, 300m, 200m);
+            HigherTarget("Company Q4", Company, 5000m);
+
+            Run();
+
+            Assert.NotEmpty(_h.WritesBy);
+            Assert.All(_h.WritesBy, w => Assert.StartsWith("user ", w));
         }
 
         [Fact]

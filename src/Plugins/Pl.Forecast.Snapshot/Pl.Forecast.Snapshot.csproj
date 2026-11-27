@@ -57,6 +57,16 @@
     <Compile Include="..\..\_Shared\Common\LocalPluginContext.cs">
       <Link>Common\LocalPluginContext.cs</Link>
     </Compile>
+    <!-- Sales periods are kept ahead with the same generator as tavu_InitializeConfiguration (Mode = periods). -->
+    <Compile Include="..\Pl.Setup.Initialize\SalesPeriodGenerator.cs">
+      <Link>Setup\SalesPeriodGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\Pl.Setup.Initialize\SalesPeriodSettings.cs">
+      <Link>Setup\SalesPeriodSettings.cs</Link>
+    </Compile>
+    <Compile Include="..\Pl.Setup.Initialize\SetupReport.cs">
+      <Link>Setup\SetupReport.cs</Link>
+    </Compile>
     <Compile Include="*.cs" Exclude="..\..\_Shared\Common\*.cs" />
   </ItemGroup>
 

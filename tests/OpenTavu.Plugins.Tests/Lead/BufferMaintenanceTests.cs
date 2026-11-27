@@ -166,6 +166,19 @@ namespace OpenTavu.Plugins.Tests.Lead
         }
 
         [Fact]
+        public void Leads_are_written_with_the_callers_privileges_and_only_the_stamp_with_the_system_service()
+        {
+            Lead(3);
+            Lead(10);
+            Lead(20, AwaitingReview);
+
+            Run();
+
+            Assert.Equal(new[] { "user Update tavu_lead", "user Update tavu_lead", "user Update tavu_lead", "system Update tavu_systemsettings" },
+                _h.WritesBy);
+        }
+
+        [Fact]
         public void Out_of_time_answers_not_complete_without_a_stamp_and_the_next_call_finishes()
         {
             Guid[] ids = Enumerable.Range(0, 3).Select(_ => Lead(10)).ToArray();

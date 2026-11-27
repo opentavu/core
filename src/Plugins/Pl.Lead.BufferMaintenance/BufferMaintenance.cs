@@ -27,8 +27,10 @@ namespace Pl.Lead.BufferMaintenance
     /// <see cref="Budget"/> and answers Complete = false; calling again finishes the rest.
     /// </summary>
     /// <remarks>
-    /// Registration: Custom API tavu_RunLeadBufferMaintenance (unbound action, execute privilege
-    /// prvWritetavu_SystemSettings), main operation, synchronous. Runs with the system service.
+    /// Registration: Custom API tavu_RunLeadBufferMaintenance (unbound action, execute privilege prvWritetavu_Lead),
+    /// main operation, synchronous. Leads and System Settings are read and leads written with the caller's privileges
+    /// (the user service); only the tavu_dailyjobslastrun stamp is written with the system service (Decision 60
+    /// amendment of 2026-11-27: the gateway's role never gets write on System Settings).
     /// </remarks>
     public class BufferMaintenance : PluginBase
     {
@@ -79,7 +81,7 @@ namespace Pl.Lead.BufferMaintenance
         protected override void ExecuteInternal(LocalPluginContext localContext)
         {
             if (localContext == null) throw new ArgumentNullException(nameof(localContext));
-            IOrganizationService svc = localContext.SystemService;
+            IOrganizationService svc = localContext.UserService;
             var clock = Stopwatch.StartNew();
             DateTime now = _utcNow();
 
@@ -137,7 +139,7 @@ namespace Pl.Lead.BufferMaintenance
             }
 
             if (complete && settings != null)
-                svc.Update(new Entity(Settings, settings.Id) { [LastRun] = now });
+                localContext.SystemService.Update(new Entity(Settings, settings.Id) { [LastRun] = now });
 
             string summary = string.Format(CultureInfo.InvariantCulture,
                 "Lead buffer: {0} leads moved to a new band, {1} closed as Stale (aging after {2} days, stale after {3}).{4}",

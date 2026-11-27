@@ -7,12 +7,15 @@ namespace OpenTavu.Plugins.Tests.Fakes
     /// <summary>
     /// Runs a plugin through IPlugin.Execute, as the Dataverse sandbox does: an execution context, a service factory that
     /// returns <see cref="Service"/> for the user and the system, and a tracing service whose lines a test can read.
+    /// Every write also lands in <see cref="WritesBy"/> with the service that made it ("user Update tavu_lead" or
+    /// "system Create tavu_salesperiod"), so a test can assert which privileges a write runs with.
     /// </summary>
     public sealed class PluginHarness : IServiceProvider, IOrganizationServiceFactory, ITracingService
     {
         public InMemoryOrganizationService Service { get; } = new InMemoryOrganizationService();
         public FakePluginContext Context { get; } = new FakePluginContext();
         public List<string> Trace { get; } = new List<string>();
+        public List<string> WritesBy { get; } = new List<string>();
 
         public ParameterCollection Run(IPlugin plugin, string message, IDictionary<string, object> inputs = null)
         {
@@ -35,7 +38,8 @@ namespace OpenTavu.Plugins.Tests.Fakes
             return null;
         }
 
-        IOrganizationService IOrganizationServiceFactory.CreateOrganizationService(Guid? userId) => Service;
+        IOrganizationService IOrganizationServiceFactory.CreateOrganizationService(Guid? userId) =>
+            new RecordingService(Service, userId.HasValue ? "user" : "system", WritesBy);
 
         void ITracingService.Trace(string format, params object[] args) =>
             Trace.Add(args == null || args.Length == 0 ? format : string.Format(format, args));
@@ -71,5 +75,46 @@ namespace OpenTavu.Plugins.Tests.Fakes
         public DateTime OperationCreatedOn { get; set; } = DateTime.UtcNow;
         public int Stage { get; set; } = 30;
         public IPluginExecutionContext ParentContext { get; set; }
+    }
+
+    /// <summary>The in-memory service seen through the user or the system service: records who wrote what.</summary>
+    internal sealed class RecordingService : IOrganizationService
+    {
+        private readonly IOrganizationService _inner;
+        private readonly string _who;
+        private readonly List<string> _log;
+
+        public RecordingService(IOrganizationService inner, string who, List<string> log)
+        {
+            _inner = inner;
+            _who = who;
+            _log = log;
+        }
+
+        public Guid Create(Entity entity)
+        {
+            _log.Add(_who + " Create " + entity.LogicalName);
+            return _inner.Create(entity);
+        }
+
+        public void Update(Entity entity)
+        {
+            _log.Add(_who + " Update " + entity.LogicalName);
+            _inner.Update(entity);
+        }
+
+        public void Delete(string entityName, Guid id)
+        {
+            _log.Add(_who + " Delete " + entityName);
+            _inner.Delete(entityName, id);
+        }
+
+        public Entity Retrieve(string entityName, Guid id, Microsoft.Xrm.Sdk.Query.ColumnSet columnSet) => _inner.Retrieve(entityName, id, columnSet);
+        public EntityCollection RetrieveMultiple(Microsoft.Xrm.Sdk.Query.QueryBase query) => _inner.RetrieveMultiple(query);
+        public OrganizationResponse Execute(OrganizationRequest request) => _inner.Execute(request);
+        public void Associate(string entityName, Guid entityId, Relationship relationship, EntityReferenceCollection relatedEntities) =>
+            _inner.Associate(entityName, entityId, relationship, relatedEntities);
+        public void Disassociate(string entityName, Guid entityId, Relationship relationship, EntityReferenceCollection relatedEntities) =>
+            _inner.Disassociate(entityName, entityId, relationship, relatedEntities);
     }
 }

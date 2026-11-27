@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.Crm.Sdk.Messages;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 
@@ -107,8 +108,42 @@ namespace OpenTavu.Plugins.Tests.Fakes
             return result;
         }
 
-        public OrganizationResponse Execute(OrganizationRequest request) =>
-            throw new NotSupportedException("The in-memory service does not execute " + request.RequestName + ".");
+        /// <summary>
+        /// Hours from UTC of the time zone codes a test uses, for LocalTimeFromUtcTime and UtcTimeFromLocalTime (fixed
+        /// offsets, no daylight saving): 92 UTC, 45 Bogota, 105 Madrid in winter.
+        /// </summary>
+        public Dictionary<int, int> TimeZoneHours { get; } = new Dictionary<int, int> { [92] = 0, [45] = -5, [105] = 1 };
+
+        public OrganizationResponse Execute(OrganizationRequest request)
+        {
+            switch (request.RequestName)
+            {
+                case "LocalTimeFromUtcTime":
+                {
+                    var utc = (DateTime)request["UtcTime"];
+                    var response = new LocalTimeFromUtcTimeResponse();
+                    response.Results["LocalTime"] = DateTime.SpecifyKind(utc.AddHours(Hours(request)), DateTimeKind.Unspecified);
+                    return response;
+                }
+                case "UtcTimeFromLocalTime":
+                {
+                    var local = (DateTime)request["LocalTime"];
+                    var response = new UtcTimeFromLocalTimeResponse();
+                    response.Results["UtcTime"] = DateTime.SpecifyKind(local.AddHours(-Hours(request)), DateTimeKind.Utc);
+                    return response;
+                }
+                default:
+                    throw new NotSupportedException("The in-memory service does not execute " + request.RequestName + ".");
+            }
+        }
+
+        private int Hours(OrganizationRequest request)
+        {
+            int code = (int)request["TimeZoneCode"];
+            if (!TimeZoneHours.TryGetValue(code, out int hours))
+                throw new NotSupportedException("The in-memory service has no offset for time zone " + code + ".");
+            return hours;
+        }
 
         public void Associate(string entityName, Guid entityId, Relationship relationship, EntityReferenceCollection relatedEntities) =>
             throw new NotSupportedException("Associate is not supported.");
