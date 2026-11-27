@@ -1,0 +1,13 @@
+<customapiresponseproperty uniquename="CachesWritten">
+  <description default="Reporting cache rows created or updated in this call.">
+    <label description="Reporting cache rows created or updated in this call." languagecode="1033" />
+    <label description="Filas de cach� de reportes creadas o actualizadas en esta llamada." languagecode="3082" />
+  </description>
+  <displayname default="Caches Written">
+    <label description="Caches Written" languagecode="1033" />
+    <label description="Cach�s escritas" languagecode="3082" />
+  </displayname>
+  <iscustomizable>0</iscustomizable>
+  <name>CachesWritten</name>
+  <type>7</type>
+</customapiresponseproperty>

@@ -17,7 +17,6 @@
           <cell name="tavu_source" width="129" />
           <cell name="tavu_aiconfidencescore" width="159" />
           <cell name="tavu_bufferalert" width="109" />
-          <cell name="tavu_daysinbuffer" width="124" />
           <cell name="createdon" width="117" />
         </row>
       </grid>
@@ -42,8 +41,7 @@
               <value>576600004</value>
             </condition>
           </filter>
-          <attribute name="tavu_daysinbuffer" />
-          <order attribute="tavu_daysinbuffer" descending="true" />
+          <order attribute="createdon" descending="false" />
         </entity>
       </fetch>
     </fetchxml>
