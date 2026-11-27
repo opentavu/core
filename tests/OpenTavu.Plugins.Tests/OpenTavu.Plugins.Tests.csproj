@@ -21,6 +21,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Plugins\Pl.Setup.Initialize\Pl.Setup.Initialize.csproj" />
+    <ProjectReference Include="..\..\src\Plugins\Pl.Forecast.Snapshot\Pl.Forecast.Snapshot.csproj" />
+    <ProjectReference Include="..\..\src\Plugins\Pl.Lead.BufferMaintenance\Pl.Lead.BufferMaintenance.csproj" />
   </ItemGroup>
 
   <ItemGroup>

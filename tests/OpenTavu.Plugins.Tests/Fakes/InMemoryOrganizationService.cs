@@ -191,9 +191,10 @@ namespace OpenTavu.Plugins.Tests.Fakes
                 case ConditionOperator.Null: return value == null;
                 case ConditionOperator.NotNull: return value != null;
                 case ConditionOperator.Equal: return value != null && Compare(value, args[0]) == 0;
-                case ConditionOperator.NotEqual: return value == null || Compare(value, args[0]) != 0;
+                // As in Dataverse, ne and not-in never match a null column; ask for null explicitly.
+                case ConditionOperator.NotEqual: return value != null && Compare(value, args[0]) != 0;
                 case ConditionOperator.In: return value != null && args.Any(a => Compare(value, a) == 0);
-                case ConditionOperator.NotIn: return value == null || args.All(a => Compare(value, a) != 0);
+                case ConditionOperator.NotIn: return value != null && args.All(a => Compare(value, a) != 0);
                 case ConditionOperator.LessThan: return value != null && Compare(value, args[0]) < 0;
                 case ConditionOperator.LessEqual: return value != null && Compare(value, args[0]) <= 0;
                 case ConditionOperator.GreaterThan: return value != null && Compare(value, args[0]) > 0;

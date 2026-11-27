@@ -86,8 +86,12 @@ namespace Pl.Setup.Initialize
             // Sales periods depend on System Settings, which the seed may have just created.
             if (mode != ModeDiagnose && report.Complete)
             {
+                // Periods follow the firm's calendar, not whoever calls (the gateway's application user calls it daily);
+                // the seed above uses the installer's time zone for the calendar it creates.
+                int periodTimeZone = PeriodTimeZone(svc, timeZoneCode);
+                localContext.Trace("Initialize: sales periods in time zone {0}.", periodTimeZone);
                 // A failed Dataverse call rolls back the whole run, so failures are not caught here.
-                new SalesPeriodGenerator(svc, localContext, report, timeZoneCode, languageCode).Run();
+                new SalesPeriodGenerator(svc, localContext, report, periodTimeZone, languageCode).Run();
             }
 
             var checks = new Diagnostics(svc, localContext, report);
@@ -130,6 +134,20 @@ namespace Pl.Setup.Initialize
             EntityCollection r = svc.RetrieveMultiple(q);
             if (r.Entities.Count == 0 || !r.Entities[0].Contains("timezonecode")) return FallbackTimeZoneCode;
             return r.Entities[0].GetAttributeValue<int>("timezonecode");
+        }
+
+        /// <summary>
+        /// The time zone sales periods are built in: the active default business calendar's tavu_timezone, else
+        /// <paramref name="fallback"/> (the calling user's).
+        /// </summary>
+        internal static int PeriodTimeZone(IOrganizationService svc, int fallback)
+        {
+            var q = new QueryExpression("tavu_businesscalendar") { ColumnSet = new ColumnSet("tavu_timezone"), TopCount = 1, NoLock = true };
+            q.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+            q.Criteria.AddCondition("tavu_isdefault", ConditionOperator.Equal, true);
+            EntityCollection r = svc.RetrieveMultiple(q);
+            int? zone = r.Entities.Count > 0 ? r.Entities[0].GetAttributeValue<int?>("tavu_timezone") : null;
+            return zone ?? fallback;
         }
 
         private static string ReadString(IPluginExecutionContext ctx, string name)

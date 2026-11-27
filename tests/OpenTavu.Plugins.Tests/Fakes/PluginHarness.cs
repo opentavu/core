@@ -21,7 +21,10 @@ namespace OpenTavu.Plugins.Tests.Fakes
             Context.OutputParameters.Clear();
             if (inputs != null) foreach (KeyValuePair<string, object> i in inputs) Context.InputParameters[i.Key] = i.Value;
             plugin.Execute(this);
-            return Context.OutputParameters;
+            // A copy, so the outputs of one run stay readable after the next.
+            var outputs = new ParameterCollection();
+            foreach (KeyValuePair<string, object> o in Context.OutputParameters) outputs[o.Key] = o.Value;
+            return outputs;
         }
 
         object IServiceProvider.GetService(Type serviceType)
