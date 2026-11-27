@@ -37,7 +37,7 @@ docs/                     Living product documentation (see "Docs map")
 
 | Artifact | Pattern | Examples |
 |---|---|---|
-| Cloud flows | `Fl.<Area>.<Purpose>` (PascalCase) | `Fl.Lead.WebToLead`, `Fl.Forecast.SnapshotDaily` |
+| Cloud flows | `Fl.<Area>.<Purpose>` (PascalCase) | `Fl.Lead.WebToLead`, `Fl.CaseInteraction.SendEmail` |
 | Plugins | `Pl.<Short>.<Action>` | `Pl.Lead.Triage`, `Pl.Case.Categorize`, `Pl.Setup.Initialize` |
 | Custom APIs, tables, columns, choices | `tavu_<name>` | `tavu_PromoteLead`, `tavu_lead`, `tavu_aitaskconfiguration` |
 | PCF controls | `Ctrl.<Area>.<Name>` | `Ctrl.Case.SlaCountdown`, `Ctrl.Forecast.Dashboard` |
